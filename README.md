@@ -21,6 +21,7 @@ is exported to files in this repository, committed, and (at publication) deposit
 |---|---|---|
 | `PROTOCOL.md` | Frozen pre-registration (hypotheses, arms, analysis plan) | Phase 1 (tagged `preregistration`) |
 | `DATA-DICTIONARY.md` | Schema of every data file | now |
+| `DESIGN-DECISIONS.md` | Decision register: every design/statistical decision + academic grounding (feeds the Methodology section) | every phase |
 | `MANIFEST.md` | Provenance log: dates, pinned model versions, costs | every phase |
 | `config/experiment_config.json` | Model tiers, pinned versions, prices, judges, designer | Phase 0 |
 | `data/problems/business_problems_15.json` | The 15 validated business problems (from LLM-Creativity, DOI 10.5281/zenodo.17407392) | committed |

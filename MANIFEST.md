@@ -92,3 +92,15 @@ Every phase appends an entry here. Never edit past entries.
   - Repository initialized as standalone git repo and pushed to GitHub (author account) — see repo remote for URL.
 - Pending decisions: author review of Business_Problem_16–30 and of original-15 domain tags; plus all items from Entry 2.
 - Cost incurred: $0 (no LLM calls yet).
+
+---
+
+## Entry 5 — Design Decisions Register created (author requirement)
+- Date: 2026-07-30
+- Phase: pre-Phase-0 (documentation)
+- Decision (by author): every design/statistical decision must be documented with its rationale grounded in academic literature and statistical methodology; these documents are source material for the paper's Methodology section.
+- Actions:
+  - `DESIGN-DECISIONS.md` committed — topic-organized register D1–D19 (factorial design, model-homogeneous teams, stochasticity sampling, independent judging, reps=3 + consistency slice, 30-problem domain stratification, mixed models/pseudo-replication fix, judge ensemble + frozen prompts, dual IRR, estimation-first stats, robustness battery, contamination control, cost-matching/T-EGR, preregistration, resilience ledger, persona congruence, oracle portfolio), each with Decision/Rationale/Academic grounding/Implementation pointers.
+  - Maintenance rule added: all future decisions appended to BOTH `DESIGN-DECISIONS.md` (topical) and `MANIFEST.md` (chronological) with grounding at decision time.
+  - README repository-layout table updated.
+- Cost incurred: $0 (no LLM calls yet).
