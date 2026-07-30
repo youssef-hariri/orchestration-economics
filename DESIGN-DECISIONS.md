@@ -123,6 +123,12 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
 - **Grounding:** Oracle/upper-bound analysis in model-routing and ensemble literature (e.g., Jiang et al. 2023 LLM-Blender); portfolio framing from Paper 4's Strategic Selector.
 - **Implemented in:** plan §4.7; config `analysis.oracle_portfolio`.
 
+## D20. Computational reproducibility: all executed code is committed (code availability)
+- **Decision:** Every script created and run at any phase (ledger generation, run execution, judging, aggregation, statistics) is committed to `code/` or `analysis/` BEFORE its outputs are trusted; pinned dependencies (`requirements.txt`), seed 42 everywhere, all parameters read from `config/experiment_config.json`, scripts idempotent, secrets only via environment variables. No result may exist in the repository without the committed code that produced it.
+- **Rationale:** The claim "anyone can re-run this experiment" requires the full computational chain, not just data: code + config + data + environment. This also protects the author — reviewers and replicators can audit exactly what was executed, and the paper's Code Availability statement becomes a pointer to the repo rather than a promise.
+- **Grounding:** Reproducible computational research standards (Peng 2011, Science; Sandve et al. 2013, PLOS Comp Bio "Ten Simple Rules for Reproducible Computational Research"; Stodden et al. 2016, Science — enhancing reproducibility for computational methods); TOP guidelines Level II–III code transparency (Nosek et al. 2015, Science). Precedent: persona-model-fit and OODA-Belbin repos already publish their execution code (`code/stats_with_anlysis.py`, `API_model_files/`).
+- **Implemented in:** `code/README.md` (script inventory + conventions); repo README Reproduction section; MANIFEST Entry 6.
+
 ---
 
 ## Maintenance rule

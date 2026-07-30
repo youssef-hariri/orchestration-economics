@@ -29,6 +29,7 @@ is exported to files in this repository, committed, and (at publication) deposit
 | `data/problems/domain_map.json` | Pre-registered 6×5 domain grid over the 30 main problems | committed |
 | `data/problems/fresh_business_cases_10.json` | 10 post-cutoff contamination-control cases (2026 scenarios) | committed |
 | `data/personas/cultural_personas.json` | 3 cultural personas (from persona-model-fit, DOI 10.5281/zenodo.19533619) | committed |
+| `code/` | ALL executable code (ledger generator, run executor, judging harness, aggregation) + pinned `requirements.txt` — no result exists without its committed code | Phases 0–2 |
 | `pipelines/fixed/` | Exported pipeline JSON for arms A1–A6, A8 (`exportPipeline`) | Phase 0 |
 | `pipelines/adaptive_A7/` | Per-problem designer outputs + resulting pipeline JSON | Phase 2 |
 | `runs/responses/{arm}/{problem}/rep{n}.json` | Full per-step outputs of every run | Phases 1–2 |
@@ -72,8 +73,11 @@ economic DV = team-level Efficiency Gain Ratio (T-EGR); key hypotheses include H
 
 ## Reproduction
 
+All code that produced any artifact in this repo is committed in `code/` and `analysis/`
+(seed 42, pinned `requirements.txt`, config-driven — see `code/README.md`). Full re-run:
+
 1. Import pipeline JSONs from `pipelines/fixed/` into DeeWaanAI (or any OpenAI-compatible orchestrator).
 2. Use `config/experiment_config.json` for exact model versions, temperatures, and maxTokens.
-3. Run problems from `data/problems/` with personas from `data/personas/`.
-4. Score with `evaluation/judge_prompts/` on the 3 judge models in config.
+3. `python code/make_ledger.py` regenerates the identical run list (seed 42); `python code/run_experiment.py` executes it (idempotent, resumable).
+4. `python code/judge_solutions.py` then `python code/aggregate_scores.py` reproduce `evaluation/`.
 5. `python analysis/stats.py` reproduces all tables/figures from `evaluation/scores_aggregated.csv`.

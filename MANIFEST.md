@@ -104,3 +104,15 @@ Every phase appends an entry here. Never edit past entries.
   - Maintenance rule added: all future decisions appended to BOTH `DESIGN-DECISIONS.md` (topical) and `MANIFEST.md` (chronological) with grounding at decision time.
   - README repository-layout table updated.
 - Cost incurred: $0 (no LLM calls yet).
+
+---
+
+## Entry 6 — Code availability / computational reproducibility rule (author requirement)
+- Date: 2026-07-30
+- Phase: pre-Phase-0 (documentation)
+- Decision (by author): all code we create and run must be saved so the experiment can be reproduced by anyone else.
+- Actions:
+  - `code/` directory created with `code/README.md` — inventory of every planned script (make_ledger.py, run_experiment.py, judge_solutions.py, aggregate_scores.py, analysis/stats.py, requirements.txt) and the reproducibility conventions (seed 42, config-driven, idempotent, env-var secrets, documented headers). Each script is committed BEFORE its outputs are trusted.
+  - Decision recorded as D20 in `DESIGN-DECISIONS.md` with academic grounding (Peng 2011; Sandve et al. 2013; Stodden et al. 2016; TOP guidelines, Nosek et al. 2015).
+  - README Reproduction section rewritten to a full code-driven re-run sequence; repository-layout table adds `code/`.
+- Cost incurred: $0 (no LLM calls yet).
