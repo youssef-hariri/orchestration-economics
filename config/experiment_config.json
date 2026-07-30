@@ -1,0 +1,98 @@
+{
+  "experiment": "orchestration-economics",
+  "version": "0.1-draft",
+  "status": "PENDING: pin exact model versions in Phase 0, then freeze at preregistration tag",
+  "design": {
+    "type": "2x2x2 within-family factorial + special arms",
+    "factors": { "tier": ["frontier", "cheap_sibling"], "structure": ["solo", "team_3step"], "persona": ["none", "persona_loaded"] },
+    "team_rule": "model-homogeneous: all 3 agents in a run use the SAME model; only persona/role prompts differ",
+    "solo_persona": "Culture_5 (best single persona per Doing More with Less)",
+    "team_persona": "diverse congruent trio (see persona_role_mapping_congruent)"
+  },
+  "tiers": {
+    "families": [
+      { "family": "gpt", "origin": "western", "provider": "openai", "frontier": "TO_PIN (latest GPT flagship)", "cheap_sibling": "TO_PIN (GPT-mini tier)" },
+      { "family": "claude", "origin": "western", "provider": "anthropic", "frontier": "TO_PIN (latest Claude flagship)", "cheap_sibling": "TO_PIN (Haiku tier)", "note": "strip reasoning traces before judging if extended thinking enabled" },
+      { "family": "gemini", "origin": "western", "provider": "gemini", "frontier": "TO_PIN (latest Gemini Pro flagship)", "cheap_sibling": "TO_PIN (Flash tier)", "note": "strip reasoning traces before judging (Paper 2 comparability caveat)" },
+      { "family": "kimi", "origin": "eastern", "provider": "moonshot", "frontier": "TO_PIN (Kimi V3)", "cheap_sibling": "TO_PIN (small kimi tier)" },
+      { "family": "qwen", "origin": "eastern", "provider": "aliyun", "frontier": "TO_PIN (Qwen 3.7 / qwen-max class)", "cheap_sibling": "TO_PIN (qwen-turbo/plus tier)" }
+    ],
+    "fallback_family": { "family": "deepseek", "provider": "deepseek", "note": "used only if one of the 5 families is inaccessible" },
+    "cells": {
+      "_problems": "factorial cells run on the 30 main problems (6 domains x 5); special arms A5-A8 run on the original 15 only (mechanism arms need no domain breadth)",
+      "C-S-N": { "families": 5, "reps": 3, "runs": 450 },
+      "C-S-P": { "families": 5, "reps": 3, "runs": 450 },
+      "C-T-N": { "families": 5, "reps": 3, "runs": 450 },
+      "C-T-P": { "families": 5, "reps": 3, "runs": 450, "note": "core treatment (old A4)" },
+      "F-S-N": { "families": 5, "reps": 2, "runs": 300, "note": "old A1 frontier pool" },
+      "F-S-P": { "families": 5, "reps": 2, "runs": 300 },
+      "F-T-N": { "families": 2, "reps": 2, "runs": 120, "family_rule": "PREREGISTERED: strongest Western frontier by F-S-N Novelty + Kimi V3" },
+      "F-T-P": { "families": 2, "reps": 2, "runs": 120, "family_rule": "same 2 families as F-T-N" }
+    },
+    "consistency_slice": {
+      "rule": "the single pre-registered special-arm cheap family runs 5 reps (instead of 3) in its four cheap cells C-S-N/C-S-P/C-T-N/C-T-P, 30 problems",
+      "extra_runs": 240,
+      "purpose": "reliable within-cell SD for the Consistency DV (SD from n=3 has ~52% sampling error; n=5 ~38%); mean-effect inference uses 3 reps everywhere per Westfall-Kenny-Judd stimulus-sampling power logic"
+    },
+    "frontier_cost_matched_A6": {
+      "used_in_arms": ["A6"],
+      "model": "SELECTED_BY_RULE",
+      "selection_rule": "PREREGISTERED: the frontier model with the highest mean Novelty in F-S-N becomes the A6 cost-matched baseline; token budget derived from pooled C-T-P median cost",
+      "repetitions": 5
+    },
+    "designer_smart_eastern": {
+      "provider": "moonshot",
+      "model": "TO_PIN (Kimi V3)",
+      "temperature": 0,
+      "used_in_arms": ["A7"],
+      "note": "Kimi V3 designs pipeline per problem; every design output archived in pipelines/adaptive_A7/; tokens counted in cost, amortized over 5 reps"
+    },
+    "judges": [
+      { "provider": "mistral", "model": "TO_PIN (small tier)", "note": "family disjoint from generators" },
+      { "provider": "zhipu", "model": "TO_PIN (GLM air/flash tier)", "note": "family disjoint from generators; replaces Gemini which moved to the generator pool" },
+      { "provider": "together", "model": "TO_PIN (Llama-3.3-70B class)", "note": "family disjoint from generators" }
+    ],
+    "judge_disjointness_rule": "generator families = {openai, anthropic, google, moonshot, alibaba}; judge families = {mistral, zhipu, meta} — no overlap"
+  },
+  "generation": { "temperature": 0.7, "max_tokens": 2048, "reps_cheap_cells": 3, "reps_cheap_cells_consistency_slice_family": 5, "reps_frontier_cells": 2, "reps_special_arms_A5_A6_A7": 5, "reps_A8": 3 },
+  "judging": {
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "variants": ["var1", "var2", "var3"],
+    "scores_per_solution": 9,
+    "judge_each_repetition_independently": true,
+    "never_ensemble_responses_before_judging": true,
+    "ensemble_level": "scores only: solution ensemble score = mean of 9 judge scores",
+    "blinding": "solutions stripped of arm identifiers, randomized order; Paper 1 verbatim blinding instruction reused",
+    "judge_prompts_frozen": "3 proven variants verbatim; never redesigned (Paper 1 optimization attempts collapsed kappa)"
+  },
+  "analysis": {
+    "units": ["solution-level ensemble score (effect sizes, comparable to Papers 1-2)", "judge-level mixed model with solution+judge+problem+family random effects (primary inference; fixes Paper 2 pseudo-replication)"],
+    "secondary_dv_consistency": "within-cell SD of Novelty across repetitions",
+    "inherited_stack": "stats_with_anlysis.py adapted: bootstrap d CI 5000 seed 42, Welch t, FDR-BH, Type II ANOVA + partial eta2, Rouder BF + exact JZS BF (pingouin), TTestIndPower, IsolationForest 0.1, 80/20 split by problem, leave-one-out (judge/family), mean-vs-median, EGR economics",
+    "oracle_portfolio": "per-problem best-cell oracle router upper bound vs A7 adaptive (Paper 4 +42.9% union precedent)",
+    "h2_domain_moderator": "CONFIRMATORY with 6 domains x 5 problems: domain as fixed moderator in the mixed model (Structure x Domain interaction); enabled by the domain-stratified 30-problem set",
+    "consistency_dv_scope": "tested only within the 5-rep consistency-slice family; 3-rep SDs reported descriptively",
+    "irr": "Fleiss kappa AND ICC(2,k) per dimension on ALL solutions",
+    "random_seed": 42
+  },
+  "execution_resilience": {
+    "ledger": "runs/ledger.csv — full randomized interleaved run list committed at preregistration (seed 42)",
+    "statuses": ["PENDING", "RUNNING", "DONE", "FAILED_RETRYABLE", "FAILED_PERMANENT"],
+    "idempotent_resume": "scan ledger, skip DONE, requeue FAILED_RETRYABLE; credit outage or disconnect leaves runs PENDING and execution resumes when service returns",
+    "retries": { "max_attempts": 3, "backoff_seconds": [5, 30, 120] },
+    "concurrency": { "max_parallel_runs": 4, "pause_between_batches_seconds": 5 },
+    "error_handling": "failed generations re-run, never scored (parsed_ok gate); fixes Paper 4 silent budget burn"
+  },
+  "problems": {
+    "main_original_15": "data/problems/business_problems_15.json",
+    "main_domain_extension_15": "data/problems/business_problems_domain_15.json",
+    "domain_map": "data/problems/domain_map.json (30 main problems, 6 domains x 5; original-15 tags PENDING author confirmation)",
+    "fresh_control": "data/problems/fresh_business_cases_10.json (out-of-sample post-cutoff robustness set, NOT in the domain grid)",
+    "special_arms_subset": "A5-A8 run on the original 15 problems only"
+  },
+  "personas": "data/personas/cultural_personas.json",
+  "persona_role_mapping_congruent": { "builder": "Culture_5", "critic": "Culture_Expert", "refiner": "Culture_11" },
+  "primary_dv": "Novelty",
+  "economic_dv": "T-EGR = (Novelty_cell / Novelty_F-S-N) / (Cost_cell / Cost_F-S-N)"
+}
