@@ -1,0 +1,146 @@
+{
+  "_purpose": "Phase 0 model registry: pinned model IDs, per-1M-token USD prices, endpoints, and provider discount windows. Prices verified against official provider pricing pages on pin_date. Primary cost analysis uses pinned_price (standard daytime price at freeze, time-invariant); actual paid price after off-peak discounts is recorded per run in the ledger as a sensitivity variable (see DESIGN-DECISIONS D21).",
+  "pin_date": "2026-07-30",
+  "status": "PARTIAL: eastern families + judges + designer + fallback pinned and endpoint-verified; gpt/claude/gemini pending API keys",
+  "generators": {
+    "kimi": {
+      "provider": "moonshot",
+      "endpoint": "https://api.moonshot.ai/v1",
+      "env_key": "KIMI_API_KEY",
+      "frontier": {
+        "model": "kimi-k3",
+        "input_usd_per_1m": 3.0,
+        "output_usd_per_1m": 15.0,
+        "cache_hit_input_usd_per_1m": 0.3,
+        "context": 1048576,
+        "pricing_source": "https://platform.kimi.ai/docs/pricing/chat-k3",
+        "notes": "Always reasons (reasoning_effort low/high/max, default max). Strip reasoning traces before judging. Flat pricing, no time-of-day discount; Batch API (60% price) does NOT support k3."
+      },
+      "cheap_sibling": {
+        "model": "kimi-k2.6",
+        "input_usd_per_1m": 0.95,
+        "output_usd_per_1m": 4.0,
+        "cache_hit_input_usd_per_1m": 0.16,
+        "context": 262144,
+        "pricing_source": "https://platform.kimi.ai/docs/pricing/chat-k26",
+        "notes": "Thinking and non-thinking modes; strip traces if thinking used. Flat pricing."
+      },
+      "discount_window": null
+    },
+    "qwen": {
+      "provider": "aliyun",
+      "endpoint": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+      "env_key": "ALIBABA_API_KEY",
+      "frontier": {
+        "model": "qwen3.7-max-2026-06-08",
+        "input_usd_per_1m": 1.25,
+        "output_usd_per_1m": 3.75,
+        "list_input_usd_per_1m": 2.5,
+        "list_output_usd_per_1m": 7.5,
+        "context": 1000000,
+        "pricing_source": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "notes": "Dated snapshot (not the moving alias qwen3.7-max). International (Singapore) list $2.5/$7.5 with limited-time 50% off in force at pin date -> pinned $1.25/$3.75. Off-peak campaign advertises up to 80% off 22:00-08:00 UTC+8; VERIFY actual billed off-peak rate in pilot via billing console before trusting paid-price sensitivity values."
+      },
+      "cheap_sibling": {
+        "model": "qwen3.7-plus-2026-05-26",
+        "input_usd_per_1m": 0.32,
+        "output_usd_per_1m": 1.28,
+        "list_input_usd_per_1m": 0.4,
+        "list_output_usd_per_1m": 1.6,
+        "context": 1000000,
+        "pricing_source": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "notes": "Dated snapshot, same 3.7 generation as frontier (clean cheap-sibling construct). Intl list $0.4/$1.6 (<=256K input tier) with limited-time 20% off -> pinned $0.32/$1.28. Night 60% off advertised for off-peak window; VERIFY in pilot."
+      },
+      "discount_window": {
+        "window_utc8": "22:00-08:00",
+        "window_utc": "14:00-00:00",
+        "claims": { "qwen3.7-max": "up to 80% off", "qwen3.7-plus": "60% off" },
+        "source": "https://modelstudio.alibabacloud.com/ campaign banner + https://help.aliyun.com/en/lingma/product-overview/qwen-3-7-series-model-staggering-discount",
+        "verified_on_billing": false
+      }
+    },
+    "gpt": { "provider": "openai", "frontier": { "model": "TO_PIN" }, "cheap_sibling": { "model": "TO_PIN" }, "blocker": "OPENAI_API_KEY not yet in .env", "discount_window": null },
+    "claude": { "provider": "anthropic", "frontier": { "model": "TO_PIN" }, "cheap_sibling": { "model": "TO_PIN" }, "blocker": "ANTHROPIC_API_KEY not yet in .env", "discount_window": null },
+    "gemini": { "provider": "gemini", "frontier": { "model": "TO_PIN" }, "cheap_sibling": { "model": "TO_PIN" }, "blocker": "GEMINI_API_KEY not yet in .env", "discount_window": null }
+  },
+  "judges": [
+    {
+      "family": "mistral",
+      "provider": "together",
+      "endpoint": "https://api.together.xyz/v1",
+      "env_key": "TOGETHER_API_KEY",
+      "model": "mistralai/Mistral-Small-24B-Instruct-2501",
+      "input_usd_per_1m": 0.1,
+      "output_usd_per_1m": 0.3,
+      "context": 32768,
+      "pricing_source": "Together /v1/models API pricing field, 2026-07-30"
+    },
+    {
+      "family": "zhipu",
+      "provider": "together",
+      "endpoint": "https://api.together.xyz/v1",
+      "env_key": "TOGETHER_API_KEY",
+      "model": "zai-org/GLM-4.7",
+      "input_usd_per_1m": 0.45,
+      "output_usd_per_1m": 2.0,
+      "context": 202752,
+      "pricing_source": "Together /v1/models API pricing field, 2026-07-30"
+    },
+    {
+      "family": "meta",
+      "provider": "together",
+      "endpoint": "https://api.together.xyz/v1",
+      "env_key": "TOGETHER_API_KEY",
+      "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "input_usd_per_1m": 1.04,
+      "output_usd_per_1m": 1.04,
+      "context": 131072,
+      "pricing_source": "Together /v1/models API pricing field, 2026-07-30"
+    }
+  ],
+  "judge_disjointness_check": "judge families {mistral, zhipu, meta} disjoint from generator families {openai, anthropic, google, moonshot, alibaba} - PASS",
+  "designer_A7": {
+    "provider": "moonshot",
+    "endpoint": "https://api.moonshot.ai/v1",
+    "env_key": "KIMI_API_KEY",
+    "model": "kimi-k3",
+    "temperature": 0,
+    "notes": "Same pricing as kimi frontier; designer tokens counted in A7 cost, amortized over 5 reps."
+  },
+  "fallback_family": {
+    "family": "deepseek",
+    "provider": "deepseek",
+    "endpoint": "https://api.deepseek.com",
+    "env_key": "DEEPSEEK_API_KEY",
+    "frontier": {
+      "model": "deepseek-v4-pro",
+      "input_usd_per_1m": 0.435,
+      "output_usd_per_1m": 0.87,
+      "cache_hit_input_usd_per_1m": 0.003625,
+      "context": 1000000,
+      "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    "cheap_sibling": {
+      "model": "deepseek-v4-flash",
+      "input_usd_per_1m": 0.14,
+      "output_usd_per_1m": 0.28,
+      "cache_hit_input_usd_per_1m": 0.0028,
+      "context": 1000000,
+      "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/"
+    },
+    "surge_window": {
+      "peak_windows_utc8": ["09:00-12:00", "14:00-18:00"],
+      "peak_windows_utc": ["01:00-04:00", "06:00-10:00"],
+      "peak_multiplier": "2x (press reports, July 2026); official pricing page lists base prices only - VERIFY on billing before any peak-hour run",
+      "rule": "never run during peak windows; base price applies off-peak"
+    }
+  },
+  "execution_window": {
+    "rule": "All experiment runs execute inside the preferred window unless a provider is window-free (kimi, together, western providers flat-priced).",
+    "preferred_window_utc": "14:00-00:00",
+    "preferred_window_paris": "16:00-02:00 (UTC+2 summer)",
+    "preferred_window_utc8": "22:00-08:00",
+    "rationale": "Single window that simultaneously (a) hits the Qwen off-peak discount window and (b) fully avoids both DeepSeek peak-surge windows. Kimi/Together are time-invariant so unaffected.",
+    "ledger_requirement": "every run records started_at_utc, in_discount_window (bool), pinned_price_usd and paid_price_usd estimates; primary T-EGR uses pinned prices, paid prices feed the sensitivity analysis (D21)"
+  }
+}

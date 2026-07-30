@@ -116,3 +116,18 @@ Every phase appends an entry here. Never edit past entries.
   - Decision recorded as D20 in `DESIGN-DECISIONS.md` with academic grounding (Peng 2011; Sandve et al. 2013; Stodden et al. 2016; TOP guidelines, Nosek et al. 2015).
   - README Reproduction section rewritten to a full code-driven re-run sequence; repository-layout table adds `code/`.
 - Cost incurred: $0 (no LLM calls yet).
+
+---
+
+## Entry 7 — Phase 0 (partial): Eastern-family model pins, judges, discount windows
+- Date: 2026-07-30
+- Phase: Phase 0 (model pinning)
+- Author inputs: API keys provided for Moonshot (Kimi), Alibaba (DashScope intl), DeepSeek, Together.ai via git-ignored `.env`; author directive to exploit provider off-peak discount windows.
+- Actions:
+  - All 4 keys validated live (HTTP 200 on /models). Endpoints fixed: Kimi = api.moonshot.ai (intl), Alibaba = dashscope-intl (Singapore), DeepSeek = api.deepseek.com, Together = api.together.xyz.
+  - `config/model_registry.json` created: kimi-k3 / kimi-k2.6; qwen3.7-max-2026-06-08 / qwen3.7-plus-2026-05-26 (dated snapshots); judges Mistral-Small-24B-2501, GLM-4.7, Llama-3.3-70B-Turbo (all on Together, family-disjoint from generators); designer A7 = kimi-k3 T=0; fallback deepseek-v4-pro/flash. Prices pinned from official provider pricing pages same day.
+  - Discount windows recorded: Qwen off-peak 22:00–08:00 UTC+8 (up to 80% off Max, 60% Plus, unverified on billing); DeepSeek 2x peak surge 09:00–12:00 & 14:00–18:00 UTC+8 (press-reported); Kimi & Together flat. Execution window fixed at 14:00–00:00 UTC (D21: pinned prices primary, paid prices sensitivity-only).
+  - `code/pin_models.py` written and run: ALL PINNED MODELS VERIFIED (gpt/claude/gemini SKIP pending keys).
+  - Decisions D21 (discount-window cost accounting) and D22 (model pins) appended to DESIGN-DECISIONS.md.
+- Pending: OpenAI/Anthropic/Gemini keys → pin Western families; verify Qwen off-peak & DeepSeek surge on billing console during pilot; sync experiment_config.json TO_PIN fields at freeze.
+- Cost incurred: $0 (free /models listings only).
