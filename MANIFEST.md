@@ -198,3 +198,14 @@ Every phase appends an entry here. Never edit past entries.
 - Housekeeping: diagnostic scratch project 43 renamed to `zz-scratch-retired (was oe-smoke-tmp)` (MCP has no delete tool; safe to delete from UI).
 - **Phase 0 §6 steps 3–5 are now COMPLETE**: 30 fixed pipelines live, smoke-tested, token ledger verified.
 - Cost incurred: ~110k tokens total this session (smoke 88.9k + diagnostics + D28 recheck ~21k), spread across 5 providers' cheap+frontier models.
+
+---
+
+## Entry 13 — D29–D31: Polisher exclusion made explicit; A7 refined (persona-free + variance probe + conditional A7-P); pre-registered sequential gate protocol
+- Date: 2026-07-31
+- Phase: Phase 0 (pre-freeze design consolidation, prompted by author design review)
+- **D29**: Polisher role formally excluded from team cells — Builder→Critic→Refiner is the minimal orchestration loop; Polisher affects presentation, not substance (LLM-judge style-bias risk); makes D1's "3-step" explicit.
+- **D30**: A7 refinements — (1) A7 executes WITHOUT personas (isolates Design lever; exploratory 2×2 = C-T-N / C-T-P / A7 / A7-P); (2) bounded design-variance probe (5 problems × 3 temp-1 designs × 1 execution → design ICC); (3) A7-P conditional arm: designer also staffs roles from the frozen persona pool only; (4) single designer (Kimi V3) reaffirmed. All designer/probe/staffing tokens charged to arm cost.
+- **D31**: sequential gate protocol frozen BEFORE any pilot token: gate table G0/G-A5/G-A6/G-A7/G-A7P/G-A8 with thresholds; SESOI d = 0.30 on Novelty; gates are futility/feasibility only (never evidence); confirmatory factorial runs in full regardless; H4/H5 pre-declared as conditional; every executed arm reported (no file-drawer).
+- Files: DESIGN-DECISIONS.md (D29–D31), RESEARCH-PAPER-PLAN.md §4.1 (A7 amended, A7-P row, gate principle), config/experiment_config.json (`exploratory_gates` block).
+- Cost incurred: 0 tokens (documentation only).

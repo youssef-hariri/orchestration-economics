@@ -152,14 +152,16 @@ strongest Western frontier by A1/F-S-N Novelty + Kimi V3 as the Eastern represen
 |---|---|---|---|
 | **A5** | C-T-P + WHILE loop (Critic verdict gate, max 2 iterations) | 3–5 | Depth/H4 |
 | **A6** | Frontier solo, **cost-matched compute**: same $ budget as C-T-P (pooled median) spent on the **best A1 frontier** (pre-registered rule) via longer/self-refine prompt | 1–2 | The killer cost-matched comparison (H1) |
-| **A7** | **Adaptive**: pipeline auto-designed per problem by **Kimi V3** (temp 0, pre-registered design prompt with contingency rules from Papers 2+4, via `designPipeline`); **cheap models execute** | var | Prescriptive Strategic Selector test (exploratory) |
+| **A7** | **Adaptive**: pipeline auto-designed per problem by **Kimi V3** (temp 0, pre-registered design prompt with contingency rules from Papers 2+4, via `designPipeline`); **cheap models execute, NO personas** (D30 — isolates the Design lever). Plus a bounded design-variance probe: 5 problems × 3 temp-1 designs, executed once each (design ICC) | var | Prescriptive Strategic Selector test (exploratory) |
+| **A7-P** | **Conditional (gate G-A7P, D31)**: designer designs the pipeline AND staffs each role with a persona chosen ONLY from the frozen verbatim pool (D30) | var | Design×Persona interaction; frontier as full team architect |
 | **A8** | C-T-P with **shuffled persona→role mapping** (15 problems, 3 reps) | 3 | Persona-role congruence control (H5) |
 
 Design principles decided:
 - **Fixed pipelines for all confirmatory cells** (factorial + A5, A6, A8): pipeline identical across problems so effects are attributable. Per-problem auto-design only as the A7 *policy* arm — the adaptive policy itself is the treatment.
 - **Model-homogeneous teams**: family is manipulated between runs, never mixed within a team — removes the model-mixing confound of an arbitrary cheap-model blend.
 - **Smart designer, cheap executors** (A7): the smartest available model designs the pipeline; cheap models run it. Mirrors the real DeeWaanAI product pattern (design once, execute cheaply) and confines frontier spend.
-- **Single designer model** for A7, pinned version, temp 0 (ensemble designing = future work; irreproducible and unattributable). **Every generated pipeline is archived** as the record of truth (frontier temp-0 is not perfectly deterministic); designer tokens are counted in cost accounting, amortized across the 5 repetitions.
+- **Single designer model** for A7, pinned version, temp 0 (ensemble designing = future work; irreproducible and unattributable). **Every generated pipeline is archived** as the record of truth (frontier temp-0 is not perfectly deterministic); designer tokens are counted in cost accounting, amortized across the 5 repetitions. Probe and A7-P staffing tokens are likewise charged to their arm (D30).
+- **Sequential gate protocol (D31)**: exploratory arms (A5–A8, A7-P) run only if their pre-registered feasibility/futility gates pass (gate table frozen in DESIGN-DECISIONS D31; SESOI d = 0.30 on Novelty). Gates allocate exploratory budget only — the confirmatory factorial runs in full regardless; every executed arm is reported regardless of outcome; H4/H5 are conditional on their arm's gate.
 
 Personas: reuse verbatim `3_cultural_personas_data.jsonl` from the persona-model-fit repo
 (Culture_5 innovator, Culture_Expert implementer, Culture_11 cultural specialist) —

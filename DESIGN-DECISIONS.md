@@ -185,6 +185,44 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
 - **Reporting obligation:** documented deviation from the pre-registered 2048, reported in Method alongside D27; the kimi empty-output artifact and its isolation procedure belong in the Method's pilot/smoke-test paragraph.
 - **Implemented in:** all 30 production pipelines via `code/apply_d28_maxtokens.mjs`; registry `d28` block; config `generation.max_tokens` (+note); plan §4.4 cost controls.
 
+## D29. Polisher excluded — teams are Builder→Critic→Refiner only (3 steps)
+- **Decision (by author, 2026-07-31):** Team cells use the platform's Builder/Critic/Refiner roles verbatim but EXCLUDE the platform's 4th default role (Polisher). Makes explicit what D1 fixed implicitly ("3-step Team").
+- **Rationale:** (a) Builder→Critic→Refiner is the minimal causal loop of orchestration — generate → evaluate → revise — which is the mechanism being priced; (b) Polisher's mandate is presentation (clarity, formatting, tone), not substance — including it risks inflating LLM-judge scores through style rather than solution quality (style bias in LLM judges: Zheng et al. 2023, *Judging LLM-as-a-Judge*); (c) a 4th call adds ~33% team cost that buys polish, not problem-solving, muddying the cost-of-orchestration question; (d) persona congruence mapping (D-persona) is defined for exactly three roles from Paper 2's validated trio.
+- **Implemented in:** generator `code/create_pipelines.mjs` (3 canonical role prompts); all 10 team pipelines on production (3 steps each).
+
+## D30. A7 refined execution spec: persona-free execution, design-variance probe, conditional A7-P
+- **Decision (by author, 2026-07-31, pre-freeze):** Four refinements to the A7 adaptive arm; single-designer principle reaffirmed.
+  1. **A7 executes WITHOUT personas.** The pre-registered design prompt must not mention personas or the persona pool. This isolates the *Design* lever from the *Persona* lever, giving the exploratory 2×2: {fixed template, auto-design} × {no persona, persona} = {C-T-N, C-T-P, A7, A7-P}.
+  2. **Design-variance probe (bounded):** main A7 keeps the frozen spec — Kimi V3, temp 0, ONE design per problem, archived, designer tokens amortized. Additionally, on a pre-registered 5-problem subset, the designer is sampled at temp 1 × 3 designs/problem (each archived, executed once by the same cheap family). Purpose: estimate between-design variance in outcome (design ICC) — "is auto-design reliable or a lottery?" Cost bound: 15 designer calls + 15 cheap executions.
+  3. **A7-P (conditional arm — delegated staffing):** the designer both designs the pipeline AND assigns personas to each designed role, choosing ONLY from the frozen verbatim persona pool (pool closed; researcher-side role→persona heuristics for arbitrary designed roles are rejected as unreproducible researcher degrees of freedom). Tests the frontier as full team architect (design + staffing) and estimates the Design×Persona interaction. Runs only if its D31 gate passes.
+  4. **Single designer reaffirmed** (Kimi V3, pinned, per D-designer rationale: attribution, reproducibility, cost). Per-family frontier designers considered and deferred to future work: A7 runs on one family only, so multi-designer adds cost without removing any confound inside A7.
+- **Cost rule:** designer tokens (including probe and A7-P staffing calls) are charged to the arm's cost DV — excluding them would flatter auto-design in the economics.
+- **Grounding:** design-as-sampled-variable follows the same stimulus-sampling logic as D3 (Clark 1973; Westfall et al. 2014, applied to pipeline designs as stimuli); delegated staffing mirrors the platform's `designPipeline` product pattern.
+- **Implemented in:** plan §4.1 special-arms table (A7 amended, A7-P row added); config `exploratory_gates`; designer prompt to be authored at pilot (frozen before A7 runs).
+
+## D31. Pre-registered sequential gate protocol for exploratory arms (budget-aware adaptive design)
+- **Decision (by author, 2026-07-31):** Exploratory arms (A5–A8, A7-P) are governed by feasibility/futility gates, ALL specified before any pilot token is spent. The confirmatory 30-pipeline factorial runs IN FULL regardless of gates — gates allocate exploratory budget only; they never alter confirmatory hypotheses, cells, or stopping.
+- **Interpretation rules (what keeps this rigorous):**
+  - Gates decide *budget allocation*, never evidence: a pilot result is NEVER reported as an effect estimate for confirmatory claims (pilot effect sizes are noisy — Albers & Lakens 2018).
+  - Gate criteria are feasibility- and SESOI-based, not p-value peeking (no Type-I inflation from optional stopping; cf. group-sequential logic, Pocock 1977, used here for futility only).
+  - **SESOI declared now: d = 0.30 on the primary DV (Novelty)** — below Paper 2's smallest reported persona effect; effects smaller than this are of no practical interest at these budget levels.
+  - Every gate decision (pass/fail, the numbers, the action taken) is logged in MANIFEST; every arm that runs is reported in the paper regardless of outcome (no file-drawer).
+  - H4 (depth, needs A5) and H5 (congruence, needs A8) become CONDITIONAL hypotheses: if their arm is gated out, the paper reports "not testable" with the gate numbers — pre-declaring this preserves confirmatory status for the arms that do run.
+- **Gate table (frozen):**
+
+| Gate | Arm | Criterion (measured at pilot / prior stage) | Threshold | Action if failed |
+|---|---|---|---|---|
+| G0 | all | empty-output rate per cell; judge Fleiss κ on pilot solutions; per-cell cost vs budget envelope | ≤5%; κ≥0.40; ≤1.5× envelope | fix root cause and re-pilot (never silently drop) |
+| G-A5 | A5 | C-T-P completion rate; Critic verdict (PASS/NEEDS_WORK/MAJOR_REVISIONS) machine-parseable | ≥95%; ≥90% parseable | drop A5; H4 reported as not testable |
+| G-A6 | A6 | token ledger validated (step sums = totals); F-S-N Novelty ranking stable under leave-one-rep-out (baseline rule needs a stable winner) | ledger exact; top model unchanged | defer A6 until ranking stabilizes with +2 reps; if still unstable, drop and report |
+| G-A7 | A7 | share of designed pipelines schema-valid and executable without manual repair (5 pilot problems) | ≥90% | one designer-prompt revision permitted (revision archived); re-gate once; then drop |
+| G-A7P | A7-P | G-A7 passed AND (confirmatory Persona main effect \|d\| ≥ 0.20 OR A7 mean Novelty ≥ C-T-N − SESOI) | as stated | drop A7-P; Design×Persona interaction reported as not estimated |
+| G-A8 | A8 | confirmatory Persona main effect | \|d\| ≥ 0.20 | drop A8; H5 reported as not testable (congruence moot if personas do nothing) |
+
+- **Sequencing:** G0 at Phase 0 pilot (§6 step 6) → confirmatory factorial in full → G-A5/G-A6/G-A7 → special arms → G-A7P/G-A8 → conditional arms. Special-arm family frozen at pilot as already pre-registered.
+- **Grounding:** internal pilot / adaptive designs (Wittes & Brittain 1990); futility stopping (Lachin 2005); SESOI logic (Lakens 2017, equivalence-testing framing); pre-registered decision trees as forking-path control (Gelman & Loken 2014).
+- **Implemented in:** config `exploratory_gates`; plan §4.1 design principles; MANIFEST logging duty per gate.
+
 ## Maintenance rule
 Every future design or analysis decision MUST be appended here (topic-organized) and to
 `MANIFEST.md` (chronological) **with its academic grounding at the time it is made**.

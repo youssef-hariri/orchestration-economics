@@ -4,30 +4,115 @@
   "status": "Models pinned (config/model_registry.json + price_vector.json, D22/D24); freeze at preregistration tag",
   "design": {
     "type": "2x2x2 within-family factorial + special arms",
-    "factors": { "tier": ["frontier", "cheap_sibling"], "structure": ["solo", "team_3step"], "persona": ["none", "persona_loaded"] },
+    "factors": {
+      "tier": [
+        "frontier",
+        "cheap_sibling"
+      ],
+      "structure": [
+        "solo",
+        "team_3step"
+      ],
+      "persona": [
+        "none",
+        "persona_loaded"
+      ]
+    },
     "team_rule": "model-homogeneous: all 3 agents in a run use the SAME model; only persona/role prompts differ",
     "solo_persona": "Culture_5 (best single persona per Doing More with Less)",
     "team_persona": "diverse congruent trio (see persona_role_mapping_congruent)"
   },
   "tiers": {
     "families": [
-      { "family": "gpt", "origin": "western", "provider": "openai", "frontier": "gpt-5.6-sol", "cheap_sibling": "gpt-5.6-luna" },
-      { "family": "claude", "origin": "western", "provider": "anthropic", "frontier": "claude-opus-5", "cheap_sibling": "claude-haiku-4-5-20251001", "note": "strip reasoning traces before judging if extended thinking enabled" },
-      { "family": "gemini", "origin": "western", "provider": "gemini", "frontier": "gemini-3.1-pro-preview", "cheap_sibling": "gemini-3.1-flash-lite", "note": "strip reasoning traces before judging (Paper 2 comparability caveat); preview risk - preregistered fallback gemini-2.5-pro" },
-      { "family": "kimi", "origin": "eastern", "provider": "moonshot", "frontier": "kimi-k3", "cheap_sibling": "kimi-k2.6" },
-      { "family": "qwen", "origin": "eastern", "provider": "aliyun", "frontier": "qwen3.7-max-2026-06-08", "cheap_sibling": "qwen3.7-plus-2026-05-26" }
+      {
+        "family": "gpt",
+        "origin": "western",
+        "provider": "openai",
+        "frontier": "gpt-5.6-sol",
+        "cheap_sibling": "gpt-5.6-luna"
+      },
+      {
+        "family": "claude",
+        "origin": "western",
+        "provider": "anthropic",
+        "frontier": "claude-opus-5",
+        "cheap_sibling": "claude-haiku-4-5-20251001",
+        "note": "strip reasoning traces before judging if extended thinking enabled"
+      },
+      {
+        "family": "gemini",
+        "origin": "western",
+        "provider": "gemini",
+        "frontier": "gemini-3.1-pro-preview",
+        "cheap_sibling": "gemini-3.1-flash-lite",
+        "note": "strip reasoning traces before judging (Paper 2 comparability caveat); preview risk - preregistered fallback gemini-2.5-pro"
+      },
+      {
+        "family": "kimi",
+        "origin": "eastern",
+        "provider": "moonshot",
+        "frontier": "kimi-k3",
+        "cheap_sibling": "kimi-k2.6"
+      },
+      {
+        "family": "qwen",
+        "origin": "eastern",
+        "provider": "aliyun",
+        "frontier": "qwen3.7-max-2026-06-08",
+        "cheap_sibling": "qwen3.7-plus-2026-05-26"
+      }
     ],
-    "fallback_family": { "family": "deepseek", "provider": "deepseek", "note": "used only if one of the 5 families is inaccessible" },
+    "fallback_family": {
+      "family": "deepseek",
+      "provider": "deepseek",
+      "note": "used only if one of the 5 families is inaccessible"
+    },
     "cells": {
       "_problems": "factorial cells run on the 30 main problems (6 domains x 5); special arms A5-A8 run on the original 15 only (mechanism arms need no domain breadth)",
-      "C-S-N": { "families": 5, "reps": 3, "runs": 450 },
-      "C-S-P": { "families": 5, "reps": 3, "runs": 450 },
-      "C-T-N": { "families": 5, "reps": 3, "runs": 450 },
-      "C-T-P": { "families": 5, "reps": 3, "runs": 450, "note": "core treatment (old A4)" },
-      "F-S-N": { "families": 5, "reps": 2, "runs": 300, "note": "old A1 frontier pool" },
-      "F-S-P": { "families": 5, "reps": 2, "runs": 300 },
-      "F-T-N": { "families": 2, "reps": 2, "runs": 120, "family_rule": "PREREGISTERED: strongest Western frontier by F-S-N Novelty + Kimi V3" },
-      "F-T-P": { "families": 2, "reps": 2, "runs": 120, "family_rule": "same 2 families as F-T-N" }
+      "C-S-N": {
+        "families": 5,
+        "reps": 3,
+        "runs": 450
+      },
+      "C-S-P": {
+        "families": 5,
+        "reps": 3,
+        "runs": 450
+      },
+      "C-T-N": {
+        "families": 5,
+        "reps": 3,
+        "runs": 450
+      },
+      "C-T-P": {
+        "families": 5,
+        "reps": 3,
+        "runs": 450,
+        "note": "core treatment (old A4)"
+      },
+      "F-S-N": {
+        "families": 5,
+        "reps": 2,
+        "runs": 300,
+        "note": "old A1 frontier pool"
+      },
+      "F-S-P": {
+        "families": 5,
+        "reps": 2,
+        "runs": 300
+      },
+      "F-T-N": {
+        "families": 2,
+        "reps": 2,
+        "runs": 120,
+        "family_rule": "PREREGISTERED: strongest Western frontier by F-S-N Novelty + Kimi V3"
+      },
+      "F-T-P": {
+        "families": 2,
+        "reps": 2,
+        "runs": 120,
+        "family_rule": "same 2 families as F-T-N"
+      }
     },
     "consistency_slice": {
       "rule": "the single pre-registered special-arm cheap family runs 5 reps (instead of 3) in its four cheap cells C-S-N/C-S-P/C-T-N/C-T-P, 30 problems",
@@ -35,7 +120,9 @@
       "purpose": "reliable within-cell SD for the Consistency DV (SD from n=3 has ~52% sampling error; n=5 ~38%); mean-effect inference uses 3 reps everywhere per Westfall-Kenny-Judd stimulus-sampling power logic"
     },
     "frontier_cost_matched_A6": {
-      "used_in_arms": ["A6"],
+      "used_in_arms": [
+        "A6"
+      ],
       "model": "SELECTED_BY_RULE",
       "selection_rule": "PREREGISTERED: the frontier model with the highest mean Novelty in F-S-N becomes the A6 cost-matched baseline; token budget derived from pooled C-T-P median cost",
       "repetitions": 5
@@ -44,21 +131,52 @@
       "provider": "moonshot",
       "model": "kimi-k3",
       "temperature": 0,
-      "used_in_arms": ["A7"],
+      "used_in_arms": [
+        "A7"
+      ],
       "note": "Kimi V3 designs pipeline per problem; every design output archived in pipelines/adaptive_A7/; tokens counted in cost, amortized over 5 reps"
     },
     "judges": [
-      { "provider": "together", "model": "mistralai/Mistral-Small-24B-Instruct-2501", "family": "mistral", "note": "family disjoint from generators" },
-      { "provider": "together", "model": "zai-org/GLM-4.7", "family": "zhipu", "note": "family disjoint from generators; replaces Gemini which moved to the generator pool" },
-      { "provider": "together", "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo", "family": "meta", "note": "family disjoint from generators" }
+      {
+        "provider": "together",
+        "model": "mistralai/Mistral-Small-24B-Instruct-2501",
+        "family": "mistral",
+        "note": "family disjoint from generators"
+      },
+      {
+        "provider": "together",
+        "model": "zai-org/GLM-4.7",
+        "family": "zhipu",
+        "note": "family disjoint from generators; replaces Gemini which moved to the generator pool"
+      },
+      {
+        "provider": "together",
+        "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+        "family": "meta",
+        "note": "family disjoint from generators"
+      }
     ],
     "judge_disjointness_rule": "generator families = {openai, anthropic, google, moonshot, alibaba}; judge families = {mistral, zhipu, meta} — no overlap"
   },
-  "generation": { "temperature": 1, "temperature_note": "D27 (2026-07-31): pre-registered 0.7 replaced by 1 uniformly — OpenAI gpt-5.6 and Moonshot kimi APIs enforce temperature=1 (400 otherwise); uniform value preserves cross-family ceteris paribus", "max_tokens": 8192, "max_tokens_note": "D28 (2026-07-31): pre-registered 2048 replaced by 8192 uniformly — kimi hidden reasoning counts against the completion budget and exhausted 2048 in team cells, returning empty visible output; cap is unobservable to models, token usage remains the cost DV", "reps_cheap_cells": 3, "reps_cheap_cells_consistency_slice_family": 5, "reps_frontier_cells": 2, "reps_special_arms_A5_A6_A7": 5, "reps_A8": 3 },
+  "generation": {
+    "temperature": 1,
+    "temperature_note": "D27 (2026-07-31): pre-registered 0.7 replaced by 1 uniformly — OpenAI gpt-5.6 and Moonshot kimi APIs enforce temperature=1 (400 otherwise); uniform value preserves cross-family ceteris paribus",
+    "max_tokens": 8192,
+    "max_tokens_note": "D28 (2026-07-31): pre-registered 2048 replaced by 8192 uniformly — kimi hidden reasoning counts against the completion budget and exhausted 2048 in team cells, returning empty visible output; cap is unobservable to models, token usage remains the cost DV",
+    "reps_cheap_cells": 3,
+    "reps_cheap_cells_consistency_slice_family": 5,
+    "reps_frontier_cells": 2,
+    "reps_special_arms_A5_A6_A7": 5,
+    "reps_A8": 3
+  },
   "judging": {
     "temperature": 0.0,
     "max_tokens": 512,
-    "variants": ["var1", "var2", "var3"],
+    "variants": [
+      "var1",
+      "var2",
+      "var3"
+    ],
     "scores_per_solution": 9,
     "judge_each_repetition_independently": true,
     "never_ensemble_responses_before_judging": true,
@@ -68,7 +186,10 @@
     "human_validation": "NONE - author decision D26 (2026-07-30): no human rater panel; validity via verbatim Papers 1-2 instrument, Fleiss kappa + ICC(2,k) on all solutions, leave-one-judge-out, judge-family disjointness; stated as limitation"
   },
   "analysis": {
-    "units": ["solution-level ensemble score (effect sizes, comparable to Papers 1-2)", "judge-level mixed model with solution+judge+problem+family random effects (primary inference; fixes Paper 2 pseudo-replication)"],
+    "units": [
+      "solution-level ensemble score (effect sizes, comparable to Papers 1-2)",
+      "judge-level mixed model with solution+judge+problem+family random effects (primary inference; fixes Paper 2 pseudo-replication)"
+    ],
     "secondary_dv_consistency": "within-cell SD of Novelty across repetitions",
     "inherited_stack": "stats_with_anlysis.py adapted: bootstrap d CI 5000 seed 42, Welch t, FDR-BH, Type II ANOVA + partial eta2, Rouder BF + exact JZS BF (pingouin), TTestIndPower, IsolationForest 0.1, 80/20 split by problem, leave-one-out (judge/family), mean-vs-median, EGR economics",
     "oracle_portfolio": "per-problem best-cell oracle router upper bound vs A7 adaptive (Paper 4 +42.9% union precedent)",
@@ -79,10 +200,26 @@
   },
   "execution_resilience": {
     "ledger": "runs/ledger.csv — full randomized interleaved run list committed at preregistration (seed 42)",
-    "statuses": ["PENDING", "RUNNING", "DONE", "FAILED_RETRYABLE", "FAILED_PERMANENT"],
+    "statuses": [
+      "PENDING",
+      "RUNNING",
+      "DONE",
+      "FAILED_RETRYABLE",
+      "FAILED_PERMANENT"
+    ],
     "idempotent_resume": "scan ledger, skip DONE, requeue FAILED_RETRYABLE; credit outage or disconnect leaves runs PENDING and execution resumes when service returns",
-    "retries": { "max_attempts": 3, "backoff_seconds": [5, 30, 120] },
-    "concurrency": { "max_parallel_runs": 4, "pause_between_batches_seconds": 5 },
+    "retries": {
+      "max_attempts": 3,
+      "backoff_seconds": [
+        5,
+        30,
+        120
+      ]
+    },
+    "concurrency": {
+      "max_parallel_runs": 4,
+      "pause_between_batches_seconds": 5
+    },
     "error_handling": "failed generations re-run, never scored (parsed_ok gate); fixes Paper 4 silent budget burn"
   },
   "problems": {
@@ -93,14 +230,35 @@
     "special_arms_subset": "A5-A8 run on the original 15 problems only"
   },
   "personas": "data/personas/cultural_personas.json",
-  "persona_role_mapping_congruent": { "builder": "Culture_5", "critic": "Culture_Expert", "refiner": "Culture_11" },
+  "persona_role_mapping_congruent": {
+    "builder": "Culture_5",
+    "critic": "Culture_Expert",
+    "refiner": "Culture_11"
+  },
   "primary_dv": "Novelty",
   "economic_dv": "T-EGR = (Novelty_cell / Novelty_F-S-N) / (Cost_cell / Cost_F-S-N); cost recomputed as tokens x config/price_vector.json (D23), never stored as observed dollars",
   "cost_accounting": {
     "model_registry": "config/model_registry.json",
     "price_vector": "config/price_vector.json (v2026-07-30, frozen at prereg)",
-    "ledger_token_columns_required": ["input_tokens", "output_tokens"],
+    "ledger_token_columns_required": [
+      "input_tokens",
+      "output_tokens"
+    ],
     "execution_window_utc": "14:00-00:00 (D21: Qwen off-peak, avoids DeepSeek surge)",
     "token_efficiency_robustness": "Novelty per 1K output tokens, tokenizer caveat stated"
+  },
+  "exploratory_gates": {
+    "decision": "D31 (2026-07-31): pre-registered sequential gate protocol; gates allocate exploratory budget only, confirmatory factorial runs in full regardless",
+    "sesoi": "d = 0.30 on primary DV (Novelty)",
+    "interpretation": "futility/feasibility only; pilot results never reported as effect evidence (Albers & Lakens 2018); every executed arm reported regardless of outcome; H4/H5 conditional on their arm's gate",
+    "gates": {
+      "G0": "all arms: empty-output rate <=5% per cell; judge Fleiss kappa >=0.40; per-cell cost <=1.5x budget envelope; else fix and re-pilot",
+      "G-A5": "C-T-P completion >=95% AND Critic verdict machine-parseable >=90%; else drop A5, H4 not testable",
+      "G-A6": "token ledger exact AND F-S-N Novelty top model stable under leave-one-rep-out; else +2 reps then drop if unstable",
+      "G-A7": ">=90% of designed pipelines schema-valid and executable without manual repair on 5 pilot problems; one archived designer-prompt revision permitted, re-gate once, then drop",
+      "G-A7P": "G-A7 passed AND (confirmatory Persona |d|>=0.20 OR A7 mean Novelty >= C-T-N minus SESOI); else drop, Design x Persona not estimated",
+      "G-A8": "confirmatory Persona main effect |d|>=0.20; else drop A8, H5 not testable"
+    },
+    "a7_refinements": "D30: A7 executes without personas; design-variance probe = 5 problems x 3 temp-1 designs x 1 execution; A7-P = designer also staffs roles from the frozen persona pool only; designer/probe/staffing tokens charged to arm cost"
   }
 }
