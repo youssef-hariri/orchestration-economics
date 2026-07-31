@@ -57,7 +57,7 @@ Continuity with prior work:
 - *Self-Correction as Feedback Control* (arXiv:2604.22273): repeated refinement can degrade output — mirrors our "Generative Exhaustion" (Hariri 2025).
 
 **Stream F — Measurement (methods defense)**
-- LLM-as-judge reliability: *Judge's Verdict* (arXiv:2510.09738, 54 judges vs human); Badshah 2025 (Fleiss' κ for judge-human agreement). Justifies multi-judge ensemble + human blind panel + κ reporting.
+- LLM-as-judge reliability: *Judge's Verdict* (arXiv:2510.09738, 54 judges vs human); Badshah 2025 (Fleiss' κ for judge-human agreement). Justifies multi-judge ensemble + κ reporting (these validations carry construct validity in lieu of a human panel — D26).
 
 ### 2.2 The gap (one paragraph for the paper)
 
@@ -238,7 +238,7 @@ Frontier judge NOT needed (Badshah 2025 + own κ=0.68 result justify cheap ensem
 
 - **30 main problems, domain-stratified: 6 business domains × 5 problems** (pre-registered `domain_map.json`). Rationale: stimulus-sampling power (Westfall, Kenny & Judd 2014) — generalizing across "business problems" needs ≥30 problem-level clusters, and 5 per domain makes H2 domain moderation confirmatory. Domains: strategy/market-entry, marketing/communications, operations/supply-chain, HR/organization, finance/business-models, product/innovation.
   - The **15 original problems** from LLM-Creativity `business_problems_data.json` (Business_Problem_1–15) — validated instruments; culture-agnostic general business problems (the personas are the treatment, not the problems). *(The 100-problem set from persona-model-fit is EXCLUDED: derived from DeepSeek training-adjacent material → contamination risk.)*
-  - **+15 new domain-stratified problems** (Business_Problem_16–30, `business_problems_domain_15.json`, author-drafted 2026-07-30) balancing the grid to exactly 5 per domain. Domain tags for the original 15 PENDING author confirmation before the preregistration freeze.
+  - **+15 new domain-stratified problems** (Business_Problem_16–30, `business_problems_domain_15.json`, author-drafted and **author-approved 2026-07-30, D25**) balancing the grid to exactly 5 per domain. Domain tags for the original 15 PENDING author confirmation before the preregistration freeze.
 - **+10 fresh post-cutoff business cases** (2026 scenarios) — contamination control; out-of-sample robustness/replication set, NOT part of the domain grid.
 - **Special arms A5–A8 run on the original 15 problems only** — mechanism arms (depth, cost-matching, congruence, adaptivity) need validated instruments, not domain breadth.
 - Pilot subset: **4 problems** for the pilot run.
@@ -283,7 +283,7 @@ Cost controls: maxTokens=2048 on all generation steps; judges maxTokens=512; fro
 | Measure | Source |
 |---|---|
 | Novelty (primary), Feasibility, Overall quality (1–10) | 3 judges × 3 prompt variants, mean; κ reported |
-| Human validation | Blind human panel on stratified 10% sample (n=60), 2 raters; DeeWaanAI blind-review infrastructure; human-AI correlation reported |
+| Human validation | **None — author decision (D26).** No human rater panel; validity strategy: verbatim Papers 1–2 judge instrument, Fleiss' κ + ICC(2,k) on all solutions, leave-one-judge-out, judge-family disjointness, verbatim blinding instruction; stated as an explicit limitation |
 | Cost | actual $ from token logs × provider price sheet |
 | **T-EGR** | (Novelty_cell / Novelty_F-S-N) ÷ (Cost_cell / Cost_F-S-N) — team-level EGR |
 | Latency | swarmRuns.totalLatencyMs |
@@ -359,10 +359,10 @@ scored 0 and silently burned budget. This design upgrades it:
 1. **Introduction** — the orchestration-economics question; DeeWaanAI as instrumented apparatus; contributions: (i) first cost-matched persona-team experiment on open-ended business tasks, (ii) T-EGR metric, (iii) contingency model extension, (iv) practitioner decision rules.
 2. **Literature Review** — Streams A–F + 2×2 positioning figure (§2 above).
 3. **Theory & Hypotheses** — contingency + information-processing view; H1–H4.
-4. **Method** — platform description (reproducibility as a feature: every run's prompts/tokens/latency persisted); design table; cost-matching protocol; measures; judges + human validation.
+4. **Method** — platform description (reproducibility as a feature: every run's prompts/tokens/latency persisted); design table; cost-matching protocol; measures; judges + validity strategy (LLM-judge-only, D26).
 5. **Results** — descriptives; H tests; T-EGR frontier plot (cost on x, novelty on y, arms as points — the paper's signature figure).
 6. **Discussion** — theory: when orchestration pays; practice: decision rules (extend the EGR deploy/reject table); **DeeWaanAI business implications** (evidence-based value proposition).
-7. **Limitations & future work** — RQ1/RQ3/RQ4 as future program; judge validity; model churn.
+7. **Limitations & future work** — RQ1/RQ3/RQ4 as future program; judge validity — **no human rater panel (D26): construct validity rests on prior instrument validation + judge-ensemble agreement; human validation = future work**; model churn.
 8. Data availability: Zenodo + GitHub (new repo `orchestration-economics`), consistent with your open-science track record.
 
 **Target outlets (Business of AI fit):** Decision Support Systems; Journal of Business Research; Electronic Markets; International Journal of Information Management; (conference fallback: HICSS/ECIS AI track).
@@ -392,8 +392,8 @@ Verified available MCP tools: `addProvider`, `suggestLlmProviders`, `createPipel
 10. Judge ensemble runs (3 judges × 3 variants) — as a DeeWaanAI evaluation pipeline or script; store scores.
 11. Fresh-20 contamination-control set, all arms.
 
-### Phase 3 — Human validation (1 week, parallel)
-12. Stratified 10% sample → blind review (DeeWaanAI blind-review flow or simple sheet); 2 raters; compute human–AI correlation + κ.
+### Phase 3 — Human validation — **REMOVED (author decision D26, 2026-07-30)**
+12. ~~Stratified 10% sample → blind review; 2 raters; human–AI correlation + κ.~~ No human raters; see D26 for the substitute validity strategy.
 
 ### Phase 4 — Analysis & writing (2–3 weeks)
 13. Adapt `stats_with_anlysis.py`; produce Tables (descriptives, effects, T-EGR, κ) + frontier figure.
@@ -403,8 +403,8 @@ Verified available MCP tools: `addProvider`, `suggestLlmProviders`, `createPipel
 - [ ] API keys for: DeepSeek, Aliyun/Qwen, Moonshot, + chosen Western frontier provider (added via MCP `addProvider`, stored AES-encrypted).
 - [ ] Decision: which ONE Western frontier model for A1/A6 baseline (recommend cheapest frontier-tier).
 - [ ] Decision: which ONE smart Eastern **designer** model for A7 (Kimi K2 vs Qwen-max) — pin exact version.
-- [ ] The 10 fresh business cases (I can draft them for your review).
-- [ ] Confirm 2 human raters for the validation sample (colleagues/fellow doctoral students).
+- [x] The 10 fresh business cases — drafted 2026-07-30; final author review at preregistration freeze.
+- [x] ~~Confirm 2 human raters~~ — DROPPED (D26): no human validation panel.
 
 ---
 

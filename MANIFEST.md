@@ -160,3 +160,14 @@ Every phase appends an entry here. Never edit past entries.
   - Deferred by design (reasons in generator header): F-T-N/F-T-P (family pair fixed after F-S-N Novelty), A5/A8 (special-arm family frozen at pilot), A6 (budget from C-T-P median), A7 (designed at run time).
 - Blocker found during smoke test: production DB missing migration 019 (`swarm_batches` + `swarm_runs.batch_id`) — deployed code writes `batch_id` on every run insert, so ALL production pipeline runs fail until 019 is applied. Idempotent runner `scripts/run-migration-019.mjs` written (platform repo) and verified locally (applied + re-run skip). Smoke test (§6 step 4) pending migration.
 - Cost incurred: $0 (the one smoke-test run failed at DB insert, before any LLM call).
+
+---
+
+## Entry 10 — Author decisions: problem set approved (D25), no human validation panel (D26)
+- Date: 2026-07-30
+- Phase: Phase 0 (pre-registration preparation)
+- Decisions (by author):
+  - **D25**: Business_Problem_16–30 approved as drafted → the 30-problem main set is content-final (freezes at prereg tag). Original-15 domain tags remain the only problem item pending.
+  - **D26**: NO human raters — Phase 3 (blind human panel, 2 raters, human–AI correlation) removed. Substitute validity strategy: verbatim Papers 1–2 judge instrument, Fleiss' κ + ICC(2,k) on all solutions, leave-one-judge-out, judge-family disjointness, verbatim blinding instruction; stated explicitly as a limitation with human validation as future work. Grounding: *Judge's Verdict* (arXiv:2510.09738); Badshah 2025.
+- Actions: DESIGN-DECISIONS.md (D25, D26), RESEARCH-PAPER-PLAN.md (§2 Stream F, §4.3, §4.6, §5 items 4/7, §6 Phase 3 + checklist), config/experiment_config.json (judging.human_validation, problems) all updated consistently.
+- Cost incurred: $0.

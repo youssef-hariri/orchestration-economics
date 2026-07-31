@@ -155,6 +155,19 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
 
 ---
 
+## D25. Main problem set approved (Business_Problem_16–30)
+- **Decision (by author, 2026-07-30):** The 15 new domain-stratified problems (Business_Problem_16–30, `data/problems/business_problems_domain_15.json`) are approved as drafted. The 30-problem main set (original 15 + new 15, 6 domains × 5) is content-final; it freezes at the preregistration tag. Domain tags for the original 15 (`domain_map.json`) remain the only problem-related item pending author confirmation.
+- **Academic grounding:** Approval completes the stimulus-sampling requirement (Westfall, Kenny & Judd 2014 — ≥30 problem-level clusters) and makes H2 domain moderation confirmatory (6 × 5 balanced grid).
+
+## D26. No human validation panel — LLM-judge-only measurement
+- **Decision (by author, 2026-07-30):** There will be NO human raters. Phase 3 (blind human panel, stratified 10% sample, 2 raters, human–AI correlation) is removed from the execution plan.
+- **Academic grounding / mitigation strategy (in lieu of a human panel):**
+  - Instrument continuity: the 3 judge prompt variants are reused verbatim from Papers 1–2, where the same instrument produced the reported reliability; prompts are never redesigned (Paper 1's two optimization attempts collapsed κ to ≈0).
+  - Literature support for LLM-judge validity at ensemble scale: *Judge's Verdict* (arXiv:2510.09738, 54 judges vs human); Badshah 2025 (Fleiss' κ for judge–human agreement).
+  - Internal reliability reported in full: Fleiss' κ AND ICC(2,k) per dimension on ALL solutions (9 ratings each); leave-one-judge-out robustness; judge families disjoint from all generator families (mistral/zhipu/meta vs openai/anthropic/google/moonshot/alibaba); verbatim Paper 1 blinding instruction.
+  - **Stated explicitly as a limitation** in the paper (§5 item 7): construct validity rests on prior instrument validation and judge-ensemble agreement, not a fresh human panel; human validation listed as future work.
+- **Consequence:** §4.6 Measures table, §5 Method/Limitations, §6 Phase 3, and `experiment_config.json` updated; budget/time freed (~1 week, panel logistics).
+
 ## Maintenance rule
 Every future design or analysis decision MUST be appended here (topic-organized) and to
 `MANIFEST.md` (chronological) **with its academic grounding at the time it is made**.
