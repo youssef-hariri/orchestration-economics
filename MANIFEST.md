@@ -171,3 +171,30 @@ Every phase appends an entry here. Never edit past entries.
   - **D26**: NO human raters — Phase 3 (blind human panel, 2 raters, human–AI correlation) removed. Substitute validity strategy: verbatim Papers 1–2 judge instrument, Fleiss' κ + ICC(2,k) on all solutions, leave-one-judge-out, judge-family disjointness, verbatim blinding instruction; stated explicitly as a limitation with human validation as future work. Grounding: *Judge's Verdict* (arXiv:2510.09738); Badshah 2025.
 - Actions: DESIGN-DECISIONS.md (D25, D26), RESEARCH-PAPER-PLAN.md (§2 Stream F, §4.3, §4.6, §5 items 4/7, §6 Phase 3 + checklist), config/experiment_config.json (judging.human_validation, problems) all updated consistently.
 - Cost incurred: $0.
+
+---
+
+## Entry 11 — Migration 019 applied; two provider API blockers diagnosed and resolved; D27 temp=1
+- Date: 2026-07-31
+- Phase: Phase 0 (setup, §6 step 4 — smoke test)
+- Migration: coding team applied `scripts/run-migration-019.mjs` on production — run inserts work again.
+- Blockers found via smoke tests (real errors captured from the run event stream; `run_status` only reports a generic failure):
+  1. **OpenAI gpt-5.6 rejects `max_tokens`** (400: use `max_completion_tokens`). Platform bug — fixed in adapter `api/lib/providers/openai.ts` (retry once with `max_completion_tokens` on that exact 400), commit `3b4169f`, deployed. L3 security review: 0 findings.
+  2. **Temperature 0.7 rejected by 2 of 5 families** (hard API policy, no workaround): Moonshot kimi-k3/k2.6 ("only 1 is allowed") and OpenAI gpt-5.6 ("Only the default (1) value is supported"). claude/gemini/qwen accepted 0.7. Verified empirically: gpt-5.6-luna at temp=1 completed (runId 21, 37 tokens).
+- **D27 (author decision, 2026-07-31)**: generation temperature set to **1 uniformly across ALL 30 pipelines / 5 families** (author chose uniformity over per-family heterogeneity or dropping families; full rationale + alternatives in DESIGN-DECISIONS.md D27). Documented deviation from pre-registered 0.7; must be reported in the paper's Method section with the API errors as evidence of external forcing.
+- Actions: `code/apply_d27_temp1.mjs` (idempotent) updated all 30 production pipelines (projects 13–42) → temp "1"; registry patched (write-through + `d27` block); config `generation.temperature`=1 (+note); DESIGN-DECISIONS.md (D27, D3 amendment note); RESEARCH-PAPER-PLAN.md §4.8(1).
+- Cost incurred: ~a few hundred tokens (diagnostic smoke runs 8–21, mostly failed at 0 tokens; successes: runs 14/15/16/18/21, all ≤ 361 tokens).
+
+---
+
+## Entry 12 — Phase 0 smoke test PASSED 30/30; D28 max_tokens 8192; token/cost chain verified
+- Date: 2026-07-31
+- Phase: Phase 0 (setup, §6 step 4 — COMPLETE)
+- Smoke test (`code/smoke_test.mjs`, 1 non-experimental problem per pipeline, sequential): **30/30 completed** (runs 22–51), all 5 families × 6 cells. Log: `runs/logs/smoke_test_2026-07-31.json`. Total ~88.9k tokens.
+- Token/cost chain verified (§6 step 5): every run has the expected step count (1 solo / 3 team), every step has tokensUsed > 0 and latencyMs > 0, step sums equal run totals — `agentRuns.tokensUsed` ledger is sound for cost computation (plan §4.4, Table 2).
+- Artifact found: the 2 kimi TEAM cells completed but with EMPTY final response (runs 42/43). Isolated experimentally: kimi's hidden reasoning counts against the completion budget (kimi-k2.6 solo at maxTokens=100 → empty, run 52; same prompt at 8192 → 8,532 chars, run 53).
+- **D28 (author decision, 2026-07-31)**: `max_tokens` 2048 → **8192 uniformly across all 30 pipelines** (cap unobservable to models; uniform → no family confound; reasoning tokens are genuine measured cost; full rationale + alternatives in DESIGN-DECISIONS.md D28). Applied via `code/apply_d28_maxtokens.mjs`; registry patched (`d28` block); config + plan §4.4 updated. Documented deviation, reported alongside D27.
+- D28 verification: kimi team cells re-run — oe-kimi-C-T-N run 54 (6,523 tokens, 1,327-char final) and oe-kimi-C-T-P run 55 (11,178 tokens, 3,845-char final), both non-empty. Recheck appended to the smoke log.
+- Housekeeping: diagnostic scratch project 43 renamed to `zz-scratch-retired (was oe-smoke-tmp)` (MCP has no delete tool; safe to delete from UI).
+- **Phase 0 §6 steps 3–5 are now COMPLETE**: 30 fixed pipelines live, smoke-tested, token ledger verified.
+- Cost incurred: ~110k tokens total this session (smoke 88.9k + diagnostics + D28 recheck ~21k), spread across 5 providers' cheap+frontier models.

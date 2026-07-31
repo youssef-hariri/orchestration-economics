@@ -20,7 +20,7 @@
 //   - model-homogeneous teams; step.model pinned explicitly on every step
 //     AND project.defaultModel + project.defaultProviderId set (belt and
 //     braces against provider fallback).
-//   - generation temp 0.7, max_tokens 2048 (experiment_config.json).
+//   - generation temp 1 (D27; provider-forced, was 0.7), max_tokens 8192 (D28; was 2048) (experiment_config.json).
 //   - role prompts = DeeWaanAI canonical Builder/Critic/Refiner templates
 //     (api/routers/project.ts), verbatim; persona cells prepend the
 //     verbatim persona text + a blank line.
@@ -67,7 +67,7 @@ const ROLE_PROMPTS = {
 const SOLO_NEUTRAL_PROMPT =
   "You will be presented with a business problem. Analyze the situation and propose solutions. Provide a complete, well-structured response.";
 
-const GEN = config.generation; // { temperature: 0.7, max_tokens: 2048, ... }
+const GEN = config.generation; // { temperature: 1 (D27), max_tokens: 8192 (D28), ... }
 const TEMP = String(GEN.temperature);
 const MAXTOK = GEN.max_tokens;
 const MAP = config.persona_role_mapping_congruent; // builder/critic/refiner -> persona id

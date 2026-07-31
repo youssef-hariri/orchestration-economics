@@ -26,6 +26,7 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
 - **Rationale:** LLM output is a draw from a conditional distribution; temp-0 collapses the distribution to a single (still not perfectly deterministic) point and hides output variance that managers actually face. Repetitions turn stochasticity into measurable within-cell variance.
 - **Grounding:** Paper 4 (*Team Composition Paradox*, DOI 10.5281/zenodo.17490945) used temp 0 and lists it as a limitation; Papers 1–2 sampled at temp 1 / 0.7. Treating stimuli-level randomness as data rather than noise follows the random-effects tradition (Clark 1973; Baayen, Davidson & Bates 2008).
 - **Implemented in:** plan §4.8(1); config `generation.temperature`.
+- **Amended by D27 (2026-07-31):** temperature revised from 0.7 to 1 (provider-forced; see D27). The core principle — sampled stochasticity with repeated runs, never temp 0 — is unchanged.
 
 ## D4. Judge every repetition independently; ensemble only at score level (§4.8)
 - **Decision:** Each repetition is a separate solution scored by all 9 judge calls; responses are NEVER merged before judging; the solution score = mean of its 9 judge scores.
@@ -167,6 +168,22 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
   - Internal reliability reported in full: Fleiss' κ AND ICC(2,k) per dimension on ALL solutions (9 ratings each); leave-one-judge-out robustness; judge families disjoint from all generator families (mistral/zhipu/meta vs openai/anthropic/google/moonshot/alibaba); verbatim Paper 1 blinding instruction.
   - **Stated explicitly as a limitation** in the paper (§5 item 7): construct validity rests on prior instrument validation and judge-ensemble agreement, not a fresh human panel; human validation listed as future work.
 - **Consequence:** §4.6 Measures table, §5 Method/Limitations, §6 Phase 3, and `experiment_config.json` updated; budget/time freed (~1 week, panel logistics).
+
+## D27. Generation temperature 1 for ALL families (provider-forced deviation from 0.7)
+- **Decision (by author, 2026-07-31):** Generation temperature is set to 1 uniformly across all 30 fixed pipelines and all 5 families, replacing the pre-registered 0.7.
+- **Trigger (empirical, logged):** Production smoke tests returned HTTP 400 from two of five family APIs at temp 0.7 — Moonshot kimi-k3/k2.6 ("invalid temperature: only 1 is allowed for this model") and OpenAI gpt-5.6-sol/luna ("'temperature' does not support 0.7 with this model. Only the default (1) value is supported"). Both are hard API-side policies; no platform-side workaround exists. claude/gemini/qwen accepted 0.7.
+- **Alternatives considered:** (a) per-family temperature (0.7 where allowed, 1 where forced) — rejected: introduces a family-confounded generation-parameter difference into every cross-family comparison; (b) dropping the gpt and kimi families — rejected: loses 12/30 pipelines and 2/5 families, crippling the family-as-block design.
+- **Rationale for uniform temp=1:** holding the generation parameter constant across all families preserves ceteris paribus for cross-family contrasts (Shadish, Cook & Campbell 2002); within-family contrasts are unaffected either way since temperature never varies within a family. Temp 1 is the provider default for the newest frontier models and matches Paper 1's sampling regime (Papers 1–2 sampled at temp 1 / 0.7 — see D3 grounding). D3's core principle (sampled stochasticity, repetitions as the stochasticity sample, never temp 0) is fully retained.
+- **Reporting obligation:** the paper's Method section MUST report this as a documented deviation from the pre-registered value, with the API error messages as evidence that the setting was externally forced, not researcher-chosen post hoc.
+- **Implemented in:** all 30 production pipelines (projects 13–42) via `code/apply_d27_temp1.mjs`; registry `d27` block; config `generation.temperature`; plan §4.8(1).
+
+## D28. Generation max_tokens 8192 for ALL families (was 2048; empty-output artifact)
+- **Decision (by author, 2026-07-31):** Generation `max_tokens` raised from the pre-registered 2048 to 8192, uniformly across all 30 fixed pipelines and all 5 families.
+- **Trigger (empirical, logged):** In the Phase 0 smoke test (30/30 runs completed), the two kimi team cells (oe-kimi-C-T-N run 42, oe-kimi-C-T-P run 43) completed with normal token counts but an EMPTY final response. Root cause isolated experimentally: kimi's hidden reasoning tokens count against the completion budget — kimi-k2.6 solo at maxTokens=100 returned empty content (run 52); the identical prompt at maxTokens=8192 returned a full 8,532-char response (run 53). Team-cell contexts (builder+critic outputs) induce enough reasoning to exhaust 2048 before any visible text.
+- **Alternatives considered:** (a) kimi-only raise — rejected: family-confounded budget difference; (b) keep 2048 — rejected: kimi team cells would systematically produce empty solutions, destroying two cells of the factorial.
+- **Rationale for uniform 8192:** the cap is unobservable to the model, so raising it cannot change generation behavior except by removing truncation/empty-output artifacts; cost is still measured (not capped) — `agentRuns.tokensUsed` remains the cost DV, and reasoning tokens ARE genuine cost that the economics analysis should capture. Uniformity preserves cross-family ceteris paribus (same logic as D27).
+- **Reporting obligation:** documented deviation from the pre-registered 2048, reported in Method alongside D27; the kimi empty-output artifact and its isolation procedure belong in the Method's pilot/smoke-test paragraph.
+- **Implemented in:** all 30 production pipelines via `code/apply_d28_maxtokens.mjs`; registry `d28` block; config `generation.max_tokens` (+note); plan §4.4 cost controls.
 
 ## Maintenance rule
 Every future design or analysis decision MUST be appended here (topic-organized) and to

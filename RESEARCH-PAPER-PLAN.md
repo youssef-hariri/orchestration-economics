@@ -269,7 +269,7 @@ exploratory cells with 3 scores (3 judges × 1 variant) instead of 9, keeping 9 
 confirmatory contrast cells; (3) shrink the domain grid 6×5 → 6×4 (24 problems, −20%);
 (4) cut cheap reps 3→2 (last resort — keeps 300 obs/cell).
 
-Cost controls: maxTokens=2048 on all generation steps; judges maxTokens=512; frontier calls batched last (run only after pipeline validated on cheap models); all per-call tokens logged by DeeWaanAI (`agentRuns.tokensUsed`) → **actual cost computed from logs, not estimates** (this becomes Table 2 of the paper).
+Cost controls: maxTokens=8192 on all generation steps (D28 — pre-registered 2048 raised uniformly after kimi's hidden reasoning exhausted the 2048 budget in team cells, returning empty output); judges maxTokens=512; frontier calls batched last (run only after pipeline validated on cheap models); all per-call tokens logged by DeeWaanAI (`agentRuns.tokensUsed`) → **actual cost computed from logs, not estimates** (this becomes Table 2 of the paper).
 
 ### 4.5 Cost-matching protocol (A6, methodological heart)
 
@@ -311,7 +311,7 @@ LLM stochasticity (same input → different outputs at temp > 0) is **sampled, n
 suppressed** — Paper 4 suppressed it (temp 0, single run per cell) and lists that as a
 limitation; Papers 1–2 sampled it. We follow Papers 1–2:
 
-1. **Repetitions ARE the stochasticity sample**: temp 0.7, reps per cell as in §4.4
+1. **Repetitions ARE the stochasticity sample**: temp 1 (D27 — provider-forced, uniformly across families; pre-registered 0.7), reps per cell as in §4.4
    (Paper 1 precedent: 5 iterations per cell at temp 1).
 2. **Every repetition is judged independently — never merge/ensemble responses before
    judging.** Protocol identical to Paper 1 (*"Each of the 6,375 generated business
