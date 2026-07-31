@@ -232,3 +232,14 @@ Every phase appends an entry here. Never edit past entries.
 - Superseded pins archived in `model_registry.json.judges_superseded_2026_07_31`.
 - Files: config/model_registry.json, config/experiment_config.json (judging.judges), code/judge.py (per-judge endpoints/keys/extra_params, resolved-model logging), DESIGN-DECISIONS.md (D33), RESEARCH-PAPER-PLAN.md §4.2.
 - Cost incurred: ~15 probe calls of ≤512 tokens (< $0.01), logged as infrastructure verification, not experiment data.
+
+---
+
+## Entry 16 — D34: concurrent-by-default policy; judge.py parallelized; c=100 ramp calibration frozen
+- Date: 2026-07-31 (pilot generation in progress, ~33/120 at time of writing)
+- Phase: Phase 0 → pilot
+- **Author instruction**: time has value — latency-insensitive operations run concurrently by default; after the pilot, test max concurrency with ceiling c=100.
+- **D34 frozen**: (1) judge.py parallelized NOW (24 workers = 8/judge lane, lock-serialized JSONL, resumable; ~1080 calls drop from ~1.5h to ~minutes) — scores are latency-insensitive so no measurement is touched; (2) concurrency ramp c=10/25/50/100 after G0, reusing pilot (pipeline, problem) pairs so the sequential pilot is the exact pairwise c=1 baseline; decision rule: highest c with 0% throttle-attributable failures AND ≤10% median latency inflation → main-run concurrency; fallback per-family c=5; (3) main-run writer isolation: one file per run, temp+atomic-rename, ledger by post-hoc merge; concurrency level recorded per run as execution-regime constant.
+- The D32 pilot itself stays sequential as pre-registered (protocol integrity + it doubles as the ramp c=1 baseline).
+- Files: DESIGN-DECISIONS.md (D34), code/judge.py (concurrent rewrite).
+- Cost incurred: 0 experiment tokens (documentation + code only).

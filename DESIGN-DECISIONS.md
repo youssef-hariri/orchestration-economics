@@ -244,6 +244,20 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
 - **Grounding:** forced deviations documented before data collection are standard prereg practice (transparent-deviation reporting, Willroth & Atherton 2024); family-disjoint judging against self-preference bias (Zheng et al. 2023).
 - **Implemented in:** `config/model_registry.json` (judges + superseded archive + disjointness note), `config/experiment_config.json` `judging.judges`, `code/judge.py` (per-judge endpoints/keys/extra_params), plan §4.2.
 
+## D34. Concurrency policy: concurrent-by-default, measured max-concurrency calibration (target c=100)
+- **Principle (author instruction, 2026-07-31):** time has value — any operation whose measurement validity does NOT depend on latency runs concurrently by default. Sequential execution is only permitted where (a) a frozen protocol pre-registered it (the D32 pilot), or (b) latency itself is the quantity being measured and concurrency has not yet been shown non-distorting at the chosen level.
+- **Immediate application:** `code/judge.py` parallelized (8 workers per judge provider lane × 3 judges = 24; per-lane semaphores; JSONL appends serialized by a lock; resumability unchanged). Judging scores are latency-insensitive, so this touches no measurement. DeepSeek documents a 2500-request concurrency limit; Together serverless tolerates small pools.
+- **Concurrency ramp calibration (to run immediately after G0, inside the D21 window, before prereg freeze):**
+  1. **Levels:** c = 10, 25, 50, 100 (author-mandated ceiling c=100), run in ascending order.
+  2. **Workload:** (pipeline, pilot-problem) pairs resampled deterministically (seed 20260731) from the 30×4 pilot matrix, proportionally across all 5 families — the same provider mix the main run will impose. Ramp runs are infrastructure calibration ONLY: never judged, never pooled with experiment data, cost logged as infrastructure.
+  3. **Baseline:** the sequential pilot itself provides the c=1 latency for every (pipeline, problem) pair — the ramp reuses those exact pairs, so inflation is measured pairwise, not against a synthetic baseline.
+  4. **Metrics per level:** failure/429/throttle rate (from run status + streamError), median pairwise per-run latency inflation vs the c=1 pilot baseline, and platform health (no worker starvation: all runs accepted).
+  5. **Decision rule (frozen now):** main-run concurrency = the highest tested c with failure rate 0% attributable to throttling AND median latency inflation ≤ 10%. If even c=10 fails the criterion, main run falls back to per-family lanes (c=5, one run per provider at a time) and the failure is documented.
+  6. **Latency reporting caveat:** all main-run latency analyses report the calibrated concurrency level as an execution-regime constant of the dataset; latency contrasts are valid because every arm runs under the same regime.
+- **Main-run writer isolation (frozen now):** one file per run — `runs/raw/<pipelineId>__<problemId>__rep<k>.json`, written via temp-file + atomic rename; no shared mutable files between workers; ledger assembled by post-hoc merge; each record carries its concurrency level, timestamps, and window-compliance fields. Rationale: isolation by construction (no locks to get wrong), trivially resumable by directory scan.
+- **Grounding:** calibration-before-use is the same measure-don't-assume logic as D22 endpoint verification; regime homogeneity preserves internal validity of latency contrasts (execution conditions as controlled constants, Montgomery, Design and Analysis of Experiments); atomic rename isolation is standard crash-consistent logging practice.
+- **Implemented in:** `code/judge.py` (already concurrent); ramp runner + concurrent main runner to be added before the main run; MANIFEST logs ramp numbers and the chosen c.
+
 ## Maintenance rule
 Every future design or analysis decision MUST be appended here (topic-organized) and to
 `MANIFEST.md` (chronological) **with its academic grounding at the time it is made**.

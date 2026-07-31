@@ -13,16 +13,23 @@ Together requires a custom User-Agent (known pitfall).
 Resumable: one JSONL line per (solution, judge, variant) call, flushed
 immediately; existing keys are skipped on restart.
 
+Concurrent: judging is latency-insensitive (scores are the measurement, not
+timing), so calls run in a thread pool — 8 workers per judge provider lane,
+JSONL appends serialized by a lock. DeepSeek's documented concurrency limit
+is 2500; Together serverless handles small pools comfortably.
+
 Usage: python3 code/judge.py   (per-judge keys read from env, or from the
 repo/workspace .env, both git-ignored)
 Output: runs/logs/pilot_judgments.jsonl
 """
 
+import concurrent.futures
 import json
 import os
 import random
 import re
 import sys
+import threading
 import time
 import urllib.request
 from pathlib import Path
@@ -134,48 +141,69 @@ def call_judge(judge, prompt):
 
 
 total = len(solutions) * len(judges) * len(variants)
-n = 0
+WORKERS_PER_JUDGE = 8
+
+# task list preserves the blinded shuffled solution order within each judge lane
+tasks = []
+for sol in solutions:
+    prob = pilot["problems"][sol["problemId"]]
+    problem_text = f"{prob['background_context']}\n\n{prob['business_problem']}"
+    for judge in judges:
+        for var_id, template in variants.items():
+            key = (sol["runId"], judge["family"], var_id)
+            if key in done:
+                continue
+            prompt = template.replace("{problem_text}", problem_text).replace(
+                "{solution_text}", sol["finalResponse"]
+            )
+            tasks.append((sol, judge, var_id, prompt))
+
+write_lock = threading.Lock()
+counter = {"n": len(done)}
+semaphores = {j["family"]: threading.Semaphore(WORKERS_PER_JUDGE) for j in judges}
+
+
+def run_task(task, out):
+    sol, judge, var_id, prompt = task
+    with semaphores[judge["family"]]:
+        try:
+            text, usage, resolved = call_judge(judge, prompt)
+            rec = {
+                "runId": sol["runId"],
+                "problemId": sol["problemId"],
+                "judge_family": judge["family"],
+                "judge_model": judge["model"],
+                "judge_model_resolved": resolved,
+                "variant": var_id,
+                "scores": parse_scores(text),
+                "raw": text,
+                "usage": usage,
+                "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            }
+        except Exception as e:  # noqa: BLE001 — recorded, judged later
+            rec = {
+                "runId": sol["runId"],
+                "problemId": sol["problemId"],
+                "judge_family": judge["family"],
+                "judge_model": judge["model"],
+                "variant": var_id,
+                "error": str(e)[:300],
+                "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            }
+    with write_lock:
+        out.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        out.flush()
+        counter["n"] += 1
+        print(f"[{counter['n']}/{total}] run {sol['runId']} {judge['family']}/{var_id}: "
+              f"{rec.get('scores') or rec.get('error')}")
+
+
 with open(OUT, "a") as out:
-    for sol in solutions:
-        prob = pilot["problems"][sol["problemId"]]
-        problem_text = f"{prob['background_context']}\n\n{prob['business_problem']}"
-        for judge in judges:
-            for var_id, template in variants.items():
-                n += 1
-                key = (sol["runId"], judge["family"], var_id)
-                if key in done:
-                    continue
-                prompt = template.replace("{problem_text}", problem_text).replace(
-                    "{solution_text}", sol["finalResponse"]
-                )
-                try:
-                    text, usage, resolved = call_judge(judge, prompt)
-                    rec = {
-                        "runId": sol["runId"],
-                        "problemId": sol["problemId"],
-                        "judge_family": judge["family"],
-                        "judge_model": judge["model"],
-                        "judge_model_resolved": resolved,
-                        "variant": var_id,
-                        "scores": parse_scores(text),
-                        "raw": text,
-                        "usage": usage,
-                        "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                    }
-                except Exception as e:  # noqa: BLE001 — recorded, judged later
-                    rec = {
-                        "runId": sol["runId"],
-                        "problemId": sol["problemId"],
-                        "judge_family": judge["family"],
-                        "judge_model": judge["model"],
-                        "variant": var_id,
-                        "error": str(e)[:300],
-                        "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                    }
-                out.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                out.flush()
-                print(f"[{n}/{total}] run {sol['runId']} {judge['family']}/{var_id}: "
-                      f"{rec.get('scores') or rec.get('error')}")
-                time.sleep(0.3)
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=WORKERS_PER_JUDGE * len(judges)
+    ) as pool:
+        futures = [pool.submit(run_task, t, out) for t in tasks]
+        for f in concurrent.futures.as_completed(futures):
+            f.result()  # re-raise unexpected worker crashes
 
 print(f"done -> {OUT}")
