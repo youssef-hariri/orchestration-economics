@@ -147,3 +147,16 @@ Every phase appends an entry here. Never edit past entries.
 - Pending: verify Qwen off-peak & DeepSeek surge rates on billing console during pilot; author review of Business_Problem_16–30; coding-team Research Mode completion notice.
 - Cost incurred: $0 (free /models listings only).
 
+
+---
+
+## Entry 9 — Phase 0: 30 fixed confirmatory pipelines created on production DeeWaanAI
+- Date: 2026-07-30
+- Phase: Phase 0 (setup, §6 step 3)
+- Actions:
+  - `code/create_pipelines.mjs` committed — deterministic generator; builds all 30 fixed confirmatory pipelines (5 families × {C-S-N, C-S-P, C-T-N, C-T-P, F-S-N, F-S-P}) from `config/experiment_config.json` + `data/personas/cultural_personas.json` and creates them via MCP `create_pipeline`. Idempotent (skips existing `oe-*` names).
+  - All 30 created on production (project ids 13–42); full definitions + ids archived in `pipelines/fixed/fixed_pipelines_registry.json` (record of truth).
+  - Bindings per pipeline: `defaultProviderId` (family provider), `defaultModel` + per-step `model` (pinned string), temp 0.7, maxTokens 2048. Role prompts = DeeWaanAI canonical Builder/Critic/Refiner verbatim; persona cells prepend verbatim persona text (congruent mapping); solo-N uses a fixed neutral task-only prompt (in generator, frozen at prereg).
+  - Deferred by design (reasons in generator header): F-T-N/F-T-P (family pair fixed after F-S-N Novelty), A5/A8 (special-arm family frozen at pilot), A6 (budget from C-T-P median), A7 (designed at run time).
+- Blocker found during smoke test: production DB missing migration 019 (`swarm_batches` + `swarm_runs.batch_id`) — deployed code writes `batch_id` on every run insert, so ALL production pipeline runs fail until 019 is applied. Idempotent runner `scripts/run-migration-019.mjs` written (platform repo) and verified locally (applied + re-run skip). Smoke test (§6 step 4) pending migration.
+- Cost incurred: $0 (the one smoke-test run failed at DB insert, before any LLM call).
