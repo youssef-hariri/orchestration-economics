@@ -209,3 +209,14 @@ Every phase appends an entry here. Never edit past entries.
 - **D31**: sequential gate protocol frozen BEFORE any pilot token: gate table G0/G-A5/G-A6/G-A7/G-A7P/G-A8 with thresholds; SESOI d = 0.30 on Novelty; gates are futility/feasibility only (never evidence); confirmatory factorial runs in full regardless; H4/H5 pre-declared as conditional; every executed arm reported (no file-drawer).
 - Files: DESIGN-DECISIONS.md (D29–D31), RESEARCH-PAPER-PLAN.md §4.1 (A7 amended, A7-P row, gate principle), config/experiment_config.json (`exploratory_gates` block).
 - Cost incurred: 0 tokens (documentation only).
+
+---
+
+## Entry 14 — D32 pilot protocol frozen; pilot generation launched (G0 measurement)
+- Date: 2026-07-31
+- Phase: Phase 0 → pilot (§6 step 6)
+- **D32 frozen before any pilot run**: matrix (30 pipelines × 4 problems × 1 rep = 120 runs, inside D21 window), deterministic problem draw (seed 20260731 → Business_Problem_4 [product_innovation], 8 [operations_supply_chain], 16 [strategy_market_entry], 19 [marketing_communications]; frozen in `config/pilot_problems.json`), problem rendering rule (background + blank line + problem, verbatim, no wrapper), G0 measurement procedures, and the special-arm family selection rule (100% completion → cheapest team run → lowest team latency).
+- Pilot generation scheduled: detached process waits until 14:00 UTC (D21 execution window), then runs `code/pilot_run.mjs` (sequential, resumable, full final responses logged to `runs/logs/pilot_gen_2026-07-31.json`).
+- Judging harness built (`code/judge.py`): 3 pinned Together judges × 3 verbatim D10 prompt variants = 9 scores/solution; blinded (problem+solution only, shuffled seed 20260731); resumable JSONL. Awaiting TOGETHER_API_KEY.
+- G0 gate report builder (`code/pilot_g0_report.py`): empty-output rates per cell, Fleiss κ (median-across-variants per judge, 3 raters) + ICC(2,k) on Novelty, cost projection vs §4.4 envelope (upper-bound pricing: total tokens × output price), D32.5 family selection. Stats functions sanity-checked (perfect-agreement κ=1.0, identical-rater ICC=1.0).
+- Cost incurred so far: 0 experiment tokens (setup only; generation starts 14:00 UTC).

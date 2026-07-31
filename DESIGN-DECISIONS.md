@@ -223,6 +223,15 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
 - **Grounding:** internal pilot / adaptive designs (Wittes & Brittain 1990); futility stopping (Lachin 2005); SESOI logic (Lakens 2017, equivalence-testing framing); pre-registered decision trees as forking-path control (Gelman & Loken 2014).
 - **Implemented in:** config `exploratory_gates`; plan §4.1 design principles; MANIFEST logging duty per gate.
 
+## D32. Phase 0 pilot protocol (§6 step 6 = G0 measurement)
+- **Decision (by author's agent under standing instructions, 2026-07-31, before any pilot run):**
+  1. **Matrix:** all 30 fixed confirmatory pipelines × 4 pilot problems × 1 rep = **120 runs**, sequential, executed inside the pre-registered execution window (D21: 14:00–00:00 UTC). Pilot data are G0 gate measurements ONLY — never pooled into confirmatory analysis, never reported as effect estimates (D31 / Albers & Lakens 2018).
+  2. **Problem selection rule (deterministic):** seeded draw — seed **20260731**, Python `random.Random(seed)`, from the 30 main problems sorted by ID (natural numeric order), rejection-resampled until the 4 drawn problems span 4 distinct domains per `domain_map.json` (coverage, operational use only — original-15 tags still pending author confirmation for analysis use). Selection script archived (`code/select_pilot_problems.py`); output frozen in `config/pilot_problems.json`.
+  3. **Problem rendering rule (pre-registered, used identically in pilot and main run):** pipeline input = `background_context` + blank line + `business_problem`, verbatim, NO added instructions — role instructions live exclusively in the fixed agent system prompts. Rationale: any extra wrapper text would be an unmeasured prompt treatment applied to all cells.
+  4. **G0 measurements:** (a) empty-output rate per cell = share of runs with status≠completed OR 0-char final response; (b) judge reliability on ALL 120 pilot solutions — 9 scores each (3 judges × 3 variants, D10 prompts verbatim, blinded, judging config frozen): **Fleiss κ on Novelty with each judge's median-across-variants rating as that judge's rating** (3 raters, 5 categories), plus ICC(2,k) over the 9 scores; threshold κ ≥ 0.40; (c) per-cell mean cost = tokens × price vector v2026-07-30 vs the §4.4 budget envelope (fail at >1.5×).
+  5. **Special-arm family selection rule (frozen NOW, applied at pilot end):** the special-arm family = the cheap family with (i) 100% pilot completion across its 6 cells, then (ii) lowest cost per completed TEAM run, tie-broken by (iii) lowest mean team latency. Rationale: special arms need reliability (A5 WHILE runs up to 5 steps) and carry 5 reps — the most-reliable-then-cheapest family maximizes usable budget; latency tie-break protects wall-clock feasibility.
+- **Implemented in:** `code/select_pilot_problems.py`, `config/pilot_problems.json`, `code/pilot_run.mjs`, `code/judge.py`, MANIFEST (gate numbers logged at pilot end).
+
 ## Maintenance rule
 Every future design or analysis decision MUST be appended here (topic-organized) and to
 `MANIFEST.md` (chronological) **with its academic grounding at the time it is made**.
