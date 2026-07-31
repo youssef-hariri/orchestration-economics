@@ -131,3 +131,19 @@ Every phase appends an entry here. Never edit past entries.
   - Decisions D21 (discount-window cost accounting) and D22 (model pins) appended to DESIGN-DECISIONS.md.
 - Pending: OpenAI/Anthropic/Gemini keys → pin Western families; verify Qwen off-peak & DeepSeek surge on billing console during pilot; sync experiment_config.json TO_PIN fields at freeze.
 - Cost incurred: $0 (free /models listings only).
+---
+
+## Entry 8 — Phase 0 complete: Western-family pins, token-invariant cost accounting, price vector
+- Date: 2026-07-30
+- Phase: Phase 0 (model pinning — COMPLETE)
+- Author inputs: OpenAI, Anthropic, Gemini API keys added to git-ignored `.env`; author directive "as prices change all the time, we could instead measure the cost per token instead of per dollar".
+- Actions:
+  - All 3 Western keys validated live (HTTP 200 on /models). `.env` now holds 7 verified keys.
+  - Western pins added to `config/model_registry.json` (status → COMPLETE): gpt-5.6-sol $5/$30 + gpt-5.6-luna $1/$6 (explicit Sol>Terra>Luna size ladder); claude-opus-5 $5/$25 + claude-haiku-4-5-20251001 $1/$5 (claude-fable-5 "Mythos-class" excluded as above-mainline; Sonnet 5 rejected — mid-tier with intro pricing expiring 2026-09-01); gemini-3.1-pro-preview $2/$12 + gemini-3.1-flash-lite $0.25/$1.50 (preview risk flagged, preregistered fallback gemini-2.5-pro).
+  - D23 (token-invariant cost): ledger stores tokens as the observed quantity (API usage fields, required non-null before DONE); dollars are never stored, always recomputed as tokens x `config/price_vector.json` (created, v2026-07-30, 15 models, frozen for primary analysis; replicators swap the file to re-derive all economics). Robustness: alternative price vectors + price-free token-efficiency (Novelty per 1K output tokens, cross-family tokenizer caveat noted). Grounding: Diewert 1976 quantity–price decomposition; Sandve 2013 Rule 6; Steegen 2016 multiverse.
+  - D24 (Western pins, mainline-flagship definition, price-ratio heterogeneity 3.4x–8x absorbed by family random effect) appended to DESIGN-DECISIONS.md.
+  - `code/pin_models.py` extended for Anthropic (x-api-key + anthropic-version) and Gemini (x-goog-api-key, models/ prefix) conventions; run: 16/16 PASS — ALL PINNED MODELS VERIFIED.
+  - `config/experiment_config.json` synced → version 0.2-phase0-pinned: families/judges/designer concretized, new cost_accounting block (price vector reference, required ledger token columns, execution window 14:00–00:00 UTC).
+- Pending: verify Qwen off-peak & DeepSeek surge rates on billing console during pilot; author review of Business_Problem_16–30; coding-team Research Mode completion notice.
+- Cost incurred: $0 (free /models listings only).
+

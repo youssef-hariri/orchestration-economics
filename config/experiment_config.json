@@ -1,7 +1,7 @@
 {
   "experiment": "orchestration-economics",
-  "version": "0.1-draft",
-  "status": "PENDING: pin exact model versions in Phase 0, then freeze at preregistration tag",
+  "version": "0.2-phase0-pinned",
+  "status": "Models pinned (config/model_registry.json + price_vector.json, D22/D24); freeze at preregistration tag",
   "design": {
     "type": "2x2x2 within-family factorial + special arms",
     "factors": { "tier": ["frontier", "cheap_sibling"], "structure": ["solo", "team_3step"], "persona": ["none", "persona_loaded"] },
@@ -11,11 +11,11 @@
   },
   "tiers": {
     "families": [
-      { "family": "gpt", "origin": "western", "provider": "openai", "frontier": "TO_PIN (latest GPT flagship)", "cheap_sibling": "TO_PIN (GPT-mini tier)" },
-      { "family": "claude", "origin": "western", "provider": "anthropic", "frontier": "TO_PIN (latest Claude flagship)", "cheap_sibling": "TO_PIN (Haiku tier)", "note": "strip reasoning traces before judging if extended thinking enabled" },
-      { "family": "gemini", "origin": "western", "provider": "gemini", "frontier": "TO_PIN (latest Gemini Pro flagship)", "cheap_sibling": "TO_PIN (Flash tier)", "note": "strip reasoning traces before judging (Paper 2 comparability caveat)" },
-      { "family": "kimi", "origin": "eastern", "provider": "moonshot", "frontier": "TO_PIN (Kimi V3)", "cheap_sibling": "TO_PIN (small kimi tier)" },
-      { "family": "qwen", "origin": "eastern", "provider": "aliyun", "frontier": "TO_PIN (Qwen 3.7 / qwen-max class)", "cheap_sibling": "TO_PIN (qwen-turbo/plus tier)" }
+      { "family": "gpt", "origin": "western", "provider": "openai", "frontier": "gpt-5.6-sol", "cheap_sibling": "gpt-5.6-luna" },
+      { "family": "claude", "origin": "western", "provider": "anthropic", "frontier": "claude-opus-5", "cheap_sibling": "claude-haiku-4-5-20251001", "note": "strip reasoning traces before judging if extended thinking enabled" },
+      { "family": "gemini", "origin": "western", "provider": "gemini", "frontier": "gemini-3.1-pro-preview", "cheap_sibling": "gemini-3.1-flash-lite", "note": "strip reasoning traces before judging (Paper 2 comparability caveat); preview risk - preregistered fallback gemini-2.5-pro" },
+      { "family": "kimi", "origin": "eastern", "provider": "moonshot", "frontier": "kimi-k3", "cheap_sibling": "kimi-k2.6" },
+      { "family": "qwen", "origin": "eastern", "provider": "aliyun", "frontier": "qwen3.7-max-2026-06-08", "cheap_sibling": "qwen3.7-plus-2026-05-26" }
     ],
     "fallback_family": { "family": "deepseek", "provider": "deepseek", "note": "used only if one of the 5 families is inaccessible" },
     "cells": {
@@ -42,15 +42,15 @@
     },
     "designer_smart_eastern": {
       "provider": "moonshot",
-      "model": "TO_PIN (Kimi V3)",
+      "model": "kimi-k3",
       "temperature": 0,
       "used_in_arms": ["A7"],
       "note": "Kimi V3 designs pipeline per problem; every design output archived in pipelines/adaptive_A7/; tokens counted in cost, amortized over 5 reps"
     },
     "judges": [
-      { "provider": "mistral", "model": "TO_PIN (small tier)", "note": "family disjoint from generators" },
-      { "provider": "zhipu", "model": "TO_PIN (GLM air/flash tier)", "note": "family disjoint from generators; replaces Gemini which moved to the generator pool" },
-      { "provider": "together", "model": "TO_PIN (Llama-3.3-70B class)", "note": "family disjoint from generators" }
+      { "provider": "together", "model": "mistralai/Mistral-Small-24B-Instruct-2501", "family": "mistral", "note": "family disjoint from generators" },
+      { "provider": "together", "model": "zai-org/GLM-4.7", "family": "zhipu", "note": "family disjoint from generators; replaces Gemini which moved to the generator pool" },
+      { "provider": "together", "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo", "family": "meta", "note": "family disjoint from generators" }
     ],
     "judge_disjointness_rule": "generator families = {openai, anthropic, google, moonshot, alibaba}; judge families = {mistral, zhipu, meta} — no overlap"
   },
@@ -94,5 +94,12 @@
   "personas": "data/personas/cultural_personas.json",
   "persona_role_mapping_congruent": { "builder": "Culture_5", "critic": "Culture_Expert", "refiner": "Culture_11" },
   "primary_dv": "Novelty",
-  "economic_dv": "T-EGR = (Novelty_cell / Novelty_F-S-N) / (Cost_cell / Cost_F-S-N)"
+  "economic_dv": "T-EGR = (Novelty_cell / Novelty_F-S-N) / (Cost_cell / Cost_F-S-N); cost recomputed as tokens x config/price_vector.json (D23), never stored as observed dollars",
+  "cost_accounting": {
+    "model_registry": "config/model_registry.json",
+    "price_vector": "config/price_vector.json (v2026-07-30, frozen at prereg)",
+    "ledger_token_columns_required": ["input_tokens", "output_tokens"],
+    "execution_window_utc": "14:00-00:00 (D21: Qwen off-peak, avoids DeepSeek surge)",
+    "token_efficiency_robustness": "Novelty per 1K output tokens, tokenizer caveat stated"
+  }
 }

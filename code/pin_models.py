@@ -47,19 +47,24 @@ def load_env():
 
 
 def list_models(endpoint: str, key: str) -> set:
-    url = endpoint.rstrip("/") + "/models"
-    req = urllib.request.Request(
-        url,
-        headers={
-            "Authorization": f"Bearer {key}",
-            # Together.ai rejects urllib's default UA with 403
-            "User-Agent": "orchestration-economics-pin-models/1.0",
-        },
-    )
+    """List model IDs, handling each provider's API convention."""
+    if "anthropic.com" in endpoint:
+        url = endpoint.rstrip("/") + "/models?limit=100"
+        headers = {"x-api-key": key, "anthropic-version": "2023-06-01"}
+    elif "generativelanguage.googleapis.com" in endpoint:
+        url = endpoint.rstrip("/") + "/models?pageSize=200"
+        headers = {"x-goog-api-key": key}
+    else:
+        url = endpoint.rstrip("/") + "/models"
+        headers = {"Authorization": f"Bearer {key}"}
+    # Together.ai rejects urllib's default UA with 403
+    headers["User-Agent"] = "orchestration-economics-pin-models/1.0"
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=30, context=ssl_context()) as r:
         data = json.load(r)
-    # OpenAI-style {"data": [...]} vs Together's bare [...]
-    models = data["data"] if isinstance(data, dict) else data
+    if isinstance(data, dict) and "models" in data:  # Gemini: {"models": [{"name": "models/..."}]}
+        return {m["name"].removeprefix("models/") for m in data["models"]}
+    models = data["data"] if isinstance(data, dict) else data  # OpenAI-style vs Together's bare list
     return {m["id"] for m in models}
 
 

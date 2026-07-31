@@ -1,7 +1,7 @@
 {
-  "_purpose": "Phase 0 model registry: pinned model IDs, per-1M-token USD prices, endpoints, and provider discount windows. Prices verified against official provider pricing pages on pin_date. Primary cost analysis uses pinned_price (standard daytime price at freeze, time-invariant); actual paid price after off-peak discounts is recorded per run in the ledger as a sensitivity variable (see DESIGN-DECISIONS D21).",
+  "_purpose": "Phase 0 model registry: pinned model IDs, per-1M-token USD prices, endpoints, and provider discount windows. Prices verified against official provider pricing pages on pin_date. ANALYSIS AUTHORITY: cost is always recomputed as tokens x config/price_vector.json (D23); the prices recorded here document the pin-date market state. Primary analysis uses the frozen v2026-07-30 price vector; replicators may swap in a later vector without touching token data.",
   "pin_date": "2026-07-30",
-  "status": "PARTIAL: eastern families + judges + designer + fallback pinned and endpoint-verified; gpt/claude/gemini pending API keys",
+  "status": "COMPLETE: all 5 generator families + judges + designer + fallback pinned and endpoint-verified",
   "generators": {
     "kimi": {
       "provider": "moonshot",
@@ -59,9 +59,72 @@
         "verified_on_billing": false
       }
     },
-    "gpt": { "provider": "openai", "frontier": { "model": "TO_PIN" }, "cheap_sibling": { "model": "TO_PIN" }, "blocker": "OPENAI_API_KEY not yet in .env", "discount_window": null },
-    "claude": { "provider": "anthropic", "frontier": { "model": "TO_PIN" }, "cheap_sibling": { "model": "TO_PIN" }, "blocker": "ANTHROPIC_API_KEY not yet in .env", "discount_window": null },
-    "gemini": { "provider": "gemini", "frontier": { "model": "TO_PIN" }, "cheap_sibling": { "model": "TO_PIN" }, "blocker": "GEMINI_API_KEY not yet in .env", "discount_window": null }
+    "gpt": {
+      "provider": "openai",
+      "endpoint": "https://api.openai.com/v1",
+      "env_key": "OPENAI_API_KEY",
+      "frontier": {
+        "model": "gpt-5.6-sol",
+        "input_usd_per_1m": 5.0,
+        "output_usd_per_1m": 30.0,
+        "context": 400000,
+        "pricing_source": "https://openai.com/index/gpt-5-6/",
+        "notes": "GPT-5.6 family ships as an explicit size ladder (Sol > Terra > Luna) - the cleanest within-generation tier construct of all 5 families. No dated snapshot published at pin date; ID recorded verbatim. Reasoning model: strip traces before judging."
+      },
+      "cheap_sibling": {
+        "model": "gpt-5.6-luna",
+        "input_usd_per_1m": 1.0,
+        "output_usd_per_1m": 6.0,
+        "context": 400000,
+        "pricing_source": "https://openai.com/index/gpt-5-6/",
+        "notes": "Same 5.6 generation as frontier; 5x price ratio mirrors the Claude pair."
+      },
+      "discount_window": null
+    },
+    "claude": {
+      "provider": "anthropic",
+      "endpoint": "https://api.anthropic.com/v1",
+      "env_key": "ANTHROPIC_API_KEY",
+      "frontier": {
+        "model": "claude-opus-5",
+        "input_usd_per_1m": 5.0,
+        "output_usd_per_1m": 25.0,
+        "context": 200000,
+        "pricing_source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "notes": "Mainline flagship. claude-fable-5 ($10/$50, 'Mythos-class') deliberately EXCLUDED: it sits above the mainline flagship tier and would break cross-family frontier comparability (every other family pins its mainline flagship). Strip extended-thinking traces before judging."
+      },
+      "cheap_sibling": {
+        "model": "claude-haiku-4-5-20251001",
+        "input_usd_per_1m": 1.0,
+        "output_usd_per_1m": 5.0,
+        "context": 200000,
+        "pricing_source": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "notes": "Dated snapshot. Current cheap tier of the family - no Haiku 5 exists at pin date; cross-generation pairing accepted as with kimi (k3/k2.6). Sonnet 5 rejected as sibling: mid-tier, not cheap tier, and its intro pricing changes 2026-09-01."
+      },
+      "discount_window": null
+    },
+    "gemini": {
+      "provider": "gemini",
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta",
+      "env_key": "GEMINI_API_KEY",
+      "frontier": {
+        "model": "gemini-3.1-pro-preview",
+        "input_usd_per_1m": 2.0,
+        "output_usd_per_1m": 12.0,
+        "context": 1000000,
+        "pricing_source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "notes": "Only current Pro-tier model (Google ships no GA Pro at pin date). PREVIEW RISK flagged: may be re-pointed or retired mid-experiment; preregistered fallback = gemini-2.5-pro (stable GA). Prices are <=200k-prompt tier (all experiment prompts far below). Output includes thinking tokens - strip traces before judging."
+      },
+      "cheap_sibling": {
+        "model": "gemini-3.1-flash-lite",
+        "input_usd_per_1m": 0.25,
+        "output_usd_per_1m": 1.5,
+        "context": 1000000,
+        "pricing_source": "https://ai.google.dev/gemini-api/docs/pricing",
+        "notes": "GA, same 3.1 generation as frontier - preferred over the newer gemini-3.5-flash-lite to keep the within-generation tier contrast (mirrors qwen 3.7 pairing logic)."
+      },
+      "discount_window": null
+    }
   },
   "judges": [
     {
