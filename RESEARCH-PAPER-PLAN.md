@@ -225,12 +225,20 @@ any substitution is logged as a protocol deviation): DeepSeek — `deepseek-v4-p
 
 Judges (evaluation): **3 cheap judges from families NOT used in generation**.
 Generator families now = {OpenAI, Anthropic, Google, Moonshot, Alibaba} → judge
-families = **Mistral, Zhipu, Meta** (Gemini moved to the
-generator pool, so it is no longer judge-eligible) — eliminates self-preference bias. Pinned
-at Phase 0, all served on a single aggregator (Together.ai) for one uniform judging stack:
-`mistralai/Mistral-Small-24B-Instruct-2501` ($0.10/$0.30), `zai-org/GLM-4.7` ($0.45/$2.00),
-`meta-llama/Llama-3.3-70B-Instruct-Turbo` ($1.04/$1.04) — with the 3
+families = **DeepSeek, Zhipu, Meta** (Gemini moved to the
+generator pool, so it is no longer judge-eligible) — eliminates self-preference bias.
+D33 (2026-07-31, forced infrastructure deviation, decided before any pilot judging):
+the originally pinned `mistralai/Mistral-Small-24B-Instruct-2501` and `zai-org/GLM-4.7`
+turned out to be dedicated-endpoint-only (non-serverless) on the author's Together
+account — access checks returned 400. Replacement panel, frozen as a **uniform
+non-reasoning panel** (all judges in the same capacity mode — no judge gets hidden
+chain-of-thought capacity the others lack):
+`deepseek-chat` = DeepSeek-V4-Flash on the DeepSeek API ($0.14/$0.28, non-thinking alias),
+`zai-org/GLM-5.2` on Together with thinking disabled ($1.40/$4.40),
+`meta-llama/Llama-3.3-70B-Instruct-Turbo` on Together ($1.04/$1.04) — with the 3
 judge prompt variations from persona-model-fit → 9 scores per solution, Fleiss' κ computed.
+DeepSeek is also the never-invoked fallback generator family; if the fallback is ever
+used, deepseek-judge scores of fallback-generated solutions are flagged in analysis.
 Judge design decisions (fixed): **one invariant judge ensemble for all problems/arms**
 (never per-problem judges — measurement invariance); judges blind to condition; solutions
 scored in randomized order with arm-identifying artifacts stripped.

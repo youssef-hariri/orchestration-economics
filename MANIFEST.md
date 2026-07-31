@@ -220,3 +220,15 @@ Every phase appends an entry here. Never edit past entries.
 - Judging harness built (`code/judge.py`): 3 pinned Together judges × 3 verbatim D10 prompt variants = 9 scores/solution; blinded (problem+solution only, shuffled seed 20260731); resumable JSONL. Awaiting TOGETHER_API_KEY.
 - G0 gate report builder (`code/pilot_g0_report.py`): empty-output rates per cell, Fleiss κ (median-across-variants per judge, 3 raters) + ICC(2,k) on Novelty, cost projection vs §4.4 envelope (upper-bound pricing: total tokens × output price), D32.5 family selection. Stats functions sanity-checked (perfect-agreement κ=1.0, identical-rater ICC=1.0).
 - Cost incurred so far: 0 experiment tokens (setup only; generation starts 14:00 UTC).
+
+---
+
+## Entry 15 — D33: judge panel replaced (forced infrastructure deviation), frozen before first judging call
+- Date: 2026-07-31
+- Phase: Phase 0 → pilot (§6 step 6), before any judging token
+- **Trigger**: pilot-day access checks — `mistralai/Mistral-Small-24B-Instruct-2501` and `zai-org/GLM-4.7` are dedicated-endpoint-only (400 "Unable to access non-serverless model") on the author's Together account; key itself valid (Llama-3.3-70B → 200). No mistralai model serverless at all.
+- **D33 (author choice via structured options)**: uniform NON-REASONING panel — `deepseek-chat` (=DeepSeek-V4-Flash, DeepSeek API, $0.14/$0.28, non-thinking), `zai-org/GLM-5.2` (Together, thinking disabled via `chat_template_kwargs.enable_thinking=false`, $1.40/$4.40), `meta-llama/Llama-3.3-70B-Instruct-Turbo` (unchanged, $1.04/$1.04). All three probe-verified 2026-07-31 (0 reasoning tokens, correct "Dimension: score" format). Judge families {deepseek, zhipu, meta} stay disjoint from all 5 generator families; deepseek fallback-generator overlap caveat logged (fallback never invoked).
+- Author explicitly rejected a mixed panel (1 reasoning + 2 non-reasoning) on capacity-fairness grounds; the all-reasoning alternative was rejected for ~4× cost, unauditable hidden reasoning, and an unvalidated family (Inkling).
+- Superseded pins archived in `model_registry.json.judges_superseded_2026_07_31`.
+- Files: config/model_registry.json, config/experiment_config.json (judging.judges), code/judge.py (per-judge endpoints/keys/extra_params, resolved-model logging), DESIGN-DECISIONS.md (D33), RESEARCH-PAPER-PLAN.md §4.2.
+- Cost incurred: ~15 probe calls of ≤512 tokens (< $0.01), logged as infrastructure verification, not experiment data.

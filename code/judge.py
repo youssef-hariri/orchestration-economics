@@ -6,13 +6,15 @@ For every completed non-empty pilot solution: 3 judges x 3 prompt variants
 Blinding: prompts contain ONLY problem text + solution text (no arm/family/
 cell identifiers); item order shuffled with seed 20260731.
 
-Judges: config/model_registry.json `judges` (Together.ai, TOGETHER_API_KEY).
+Judges: config/model_registry.json `judges` (D33 panel: deepseek-chat on
+DeepSeek API, GLM-5.2 thinking-disabled + Llama-3.3-70B on Together).
 Together requires a custom User-Agent (known pitfall).
 
 Resumable: one JSONL line per (solution, judge, variant) call, flushed
 immediately; existing keys are skipped on restart.
 
-Usage: TOGETHER_API_KEY=... python3 code/judge.py
+Usage: python3 code/judge.py   (per-judge keys read from env, or from the
+repo/workspace .env, both git-ignored)
 Output: runs/logs/pilot_judgments.jsonl
 """
 
@@ -41,9 +43,23 @@ variants = {
 }
 pilot = json.load(open(ROOT / "config/pilot_problems.json"))
 
-API_KEY = os.environ.get("TOGETHER_API_KEY")
-if not API_KEY:
-    sys.exit("TOGETHER_API_KEY not set")
+def load_key(env_key):
+    """Env first (incl. TOGETHER_AI_API_KEY alias), then git-ignored .env files."""
+    names = [env_key] + (["TOGETHER_AI_API_KEY"] if env_key == "TOGETHER_API_KEY" else [])
+    for name in names:
+        if os.environ.get(name):
+            return os.environ[name]
+    for env_file in (ROOT / ".env", ROOT.parent.parent / ".env"):
+        if not env_file.exists():
+            continue
+        for line in env_file.read_text().splitlines():
+            k, _, v = line.partition("=")
+            if k.strip() in names and v.strip():
+                return v.strip().strip('"').strip("'")
+    sys.exit(f"{env_key} not set (env or .env)")
+
+
+KEYS = {j["env_key"]: load_key(j["env_key"]) for j in judges}
 
 gen = json.load(open(GEN_LOG))
 solutions = [
@@ -78,17 +94,19 @@ def parse_scores(text):
 
 
 def call_judge(judge, prompt):
-    body = json.dumps({
+    payload = {
         "model": judge["model"],
         "messages": [{"role": "user", "content": prompt}],
         "temperature": cfg["temperature"],
         "max_tokens": cfg["max_tokens"],
-    }).encode()
+    }
+    payload.update(judge.get("extra_params", {}))  # e.g. GLM-5.2 thinking off (D33)
+    body = json.dumps(payload).encode()
     req = urllib.request.Request(
         judge["endpoint"].rstrip("/") + "/chat/completions",
         data=body,
         headers={
-            "Authorization": f"Bearer {API_KEY}",
+            "Authorization": f"Bearer {KEYS[judge['env_key']]}",
             "Content-Type": "application/json",
             "User-Agent": "orchestration-economics-judge/1.0",
         },
@@ -97,7 +115,11 @@ def call_judge(judge, prompt):
         try:
             with urllib.request.urlopen(req, timeout=120) as resp:
                 data = json.loads(resp.read())
-            return data["choices"][0]["message"]["content"], data.get("usage", {})
+            return (
+                data["choices"][0]["message"]["content"],
+                data.get("usage", {}),
+                data.get("model", judge["model"]),  # resolved model (D33: deepseek-chat is an alias)
+            )
         except urllib.error.HTTPError as e:
             if e.code in (429, 500, 502, 503) and attempt < 4:
                 time.sleep(2 ** attempt * 2)
@@ -127,12 +149,13 @@ with open(OUT, "a") as out:
                     "{solution_text}", sol["finalResponse"]
                 )
                 try:
-                    text, usage = call_judge(judge, prompt)
+                    text, usage, resolved = call_judge(judge, prompt)
                     rec = {
                         "runId": sol["runId"],
                         "problemId": sol["problemId"],
                         "judge_family": judge["family"],
                         "judge_model": judge["model"],
+                        "judge_model_resolved": resolved,
                         "variant": var_id,
                         "scores": parse_scores(text),
                         "raw": text,

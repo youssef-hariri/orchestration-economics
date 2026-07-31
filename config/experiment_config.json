@@ -138,16 +138,17 @@
     },
     "judges": [
       {
-        "provider": "together",
-        "model": "mistralai/Mistral-Small-24B-Instruct-2501",
-        "family": "mistral",
-        "note": "family disjoint from generators"
+        "provider": "deepseek",
+        "model": "deepseek-chat",
+        "family": "deepseek",
+        "note": "family disjoint from generators; D33 replacement for Mistral-Small-24B (non-serverless on Together); non-thinking alias, verified 2026-07-31"
       },
       {
         "provider": "together",
-        "model": "zai-org/GLM-4.7",
+        "model": "zai-org/GLM-5.2",
         "family": "zhipu",
-        "note": "family disjoint from generators; replaces Gemini which moved to the generator pool"
+        "extra_params": {"chat_template_kwargs": {"enable_thinking": false}},
+        "note": "family disjoint from generators; D33 within-family replacement for GLM-4.7 (non-serverless on Together); thinking disabled for uniform non-reasoning panel"
       },
       {
         "provider": "together",
@@ -156,7 +157,7 @@
         "note": "family disjoint from generators"
       }
     ],
-    "judge_disjointness_rule": "generator families = {openai, anthropic, google, moonshot, alibaba}; judge families = {mistral, zhipu, meta} — no overlap"
+    "judge_disjointness_rule": "generator families = {openai, anthropic, google, moonshot, alibaba}; judge families = {deepseek, zhipu, meta} — no overlap (D33; deepseek fallback generator never invoked)"
   },
   "generation": {
     "temperature": 1,

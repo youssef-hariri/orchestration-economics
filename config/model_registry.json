@@ -128,26 +128,30 @@
   },
   "judges": [
     {
-      "family": "mistral",
-      "provider": "together",
-      "endpoint": "https://api.together.xyz/v1",
-      "env_key": "TOGETHER_API_KEY",
-      "model": "mistralai/Mistral-Small-24B-Instruct-2501",
-      "input_usd_per_1m": 0.1,
-      "output_usd_per_1m": 0.3,
-      "context": 32768,
-      "pricing_source": "Together /v1/models API pricing field, 2026-07-30"
+      "family": "deepseek",
+      "provider": "deepseek",
+      "endpoint": "https://api.deepseek.com/v1",
+      "env_key": "DEEPSEEK_API_KEY",
+      "model": "deepseek-chat",
+      "resolved_model": "deepseek-v4-flash",
+      "input_usd_per_1m": 0.14,
+      "output_usd_per_1m": 0.28,
+      "context": 1000000,
+      "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing, 2026-07-31",
+      "notes": "D33 replacement for Mistral-Small-24B (non-serverless on Together). deepseek-chat alias runs non-thinking; verified no reasoning tokens in probe call 2026-07-31."
     },
     {
       "family": "zhipu",
       "provider": "together",
       "endpoint": "https://api.together.xyz/v1",
       "env_key": "TOGETHER_API_KEY",
-      "model": "zai-org/GLM-4.7",
-      "input_usd_per_1m": 0.45,
-      "output_usd_per_1m": 2.0,
-      "context": 202752,
-      "pricing_source": "Together /v1/models API pricing field, 2026-07-30"
+      "model": "zai-org/GLM-5.2",
+      "input_usd_per_1m": 1.4,
+      "output_usd_per_1m": 4.4,
+      "context": 512000,
+      "extra_params": {"chat_template_kwargs": {"enable_thinking": false}},
+      "pricing_source": "Together /v1/models API pricing field, 2026-07-31",
+      "notes": "D33 replacement for GLM-4.7 (non-serverless on Together). Thinking disabled for uniform non-reasoning panel; verified 0 reasoning tokens with enable_thinking=false, 2026-07-31."
     },
     {
       "family": "meta",
@@ -161,7 +165,19 @@
       "pricing_source": "Together /v1/models API pricing field, 2026-07-30"
     }
   ],
-  "judge_disjointness_check": "judge families {mistral, zhipu, meta} disjoint from generator families {openai, anthropic, google, moonshot, alibaba} - PASS",
+  "judges_superseded_2026_07_31": [
+    {
+      "family": "mistral",
+      "model": "mistralai/Mistral-Small-24B-Instruct-2501",
+      "reason": "400 'Unable to access non-serverless model' on pilot-day access check; no mistralai model serverless-available on this Together account"
+    },
+    {
+      "family": "zhipu",
+      "model": "zai-org/GLM-4.7",
+      "reason": "400 'Unable to access non-serverless model' on pilot-day access check; replaced within-family by GLM-5.2 (serverless)"
+    }
+  ],
+  "judge_disjointness_check": "judge families {deepseek, zhipu, meta} disjoint from generator families {openai, anthropic, google, moonshot, alibaba} - PASS (D33). Note: deepseek is also the D24 fallback generator family; fallback was never invoked (0 fallback runs as of 2026-07-31), so disjointness holds; if fallback is ever used, the deepseek judge's scores for fallback-generated solutions will be flagged in analysis.",
   "designer_A7": {
     "provider": "moonshot",
     "endpoint": "https://api.moonshot.ai/v1",
