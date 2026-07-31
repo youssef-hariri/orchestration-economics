@@ -182,18 +182,31 @@ Critic keeps the PASS / NEEDS_WORK / MAJOR_REVISIONS verdict (mechanism variable
 ### 4.2 Model selection (cost-managed — hard requirement)
 
 **Family sibling pairs** (the tier factor is manipulated WITHIN family — every frontier
-has a cheap sibling from its own family; exact versions pinned at Phase 0):
+has a cheap sibling from its own family). **PINNED at Phase 0 (2026-07-30)** — all 16 model
+IDs verified live against provider accounts (`code/pin_models.py`, 16/16 PASS); prices are
+the frozen `config/price_vector.json` v2026-07-30, USD per 1M tokens (input/output),
+standard non-discounted tier (D21–D24):
 
-| Family | Origin | Frontier (F) | Cheap sibling (C) |
-|---|---|---|---|
-| GPT (OpenAI) | Western | latest GPT flagship | GPT-mini tier |
-| Claude (Anthropic) | Western | latest Claude flagship | Haiku tier |
-| Gemini (Google) | Western | latest Gemini Pro flagship | Flash tier |
-| Kimi (Moonshot) | Eastern | **Kimi V3** | small kimi tier |
-| Qwen (Aliyun) | Eastern | Qwen 3.7 / qwen-max class | qwen-turbo/plus tier |
+| Family | Origin | Frontier (F) | $ in/out | Cheap sibling (C) | $ in/out | Price ratio |
+|---|---|---|---|---|---|---|
+| GPT (OpenAI) | Western | `gpt-5.6-sol` | 5.00 / 30.00 | `gpt-5.6-luna` | 1.00 / 6.00 | 5× |
+| Claude (Anthropic) | Western | `claude-opus-5` | 5.00 / 25.00 | `claude-haiku-4-5-20251001` | 1.00 / 5.00 | 5× |
+| Gemini (Google) | Western | `gemini-3.1-pro-preview` | 2.00 / 12.00 | `gemini-3.1-flash-lite` | 0.25 / 1.50 | 8× |
+| Kimi (Moonshot) | Eastern | `kimi-k3` | 3.00 / 15.00 | `kimi-k2.6` | 0.95 / 4.00 | ~3.6× |
+| Qwen (Aliyun) | Eastern | `qwen3.7-max-2026-06-08` | 1.25 / 3.75 | `qwen3.7-plus-2026-05-26` | 0.32 / 1.28 | ~3.4× |
 
-(DeepSeek is dropped from generation — no frontier/cheap sibling pair needed; it remains
-available as a fallback family if any of the 5 above is inaccessible.)
+Pin rules (D22/D24, for the Methods section): *frontier* = the family's **mainline
+flagship** — above-flagship premium tiers are excluded (`claude-fable-5` "Mythos-class"
+$10/$50 deliberately not used) so the frontier level is a comparable construct across
+families; *cheap sibling* = the family's current cheap tier, **same generation** where the
+provider ships one (gpt 5.6, qwen 3.7, gemini 3.1), nearest-current otherwise (claude,
+kimi). Dated snapshots preferred over moving aliases wherever published. Price-ratio
+heterogeneity (3.4×–8×) is absorbed by the family random effect; T-EGR is computed
+within-family before pooling. `gemini-3.1-pro-preview` carries preview risk — pre-registered
+fallback: `gemini-2.5-pro` (stable GA).
+
+(DeepSeek is dropped from generation — no frontier/cheap sibling pair needed; see the
+pinned fallback family below.)
 
 Frontier notes:
 - Frontier cells run last, 2 reps each to contain cost.
@@ -202,12 +215,19 @@ Frontier notes:
 - **A6 baseline selected by pre-registered rule:** the F-S-N frontier with highest mean Novelty.
 
 **Designer tier (smart, Eastern — A7 only):**
-- **Kimi V3** (Moonshot, pin exact version at Phase 0). Designs pipelines only; one design call per problem (15 calls total, amortized over 5 reps).
+- **`kimi-k3`** (Moonshot; pinned Phase 0, temperature 0). Designs pipelines only; one design call per problem (15 calls total, amortized over 5 reps).
+
+**Fallback family** (used only if one of the 5 pinned families becomes inaccessible;
+any substitution is logged as a protocol deviation): DeepSeek — `deepseek-v4-pro`
+($0.435/$0.87) / `deepseek-v4-flash` ($0.14/$0.28).
 
 Judges (evaluation): **3 cheap judges from families NOT used in generation**.
 Generator families now = {OpenAI, Anthropic, Google, Moonshot, Alibaba} → judge
-families = **Mistral Small, GLM (Zhipu), Llama-3.3-70B (Together/Meta)** (Gemini moved to the
-generator pool, so it is no longer judge-eligible) — eliminates self-preference bias — with the 3
+families = **Mistral, Zhipu, Meta** (Gemini moved to the
+generator pool, so it is no longer judge-eligible) — eliminates self-preference bias. Pinned
+at Phase 0, all served on a single aggregator (Together.ai) for one uniform judging stack:
+`mistralai/Mistral-Small-24B-Instruct-2501` ($0.10/$0.30), `zai-org/GLM-4.7` ($0.45/$2.00),
+`meta-llama/Llama-3.3-70B-Instruct-Turbo` ($1.04/$1.04) — with the 3
 judge prompt variations from persona-model-fit → 9 scores per solution, Fleiss' κ computed.
 Judge design decisions (fixed): **one invariant judge ensemble for all problems/arms**
 (never per-problem judges — measurement invariance); judges blind to condition; solutions

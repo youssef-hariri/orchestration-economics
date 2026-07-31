@@ -63,6 +63,13 @@ Critic-gated WHILE loop (H4); A6 = frontier solo **cost-matched** to C-T-P (base
 best-Novelty F-S-N frontier, pre-registered rule); A7 = **adaptive** — **Kimi V3** (temp 0)
 designs per problem, cheap models execute; A8 = C-T-P with shuffled persona→role mapping (H5).
 
+**Pinned models (Phase 0, 2026-07-30, 16/16 live-verified):** gpt-5.6-sol / gpt-5.6-luna ·
+claude-opus-5 / claude-haiku-4-5-20251001 · gemini-3.1-pro-preview / gemini-3.1-flash-lite ·
+kimi-k3 / kimi-k2.6 · qwen3.7-max-2026-06-08 / qwen3.7-plus-2026-05-26; judges (Together.ai)
+Mistral-Small-24B-2501, GLM-4.7, Llama-3.3-70B-Turbo; designer kimi-k3 (T=0); fallback
+deepseek-v4-pro/flash. Full details: plan §4.2, `config/model_registry.json`,
+frozen prices `config/price_vector.json` (D21–D24).
+
 **30 main problems, domain-stratified (6 business domains × 5, `domain_map.json`)** + 10
 post-cutoff robustness cases. **Consistency slice**: the special-arm family runs 5 reps
 (instead of 3) in its four cheap cells so the Consistency DV (within-cell SD) has a
