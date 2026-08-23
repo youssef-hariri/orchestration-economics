@@ -871,3 +871,15 @@ Supersedes the kimi-blocked status in Entry 51 §3. Author directive: "use toget
 **Isolation (author credit-exhaustion policy applied by analogy):** round 3 (pid 76904) runs the other 9 families (2,160 tasks) unimpeded; a separate gemini probe lane at c=1 (pid 77358, Fresh_Case_3 only, log `runs/logs/wave_gemini_probe.log`) tests whether the provider can complete ANY run. Outcome branches: (a) probe completes → gemini re-admitted at a validated low cap in a dedicated lane; (b) probe fails → gemini DEFERRED to the next discount window (quota reset), disclosed in the wave report with affected-cell counts; either way the 9-family record proceeds and gemini's gate contributions are reported as missing-at-random-by-provider, not imputed.
 
 **Integrity notes:** all failed/timed-out attempts consumed zero tokens and produced no scored output; resume re-attempts only non-completed records; orphaned platform runs from rounds 1–2 that later complete server-side are never captured (same treatment as Study-1 timeout repairs). No analysis-relevant data was collected under the throttled regime.
+
+---
+
+## Entry 62 — 2026-08-23 — Wave generation close for this window: 2,060/2,400 (8 families complete; kimi credit-exhausted at 140/240; gemini 0/240 deferred)
+
+**Completed this window (UTC 14:00–20:05):** claude, gpt, gpt-oss, gemma, mistral, minimax, qwen, thinkingmachines — all 240/240 (30 problems × 3 cells × reps), zero 429s on these families after the ramp. Total completed 2,060 runs; ledger `runs/logs/wave_run_ledger.json` (2,218 records incl. failed attempts).
+
+**Kimi (140/240: C-S-N 58/90, C-T-N 52/90, F-S-N 30/60):** Moonshot account balance exhausted mid-wave ("API credit exhausted: Moonshot Kimi: Account balance insufficient", run_status error of runId 5896; sidecar `runs/logs/wave_credit_exhaustion.jsonl`). Recovery option considered and REJECTED for this window: the Study-1 precedent (2026-08-04, all-cell migration to Together) does not transfer because K2.6 was retired on Together 2026-08-19 — only F-S-N (K3) could move, creating a within-family cheap/frontier routing asymmetry absent from any prior record; per author policy the remainder is deferred to a later lane after credits are restored. The 140 completed kimi runs remain valid (all Moonshot-direct, homogeneous routing).
+
+**Gemini (0/240):** provider-side failure regime all day (throttle → silent retry loops → tok=0 even at c=1, Entry 61); deferred to the next discount window pending quota reset/outage clearance; probe-first re-admission required.
+
+**Runner fixes committed en route:** credit detection fallback to run_status.error; exhausted-family skip (§5.4); worker-queue race (atomic claim). Judging proceeds on the 2,060 completed runs; gemini/kimi remainders will be judged in follow-up lanes after completion (judge_v2.py resumable).
