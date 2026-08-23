@@ -329,11 +329,15 @@ console.log(`Wave run: ${tasks.length} runs, problems=${problemIds.length}, c=${
 await waitForWindow();
 let idx = 0;
 const workers = Array.from({ length: Math.min(CONCURRENCY, tasks.length) }, async () => {
-  while (idx < tasks.length) {
+  for (;;) {
     // §5.2 strict window enforcement: a wave that starts inside the window
     // must not keep generating after UTC midnight (qwen off-peak rule).
     if (!ignoreWindow) await waitForWindow();
-    const t = tasks[idx++];
+    // Atomic claim: idx++ in one synchronous expression (the await above can
+    // let other workers drain the queue between check and increment).
+    const i = idx++;
+    if (i >= tasks.length) break;
+    const t = tasks[i];
     // §5.4: once a family is marked credit-exhausted, skip its remaining
     // tasks (they are left for a later lane after credits are restored).
     if (exhausted.has(t.family)) continue;
