@@ -1,9 +1,9 @@
 {
   "_purpose": "Per-family generation concurrency caps for wave_run.mjs (Protocol 12 §5.3). Values for NEW providers are conservative placeholders until the pre-wave RPM ramp validates them (429-rate + latency-inflation criterion; highest clean level adopted, cap 100). Study-1 families inherit the D34-calibrated level. wave_run.mjs applies the minimum of this cap and its global --concurrency.",
-  "_updated": "2026-08-23 ramp results: mini-pilot (96 runs, 6 new families, ~45 min) produced ZERO 429s and zero credit-exhaustion events. mistral/minimax tested clean at cap 4 -> doubled to 8 (conservative, undisclosed-to-data ramp step; any 429 in the full wave is captured per-run in realError and the cap revisited). thinkingmachines/gpt-oss/gemma tested clean at 30 -> kept 30. kimi tested clean at effective 40 -> kept 60 (Study-1-derived ceiling). qwen inherits D34 level 60.",
+  "_updated": "2026-08-23 ramp results: mini-pilot (96 runs, 6 new families, ~45 min) produced ZERO 429s and zero credit-exhaustion events. mistral/minimax tested clean at cap 4 -> doubled to 8 (conservative, undisclosed-to-data ramp step; any 429 in the full wave is captured per-run in realError and the cap revisited). thinkingmachines/gpt-oss/gemma tested clean at 30 -> kept 30. kimi tested clean at effective 40 -> kept 60 (Study-1-derived ceiling). qwen inherits D34 level 60. SAME-DAY CORRECTION: full wave at c=100 revealed gemini provider throttling ('Provider throttled, retry after Nms' in step_error stream; ~54 runner-side timeouts, tok=0) — Study-1's c=100 calibration did not carry to the 10-family aggregate load; gemini cap lowered 100 -> 10 (D34 fallback logic) and the wave restarted on resume (MANIFEST Entry 61).",
   "gpt": 100,
   "claude": 100,
-  "gemini": 100,
+  "gemini": 10,
   "kimi": 60,
   "qwen": 60,
   "thinkingmachines": 30,

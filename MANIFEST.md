@@ -859,3 +859,15 @@ Supersedes the kimi-blocked status in Entry 51 §3. Author directive: "use toget
 **Ramp decision (`config/wave_concurrency.json` updated):** highest-clean-level criterion (§5.3) — mistral/minimax clean at 4 → doubled to 8 (conservative step; any full-wave 429 is captured per-run in `realError` and the cap revisited); thinkingmachines/gpt-oss/gemma clean at 30 → kept; kimi clean at effective 40 → kept at 60; Study-1 families inherit D34 levels (gpt/claude/gemini 100, qwen 60).
 
 **Full wave launched 2026-08-23 ≈15:57 UTC** (inside the discount window; window gate UTC 14:00–00:00 enforced in-runner): `node code/wave_run.mjs --concurrency 100` (pid 29286, log `runs/logs/wave_full.log`). Scope 2,400 runs; the 90 completed mini-pilot records are resume-skipped, the 6 failed/timed-out records re-attempted. Per author policy (2026-08-23): a credit-exhausted family is skipped and the others continue (`runs/logs/wave_credit_exhaustion.jsonl` sidecar).
+
+---
+
+## Entry 61 — 2026-08-23 — Gemini provider throttling during full wave; family isolated per author policy
+
+**Event:** full wave round 1 (launched ≈15:57 UTC, c=100, all 10 families) produced systematic gemini failures: 54+ runner-side 20-min timeouts with tok=0 across ALL three cells; platform step_error stream shows repeated `Provider throttled, retry after Nms` (e.g., runId 5169) followed by silent retry loops (runIds 5759/5760). Other 9 families ran clean (zero 429s; gpt 94/claude 83/etc. completing normally in the same interval).
+
+**Diagnosis and response:** cap lowered 100 → 10 (D34 fallback logic; `config/wave_concurrency.json` SAME-DAY CORRECTION note) and the wave restarted on resume (round 2, pid 67363) — gemini STILL failed at cap 10 with identical tok=0 signature → the failure is not runner-side concurrency but a provider-side condition (quota exhaustion or outage on the Google key; Study-1's c=100 calibration predates the 10-family aggregate load regime).
+
+**Isolation (author credit-exhaustion policy applied by analogy):** round 3 (pid 76904) runs the other 9 families (2,160 tasks) unimpeded; a separate gemini probe lane at c=1 (pid 77358, Fresh_Case_3 only, log `runs/logs/wave_gemini_probe.log`) tests whether the provider can complete ANY run. Outcome branches: (a) probe completes → gemini re-admitted at a validated low cap in a dedicated lane; (b) probe fails → gemini DEFERRED to the next discount window (quota reset), disclosed in the wave report with affected-cell counts; either way the 9-family record proceeds and gemini's gate contributions are reported as missing-at-random-by-provider, not imputed.
+
+**Integrity notes:** all failed/timed-out attempts consumed zero tokens and produced no scored output; resume re-attempts only non-completed records; orphaned platform runs from rounds 1–2 that later complete server-side are never captured (same treatment as Study-1 timeout repairs). No analysis-relevant data was collected under the throttled regime.
