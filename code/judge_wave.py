@@ -36,8 +36,14 @@ OUT = ROOT / "runs" / "logs" / "wave_judgments.jsonl"
 JUDGE_V2 = ROOT / "code" / "judge_v2.py"
 
 # Residual reasoning-trace patterns (defensive; platform export normally
-# carries visible content only).
-THINK_RE = re.compile(r"", re.DOTALL | re.IGNORECASE)
+# carries visible content only). Patterns assembled from parts so no literal
+# tag-like sequence appears in the source (an earlier version lost its
+# pattern to tooling that strips tag-shaped text — caught at store build:
+# empty regex corrupted every doc; judging had not started).
+_THINK_OPEN = "<" + "think" + ">"
+_THINK_CLOSE = "<" + "/think" + ">"
+THINK_RE = re.compile(re.escape(_THINK_OPEN) + r".*?" + re.escape(_THINK_CLOSE),
+                      re.DOTALL | re.IGNORECASE)
 CHANNEL_RE = re.compile(r"<\|channel\|>analysis<\|message\|>.*?<\|end\|>", re.DOTALL)
 
 
