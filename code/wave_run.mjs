@@ -282,7 +282,7 @@ async function runOne(t) {
         step: s.step, agentRole: s.agentRole, status: s.status,
         tokensUsed: s.tokensUsed, latencyMs: s.latencyMs,
       }));
-      if (rec.status === "failed") rec.realError = streamError(runId);
+      if (rec.status === "failed") rec.realError = streamError(runId) ?? status?.error ?? null;
       if (rec.status === "completed") {
         const statusText = status.finalResponse ?? "";
         rec.truncatedAtSource = statusText.length === CAP;
@@ -334,6 +334,9 @@ const workers = Array.from({ length: Math.min(CONCURRENCY, tasks.length) }, asyn
     // must not keep generating after UTC midnight (qwen off-peak rule).
     if (!ignoreWindow) await waitForWindow();
     const t = tasks[idx++];
+    // §5.4: once a family is marked credit-exhausted, skip its remaining
+    // tasks (they are left for a later lane after credits are restored).
+    if (exhausted.has(t.family)) continue;
     await semFor(t.family)(() => runOne(t));
   }
 });
