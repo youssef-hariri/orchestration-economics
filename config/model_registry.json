@@ -126,6 +126,114 @@
       "discount_window": null
     }
   },
+  "wave_generators": {
+    "_purpose": "Protocol 12 (OSF jg49x) new-family additions for the confirmatory replication wave (D48). The 5 Study-1 families above remain the reference definitions; wave runs reuse the same frontier/cheap models for them. All entries verified live on 2026-08-22/23.",
+    "pin_date": "2026-08-22/23",
+    "thinkingmachines": {
+      "provider": "together",
+      "endpoint": "https://api.together.xyz/v1",
+      "env_key": "TOGETHER_API_KEY",
+      "frontier": {
+        "model": "thinkingmachines/Inkling",
+        "input_usd_per_1m": 1.0,
+        "output_usd_per_1m": 4.05,
+        "pricing_source": "Together /v1/models API pricing field, 2026-08-22",
+        "notes": "Reasoning model; strip traces before judging where present."
+      },
+      "cheap_sibling": {
+        "model": "thinkingmachines/Inkling-Small",
+        "input_usd_per_1m": 0.5,
+        "output_usd_per_1m": 1.2,
+        "pricing_source": "Together /v1/models API pricing field, 2026-08-22"
+      },
+      "discount_window": null
+    },
+    "gpt-oss": {
+      "provider": "together",
+      "endpoint": "https://api.together.xyz/v1",
+      "env_key": "TOGETHER_API_KEY",
+      "frontier": {
+        "model": "openai/gpt-oss-120b",
+        "input_usd_per_1m": 0.15,
+        "output_usd_per_1m": 0.6,
+        "pricing_source": "Together /v1/models API pricing field, 2026-08-22",
+        "notes": "Open-weight OpenAI model hosted by Together; reasoning output — strip traces before judging where present."
+      },
+      "cheap_sibling": {
+        "model": "openai/gpt-oss-20b",
+        "input_usd_per_1m": 0.05,
+        "output_usd_per_1m": 0.2,
+        "pricing_source": "Together /v1/models API pricing field, 2026-08-22"
+      },
+      "discount_window": null
+    },
+    "gemma": {
+      "provider": "together",
+      "endpoint": "https://api.together.xyz/v1",
+      "env_key": "TOGETHER_API_KEY",
+      "frontier": {
+        "model": "google/gemma-4-31B-it",
+        "input_usd_per_1m": 0.39,
+        "output_usd_per_1m": 0.97,
+        "pricing_source": "Together /v1/models API pricing field, 2026-08-22",
+        "notes": "Official Google release only; the pearl-ai fine-tune variant is excluded (D48)."
+      },
+      "cheap_sibling": {
+        "model": "google/gemma-3n-E4B-it",
+        "input_usd_per_1m": 0.06,
+        "output_usd_per_1m": 0.12,
+        "pricing_source": "Together /v1/models API pricing field, 2026-08-22",
+        "notes": "Cross-generation pairing accepted (same convention as kimi k3/k2.6 and claude opus/haiku); no same-generation cheap Gemma is serverless-listed on Together at pin date."
+      },
+      "discount_window": null
+    },
+    "mistral": {
+      "provider": "mistral",
+      "endpoint": "https://api.mistral.ai/v1",
+      "env_key": "MISTRAL_API_KEY",
+      "frontier": {
+        "model": "mistral-medium-3-5-26-04",
+        "input_usd_per_1m": 1.5,
+        "output_usd_per_1m": 7.5,
+        "pricing_source": "api.mistral.ai pricing page, 2026-08-22",
+        "notes": "Dated snapshot ID (not the moving 'mistral-medium-latest' alias)."
+      },
+      "cheap_sibling": {
+        "model": "mistral-small-2603",
+        "input_usd_per_1m": 0.15,
+        "output_usd_per_1m": 0.6,
+        "pricing_source": "api.mistral.ai pricing page, 2026-08-22"
+      },
+      "discount_window": null
+    },
+    "minimax": {
+      "provider": "minimax",
+      "endpoint": "https://api.minimax.io/v1",
+      "env_key": "MINIMAX_API_KEY",
+      "frontier": {
+        "model": "MiniMax-M3",
+        "list_input_usd_per_1m": 0.6,
+        "list_output_usd_per_1m": 2.4,
+        "promo_input_usd_per_1m": 0.3,
+        "promo_output_usd_per_1m": 1.2,
+        "pricing_source": "api.minimax.io pricing, 2026-08-23",
+        "notes": "D46: primary accounting at LIST prices; 'permanent 50% off' promo billed during collection reported via config/price_vector_minimax_promo.json. Adaptive thinking ON by default; traces stripped before judging (D48)."
+      },
+      "cheap_sibling": {
+        "model": "MiniMax-M2.7",
+        "list_input_usd_per_1m": 0.3,
+        "list_output_usd_per_1m": 1.2,
+        "promo_input_usd_per_1m": 0.15,
+        "promo_output_usd_per_1m": 0.6,
+        "pricing_source": "api.minimax.io pricing, 2026-08-23",
+        "notes": "Thinking CANNOT be disabled (platform.minimax.io docs, verified 2026-08-23); runs at vendor default, traces stripped before judging. Within-family asymmetry (M3 adaptive vs M2.7 always-on) disclosed as measurement caveat (D48)."
+      },
+      "discount_window": null
+    },
+    "kimi_wave_routing": {
+      "note": "Wave kimi pipelines reuse the Study-1 kimi definitions but run on Moonshot DIRECT (api.moonshot.ai): kimi-k2.6 was retired on Together 2026-08-19; both models remain callable direct (verified 2026-08-22). D48."
+    }
+  },
   "judges": [
     {
       "family": "deepseek",
