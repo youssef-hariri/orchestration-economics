@@ -811,3 +811,51 @@ Supersedes the kimi-blocked status in Entry 51 §3. Author directive: "use toget
 **Verification:** two pdflatex passes, exit 0, 30 pages, zero undefined references, zero LaTeX errors.
 
 **Discipline:** confirmatory record (H1–H6) untouched; all new content labeled exploratory; Fresh_Case replication wave still requires OSF pre-registration BEFORE any fresh generation (pending step 2).
+---
+
+## Entry 57 — 2026-08-23 — Confirmatory replication wave pre-registered (D47–D50, Protocol 12, OSF jg49x)
+
+**What was locked (all BEFORE the first wave generation call):**
+1. **D47** — wave scope/design: 30 fresh problems × 10 families × 3 core cells (C-S-N/C-T-N/F-S-N), cheap ×3 / frontier ×2 reps = 2,400 generation runs; frozen judge panel ×3 verbatim variants = 21,600 judge calls; binding upgrade gate for the Study-1 exploratory findings; author credit-exhaustion policy (skip exhausted family, continue others). Grounded in OSC 2015 (doi:10.1126/science.aac4716), Camerer et al. 2018 (doi:10.1038/s41562-018-0399-z), Simons 2014, Nosek et al. 2018.
+2. **D48** — family universe 5→10 with verified model/price/provider pins (thinkingmachines/Inkling, gpt-oss, gemma on Together; mistral direct; minimax direct; kimi Moonshot-direct after K2.6 Together retirement 2026-08-19); MiniMax reasoning pinned at vendor defaults + traces stripped before judging.
+3. **D49** — 20 newly authored fresh cases complete the second 6×5 domain grid (Fresh_Case_11–32 minus 24/28; `fresh_business_cases_20_wave.json` + `fresh_domain_map_wave.json`). Grounded in Maxwell 2004 (doi:10.1207/s15327906mbr3901_7), Borenstein et al. 2009.
+4. **D50** — persona/refinement cells excluded from the wave (own frozen records exist; budget ≈ $250–350); disclosure obligation recorded.
+5. **Protocol 12** (`DeeWaanAI-Next/protocols/12-PROTOCOL-WAVE-CONFIRMATORY-REPLICATION.md`) with W1–W7 gate tests and execution discipline.
+6. **OSF registration jg49x** submitted 2026-08-23T14:42:17 UTC (before any wave generation); stimulus files stored with OSF timestamps under child component osf.io/ezuwt with sha256 hashes in the registration summary (OSF API does not permit form file attachments — same documented limitation as mjb8x). State: `preregistration/osf_submission/.osf_state_wave.json`.
+7. **Analysis lock:** `code/analyze_wave.py` (W1–W7, Study-1 reference values computed from frozen Study-1 artifacts pre-wave) and `code/judge_wave.py` (thin wrapper over frozen judge_v2.py + defensive reasoning-strip) written before judging, per Protocol §5.6.
+
+**Platform prep:** MiniMax provider slug added to DeeWaanAI (commit 55706c2, deployed to Railway) so `add_provider` accepts it.
+
+---
+
+## Entry 58 — 2026-08-23 — Wave platform setup + mini-pilot (t5/t6)
+
+**Providers added:** mistral (id 19, api.mistral.ai) and minimax (id 20, api.minimax.io) via MCP add_provider; together=18 confirmed; ids archived in `pipelines/fixed/wave_provider_ids.json`.
+
+**Pipelines (30, `pipelines/fixed/wave_pipelines_registry.json`):** 12 Study-1 frozen pipelines reused (gpt/claude/gemini/qwen × C-S-N/C-T-N/F-S-N — identical instrument); 18 created new (kimi ×3 on Moonshot provider 12 — ROUTING-ONLY deviation with Study-1 precedent, since the frozen kimi pipelines sit on Together where K2.6 was retired 2026-08-19; plus thinkingmachines/gpt-oss/gemma/mistral/minimax ×3). Study-1 frozen registry untouched.
+
+**Mini-pilot:** 6 new families × {Fresh_Case_1, Fresh_Case_2} × all reps = 96 runs, inside the UTC 14:00–00:00 window, concurrency 40 (new-provider caps mistral/minimax = 4, placeholder ramp values in `config/wave_concurrency.json`).
+
+**Results:** gemma 16/16 and gpt-oss 16/16 clean; kimi (Moonshot direct), minimax, thinkingmachines completing cleanly; mistral cheap/team cells clean but ALL 4 frontier (F-S-N) attempts failed at step 1 → root cause found: pinned model id invalid (Entry 59 / D51). One transient mistral frontier failure pre-dates the id discovery. Kimi route validated live (Moonshot-direct completions non-empty).
+
+---
+
+## Entry 59 — 2026-08-23 — D51: mistral frontier model id corrected pre-data (mistral-medium-3-5-26-04 → mistral-medium-2604)
+
+**Discovery:** api.mistral.ai rejects `mistral-medium-3-5-26-04` (400 invalid_model); the correct dated snapshot of Mistral Medium 3.5 is `mistral-medium-2604` (alias `mistral-medium-3.5` resolves to the same model; both verified callable). Price re-verified unchanged ($1.5/$7.5).
+
+**Legitimacy:** zero valid observations existed under the invalid id (the 4 failed attempts produced no output; failures are never scored); the fix changes only the vendor identifier string; made before the first successful mistral frontier generation; disclosed in DESIGN-DECISIONS D51, Protocol 12 §3, model_registry.json, both price vectors, the wave registry, and platform pipeline 69 (update_pipeline). Grounding: Nosek et al. 2018; Simons 2014.
+
+---
+
+## Entry 60 — 2026-08-23 — Mini-pilot close-out, ramp decision, full wave launch (t6 → t7)
+
+**Mini-pilot final (96 runs, 6 new families × {Fresh_Case_1, Fresh_Case_2} × all reps):** 90/96 completed with non-empty full text on first pass; **zero 429s, zero credit-exhaustion events** across ~50 min at global concurrency 40 (new-provider caps mistral/minimax = 4). gemma 16/16, gpt-oss 16/16, minimax 16/16, thinkingmachines 16/16, kimi 14/16, mistral 12/16 (4 frontier failures under the invalid id — Entry 59).
+
+**Mistral fix verified post-D51:** all 4 F-S-N re-runs completed on `mistral-medium-2604` (runIds 4805/4808/4809/4810) — end-to-end frontier generation now clean on provider 19.
+
+**Kimi routing disclosure:** F-S-N Fresh_Case_2 hit repeated platform-side `fetch failed` at step 1 (tok=0) on the Moonshot-direct route — runIds 4737, 4788 (mini-pilot) and 4806, 4807 (fix-rerun); platform auto-retry observed on 4807. Fresh_Case_1 frontier completed normally both times (e.g., runId 4763), and all kimi cheap/team runs completed — so the route works; this specific task exhibits intermittent first-attempt fetch failures. Both tasks remain in the full-wave queue (resume re-attempts non-completed records); any residual failures will be disclosed in the wave report with the affected cell counts. This is a transport-level event (no tokens consumed, no output produced, nothing scored).
+
+**Ramp decision (`config/wave_concurrency.json` updated):** highest-clean-level criterion (§5.3) — mistral/minimax clean at 4 → doubled to 8 (conservative step; any full-wave 429 is captured per-run in `realError` and the cap revisited); thinkingmachines/gpt-oss/gemma clean at 30 → kept; kimi clean at effective 40 → kept at 60; Study-1 families inherit D34 levels (gpt/claude/gemini 100, qwen 60).
+
+**Full wave launched 2026-08-23 ≈15:57 UTC** (inside the discount window; window gate UTC 14:00–00:00 enforced in-runner): `node code/wave_run.mjs --concurrency 100` (pid 29286, log `runs/logs/wave_full.log`). Scope 2,400 runs; the 90 completed mini-pilot records are resume-skipped, the 6 failed/timed-out records re-attempted. Per author policy (2026-08-23): a credit-exhausted family is skipped and the others continue (`runs/logs/wave_credit_exhaustion.jsonl` sidecar).

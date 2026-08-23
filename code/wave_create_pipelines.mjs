@@ -74,7 +74,7 @@ const NEW_FAMILIES = [
   { family: "thinkingmachines", provider: "together", frontier: "thinkingmachines/Inkling", cheap: "thinkingmachines/Inkling-Small" },
   { family: "gpt-oss", provider: "together", frontier: "openai/gpt-oss-120b", cheap: "openai/gpt-oss-20b" },
   { family: "gemma", provider: "together", frontier: "google/gemma-4-31B-it", cheap: "google/gemma-3n-E4B-it" },
-  { family: "mistral", provider: "mistral", frontier: "mistral-medium-3-5-26-04", cheap: "mistral-small-2603" },
+  { family: "mistral", provider: "mistral", frontier: "mistral-medium-2604", cheap: "mistral-small-2603" },
   { family: "minimax", provider: "minimax", frontier: "MiniMax-M3", cheap: "MiniMax-M2.7" },
 ];
 
