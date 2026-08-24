@@ -1,0 +1,422 @@
+{
+  "protocol": "12-PROTOCOL-WAVE-CONFIRMATORY-REPLICATION.md",
+  "osf": "jg49x",
+  "analysis_script_sha256": "94729d0221e17be1de9d2e8c699a57d009d7b7bc03fb02e700d19a61f5da8f9a",
+  "analyzed_at_utc": "2026-08-24T01:11:01Z",
+  "price_vector": "config/price_vector.json",
+  "alpha": 0.05,
+  "gates": {},
+  "n_runs": 2050,
+  "families": [
+    "claude",
+    "gemma",
+    "gpt",
+    "gpt-oss",
+    "kimi",
+    "minimax",
+    "mistral",
+    "qwen",
+    "thinkingmachines"
+  ],
+  "completion": {
+    "per_family_completed": {
+      "claude": 240,
+      "gemma": 240,
+      "gpt": 240,
+      "gpt-oss": 240,
+      "kimi": 134,
+      "minimax": 236,
+      "mistral": 240,
+      "qwen": 240,
+      "thinkingmachines": 240
+    },
+    "expected_per_family": 240,
+    "families_exhausted": []
+  },
+  "W1_team_effect": {
+    "model": "LMM comp ~ cell + (1|family) + (1|problem) + (1|family:problem), cells C-S-N/C-T-N",
+    "fixed_effects": {
+      "Intercept": {
+        "coef": 4.4802,
+        "p": 0.0
+      },
+      "C(cell, Treatment('C-S-N'))[T.C-T-N]": {
+        "coef": 0.0167,
+        "p": 0.00647
+      }
+    },
+    "team_effect_coef": 0.0167,
+    "team_effect_p": 0.00647,
+    "gate": "PASS"
+  },
+  "W2_upgrade_threshold": {
+    "model": "same LMM, cells C-T-N/F-S-N (reference C-T-N)",
+    "fixed_effects": {
+      "Intercept": {
+        "coef": 4.4905,
+        "p": 0.0
+      },
+      "C(cell, Treatment('C-T-N'))[T.F-S-N]": {
+        "coef": 0.0912,
+        "p": 0.0
+      }
+    },
+    "frontier_over_team_coef": 0.0912,
+    "frontier_over_team_p": 0.0,
+    "gate": "PASS"
+  },
+  "W3_domain_contingency": {
+    "gate3a_interaction": {
+      "LRT_chi2": -45.506,
+      "df": 10,
+      "p": 1.0,
+      "gate": "FAIL",
+      "model": "LMM comp ~ logtok + cell*domain + RE(family, problem, family:problem)"
+    },
+    "gate3b_directional": {
+      "per_domain": {
+        "finance_business_models": {
+          "n_problems": 5,
+          "delta": -0.1204,
+          "t": -3.494,
+          "p": 0.02503,
+          "study1_ref": -0.1062,
+          "p_holm": 0.09713
+        },
+        "hr_organization": {
+          "n_problems": 5,
+          "delta": -0.0992,
+          "t": -10.968,
+          "p": 0.00039,
+          "study1_ref": -0.0528,
+          "p_holm": 0.00236
+        },
+        "marketing_communications": {
+          "n_problems": 5,
+          "delta": -0.083,
+          "t": -8.106,
+          "p": 0.00126,
+          "study1_ref": 0.0037,
+          "p_holm": 0.0063
+        },
+        "operations_supply_chain": {
+          "n_problems": 5,
+          "delta": -0.0815,
+          "t": -3.528,
+          "p": 0.02428,
+          "study1_ref": -0.0583,
+          "p_holm": 0.09713
+        },
+        "product_innovation": {
+          "n_problems": 5,
+          "delta": -0.0392,
+          "t": -1.469,
+          "p": 0.21582,
+          "study1_ref": -0.1033,
+          "p_holm": 0.21582
+        },
+        "strategy_market_entry": {
+          "n_problems": 5,
+          "delta": -0.0928,
+          "t": -2.409,
+          "p": 0.07366,
+          "study1_ref": -0.0356,
+          "p_holm": 0.14732
+        }
+      },
+      "sign_matches": "5/6",
+      "strongest_positive": null,
+      "strongest_negative": "finance_business_models",
+      "study1_reference": {
+        "finance_business_models": -0.1062,
+        "hr_organization": -0.0528,
+        "marketing_communications": 0.0037,
+        "operations_supply_chain": -0.0583,
+        "product_innovation": -0.1033,
+        "strategy_market_entry": -0.0356
+      },
+      "gate": "FAIL"
+    },
+    "gate": "FAIL"
+  },
+  "W4_capability_gap": {
+    "families_complete": 9,
+    "families": [
+      "claude",
+      "gemma",
+      "gpt",
+      "gpt-oss",
+      "kimi",
+      "minimax",
+      "mistral",
+      "qwen",
+      "thinkingmachines"
+    ],
+    "study1_reference_r": -0.978,
+    "capability_gap_delta": {
+      "claude": 0.132,
+      "gemma": 0.638,
+      "gpt": 0.0289,
+      "gpt-oss": 0.2291,
+      "kimi": -0.1216,
+      "minimax": 0.0613,
+      "mistral": -0.0188,
+      "qwen": 0.0604,
+      "thinkingmachines": -0.1731
+    },
+    "team_effect_tau": {
+      "claude": 0.0644,
+      "gemma": -0.0244,
+      "gpt": 0.0111,
+      "gpt-oss": 0.0002,
+      "kimi": 0.0398,
+      "minimax": 0.0064,
+      "mistral": 0.0462,
+      "qwen": 0.0598,
+      "thinkingmachines": -0.0388
+    },
+    "pearson_r": -0.2445,
+    "pearson_p": 0.52597,
+    "spearman_rho": -0.0333,
+    "spearman_p": 0.93216,
+    "power_at_n_for_rho_0.80": 0.768,
+    "power_at_n_for_rho_0.70": 0.565,
+    "gate": "FAIL"
+  },
+  "W5_variance": {
+    "per_domain_brown_forsythe": {
+      "finance_business_models": {
+        "sd_team": 0.2865,
+        "sd_solo": 0.3008,
+        "stat": 0.629,
+        "p": 0.42849,
+        "p_below_4.0_team": 0.0846,
+        "p_below_4.0_solo": 0.1085
+      },
+      "hr_organization": {
+        "sd_team": 0.2939,
+        "sd_solo": 0.2786,
+        "stat": 0.008,
+        "p": 0.92839,
+        "p_below_4.0_team": 0.093,
+        "p_below_4.0_solo": 0.0833
+      },
+      "marketing_communications": {
+        "sd_team": 0.29,
+        "sd_solo": 0.2739,
+        "stat": 0.0,
+        "p": 0.99049,
+        "p_below_4.0_team": 0.0625,
+        "p_below_4.0_solo": 0.063
+      },
+      "operations_supply_chain": {
+        "sd_team": 0.3024,
+        "sd_solo": 0.2858,
+        "stat": 0.263,
+        "p": 0.60855,
+        "p_below_4.0_team": 0.093,
+        "p_below_4.0_solo": 0.0916
+      },
+      "product_innovation": {
+        "sd_team": 0.2936,
+        "sd_solo": 0.3738,
+        "stat": 0.292,
+        "p": 0.58951,
+        "p_below_4.0_team": 0.088,
+        "p_below_4.0_solo": 0.093
+      },
+      "strategy_market_entry": {
+        "sd_team": 0.3038,
+        "sd_solo": 0.2933,
+        "stat": 0.002,
+        "p": 0.9625,
+        "p_below_4.0_team": 0.1069,
+        "p_below_4.0_solo": 0.1077
+      }
+    },
+    "downside": {},
+    "gate": "FAIL",
+    "pooled": {
+      "sd_team": 0.2972,
+      "sd_solo": 0.3035,
+      "p": 0.75229,
+      "note": "reported without gate (Protocol 12 §4 W5)"
+    }
+  },
+  "W6_economics": {
+    "cell_summary": {
+      "C-S-N": {
+        "cost_usd": 0.01541,
+        "latency_s": 85.0,
+        "quality": 4.4714,
+        "quality_per_dollar_minute": 204.7
+      },
+      "C-T-N": {
+        "cost_usd": 0.06575,
+        "latency_s": 219.4,
+        "quality": 4.487,
+        "quality_per_dollar_minute": 18.7
+      },
+      "F-S-N": {
+        "cost_usd": 0.06176,
+        "latency_s": 94.0,
+        "quality": 4.5733,
+        "quality_per_dollar_minute": 47.3
+      }
+    },
+    "pareto_frontier": [
+      "C-S-N",
+      "F-S-N"
+    ],
+    "T_EGR_vs_FSN": {
+      "C-S-N": 3.918,
+      "C-T-N": 0.922
+    },
+    "note": "T-EGR = (quality_cell/quality_FSN)/(cost_cell/cost_FSN); >1 = more efficient than frontier solo. Cost = tokens x price vector (D23), PHI=0.5 blend as Study-1 A4.",
+    "gate": "PASS"
+  },
+  "W7_judge_icc_by_domain": {
+    "finance_business_models": {
+      "n_runs": 343,
+      "k_raters": 9,
+      "icc_3_1": 0.557,
+      "icc_3_k": 0.919
+    },
+    "hr_organization": {
+      "n_runs": 346,
+      "k_raters": 9,
+      "icc_3_1": 0.544,
+      "icc_3_k": 0.915
+    },
+    "marketing_communications": {
+      "n_runs": 336,
+      "k_raters": 9,
+      "icc_3_1": 0.48,
+      "icc_3_k": 0.892
+    },
+    "operations_supply_chain": {
+      "n_runs": 346,
+      "k_raters": 9,
+      "icc_3_1": 0.595,
+      "icc_3_k": 0.93
+    },
+    "product_innovation": {
+      "n_runs": 337,
+      "k_raters": 9,
+      "icc_3_1": 0.629,
+      "icc_3_k": 0.939
+    },
+    "strategy_market_entry": {
+      "n_runs": 342,
+      "k_raters": 9,
+      "icc_3_1": 0.602,
+      "icc_3_k": 0.932
+    }
+  },
+  "upgrade_gate_summary": {
+    "rule": "an exploratory Study-1 finding upgrades to a headline claim only if its wave gate PASSes at pre-registered alpha and direction",
+    "domain_contingency": "FAIL",
+    "capability_gap_mechanism": "FAIL",
+    "marketing_variance_advantage": "FAIL",
+    "core_replications": {
+      "W1_team_effect": "PASS",
+      "W2_upgrade_threshold": "PASS",
+      "W6_economics": "PASS"
+    }
+  },
+  "lmm_numerical_fallback_disclosure": {
+    "wrapper": "code/run_wave_analysis.py",
+    "wrapper_sha256": "8ee8d04338101610a913f95b3eb2399f3ac24849bf8c9ac08bd2cf2e880d7958",
+    "frozen_script": "code/analyze_wave.py",
+    "frozen_script_sha256": "94729d0221e17be1de9d2e8c699a57d009d7b7bc03fb02e700d19a61f5da8f9a",
+    "reason": "The pre-registered dual variance-component RE structure (groups=family; vc problem; vc family:problem) is numerically singular on the observed wave data (imbalanced panel: kimi credit-exhausted, gemini provider failure deferred). The fallback is a numerical necessity, not a model re-specification: on this data both single-vc models converge with identical fixed effects, verified per call below.",
+    "rule_sticky": "After the first fallback, all LMMs in this run use the single-vc (problem) structure so the W3a LRT compares identical RE structures.",
+    "lmm_calls": [
+      {
+        "formula": "comp ~ C(cell, Treatment('C-S-N'))",
+        "n_rows": 1550,
+        "cells": [
+          "C-S-N",
+          "C-T-N"
+        ],
+        "pre_registered_spec_error": "LinAlgError: Singular matrix",
+        "spec": "fallback single-vc (problem); fam_prob-only fit cross-checked, fixed effects identical within rtol=1e-6/atol=1e-9",
+        "cross_check_fixed_effects": {
+          "Intercept": 4.4801792265,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]": 0.0167346827
+        }
+      },
+      {
+        "formula": "comp ~ C(cell, Treatment('C-T-N'))",
+        "n_rows": 1272,
+        "cells": [
+          "C-T-N",
+          "F-S-N"
+        ],
+        "sticky_from_prior_fallback": true,
+        "spec": "fallback single-vc (problem); fam_prob-only fit cross-checked, fixed effects identical within rtol=1e-6/atol=1e-9",
+        "cross_check_fixed_effects": {
+          "Intercept": 4.4904849087,
+          "C(cell, Treatment('C-T-N'))[T.F-S-N]": 0.091168055
+        }
+      },
+      {
+        "formula": "comp ~ logtok + C(cell, Treatment('C-S-N')) * C(domain)",
+        "n_rows": 2050,
+        "cells": [
+          "C-S-N",
+          "C-T-N",
+          "F-S-N"
+        ],
+        "sticky_from_prior_fallback": true,
+        "spec": "fallback single-vc (problem); fam_prob-only fit cross-checked, fixed effects identical within rtol=1e-6/atol=1e-9",
+        "cross_check_fixed_effects": {
+          "Intercept": 3.8203213214,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]": -0.0966861058,
+          "C(cell, Treatment('C-S-N'))[T.F-S-N]": 0.1287921342,
+          "C(domain)[T.hr_organization]": 0.0535988073,
+          "C(domain)[T.marketing_communications]": 0.0676380875,
+          "C(domain)[T.operations_supply_chain]": -0.0089056562,
+          "C(domain)[T.product_innovation]": 0.0225910523,
+          "C(domain)[T.strategy_market_entry]": -0.0233531067,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]:C(domain)[T.hr_organization]": 0.0078041617,
+          "C(cell, Treatment('C-S-N'))[T.F-S-N]:C(domain)[T.hr_organization]": -0.0180927641,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]:C(domain)[T.marketing_communications]": 0.0176441921,
+          "C(cell, Treatment('C-S-N'))[T.F-S-N]:C(domain)[T.marketing_communications]": -0.0180061468,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]:C(domain)[T.operations_supply_chain]": 0.0061312737,
+          "C(cell, Treatment('C-S-N'))[T.F-S-N]:C(domain)[T.operations_supply_chain]": -0.0468889633,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]:C(domain)[T.product_innovation]": 0.0360050276,
+          "C(cell, Treatment('C-S-N'))[T.F-S-N]:C(domain)[T.product_innovation]": -0.0529427224,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]:C(domain)[T.strategy_market_entry]": -0.0082886411,
+          "C(cell, Treatment('C-S-N'))[T.F-S-N]:C(domain)[T.strategy_market_entry]": -0.0259674569,
+          "logtok": 0.0704214881
+        }
+      },
+      {
+        "formula": "comp ~ logtok + C(cell, Treatment('C-S-N')) + C(domain)",
+        "n_rows": 2050,
+        "cells": [
+          "C-S-N",
+          "C-T-N",
+          "F-S-N"
+        ],
+        "sticky_from_prior_fallback": true,
+        "spec": "fallback single-vc (problem); fam_prob-only fit cross-checked, fixed effects identical within rtol=1e-6/atol=1e-9",
+        "cross_check_fixed_effects": {
+          "Intercept": 3.830755568,
+          "C(cell, Treatment('C-S-N'))[T.C-T-N]": -0.0858007445,
+          "C(cell, Treatment('C-S-N'))[T.F-S-N]": 0.1017396757,
+          "C(domain)[T.hr_organization]": 0.0521130628,
+          "C(domain)[T.marketing_communications]": 0.0699350053,
+          "C(domain)[T.operations_supply_chain]": -0.0181065588,
+          "C(domain)[T.product_innovation]": 0.0230514716,
+          "C(domain)[T.strategy_market_entry]": -0.0330391577,
+          "logtok": 0.0695960035
+        }
+      }
+    ],
+    "n_lmm_calls": 4,
+    "n_fallback_calls": 4,
+    "ran_at_utc": "2026-08-24T01:11:01Z"
+  }
+}

@@ -893,3 +893,25 @@ Supersedes the kimi-blocked status in Entry 51 §3. Author directive: "use toget
 **Empty-response re-runs:** 11 frontier runs (claude F-S-N ×5, kimi F-S-N ×6) had completed status with ~10–13k tokens consumed but empty finalResponse in BOTH run_status and export_run (platform-side content loss; cf. Study-1 DB-write incident). Resume logic requires non-empty content (Study-1 lesson), so a claude/kimi lane re-ran them: all 5 claude recovered non-empty (runIds 7152–7156); the 6 kimi remain empty-pending (Moonshot credit exhaustion — deferred with the kimi remainder). Auto credit-detection fired correctly this time (sidecar entry 20:04:48 UTC) and skipped kimi's remaining queue.
 
 **Judging launched 2026-08-23 ≈20:12 UTC** (off-peak for DeepSeek; window discipline §5.5): `judge_wave.py` → frozen `judge_v2.py` (3 judges × 3 verbatim variants, temp 0, blinded, seed 20260731), store = 2,054 runs → 18,486 planned judge calls; output `runs/logs/wave_judgments.jsonl`, console `runs/logs/wave_judging_console.log`. Judgeable population this wave: claude/gpt/gpt-oss/gemma/mistral/minimax/qwen/thinkingmachines 240 each, kimi 134 (of which 6 empty excluded → 134 in store), gemini 0. Correction to Entry 62 headline: 2,060 completed-status records, of which 2,054 judgeable after the claude re-runs and 6 kimi empty-pending.
+
+---
+
+## Entry 64 — 2026-08-24 — Confirmatory analysis executed (wrapper fallback disclosed); gates: W1/W2/W6 PASS, W3/W4/W5 FAIL
+
+**Judging close (prior step, carried over):** 18,450/18,450 unique judge keys completed over 4 resumable passes (pass1 DNS churn 5,586 transient errors; pass2-4 backfill; zhipu/meta/deepseek 402s were transient, not exhaustion). 2,050 judged runs enter analysis (kimi 134 incl. 6 empty excluded at store build; minimax 236; all others 240; gemini 0 deferred). 27 orphan judgments belong to quarantined pre-re-run minimax runIds and join to nothing.
+
+**Numerical event — pre-registered LMM singular:** frozen `analyze_wave.py::lmm` (dual vc: problem + family:problem) raised `LinAlgError: Singular matrix` at the first fit (W1). Diagnosis before gate outcomes: each single-vc spec converges with BIT-IDENTICAL fixed effects (W1 C-T-N coef 0.016734682689594604 both ways) — the imbalanced panel (kimi credit-exhausted; gemini deferred) makes the dual-vc structure numerically non-identifiable. Resolution: disclosed runtime wrapper `code/run_wave_analysis.py` (D52) — frozen script untouched (sha256 94729d02… embedded in output), rule declared pre-execution: try frozen spec → on LinAlgError fit both single-vc specs, hard-require convergence + identical fixed effects (rtol 1e-6), sticky single-vc thereafter so the W3a LRT pair shares RE structure. 4/4 LMM calls fell back; full per-call disclosure in `lmm_numerical_fallback_disclosure` of both results JSONs.
+
+**Gate outcomes (primary price vector; n=2,050 judged runs, 9 families, α=0.05):**
+- W1 team effect: coef +0.0167, p=0.00647 → **PASS** (replicates Study-1 core).
+- W2 upgrade threshold: F-S-N over C-T-N coef +0.0912, p<0.0001 → **PASS**.
+- W3a cell×domain interaction: LRT χ²=−45.506 (negative — REML vc-structure caveat, D52), p=1.0 → **FAIL**. W3b signs 5/6 (marketing flipped negative: Δ=−0.083 vs Study-1 +0.0037; strongest negative = finance as predicted, strongest positive = none) → **FAIL**. W3 gate **FAIL**.
+- W4 capability-gap mechanism (9 complete families): Pearson r=−0.2445, p=0.526; Spearman ρ=−0.033, p=0.932 (Study-1 ref r=−0.978; power at n=9 for ρ=0.80 is 0.768) → **FAIL**; stays exploratory.
+- W5 marketing variance advantage: Brown-Forsythe p=0.990, sd_team 0.290 > sd_solo 0.274 → **FAIL**; pooled p=0.752 (no gate).
+- W6 economics: C-S-N $0.0154 / 4.471, C-T-N $0.0657 / 4.487, F-S-N $0.0618 / 4.573; quality/$·min F-S-N 47.3 > C-T-N 18.7; Pareto {C-S-N, F-S-N}; T-EGR C-S-N 3.918, C-T-N 0.922 → **PASS**.
+- W7 ICC(3,1) by domain: 0.480–0.629 (ICC(3,k) 0.892–0.939) — judge reliability audit, no gate.
+- Upgrade-gate summary: all three Study-1 exploratory findings (domain contingency, capability-gap mechanism, marketing variance advantage) FAIL the gate and REMAIN EXPLORATORY; core replications W1/W2/W6 hold.
+
+**Sensitivity (--promo, D46 minimax promo vector):** identical gate pattern; W6 cost shifts C-S-N $0.01485 / C-T-N $0.06275 / F-S-N $0.06042, T-EGR 3.978/0.945 — conclusions robust to the minimax pricing scenario.
+
+**Disclosures carried into WAVE-REPLICATION-REPORT.md:** gemini 0/240 (provider outage, deferred), kimi 134/240 judged (credit exhaustion; 6 empty F-S-N pending), minimax 236/240 (quarantine re-runs), THINK_RE near-miss (Entry 63), LMM numerical fallback (D52), W3a REML-LRT caveat. Report written this date; frozen artifacts unchanged.
