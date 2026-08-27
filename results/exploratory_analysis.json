@@ -1,0 +1,139 @@
+{
+  "amendment": "A3 (author-approved 2026-08-06, EXPLORATORY)",
+  "n_runs": 1900,
+  "A3_1_lmm": {
+    "model_error": "'problem'",
+    "model": "groups=problem|family (fallback)",
+    "fe": {
+      "Intercept": {
+        "coef": 4.5066,
+        "p": 0.0
+      },
+      "C(tier)[T.F]": {
+        "coef": 0.0799,
+        "p": 0.00016
+      },
+      "C(structure)[T.T]": {
+        "coef": 0.0244,
+        "p": 0.19726
+      },
+      "C(persona)[T.P]": {
+        "coef": -0.2965,
+        "p": 0.0
+      },
+      "C(tier)[T.F]:C(structure)[T.T]": {
+        "coef": -0.0012,
+        "p": 0.967
+      },
+      "C(tier)[T.F]:C(persona)[T.P]": {
+        "coef": 0.1164,
+        "p": 0.0001
+      },
+      "C(structure)[T.T]:C(persona)[T.P]": {
+        "coef": 0.0923,
+        "p": 0.00056
+      },
+      "C(tier)[T.F]:C(structure)[T.T]:C(persona)[T.P]": {
+        "coef": -0.1514,
+        "p": 0.00035
+      }
+    }
+  },
+  "A3_2_tost_no_persona": {
+    "subset": "persona=N",
+    "n": 950,
+    "d": -0.0076,
+    "se_boot": 0.1255,
+    "bounds": [
+      -0.2,
+      0.2
+    ],
+    "p_tost": 0.06289,
+    "equivalent": false,
+    "interpretation": "equivalence NOT established: null remains unproven"
+  },
+  "A3_3_empirical_bayes": {
+    "shrunk_d": {
+      "claude": -0.3046,
+      "gemini": -0.2296,
+      "gpt": -0.1976,
+      "kimi": -0.3648,
+      "qwen": -0.2553
+    },
+    "pooled_d": -0.2704,
+    "note": "empirical-Bayes substitute for full MCMC (pymc unavailable)"
+  },
+  "A3_4_meta_analysis": {
+    "k": 5,
+    "Q": 5.593,
+    "tau2": 0.015,
+    "I2_pct": 28.5,
+    "pooled_d": -0.2704,
+    "se": 0.1026,
+    "z": -2.635,
+    "p": 0.00843,
+    "ci95": [
+      -0.4715,
+      -0.0692
+    ],
+    "per_family": {
+      "claude": {
+        "d": -0.3717,
+        "se_boot": 0.1713
+      },
+      "gemini": {
+        "d": -0.1032,
+        "se_boot": 0.2155
+      },
+      "gpt": {
+        "d": 0.0035,
+        "se_boot": 0.2034
+      },
+      "kimi": {
+        "d": -0.5705,
+        "se_boot": 0.1807
+      },
+      "qwen": {
+        "d": -0.2126,
+        "se_boot": 0.2063
+      }
+    }
+  },
+  "A3_5_persona_dimensions": [
+    {
+      "dimension": "Novelty",
+      "d_P_minus_N": 0.1535,
+      "p": 0.00084,
+      "p_fdr": 0.00105,
+      "sig_fdr": true
+    },
+    {
+      "dimension": "Usefulness",
+      "d_P_minus_N": -1.0238,
+      "p": 0.0,
+      "p_fdr": 0.0,
+      "sig_fdr": true
+    },
+    {
+      "dimension": "Flexibility",
+      "d_P_minus_N": -0.2994,
+      "p": 0.0,
+      "p_fdr": 0.0,
+      "sig_fdr": true
+    },
+    {
+      "dimension": "Elaboration",
+      "d_P_minus_N": -0.9664,
+      "p": 0.0,
+      "p_fdr": 0.0,
+      "sig_fdr": true
+    },
+    {
+      "dimension": "Cultural Sensitivity",
+      "d_P_minus_N": -0.0871,
+      "p": 0.057692,
+      "p_fdr": 0.057692,
+      "sig_fdr": false
+    }
+  ]
+}

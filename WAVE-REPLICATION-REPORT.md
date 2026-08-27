@@ -106,3 +106,61 @@ cd research/orchestration-economics
 /usr/local/bin/python3 code/run_wave_analysis.py --promo  # D46 sensitivity
 ```
 Inputs: `runs/logs/wave_run_ledger.json` + `runs/logs/wave_judgments.jsonl` + `data/problems/fresh_domain_map_wave.json` + `config/price_vector*.json` + `config/model_registry.json`. All artifacts committed; frozen scripts byte-identical to their pre-judging hashes.
+
+---
+
+# UPDATE 2026-08-28 — Wave completed to 2,400/2,400 (all 10 families); gates re-run; pattern unchanged
+
+This is an **update**, not a revision: the 2026-08-24 report above stands as the record of the
+9-family interim analysis; this section reports the completed panel per Protocol 12 §6
+("any change will be reported as an update"). Frozen `analyze_wave.py` untouched; executed via
+the same disclosed D52 wrapper.
+
+## U1. What changed since 2026-08-24
+
+- **gemini 0/240 → 240/240.** The "provider outage" was diagnosed as the free-tier daily cap
+  (429 `generate_requests_per_model_per_day`, limit 150/model/day); resolved by the author's
+  Google billing upgrade. Probe-first re-admission per the Entry-61 rule (Fresh_Case_3 at c=1,
+  8/8 clean), then the remainder at c=10: 232/232, zero throttled.
+- **kimi 134/240 → 240/240.** Moonshot recharge restored the cheap cells (Moonshot-direct,
+  homogeneity preserved). **Author-directed routing deviation (D53):** kimi F-S-N completed via
+  Together serverless `moonshotai/Kimi-K3` (pipeline 73), superseding the Entry-62 deferral;
+  same pinned model version and parameters; the 30 F-S-N runs from 08-23 remain Moonshot-direct;
+  route membership is auditable per run in the ledger.
+- **Judging:** resumed to **0 pending** (21,762 unique keys; 27 quarantine orphans join to
+  nothing). Two disclosed infrastructure events: a local Python SSL/cert failure (no scores
+  recorded; relaunched under the managed runtime) and a Together 402 credit-exhaustion mid-pass
+  (author recharged; 402 calls never record; backfilled by resume).
+- **Analyzed n: 2,418 judged runs, 10/10 families with all three cells present.**
+
+## U2. Gate outcomes on the complete panel (primary price vector, α = 0.05)
+
+| Gate | Interim (9 families, 2026-08-24) | Complete (10 families, 2026-08-28) | Verdict |
+|---|---|---|---|
+| W1 team effect | +0.0167, p = 0.006 | **+0.0168, p = 0.00217** | PASS (unchanged) |
+| W2 upgrade threshold | +0.0912, p < 0.0001 | **+0.0745, p < 0.0001** | PASS (unchanged) |
+| W3 domain contingency | χ² = −45.5, signs 5/6 | χ² = −47.5, p = 1.0; signs 5/6; still no positive domain | FAIL (unchanged) |
+| W4 capability-gap | r = −0.2445 (n = 9) | **r = −0.2141, p = 0.553; ρ = −0.067 (n = 10)**; power for ρ = 0.80 now 0.828 | FAIL (unchanged) |
+| W5 marketing variance | p = 0.990, reversed | p = 0.795, sd_team 0.2722 > sd_solo 0.2626; pooled p = 0.618 | FAIL (unchanged) |
+| W6 economics | T-EGR 3.918/0.922; Pareto {C-S-N, F-S-N} | C-S-N $0.0145/4.479/231.9 · C-T-N $0.0616/4.496/21.2 · F-S-N $0.0599/4.575/40.6; T-EGR **4.044/0.956**; Pareto {C-S-N, F-S-N} | PASS (unchanged) |
+| W7 judge ICC(3,1) | 0.480–0.629 | 0.471–0.622 | audit (unchanged regime) |
+
+**Upgrade-gate consequence (binding, unchanged):** the three Study-1 exploratory findings
+(domain contingency, capability-gap mechanism, marketing variance advantage) REMAIN EXPLORATORY.
+The core claims — small real team effect, decisive frontier-solo quality advantage, bimodal
+cost-quality frontier with cheap teams as the dominated middle — now replicate out-of-sample on
+the FULL pre-registered family universe (10/10) and stimulus set (30/30).
+
+**Sensitivity (D46 promo vector):** gate pattern identical; T-EGR 4.11/0.98; Pareto unchanged.
+
+## U3. Additional disclosures
+
+1. The D52 LMM fallback fired on all 4 calls again — now on a BALANCED panel, showing the
+   dual-vc singularity is structural to this design (imbalance was not the sole cause). Per-call
+   disclosure in `lmm_numerical_fallback_disclosure` of both results JSONs; W3a's negative
+   χ² carries the same REML comparability caveat.
+2. kimi F-S-N empties (platform content loss, tok≈9–10k len=0, both routes) recovered over five
+   resume passes; final run 2026-08-28 (runId 7631). No scored output was ever empty.
+3. W2's point estimate moved +0.0912 → +0.0745 with gemini (a large-gap family) added and kimi
+   completed — reported as the updated estimate; the interim value remains quoted in §3 as the
+   9-family record.

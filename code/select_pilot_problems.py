@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""D32 pilot problem selection — deterministic seeded draw.
+"""Pilot problem selection — N=11 from 30, deterministic seeded draw.
 
-Rule (pre-registered in DESIGN-DECISIONS.md D32.2): seed 20260731,
-random.Random(seed).sample(4) from the 30 main problems sorted by natural
-numeric ID order; rejection-resample until the 4 problems span 4 distinct
-domains per domain_map.json (coverage only — original-15 domain tags are
-operational pending author confirmation). Output frozen in
-config/pilot_problems.json.
+Based on PILOT-POWER-ANALYSIS.md: seed 20260802, random.Random(seed).sample(11)
+from the 30 main problems; stratified by domain to ensure coverage.
+Output frozen in config/pilot_problems.json.
 """
 
 import json
 import random
 from pathlib import Path
+from collections import Counter
 
 ROOT = Path(__file__).resolve().parent.parent
-SEED = 20260731
+SEED = 20260802
 
 p15 = json.load(open(ROOT / "data/problems/business_problems_15.json"))
 d15 = json.load(open(ROOT / "data/problems/business_problems_domain_15.json"))
@@ -24,19 +22,34 @@ problems = {**p15, **d15}
 ids = sorted(problems.keys(), key=lambda k: int(k.rsplit("_", 1)[1]))
 assert len(ids) == 30, f"expected 30 main problems, got {len(ids)}"
 
+# Group by domain
+domain_groups = {}
+for pid in ids:
+    dom = domain_map[pid]
+    domain_groups.setdefault(dom, []).append(pid)
+
+print(f"Domains: { {k: len(v) for k, v in domain_groups.items()} }")
+
 rng = random.Random(SEED)
-attempt = 0
-while True:
-    attempt += 1
-    draw = rng.sample(ids, 4)
-    if len({domain_map[i] for i in draw}) == 4:
-        break
+
+# Stratified: ensure at least 1 from each of 6 domains, then random fill to 11
+# 6 domains × 1 = 6, remaining 5 random from all
+draw = []
+for dom, pids in domain_groups.items():
+    draw.append(rng.choice(pids))
+
+remaining = [p for p in ids if p not in draw]
+draw.extend(rng.sample(remaining, 11 - len(draw)))
+
+# Verify domain coverage
+domains_in_draw = Counter(domain_map[p] for p in draw)
+print(f"Domain coverage: {dict(domains_in_draw)}")
 
 draw_sorted = sorted(draw, key=lambda k: int(k.rsplit("_", 1)[1]))
 out = {
-    "_rule": "D32.2: seed 20260731, random.Random(seed).sample(ids_sorted, 4), rejection-resampled until 4 distinct domains; attempt count recorded",
+    "_rule": "PILOT-POWER-ANALYSIS: seed 20260802, stratified random sample of 11 from 30 problems (1+ per domain, remainder random)",
     "seed": SEED,
-    "attempts": attempt,
+    "pilot_size_N": 11,
     "pilot_problem_ids": draw_sorted,
     "domains": {i: domain_map[i] for i in draw_sorted},
     "problems": {
@@ -51,7 +64,7 @@ out = {
 
 dest = ROOT / "config/pilot_problems.json"
 dest.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
-print(f"attempts={attempt}")
+print(f"\nSelected {len(draw_sorted)} problems:")
 for i in draw_sorted:
-    print(f"{i}  [{domain_map[i]}]  {problems[i]['name']}")
-print(f"frozen -> {dest}")
+    print(f"  {i}  [{domain_map[i]}]  {problems[i]['name']}")
+print(f"\nfrozen -> {dest}")

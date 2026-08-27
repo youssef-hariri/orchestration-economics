@@ -1,0 +1,51 @@
+{
+  "test": "D34 c-ramp re-validation after limiter fix (L1 credit/rate-limit split + raised AIMD defaults)",
+  "date": "2026-08-02",
+  "environment": "production (Railway deewaanai, SWARM_WORKER_CONCURRENCY=100)",
+  "protocol": "top-down levels c=100 then c=50; pass = 0 paused_credit + 0 failures + 20/20 per family; adopt highest passing level",
+  "fixes_under_test": [
+    "L1: 429/rate-limit no longer misclassified as credit (no batch pause; retry -> requeue)",
+    "AIMD defaults raised: initRpm 30 -> 600, floorRpm 6 -> 60",
+    "Redis provider-throttle:* cleared before each level"
+  ],
+  "levels": {
+    "c=50": {
+      "batches": [17, 18, 19, 20, 21],
+      "result": "PASS",
+      "median_latency_s": { "gpt": 2.14, "claude": 0.84, "gemini": 0.56, "kimi": 6.40, "qwen": 8.02 },
+      "paused_credit": 0,
+      "failed": 0
+    },
+    "c=100": {
+      "batches": "22-26 (coder-reported)",
+      "result": "PASS",
+      "stats": {
+        "gpt":    { "n": 20, "median_s": 1.37, "p95_s": 2.52 },
+        "claude": { "n": 20, "median_s": 0.84, "p95_s": 1.59 },
+        "gemini": { "n": 20, "median_s": 0.58, "p95_s": 11.35 },
+        "kimi":   { "n": 20, "median_s": 5.33, "p95_s": 64.77 },
+        "qwen":   { "n": 20, "median_s": 11.18, "p95_s": 29.14 }
+      },
+      "paused_credit": 0,
+      "failed": 0
+    }
+  },
+  "throttle_state_after_c100": {
+    "kimi": "600 RPM (never rate-limited)",
+    "aliyun": "150 RPM",
+    "anthropic": "60 RPM (floor, post-429)",
+    "gemini": "60 RPM (floor, post-429)",
+    "openai": "60 RPM (floor, post-429)"
+  },
+  "comparison_to_broken_run": {
+    "qwen_c50_old": "~10.3s median + paused_credit (6 RPM AIMD cage + credit misclassification)",
+    "qwen_c50_new": "8.02s median, 20/20, 0 paused_credit",
+    "qwen_c100_new": "11.18s median, 20/20, 0 paused_credit"
+  },
+  "decision": "Adopt c=100 as production concurrency for the main run (highest passing level per pre-registered protocol). No c=150 probe: c=100 is the pre-registered ceiling and the workload ceiling.",
+  "notes": [
+    "Latency did not inflate from c=50 -> c=100 (gpt 2.14 -> 1.37s; claude/gemini flat): retries/requeues absorbed genuine 429s with no functional cost.",
+    "anthropic/gemini/openai settling at the 60 RPM floor is correct AIMD behavior post-genuine-429; recovery +10/min climbs under sustained traffic. Monitor during main run; only raise the floor if it binds on large judging volumes.",
+    "qwen 11.18s at c=100 vs 8.02s at c=50 reflects Aliyun-side saturation at higher concurrency, handled gracefully (no pauses)."
+  ]
+}

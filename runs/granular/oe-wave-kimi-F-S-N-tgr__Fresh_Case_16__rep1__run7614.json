@@ -1,0 +1,122 @@
+{
+  "archivedAtUtc": "2026-08-26T21:54:06.040Z",
+  "runKey": "oe-wave-kimi-F-S-N-tgr__Fresh_Case_16__rep1",
+  "projectId": 73,
+  "name": "oe-wave-kimi-F-S-N-tgr",
+  "cell": "F-S-N",
+  "family": "kimi",
+  "tier": "frontier",
+  "problemId": "Fresh_Case_16",
+  "rep": 1,
+  "concurrency": 20,
+  "harness": "wave_run/Protocol12",
+  "startedAtUtc": "2026-08-26T21:45:40.521Z",
+  "in_discount_window": true,
+  "runId": 7614,
+  "status": "completed",
+  "totalTokensUsed": 9885,
+  "totalLatencyMs": 499544,
+  "steps": [
+    {
+      "step": 1,
+      "agentRole": "solo",
+      "status": "completed",
+      "tokensUsed": 9885,
+      "latencyMs": 226897
+    }
+  ],
+  "truncatedAtSource": false,
+  "fulltextLen": 8582,
+  "finalResponse": "# Culturally Differentiated Adaptation Strategy: Smart-Home Voice Assistant for Honorific-Language Markets (2026)\n\n*A decision-ready framework covering interaction style, household roles, privacy signaling, and feature prioritization across Japan, Korea, Thailand, and the Gulf.*\n\n---\n\n## Core Principle\n\nA voice assistant is not a device that gets translated — it is a **social actor that gets placed inside an existing household hierarchy**. In honorific languages, every utterance encodes relative status: who is speaking, to whom, with what degree of deference. A Western assistant that accepts bare imperatives and replies in one flat register is not \"neutral\" in these markets — it is a foreigner with no manners, and worse, it trains children to speak rudely and forces adults to perform dominance aloud in front of family.\n\nTwo failure modes to avoid: shipping one \"global assistant\" with localized strings, and forking four disconnected products. The architecture that works is two-layered:\n\n- **Layer 1 — Global Trust Core (non-negotiable, centrally owned):** on-device wake-word detection, physical mic disconnect, a roles-and-permissions engine, voice-match authentication for sensitive actions, emergency escalation, and a hard guarantee that audio is never used for advertising. Identical everywhere.\n- **Layer 2 — Cultural Interaction Layer (regionally owned):** the register engine, persona, household role mappings, rituals, and ecosystem integrations. Radically different by market.\n\n**In voice, register is not a style setting — it is the product's understanding of who it is in the family.**\n\n---\n\n## 1. Four Market Archetypes\n\n| | **Japan** | **Korea** | **Thailand** | **Gulf** (KSA, UAE first) |\n|---|---|---|---|---|\n| **Honorific mechanics** | Three-tier *keigo* (respectful / humble / polite); age and seniority shift register | Speech levels: *haeyo-che* (polite) vs. *banmal* (casual); age hierarchy is strict | Politeness particles *khrap/kha* (gendered by speaker); royal vocabulary (*rachasap*) exists but is out of scope | MSA vs. Gulf dialect split; elaborate greeting formulas; honorific address for elders |\n| **Commanding a device aloud feels like** | A performance — embarrassing in front of family; volume constrained by thin walls (*meiwaku*: don't trouble others) | Similar performance anxiety; shouting at a speaker across an apartment feels undignified | *Kreng jai* — reluctance to impose, even on a machine; users under-ask | Hospitality frame makes \"directing staff\" familiar, but doing it before guests is showing off; women may avoid raising voices when male guests are present |\n| **Household shape** | Aging society; some three-generation homes; many compact apartments | Apartment-dominant (wall-pad intercoms universal); growing single households; intense child-education focus | Three-generation homes common; grandparents as primary caregivers while parents work | Large extended households **plus domestic staff**; the *majlis* (guest reception room) is a distinct social zone |\n| **Privacy anxiety centers on** | Being overheard by family and neighbors; recorded utterances replayed as embarrassment | Data leaks (PIPA is strict); household eavesdropping; corporate profiling | Family witnessing queries; **night activations read as supernatural** — a genuinely frightening failure | Sanctity of the home (*harim*); exposure to staff and outsiders; in-country data residency |\n| **Trust is earned through** | Craftsmanship, quiet reliability, quality of apology, domestic-brand sensibility | Ecosystem fit (Kakao/Naver), speed, visible certification | Warmth, price honesty, LINE fluency, never startling anyone | Discretion, dialect fluency (not just MSA), faith compatibility, local data residency |\n\n---\n\n## 2. Interaction Style: The Register Engine\n\nThe core technical investment is a **register engine** — speech-level generation and politeness-tolerant parsing — treated as core NLU infrastructure, not localization polish.\n\n### 2.1 Register defaults and options\n\n| Market | Assistant → user default | User → assistant parsing | Options to ship |\n|---|---|---|---|\n| **Japan** | *Teineigo* (desu/masu) — the register of a competent concierge. Full *keigo* is obsequious; plain form is presumptuous | Parse *kudasai / onegai shimasu* forms and plain imperatives **equally well** — never force the user to perform deference | Casual mode; character-persona mode (character culture is established); honorific-tolerant wake phrases (\"…-san\" appended) |\n| **Korea** | *Haeyo-che* (polite informal) | Banmal and jondaemal parsed to identical intent | *Hapsyo-che* (formal); banmal toggle for singles/teens — **never** initiate banmal to an adult |\n| **Thailand** | Persona-gendered particles (a male persona says *khrap*, female says *kha*), always present; softening particles (*na*, *ja*) for warmth | Commands with and without particles parsed equally; nicknames as first-class entity types | Persona gender is an **explicit onboarding choice** — the particles force it; skip *rachasap* entirely |\n| **Gulf** | Gulf dialect for conversation; MSA for news, reading, and formal content; courteous openers without religious overreach | Dialect + MSA + Arabizi/English code-switching | Elder address forms; persona gender choice; a \"formal\" MSA mode |\n\n### 2.2 Accept indirectness\n\nBuild an opt-in **attentive mode** that acts on hints: *\"it's gotten chilly\"* → offer to adjust heating. This maps to real cultural frames — Japanese *omotenashi* (anticipatory service), Gulf *karam* (generous hospitality), Korean *nunchi* (reading the room), Thai *kreng jai* (users won't ask). Calibrate carefully: anticipation is welcome when quiet, creepy when verbose. One-step confirmations, never a monologue.\n\n### 2.3 Volume and discretion\n\nSpeaking aloud to a machine in front of elders or guests carries social cost in all four markets. Ship **whisper mode** (whisper in, whisper out), far-field mics tuned for soft speech, and **full non-voice parity** — every core function reachable by app, tap, or gesture. Voice must be an option, never a requirement. Default to visual-only responses during quiet hours.\n\n### 2.4 Face and failure\n\nError handling is a trust surface. The assistant takes blame gracefully with register-correct apologies (in Japan, apology craft is a measurable quality signal); it **never asks a user to repeat themselves loudly**, never corrects pronunciation in front of others, and degrades to text silently rather than failing audibly in a room full of people.\n\n### 2.5 Persona and voice\n\nOffer gender choice everywhere (Thai grammar makes it mandatory anyway). Avoid a female-default servile voice — the criticism is now global. Japan and Korea support licensed character/celebrity voices as a revenue line; the Gulf requires a modest, family-appropriate register. Simulated intimacy is out of scope everywhere.\n\n---\n\n## 3. Household Roles\n\nShip a **role taxonomy** on the global core: Admin / Adult / Elder / Child / Guest / Staff, bound to voice profiles, with voice-match enforced for purchases, locks, cameras, and messaging.\n\n| Design question | Japan | Korea | Thailand | Gulf |\n|---|---|---|---|---|\n| **Arbitration when commands conflict** | Configurable role-priority (default: adult > child, then recency) | Same; parents expect authority over kids' overrides | Flexible; grandparents often control shared spaces | Dual-admin (head of household + home manager — often different people); never hardcode patriarchy |\n| **Elder mode** | Honorific address to elders **always on** — parents value the assistant modeling respect for grandparents; dialect-tolerant ASR (Kansai-ben); slower, louder TTS; *mimamori* (remote check-in) pings to adult children | Same pattern; satoori tolerance; hearing-loss compensation | Elders as caregivers: simple controls for grandparent-administered households; Isan dialect tolerance | Elder honorifics; Bedouin and regional dialect tolerance; large-text companion app |\n| **Child mode** | Politeness coaching: responds more warmly to polite forms (parent-configurable) | **Study mode** (focus timers, quiz content) is a headline feature; banmal exposure controlled by parents | Content filters; grandparent-supervised usage patterns | Content filters; purchase locks; prayer-time-aware screen limits |\n| **Guest mode** | One-tap lockdown: no personal info surfaced, no history access | Same | Same | **Majlis mode is P0:** no notifications read aloud, no calendar/messages surfaced, camera and mic lockdown, auto-pause entertainment for the Adhan |\n| **Staff mode** | N",
+  "fulltextSource": "export_run",
+  "export": {
+    "version": 1,
+    "exportedAt": "2026-08-26T21:54:05.980Z",
+    "run": {
+      "id": 7614,
+      "projectId": 73,
+      "userId": 1,
+      "userPrompt": "In 2026, a consumer-electronics maker is adapting its smart-home voice assistant for Japan, Korea, Thailand, and the Gulf. Languages differ in honorific systems, users differ in comfort with commanding a device aloud, household structures vary (multigenerational homes are common), and local privacy expectations about always-listening devices diverge from the product's Western design assumptions.\n\nPropose a product-adaptation strategy for a voice assistant entering honorific-language markets, covering interaction style, household roles, privacy signaling, and feature prioritization.",
+      "status": "completed",
+      "currentStep": "init",
+      "pipelineVersion": "custom-v2",
+      "agentsUsed": [
+        "solo"
+      ],
+      "iterationsUsed": 0,
+      "isTestRun": false,
+      "testFixtureId": null,
+      "finalResponseId": 10668,
+      "totalTokensUsed": 9885,
+      "totalLatencyMs": 499544,
+      "executionState": null,
+      "runParams": {
+        "prompt": "In 2026, a consumer-electronics maker is adapting its smart-home voice assistant for Japan, Korea, Thailand, and the Gulf. Languages differ in honorific systems, users differ in comfort with commanding a device aloud, household structures vary (multigenerational homes are common), and local privacy expectations about always-listening devices diverge from the product's Western design assumptions.\n\nPropose a product-adaptation strategy for a voice assistant entering honorific-language markets, covering interaction style, household roles, privacy signaling, and feature prioritization.",
+        "source": "execute",
+        "memoryMode": "balanced"
+      },
+      "startedAt": "2026-08-26T21:45:44.000Z",
+      "completedAt": "2026-08-26T21:54:04.000Z",
+      "batchId": null,
+      "error": null
+    },
+    "agentRuns": [
+      {
+        "id": 242698,
+        "swarmRunId": 7614,
+        "agentId": 49,
+        "projectId": 73,
+        "agentName": "Solo",
+        "agentRole": "solo",
+        "pipelineStep": 1,
+        "iteration": 1,
+        "systemPrompt": "[137 chars] You will be presented with a business problem. Analyze the situation and propose solutions. Provide a complete, well-structured response.",
+        "userPrompt": "[7,378 chars] [PREVIOUS WORK] # Culturally Differentiated Launch Strategy: AI Emotional-Wellbeing Companion (2026)  *A decision-ready framework covering positioning, feature adaptation, and trust safeguards across ",
+        "contextInput": null,
+        "status": "completed",
+        "tokensUsed": 9885,
+        "latencyMs": 226897,
+        "modelUsed": "moonshotai/Kimi-K3",
+        "providerUsed": "together",
+        "startedAt": "2026-08-26T21:45:43.000Z",
+        "completedAt": "2026-08-26T21:54:04.000Z"
+      }
+    ],
+    "agentResponses": [
+      {
+        "id": 10668,
+        "agentRunId": 242698,
+        "swarmRunId": 7614,
+        "projectId": 73,
+        "parentResponseId": null,
+        "responseType": "intermediate",
+        "content": "# Culturally Differentiated Adaptation Strategy: Smart-Home Voice Assistant for Honorific-Language Markets (2026)\n\n*A decision-ready framework covering interaction style, household roles, privacy signaling, and feature prioritization across Japan, Korea, Thailand, and the Gulf.*\n\n---\n\n## Core Principle\n\nA voice assistant is not a device that gets translated — it is a **social actor that gets placed inside an existing household hierarchy**. In honorific languages, every utterance encodes relative status: who is speaking, to whom, with what degree of deference. A Western assistant that accepts bare imperatives and replies in one flat register is not \"neutral\" in these markets — it is a foreigner with no manners, and worse, it trains children to speak rudely and forces adults to perform dominance aloud in front of family.\n\nTwo failure modes to avoid: shipping one \"global assistant\" with localized strings, and forking four disconnected products. The architecture that works is two-layered:\n\n- **Layer 1 — Global Trust Core (non-negotiable, centrally owned):** on-device wake-word detection, physical mic disconnect, a roles-and-permissions engine, voice-match authentication for sensitive actions, emergency escalation, and a hard guarantee that audio is never used for advertising. Identical everywhere.\n- **Layer 2 — Cultural Interaction Layer (regionally owned):** the register engine, persona, household role mappings, rituals, and ecosystem integrations. Radically different by market.\n\n**In voice, register is not a style setting — it is the product's understanding of who it is in the family.**\n\n---\n\n## 1. Four Market Archetypes\n\n| | **Japan** | **Korea** | **Thailand** | **Gulf** (KSA, UAE first) |\n|---|---|---|---|---|\n| **Honorific mechanics** | Three-tier *keigo* (respectful / humble / polite); age and seniority shift register | Speech levels: *haeyo-che* (polite) vs. *banmal* (casual); age hierarchy is strict | Politeness particles *khrap/kha* (gendered by speaker); royal vocabulary (*rachasap*) exists but is out of scope | MSA vs. Gulf dialect split; elaborate greeting formulas; honorific address for elders |\n| **Commanding a device aloud feels like** | A performance — embarrassing in front of family; volume constrained by thin walls (*meiwaku*: don't trouble others) | Similar performance anxiety; shouting at a speaker across an apartment feels undignified | *Kreng jai* — reluctance to impose, even on a machine; users under-ask | Hospitality frame makes \"directing staff\" familiar, but doing it before guests is showing off; women may avoid raising voices when male guests are present |\n| **Household shape** | Aging society; some three-generation homes; many compact apartments | Apartment-dominant (wall-pad intercoms universal); growing single households; intense child-education focus | Three-generation homes common; grandparents as primary caregivers while parents work | Large extended households **plus domestic staff**; the *majlis* (guest reception room) is a distinct social zone |\n| **Privacy anxiety centers on** | Being overheard by family and neighbors; recorded utterances replayed as embarrassment | Data leaks (PIPA is strict); household eavesdropping; corporate profiling | Family witnessing queries; **night activations read as supernatural** — a genuinely frightening failure | Sanctity of the home (*harim*); exposure to staff and outsiders; in-country data residency |\n| **Trust is earned through** | Craftsmanship, quiet reliability, quality of apology, domestic-brand sensibility | Ecosystem fit (Kakao/Naver), speed, visible certification | Warmth, price honesty, LINE fluency, never startling anyone | Discretion, dialect fluency (not just MSA), faith compatibility, local data residency |\n\n---\n\n## 2. Interaction Style: The Register Engine\n\nThe core technical investment is a **register engine** — speech-level generation and politeness-tolerant parsing — treated as core NLU infrastructure, not localization polish.\n\n### 2.1 Register defaults and options\n\n| Market | Assistant → user default | User → assistant parsing | Options to ship |\n|---|---|---|---|\n| **Japan** | *Teineigo* (desu/masu) — the register of a competent concierge. Full *keigo* is obsequious; plain form is presumptuous | Parse *kudasai / onegai shimasu* forms and plain imperatives **equally well** — never force the user to perform deference | Casual mode; character-persona mode (character culture is established); honorific-tolerant wake phrases (\"…-san\" appended) |\n| **Korea** | *Haeyo-che* (polite informal) | Banmal and jondaemal parsed to identical intent | *Hapsyo-che* (formal); banmal toggle for singles/teens — **never** initiate banmal to an adult |\n| **Thailand** | Persona-gendered particles (a male persona says *khrap*, female says *kha*), always present; softening particles (*na*, *ja*) for warmth | Commands with and without particles parsed equally; nicknames as first-class entity types | Persona gender is an **explicit onboarding choice** — the particles force it; skip *rachasap* entirely |\n| **Gulf** | Gulf dialect for conversation; MSA for news, reading, and formal content; courteous openers without religious overreach | Dialect + MSA + Arabizi/English code-switching | Elder address forms; persona gender choice; a \"formal\" MSA mode |\n\n### 2.2 Accept indirectness\n\nBuild an opt-in **attentive mode** that acts on hints: *\"it's gotten chilly\"* → offer to adjust heating. This maps to real cultural frames — Japanese *omotenashi* (anticipatory service), Gulf *karam* (generous hospitality), Korean *nunchi* (reading the room), Thai *kreng jai* (users won't ask). Calibrate carefully: anticipation is welcome when quiet, creepy when verbose. One-step confirmations, never a monologue.\n\n### 2.3 Volume and discretion\n\nSpeaking aloud to a machine in front of elders or guests carries social cost in all four markets. Ship **whisper mode** (whisper in, whisper out), far-field mics tuned for soft speech, and **full non-voice parity** — every core function reachable by app, tap, or gesture. Voice must be an option, never a requirement. Default to visual-only responses during quiet hours.\n\n### 2.4 Face and failure\n\nError handling is a trust surface. The assistant takes blame gracefully with register-correct apologies (in Japan, apology craft is a measurable quality signal); it **never asks a user to repeat themselves loudly**, never corrects pronunciation in front of others, and degrades to text silently rather than failing audibly in a room full of people.\n\n### 2.5 Persona and voice\n\nOffer gender choice everywhere (Thai grammar makes it mandatory anyway). Avoid a female-default servile voice — the criticism is now global. Japan and Korea support licensed character/celebrity voices as a revenue line; the Gulf requires a modest, family-appropriate register. Simulated intimacy is out of scope everywhere.\n\n---\n\n## 3. Household Roles\n\nShip a **role taxonomy** on the global core: Admin / Adult / Elder / Child / Guest / Staff, bound to voice profiles, with voice-match enforced for purchases, locks, cameras, and messaging.\n\n| Design question | Japan | Korea | Thailand | Gulf |\n|---|---|---|---|---|\n| **Arbitration when commands conflict** | Configurable role-priority (default: adult > child, then recency) | Same; parents expect authority over kids' overrides | Flexible; grandparents often control shared spaces | Dual-admin (head of household + home manager — often different people); never hardcode patriarchy |\n| **Elder mode** | Honorific address to elders **always on** — parents value the assistant modeling respect for grandparents; dialect-tolerant ASR (Kansai-ben); slower, louder TTS; *mimamori* (remote check-in) pings to adult children | Same pattern; satoori tolerance; hearing-loss compensation | Elders as caregivers: simple controls for grandparent-administered households; Isan dialect tolerance | Elder honorifics; Bedouin and regional dialect tolerance; large-text companion app |\n| **Child mode** | Politeness coaching: responds more warmly to polite forms (parent-configurable) | **Study mode** (focus timers, quiz content) is a headline feature; banmal exposure controlled by parents | Content filters; grandparent-supervised usage patterns | Content filters; purchase locks; prayer-time-aware screen limits |\n| **Guest mode** | One-tap lockdown: no personal info surfaced, no history access | Same | Same | **Majlis mode is P0:** no notifications read aloud, no calendar/messages surfaced, camera and mic lockdown, auto-pause entertainment for the Adhan |\n| **Staff mode** | N",
+        "metadata": {
+          "model": "moonshotai/Kimi-K3",
+          "provider": "Together.ai",
+          "agentName": "Solo",
+          "agentRole": "solo",
+          "agentSlug": "solo",
+          "iteration": 1,
+          "latencyMs": 226897,
+          "maxTokens": 8192,
+          "tokensUsed": {
+            "total": 9885,
+            "prompt": 1693,
+            "completion": 8192
+          },
+          "buildMethod": "initial",
+          "temperature": 1,
+          "pipelineStep": 1,
+          "providerSlug": "together",
+          "sourceResponseIds": []
+        },
+        "humanReviewed": false,
+        "humanNotes": null,
+        "isFlagged": false,
+        "createdAt": "2026-08-26T21:54:03.000Z"
+      }
+    ],
+    "message": "Run 7614 exported (1 steps, 1 responses). To archive locally, ask your chat client to write this JSON to a file."
+  }
+}

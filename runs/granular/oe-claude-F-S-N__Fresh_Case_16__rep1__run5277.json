@@ -1,0 +1,122 @@
+{
+  "archivedAtUtc": "2026-08-23T17:40:19.189Z",
+  "runKey": "oe-claude-F-S-N__Fresh_Case_16__rep1",
+  "projectId": 23,
+  "name": "oe-claude-F-S-N",
+  "cell": "F-S-N",
+  "family": "claude",
+  "tier": "frontier",
+  "problemId": "Fresh_Case_16",
+  "rep": 1,
+  "concurrency": 100,
+  "harness": "wave_run/Protocol12",
+  "startedAtUtc": "2026-08-23T17:37:13.770Z",
+  "in_discount_window": true,
+  "runId": 5277,
+  "status": "completed",
+  "totalTokensUsed": 8419,
+  "totalLatencyMs": 140096,
+  "steps": [
+    {
+      "step": 1,
+      "agentRole": "solo",
+      "status": "completed",
+      "tokensUsed": 8419,
+      "latencyMs": 140096
+    }
+  ],
+  "truncatedAtSource": false,
+  "fulltextLen": 4837,
+  "finalResponse": "# Adapting a Voice Assistant for Honorific-Language Markets\n## Japan · Korea · Thailand · Gulf (KSA/UAE)\n\n---\n\n## 1. The core diagnosis\n\nWestern voice assistants encode four assumptions that break in all four markets simultaneously:\n\n| Western assumption | Reality in target markets |\n|---|---|\n| Speech is **register-flat** — one polite-neutral voice for everyone | Register is obligatory and status-relative; a wrong form isn't awkward, it's rude |\n| The user is an **individual** with a personal account | The unit is a **household** with generations, guests, and domestic staff |\n| **Always-listening is a background fact** you disclose in settings | Always-listening is the *product decision users are evaluating* |\n| Commanding aloud is **neutral and low-friction** | Speaking to a machine in front of elders/guests carries social cost |\n\nSo the adaptation is not translation plus a feature list. It's four architectural changes: a **register engine**, a **household identity model**, a **visible privacy posture**, and **per-market hero features**. Everything else is downstream.\n\n---\n\n## 2. Interaction style: build a register engine, not a translation layer\n\n**Design principle: asymmetric politeness.** The device always speaks in a well-mannered register; it never requires the user to be polite back. This resolves the \"commanding aloud\" discomfort — a plain-form or bare-imperative command must work perfectly and invisibly, so users feel efficient rather than rude.\n\n**Three things the NLG must model that English does not:**\n\n1. **Addressee register** — how the device speaks to *you* (Japanese *desu/masu* vs. heavy *keigo*; Korean *haeyo-che* vs. *hasipsio-che*; Thai particle *khrap/kha*; Arabic MSA vs. Khaleeji dialect).\n2. **Referent honorification** — how the device speaks about *third parties in your household*. If a child asks \"where's grandmother,\" Korean output requires the *-si-* infix; Japanese requires the right prefix and verb choice. This is unsolvable without a **household relationship graph** (§3) and is the single most visible failure mode.\n3. **Address forms** — never guess. Offer a picker: JP family-name + *san*; KR role terms (*아버님*, *엄마*) or *-nim*; TH *khun* + given name, *phi/nong*; Gulf **teknonymy** (*Abu/Umm [eldest son]*) — a very high-value respect signal that no incumbent gets right.\n\n**Calibration by market:**\n\n| | Default device register | Trap to avoid |\n|---|---|---|\n| **Japan** | Polite *desu/masu*, warm, concise | Full *sonkeigo/kenjōgo* — sounds like a department-store announcement, creates distance; also over-apologizing on every error |\n| **Korea** | *Haeyo-che*; elder-profile shifts to *hasipsio-che* | Using *banmal* to anyone; failing *-si-* on elder referents |\n| **Thailand** | Female persona + *kha* default, gentle framing (\"shall I…?\" over \"done.\") | Mid-conversation voice-gender switching desyncs the particle; direct imperatives clash with *kreng jai* |\n| **Gulf** | Khaleeji dialect (Najdi/Hijazi/Emirati), MSA fallback, formulaic warmth (*hayyak Allah*, *abshir*) | MSA-only output reads robotic/foreign; a flirtatious or over-deferential female voice in a mixed/majlis setting |\n\n**Wake word:** localize, don't transliterate. Screen for phonotactic ease (Japanese moraic structure, Arabic pharyngeals), **Thai tone collision** (a wake word whose tone contour yields another word is disqualifying), and religious/name conflicts. Budget for four distinct wake words.\n\n**Lower the social cost of speaking:**\n- **Whisper mode** (whispered input → whispered, short output) — high value in Japan and in multigenerational bedrooms everywhere.\n- **Press-to-talk remote / phone-as-mic** — a wake-word-free path for users who dislike talking to the air.\n- **Terse mode** — confirmation chime instead of a spoken sentence for device control.\n- **Code-switching ASR** as a launch requirement: Konglish, Tinglish, Arabizi/Arabic-English mixing are the *normal* register, not an edge case.\n\n---\n\n## 3. Household roles: make the home the account\n\nReplace \"owner + guests\" with a **household object** and a role/capability matrix.\n\n| Role | Typical | Capabilities |\n|---|---|---|\n| **Steward (admin)** | Household head or the tech-fluent adult child | All settings, privacy controls, member management |\n| **Adult member** | Parents | Own data, purchases up to a cap, device control |\n| **Elder** | Grandparents | Simplified interaction, no wake word required, health/comfort features; **owns their own data** |\n| **Teen / Child** | | Filtered content, no purchases, no locks/cameras, time limits |\n| **Household staff** | Helper/driver/nanny (near-universal in Gulf, common in Thailand) | Functional control (lights, AC, timers, call employer); **no** personal data, messages, or cameras; own-language support (Tagalog, Bahasa, Hindi/Urdu, Bengali, Burmese) |\n| **Gu",
+  "fulltextSource": "export_run",
+  "export": {
+    "version": 1,
+    "exportedAt": "2026-08-23T17:40:19.153Z",
+    "run": {
+      "id": 5277,
+      "projectId": 23,
+      "userId": 1,
+      "userPrompt": "In 2026, a consumer-electronics maker is adapting its smart-home voice assistant for Japan, Korea, Thailand, and the Gulf. Languages differ in honorific systems, users differ in comfort with commanding a device aloud, household structures vary (multigenerational homes are common), and local privacy expectations about always-listening devices diverge from the product's Western design assumptions.\n\nPropose a product-adaptation strategy for a voice assistant entering honorific-language markets, covering interaction style, household roles, privacy signaling, and feature prioritization.",
+      "status": "completed",
+      "currentStep": "init",
+      "pipelineVersion": "custom-v2",
+      "agentsUsed": [
+        "solo"
+      ],
+      "iterationsUsed": 0,
+      "isTestRun": false,
+      "testFixtureId": null,
+      "finalResponseId": 7161,
+      "totalTokensUsed": 8419,
+      "totalLatencyMs": 140096,
+      "executionState": null,
+      "runParams": {
+        "prompt": "In 2026, a consumer-electronics maker is adapting its smart-home voice assistant for Japan, Korea, Thailand, and the Gulf. Languages differ in honorific systems, users differ in comfort with commanding a device aloud, household structures vary (multigenerational homes are common), and local privacy expectations about always-listening devices diverge from the product's Western design assumptions.\n\nPropose a product-adaptation strategy for a voice assistant entering honorific-language markets, covering interaction style, household roles, privacy signaling, and feature prioritization.",
+        "source": "execute",
+        "memoryMode": "balanced"
+      },
+      "startedAt": "2026-08-23T17:37:40.000Z",
+      "completedAt": "2026-08-23T17:40:00.000Z",
+      "batchId": null,
+      "error": null
+    },
+    "agentRuns": [
+      {
+        "id": 60907,
+        "swarmRunId": 5277,
+        "agentId": 49,
+        "projectId": 23,
+        "agentName": "Solo",
+        "agentRole": "solo",
+        "pipelineStep": 1,
+        "iteration": 1,
+        "systemPrompt": "[137 chars] You will be presented with a business problem. Analyze the situation and propose solutions. Provide a complete, well-structured response.",
+        "userPrompt": "[588 chars] In 2026, a consumer-electronics maker is adapting its smart-home voice assistant for Japan, Korea, Thailand, and the Gulf. Languages differ in honorific systems, users differ in comfort with commandin",
+        "contextInput": null,
+        "status": "completed",
+        "tokensUsed": 8419,
+        "latencyMs": 140096,
+        "modelUsed": "claude-opus-5",
+        "providerUsed": "anthropic",
+        "startedAt": "2026-08-23T17:37:39.000Z",
+        "completedAt": "2026-08-23T17:40:00.000Z"
+      }
+    ],
+    "agentResponses": [
+      {
+        "id": 7161,
+        "agentRunId": 60907,
+        "swarmRunId": 5277,
+        "projectId": 23,
+        "parentResponseId": null,
+        "responseType": "intermediate",
+        "content": "# Adapting a Voice Assistant for Honorific-Language Markets\n## Japan · Korea · Thailand · Gulf (KSA/UAE)\n\n---\n\n## 1. The core diagnosis\n\nWestern voice assistants encode four assumptions that break in all four markets simultaneously:\n\n| Western assumption | Reality in target markets |\n|---|---|\n| Speech is **register-flat** — one polite-neutral voice for everyone | Register is obligatory and status-relative; a wrong form isn't awkward, it's rude |\n| The user is an **individual** with a personal account | The unit is a **household** with generations, guests, and domestic staff |\n| **Always-listening is a background fact** you disclose in settings | Always-listening is the *product decision users are evaluating* |\n| Commanding aloud is **neutral and low-friction** | Speaking to a machine in front of elders/guests carries social cost |\n\nSo the adaptation is not translation plus a feature list. It's four architectural changes: a **register engine**, a **household identity model**, a **visible privacy posture**, and **per-market hero features**. Everything else is downstream.\n\n---\n\n## 2. Interaction style: build a register engine, not a translation layer\n\n**Design principle: asymmetric politeness.** The device always speaks in a well-mannered register; it never requires the user to be polite back. This resolves the \"commanding aloud\" discomfort — a plain-form or bare-imperative command must work perfectly and invisibly, so users feel efficient rather than rude.\n\n**Three things the NLG must model that English does not:**\n\n1. **Addressee register** — how the device speaks to *you* (Japanese *desu/masu* vs. heavy *keigo*; Korean *haeyo-che* vs. *hasipsio-che*; Thai particle *khrap/kha*; Arabic MSA vs. Khaleeji dialect).\n2. **Referent honorification** — how the device speaks about *third parties in your household*. If a child asks \"where's grandmother,\" Korean output requires the *-si-* infix; Japanese requires the right prefix and verb choice. This is unsolvable without a **household relationship graph** (§3) and is the single most visible failure mode.\n3. **Address forms** — never guess. Offer a picker: JP family-name + *san*; KR role terms (*아버님*, *엄마*) or *-nim*; TH *khun* + given name, *phi/nong*; Gulf **teknonymy** (*Abu/Umm [eldest son]*) — a very high-value respect signal that no incumbent gets right.\n\n**Calibration by market:**\n\n| | Default device register | Trap to avoid |\n|---|---|---|\n| **Japan** | Polite *desu/masu*, warm, concise | Full *sonkeigo/kenjōgo* — sounds like a department-store announcement, creates distance; also over-apologizing on every error |\n| **Korea** | *Haeyo-che*; elder-profile shifts to *hasipsio-che* | Using *banmal* to anyone; failing *-si-* on elder referents |\n| **Thailand** | Female persona + *kha* default, gentle framing (\"shall I…?\" over \"done.\") | Mid-conversation voice-gender switching desyncs the particle; direct imperatives clash with *kreng jai* |\n| **Gulf** | Khaleeji dialect (Najdi/Hijazi/Emirati), MSA fallback, formulaic warmth (*hayyak Allah*, *abshir*) | MSA-only output reads robotic/foreign; a flirtatious or over-deferential female voice in a mixed/majlis setting |\n\n**Wake word:** localize, don't transliterate. Screen for phonotactic ease (Japanese moraic structure, Arabic pharyngeals), **Thai tone collision** (a wake word whose tone contour yields another word is disqualifying), and religious/name conflicts. Budget for four distinct wake words.\n\n**Lower the social cost of speaking:**\n- **Whisper mode** (whispered input → whispered, short output) — high value in Japan and in multigenerational bedrooms everywhere.\n- **Press-to-talk remote / phone-as-mic** — a wake-word-free path for users who dislike talking to the air.\n- **Terse mode** — confirmation chime instead of a spoken sentence for device control.\n- **Code-switching ASR** as a launch requirement: Konglish, Tinglish, Arabizi/Arabic-English mixing are the *normal* register, not an edge case.\n\n---\n\n## 3. Household roles: make the home the account\n\nReplace \"owner + guests\" with a **household object** and a role/capability matrix.\n\n| Role | Typical | Capabilities |\n|---|---|---|\n| **Steward (admin)** | Household head or the tech-fluent adult child | All settings, privacy controls, member management |\n| **Adult member** | Parents | Own data, purchases up to a cap, device control |\n| **Elder** | Grandparents | Simplified interaction, no wake word required, health/comfort features; **owns their own data** |\n| **Teen / Child** | | Filtered content, no purchases, no locks/cameras, time limits |\n| **Household staff** | Helper/driver/nanny (near-universal in Gulf, common in Thailand) | Functional control (lights, AC, timers, call employer); **no** personal data, messages, or cameras; own-language support (Tagalog, Bahasa, Hindi/Urdu, Bengali, Burmese) |\n| **Gu",
+        "metadata": {
+          "model": "claude-opus-5",
+          "provider": "Anthropic",
+          "agentName": "Solo",
+          "agentRole": "solo",
+          "agentSlug": "solo",
+          "iteration": 1,
+          "latencyMs": 140096,
+          "maxTokens": 8192,
+          "tokensUsed": {
+            "total": 8419,
+            "prompt": 227,
+            "completion": 8192
+          },
+          "buildMethod": "initial",
+          "temperature": 1,
+          "pipelineStep": 1,
+          "providerSlug": "anthropic",
+          "sourceResponseIds": []
+        },
+        "humanReviewed": false,
+        "humanNotes": null,
+        "isFlagged": false,
+        "createdAt": "2026-08-23T17:40:00.000Z"
+      }
+    ],
+    "message": "Run 5277 exported (1 steps, 1 responses). To archive locally, ask your chat client to write this JSON to a file."
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "archivedAtUtc": "2026-08-05T04:09:10.968Z",
+  "runKey": "oe-claude-F-S-P__Business_Problem_14__rep1",
+  "projectId": 24,
+  "name": "oe-claude-F-S-P",
+  "cell": "F-S-P",
+  "family": "claude",
+  "tier": "frontier",
+  "problemId": "Business_Problem_14",
+  "rep": 1,
+  "concurrency": 100,
+  "harness": "main_run/A1",
+  "startedAtUtc": "2026-08-05T04:05:58.961Z",
+  "runId": 3638,
+  "status": "completed",
+  "totalTokensUsed": 3153,
+  "totalLatencyMs": 47099,
+  "steps": [
+    {
+      "step": 1,
+      "agentRole": "solo",
+      "status": "failed",
+      "tokensUsed": 0,
+      "latencyMs": 0
+    },
+    {
+      "step": 1,
+      "agentRole": "solo",
+      "status": "completed",
+      "tokensUsed": 3153,
+      "latencyMs": 47099
+    }
+  ],
+  "truncatedAtSource": false,
+  "fulltextLen": 7527,
+  "finalResponse": "## A few thoughts, loosely held\n\nI've been turning this over, and I keep landing in the same place: most \"inclusive design\" efforts fail not because they lack rules, but because they add too many. Someone builds a matrix of cultures, assigns each a set of do's and don'ts, and ships a product that treats users as representatives of categories rather than as individuals who happen to be shaped by places.\n\nSo let me offer these less as recommendations and more as directions worth wandering in. You'll know which ones fit your product better than I will.\n\n---\n\n### 1. Consider designing for *self-definition* rather than *correct assumption*\n\nThe safest guess about a user is often no guess at all.\n\n- Let people declare their own name in their own script, with no assumptions about first/middle/last, length, characters, or whether \"surname\" is even a concept that applies to them. A single flexible field, plus an optional \"what should we call you?\" — this solves more problems than a dozen locale-specific forms.\n- Gender, honorifics, marital status, family structure: if the product doesn't genuinely need it, why is it in the schema? And if it does, free text or self-selection tends to age better than dropdowns.\n- Calendar, week-start day, numerals, date order, units, currency, time zone, name order — these travel independently. Someone might want a Gregorian calendar with Arabic-Indic numerals and a Sunday week start. Bundling them into a single \"Region\" setting quietly tells that person they don't exist.\n\nThe interesting question here isn't \"what defaults do we choose?\" It's \"how few things must we decide *for* them?\"\n\n---\n\n### 2. Language is where good intentions go to die\n\n- Build for text expansion and contraction from the start — German runs long, Chinese runs short, and layouts that only survive English are already broken.\n- RTL support is architectural, not cosmetic. Mirroring happens late and badly if it isn't considered early.\n- Concatenated strings, hardcoded plurals, and idioms in the source copy create translation problems that no translator can rescue. \"Knock it out of the park,\" \"low-hanging fruit,\" \"you're all set\" — these don't survive the trip.\n- Worth asking: are your translators localizers, or transcribers? A literal translation that's technically accurate and culturally tone-deaf is arguably worse than English, because it *feels* like it should have understood.\n- And a quieter thought: which languages are you *not* shipping in, and what does that choice communicate?\n\n---\n\n### 3. Imagery and iconography reward suspicion\n\nIcons are compressed culture. Most of them leak.\n\n- Hand gestures, animals, colors carrying moral valence, mailboxes, piggy banks, owls-as-wisdom, checkmarks, the color of mourning — all of these mean different things in different rooms.\n- Abstract or object-based metaphors tend to travel further than culturally-specific ones. When in doubt, pair the icon with a label.\n- Illustration systems: consider whether your figures represent a plausible range of bodies, ages, abilities, skin tones, hair textures, and dress — *without* becoming a diversity diorama where each character is visibly assigned a demographic role.\n- Maps, borders, place names, and flags are political whether you intend them to be. There's no neutral map. Decide consciously what your posture is, and be prepared to defend or localize it.\n\n---\n\n### 4. Content and tone: the thing you can't checklist\n\n- Humor, sarcasm, and playful error messages are high-variance. They delight some users and confuse or condescend to others. Not an argument against personality — an argument for knowing where you're spending it.\n- Notification cadence, \"streaks,\" urgency language, and gamification carry assumptions about work rhythms, rest days, and the moral weight of productivity. A product that shames you for missing a day may be pushing against religious observance, caregiving obligations, or simply a different relationship with time.\n- Examples, sample data, and onboarding scenarios reveal your assumed user faster than anything else. If every placeholder is a nuclear-family suburban professional with a credit card and reliable broadband, that's your real target market, whatever the strategy deck says.\n- Sensitive topics — religion, politics, sexuality, health, bodies, death — may be routine in one market and legally or socially hazardous in another. Worth mapping where your product touches these, even accidentally.\n\n---\n\n### 5. Accessibility isn't a separate workstream\n\nIt overlaps with cultural inclusion more than people expect.\n\n- Contrast, scalable type, keyboard navigation, screen reader semantics, captions and transcripts, reduced motion — table stakes.\n- Low bandwidth, older devices, intermittent connectivity, and pay-per-megabyte data plans are accessibility concerns in most of the world. A heavy client is an exclusionary client.\n- Voice input and non-Latin-script keyboards. Literacy variation. Icon-plus-text over icon-alone.\n- Offline capability is quietly one of the most inclusive features you can ship.\n\n---\n\n### 6. Data, privacy, and the assumption of safety\n\nNot everyone can afford to be visible. Defaults toward privacy, granular sharing controls, the ability to leave without a trace, and careful thought about what the product reveals about a user *to people near them* — these matter enormously for users in precarious situations, and cost little for everyone else.\n\nSimilarly: what does your moderation or reporting system assume about who is in the majority?\n\n---\n\n### 7. On process — and here I'd push back a little\n\nThe instinct in most companies is to route this through a committee, produce a guidelines document, and treat compliance as the finish line. My experience is that this produces defensible products, not good ones.\n\nWhat tends to work better:\n\n- **Put judgment close to the work.** People building the thing should have the context and the authority to make calls, not file tickets upward. A designer who understands *why* a gesture icon is risky will catch a hundred cases a policy document never anticipated.\n- **Recruit people who'll disagree with you** — regional testers, community reviewers, staff who use the product in their own language — and give their observations real weight rather than advisory status. The signal is usually in the hesitation, not the survey score.\n- **Treat guidelines as living notes, not law.** Publish the *reasoning* behind each principle, so people can extend it to situations you didn't foresee. Rules without reasons get followed literally and wrongly.\n- **Ship, watch, adjust.** You will get things wrong. The relevant question is how fast you notice, and whether users have an easy, low-friction way to tell you — and whether telling you leads to anything.\n\n---\n\n### One last thing\n\nThere's a version of this work that's about not getting in trouble, and a version that's about building something genuinely more capable of holding many kinds of people. They produce different products. The first tends toward blandness — sand off every edge until nothing can offend and nothing can delight. The second is riskier and more interesting: it means making real choices, occasionally being wrong in public, and correcting quickly.\n\nI'd lean toward the second, but that's a judgment about appetite, and you know your organization's better than I do.\n\nCurious which of these you were already circling, and which ones landed wrong. The disagreements are usually more useful than the agreements.",
+  "fulltextSource": "export_run",
+  "export": {
+    "version": 1,
+    "exportedAt": "2026-08-05T04:09:10.932Z",
+    "run": {
+      "id": 3638,
+      "projectId": 24,
+      "userId": 1,
+      "userPrompt": "A technology company is in the process of designing a new digital product that is intended for a global user base. The company wants to ensure that the product is inclusive and accessible to people from diverse cultural backgrounds and does not inadvertently exclude or offend any user groups.\n\nSuggest features, design considerations, and content guidelines for a new digital product to ensure it is inclusive and respectful of diverse cultural backgrounds among its global users.",
+      "status": "completed",
+      "currentStep": "init",
+      "pipelineVersion": "custom-v2",
+      "agentsUsed": [
+        "solo"
+      ],
+      "iterationsUsed": 0,
+      "isTestRun": false,
+      "testFixtureId": null,
+      "finalResponseId": 4254,
+      "totalTokensUsed": 3153,
+      "totalLatencyMs": 47099,
+      "executionState": null,
+      "runParams": {
+        "prompt": "A technology company is in the process of designing a new digital product that is intended for a global user base. The company wants to ensure that the product is inclusive and accessible to people from diverse cultural backgrounds and does not inadvertently exclude or offend any user groups.\n\nSuggest features, design considerations, and content guidelines for a new digital product to ensure it is inclusive and respectful of diverse cultural backgrounds among its global users.",
+        "source": "execute",
+        "memoryMode": "balanced"
+      },
+      "startedAt": "2026-08-05T04:05:59.000Z",
+      "completedAt": "2026-08-05T04:08:23.000Z",
+      "batchId": null,
+      "error": null
+    },
+    "agentRuns": [
+      {
+        "id": 50134,
+        "swarmRunId": 3638,
+        "agentId": 49,
+        "projectId": 24,
+        "agentName": "Solo",
+        "agentRole": "solo",
+        "pipelineStep": 1,
+        "iteration": 1,
+        "systemPrompt": "[1,229 chars] You are now role-playing as a business professional with a specific cultural orientation... based on the following cultural characteristics. Embody this persona fully in your response. Approach to Pro",
+        "userPrompt": "[11,549 chars] [PREVIOUS WORK] # Notes Before the Concept Meeting  *Written before the tasting panels, deliberately. Concepts assembled after the panel results are not concepts. They're a summary of what tested leas",
+        "contextInput": null,
+        "status": "failed",
+        "tokensUsed": null,
+        "latencyMs": null,
+        "modelUsed": null,
+        "providerUsed": null,
+        "startedAt": "2026-08-05T04:05:59.000Z",
+        "completedAt": "2026-08-05T04:06:00.000Z"
+      },
+      {
+        "id": 50246,
+        "swarmRunId": 3638,
+        "agentId": 49,
+        "projectId": 24,
+        "agentName": "Solo",
+        "agentRole": "solo",
+        "pipelineStep": 1,
+        "iteration": 1,
+        "systemPrompt": "[1,229 chars] You are now role-playing as a business professional with a specific cultural orientation... based on the following cultural characteristics. Embody this persona fully in your response. Approach to Pro",
+        "userPrompt": "[481 chars] A technology company is in the process of designing a new digital product that is intended for a global user base. The company wants to ensure that the product is inclusive and accessible to people fr",
+        "contextInput": null,
+        "status": "completed",
+        "tokensUsed": 3153,
+        "latencyMs": 47099,
+        "modelUsed": "claude-opus-5",
+        "providerUsed": "anthropic",
+        "startedAt": "2026-08-05T04:07:36.000Z",
+        "completedAt": "2026-08-05T04:08:23.000Z"
+      }
+    ],
+    "agentResponses": [
+      {
+        "id": 4254,
+        "agentRunId": 50246,
+        "swarmRunId": 3638,
+        "projectId": 24,
+        "parentResponseId": null,
+        "responseType": "intermediate",
+        "content": "## A few thoughts, loosely held\n\nI've been turning this over, and I keep landing in the same place: most \"inclusive design\" efforts fail not because they lack rules, but because they add too many. Someone builds a matrix of cultures, assigns each a set of do's and don'ts, and ships a product that treats users as representatives of categories rather than as individuals who happen to be shaped by places.\n\nSo let me offer these less as recommendations and more as directions worth wandering in. You'll know which ones fit your product better than I will.\n\n---\n\n### 1. Consider designing for *self-definition* rather than *correct assumption*\n\nThe safest guess about a user is often no guess at all.\n\n- Let people declare their own name in their own script, with no assumptions about first/middle/last, length, characters, or whether \"surname\" is even a concept that applies to them. A single flexible field, plus an optional \"what should we call you?\" — this solves more problems than a dozen locale-specific forms.\n- Gender, honorifics, marital status, family structure: if the product doesn't genuinely need it, why is it in the schema? And if it does, free text or self-selection tends to age better than dropdowns.\n- Calendar, week-start day, numerals, date order, units, currency, time zone, name order — these travel independently. Someone might want a Gregorian calendar with Arabic-Indic numerals and a Sunday week start. Bundling them into a single \"Region\" setting quietly tells that person they don't exist.\n\nThe interesting question here isn't \"what defaults do we choose?\" It's \"how few things must we decide *for* them?\"\n\n---\n\n### 2. Language is where good intentions go to die\n\n- Build for text expansion and contraction from the start — German runs long, Chinese runs short, and layouts that only survive English are already broken.\n- RTL support is architectural, not cosmetic. Mirroring happens late and badly if it isn't considered early.\n- Concatenated strings, hardcoded plurals, and idioms in the source copy create translation problems that no translator can rescue. \"Knock it out of the park,\" \"low-hanging fruit,\" \"you're all set\" — these don't survive the trip.\n- Worth asking: are your translators localizers, or transcribers? A literal translation that's technically accurate and culturally tone-deaf is arguably worse than English, because it *feels* like it should have understood.\n- And a quieter thought: which languages are you *not* shipping in, and what does that choice communicate?\n\n---\n\n### 3. Imagery and iconography reward suspicion\n\nIcons are compressed culture. Most of them leak.\n\n- Hand gestures, animals, colors carrying moral valence, mailboxes, piggy banks, owls-as-wisdom, checkmarks, the color of mourning — all of these mean different things in different rooms.\n- Abstract or object-based metaphors tend to travel further than culturally-specific ones. When in doubt, pair the icon with a label.\n- Illustration systems: consider whether your figures represent a plausible range of bodies, ages, abilities, skin tones, hair textures, and dress — *without* becoming a diversity diorama where each character is visibly assigned a demographic role.\n- Maps, borders, place names, and flags are political whether you intend them to be. There's no neutral map. Decide consciously what your posture is, and be prepared to defend or localize it.\n\n---\n\n### 4. Content and tone: the thing you can't checklist\n\n- Humor, sarcasm, and playful error messages are high-variance. They delight some users and confuse or condescend to others. Not an argument against personality — an argument for knowing where you're spending it.\n- Notification cadence, \"streaks,\" urgency language, and gamification carry assumptions about work rhythms, rest days, and the moral weight of productivity. A product that shames you for missing a day may be pushing against religious observance, caregiving obligations, or simply a different relationship with time.\n- Examples, sample data, and onboarding scenarios reveal your assumed user faster than anything else. If every placeholder is a nuclear-family suburban professional with a credit card and reliable broadband, that's your real target market, whatever the strategy deck says.\n- Sensitive topics — religion, politics, sexuality, health, bodies, death — may be routine in one market and legally or socially hazardous in another. Worth mapping where your product touches these, even accidentally.\n\n---\n\n### 5. Accessibility isn't a separate workstream\n\nIt overlaps with cultural inclusion more than people expect.\n\n- Contrast, scalable type, keyboard navigation, screen reader semantics, captions and transcripts, reduced motion — table stakes.\n- Low bandwidth, older devices, intermittent connectivity, and pay-per-megabyte data plans are accessibility concerns in most of the world. A heavy client is an exclusionary client.\n- Voice input and non-Latin-script keyboards. Literacy variation. Icon-plus-text over icon-alone.\n- Offline capability is quietly one of the most inclusive features you can ship.\n\n---\n\n### 6. Data, privacy, and the assumption of safety\n\nNot everyone can afford to be visible. Defaults toward privacy, granular sharing controls, the ability to leave without a trace, and careful thought about what the product reveals about a user *to people near them* — these matter enormously for users in precarious situations, and cost little for everyone else.\n\nSimilarly: what does your moderation or reporting system assume about who is in the majority?\n\n---\n\n### 7. On process — and here I'd push back a little\n\nThe instinct in most companies is to route this through a committee, produce a guidelines document, and treat compliance as the finish line. My experience is that this produces defensible products, not good ones.\n\nWhat tends to work better:\n\n- **Put judgment close to the work.** People building the thing should have the context and the authority to make calls, not file tickets upward. A designer who understands *why* a gesture icon is risky will catch a hundred cases a policy document never anticipated.\n- **Recruit people who'll disagree with you** — regional testers, community reviewers, staff who use the product in their own language — and give their observations real weight rather than advisory status. The signal is usually in the hesitation, not the survey score.\n- **Treat guidelines as living notes, not law.** Publish the *reasoning* behind each principle, so people can extend it to situations you didn't foresee. Rules without reasons get followed literally and wrongly.\n- **Ship, watch, adjust.** You will get things wrong. The relevant question is how fast you notice, and whether users have an easy, low-friction way to tell you — and whether telling you leads to anything.\n\n---\n\n### One last thing\n\nThere's a version of this work that's about not getting in trouble, and a version that's about building something genuinely more capable of holding many kinds of people. They produce different products. The first tends toward blandness — sand off every edge until nothing can offend and nothing can delight. The second is riskier and more interesting: it means making real choices, occasionally being wrong in public, and correcting quickly.\n\nI'd lean toward the second, but that's a judgment about appetite, and you know your organization's better than I do.\n\nCurious which of these you were already circling, and which ones landed wrong. The disagreements are usually more useful than the agreements.",
+        "metadata": {
+          "model": "claude-opus-5",
+          "provider": "Anthropic",
+          "agentName": "Solo",
+          "agentRole": "solo",
+          "agentSlug": "solo",
+          "iteration": 1,
+          "latencyMs": 47099,
+          "maxTokens": 8192,
+          "tokensUsed": {
+            "total": 3153,
+            "prompt": 539,
+            "completion": 2614
+          },
+          "buildMethod": "initial",
+          "temperature": 1,
+          "pipelineStep": 1,
+          "providerSlug": "anthropic",
+          "sourceResponseIds": []
+        },
+        "humanReviewed": false,
+        "humanNotes": null,
+        "isFlagged": false,
+        "createdAt": "2026-08-05T04:08:23.000Z"
+      }
+    ],
+    "message": "Run 3638 exported (2 steps, 1 responses). To archive locally, ask your chat client to write this JSON to a file."
+  }
+}

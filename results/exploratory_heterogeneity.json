@@ -1,0 +1,673 @@
+{
+  "note": "EXPLORATORY post-hoc analyses per DESIGN-DECISIONS D44 / MANIFEST Entry 53. Not pre-registered.",
+  "n_runs": 760,
+  "A1_reliability": {
+    "cell_sd_cv": {
+      "claude|C-S-N": {
+        "n": 57,
+        "mean": 4.3753,
+        "sd": 0.2133,
+        "cv": 0.0487
+      },
+      "gemini|C-S-N": {
+        "n": 57,
+        "mean": 4.3688,
+        "sd": 0.2454,
+        "cv": 0.0562
+      },
+      "gpt|C-S-N": {
+        "n": 57,
+        "mean": 4.5365,
+        "sd": 0.1384,
+        "cv": 0.0305
+      },
+      "kimi|C-S-N": {
+        "n": 57,
+        "mean": 4.7251,
+        "sd": 0.1538,
+        "cv": 0.0325
+      },
+      "qwen|C-S-N": {
+        "n": 57,
+        "mean": 4.5205,
+        "sd": 0.197,
+        "cv": 0.0436
+      },
+      "claude|C-T-N": {
+        "n": 57,
+        "mean": 4.4475,
+        "sd": 0.208,
+        "cv": 0.0468
+      },
+      "gemini|C-T-N": {
+        "n": 57,
+        "mean": 4.4144,
+        "sd": 0.2379,
+        "cv": 0.0539
+      },
+      "gpt|C-T-N": {
+        "n": 57,
+        "mean": 4.5439,
+        "sd": 0.1482,
+        "cv": 0.0326
+      },
+      "kimi|C-T-N": {
+        "n": 57,
+        "mean": 4.6659,
+        "sd": 0.1755,
+        "cv": 0.0376
+      },
+      "qwen|C-T-N": {
+        "n": 57,
+        "mean": 4.5832,
+        "sd": 0.1728,
+        "cv": 0.0377
+      },
+      "claude|F-S-N": {
+        "n": 38,
+        "mean": 4.7392,
+        "sd": 0.1958,
+        "cv": 0.0413
+      },
+      "gemini|F-S-N": {
+        "n": 38,
+        "mean": 4.483,
+        "sd": 0.1951,
+        "cv": 0.0435
+      },
+      "gpt|F-S-N": {
+        "n": 38,
+        "mean": 4.5918,
+        "sd": 0.1343,
+        "cv": 0.0292
+      },
+      "kimi|F-S-N": {
+        "n": 38,
+        "mean": 4.5608,
+        "sd": 0.376,
+        "cv": 0.0824
+      },
+      "qwen|F-S-N": {
+        "n": 38,
+        "mean": 4.5573,
+        "sd": 0.1674,
+        "cv": 0.0367
+      }
+    },
+    "brown_forsythe_team_vs_solo": {
+      "claude": {
+        "sd_team": 0.208,
+        "sd_solo": 0.2133,
+        "stat": 0.519,
+        "p": 0.4729
+      },
+      "gemini": {
+        "sd_team": 0.2379,
+        "sd_solo": 0.2454,
+        "stat": 0.021,
+        "p": 0.8853
+      },
+      "gpt": {
+        "sd_team": 0.1482,
+        "sd_solo": 0.1384,
+        "stat": 0.006,
+        "p": 0.9359
+      },
+      "kimi": {
+        "sd_team": 0.1755,
+        "sd_solo": 0.1538,
+        "stat": 0.968,
+        "p": 0.3273
+      },
+      "qwen": {
+        "sd_team": 0.1728,
+        "sd_solo": 0.197,
+        "stat": 0.473,
+        "p": 0.4929
+      }
+    },
+    "downside": {
+      "C-S-N": {
+        "p10": 4.2,
+        "p_below_4.0": 0.0281
+      },
+      "C-T-N": {
+        "p10": 4.267,
+        "p_below_4.0": 0.0175
+      },
+      "F-S-N": {
+        "p10": 4.309,
+        "p_below_4.0": 0.0105
+      }
+    },
+    "domain_sd": {
+      "finance_business_models": {
+        "sd_team": 0.1837,
+        "sd_solo": 0.2187,
+        "p_BF": 0.1596
+      },
+      "hr_organization": {
+        "sd_team": 0.1026,
+        "sd_solo": 0.1487,
+        "p_BF": 0.1468
+      },
+      "marketing_communications": {
+        "sd_team": 0.1269,
+        "sd_solo": 0.1717,
+        "p_BF": 0.0203
+      },
+      "operations_supply_chain": {
+        "sd_team": 0.1807,
+        "sd_solo": 0.2062,
+        "p_BF": 0.2245
+      },
+      "product_innovation": {
+        "sd_team": 0.1551,
+        "sd_solo": 0.1458,
+        "p_BF": 0.6259
+      },
+      "strategy_market_entry": {
+        "sd_team": 0.1682,
+        "sd_solo": 0.1982,
+        "p_BF": 0.7187
+      }
+    }
+  },
+  "A2_difficulty_moderation": {
+    "n_problems": 19,
+    "pearson_r": 0.153,
+    "pearson_p": 0.5321,
+    "spearman_rho": 0.105,
+    "spearman_p": 0.668,
+    "slope": 0.066,
+    "hardest_problem": "Business_Problem_28",
+    "hardest_score": 4.21,
+    "easiest_problem": "Business_Problem_14",
+    "easiest_score": 4.73
+  },
+  "A3_length_ancova": {
+    "model": "LMM comp ~ logtok + cell + (1|family) + (1|problem)",
+    "fixed_effects": {
+      "Intercept": 4.2318,
+      "C(cell, Treatment('C-S-N'))[T.C-T-N]": -0.0178,
+      "C(cell, Treatment('C-S-N'))[T.F-S-N]": 0.0779,
+      "logtok": 0.0314
+    },
+    "p_values": {
+      "Intercept": 0.0,
+      "C(cell, Treatment('C-S-N'))[T.C-T-N]": 0.3994,
+      "C(cell, Treatment('C-S-N'))[T.F-S-N]": 0.0,
+      "logtok": 0.0136,
+      "problem Var": 0.0
+    },
+    "interpretation": "team/frontier coefficients AFTER controlling log(tokens)"
+  },
+  "A4_latency_economics": {
+    "cell_summary": {
+      "C-S-N": {
+        "cost": 0.01936,
+        "latency_s": 47.2,
+        "quality": 4.505,
+        "quality_per_dollar_minute": 295.8
+      },
+      "C-T-N": {
+        "cost": 0.0734,
+        "latency_s": 131.7,
+        "quality": 4.531,
+        "quality_per_dollar_minute": 28.1
+      },
+      "F-S-N": {
+        "cost": 0.08352,
+        "latency_s": 94.8,
+        "quality": 4.586,
+        "quality_per_dollar_minute": 34.7
+      }
+    },
+    "pareto_frontier": [
+      "C-S-N",
+      "C-T-N",
+      "F-S-N"
+    ],
+    "dominated": []
+  },
+  "A5_dimension_domains": {
+    "n_tests": 30,
+    "significant_holm": [],
+    "all": [
+      {
+        "dim": "Novelty",
+        "domain": "finance_business_models",
+        "n": 3,
+        "delta": -0.221,
+        "t": -3.082,
+        "p": 0.09111,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Novelty",
+        "domain": "hr_organization",
+        "n": 3,
+        "delta": -0.1457,
+        "t": -2.714,
+        "p": 0.11321,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Novelty",
+        "domain": "marketing_communications",
+        "n": 4,
+        "delta": -0.0611,
+        "t": -0.982,
+        "p": 0.39834,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Novelty",
+        "domain": "operations_supply_chain",
+        "n": 3,
+        "delta": -0.116,
+        "t": -7.167,
+        "p": 0.01892,
+        "p_holm": 0.54868,
+        "sig_holm": false
+      },
+      {
+        "dim": "Novelty",
+        "domain": "product_innovation",
+        "n": 3,
+        "delta": -0.2293,
+        "t": -8.792,
+        "p": 0.01269,
+        "p_holm": 0.3807,
+        "sig_holm": false
+      },
+      {
+        "dim": "Novelty",
+        "domain": "strategy_market_entry",
+        "n": 3,
+        "delta": -0.1358,
+        "t": -1.92,
+        "p": 0.19487,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Usefulness",
+        "domain": "finance_business_models",
+        "n": 3,
+        "delta": -0.1185,
+        "t": -2.993,
+        "p": 0.09587,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Usefulness",
+        "domain": "hr_organization",
+        "n": 3,
+        "delta": -0.0444,
+        "t": -1.035,
+        "p": 0.40928,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Usefulness",
+        "domain": "marketing_communications",
+        "n": 4,
+        "delta": -0.0315,
+        "t": -0.515,
+        "p": 0.6423,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Usefulness",
+        "domain": "operations_supply_chain",
+        "n": 3,
+        "delta": -0.1012,
+        "t": -5.491,
+        "p": 0.0316,
+        "p_holm": 0.8848,
+        "sig_holm": false
+      },
+      {
+        "dim": "Usefulness",
+        "domain": "product_innovation",
+        "n": 3,
+        "delta": -0.0796,
+        "t": -2.707,
+        "p": 0.11367,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Usefulness",
+        "domain": "strategy_market_entry",
+        "n": 3,
+        "delta": -0.0593,
+        "t": -1.831,
+        "p": 0.20853,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Flexibility",
+        "domain": "finance_business_models",
+        "n": 3,
+        "delta": -0.1049,
+        "t": -1.369,
+        "p": 0.30452,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Flexibility",
+        "domain": "hr_organization",
+        "n": 3,
+        "delta": -0.021,
+        "t": -0.511,
+        "p": 0.66034,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Flexibility",
+        "domain": "marketing_communications",
+        "n": 4,
+        "delta": 0.038,
+        "t": 0.429,
+        "p": 0.69687,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Flexibility",
+        "domain": "operations_supply_chain",
+        "n": 3,
+        "delta": -0.0741,
+        "t": -1.212,
+        "p": 0.34929,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Flexibility",
+        "domain": "product_innovation",
+        "n": 3,
+        "delta": -0.113,
+        "t": -1.593,
+        "p": 0.25225,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Flexibility",
+        "domain": "strategy_market_entry",
+        "n": 3,
+        "delta": 0.0123,
+        "t": 0.144,
+        "p": 0.89897,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Elaboration",
+        "domain": "finance_business_models",
+        "n": 3,
+        "delta": 0.021,
+        "t": 0.641,
+        "p": 0.58708,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Elaboration",
+        "domain": "hr_organization",
+        "n": 3,
+        "delta": -0.0457,
+        "t": -1.466,
+        "p": 0.2803,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Elaboration",
+        "domain": "marketing_communications",
+        "n": 4,
+        "delta": 0.1019,
+        "t": 0.921,
+        "p": 0.42487,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Elaboration",
+        "domain": "operations_supply_chain",
+        "n": 3,
+        "delta": 0.0481,
+        "t": 2.751,
+        "p": 0.11065,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Elaboration",
+        "domain": "product_innovation",
+        "n": 3,
+        "delta": -0.004,
+        "t": -0.212,
+        "p": 0.85169,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Elaboration",
+        "domain": "strategy_market_entry",
+        "n": 3,
+        "delta": 0.0654,
+        "t": 1.028,
+        "p": 0.41209,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Cultural Sensitivity",
+        "domain": "finance_business_models",
+        "n": 3,
+        "delta": -0.1074,
+        "t": -1.827,
+        "p": 0.20925,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Cultural Sensitivity",
+        "domain": "hr_organization",
+        "n": 3,
+        "delta": -0.0074,
+        "t": -0.212,
+        "p": 0.85202,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Cultural Sensitivity",
+        "domain": "marketing_communications",
+        "n": 4,
+        "delta": -0.0287,
+        "t": -0.86,
+        "p": 0.45308,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Cultural Sensitivity",
+        "domain": "operations_supply_chain",
+        "n": 3,
+        "delta": -0.0481,
+        "t": -1.04,
+        "p": 0.40766,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Cultural Sensitivity",
+        "domain": "product_innovation",
+        "n": 3,
+        "delta": -0.0907,
+        "t": -1.684,
+        "p": 0.23416,
+        "p_holm": 1.0,
+        "sig_holm": false
+      },
+      {
+        "dim": "Cultural Sensitivity",
+        "domain": "strategy_market_entry",
+        "n": 3,
+        "delta": -0.0605,
+        "t": -2.423,
+        "p": 0.13635,
+        "p_holm": 1.0,
+        "sig_holm": false
+      }
+    ]
+  },
+  "A6_rank_stability": {
+    "C-T-N": {
+      "kendall_W": 0.922,
+      "rank_table": {
+        "finance_business_models": {
+          "claude": 2,
+          "gemini": 1,
+          "gpt": 4,
+          "kimi": 5,
+          "qwen": 3
+        },
+        "hr_organization": {
+          "claude": 1,
+          "gemini": 2,
+          "gpt": 3,
+          "kimi": 5,
+          "qwen": 4
+        },
+        "marketing_communications": {
+          "claude": 2,
+          "gemini": 1,
+          "gpt": 3,
+          "kimi": 5,
+          "qwen": 4
+        },
+        "operations_supply_chain": {
+          "claude": 2,
+          "gemini": 1,
+          "gpt": 3,
+          "kimi": 5,
+          "qwen": 4
+        },
+        "product_innovation": {
+          "claude": 1,
+          "gemini": 2,
+          "gpt": 3,
+          "kimi": 5,
+          "qwen": 4
+        },
+        "strategy_market_entry": {
+          "claude": 1,
+          "gemini": 2,
+          "gpt": 3,
+          "kimi": 5,
+          "qwen": 4
+        }
+      }
+    },
+    "F-S-N": {
+      "kendall_W": 0.665,
+      "rank_table": {
+        "finance_business_models": {
+          "claude": 5,
+          "gemini": 1,
+          "gpt": 4,
+          "kimi": 3,
+          "qwen": 2
+        },
+        "hr_organization": {
+          "claude": 5,
+          "gemini": 1,
+          "gpt": 1,
+          "kimi": 4,
+          "qwen": 3
+        },
+        "marketing_communications": {
+          "claude": 5,
+          "gemini": 2,
+          "gpt": 3,
+          "kimi": 1,
+          "qwen": 4
+        },
+        "operations_supply_chain": {
+          "claude": 5,
+          "gemini": 1,
+          "gpt": 3,
+          "kimi": 4,
+          "qwen": 2
+        },
+        "product_innovation": {
+          "claude": 5,
+          "gemini": 1,
+          "gpt": 3,
+          "kimi": 4,
+          "qwen": 2
+        },
+        "strategy_market_entry": {
+          "claude": 5,
+          "gemini": 2,
+          "gpt": 4,
+          "kimi": 1,
+          "qwen": 3
+        }
+      }
+    }
+  },
+  "A7_judge_icc_by_domain": {
+    "finance_business_models": {
+      "n_runs": 120,
+      "k_raters": 9,
+      "icc_3_1": 0.433,
+      "icc_3_k": 0.873
+    },
+    "hr_organization": {
+      "n_runs": 118,
+      "k_raters": 9,
+      "icc_3_1": 0.235,
+      "icc_3_k": 0.734
+    },
+    "marketing_communications": {
+      "n_runs": 159,
+      "k_raters": 9,
+      "icc_3_1": 0.523,
+      "icc_3_k": 0.908
+    },
+    "operations_supply_chain": {
+      "n_runs": 120,
+      "k_raters": 9,
+      "icc_3_1": 0.509,
+      "icc_3_k": 0.903
+    },
+    "product_innovation": {
+      "n_runs": 119,
+      "k_raters": 9,
+      "icc_3_1": 0.346,
+      "icc_3_k": 0.827
+    },
+    "strategy_market_entry": {
+      "n_runs": 120,
+      "k_raters": 9,
+      "icc_3_1": 0.522,
+      "icc_3_k": 0.908
+    }
+  }
+}

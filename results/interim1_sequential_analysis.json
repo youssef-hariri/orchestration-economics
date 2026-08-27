@@ -1,0 +1,82 @@
+{
+  "analysis": "interim-1 sequential analysis (pilot, combined Phase A + Phase B)",
+  "timestamp_utc": "2026-08-04T02:02:07Z",
+  "data_sha": {
+    "phaseA_gen": "69c6ffb872c7e9a4",
+    "phaseA_judgments": "993b981cecdab89d",
+    "phaseB_gen": "b2f531dd5cb5d667",
+    "phaseB_judgments": "c121159f18519133"
+  },
+  "n": {
+    "combined": 371,
+    "phaseA": 329,
+    "phaseB": 42
+  },
+  "deviation_note": "Protocol 03 assumed an 8-cell pilot; executed pilot deferred F-T to Phase B for 2 preregistered families (claude+kimi). The tier x structure interaction is unestimable from Phase A alone, so the interim test uses combined A+B data (F-T = claude+kimi only).",
+  "primary_model": "quality ~ tier*structure*persona + (1|problem) + (1|family) [combined]",
+  "primary_interaction": {
+    "label": "combined A+B (8 cells, F-T=claude+kimi)",
+    "n": 371,
+    "term": "C(tier)[T.F]:C(structure)[T.T]",
+    "b": -0.1173316272132505,
+    "se": 0.0720134831985453,
+    "t": -1.6293008198167624,
+    "df": 363.0,
+    "p": 0.10411679948015976,
+    "beta_std": -0.37137169453507535,
+    "bf10": 0.0013046106179034063,
+    "bf01": 766.5122345907814
+  },
+  "crosscheck_balanced_2fam": {
+    "label": "claude+kimi balanced 8-cell",
+    "n": 173,
+    "term": "C(tier)[T.F]:C(structure)[T.T]",
+    "b": -0.07623857647331769,
+    "se": 0.07808493573586489,
+    "t": -0.9763544754804844,
+    "df": 165.0,
+    "p": 0.33031811350727747,
+    "beta_std": -0.30312820468083934,
+    "bf10": 11.627799426444923,
+    "bf01": 0.08600079544937071
+  },
+  "crosscheck_rm_anova": {
+    "F": 17.6998688971207,
+    "df1": 1,
+    "df2": 10,
+    "p": 0.0018081558590225175,
+    "partial_eta2": 0.6389874610186526
+  },
+  "team_gain": {
+    "cheap": 0.02800000000000047,
+    "frontier": 0.11599999999999966
+  },
+  "per_problem_contrast": {
+    "claude+kimi": {
+      "mean_d": -0.16728395061728377,
+      "n_problems": 11,
+      "t": -4.207121212554096,
+      "p": 0.0018081558590218537
+    },
+    "claude": {
+      "mean_d": -0.242592592592593,
+      "n_problems": 11,
+      "t": -5.194636391618092,
+      "p": 0.0004044201934002332
+    },
+    "kimi": {
+      "mean_d": -0.09680134680134705,
+      "n_problems": 11,
+      "t": -1.2761246129704948,
+      "p": 0.230753130188495
+    }
+  },
+  "bf_reliability_flag": "BIC-approximated BFs for mixed models with variance components are indicative only; the combined-model BF01 is inconsistent with the balanced-subset rm-ANOVA and should not drive decisions.",
+  "stopping_rules": {
+    "rule1_triggered": false,
+    "rule2_triggered": true,
+    "rule3_triggered": false
+  },
+  "mechanical_decision_primary_lmm": "STOP (futility)",
+  "analyst_recommendation": "CONTINUE to main run: pre-registered analysis options disagree (LMM p=0.104 vs problem-level rm-ANOVA p=0.0018 on balanced subset); the significant interaction is OPPOSITE to H1's predicted direction and driven by claude alone (claude p=0.0004, kimi p=0.23). The main run with all 8 cells x 5 families resolves existence and direction."
+}
