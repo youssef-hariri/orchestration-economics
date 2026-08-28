@@ -944,3 +944,21 @@ Supersedes the kimi-blocked status in Entry 51 §3. Author directive: "use toget
 **Bug caught at materialization (fixed same day):** documented `solution_id` scheme was not unique under the within-family factorial (collapsed 1,900 → 380); now `{cell}__{family}__{problem}__{rep}`. Labeling layer only — judgment logs were always keyed by unique runId.
 
 **Standing rule (D54):** every future analysis writes its result JSON to `results/` AND is added to `materialize_results.py`; an analysis that exists only in stdout/chat does not exist.
+
+## Entry 67 — 2026-08-28 — Paper draft v11: confirmatory wave integrated; exploratory demotions + A5–A8 disclosure
+
+**New draft:** `paper/FULL-PAPER-DRAFT-BUSINESS-v11_with_figures/` (from audited v10). Two pdflatex passes, exit 0, 32 pages, zero undefined references, zero LaTeX errors.
+
+**Edits:**
+1. New Results subsection "Out-of-Sample Confirmatory Replication: The Wave" (sec:wave): Protocol 12 / OSF jg49x design, Table (W1–W7 complete-panel gate outcomes, n = 2,418, 10 families), D52/D53 disclosures, binding upgrade-gate reading (W1/W2/W6 PASS; W3/W4/W5 FAIL — exploratory findings remain exploratory), promo-vector sensitivity note.
+2. Exploratory heterogeneity subsection (sec:exploratory-heterogeneity): status declaration updated — forward reference replaced by the gate outcomes; strategic-implication quote relabeled "exploratory — gate FAILED" (kept as hypothesis generator only).
+3. Abstract: replication-wave block added (core claims replicate; exploratory findings fail their gates).
+4. Contributions: sixth contribution added (pre-registered confirmatory replication wave as a demonstration of gate discipline).
+5. Methodology §3.1: two-study framing extended with Protocol 12; **registered-but-unexecuted arms A5/A6/A8 disclosed** (gates never evaluated, arms never executed; A5→Protocol 14, A7→Protocol 13).
+6. Summary-of-findings table: wave-replicated row (W1/W2/W6) added; exploratory row split — wave-gated (FAIL) vs persona battery (not wave-tested, D50).
+7. Future Directions rewritten: wave item (done) replaced by Protocols 13/14/15 (design authorship, loop control, routing); subtractive refiner / human panel / second domain retained (six items).
+8. Limitations: seventh limitation added (wave execution environment: gemini billing fix, kimi Together routing deviation, D52 REML caveat).
+9. Code and Data Availability: D54 materialized CSV layer documented.
+10. Two new references: Open Science Collaboration 2015 (10.1126/science.aac4716); Camerer et al. 2018 (10.1038/s41562-018-0399-z). Author date stamp 2026-08-28.
+
+**Still open (author decision, Entry 47):** the title. The wave results strengthen the case for a title reflecting the replicated negative-substitution finding; candidates unchanged pending the author's pick.
