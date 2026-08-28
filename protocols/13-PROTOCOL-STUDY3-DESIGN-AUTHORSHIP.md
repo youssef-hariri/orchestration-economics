@@ -1,8 +1,7 @@
 # Protocol 13 — Study 3: Pipeline Design Authorship (Designer Tier × Executor Tier)
 
-**Status: DRAFT — NOT REGISTERED. No generation, judging, or analysis call may be made under
-this protocol until (a) author go-ahead, (b) OSF registration timestamped BEFORE first data
-collection, (c) registration ID recorded here.**
+**Status: REGISTERED — OSF Open-Ended Registration `9ukjz` (https://osf.io/9ukjz),
+timestamped 2026-08-28 BEFORE first data collection (D55; runner `code/study3_design_run.py`).**
 
 **Lineage:** executes and completes the pre-registered-but-unexecuted arm A7 (D30, D31),
 expanded from a single-designer policy arm to a Designer-Tier × Executor design.
