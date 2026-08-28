@@ -86,21 +86,34 @@ Raw `runStatus` / `exportMyData` exports (JSON), untouched, one per phase.
 `{problem_text}` and `{solution_text}` placeholders). Dimensions scored (1–5):
 Novelty (PRIMARY), Usefulness/Feasibility, Flexibility, Elaboration, Cultural Sensitivity.
 
-## evaluation/judge_raw/{solution_id}__{judge}__{variant}.json
+## evaluation/judge_raw/{study}/{solution_id}__{judge}__{variant}.json
+One file per judge call (materialized by `code/materialize_results.py` from the frozen
+judgment JSONL logs; `{study}` = study1_main | wave).
 | Field | Type | Description |
 |---|---|---|
-| solution_id | string | `{arm}__{problem_id}__rep{n}` |
+| solution_id | string | `{cell}__{family}__{problem_id}__rep{n}` (corrected 2026-08-28, D54: the pre-factorial scheme `{arm}__{problem}__{rep}` was not unique across families) |
 | judge_provider / judge_model | string | pinned judge |
 | variant | string | var1..var3 |
-| prompt | string | Exact prompt sent |
 | raw_response | string | Unparsed judge output |
 | scores | object | novelty, usefulness, flexibility, elaboration, cultural_sensitivity (1–5) |
 | parsed_ok | bool | Parser success flag |
 
 ## evaluation/scores_aggregated.csv
-One row per solution × judge × variant (long format):
-`solution_id, arm, problem_id, rep, judge, variant, novelty, usefulness, flexibility, elaboration, cultural_sensitivity`
-Plus companion `kappa_by_dimension.csv`: `dimension, fleiss_kappa, n_solutions`.
+One row per solution × judge × variant (long format), 17,091 rows:
+`study, solution_id, run_id, cell, family, problem_id, rep, condition, judge_family, judge_model, variant, composite, novelty, usefulness, flexibility, elaboration, cultural_sensitivity`
+Plus companion `kappa_by_dimension.csv`: `dimension, fleiss_kappa, n_solutions, computed_by`
+(9-rater matrix per solution; descriptive, computed by materialize_results).
+
+## analysis/results/ (materialized reviewer layer, D54)
+`INDEX.csv` lists every file. Key tables: `descriptive_stats.csv` (cell × dimension),
+`effect_sizes.csv` (Interim-2 H1–H5 + Amendment A3, flattened from frozen JSONs),
+`heterogeneity_battery.csv` (D44/D45), `tegr_by_arm.csv`, `wave_scores_aggregated.csv`
+(21,762 rows), `wave_gates.csv` (W1–W7 × both price vectors),
+`refine_scores_aggregated.csv` + `study2_refine_results.csv` (Studies 2/2b),
+`qual_codebook_kappa.csv` (13 codes + pooled κ, gate column), `qual_code_application.csv`
+(per-text × coder code vectors), `qual_a4_themes.csv`, `qual_a4_kappa.csv`,
+`qual_study2_analysis.csv`. All regenerated idempotently by `code/materialize_results.py`;
+confirmatory numbers are flattened verbatim from frozen `results/*.json`, never recomputed.
 
 ## analysis/results/
 - `descriptive_stats.csv` — mean/sd/n by arm × dimension

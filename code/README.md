@@ -22,3 +22,12 @@ keys and `config/experiment_config.json` must be able to re-run the entire exper
 - Scripts are idempotent: re-running never duplicates or overwrites completed work.
 - Secrets via environment variables only (`.env` is git-ignored); never committed.
 - Each script's header documents: usage command, inputs, outputs, phase.
+
+## materialize_results.py (D54, 2026-08-28)
+Emits the reviewer-facing CSV/JSON layer (`evaluation/scores_aggregated.csv`,
+`evaluation/kappa_by_dimension.csv`, `evaluation/judge_raw/<study>/`, all of
+`analysis/results/`) from frozen artifacts. stdlib-only, idempotent, zero API calls,
+never recomputes a hypothesis test (confirmatory numbers flattened verbatim from
+`results/*.json`; only descriptives computed, labeled `computed_by=materialize_results`).
+**Standing rule:** every new analysis writes `results/<name>.json` AND is added here.
+Run: `python3 code/materialize_results.py`

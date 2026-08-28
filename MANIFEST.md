@@ -928,3 +928,19 @@ Supersedes the kimi-blocked status in Entry 51 §3. Author directive: "use toget
 **Re-analysis (disclosed wrapper; frozen `analyze_wave.py` byte-identical):** n = 2,418 judged runs, 10 families complete. **Gate pattern UNCHANGED:** W1 PASS (+0.0168, p=0.00217) · W2 PASS (+0.0745, p<0.0001) · W3 FAIL (χ²=−47.5, p=1.0; signs 5/6; marketing still negative) · W4 FAIL (n=10; r=−0.2141, p=0.553; power for ρ=0.80 now 0.828) · W5 FAIL (marketing p=0.795, direction still reversed; pooled p=0.618) · W6 PASS (Pareto {C-S-N, F-S-N}; T-EGR 4.044/0.956; promo 4.11/0.98 — gates unchanged) · W7 ICC(3,1) 0.471–0.622. The three Study-1 exploratory findings REMAIN exploratory per the binding upgrade rule (D47). 4/4 LMM calls fell back under D52 on the now-balanced panel — the singularity is structural to the design, disclosed in the results JSONs.
 
 **Artifacts:** `results/wave_analysis.json`, `results/wave_analysis_minimax_promo.json` (regenerated); WAVE-REPLICATION-REPORT.md §Update 2026-08-28; lane logs `wave_gemini_probe2.log` / `wave_gemini_lane.log` / `wave_kimi_lane2–5.log` / `wave_judging_console2–5.log`.
+
+## Entry 66 — 2026-08-28 — Reviewer-facing results layer materialized (D54); standing rule: every stat test ships as a file
+
+**Author directive:** statistical test results must live in files readable without re-running code; reusable for figures/secondary analyses; same treatment for qualitative coding.
+
+**Built:** `code/materialize_results.py` (stdlib-only, idempotent, ZERO API calls, never recomputes a hypothesis test — joins frozen judgment logs to frozen ledgers, flattens existing result JSONs; only descriptive quantities computed, labeled `computed_by=materialize_results`).
+
+**Outputs (all verified):**
+- `evaluation/scores_aggregated.csv` — 17,091 rows = 1,900 solutions × ≤9 judgments (7 solutions at 8 and 1 at 7 = the audited Interim-2 incompletes); families 3,420/3,420/3,420/3,420/3,411.
+- `evaluation/kappa_by_dimension.csv` — Fleiss' κ over the 9-rater matrix: novelty 0.235, usefulness 0.334, flexibility 0.281, elaboration 0.377, cultural sensitivity 0.466 (n = 1,900; descriptive label).
+- `evaluation/judge_raw/` — 17,091 Study-1 + 21,762 wave per-call files (prompt variant, judge, raw response, parsed scores).
+- `analysis/results/` — `INDEX.csv` + 13 CSVs: descriptive_stats, effect_sizes (Interim-2 H1–H5 + A3), heterogeneity_battery (D44/D45), tegr_by_arm, wave_scores_aggregated (21,762), wave_gates (W1–W7 × 2 price vectors), refine_scores_aggregated (2,794; Studies 2/2b), study2_refine_results, qual_codebook_kappa (13 codes + pooled κ = 0.824 with 0.70 gate column), qual_code_application (378 text × coder vectors), qual A4/Study-2 flattened tables.
+
+**Bug caught at materialization (fixed same day):** documented `solution_id` scheme was not unique under the within-family factorial (collapsed 1,900 → 380); now `{cell}__{family}__{problem}__{rep}`. Labeling layer only — judgment logs were always keyed by unique runId.
+
+**Standing rule (D54):** every future analysis writes its result JSON to `results/` AND is added to `materialize_results.py`; an analysis that exists only in stdout/chat does not exist.
