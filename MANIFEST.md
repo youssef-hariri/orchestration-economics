@@ -962,3 +962,16 @@ Supersedes the kimi-blocked status in Entry 51 §3. Author directive: "use toget
 10. Two new references: Open Science Collaboration 2015 (10.1126/science.aac4716); Camerer et al. 2018 (10.1038/s41562-018-0399-z). Author date stamp 2026-08-28.
 
 **Still open (author decision, Entry 47):** the title. The wave results strengthen the case for a title reflecting the replicated negative-substitution finding; candidates unchanged pending the author's pick.
+
+## Entry 68 — 2026-08-28 — v11 audit against frozen data: five corrections, all numbers verified
+
+Full pass of v11 claims vs frozen artifacts (`results/wave_analysis.json`, `interim2_analysis.json`, `results/cost/cost_effectiveness.json`, `qual2_kappa.json`). Verified accurate: wave gates W1–W7 (all point estimates, p-values, power, ICC range, T-EGR incl. promo sensitivity), abstract figures (d = −0.227/−0.691, 98%/23%, T-EGR 6.15/1.49, κ = 0.824, wave +0.017/+0.075), 64% gap recovery, summary table.
+
+**Corrections made (stale or interim-value carryovers):**
+1. "Five contributions follow" → Six (a sixth was added in v11).
+2. Marketing wave delta quoted from the 9-family interim (−0.083) → complete-panel value **−0.075**.
+3. Decision-register references updated: D1–D39 → **D1–D54** (three occurrences, incl. AI-disclosure "all 39 design decisions").
+4. "ten protocols" → **twelve protocols** (two occurrences).
+5. Conclusion now cites "this 1,900-run experiment **and its 2,400-run pre-registered replication wave**".
+
+Recompiled: 32 pages, zero errors, zero undefined references.
