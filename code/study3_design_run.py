@@ -25,6 +25,7 @@ Usage:
 """
 
 import json
+import os
 import sys
 import time
 import urllib.request
@@ -58,8 +59,11 @@ DESIGNS_DIR = ROOT / "runs" / "study3" / "designs"
 MAX_TOKENS = 8192
 WORKERS = 8
 PROMPT_TAG = "protocol13-v1"
-PILOT_PROBLEMS = ["Business_Problem_4", "Business_Problem_8",
-                  "Business_Problem_16", "Business_Problem_19"]  # D32 frozen draw (seed 20260731)
+# Study-3 pilot draw (D55 amendment, 2026-08-28): deterministic seeded draw —
+# random.Random(20260828).sample of the 19 confirmatory problems (numeric-sorted),
+# rejection-resampled until 4 distinct domains per domain_map.json. Result:
+PILOT_PROBLEMS = ["Business_Problem_6", "Business_Problem_8",
+                  "Business_Problem_9", "Business_Problem_12"]
 
 # Provider configs: [cheap sibling] and [frontier]. Conventions from
 # refine_study2b_run.py (D27 temperatures: provider-enforced defaults; gpt
@@ -119,7 +123,7 @@ refine; the FINAL step must produce the complete answer to the problem.
 
 Rules:
 1. Output ONLY a JSON object of the form:
-   {"steps": [{"name": str, "role": str, "systemPrompt": str}, ...]}
+   {{"steps": [{{"name": str, "role": str, "systemPrompt": str}}, ...]}}
 2. Use 1 to 4 steps. Each systemPrompt instructs the model what to produce at that step.
 3. No commentary outside the JSON. No markdown fences.
 4. systemPrompt text must not include the problem itself (it is provided at run time).
@@ -217,7 +221,12 @@ def call(cfg, messages, keys):
 
 
 def _call_anthropic(cfg, messages, keys):
-    payload = {"model": cfg["model"], "messages": messages, "max_tokens": MAX_TOKENS}
+    # Anthropic rejects system-role entries inside messages; hoist to top-level.
+    sys_parts = [m["content"] for m in messages if m["role"] == "system"]
+    msgs = [m for m in messages if m["role"] != "system"]
+    payload = {"model": cfg["model"], "messages": msgs, "max_tokens": MAX_TOKENS}
+    if sys_parts:
+        payload["system"] = "\n\n".join(sys_parts)
     req = urllib.request.Request(
         cfg["endpoint"].rstrip("/") + "/messages",
         data=json.dumps(payload).encode(),
@@ -308,9 +317,20 @@ def run_task(task, problems, keys, ignore_window):
         return "deferred"
     ptext = problems[pid]
     try:
-        # 1) design
-        raw, du = call(cfg_d, [{"role": "user",
-                                "content": DESIGN_PROMPT.format(problem_text=ptext)}], keys)
+        # 1) design (step-level checkpointing: killed chunks resume mid-task)
+        ckpt_file = ROOT / "runs" / "study3" / "checkpoints" / f"{key}.json"
+        ck = {}
+        if ckpt_file.exists():
+            try:
+                ck = json.loads(ckpt_file.read_text())
+            except Exception:
+                ck = {}
+        print(f"  [{key}] design call...", flush=True)
+        if ck.get("steps"):
+            raw, du, steps = ck["raw"], {}, ck["steps"]
+        else:
+            raw, du = call(cfg_d, [{"role": "user",
+                                    "content": DESIGN_PROMPT.format(problem_text=ptext)}], keys)
         rec["designer_model"] = cfg_d["model"]
         rec["designer_usage"] = du
         steps, err = validate_design(raw)
@@ -330,19 +350,29 @@ def run_task(task, problems, keys, ignore_window):
         DESIGNS_DIR.mkdir(parents=True, exist_ok=True)
         (DESIGNS_DIR / f"{key}.designer_raw.txt").write_text(raw)
         rec["n_steps"] = len(steps)
+        ckpt_file.parent.mkdir(parents=True, exist_ok=True)
 
-        # 2) execute steps on the cheap sibling
-        prior, step_logs = "", []
+        # 2) execute steps on the cheap sibling (checkpoint after each step)
+        prior, step_logs = ck.get("prior", ""), ck.get("step_logs", [])
+        ckpt_file.write_text(json.dumps({"raw": raw, "steps": steps,
+                                         "prior": prior, "step_logs": step_logs}))
+        done_names = {s["name"] for s in step_logs}
         for s in steps:
+            if s["name"] in done_names:
+                continue
             user = (f"=== BUSINESS PROBLEM ===\n{ptext}\n\n"
                     + (f"=== PREVIOUS STEP OUTPUTS ===\n{prior}\n\n" if prior else "")
                     + "Produce your step's output now.")
             out, u = call(cfg_x, [{"role": "system", "content": s["systemPrompt"]},
                                   {"role": "user", "content": user}], keys)
+            print(f"  [{key}] step {s['name']} done ({len(out)} chars)", flush=True)
             step_logs.append({"name": s["name"], "role": s["role"],
                               "system_prompt": s["systemPrompt"],
                               "output_len": len(out), "usage": u})
             prior += f"\n\n--- {s['name']} ---\n{out}"
+            ckpt_file.write_text(json.dumps({"raw": raw, "steps": steps,
+                                             "prior": prior, "step_logs": step_logs}))
+        ckpt_file.unlink(missing_ok=True)
         final = step_logs[-1]["output_len"]
         rec.update(status="completed", executor_model=cfg_x["model"],
                    steps=step_logs, final_len=final,

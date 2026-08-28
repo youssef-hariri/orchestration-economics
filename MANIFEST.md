@@ -985,3 +985,13 @@ Recompiled: 32 pages, zero errors, zero undefined references.
 **Protocol §9 decisions resolved (D55):** invalid design → exclude-and-disclose after ONE repair retry (no fixed-pipeline fallback); fresh design per rep; provider-enforced default sampling params (D27; gpt omits temperature, uses max_completion_tokens + reasoning_effort=low).
 
 **Gate before any generation:** OSF pre-registration of Protocol 13 (adapt `code/osf_register_study2b.py`), then pilot (`--pilot`, ≈ $5), gates G1 (≥90% valid designs + ≥90% completion) and G2 (stop only if D-FRONT < C-T-N by d < −0.30), then the full run. DeepSeek judging only off-peak (weekend = off-peak all day Beijing time); qwen generation gated to UTC 14:00–00:00 inside the runner. Budget envelope ≤ $40.
+
+## Entry 70 — 2026-08-28 — Study 3 pilot COMPLETE: 40/40, gates G1+G2 PASS; runner hardened; full run authorized by gate results
+
+**Execution:** OSF registration `9ukjz` timestamped BEFORE first successful generation (pre-registration failures made zero API calls: import bug → pilot-list KeyError → `DESIGN_PROMPT.format` brace KeyError; all pre-API). Pilot = 40 tasks (4 problems × 5 families × 2 arms × 1 rep; seeded draw 20260828, 4 domains — the registered summary cited stale D32 IDs; corrected to the deterministic re-draw disclosed here and in D55: Business_Problem_6/8/9/12).
+
+**Gates (results/study3_pilot_gates.json, D54):**
+- **G1 PASS** — 100% schema-valid designs (0 repair retries, 0 design_failed), 100% completion, all 5 families. Step-count distribution: 3-step ×8, 4-step ×32.
+- **G2 PASS** — Novelty vs frozen C-T-N baseline (n=60, mean 3.92): D-FRONT mean 4.067 (d = **+0.392**), D-SELF 3.972 (d = +0.137). Stop-rule was d < −0.30; both arms ABOVE the human-designed baseline. Judging: frozen panel ×3 variants, 360/360, DeepSeek weekend off-peak.
+
+**Runner hardening (author resilience directive):** missing `import os`; stale env `KIMI_API_KEY` shadows fresh .env key → run with `env -u KIMI_API_KEY`; Anthropic system-role hoisting to top-level `system` param; unescaped braces in DESIGN_PROMPT; **step-level checkpointing** (`runs/study3/checkpoints/`) so 5–15-min multi-step tasks survive chunk kills and resume mid-task (design call not re-paid). Two early findings for the paper: frontier designers produce longer pipelines; first pilot signal says model-authored pipelines meet/beat the human baseline.
