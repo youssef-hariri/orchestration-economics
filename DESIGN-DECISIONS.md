@@ -393,6 +393,15 @@ Format per decision: **Decision → Rationale → Academic grounding → Impleme
 - **Academic grounding:** reusable, inspectable analysis outputs as the unit of computational reproducibility (Sandve et al. 2013, doi:10.1371/journal.pcbi.1003285; Peng 2011, doi:10.1126/science.1213847); results-as-data enabling secondary analysis without re-execution (Stodden et al. 2016, doi:10.1126/science.aah6168).
 - **Implemented in:** `code/materialize_results.py`; outputs as listed above; MANIFEST Entry 66.
 
+## D55. Protocol 13 (Study 3) design-authorship implementation decisions (2026-08-28, pre-registration)
+- **Arms:** D-SELF (cheap sibling designs AND executes its own pipeline) vs D-FRONT (frontier designs, cheap sibling executes). Executor is ALWAYS the cheap sibling so quality differences are attributable to design authorship only. 2 arms × 5 families × 19 confirmatory problems × 3 reps = **570 generations** (pilot: 2 × 5 × 4 D32 problems × 1 rep = 40).
+- **Invalid-design handling:** exclude-and-disclose after ONE repair retry (designer re-prompted once with the validation error; persistent failure → `design_failed` ledger mark, excluded from analysis, disclosed in the participant-flow table). No fixed-pipeline fallback — a fallback would confound authorship with structure.
+- **Design granularity:** fresh design per rep, so design variance is measurable rather than a shared hidden component across reps.
+- **Sampling parameters:** provider-enforced defaults per D27 (gpt omits `temperature`, uses `max_completion_tokens` + `reasoning_effort=low`; all other families use API defaults) — keeps Study 3 comparable to Studies 1–2.
+- **Resilience (author directive):** append-only ledger `runs/logs/study3_ledger.jsonl`; resume = skip tasks already completed with `final_len > 0`; per-family credit exhaustion is caught, logged to `runs/logs/study3_credit_exhaustion.jsonl`, and the family is skipped so other families continue; re-running the script resumes exactly where it stopped. Solutions land in `runs/study3/solutions/`, designer raw JSON in `runs/study3/designs/`; `--build-store` rebuilds the judge_v2-compatible store idempotently.
+- **Academic grounding:** exclude-and-disclose preserves randomization integrity and mirrors CONSORT attrition reporting (Schulz et al. 2010, doi:10.1136/bmj.c332); per-rep fresh designs follow variance-decomposition practice for pipeline/ICC estimation (D30); default-parameter comparability per D27.
+- **Implemented in:** `code/study3_design_run.py`; protocol §9 updated; MANIFEST Entry 69.
+
 ## Maintenance rule
 Every future design or analysis decision MUST be appended here (topic-organized) and to
 `MANIFEST.md` (chronological) **with its academic grounding at the time it is made**.

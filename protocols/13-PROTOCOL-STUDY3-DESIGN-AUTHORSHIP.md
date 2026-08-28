@@ -94,9 +94,17 @@ pipeline rather than to cheap-model execution. Study 3 removes that confound.
 ~570 executions (cheap-tier tokens) + ~570 design calls (half frontier) + 5,130 judge calls.
 Order of magnitude **≤ $40**. Pilot ≈ $5 inside the envelope.
 
-## 9. Open decisions (must be resolved BEFORE OSF registration)
+## 9. Open decisions — RESOLVED 2026-08-28 (implemented in `code/study3_design_run.py`)
 
-1. Invalid-design handling: exclude-and-disclose (recommended) vs fixed-pipeline fallback.
-2. One shared design per problem per arm, or a fresh design per rep (design-variance: D30's
-   design-ICC probe suggests fresh-per-rep is informative but triples design cost).
-3. Designer temperature: API-enforced defaults (D27 precedent) vs pinned low.
+1. Invalid-design handling: **exclude-and-disclose after ONE repair retry**. The designer
+   response is parsed as JSON; on parse/validation failure the designer is re-prompted once
+   with the validation error echoed back. If the retry also fails, the task is marked
+   `design_failed` in the ledger, excluded from analysis, and disclosed in the CONSORT-style
+   flow. No fixed-pipeline fallback (a fallback would confound authorship with structure).
+2. Design granularity: **fresh design per rep** (design × execution both vary; design
+   variance becomes measurable rather than a hidden shared component). Cost accepted within
+   the ≤ $40 envelope.
+3. Designer/executor temperature: **provider-enforced defaults (D27 precedent)** —
+   gpt omits `temperature` (uses `max_completion_tokens` + `reasoning_effort=low`); all
+   other families use their API defaults. No pinned temperature, so results stay comparable
+   to Studies 1–2 conditions.

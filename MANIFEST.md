@@ -975,3 +975,13 @@ Full pass of v11 claims vs frozen artifacts (`results/wave_analysis.json`, `inte
 5. Conclusion now cites "this 1,900-run experiment **and its 2,400-run pre-registered replication wave**".
 
 Recompiled: 32 pages, zero errors, zero undefined references.
+
+## Entry 69 — 2026-08-28 — Protocol 13 (Study 3) runner built: `code/study3_design_run.py`; §9 open decisions resolved (D55)
+
+**Code:** `code/study3_design_run.py` — resilient, resumable Study 3 generation runner per author directive (network/credit failure → resume where it stopped). Append-only ledger `runs/logs/study3_ledger.jsonl`; resume skips tasks completed with `final_len > 0`; per-family credit exhaustion logged to `runs/logs/study3_credit_exhaustion.jsonl` and family skipped; solutions in `runs/study3/solutions/`, raw designer JSON in `runs/study3/designs/`; `--build-store` rebuilds the judge_v2-compatible store (`runs/study3/study3_store.json`) idempotently. Local `load_key` copy so the runner never requires judge keys at generation time.
+
+**Dry-run verified:** full plan = **570 tasks** (2 arms × 5 families × 19 confirmatory problems × 3 reps = 57/arm·family); pilot = **40 tasks** (D32 frozen draw Business_Problem_4/8/16/19, 1 rep). Zero API calls made to date.
+
+**Protocol §9 decisions resolved (D55):** invalid design → exclude-and-disclose after ONE repair retry (no fixed-pipeline fallback); fresh design per rep; provider-enforced default sampling params (D27; gpt omits temperature, uses max_completion_tokens + reasoning_effort=low).
+
+**Gate before any generation:** OSF pre-registration of Protocol 13 (adapt `code/osf_register_study2b.py`), then pilot (`--pilot`, ≈ $5), gates G1 (≥90% valid designs + ≥90% completion) and G2 (stop only if D-FRONT < C-T-N by d < −0.30), then the full run. DeepSeek judging only off-peak (weekend = off-peak all day Beijing time); qwen generation gated to UTC 14:00–00:00 inside the runner. Budget envelope ≤ $40.
