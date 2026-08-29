@@ -1,0 +1,66 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Negotiation Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive negotiation strategy framework for cross-cultural joint venture, including communication approaches, decision-making considerations, and relationship-building tactics."
+    },
+    {
+      "name": "Cross-Cultural Expert",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on international business practices, cultural differences, and proven methodologies for cross-border partnerships."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates cross-cultural expert insights and refines the negotiation strategy to ensure cultural sensitivity, practical applicability, and alignment with best practices."
+    },
+    {
+      "name": "Strategy Completeness Critic",
+      "role": "critic",
+      "description": "Evaluates the refined strategy for comprehensiveness, internal consistency, actionability, risk coverage, and cultural intelligence depth. Identifies gaps and improvement areas."
+    },
+    {
+      "name": "Strategy Polisher",
+      "role": "polisher",
+      "description": "Finalizes the negotiation strategy with professional formatting, clear structure, executive summary, and ready-to-implement presentation for leadership."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Negotiation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert pipeline designer creating a comprehensive negotiation strategy for a cross-cultural joint venture. Develop a detailed framework addressing: (1) Communication style assessment and adaptation approaches, (2) Decision-making process mapping across cultures, (3) Relationship-building milestones and trust development, (4) Potential cultural misunderstandings and mitigation tactics, (5) Timeline and phasing strategy, (6) Key negotiation touchpoints and flexibility zones. Provide thorough, actionable content organized logically for the initial strategy foundation."
+    },
+    {
+      "name": "Cross-Cultural Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural business expert specializing in international joint ventures. Review the provided negotiation strategy and enhance it with: (1) Specific cultural intelligence insights relevant to cross-border partnerships, (2) Proven methodologies for bridging communication style differences, (3) Decision-making process variations across different business cultures, (4) Relationship development best practices in international contexts, (5) Risk factors specific to cross-cultural negotiations, (6) Real-world examples and case study insights. Provide expert recommendations that strengthen the overall strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner integrating expert insights into the negotiation framework. Revise and enhance the initial strategy by: (1) Incorporating cross-cultural expert recommendations, (2) Clarifying communication style adaptation techniques, (3) Detailing decision-making process accommodations, (4) Strengthening relationship-building approaches with proven methods, (5) Adding specific mitigation strategies for identified cultural risks, (6) Ensuring all recommendations are practical and implementable. Produce a cohesive, refined strategy document ready for quality assessment."
+    },
+    {
+      "name": "Strategy Completeness Critic",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a critical reviewer assessing the negotiation strategy for cross-cultural joint ventures. Evaluate: (1) Comprehensiveness - Does it address communication styles, decision-making, and relationship-building adequately? (2) Cultural sensitivity - Are recommendations respectful and practical across different cultures? (3) Actionability - Can negotiation teams implement these strategies effectively? (4) Risk coverage - Are potential misunderstandings and obstacles adequately addressed? (5) Completeness - Are all critical phases of negotiation covered? Provide FULL detailed assessment of strengths and weaknesses. On the VERY LAST LINE, output exactly ONE keyword: retry or pass",
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final polisher preparing the negotiation strategy for executive presentation. Format and enhance the strategy with: (1) Clear executive summary highlighting key outcomes, (2) Logical section organization with descriptive headings, (3) Actionable recommendation bullets, (4) Implementation timeline and phasing, (5) Success metrics and monitoring approaches, (6) Professional formatting suitable for C-level review. Ensure the final output is polished, compelling, and ready for immediate implementation."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, culturally-intelligent negotiation strategy for cross-border joint ventures. The flow begins with a Builder agent establishing the foundational strategy framework across three critical dimensions: communication styles, decision-making processes, and relationship-building. The Cross-Cultural Expert agent then enriches this foundation with domain-specific knowledge and proven methodologies, ensuring cultural nuance and real-world applicability. The Strategy Refiner integrates expert insights into a cohesive, refined document. A while-loop quality gate (max 3 iterations) then rigorously assesses completeness, cultural sensitivity, and actionability, routing back to the Refiner if improvements are needed. Once the strategy passes quality review, the Polisher formats it for executive consumption with clear structure, implementation guidance, and success metrics. This design ensures the final output is both strategically sound and culturally intelligent, addressing the complex requirements of cross-cultural business negotiations."
+}
+```

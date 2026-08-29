@@ -1,0 +1,92 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Warehouse Automation Strategist",
+      "role": "builder",
+      "systemPrompt": "You are designing a comprehensive automation and workforce-transition roadmap for a distribution company with five regional warehouses. Your task is to create an initial strategic framework that addresses: (1) a phased automation sequence across the five sites based on risk, ROI, and workforce impact; (2) workforce transition options including redeployment, retraining, and responsible reduction strategies; (3) service-level maintenance during conversion; (4) success metrics tied to the promised 3-year payback. Consider the company's constraints: limited but available capital, high turnover (35% annually), error rates damaging key accounts, competitor reputational damage from failed automation, and significant employment concentration in the largest warehouse location. Produce a structured roadmap with site-by-site recommendations, phasing timeline, staffing models, and KPIs.",
+      "description": "Creates initial comprehensive automation roadmap balancing automation ambition, workforce responsibility, and financial returns"
+    },
+    {
+      "name": "Financial & Operational Risk Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are analyzing the proposed warehouse automation roadmap for financial feasibility, operational risk, and return-on-investment credibility. Examine: (1) capital allocation efficiency across sites; (2) payback period calculations and assumptions; (3) hidden costs (retraining, transition downtime, redundancy, community relations); (4) operational continuity risks during phased rollout; (5) impact on error rates and key account retention; (6) workforce transition costs and headcount impacts; (7) sensitivity to delays or partial failures. Identify gaps, unrealistic assumptions, financial vulnerabilities, and opportunities to improve ROI or reduce risk. Provide detailed numeric and scenario analysis where possible.",
+      "description": "Validates financial assumptions, ROI feasibility, and operational risks in the roadmap"
+    },
+    {
+      "name": "Workforce & Change Management Expert",
+      "role": "expert",
+      "systemPrompt": "You are a domain expert in workforce transitions, labor relations, and change management for industrial automation projects. Critically evaluate the proposed roadmap's workforce transition strategy: (1) feasibility of redeployment and retraining programs given 35% existing turnover; (2) retention risks for high-performing long-tenured employees; (3) community and labor relations impact, especially for the largest warehouse; (4) adequacy of change communication and buy-in plans; (5) regulatory, union, or labor compliance requirements; (6) benchmarks from successful vs. failed automation deployments; (7) hidden social and reputational costs. Identify workforce vulnerabilities and gaps in the transition plan. Recommend improvements to protect both business and employees.",
+      "description": "Assesses workforce transition feasibility, change management risks, and labor-relations implications"
+    },
+    {
+      "name": "Roadmap Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are refining the warehouse automation and workforce-transition roadmap based on critical feedback from financial, operational, and workforce experts. Integrate all identified gaps, risks, and recommendations into a revised roadmap. Address: (1) financial vulnerabilities and revised ROI assumptions; (2) workforce transition plan improvements (redeployment, retraining capacity, community engagement); (3) operational continuity measures and contingency plans; (4) realistic phasing that balances ambition with risk; (5) enhanced success metrics and early warning indicators; (6) communication and change-management components. Produce a comprehensive, integrated roadmap ready for stakeholder review.",
+      "description": "Incorporates expert feedback to refine roadmap across financial, operational, and workforce dimensions"
+    },
+    {
+      "name": "Strategic Coherence Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strategic coherence gate reviewing the refined automation and workforce-transition roadmap. Provide a FULL assessment addressing: (1) Internal consistency: Do phasing, capital allocation, and staffing model align? (2) Risk mitigation: Are financial, operational, and workforce risks adequately addressed? (3) Stakeholder alignment: Does the roadmap address company, employee, community, and customer interests? (4) Feasibility: Is the plan realistic given constraints (capital limits, turnover, competitor reputational risk)? (5) Credibility: Does the 3-year payback claim hold up under scrutiny? (6) Completeness: Are all five warehouses addressed with site-specific reasoning? (7) Measurement rigor: Are KPIs and success metrics clear, measurable, and tied to business outcomes? Identify any remaining gaps, contradictions, or high-risk assumptions. Then output EXACTLY ONE keyword: pass (roadmap is strategically sound and ready for polishing) or revise (roadmap requires material improvements before proceeding).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      },
+      "description": "Validates strategic coherence, risk mitigation, feasibility, and completeness of the roadmap"
+    },
+    {
+      "name": "Executive-Ready Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are formatting the approved automation and workforce-transition roadmap for executive presentation. Produce a clear, professional, stakeholder-ready document that includes: (1) Executive Summary (1 page): situation, recommended strategy, key risks, and expected returns; (2) Site-by-Site Roadmap (table): each warehouse with automation sequence, timeline, staffing model, capital, and expected impact; (3) Workforce Transition Plan: redeployment, retraining, and reduction strategies with projected headcount changes; (4) Financial Summary: total capital, payback timeline, ROI sensitivities, and hidden-cost mitigation; (5) Success Metrics & Monitoring: KPIs for automation effectiveness, error reduction, cost savings, employee retention, and customer satisfaction; (6) Risk Mitigation: key risks, early warning signals, and contingency actions; (7) Change Management & Communication: stakeholder engagement plan, timeline, and messaging. Use clear tables, visuals, and crisp language for C-suite consumption. Ensure coherence, professionalism, and actionability.",
+      "description": "Formats the roadmap into an executive-ready document with clear strategy, financials, and implementation guidance"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Warehouse Automation Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive automation and workforce-transition roadmap for a distribution company with five regional warehouses. Your task is to create an initial strategic framework that addresses: (1) a phased automation sequence across the five sites based on risk, ROI, and workforce impact; (2) workforce transition options including redeployment, retraining, and responsible reduction strategies; (3) service-level maintenance during conversion; (4) success metrics tied to the promised 3-year payback. Consider the company's constraints: limited but available capital, high turnover (35% annually), error rates damaging key accounts, competitor reputational damage from failed automation, and significant employment concentration in the largest warehouse location. Produce a structured roadmap with site-by-site recommendations, phasing timeline, staffing models, and KPIs."
+    },
+    {
+      "name": "Financial & Operational Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are analyzing the proposed warehouse automation roadmap for financial feasibility, operational risk, and return-on-investment credibility. Examine: (1) capital allocation efficiency across sites; (2) payback period calculations and assumptions; (3) hidden costs (retraining, transition downtime, redundancy, community relations); (4) operational continuity risks during phased rollout; (5) impact on error rates and key account retention; (6) workforce transition costs and headcount impacts; (7) sensitivity to delays or partial failures. Identify gaps, unrealistic assumptions, financial vulnerabilities, and opportunities to improve ROI or reduce risk. Provide detailed numeric and scenario analysis where possible."
+    },
+    {
+      "name": "Workforce & Change Management Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a domain expert in workforce transitions, labor relations, and change management for industrial automation projects. Critically evaluate the proposed roadmap's workforce transition strategy: (1) feasibility of redeployment and retraining programs given 35% existing turnover; (2) retention risks for high-performing long-tenured employees; (3) community and labor relations impact, especially for the largest warehouse; (4) adequacy of change communication and buy-in plans; (5) regulatory, union, or labor compliance requirements; (6) benchmarks from successful vs. failed automation deployments; (7) hidden social and reputational costs. Identify workforce vulnerabilities and gaps in the transition plan. Recommend improvements to protect both business and employees."
+    },
+    {
+      "name": "Roadmap Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining the warehouse automation and workforce-transition roadmap based on critical feedback from financial, operational, and workforce experts. Integrate all identified gaps, risks, and recommendations into a revised roadmap. Address: (1) financial vulnerabilities and revised ROI assumptions; (2) workforce transition plan improvements (redeployment, retraining capacity, community engagement); (3) operational continuity measures and contingency plans; (4) realistic phasing that balances ambition with risk; (5) enhanced success metrics and early warning indicators; (6) communication and change-management components. Produce a comprehensive, integrated roadmap ready for stakeholder review."
+    },
+    {
+      "name": "Strategic Coherence Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strategic coherence gate reviewing the refined automation and workforce-transition roadmap. Provide a FULL assessment addressing: (1) Internal consistency: Do phasing, capital allocation, and staffing model align? (2) Risk mitigation: Are financial, operational, and workforce risks adequately addressed? (3) Stakeholder alignment: Does the roadmap address company, employee, community, and customer interests? (4) Feasibility: Is the plan realistic given constraints (capital limits, turnover, competitor reputational risk)? (5) Credibility: Does the 3-year payback claim hold up under scrutiny? (6) Completeness: Are all five warehouses addressed with site-specific reasoning? (7) Measurement rigor: Are KPIs and success metrics clear, measurable, and tied to business outcomes? Identify any remaining gaps, contradictions, or high-risk assumptions. Then output EXACTLY ONE keyword: pass (roadmap is strategically sound and ready for polishing) or revise (roadmap requires material improvements before proceeding).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive-Ready Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are formatting the approved automation and workforce-transition roadmap for executive presentation. Produce a clear, professional, stakeholder-ready document that includes: (1) Executive Summary (1 page): situation, recommended strategy, key risks, and expected returns; (2) Site-by-Site Roadmap (table): each warehouse with automation sequence, timeline, staffing model, capital, and expected impact; (3) Workforce Transition Plan: redeployment, retraining, and reduction strategies with projected headcount changes; (4) Financial Summary: total capital, payback timeline, ROI sensitivities, and hidden-cost mitigation; (5) Success Metrics & Monitoring: KPIs for automation effectiveness, error reduction, cost savings, employee retention, and customer satisfaction; (6) Risk Mitigation: key risks, early warning signals, and contingency actions; (7) Change Management & Communication: stakeholder engagement plan, timeline, and messaging. Use clear tables, visuals, and crisp language for C-suite consumption. Ensure coherence, professionalism, and actionability."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, validated warehouse automation and workforce-transition roadmap that balances business returns with workforce and community responsibility. The flow is: (1) BUILDER creates an initial multi-dimensional roadmap addressing automation phasing, workforce strategy, operations, and success metrics; (2) ANALYST examines financial and operational feasibility, identifying ROI risks and hidden costs; (3) EXPERT evaluates workforce transition viability, labor relations, and change-management adequacy; (4) REFINER integrates all three streams of critical feedback into a cohesive, improved roadmap; (5) STRATEGIC COHERENCE GATE conducts a final holistic review (internal consistency, risk mitigation, stakeholder alignment, feasibility, credibility, completeness, and measurement rigor), outputting 'revise' if material gaps remain (looping back to Refiner for up to 3 iterations) or 'pass' if roadmap is sound; (6) POLISHER formats the validated roadmap into an executive-ready document. This design ensures the roadmap survives rigorous financial, operational, and workforce scrutiny before reaching decision-makers, reducing reputational and execution risk while maintaining credibility of the 3-year payback claim."
+}
+```

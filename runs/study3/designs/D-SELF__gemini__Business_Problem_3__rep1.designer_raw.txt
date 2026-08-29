@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in regional retail customer service. Develop a comprehensive strategy to improve customer satisfaction and loyalty, focusing on localized cultural nuances, communication channels, and service recovery protocols.",
+      "description": "Generates the initial strategic framework for regional customer service enhancement."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "systemPrompt": "You are a regional market specialist. Evaluate the proposed customer service strategy for feasibility, cultural alignment, and potential impact on local customer loyalty. Identify gaps in the strategy.",
+      "description": "Provides domain-specific critique of the proposed strategy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalExpert to strengthen the proposal, ensuring all identified gaps are addressed and the strategy is actionable and innovative.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "You are a quality control agent. Assess the refined strategy for clarity, innovation, and alignment with the goal of increasing customer loyalty. Provide a detailed assessment. If the strategy is not fully optimized, output 'revise'. If it meets high standards, output 'pass'. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "description": "Validates the quality of the strategy before final polish."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional business writer. Format the final strategy into a clear, compelling, and professional document suitable for executive review.",
+      "description": "Formats the final output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in regional retail customer service. Develop a comprehensive strategy to improve customer satisfaction and loyalty, focusing on localized cultural nuances, communication channels, and service recovery protocols."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regional market specialist. Evaluate the proposed customer service strategy for feasibility, cultural alignment, and potential impact on local customer loyalty. Identify gaps in the strategy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalExpert to strengthen the proposal, ensuring all identified gaps are addressed and the strategy is actionable and innovative."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality control agent. Assess the refined strategy for clarity, innovation, and alignment with the goal of increasing customer loyalty. Provide a detailed assessment. If the strategy is not fully optimized, output 'revise'. If it meets high standards, output 'pass'. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional business writer. Format the final strategy into a clear, compelling, and professional document suitable for executive review."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist creating a foundational plan. The RegionalExpert evaluates this plan for local market fit. The StrategyRefiner then incorporates this feedback. The QualityGate assesses the output; if it requires improvement, it loops back to the StrategyRefiner. Once the quality is sufficient, the FinalPolisher formats the document for the end user."
+}

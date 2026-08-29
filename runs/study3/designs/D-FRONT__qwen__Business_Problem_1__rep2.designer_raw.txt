@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Market Expansion Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive market entry strategy for a mid-sized eco-friendly clothing company expanding into a new international market. Include detailed sections on target market selection, product positioning, marketing channels, and initial operational and manufacturing steps. Ensure the strategy strongly aligns with sustainable and environmentally friendly brand values.",
+      "description": "Drafts the initial comprehensive international market expansion strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Review the initial market expansion strategy. Enhance its depth, ensure all constraints (product positioning, marketing, operations) are thoroughly addressed, and improve the logical flow. If feedback is provided from a previous review, strictly implement those corrections and resolve all identified issues.",
+      "description": "Refines and improves the strategy draft based on feedback or initial quality checks."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a critical strategy reviewer. Evaluate the refined market expansion strategy for comprehensiveness, feasibility, and alignment with eco-friendly branding. Check if product positioning, marketing channels, and operational steps are detailed, realistic, and cohesive. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy and decides if it meets quality standards or needs revision."
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Take the finalized market expansion strategy and format it into a highly professional, polished, and easy-to-read executive brief. Use clear headings, bullet points, and professional business language. Ensure the final output is visually structured and ready for presentation to the company's board of directors.",
+      "description": "Formats and polishes the final approved strategy into an executive-ready document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Expansion Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive market entry strategy for a mid-sized eco-friendly clothing company expanding into a new international market. Include detailed sections on target market selection, product positioning, marketing channels, and initial operational and manufacturing steps. Ensure the strategy strongly aligns with sustainable and environmentally friendly brand values."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Review the initial market expansion strategy. Enhance its depth, ensure all constraints (product positioning, marketing, operations) are thoroughly addressed, and improve the logical flow. If feedback is provided from a previous review, strictly implement those corrections and resolve all identified issues."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical strategy reviewer. Evaluate the refined market expansion strategy for comprehensiveness, feasibility, and alignment with eco-friendly branding. Check if product positioning, marketing channels, and operational steps are detailed, realistic, and cohesive. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Take the finalized market expansion strategy and format it into a highly professional, polished, and easy-to-read executive brief. Use clear headings, bullet points, and professional business language. Ensure the final output is visually structured and ready for presentation to the company's board of directors."
+    }
+  ],
+  "explanation": "This pipeline begins with a Builder agent to draft the initial international expansion strategy. A Refiner agent then enhances the draft for depth, clarity, and alignment with the prompt's constraints. A Quality Gate (Critic) evaluates the refined strategy; if it lacks comprehensiveness or feasibility, it routes back to the Refiner for revisions. Once the strategy passes the quality check, the Polisher formats it into a professional executive brief. This ensures a high-quality, thoroughly vetted, and well-presented final strategy while remaining well under the 8-step limit."
+}

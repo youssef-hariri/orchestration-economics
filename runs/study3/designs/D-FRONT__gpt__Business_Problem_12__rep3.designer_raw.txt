@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Sustainable Tourism Plan Drafter",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, practical sustainable tourism development plan for a government tourism agency in a region with significant natural beauty and historical sites. The plan must attract international visitors while protecting ecosystems, preserving cultural heritage, respecting local communities, and distributing economic benefits locally. Include a situational assessment, strategic objectives, target visitor segments, destination positioning, conservation measures, cultural safeguards, community participation and ownership, tourism products, infrastructure and mobility, international marketing, workforce development, governance, financing, implementation phases, risk mitigation, and measurable indicators. Clearly identify assumptions where regional data is unavailable and avoid inventing facts.",
+      "description": "Creates the initial end-to-end sustainable tourism development plan."
+    },
+    {
+      "name": "Environmental and Cultural Sustainability Expert",
+      "role": "expert",
+      "systemPrompt": "Assess the draft plan from the perspective of sustainable destination management. Provide specific recommendations concerning biodiversity, carrying capacity, climate resilience, emissions, water and waste management, protected areas, heritage conservation, Indigenous or traditional rights where applicable, cultural authenticity, visitor conduct, resident well-being, accessibility, and prevention of overtourism. Evaluate whether local people have meaningful decision-making power and realistic opportunities to own businesses, gain employment, and retain tourism revenue. Flag unsupported assumptions, harmful proposals, greenwashing risks, and implementation gaps. Produce actionable expert guidance for revising the plan.",
+      "description": "Supplies specialist guidance on environmental protection, cultural heritage, and community benefit."
+    },
+    {
+      "name": "Inclusive Tourism Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the sustainable tourism plan using the original draft and all available expert or quality feedback. Resolve every identified weakness and produce a coherent, self-contained plan suitable for a government tourism agency. Balance international market growth with enforceable environmental limits, cultural safeguards, and equitable local economic participation. Make recommendations operational by assigning responsibilities, suggesting funding mechanisms, defining phased timelines, and providing measurable baselines or baseline-setting methods, targets, and indicators. Distinguish immediate, medium-term, and long-term actions. Preserve useful content, remove repetition, state assumptions, and do not fabricate region-specific evidence.",
+      "description": "Integrates expert feedback and turns the proposal into an actionable government strategy."
+    },
+    {
+      "name": "Sustainable Tourism Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Review the refined plan rigorously and provide a full quality assessment. Determine whether it is comprehensive, internally consistent, actionable, financially and institutionally plausible, and appropriately tailored to a nature- and heritage-rich region seeking international visitors. Examine destination positioning, community governance and benefit sharing, conservation and carrying-capacity controls, heritage safeguards, infrastructure, climate resilience, international promotion, funding, implementation sequencing, risk management, and monitoring indicators. Check for vague language, invented facts, extractive tourism models, greenwashing, cultural commodification, accessibility omissions, or growth targets that conflict with ecological limits. List strengths, weaknesses, and exact corrections required. Output pass only if the plan is ready for final presentation; otherwise output revise. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "description": "Determines whether the refined plan meets strategic, sustainability, and implementation standards."
+    },
+    {
+      "name": "Government Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing sustainable tourism plan. Improve organization, clarity, concision, and professional presentation without weakening substantive safeguards or introducing unsupported claims. Use clear headings, prioritized recommendations, phased implementation, a responsibility framework, and a concise KPI table. Make trade-offs explicit and emphasize that visitor growth must remain within environmental and social limits. Ensure the final document is persuasive to government decision-makers, useful to implementation partners, understandable to communities, and suitable for discussion with international tourism stakeholders.",
+      "description": "Delivers a polished, decision-ready sustainable tourism strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Sustainable Tourism Plan Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, practical sustainable tourism development plan for a government tourism agency in a region with significant natural beauty and historical sites. The plan must attract international visitors while protecting ecosystems, preserving cultural heritage, respecting local communities, and distributing economic benefits locally. Include a situational assessment, strategic objectives, target visitor segments, destination positioning, conservation measures, cultural safeguards, community participation and ownership, tourism products, infrastructure and mobility, international marketing, workforce development, governance, financing, implementation phases, risk mitigation, and measurable indicators. Clearly identify assumptions where regional data is unavailable and avoid inventing facts."
+    },
+    {
+      "name": "Environmental and Cultural Sustainability Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Assess the draft plan from the perspective of sustainable destination management. Provide specific recommendations concerning biodiversity, carrying capacity, climate resilience, emissions, water and waste management, protected areas, heritage conservation, Indigenous or traditional rights where applicable, cultural authenticity, visitor conduct, resident well-being, accessibility, and prevention of overtourism. Evaluate whether local people have meaningful decision-making power and realistic opportunities to own businesses, gain employment, and retain tourism revenue. Flag unsupported assumptions, harmful proposals, greenwashing risks, and implementation gaps. Produce actionable expert guidance for revising the plan."
+    },
+    {
+      "name": "Inclusive Tourism Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the sustainable tourism plan using the original draft and all available expert or quality feedback. Resolve every identified weakness and produce a coherent, self-contained plan suitable for a government tourism agency. Balance international market growth with enforceable environmental limits, cultural safeguards, and equitable local economic participation. Make recommendations operational by assigning responsibilities, suggesting funding mechanisms, defining phased timelines, and providing measurable baselines or baseline-setting methods, targets, and indicators. Distinguish immediate, medium-term, and long-term actions. Preserve useful content, remove repetition, state assumptions, and do not fabricate region-specific evidence."
+    },
+    {
+      "name": "Sustainable Tourism Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined plan rigorously and provide a full quality assessment. Determine whether it is comprehensive, internally consistent, actionable, financially and institutionally plausible, and appropriately tailored to a nature- and heritage-rich region seeking international visitors. Examine destination positioning, community governance and benefit sharing, conservation and carrying-capacity controls, heritage safeguards, infrastructure, climate resilience, international promotion, funding, implementation sequencing, risk management, and monitoring indicators. Check for vague language, invented facts, extractive tourism models, greenwashing, cultural commodification, accessibility omissions, or growth targets that conflict with ecological limits. List strengths, weaknesses, and exact corrections required. Output pass only if the plan is ready for final presentation; otherwise output revise. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Government Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing sustainable tourism plan. Improve organization, clarity, concision, and professional presentation without weakening substantive safeguards or introducing unsupported claims. Use clear headings, prioritized recommendations, phased implementation, a responsibility framework, and a concise KPI table. Make trade-offs explicit and emphasize that visitor growth must remain within environmental and social limits. Ensure the final document is persuasive to government decision-makers, useful to implementation partners, understandable to communities, and suitable for discussion with international tourism stakeholders."
+    }
+  ],
+  "explanation": "The flow is Sustainable Tourism Plan Drafter → Environmental and Cultural Sustainability Expert → Inclusive Tourism Strategy Refiner → Sustainable Tourism Quality Assessor → Government Strategy Polisher. The builder establishes a complete strategic foundation, the expert adds specialized environmental, cultural, and community-benefit scrutiny, and the refiner integrates that guidance into an implementable government plan. The assessor then conducts a full review after the revised output exists. If it outputs revise, execution returns to the refiner, which incorporates the detailed assessment before resubmission; this revision cycle may run up to three times. If it outputs pass, the plan proceeds to the polisher for a clear, professional, decision-ready final response."
+}

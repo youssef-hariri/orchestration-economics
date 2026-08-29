@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Roadmap Builder",
+      "role": "builder",
+      "systemPrompt": "You are a supply chain strategist. Draft an initial automation and workforce-transition roadmap for a distribution company with 5 regional warehouses. Address the degree and sequence of automation, staff redeployment/reduction, service level maintenance during conversion, and ROI measurement.",
+      "description": "Drafts the initial comprehensive automation and workforce transition roadmap."
+    },
+    {
+      "name": "Labor & Operations Expert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in warehouse operations and labor relations. Review the initial roadmap. Provide a detailed analysis on how well it addresses the 35% turnover, long-tenured employees, community impact (largest employer in town), capital constraints, and the risks of a botched rollout (learning from competitor failure). Suggest specific strategic improvements.",
+      "description": "Analyzes the draft for labor sensitivity, community impact, and operational risks."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Improve the roadmap based on the Labor & Operations Expert's analysis and any subsequent quality feedback. Ensure the plan perfectly balances capital constraints, workforce sensitivity, and operational continuity. Fix all issues and produce a cohesive, improved version.",
+      "description": "Refines and improves the roadmap based on expert analysis and feedback."
+    },
+    {
+      "name": "Executive Review Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined roadmap carefully. Assess if it realistically balances automation ROI with responsible workforce transition, mitigates the competitor failure risk, and maintains service levels. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined roadmap and triggers a retry if it fails to meet strategic standards."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional business formatter. Polish the final approved roadmap into an executive-ready presentation format, ensuring clear headings, bullet points, actionable timelines, and a professional, empathetic tone.",
+      "description": "Formats the final roadmap for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Roadmap Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain strategist. Draft an initial automation and workforce-transition roadmap for a distribution company with 5 regional warehouses. Address the degree and sequence of automation, staff redeployment/reduction, service level maintenance during conversion, and ROI measurement."
+    },
+    {
+      "name": "Labor & Operations Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in warehouse operations and labor relations. Review the initial roadmap. Provide a detailed analysis on how well it addresses the 35% turnover, long-tenured employees, community impact (largest employer in town), capital constraints, and the risks of a botched rollout (learning from competitor failure). Suggest specific strategic improvements."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Improve the roadmap based on the Labor & Operations Expert's analysis and any subsequent quality feedback. Ensure the plan perfectly balances capital constraints, workforce sensitivity, and operational continuity. Fix all issues and produce a cohesive, improved version."
+    },
+    {
+      "name": "Executive Review Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality gate. Review the refined roadmap carefully. Assess if it realistically balances automation ROI with responsible workforce transition, mitigates the competitor failure risk, and maintains service levels. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "maxIterations": 3,
+      "targetStep": 3
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional business formatter. Polish the final approved roadmap into an executive-ready presentation format, ensuring clear headings, bullet points, actionable timelines, and a professional, empathetic tone."
+    }
+  ],
+  "explanation": "The pipeline begins with the Roadmap Builder drafting the initial automation and workforce transition plan. The Labor & Operations Expert then analyzes this draft specifically for labor sensitivity, community impact, and operational risks. The Strategy Refiner integrates these insights to create a comprehensive, risk-adjusted roadmap. The Executive Review Gate (a 'while' loop) evaluates the refined roadmap, looping back to the Strategy Refiner (up to 3 times) if the balance between ROI, workforce transition, and service continuity is inadequate. Finally, the Final Polisher formats the approved roadmap into an executive-ready document."
+}

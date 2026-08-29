@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "FutureOfWorkBuilder",
+      "role": "builder",
+      "systemPrompt": "You are a future of work strategist. Draft a comprehensive framework and set of principles for a large international company re-evaluating its work approach. Cover remote work, office spaces, and collaboration tools. Crucially, integrate considerations for the varied needs, preferences, and cultural expectations of employees across different countries.",
+      "description": "Creates the initial draft of the global future of work framework."
+    },
+    {
+      "name": "FrameworkRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous future of work framework based on any quality feedback provided. Enhance its flexibility, ensure deep integration of global and cultural nuances, fix any structural issues, and produce a polished, improved version.",
+      "description": "Refines and improves the framework based on feedback and global best practices."
+    },
+    {
+      "name": "GlobalAlignmentGate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined future of work framework carefully for global applicability, cultural sensitivity, and strategic completeness. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the framework for global and cultural alignment, routing to refiner or polisher."
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive polisher. Perform a final quality check and format the future of work framework. Ensure professional executive formatting, clear headings, bullet points where appropriate, and impactful language suitable for global leadership.",
+      "description": "Formats and finalizes the output for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "FutureOfWorkBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a future of work strategist. Draft a comprehensive framework and set of principles for a large international company re-evaluating its work approach. Cover remote work, office spaces, and collaboration tools. Crucially, integrate considerations for the varied needs, preferences, and cultural expectations of employees across different countries."
+    },
+    {
+      "name": "FrameworkRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous future of work framework based on any quality feedback provided. Enhance its flexibility, ensure deep integration of global and cultural nuances, fix any structural issues, and produce a polished, improved version."
+    },
+    {
+      "name": "GlobalAlignmentGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined future of work framework carefully for global applicability, cultural sensitivity, and strategic completeness. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive polisher. Perform a final quality check and format the future of work framework. Ensure professional executive formatting, clear headings, bullet points where appropriate, and impactful language suitable for global leadership."
+    }
+  ],
+  "explanation": "The pipeline begins with the FutureOfWorkBuilder drafting the initial strategic framework. The FrameworkRefiner then enhances the draft, focusing on global nuances and structural clarity. The GlobalAlignmentGate acts as a quality check; if it identifies gaps in cultural sensitivity or strategic depth, it outputs 'revise' to loop back to the Refiner. If the framework meets all global standards, it outputs 'pass' to proceed to the ExecutivePolisher, which formats the final output for leadership. This design ensures high-quality, culturally aware output within a concise 4-step automated flow."
+}

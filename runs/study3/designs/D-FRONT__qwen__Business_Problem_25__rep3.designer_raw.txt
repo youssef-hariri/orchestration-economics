@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert business strategist. Draft a comprehensive business-model transition plan for a software company moving from perpetual licenses to subscriptions. Address: 1) Offer structure and migration incentives for existing license holders (acknowledging their entitlement). 2) Pricing strategy that balances the multi-year revenue trough depth against adoption speed. 3) Sales compensation redesign to shift focus from large upfront deals to recurring revenue. 4) Financial communication plan to keep investors and the board committed through the revenue trough. Provide a detailed, structured initial draft.",
+      "description": "Creates the initial comprehensive transition strategy covering offers, pricing, sales comp, and investor comms."
+    },
+    {
+      "name": "Business Model Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a SaaS business model expert and refiner. Review the initial transition strategy. Enhance and refine the plan to ensure it directly mitigates the risks of losing the installed base (like the competitor who lost 20%), deeply aligns sales incentives with subscription metrics (e.g., ARR, NRR), and provides highly specific, actionable financial messaging for the investor trough. Fix any logical gaps and improve the strategic depth.",
+      "description": "Refines the initial strategy to mitigate churn risks and deeply align incentives and financial messaging."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate for business strategy. Review the refined transition plan. Evaluate if it comprehensively covers offer structure, migration incentives, pricing trough-balancing, sales comp redesign, and investor communications. Check if it realistically prevents the 20% churn risk. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy for completeness and risk mitigation, routing to polish or revise."
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Take the finalized business-model transition plan and polish it for a C-suite and Board of Directors audience. Ensure the tone is authoritative, reassuring, and highly professional. Use clear headings, bullet points, and executive summaries. Format it beautifully for immediate presentation.",
+      "description": "Formats and polishes the final strategy for executive and board-level presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert business strategist. Draft a comprehensive business-model transition plan for a software company moving from perpetual licenses to subscriptions. Address: 1) Offer structure and migration incentives for existing license holders (acknowledging their entitlement). 2) Pricing strategy that balances the multi-year revenue trough depth against adoption speed. 3) Sales compensation redesign to shift focus from large upfront deals to recurring revenue. 4) Financial communication plan to keep investors and the board committed through the revenue trough. Provide a detailed, structured initial draft."
+    },
+    {
+      "name": "Business Model Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a SaaS business model expert and refiner. Review the initial transition strategy. Enhance and refine the plan to ensure it directly mitigates the risks of losing the installed base (like the competitor who lost 20%), deeply aligns sales incentives with subscription metrics (e.g., ARR, NRR), and provides highly specific, actionable financial messaging for the investor trough. Fix any logical gaps and improve the strategic depth."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate for business strategy. Review the refined transition plan. Evaluate if it comprehensively covers offer structure, migration incentives, pricing trough-balancing, sales comp redesign, and investor communications. Check if it realistically prevents the 20% churn risk. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Take the finalized business-model transition plan and polish it for a C-suite and Board of Directors audience. Ensure the tone is authoritative, reassuring, and highly professional. Use clear headings, bullet points, and executive summaries. Format it beautifully for immediate presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a robust, executive-ready business model transition plan. It begins with the Transition Strategy Builder drafting the core components (offers, pricing, sales comp, investor comms). The Business Model Refiner then enhances this draft, specifically targeting the mitigation of the 20% churn risk and aligning sales incentives with SaaS metrics. The Strategy Quality Gate assesses the refined output; if it finds gaps in risk mitigation or strategic depth, it routes back to the Refiner for corrections. Once approved, the Executive Presentation Polisher formats the final output for the Board and C-suite, ensuring a professional and authoritative tone."
+}

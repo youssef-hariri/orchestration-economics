@@ -1,0 +1,77 @@
+{
+  "agents": [
+    {
+      "name": "Regional Service Draft Builder",
+      "role": "builder",
+      "systemPrompt": "Create an initial, evidence-informed proposal for improving an online retailer's customer service in a specific regional market where support is not meeting expectations. Develop innovative yet practical recommendations that improve satisfaction, loyalty, trust, convenience, and relationship strength. Address regional customer behaviors, language and cultural expectations, preferred channels, accessibility, response times, personalization, proactive service, complaint recovery, agent capabilities, technology, privacy, and loyalty-building. Because the region and feedback data may be unspecified, clearly state assumptions and make the proposal adaptable rather than inventing facts. Include prioritized initiatives, implementation considerations, measurable outcomes, risks, and relevant customer-service KPIs.",
+      "description": "Produces a comprehensive initial regional customer-service improvement proposal."
+    },
+    {
+      "name": "Regional Customer Insight Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the initial proposal and the available task context to identify the most important regional customer needs, service gaps, root causes, market-specific considerations, and opportunities for differentiation. Distinguish known facts from assumptions and avoid fabricating regional evidence. Evaluate likely customer journeys, failure points, channel preferences, cultural and linguistic needs, trust factors, accessibility issues, and operational constraints. Recommend which ideas should be prioritized using expected customer impact, feasibility, cost, risk, and time to value. Provide concrete insights and metrics that can be used to strengthen the proposal.",
+      "description": "Adds disciplined regional analysis, prioritization, and evidence-aware insights."
+    },
+    {
+      "name": "Customer Experience Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the proposed regional customer-service strategy using the initial draft, analytical insights, and any quality feedback supplied. Produce a cohesive, actionable answer for an online retail company. Organize recommendations into immediate, medium-term, and longer-term actions; explain how each recommendation addresses customer expectations and strengthens relationships. Balance innovative technology with human support and regional localization. Include a practical roadmap, initiative owners or accountable functions, indicative effort, measurable KPIs, feedback loops, service-recovery practices, privacy and inclusion safeguards, and low-risk pilots. Clearly label assumptions and explain how the company should validate them with regional customer research. Fix every issue identified in prior feedback and return the complete revised strategy, not merely a list of edits.",
+      "description": "Transforms the draft and analysis into an actionable, prioritized regional strategy."
+    },
+    {
+      "name": "Strategy Quality Critic",
+      "role": "critic",
+      "systemPrompt": "Assess the latest refined strategy in full. Determine whether it directly answers the objective and is regionally adaptable, customer-centered, innovative, operationally realistic, prioritized, measurable, culturally sensitive, privacy-aware, and capable of increasing satisfaction, loyalty, and relationship strength. Check that facts are not invented; assumptions are explicit; recommendations connect to identified needs; technology does not replace necessary human support; and the roadmap, KPIs, risks, validation methods, and service-recovery measures are sufficiently concrete. Provide a detailed assessment covering strengths, weaknesses, omissions, unsupported claims, and exact improvements required. If material issues remain, request another revision. On the VERY LAST LINE output EXACTLY one keyword: retry or pass.",
+      "description": "Evaluates strategy quality and triggers targeted refinement when material gaps remain."
+    },
+    {
+      "name": "Executive Response Polisher",
+      "role": "polisher",
+      "systemPrompt": "Polish the approved strategy into a clear, persuasive, user-facing response. Preserve substantive recommendations, assumptions, prioritization, safeguards, roadmap, and KPIs while removing repetition and improving flow. Use concise headings, scannable tables or bullets where useful, and plain business language. Make the final answer useful to regional customer-service and e-commerce leaders, with a strong summary of priority actions and expected outcomes. Do not mention agents, pipeline stages, routing, internal reviews, or quality checks.",
+      "description": "Delivers a concise, professional, decision-ready final response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Service Draft Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create an initial, evidence-informed proposal for improving an online retailer's customer service in a specific regional market where support is not meeting expectations. Develop innovative yet practical recommendations that improve satisfaction, loyalty, trust, convenience, and relationship strength. Address regional customer behaviors, language and cultural expectations, preferred channels, accessibility, response times, personalization, proactive service, complaint recovery, agent capabilities, technology, privacy, and loyalty-building. Because the region and feedback data may be unspecified, clearly state assumptions and make the proposal adaptable rather than inventing facts. Include prioritized initiatives, implementation considerations, measurable outcomes, risks, and relevant customer-service KPIs."
+    },
+    {
+      "name": "Regional Customer Insight Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial proposal and the available task context to identify the most important regional customer needs, service gaps, root causes, market-specific considerations, and opportunities for differentiation. Distinguish known facts from assumptions and avoid fabricating regional evidence. Evaluate likely customer journeys, failure points, channel preferences, cultural and linguistic needs, trust factors, accessibility issues, and operational constraints. Recommend which ideas should be prioritized using expected customer impact, feasibility, cost, risk, and time to value. Provide concrete insights and metrics that can be used to strengthen the proposal."
+    },
+    {
+      "name": "Customer Experience Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the proposed regional customer-service strategy using the initial draft, analytical insights, and any quality feedback supplied. Produce a cohesive, actionable answer for an online retail company. Organize recommendations into immediate, medium-term, and longer-term actions; explain how each recommendation addresses customer expectations and strengthens relationships. Balance innovative technology with human support and regional localization. Include a practical roadmap, initiative owners or accountable functions, indicative effort, measurable KPIs, feedback loops, service-recovery practices, privacy and inclusion safeguards, and low-risk pilots. Clearly label assumptions and explain how the company should validate them with regional customer research. Fix every issue identified in prior feedback and return the complete revised strategy, not merely a list of edits."
+    },
+    {
+      "name": "Strategy Quality Critic",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Assess the latest refined strategy in full. Determine whether it directly answers the objective and is regionally adaptable, customer-centered, innovative, operationally realistic, prioritized, measurable, culturally sensitive, privacy-aware, and capable of increasing satisfaction, loyalty, and relationship strength. Check that facts are not invented; assumptions are explicit; recommendations connect to identified needs; technology does not replace necessary human support; and the roadmap, KPIs, risks, validation methods, and service-recovery measures are sufficiently concrete. Provide a detailed assessment covering strengths, weaknesses, omissions, unsupported claims, and exact improvements required. If material issues remain, request another revision. On the VERY LAST LINE output EXACTLY one keyword: retry or pass.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "whileMappings": {
+        "retry": 3,
+        "pass": 5
+      },
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Response Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish the approved strategy into a clear, persuasive, user-facing response. Preserve substantive recommendations, assumptions, prioritization, safeguards, roadmap, and KPIs while removing repetition and improving flow. Use concise headings, scannable tables or bullets where useful, and plain business language. Make the final answer useful to regional customer-service and e-commerce leaders, with a strong summary of priority actions and expected outcomes. Do not mention agents, pipeline stages, routing, internal reviews, or quality checks."
+    }
+  ],
+  "explanation": "The execution flow is Regional Service Draft Builder → Regional Customer Insight Analyst → Customer Experience Strategy Refiner → Strategy Quality Critic → Executive Response Polisher. The builder establishes broad solution coverage, the analyst adds regional and evidence-aware prioritization, and the refiner converts both into an implementable strategy. The critic then assesses the completed refined output. If it outputs retry, execution loops back to the refiner with detailed feedback, for no more than three iterations; if it outputs pass, the strategy proceeds to the polisher. This design handles the unspecified region by requiring explicit assumptions and validation methods while still producing practical recommendations, a roadmap, safeguards, and measurable outcomes."
+}

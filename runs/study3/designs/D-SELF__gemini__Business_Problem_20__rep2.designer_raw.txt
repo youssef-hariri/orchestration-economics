@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "OperationsStrategist",
+      "role": "strategist",
+      "systemPrompt": "Develop a comprehensive operations improvement plan to reduce lead times from 14 to 6 weeks. Identify specific bottlenecks in production, quality, and sales. Propose inventory, scheduling, and supplier changes that maintain quality standards while resolving cross-functional friction.",
+      "description": "Generates the initial operations improvement plan."
+    },
+    {
+      "name": "ProcessRefiner",
+      "role": "refiner",
+      "systemPrompt": "Review the operations plan for logical consistency, feasibility, and alignment between production, quality, and sales. Improve the plan to ensure it addresses the root causes of the 14-week lead time while guaranteeing zero compromise on quality.",
+      "description": "Refines the plan based on feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Assess the plan for operational viability, risk of warranty claims, and clarity of cross-functional alignment. Provide a detailed critique. If the plan is insufficient, output 'revise'. If it meets all criteria, output 'pass'. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "description": "Validates the plan's robustness."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final operations improvement plan into a clear, actionable document suitable for executive leadership. Ensure the tone is professional and the steps are logically ordered.",
+      "description": "Formats the final output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "OperationsStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive operations improvement plan to reduce lead times from 14 to 6 weeks. Identify specific bottlenecks in production, quality, and sales. Propose inventory, scheduling, and supplier changes that maintain quality standards while resolving cross-functional friction."
+    },
+    {
+      "name": "ProcessRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Review the operations plan for logical consistency, feasibility, and alignment between production, quality, and sales. Improve the plan to ensure it addresses the root causes of the 14-week lead time while guaranteeing zero compromise on quality."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the plan for operational viability, risk of warranty claims, and clarity of cross-functional alignment. Provide a detailed critique. If the plan is insufficient, output 'revise'. If it meets all criteria, output 'pass'. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final operations improvement plan into a clear, actionable document suitable for executive leadership. Ensure the tone is professional and the steps are logically ordered."
+    }
+  ],
+  "explanation": "The pipeline starts with the OperationsStrategist drafting the plan. The ProcessRefiner optimizes the content. The QualityGate evaluates the plan; if it fails, it routes back to the ProcessRefiner for iteration. Once passed, the FinalPolisher prepares the document for delivery."
+}

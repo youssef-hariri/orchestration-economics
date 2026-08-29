@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "FutureOfWorkBuilder",
+      "role": "builder",
+      "systemPrompt": "You are an expert organizational strategist. Draft a comprehensive framework and set of principles for the 'future of work' within a large international company. Address remote work, office spaces, and team collaboration tools. Ensure the framework considers the varied needs, preferences, and cultural expectations of employees across different countries.",
+      "description": "Creates the initial draft of the global future of work framework."
+    },
+    {
+      "name": "GlobalCultureRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a global HR and culture expert. Review the drafted 'future of work' framework. Refine and improve it by deepening the considerations for diverse cultural expectations, regional labor norms, and varying infrastructure capabilities worldwide. Ensure the principles are actionable, inclusive, and highly adaptable to local contexts while maintaining global cohesion.",
+      "description": "Refines the initial draft to ensure deep cultural sensitivity and global applicability."
+    },
+    {
+      "name": "FrameworkQualityGate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality assurance critic for global corporate strategies. Evaluate the refined 'future of work' framework. Check for comprehensiveness, cultural sensitivity, practical applicability, and clarity. Provide a FULL assessment detailing strengths, weaknesses, and specific issues. Then, on the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined framework for quality, cultural nuance, and strategic soundness."
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications specialist. Take the approved 'future of work' framework and polish it for a global leadership audience. Ensure professional formatting, compelling executive summaries, clear headings, and a persuasive, forward-looking tone. Output the final, ready-to-publish document.",
+      "description": "Formats and polishes the final framework for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "FutureOfWorkBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert organizational strategist. Draft a comprehensive framework and set of principles for the 'future of work' within a large international company. Address remote work, office spaces, and team collaboration tools. Ensure the framework considers the varied needs, preferences, and cultural expectations of employees across different countries."
+    },
+    {
+      "name": "GlobalCultureRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a global HR and culture expert. Review the drafted 'future of work' framework. Refine and improve it by deepening the considerations for diverse cultural expectations, regional labor norms, and varying infrastructure capabilities worldwide. Ensure the principles are actionable, inclusive, and highly adaptable to local contexts while maintaining global cohesion."
+    },
+    {
+      "name": "FrameworkQualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality assurance critic for global corporate strategies. Evaluate the refined 'future of work' framework. Check for comprehensiveness, cultural sensitivity, practical applicability, and clarity. Provide a FULL assessment detailing strengths, weaknesses, and specific issues. Then, on the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications specialist. Take the approved 'future of work' framework and polish it for a global leadership audience. Ensure professional formatting, compelling executive summaries, clear headings, and a persuasive, forward-looking tone. Output the final, ready-to-publish document."
+    }
+  ],
+  "explanation": "Execution flow: FutureOfWorkBuilder (Step 1) drafts the initial framework. GlobalCultureRefiner (Step 2) enhances it with cultural and regional nuances. FrameworkQualityGate (Step 3) assesses the output; if it outputs 'revise', the pipeline loops back to GlobalCultureRefiner (Step 2) for improvements. If it outputs 'pass', the pipeline proceeds to ExecutivePolisher (Step 4) for final formatting and delivery. This ensures a robust, culturally aware, and professionally presented strategy without human intervention."
+}

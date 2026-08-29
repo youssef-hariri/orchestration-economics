@@ -85,7 +85,7 @@ MODELS = {
         "cheap": {"model": "claude-haiku-4-5-20251001",
                   "endpoint": "https://api.anthropic.com/v1",
                   "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic", "omit_temperature": True},
-        "frontier": {"model": "claude-opus-5", "max_tokens": 16384,
+        "frontier": {"model": "claude-opus-5", "max_tokens": 32768,
                      "endpoint": "https://api.anthropic.com/v1",
                      "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic", "omit_temperature": True},
     },
@@ -100,9 +100,9 @@ MODELS = {
     "kimi": {
         "cheap": {"model": "kimi-k2.6", "endpoint": "https://api.moonshot.ai/v1",
                   "env_key": "KIMI_API_KEY", "api_format": "openai", "omit_temperature": True},
-        "frontier": {"model": "kimi-k3", "endpoint": "https://api.moonshot.ai/v1",
-                     "env_key": "KIMI_API_KEY", "api_format": "openai", "omit_temperature": True,
-                     "extra": {"reasoning_effort": "low"}},
+        "frontier": {"model": "moonshotai/Kimi-K3", "endpoint": "https://api.together.ai/v1",
+                     "env_key": "TOGETHER_API_KEY", "api_format": "openai", "omit_temperature": True,
+                     "extra": {"reasoning_effort": "low"}},  # D58: k3 via Together (author directive 2026-08-29)
     },
     "qwen": {
         "cheap": {"model": "qwen3.7-plus-2026-05-26",
@@ -353,7 +353,11 @@ def load_ledger():
     if voided_file.exists():
         for line in voided_file.read_text().splitlines():
             try:
-                terminal.discard(json.loads(line)["key"])
+                v=json.loads(line)
+                if "family_credit_restored" in v:
+                    exhausted.discard(v["family_credit_restored"])
+                else:
+                    terminal.discard(v["key"])
             except Exception:
                 pass
     return done, exhausted, terminal
@@ -593,7 +597,7 @@ def main():
 
     keys = {k: load_key(k) for k in
             {"OPENAI_API_KEY", "ANTHROPIC_API_KEY", "GEMINI_API_KEY",
-             "KIMI_API_KEY", "ALIBABA_API_KEY"}}
+             "KIMI_API_KEY", "ALIBABA_API_KEY", "TOGETHER_API_KEY"}}
     from collections import Counter
     stats = Counter()
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:

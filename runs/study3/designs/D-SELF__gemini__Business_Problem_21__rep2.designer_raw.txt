@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "LogisticsStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in warehouse automation and labor relations. Create a comprehensive roadmap for a 5-site warehouse network. Balance automation ROI (3-year target) with social responsibility. Include: site-specific automation tiers, a phased workforce transition plan (reskilling/redeployment), service continuity strategies, and a KPI framework for success.",
+      "description": "Develops the initial strategic roadmap for warehouse automation and workforce management."
+    },
+    {
+      "name": "LaborImpactExpert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in industrial relations and change management. Review the proposed roadmap. Ensure the plan addresses the risks of high-tenure employee displacement, local economic impact, and the reputational risk of failed automation. Ensure the transition plan is humane and legally sound.",
+      "description": "Evaluates the social and labor-related feasibility of the automation strategy."
+    },
+    {
+      "name": "RoadmapRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic refiner. Incorporate feedback from the LaborImpactExpert to adjust the automation sequence and workforce transition steps. Ensure the tone is professional, empathetic, and data-driven.",
+      "description": "Refines the roadmap based on expert feedback regarding labor and social impact."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the roadmap for: 1) Financial viability (3-year payback), 2) Workforce transition ethics, 3) Operational continuity, and 4) Clear KPI definitions. Provide a detailed assessment of strengths and gaps. On the last line, output 'pass' if the plan is robust, or 'revise' if it needs further refinement.",
+      "description": "Validates the roadmap against the company's constraints and objectives."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final roadmap into a professional, executive-ready document. Ensure clarity, logical flow, and actionable headings.",
+      "description": "Finalizes the document for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "LogisticsStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in warehouse automation and labor relations. Create a comprehensive roadmap for a 5-site warehouse network. Balance automation ROI (3-year target) with social responsibility. Include: site-specific automation tiers, a phased workforce transition plan (reskilling/redeployment), service continuity strategies, and a KPI framework for success."
+    },
+    {
+      "name": "LaborImpactExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in industrial relations and change management. Review the proposed roadmap. Ensure the plan addresses the risks of high-tenure employee displacement, local economic impact, and the reputational risk of failed automation. Ensure the transition plan is humane and legally sound."
+    },
+    {
+      "name": "RoadmapRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic refiner. Incorporate feedback from the LaborImpactExpert to adjust the automation sequence and workforce transition steps. Ensure the tone is professional, empathetic, and data-driven."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the roadmap for: 1) Financial viability (3-year payback), 2) Workforce transition ethics, 3) Operational continuity, and 4) Clear KPI definitions. Provide a detailed assessment of strengths and gaps. On the last line, output 'pass' if the plan is robust, or 'revise' if it needs further refinement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final roadmap into a professional, executive-ready document. Ensure clarity, logical flow, and actionable headings."
+    }
+  ],
+  "explanation": "The pipeline begins with the LogisticsStrategist creating the core roadmap. The LaborImpactExpert then reviews this for social and labor risks. The RoadmapRefiner incorporates these insights. The QualityGate assesses the plan against the 3-year payback and ethical constraints; if it fails, it routes back to the RoadmapRefiner (up to 3 iterations). Finally, the FinalPolisher formats the output for executive delivery."
+}

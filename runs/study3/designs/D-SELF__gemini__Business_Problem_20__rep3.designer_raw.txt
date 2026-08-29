@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "OperationsStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in industrial operations and lean manufacturing. Develop a comprehensive plan to reduce lead times from 14 to 6 weeks by identifying bottlenecks, optimizing inventory, and aligning Sales, Production, and Quality departments without compromising safety or quality standards.",
+      "description": "Drafts the initial operations improvement plan."
+    },
+    {
+      "name": "ProcessRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are an expert in process engineering. Review the provided operations plan. If the plan lacks specific metrics, fails to address the inter-departmental friction, or risks quality degradation, rewrite the sections to ensure robustness and cross-functional alignment.",
+      "description": "Refines the plan based on feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "You are a quality assurance auditor. Evaluate the plan for feasibility, risk of warranty spikes, and clarity of cross-functional accountability. Provide a detailed assessment of why the plan will or will not succeed. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Validates the plan against the goal of reducing lead time without quality loss."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional technical writer. Format the final operations improvement plan into a clear, actionable executive report suitable for stakeholders in Sales, Production, and Quality.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "OperationsStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in industrial operations and lean manufacturing. Develop a comprehensive plan to reduce lead times from 14 to 6 weeks by identifying bottlenecks, optimizing inventory, and aligning Sales, Production, and Quality departments without compromising safety or quality standards."
+    },
+    {
+      "name": "ProcessRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an expert in process engineering. Review the provided operations plan. If the plan lacks specific metrics, fails to address the inter-departmental friction, or risks quality degradation, rewrite the sections to ensure robustness and cross-functional alignment."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assurance auditor. Evaluate the plan for feasibility, risk of warranty spikes, and clarity of cross-functional accountability. Provide a detailed assessment of why the plan will or will not succeed. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional technical writer. Format the final operations improvement plan into a clear, actionable executive report suitable for stakeholders in Sales, Production, and Quality."
+    }
+  ],
+  "explanation": "The pipeline begins with the OperationsStrategist drafting the improvement plan. This draft is passed to the ProcessRefiner, which acts as the primary iteration point. The QualityGate evaluates the plan's integrity; if it identifies risks to quality or gaps in alignment, it routes back to the ProcessRefiner. Once the QualityGate issues a 'pass', the FinalPolisher formats the document for stakeholder delivery."
+}

@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "JV Strategy Builder",
+      "role": "strategist",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive negotiation strategy for establishing a joint venture with a foreign company. Your outline must explicitly address potential differences in communication styles, decision-making processes, and relationship-building approaches. Provide actionable steps for the negotiation team.",
+      "description": "Creates the initial draft of the cross-cultural joint venture negotiation strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Review the initial joint venture negotiation strategy. Enhance its depth, ensure all cross-cultural aspects (communication, decision-making, relationship-building) are thoroughly addressed, and improve the clarity and actionability of the outline based on any provided feedback.",
+      "description": "Improves and expands the initial strategy draft based on feedback and cross-cultural requirements."
+    },
+    {
+      "name": "Cultural & Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a cross-cultural negotiation critic and quality gate. Evaluate the refined joint venture strategy. Check if it adequately covers communication styles, decision-making processes, and relationship-building approaches for an international context. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy for completeness and cultural accuracy, routing it for revision or final polishing."
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional document polisher. Format the finalized joint venture negotiation strategy into a clean, highly readable, and professional executive outline. Use clear headings, bullet points, and bold text for emphasis. Ensure the tone is authoritative and suitable for corporate leadership.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "JV Strategy Builder",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive negotiation strategy for establishing a joint venture with a foreign company. Your outline must explicitly address potential differences in communication styles, decision-making processes, and relationship-building approaches. Provide actionable steps for the negotiation team."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Review the initial joint venture negotiation strategy. Enhance its depth, ensure all cross-cultural aspects (communication, decision-making, relationship-building) are thoroughly addressed, and improve the clarity and actionability of the outline based on any provided feedback."
+    },
+    {
+      "name": "Cultural & Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a cross-cultural negotiation critic and quality gate. Evaluate the refined joint venture strategy. Check if it adequately covers communication styles, decision-making processes, and relationship-building approaches for an international context. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document polisher. Format the finalized joint venture negotiation strategy into a clean, highly readable, and professional executive outline. Use clear headings, bullet points, and bold text for emphasis. Ensure the tone is authoritative and suitable for corporate leadership."
+    }
+  ],
+  "explanation": "This pipeline begins with a Strategist Builder to draft the initial cross-cultural joint venture negotiation strategy. A Refiner then enhances the draft for depth and clarity. A Quality Gate (Critic) evaluates the refined output; if it finds deficiencies in addressing communication styles, decision-making, or relationship-building, it outputs 'revise' to loop back to the Refiner. If it outputs 'pass', the pipeline proceeds to the Polisher, which formats the final strategy into a professional, executive-ready document. This automated flow ensures high-quality, culturally nuanced output without human intervention."
+}

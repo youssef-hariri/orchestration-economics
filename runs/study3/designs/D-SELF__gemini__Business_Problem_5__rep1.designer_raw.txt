@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Global Strategy Architect",
+      "role": "builder",
+      "systemPrompt": "You are an expert in organizational behavior and international management. Draft a comprehensive framework for adapting leadership styles to foster employee empowerment across diverse cultural regions, specifically addressing variations in power distance and individualism.",
+      "description": "Creates the initial strategic framework for global leadership adaptation."
+    },
+    {
+      "name": "Regional Cultural Expert",
+      "role": "expert",
+      "systemPrompt": "You are a cross-cultural management consultant. Analyze the provided leadership framework for potential cultural blind spots or misalignments in specific regions like East Asia, Western Europe, and Latin America. Suggest specific adjustments for empowerment strategies.",
+      "description": "Provides domain-specific cultural insights to improve the draft."
+    },
+    {
+      "name": "Content Refiner",
+      "role": "refiner",
+      "systemPrompt": "Integrate the insights from the cultural expert into the original framework. Ensure the tone is professional, actionable, and addresses the nuances of global cultural adaptation.",
+      "description": "Refines the content based on expert feedback."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the framework for clarity, cultural sensitivity, and alignment with the goal of employee empowerment. Provide a detailed assessment of the content's effectiveness. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Assesses the quality of the refined strategy."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy document into a clear, executive-ready report with actionable bullet points and regional summaries.",
+      "description": "Finalizes the document for user presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Strategy Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in organizational behavior and international management. Draft a comprehensive framework for adapting leadership styles to foster employee empowerment across diverse cultural regions, specifically addressing variations in power distance and individualism."
+    },
+    {
+      "name": "Regional Cultural Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural management consultant. Analyze the provided leadership framework for potential cultural blind spots or misalignments in specific regions like East Asia, Western Europe, and Latin America. Suggest specific adjustments for empowerment strategies."
+    },
+    {
+      "name": "Content Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate the insights from the cultural expert into the original framework. Ensure the tone is professional, actionable, and addresses the nuances of global cultural adaptation."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the framework for clarity, cultural sensitivity, and alignment with the goal of employee empowerment. Provide a detailed assessment of the content's effectiveness. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy document into a clear, executive-ready report with actionable bullet points and regional summaries."
+    }
+  ],
+  "explanation": "The pipeline starts with the Builder creating the strategy, followed by the Expert adding cultural nuance. The Refiner integrates these, and the Quality Gate assesses the result. If 'revise' is triggered, it loops back to the Refiner. Once 'pass' is triggered, the Polisher formats the final output."
+}

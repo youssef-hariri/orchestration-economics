@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft a comprehensive set of strategies and best practices to improve communication, collaboration, and conflict resolution for geographically dispersed and culturally diverse technology teams.",
+      "description": "Generates the initial draft of the global collaboration strategy."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Review the provided strategies for potential cultural biases, communication gaps, or insensitivities. Provide actionable feedback to improve inclusivity and clarity.",
+      "description": "Evaluates the strategy from a cultural and global perspective."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate the feedback from the CulturalExpert to improve the clarity, inclusivity, and effectiveness of the collaboration strategies.",
+      "description": "Updates the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Assess the refined strategy for completeness, tone, and adherence to the goal of solving communication delays and team cohesion issues. Provide a detailed analysis. On the last line, output 'pass' if the strategy is excellent, or 'revise' if it needs further refinement.",
+      "description": "Final validation gate for the strategy content."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy document into a professional, easy-to-read guide with clear headings, bullet points, and actionable takeaways for a multinational technology company.",
+      "description": "Formats the final output for the end user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive set of strategies and best practices to improve communication, collaboration, and conflict resolution for geographically dispersed and culturally diverse technology teams."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the provided strategies for potential cultural biases, communication gaps, or insensitivities. Provide actionable feedback to improve inclusivity and clarity."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate the feedback from the CulturalExpert to improve the clarity, inclusivity, and effectiveness of the collaboration strategies."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy for completeness, tone, and adherence to the goal of solving communication delays and team cohesion issues. Provide a detailed analysis. On the last line, output 'pass' if the strategy is excellent, or 'revise' if it needs further refinement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy document into a professional, easy-to-read guide with clear headings, bullet points, and actionable takeaways for a multinational technology company."
+    }
+  ],
+  "explanation": "The pipeline starts with the StrategyBuilder, followed by the CulturalExpert to ensure global inclusivity. The StrategyRefiner integrates feedback. The QualityGate assesses the output; if 'revise' is selected, it loops back to the StrategyRefiner. Once 'pass' is selected, the FinalPolisher formats the document."
+}

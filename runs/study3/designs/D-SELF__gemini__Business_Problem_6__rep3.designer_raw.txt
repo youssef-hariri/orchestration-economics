@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in international marketing strategy. Analyze the target market's cultural values, health beliefs, and advertising regulations. Develop a comprehensive campaign strategy for a new dietary supplement that aligns with these local norms.",
+      "description": "Develops the core strategy and cultural framework for the campaign."
+    },
+    {
+      "name": "CampaignBuilder",
+      "role": "builder",
+      "systemPrompt": "You are a creative copywriter. Based on the provided strategy, draft a full marketing campaign including taglines, social media posts, and messaging that respects local health beliefs and advertising laws.",
+      "description": "Creates the initial campaign content."
+    },
+    {
+      "name": "CulturalCritic",
+      "role": "critic",
+      "systemPrompt": "You are a cultural and regulatory expert. Evaluate the campaign content for sensitivity to local values, accuracy of health claims, and compliance with regional advertising standards. Provide a detailed assessment of any risks. On the last line, output 'pass' if compliant, or 'revise' if changes are needed.",
+      "description": "Evaluates the campaign for cultural and regulatory compliance."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Review the feedback from the CulturalCritic and adjust the campaign messaging to ensure it is culturally appropriate, legally compliant, and persuasive.",
+      "description": "Adjusts content based on expert feedback."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional editor. Perform a final quality check for tone, consistency, and formatting to ensure the campaign is ready for deployment.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in international marketing strategy. Analyze the target market's cultural values, health beliefs, and advertising regulations. Develop a comprehensive campaign strategy for a new dietary supplement that aligns with these local norms."
+    },
+    {
+      "name": "CampaignBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a creative copywriter. Based on the provided strategy, draft a full marketing campaign including taglines, social media posts, and messaging that respects local health beliefs and advertising laws."
+    },
+    {
+      "name": "CulturalCritic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a cultural and regulatory expert. Evaluate the campaign content for sensitivity to local values, accuracy of health claims, and compliance with regional advertising standards. Provide a detailed assessment of any risks. On the last line, output 'pass' if compliant, or 'revise' if changes are needed.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Review the feedback from the CulturalCritic and adjust the campaign messaging to ensure it is culturally appropriate, legally compliant, and persuasive."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional editor. Perform a final quality check for tone, consistency, and formatting to ensure the campaign is ready for deployment."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist to establish a culturally grounded foundation. The CampaignBuilder creates the initial content, which is then assessed by the CulturalCritic. If the critic identifies issues, the pipeline routes to the ContentRefiner to fix the content before re-evaluating. Once the content passes the quality gate, the FinalPolisher ensures the output is professional and ready for use."
+}

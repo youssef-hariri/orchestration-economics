@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert corporate strategist. Draft a comprehensive strategy to foster an innovative culture, encourage creativity, and promote risk-taking across an international company with varying levels of proactive innovation by location. Include actionable initiatives, communication plans, and incentive structures.",
+      "description": "Creates the initial innovation strategy draft focusing on corporate culture and risk-taking."
+    },
+    {
+      "name": "Cross-Cultural Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a cross-cultural organizational expert. Refine the provided innovation strategy. Ensure it addresses the specific challenges of international branches with varying innovation levels. Add localized approaches, psychological safety measures, and concrete metrics for success. Fix any issues identified in previous feedback.",
+      "description": "Refines and enhances the strategy with cross-cultural and organizational insights."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate for corporate strategies. Review the refined strategy for completeness, cross-cultural applicability, and actionable clarity. Provide a FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy and routes it for revision or final polishing."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Polish the final innovation strategy. Ensure professional formatting, clear headings, bullet points for readability, and an inspiring, authoritative tone suitable for global leadership.",
+      "description": "Formats and polishes the final output for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert corporate strategist. Draft a comprehensive strategy to foster an innovative culture, encourage creativity, and promote risk-taking across an international company with varying levels of proactive innovation by location. Include actionable initiatives, communication plans, and incentive structures."
+    },
+    {
+      "name": "Cross-Cultural Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural organizational expert. Refine the provided innovation strategy. Ensure it addresses the specific challenges of international branches with varying innovation levels. Add localized approaches, psychological safety measures, and concrete metrics for success. Fix any issues identified in previous feedback."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate for corporate strategies. Review the refined strategy for completeness, cross-cultural applicability, and actionable clarity. Provide a FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Polish the final innovation strategy. Ensure professional formatting, clear headings, bullet points for readability, and an inspiring, authoritative tone suitable for global leadership."
+    }
+  ],
+  "explanation": "This pipeline is designed to generate a highly tailored, cross-culturally aware innovation strategy. It begins with the Innovation Strategy Builder drafting the initial concepts. The Cross-Cultural Strategy Refiner then immediately enhances this draft, ensuring international nuances and varying regional innovation levels are addressed. The Strategy Quality Gate evaluates the refined output; if it finds gaps in cultural applicability or actionable clarity, it outputs 'revise' to loop back to the Refiner (Step 2) for further improvement. Once the strategy meets all quality criteria, the gate outputs 'pass', routing to the Executive Polisher (Step 4) for final formatting and professional presentation."
+}

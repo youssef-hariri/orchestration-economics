@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Customer Service Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategy for regional customer service enhancement based on the task requirements"
+    },
+    {
+      "name": "Regional Market Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional market data, customer feedback patterns, and competitive landscape to provide data-driven insights"
+    },
+    {
+      "name": "Customer Service Expert",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on innovative customer service approaches, best practices, and regional considerations"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates market analysis and expert insights to refine and enhance the initial strategy with concrete, actionable recommendations"
+    },
+    {
+      "name": "Quality Assessment Critic",
+      "role": "critic",
+      "description": "Evaluates the refined strategy for completeness, feasibility, innovation, and alignment with customer satisfaction goals"
+    },
+    {
+      "name": "Final Polish Specialist",
+      "role": "polisher",
+      "description": "Formats and polishes the final output for presentation to stakeholders, ensuring clarity and professional presentation"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Customer Service Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are tasked with creating an initial comprehensive strategy for enhancing customer service operations in a regional market. Based on the scenario that current support methods are not fully meeting customer expectations, develop a strategic framework that includes: current state assessment, key improvement areas, innovative service approaches, customer relationship building tactics, and expected outcomes. Provide detailed, forward-thinking recommendations."
+    },
+    {
+      "name": "Regional Market Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the customer service enhancement task from a regional market perspective. Examine: regional customer demographics and preferences, typical service gaps in retail markets, competitive benchmarks for regional customer service excellence, feedback patterns indicating unmet expectations, and regional economic/cultural factors affecting customer loyalty. Provide data-driven insights and specific observations about the regional market context."
+    },
+    {
+      "name": "Customer Service Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "As a customer service innovation expert, review the initial strategy and market analysis. Provide domain expertise on: cutting-edge customer service technologies and methodologies, innovative approaches to regional market engagement, best practices for building customer loyalty, omnichannel service strategies, personalization techniques, and service recovery methods. Highlight the most impactful innovations applicable to this regional context."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize the initial strategy with the regional market analysis and expert insights. Refine and enhance the strategy by: integrating market-specific recommendations, incorporating innovative approaches from expert input, developing concrete implementation tactics, creating measurable satisfaction metrics, establishing relationship-building initiatives, and ensuring regional market relevance. Produce a comprehensive, integrated strategy document with specific, actionable improvements."
+    },
+    {
+      "name": "Quality Assessment Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assessment gate. Evaluate the refined customer service strategy comprehensively. Assess: innovation level and uniqueness of approaches, feasibility of implementation in regional context, potential impact on customer satisfaction and loyalty, completeness of the strategy (does it address all key areas?), specificity and actionability of recommendations, alignment with regional market needs, and clarity of expected outcomes. Provide detailed analysis of strengths and any gaps. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Final Polish Specialist",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final customer service enhancement strategy for stakeholder presentation. Format the output professionally with: clear executive summary, structured sections (innovative approaches, implementation roadmap, expected outcomes, timeline), compelling narrative for customer relationship building initiatives, visual organization for easy comprehension, and professional language. Ensure all recommendations are clearly articulated and the strategy is presentation-ready."
+    }
+  ],
+  "explanation": "This pipeline is designed to transform raw strategic thinking into a regionally-optimized, data-informed customer service enhancement strategy. The flow begins with the Builder establishing initial strategic direction. The Analyst immediately provides regional market context and data-driven insights. The Expert contributes domain-specific innovation recommendations based on both the initial strategy and market analysis. The Refiner synthesizes all inputs into a cohesive, integrated, and actionable strategy. The Quality Gate (if statement) critically evaluates whether the refined strategy is innovative, feasible, and complete—routing back to the Refiner if issues are found, or proceeding to final polish if quality standards are met. Finally, the Polisher presents the strategy in professional, stakeholder-ready format. This structure ensures the outcome is grounded in regional market reality, enriched by customer service expertise, and refined through iterative quality assessment before final delivery."
+}
+```

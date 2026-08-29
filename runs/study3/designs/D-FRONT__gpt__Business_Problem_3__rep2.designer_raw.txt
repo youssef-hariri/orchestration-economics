@@ -1,0 +1,88 @@
+{
+  "agents": [
+    {
+      "name": "Regional Service Solution Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial, actionable proposal for improving an online retailer's customer service in a specific regional market. The desired outcome is a set of innovative, locally relevant approaches that increase customer satisfaction, loyalty, trust, and relationship strength. Address likely customer pain points, localization, cultural expectations, preferred communication channels, response speed, personalization, proactive support, returns and refunds, accessibility, human and AI-assisted service, employee enablement, feedback collection, loyalty-building, implementation priorities, risks, and measurable success indicators. Do not invent unsupported facts about the region. Clearly label assumptions and make recommendations adaptable when market details are unavailable.",
+      "description": "Creates the initial regional customer-service improvement proposal."
+    },
+    {
+      "name": "Regional Expectations Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the initial proposal for its ability to address unmet customer expectations in a regional online retail market. Identify likely root causes, customer journey friction, underserved segments, cultural and linguistic considerations, channel preferences, trust barriers, operational constraints, and opportunities revealed by feedback. Distinguish universal recommendations from ideas that require regional validation. Provide concrete insights, prioritization criteria, and measurable indicators that can strengthen the proposal without fabricating market data.",
+      "description": "Adds evidence-oriented analysis of regional needs, customer journeys, and service gaps."
+    },
+    {
+      "name": "Customer Experience Innovation Expert",
+      "role": "expert",
+      "systemPrompt": "Provide domain-specific recommendations that make the proposal innovative yet practical. Evaluate and improve ideas involving multilingual and culturally aware support, conversational AI with seamless human escalation, messaging and social channels, proactive order updates, personalized service recovery, community engagement, localized self-service, flexible returns, agent empowerment, voice-of-customer programs, loyalty recognition, privacy, and inclusive design. Explain expected customer value, operational requirements, risks, and safeguards. Favor realistic innovations over novelty for its own sake.",
+      "description": "Contributes customer-experience expertise and practical service innovations."
+    },
+    {
+      "name": "Regional Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the prior draft, analysis, expert input, and any quality feedback into one coherent strategy for improving regional online retail customer service. Fix all identified weaknesses and remove unsupported assumptions. Organize the result around customer needs and include: an executive summary; assumptions and validation needs; key service gaps; regionally adaptable initiatives; customer journey improvements; personalization and relationship-building tactics; technology and human-support roles; implementation phases with quick wins and longer-term actions; ownership and capability requirements; risks and mitigations; and a measurement framework with satisfaction, effort, loyalty, operational, and trust metrics. Prioritize recommendations using customer impact, feasibility, and time to value. Produce specific actions rather than generic advice.",
+      "description": "Combines all inputs into a prioritized, measurable, and regionally adaptable strategy."
+    },
+    {
+      "name": "Strategy Quality Critic",
+      "role": "critic",
+      "systemPrompt": "Assess the refined strategy in full. Determine whether it directly answers the objective and is regionally sensitive, customer-centered, innovative, feasible, actionable, prioritized, measurable, and honest about missing market information. Check that it covers localization, channels, technology with human escalation, service recovery, feedback loops, loyalty-building, implementation, metrics, privacy, accessibility, and operational risks. Identify strengths, weaknesses, unsupported claims, generic recommendations, contradictions, and specific improvements. If material issues remain, select revise. If the strategy is complete and ready for final presentation, select pass. After no more than three assessments, select pass while clearly documenting any residual limitations. Provide the full assessment first. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "description": "Evaluates completeness, regional relevance, practicality, and strategic quality."
+    },
+    {
+      "name": "Executive Response Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing response from the approved strategy. Preserve substantive recommendations while improving clarity, concision, structure, consistency, and executive readability. Use descriptive headings, prioritized action tables or concise bullets where useful, and plain business language. Clearly separate quick wins, medium-term improvements, and longer-term innovations. Retain assumptions and regional validation needs rather than presenting speculation as fact. Ensure metrics are defined clearly and conclude with a practical sequence of next steps.",
+      "description": "Delivers a clear, polished, decision-ready customer-service strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Service Solution Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create an actionable initial proposal of innovative, locally adaptable customer-service improvements for an online retailer seeking higher satisfaction, loyalty, trust, and stronger relationships in a regional market. Cover customer pain points, localization, channels, personalization, proactive support, service recovery, AI and human support, feedback, loyalty, implementation, risks, and metrics. Label assumptions and do not fabricate regional facts."
+    },
+    {
+      "name": "Regional Expectations Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial proposal and identify regional customer expectations, journey friction, possible root causes, underserved segments, cultural and language needs, trust barriers, operational constraints, validation needs, and measurement opportunities. Supply concrete improvements without inventing market evidence."
+    },
+    {
+      "name": "Customer Experience Innovation Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Strengthen the preceding work with practical customer-experience innovations. Address multilingual support, conversational AI and human escalation, proactive communication, personalized recovery, localized self-service, returns, community engagement, agent enablement, accessibility, privacy, feedback systems, and loyalty recognition. Explain value, requirements, risks, and safeguards."
+    },
+    {
+      "name": "Regional Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize all preceding outputs and any later quality feedback into a coherent, prioritized regional customer-service strategy. Resolve weaknesses, avoid unsupported claims, and include an executive summary, assumptions, service gaps, initiatives, journey improvements, relationship-building tactics, human and technology roles, phased implementation, ownership, risks, mitigations, and measurable satisfaction, effort, loyalty, trust, and operational indicators."
+    },
+    {
+      "name": "Strategy Quality Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy carefully and provide a FULL quality assessment with detailed reasoning. Evaluate relevance to the objective, regional adaptability, cultural sensitivity, innovation, feasibility, specificity, prioritization, measurement, implementation detail, privacy, accessibility, human escalation, service recovery, feedback loops, and loyalty impact. Identify strengths and every material issue requiring correction. Choose revise if substantive problems remain; otherwise choose pass. After no more than three assessments, choose pass and document any residual limitations. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Response Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved strategy into a polished, decision-ready response. Improve structure and readability, retain useful detail and caveats, distinguish quick wins from medium- and long-term initiatives, present metrics clearly, and finish with practical next steps. Do not introduce unsupported regional claims."
+    }
+  ],
+  "explanation": "Execution flow: Regional Service Solution Builder → Regional Expectations Analyst → Customer Experience Innovation Expert → Regional Strategy Refiner → Strategy Quality Critic. If the critic outputs revise, execution loops back to the Regional Strategy Refiner, which incorporates the full assessment; this may occur up to three times. If the critic outputs pass, execution continues to the Executive Response Polisher. The design first establishes a broad solution, then tests it against regional expectations and customer-experience expertise before consolidating it into an actionable strategy. The iterative assessment improves regional relevance, feasibility, specificity, and measurement, while the final polisher produces a concise, user-facing result."
+}

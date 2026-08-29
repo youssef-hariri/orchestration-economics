@@ -1,0 +1,92 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Creates initial snack product concepts based on target market research, local taste preferences, and consumption occasions"
+    },
+    {
+      "name": "Cultural & Culinary Expert",
+      "role": "expert",
+      "description": "Provides domain expertise on local ingredients, flavor profiles, dietary restrictions, and cultural eating habits of the target market"
+    },
+    {
+      "name": "Strategic Product Planner",
+      "role": "strategist",
+      "description": "Develops comprehensive product line strategy including positioning, flavor variants, packaging, and market entry approach"
+    },
+    {
+      "name": "Concept Critic",
+      "role": "critic",
+      "description": "Critically reviews product concepts for feasibility, market fit, ingredient sourcing challenges, and competitive positioning"
+    },
+    {
+      "name": "Product Concept Refiner",
+      "role": "refiner",
+      "description": "Addresses critic feedback by refining product concepts, adjusting ingredients, improving market alignment, and strengthening value propositions"
+    },
+    {
+      "name": "Quality Assurance Reviewer",
+      "role": "reviewer",
+      "type": "if",
+      "description": "Conducts final quality assessment of product line concepts against market viability, originality, and execution feasibility criteria"
+    },
+    {
+      "name": "Final Polish & Format",
+      "role": "polisher",
+      "description": "Formats final deliverable with clear product descriptions, specifications, market rationale, and implementation recommendations for stakeholder presentation"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a product concept builder specializing in international snack foods. Generate 4-5 innovative snack product concepts specifically designed for the target international market. For each concept, include: product name, primary ingredients (emphasizing local/regional flavors), flavor profile, target consumption occasions, and why it appeals to local consumers. Consider local taste preferences, traditional snacking habits, and emerging food trends in the target region. Be creative but grounded in market reality."
+    },
+    {
+      "name": "Cultural & Culinary Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a culinary and cultural expert specializing in regional snacking traditions. Analyze and enhance the product concepts with deep cultural insight. For each concept, evaluate: authenticity to local palate, ingredient availability and sourcing feasibility in the target market, compatibility with local dietary preferences/restrictions, alignment with traditional and modern snacking occasions, and opportunities to innovate within cultural boundaries. Provide specific recommendations to strengthen cultural relevance and market authenticity. Identify any cultural sensitivities or preferences that should guide product development."
+    },
+    {
+      "name": "Strategic Product Planner",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategic product planner for international food brands. Develop a comprehensive product line strategy based on the cultural insights and initial concepts. Provide: product line architecture (core variants, premium options, seasonal offerings), differentiation strategy vs. local competitors, packaging and branding recommendations, distribution channel strategy, pricing positioning, and go-to-market timeline. Ensure the strategy maximizes market penetration while respecting local preferences. Include risk mitigation for supply chain and regulatory compliance in the target market."
+    },
+    {
+      "name": "Concept Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a critical evaluator of new product concepts. Thoroughly assess the complete product line proposal by analyzing: ingredient sourcing feasibility and cost structure, regulatory compliance for the target market, competitive differentiation and market gaps, production scalability and supply chain viability, authenticity vs. market appeal balance, pricing competitiveness, and execution risks. Identify specific weaknesses, inconsistencies, or gaps. Provide detailed, constructive criticism that clarifies what needs improvement. End your assessment with EXACTLY ONE keyword on the final line: either 'pass' or 'revise'."
+    },
+    {
+      "name": "Product Concept Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a product refinement specialist. Address all criticisms and concerns raised in the previous review. Strengthen the product concepts by: adjusting ingredient selections for better sourcing viability, refining flavor profiles for stronger market appeal, clarifying production and supply chain strategies, enhancing competitive differentiation, addressing regulatory and cost concerns, and improving strategic positioning. Produce a refined, more robust product line proposal that resolves identified issues while maintaining cultural authenticity and market innovation."
+    },
+    {
+      "name": "Quality Assurance Reviewer",
+      "role": "reviewer",
+      "type": "if",
+      "systemPrompt": "You are a final quality gate reviewer for new product line launches. Conduct a comprehensive assessment of the refined product concepts against these criteria: market viability and consumer appeal for target region, ingredient and production feasibility, competitive positioning strength, strategic coherence and execution clarity, cultural authenticity and respect, and innovation/differentiation level. Provide full detailed reasoning on each criterion. Identify any remaining gaps or concerns. Then on the VERY LAST LINE output exactly one keyword: 'pass' if the concepts meet launch-ready standards, or 'revise' if further refinement is needed.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Final Polish & Format",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final presentation polisher for executive stakeholder consumption. Transform the approved product line concepts into a compelling, professionally formatted deliverable. Include: executive summary of product line vision, detailed product specifications (name, ingredients, flavor profile, consumption occasions), market rationale and cultural insights, competitive positioning, strategic implementation plan, timeline and milestones, and key success metrics. Organize with clear headers, bullet points, and visual logic. Ensure all content is clear, persuasive, and ready for board-level presentation or investor review. Maintain professional tone while conveying innovation and market opportunity."
+    }
+  ],
+  "explanation": "This 7-step pipeline is optimized for developing culturally-nuanced, market-ready snack product concepts. Execution flows as: Builder creates initial concepts → Expert enriches with cultural/culinary depth → Strategist develops comprehensive market strategy → Critic performs rigorous feasibility assessment → (If 'revise': loops back to Refiner to address issues, up to 3 iterations; if 'pass': continues) → Polisher formats final deliverable. The pipeline positions expert domain knowledge (culinary and cultural insights) early to ensure concepts are authentic and feasible, followed by strategic planning and iterative critic-refiner loops to validate market readiness. Quality gates are placed after production steps, ensuring agents have output to assess. The design enforces one revision cycle before final polish, balancing thoroughness with efficiency for time-sensitive market entry decisions."
+}
+```

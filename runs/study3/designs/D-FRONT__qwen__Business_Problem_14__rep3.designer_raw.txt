@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Inclusive Product Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert product designer specializing in global digital products. Draft a comprehensive proposal for a new digital product that includes specific features, UI/UX design considerations, and content guidelines to ensure it is inclusive, accessible, and respectful of diverse cultural backgrounds worldwide.",
+      "description": "Creates the initial draft of the global digital product proposal focusing on inclusivity and accessibility."
+    },
+    {
+      "name": "Cultural & Accessibility Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a cultural localization and accessibility expert. Review the initial product proposal and refine it. Enhance the features, design considerations, and content guidelines to address edge cases in cultural sensitivities, RTL languages, color symbolism, and WCAG accessibility standards. Fix any gaps in the initial draft based on feedback if provided.",
+      "description": "Refines and enhances the product proposal with deep cultural and accessibility expertise."
+    },
+    {
+      "name": "Inclusivity Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate for global inclusivity. Review the refined product proposal. Assess whether the features, design considerations, and content guidelines adequately cover diverse cultural backgrounds, avoid offensive tropes, and meet global accessibility standards. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined proposal for cultural inclusivity and accessibility compliance."
+    },
+    {
+      "name": "Global Product Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional technical writer and editor. Take the approved inclusive product proposal and format it into a clean, highly readable, and professional document. Use clear headings, bullet points, and executive summaries. Ensure the tone is authoritative yet empathetic.",
+      "description": "Formats and polishes the final approved proposal for professional presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Inclusive Product Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert product designer specializing in global digital products. Draft a comprehensive proposal for a new digital product that includes specific features, UI/UX design considerations, and content guidelines to ensure it is inclusive, accessible, and respectful of diverse cultural backgrounds worldwide."
+    },
+    {
+      "name": "Cultural & Accessibility Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a cultural localization and accessibility expert. Review the initial product proposal and refine it. Enhance the features, design considerations, and content guidelines to address edge cases in cultural sensitivities, RTL languages, color symbolism, and WCAG accessibility standards. Fix any gaps in the initial draft based on feedback if provided."
+    },
+    {
+      "name": "Inclusivity Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate for global inclusivity. Review the refined product proposal. Assess whether the features, design considerations, and content guidelines adequately cover diverse cultural backgrounds, avoid offensive tropes, and meet global accessibility standards. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Global Product Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional technical writer and editor. Take the approved inclusive product proposal and format it into a clean, highly readable, and professional document. Use clear headings, bullet points, and executive summaries. Ensure the tone is authoritative yet empathetic."
+    }
+  ],
+  "explanation": "This pipeline is designed to generate a highly inclusive and culturally sensitive digital product proposal. Execution flow: Inclusive Product Builder (Step 1) creates the foundational draft → Cultural & Accessibility Refiner (Step 2) enhances the draft with specialized localization and accessibility knowledge → Inclusivity Quality Gate (Step 3) evaluates the output; if 'revise', it loops back to the Refiner (Step 2) for corrections, if 'pass', it proceeds to the final step → Global Product Polisher (Step 4) formats the approved content into a professional, user-facing document. This structure ensures rigorous quality control and deep cultural review without exceeding the step limit."
+}

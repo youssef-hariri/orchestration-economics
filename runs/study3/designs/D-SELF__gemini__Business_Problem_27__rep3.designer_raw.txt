@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "FinancialStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in corporate finance and venture strategy. Analyze the trade-offs between debt, minority equity, and hybrid instruments for a high-growth company. Evaluate the impact on founder control, competitive positioning, and cash flow. Propose a specific funding structure, milestones, and walk-away conditions.",
+      "description": "Drafts the comprehensive growth-financing strategy."
+    },
+    {
+      "name": "MarketExpert",
+      "role": "expert",
+      "systemPrompt": "You are a specialist in competitive strategy and scale-up dynamics. Review the proposed financing strategy against the risks of a well-funded rival and the founders' desire for independence. Ensure the milestones are realistic and the walk-away conditions protect the company's long-term viability.",
+      "description": "Reviews the strategy for market alignment and risk mitigation."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a professional business writer and strategist. Incorporate feedback from the MarketExpert to sharpen the recommendations, ensure clarity on the funding structure, and verify that all constraints (control, competitive window, cash flow) are addressed.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for logical consistency, depth of analysis, and adherence to the user's requirements. Provide a detailed critique. If the strategy is incomplete or lacks actionable walk-away conditions, output 'revise'. Otherwise, output 'pass'. On the very last line, output only the keyword.",
+      "description": "Final validation of the strategy."
+    },
+    {
+      "name": "DocumentPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Use clear headings, bullet points for milestones, and a concise summary of the recommended funding structure.",
+      "description": "Final formatting for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "FinancialStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in corporate finance and venture strategy. Analyze the trade-offs between debt, minority equity, and hybrid instruments for a high-growth company. Evaluate the impact on founder control, competitive positioning, and cash flow. Propose a specific funding structure, milestones, and walk-away conditions."
+    },
+    {
+      "name": "MarketExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a specialist in competitive strategy and scale-up dynamics. Review the proposed financing strategy against the risks of a well-funded rival and the founders' desire for independence. Ensure the milestones are realistic and the walk-away conditions protect the company's long-term viability."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a professional business writer and strategist. Incorporate feedback from the MarketExpert to sharpen the recommendations, ensure clarity on the funding structure, and verify that all constraints (control, competitive window, cash flow) are addressed."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for logical consistency, depth of analysis, and adherence to the user's requirements. Provide a detailed critique. If the strategy is incomplete or lacks actionable walk-away conditions, output 'revise'. Otherwise, output 'pass'. On the very last line, output only the keyword.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "DocumentPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Use clear headings, bullet points for milestones, and a concise summary of the recommended funding structure."
+    }
+  ],
+  "explanation": "The pipeline starts with the FinancialStrategist drafting the core strategy. The MarketExpert reviews it for competitive viability. The StrategyRefiner updates the content based on that review. The QualityGate assesses the output; if it fails, it loops back to the StrategyRefiner (step 2) for improvement. Once passed, the DocumentPolisher formats the final output."
+}

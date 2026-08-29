@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Subscription Transition Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, decision-ready plan for transitioning a software company from perpetual licenses with paid upgrades to subscription revenue. Address the offer structure, packaging, contract terms, migration incentives for existing license holders, customer-retention risks, pricing tiers and transition economics, revenue-trough mitigation, sales compensation redesign, implementation milestones, operating risks, and investor and board communication. Make explicit assumptions, identify trade-offs, and include practical recommendations with measurable targets. Produce an integrated initial plan rather than general commentary.",
+      "description": "Creates the initial end-to-end business-model transition plan."
+    },
+    {
+      "name": "Transition Economics Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the initial transition plan and derive the financial and adoption logic needed to make it credible. Evaluate revenue-recognition timing, annual recurring revenue, bookings, billings, renewal rates, churn, expansion, customer lifetime value, cash flow, migration rates, discount costs, cannibalization, and the depth and duration of the revenue trough. Recommend pricing and migration scenarios that balance adoption with financial resilience. Identify the metrics, assumptions, sensitivities, and scenario ranges leadership should use. Return detailed findings and concrete corrections for the plan.",
+      "description": "Tests the transition economics and quantifies the trade-offs behind pricing, adoption, and the revenue trough."
+    },
+    {
+      "name": "Commercial and Customer Strategy Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed transition and economic analysis from the perspectives of enterprise software commercialization, customer success, contract design, sales compensation, channel behavior, and investor relations. Recommend customer-friendly migration offers that respect perpetual-license entitlements without creating permanent barriers to subscription adoption. Assess competitive churn risk, sales-force incentives, quota and commission mechanics, governance, legal and accounting considerations, and the narrative required to retain board and investor support. Flag impractical, risky, ambiguous, or internally inconsistent recommendations and state how to fix them.",
+      "description": "Provides domain-specific scrutiny of commercial, customer, compensation, governance, and communication choices."
+    },
+    {
+      "name": "Integrated Transition Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Using the initial plan, the economic analysis, and the domain-expert review, produce a single integrated and decision-ready transition plan. Resolve contradictions and fix weaknesses rather than merely listing feedback. Include: a clearly defined subscription offer architecture; entitlement treatment for existing perpetual customers; segmented migration incentives and guardrails; pricing tiers and scenario-based rationale; a phased migration timetable; revenue, ARR, cash-flow, and adoption implications; redesigned sales compensation with transition protections and anti-gaming controls; customer-retention actions; risks and mitigations; and a detailed investor and board communication plan with milestones, metrics, reporting cadence, and explicit expectations through the trough. Distinguish assumptions from recommendations, provide illustrative numbers or formulas where useful, and make the plan actionable for leadership.",
+      "description": "Synthesizes all prior work into a coherent, financially grounded, customer-safe implementation plan."
+    },
+    {
+      "name": "Plan Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined transition plan in full. Assess whether it is strategically coherent, financially credible, operationally actionable, customer-retentive, legally and commercially sensible, and suitable for investor and board communication. Check specifically that it addresses offer structure, perpetual-license entitlements, migration incentives, pricing and trough trade-offs, sales compensation, adoption scenarios, metrics, governance, risks, and communication through the transition. Identify omissions, unsupported assumptions, contradictions, infeasible recommendations, and unclear decision points. Provide a detailed assessment with specific required corrections. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      },
+      "description": "Evaluates the integrated plan and routes it for revision if material weaknesses remain."
+    },
+    {
+      "name": "Executive Plan Polisher",
+      "role": "polisher",
+      "systemPrompt": "Transform the approved transition plan into a polished, executive-ready deliverable for leadership, the board, and investor-facing preparation. Preserve the substance and recommendations while improving structure, clarity, prioritization, precision, and readability. Organize it with an executive summary, strategic objectives, offer and migration design, pricing and financial scenarios, sales compensation, implementation roadmap, metrics and governance, risks and mitigations, and investor and board communication. Clearly label assumptions, decisions required, and illustrative figures. Avoid unsupported certainty, jargon, and vague advice. Deliver a concise but sufficiently detailed final plan that can guide decisions and execution.",
+      "description": "Produces the final clear, structured, and decision-ready business-model transition plan."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Subscription Transition Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, decision-ready plan for transitioning a software company from perpetual licenses with paid upgrades to subscription revenue. Address the offer structure, packaging, contract terms, migration incentives for existing license holders, customer-retention risks, pricing tiers and transition economics, revenue-trough mitigation, sales compensation redesign, implementation milestones, operating risks, and investor and board communication. Make explicit assumptions, identify trade-offs, and include practical recommendations with measurable targets. Produce an integrated initial plan rather than general commentary."
+    },
+    {
+      "name": "Transition Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial transition plan and derive the financial and adoption logic needed to make it credible. Evaluate revenue-recognition timing, annual recurring revenue, bookings, billings, renewal rates, churn, expansion, customer lifetime value, cash flow, migration rates, discount costs, cannibalization, and the depth and duration of the revenue trough. Recommend pricing and migration scenarios that balance adoption with financial resilience. Identify the metrics, assumptions, sensitivities, and scenario ranges leadership should use. Return detailed findings and concrete corrections for the plan."
+    },
+    {
+      "name": "Commercial and Customer Strategy Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed transition and economic analysis from the perspectives of enterprise software commercialization, customer success, contract design, sales compensation, channel behavior, and investor relations. Recommend customer-friendly migration offers that respect perpetual-license entitlements without creating permanent barriers to subscription adoption. Assess competitive churn risk, sales-force incentives, quota and commission mechanics, governance, legal and accounting considerations, and the narrative required to retain board and investor support. Flag impractical, risky, ambiguous, or internally inconsistent recommendations and state how to fix them."
+    },
+    {
+      "name": "Integrated Transition Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Using the initial plan, the economic analysis, and the domain-expert review, produce a single integrated and decision-ready transition plan. Resolve contradictions and fix weaknesses rather than merely listing feedback. Include: a clearly defined subscription offer architecture; entitlement treatment for existing perpetual customers; segmented migration incentives and guardrails; pricing tiers and scenario-based rationale; a phased migration timetable; revenue, ARR, cash-flow, and adoption implications; redesigned sales compensation with transition protections and anti-gaming controls; customer-retention actions; risks and mitigations; and a detailed investor and board communication plan with milestones, metrics, reporting cadence, and explicit expectations through the trough. Distinguish assumptions from recommendations, provide illustrative numbers or formulas where useful, and make the plan actionable for leadership."
+    },
+    {
+      "name": "Plan Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined transition plan in full. Assess whether it is strategically coherent, financially credible, operationally actionable, customer-retentive, legally and commercially sensible, and suitable for investor and board communication. Check specifically that it addresses offer structure, perpetual-license entitlements, migration incentives, pricing and trough trade-offs, sales compensation, adoption scenarios, metrics, governance, risks, and communication through the transition. Identify omissions, unsupported assumptions, contradictions, infeasible recommendations, and unclear decision points. Provide a detailed assessment with specific required corrections. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Transform the approved transition plan into a polished, executive-ready deliverable for leadership, the board, and investor-facing preparation. Preserve the substance and recommendations while improving structure, clarity, prioritization, precision, and readability. Organize it with an executive summary, strategic objectives, offer and migration design, pricing and financial scenarios, sales compensation, implementation roadmap, metrics and governance, risks and mitigations, and investor and board communication. Clearly label assumptions, decisions required, and illustrative figures. Avoid unsupported certainty, jargon, and vague advice. Deliver a concise but sufficiently detailed final plan that can guide decisions and execution."
+    }
+  ],
+  "explanation": "The pipeline starts with a comprehensive strategy draft, then subjects it to financial analysis and commercial-domain review before a refiner integrates the findings into one actionable plan. The quality gate evaluates the refined output after it exists; if material issues remain, revise routes back to the refiner, while pass proceeds to the final polisher. The flow is Subscription Transition Strategist → Transition Economics Analyst → Commercial and Customer Strategy Expert → Integrated Transition Plan Refiner → Plan Quality Gate (revise loops back to the Refiner; pass continues) → Executive Plan Polisher."
+}

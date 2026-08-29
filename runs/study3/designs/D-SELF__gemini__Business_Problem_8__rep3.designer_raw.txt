@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "SupplyChainStrategist",
+      "role": "builder",
+      "systemPrompt": "You are a global supply chain expert. Draft a comprehensive strategy to enhance supply chain resilience and ethical sourcing. Include diversification of suppliers, digital transparency tools, and compliance frameworks for international labor standards.",
+      "description": "Generates the initial strategic framework for supply chain improvement."
+    },
+    {
+      "name": "EthicalComplianceExpert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in international trade law and ethical sourcing. Analyze the draft for gaps in human rights compliance, environmental sustainability, and regulatory alignment across multiple jurisdictions.",
+      "description": "Provides domain-specific critique on ethical and legal aspects."
+    },
+    {
+      "name": "ResilienceRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a supply chain refiner. Incorporate the feedback from the EthicalComplianceExpert to strengthen the strategy, ensuring all ethical and resilience-focused recommendations are actionable and robust.",
+      "description": "Refines the draft based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for completeness, clarity, and adherence to the goal of resilience and ethical sourcing. Provide a detailed assessment. If the strategy lacks depth in either resilience or ethics, output 'revise'. If it is comprehensive, output 'pass'. On the last line, output only one keyword: pass or revise.",
+      "description": "Validates the quality of the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional technical writer. Format the final strategy into a clear, executive-ready report with structured headings, actionable bullet points, and a professional tone.",
+      "description": "Formats the final output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "SupplyChainStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global supply chain expert. Draft a comprehensive strategy to enhance supply chain resilience and ethical sourcing. Include diversification of suppliers, digital transparency tools, and compliance frameworks for international labor standards."
+    },
+    {
+      "name": "EthicalComplianceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in international trade law and ethical sourcing. Analyze the draft for gaps in human rights compliance, environmental sustainability, and regulatory alignment across multiple jurisdictions."
+    },
+    {
+      "name": "ResilienceRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain refiner. Incorporate the feedback from the EthicalComplianceExpert to strengthen the strategy, ensuring all ethical and resilience-focused recommendations are actionable and robust."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for completeness, clarity, and adherence to the goal of resilience and ethical sourcing. Provide a detailed assessment. If the strategy lacks depth in either resilience or ethics, output 'revise'. If it is comprehensive, output 'pass'. On the last line, output only one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional technical writer. Format the final strategy into a clear, executive-ready report with structured headings, actionable bullet points, and a professional tone."
+    }
+  ],
+  "explanation": "The pipeline begins with the SupplyChainStrategist creating a foundational plan. The EthicalComplianceExpert reviews this draft to ensure domain-specific rigor. The ResilienceRefiner then updates the content based on that expert feedback. The QualityGate assesses the output; if it is insufficient, it routes back to the ResilienceRefiner (up to 3 iterations allowed by logic). Once the QualityGate issues a 'pass', the FinalPolisher formats the document for the user."
+}

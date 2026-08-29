@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Customer Insights Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive analysis of regional customer service challenges and opportunities based on feedback data"
+    },
+    {
+      "name": "Regional Market Analyst",
+      "role": "analyst",
+      "description": "Analyzes demographic, behavioral, and satisfaction metrics specific to the regional market to identify patterns and root causes"
+    },
+    {
+      "name": "Customer Service Strategist",
+      "role": "strategist",
+      "description": "Develops innovative service improvement strategies and regional customer relationship-building initiatives based on insights"
+    },
+    {
+      "name": "Domain Expert Reviewer",
+      "role": "expert",
+      "description": "Provides domain-specific expertise in retail customer service best practices, emerging technologies, and regional market considerations"
+    },
+    {
+      "name": "Solutions Refiner",
+      "role": "refiner",
+      "description": "Integrates expert feedback and analyst insights to strengthen and refine proposed service improvements and strategies"
+    },
+    {
+      "name": "Quality Validator",
+      "role": "critic",
+      "description": "Validates completeness, feasibility, and innovation level of proposed solutions with structured assessment"
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final recommendations into clear, actionable deliverables ready for stakeholder presentation"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Customer Insights Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are the initial content builder for a customer service improvement initiative. Analyze the retail company's regional market challenge: recent customer feedback shows current support methods are not meeting expectations in a specific region. Create a comprehensive initial assessment that includes: (1) likely root causes of dissatisfaction based on typical retail service gaps, (2) key customer expectations in regional markets, (3) opportunities for differentiation through enhanced service. Produce structured content that subsequent agents will build upon."
+    },
+    {
+      "name": "Regional Market Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a regional market analyst. Analyze the initial assessment provided. Conduct deep analysis on: (1) Regional demographic and psychographic factors affecting customer service expectations, (2) Specific pain points in current support methods (response time, channel availability, localization, cultural factors), (3) Competitive service standards in this regional market, (4) Data-driven insights about what customers actually value in their region. Provide quantitative reasoning and market patterns to support the strategist's later recommendations."
+    },
+    {
+      "name": "Customer Service Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategic innovator for customer service. Using the builder's assessment and analyst's insights, develop comprehensive innovative approaches including: (1) Enhanced omnichannel support tailored to regional preferences, (2) Personalization and loyalty-building initiatives specific to the regional market, (3) Proactive support improvements (AI-assisted agents, predictive issue resolution), (4) Community and relationship-building strategies for the region, (5) Implementation roadmap with quick wins and long-term initiatives. Focus on innovation that directly addresses the identified gaps."
+    },
+    {
+      "name": "Domain Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a customer service domain expert with deep knowledge of retail operations. Review the strategy provided by the strategist. Assess: (1) Alignment with proven retail customer service best practices, (2) Feasibility and resource requirements, (3) Potential gaps or risks in the proposed approach, (4) Opportunities to leverage emerging technologies (AI chatbots, sentiment analysis, regional customization platforms), (5) How well solutions address regional market dynamics. Provide expert critique and specific recommendations to strengthen the strategy."
+    },
+    {
+      "name": "Solutions Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a solutions refiner. Take the strategist's recommendations and expert feedback. Strengthen the proposal by: (1) Integrating expert best practices into the strategies, (2) Adding specific, actionable details based on analyst's regional insights, (3) Addressing any feasibility concerns raised by the expert, (4) Ensuring all recommendations directly map to customer satisfaction and loyalty outcomes, (5) Enhancing the implementation roadmap with realistic timelines and metrics. Produce a refined, comprehensive set of service improvement recommendations."
+    },
+    {
+      "name": "Quality Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality validation gate. Review the refined customer service recommendations comprehensively. Assess: (1) Are all recommendations innovative and differentiated for the regional market? (2) Do solutions directly address the stated dissatisfaction issues? (3) Is there clear strategy for building customer relationships and loyalty? (4) Are approaches feasible and realistic? (5) Is the implementation roadmap clear with measurable outcomes? (6) Are regional market considerations adequately addressed? Provide full detailed assessment of strengths and any weaknesses. Then output EXACTLY ONE keyword on the final line: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are the final output polisher. Take the validated customer service improvement recommendations and format them into a clear, professional deliverable including: (1) Executive summary of recommended innovations, (2) Detailed service improvement strategies organized by category, (3) Regional market-specific considerations and customizations, (4) Customer relationship-building initiatives, (5) Implementation roadmap with phases and success metrics, (6) Expected impact on customer satisfaction and loyalty. Ensure all content is compelling, actionable, and ready for stakeholder presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to deliver a comprehensive, validated, and regionally-tailored customer service improvement strategy. The flow is: Builder creates initial assessment → Analyst provides regional data insights → Strategist develops innovative solutions → Expert validates against best practices → Refiner integrates feedback and strengthens proposals → Quality gate ensures completeness and innovation → Polisher formats for stakeholder delivery. The Quality Validator (if gate) checks whether solutions are sufficiently innovative and address regional market needs; if revisions are needed, the loop returns to the Solutions Refiner to incorporate improvements. This structure ensures the final output represents integrated expertise (strategy + analytics + domain knowledge) and meets high quality standards for executive decision-making."
+}
+```

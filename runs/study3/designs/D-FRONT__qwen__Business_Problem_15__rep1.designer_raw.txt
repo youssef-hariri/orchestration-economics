@@ -1,0 +1,64 @@
+{
+  "agents": [
+    {
+      "name": "Framework Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert organizational strategist. Draft a comprehensive framework for the 'future of work' for a large international company. Include principles for remote work, office spaces, and collaboration tools. Address varied needs, preferences, and cultural expectations across different countries.",
+      "description": "Creates the initial draft of the future of work framework."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Review the initial framework draft and any previous feedback. Enhance its depth, ensure actionable principles, and strengthen the considerations for diverse global cultures and employee well-being. Produce a polished, improved version.",
+      "description": "Improves and expands the initial framework draft based on feedback."
+    },
+    {
+      "name": "Global Standards Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate evaluating the 'future of work' framework. Assess it for comprehensiveness, cultural sensitivity, practical applicability, and alignment with global HR best practices. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass. Use 'retry' if it needs more depth or cultural nuance, 'pass' if it is excellent.",
+      "description": "Evaluates the refined framework for global standards and cultural sensitivity."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a final polisher. Format the approved 'future of work' framework into a highly professional, executive-ready document. Use clear headings, bullet points, and an inspiring yet professional tone. Ensure flawless grammar and structure.",
+      "description": "Formats and polishes the final output for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert organizational strategist. Draft a comprehensive framework for the 'future of work' for a large international company. Include principles for remote work, office spaces, and collaboration tools. Address varied needs, preferences, and cultural expectations across different countries."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Review the initial framework draft and any previous feedback. Enhance its depth, ensure actionable principles, and strengthen the considerations for diverse global cultures and employee well-being. Produce a polished, improved version."
+    },
+    {
+      "name": "Global Standards Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality gate evaluating the 'future of work' framework. Assess it for comprehensiveness, cultural sensitivity, practical applicability, and alignment with global HR best practices. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass. Use 'retry' if it needs more depth or cultural nuance, 'pass' if it is excellent.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 3,
+        "retry": 1
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final polisher. Format the approved 'future of work' framework into a highly professional, executive-ready document. Use clear headings, bullet points, and an inspiring yet professional tone. Ensure flawless grammar and structure."
+    }
+  ],
+  "explanation": "This pipeline starts with a Builder to generate the initial future of work framework. It then passes to a Refiner to immediately enhance depth and cultural considerations. A While-loop Quality Gate then evaluates the refined output against global HR standards; if it lacks nuance or actionable principles, it routes back to the Refiner (up to 3 iterations) for continuous improvement. Once it passes, the Final Polisher formats the output into an executive-ready document."
+}

@@ -1,0 +1,81 @@
+{
+  "agents": [
+    {
+      "name": "Network Transition Roadmap Builder",
+      "role": "builder",
+      "systemPrompt": "Create a comprehensive initial automation and workforce-transition roadmap for a distribution company with five regional warehouses. Determine the appropriate degree, technology category, and sequence of automation for each site based on labor costs, turnover, error rates, workforce tenure, local economic dependence, operational risk, service requirements, and limited capital. Include site segmentation, phased implementation, pilot design, staffing implications, redeployment and retraining pathways, responsible workforce-reduction principles if unavoidable, conversion safeguards, vendor and governance considerations, financial assumptions, and measurable success criteria. Clearly distinguish known facts from assumptions and identify information that should be validated. Produce an actionable executive-level draft with tables where useful."
+    },
+    {
+      "name": "Warehouse Economics and Capacity Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed roadmap and improve its quantitative rigor. Evaluate labor-cost exposure, turnover effects, picking-error costs, throughput, capacity, implementation disruption, capital constraints, payback claims, total cost of ownership, sensitivity scenarios, and site-level sequencing. Develop practical KPI definitions, baseline requirements, measurement formulas, targets, and stage-gate criteria for continuing, pausing, or changing each phase. Flag unsupported assumptions and provide reasonable scenario ranges without inventing company-specific facts."
+    },
+    {
+      "name": "Responsible Workforce Strategy Expert",
+      "role": "expert",
+      "systemPrompt": "Review the roadmap from the perspectives of workforce transition, change management, operational resilience, ethics, employment practices, and community impact. Strengthen recommendations for transparent communication, skills assessment, paid training, redeployment, career ladders, accommodations, fair selection processes, severance or transition support, labor-law and collective-bargaining considerations, and protection of long-tenured employees. Address the largest warehouse's role as a major local employer and the reputational risks of a failed rollout. Preserve service levels and employee safety while ensuring the plan remains financially realistic."
+    },
+    {
+      "name": "Integrated Automation Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the initial roadmap, quantitative analysis, and workforce-transition review into one coherent, decision-ready plan. Resolve contradictions, correct weak assumptions, and make explicit site-by-site recommendations covering automation degree, sequence, prerequisites, pilot scope, staffing changes, retraining and redeployment, contingency capacity, service-level protection, governance, vendor accountability, capital allocation, and return measurement. Include an implementation timeline, decision criteria, risk mitigations, and alternatives if expected benefits do not materialize. Ensure recommendations are humane, operationally credible, and financially disciplined."
+    },
+    {
+      "name": "Roadmap Quality Reviewer",
+      "role": "critic",
+      "systemPrompt": "Assess the integrated roadmap in full. Examine whether it is specific enough for all five warehouses, quantitatively credible, aligned with limited capital, realistic about a three-year payback, protective of service levels, responsible toward employees and the affected community, and robust against vendor or implementation failure. Check that it provides clear sequencing, staffing and retraining actions, measurable baselines and targets, ownership, timelines, contingencies, and stop-or-adjust criteria. Identify omissions, contradictions, unsupported assumptions, ethical or legal risks, and any recommendations that need revision. Provide detailed reasoning and concrete fixes. On the VERY LAST LINE output exactly one keyword: pass or revise."
+    },
+    {
+      "name": "Executive Roadmap Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing automation and workforce-transition roadmap using the refined plan and quality review. Incorporate every valid correction, remove repetition, clearly label assumptions, and present the result in a concise but sufficiently detailed executive format. Include an executive recommendation, warehouse-by-warehouse automation and sequencing table, phased timeline, workforce-transition plan, service-continuity controls, investment and payback logic, KPI scorecard, governance, risk register, and explicit decision triggers. Make the language practical, transparent, respectful, and suitable for senior leadership, operations managers, employees, and community stakeholders. Do not claim certainty where data is unavailable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Network Transition Roadmap Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive initial automation and workforce-transition roadmap for a distribution company with five regional warehouses. Determine the appropriate degree, technology category, and sequence of automation for each site based on labor costs, turnover, error rates, workforce tenure, local economic dependence, operational risk, service requirements, and limited capital. Include site segmentation, phased implementation, pilot design, staffing implications, redeployment and retraining pathways, responsible workforce-reduction principles if unavoidable, conversion safeguards, vendor and governance considerations, financial assumptions, and measurable success criteria. Clearly distinguish known facts from assumptions and identify information that should be validated. Produce an actionable executive-level draft with tables where useful."
+    },
+    {
+      "name": "Warehouse Economics and Capacity Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed roadmap and improve its quantitative rigor. Evaluate labor-cost exposure, turnover effects, picking-error costs, throughput, capacity, implementation disruption, capital constraints, payback claims, total cost of ownership, sensitivity scenarios, and site-level sequencing. Develop practical KPI definitions, baseline requirements, measurement formulas, targets, and stage-gate criteria for continuing, pausing, or changing each phase. Flag unsupported assumptions and provide reasonable scenario ranges without inventing company-specific facts."
+    },
+    {
+      "name": "Responsible Workforce Strategy Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the roadmap from the perspectives of workforce transition, change management, operational resilience, ethics, employment practices, and community impact. Strengthen recommendations for transparent communication, skills assessment, paid training, redeployment, career ladders, accommodations, fair selection processes, severance or transition support, labor-law and collective-bargaining considerations, and protection of long-tenured employees. Address the largest warehouse's role as a major local employer and the reputational risks of a failed rollout. Preserve service levels and employee safety while ensuring the plan remains financially realistic."
+    },
+    {
+      "name": "Integrated Automation Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize the initial roadmap, quantitative analysis, and workforce-transition review into one coherent, decision-ready plan. Resolve contradictions, correct weak assumptions, and make explicit site-by-site recommendations covering automation degree, sequence, prerequisites, pilot scope, staffing changes, retraining and redeployment, contingency capacity, service-level protection, governance, vendor accountability, capital allocation, and return measurement. Include an implementation timeline, decision criteria, risk mitigations, and alternatives if expected benefits do not materialize. Ensure recommendations are humane, operationally credible, and financially disciplined."
+    },
+    {
+      "name": "Roadmap Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the integrated roadmap in full. Examine whether it is specific enough for all five warehouses, quantitatively credible, aligned with limited capital, realistic about a three-year payback, protective of service levels, responsible toward employees and the affected community, and robust against vendor or implementation failure. Check that it provides clear sequencing, staffing and retraining actions, measurable baselines and targets, ownership, timelines, contingencies, and stop-or-adjust criteria. Identify omissions, contradictions, unsupported assumptions, ethical or legal risks, and any recommendations that need revision. Provide detailed reasoning and concrete fixes. On the VERY LAST LINE output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 7,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Roadmap Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing automation and workforce-transition roadmap using the refined plan and quality review. Incorporate every valid correction, remove repetition, clearly label assumptions, and present the result in a concise but sufficiently detailed executive format. Include an executive recommendation, warehouse-by-warehouse automation and sequencing table, phased timeline, workforce-transition plan, service-continuity controls, investment and payback logic, KPI scorecard, governance, risk register, and explicit decision triggers. Make the language practical, transparent, respectful, and suitable for senior leadership, operations managers, employees, and community stakeholders. Do not claim certainty where data is unavailable."
+    }
+  ],
+  "explanation": "The pipeline begins with a full strategic draft, adds quantitative analysis, incorporates responsible workforce and community considerations, and then synthesizes those inputs into an integrated roadmap. A critic evaluates the refined plan after it exists; if material weaknesses remain, the flow returns to the refiner, while a passing assessment proceeds to the final polisher. The result balances site-specific automation decisions, financial discipline, operational continuity, workforce responsibility, and measurable returns."
+}

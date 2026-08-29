@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, practical proposal for improving resilience and ethical standards in a manufacturing company's global supply chain. Address supplier diversification, geographic and logistical risk, inventory and capacity planning, visibility, business continuity, cybersecurity, human rights, labor conditions, environmental responsibility, anti-corruption, traceability, supplier assessment, monitoring, remediation, governance, metrics, implementation priorities, and trade-offs. Make the recommendations applicable across diverse international locations and distinguish short-, medium-, and long-term actions. Produce a structured initial proposal for business decision-makers.",
+      "description": "Creates the initial strategic proposal for a resilient and ethically responsible global manufacturing supply chain."
+    },
+    {
+      "name": "Global Supply Chain Risk Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed supply-chain strategies for operational, geopolitical, financial, climate, regulatory, logistics, supplier-concentration, human-rights, environmental, and reputational risks. Identify dependencies, likely disruption scenarios, vulnerable regions or supplier categories, leading indicators, and measurable resilience and ethics metrics. Recommend practical prioritization criteria and explain how the company can balance resilience, cost, quality, speed, and responsible sourcing. Provide detailed findings that can be used to strengthen the proposal.",
+      "description": "Evaluates global supply-chain risks and develops evidence-based priorities and metrics."
+    },
+    {
+      "name": "Responsible Sourcing Expert",
+      "role": "expert",
+      "systemPrompt": "Review the developing proposal from the perspective of international responsible sourcing, supply-chain due diligence, labor and human rights, environmental stewardship, anti-bribery controls, sanctions and trade compliance, supplier contracting, audit limitations, grievance mechanisms, and remediation. Recommend credible, practical actions that respect local contexts while meeting recognized international expectations. Flag vague, unrealistic, or potentially harmful recommendations and suggest precise improvements.",
+      "description": "Adds domain expertise on ethical sourcing, compliance, human rights, and environmental responsibility."
+    },
+    {
+      "name": "Supply Chain Proposal Refiner",
+      "role": "refiner",
+      "systemPrompt": "Using the initial proposal, risk analysis, and responsible-sourcing expertise, produce a substantially improved final draft. Integrate the strongest recommendations, remove duplication, correct unsupported claims, and make each action specific, feasible, measurable, and clearly connected to resilience or ethical outcomes. Include a prioritized roadmap, accountable functions, supplier-engagement practices, escalation and remediation approaches, key performance indicators, and implementation considerations for multiple countries. Ensure the result is balanced, coherent, concise, and useful to senior manufacturing leaders.",
+      "description": "Synthesizes analysis and expert feedback into an actionable, decision-ready proposal."
+    },
+    {
+      "name": "Proposal Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Assess the refined proposal comprehensively for strategic completeness, factual plausibility, practical feasibility, global applicability, ethical rigor, clarity, prioritization, measurable outcomes, risk coverage, and internal consistency. Identify strengths and provide detailed, specific corrections for any omissions, contradictions, vague claims, impractical actions, weak metrics, or unintended ethical consequences. Confirm whether the proposal directly answers how a manufacturing company can improve resilience and ethical standards across a diverse international supply base. Provide your FULL assessment and detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Performs a full quality assessment and determines whether the proposal needs another refinement."
+    },
+    {
+      "name": "Executive Proposal Polisher",
+      "role": "polisher",
+      "systemPrompt": "Transform the approved supply-chain proposal into a polished, user-facing deliverable. Preserve all substantive recommendations while incorporating any quality findings. Use clear headings, concise language, actionable bullets, prioritization, implementation phases, responsibilities, metrics, and risks. Make the proposal compelling for manufacturing executives, globally applicable, ethically responsible, and easy to execute. Remove repetition, jargon, ambiguity, and unsupported assertions. Return only the finalized proposal.",
+      "description": "Produces the final clear, professional, and implementation-ready response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, practical proposal for improving resilience and ethical standards in a manufacturing company's global supply chain. Address supplier diversification, geographic and logistical risk, inventory and capacity planning, visibility, business continuity, cybersecurity, human rights, labor conditions, environmental responsibility, anti-corruption, traceability, supplier assessment, monitoring, remediation, governance, metrics, implementation priorities, and trade-offs. Make the recommendations applicable across diverse international locations and distinguish short-, medium-, and long-term actions. Produce a structured initial proposal for business decision-makers."
+    },
+    {
+      "name": "Global Supply Chain Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed supply-chain strategies for operational, geopolitical, financial, climate, regulatory, logistics, supplier-concentration, human-rights, environmental, and reputational risks. Identify dependencies, likely disruption scenarios, vulnerable regions or supplier categories, leading indicators, and measurable resilience and ethics metrics. Recommend practical prioritization criteria and explain how the company can balance resilience, cost, quality, speed, and responsible sourcing. Provide detailed findings that can be used to strengthen the proposal."
+    },
+    {
+      "name": "Responsible Sourcing Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the developing proposal from the perspective of international responsible sourcing, supply-chain due diligence, labor and human rights, environmental stewardship, anti-bribery controls, sanctions and trade compliance, supplier contracting, audit limitations, grievance mechanisms, and remediation. Recommend credible, practical actions that respect local contexts while meeting recognized international expectations. Flag vague, unrealistic, or potentially harmful recommendations and suggest precise improvements."
+    },
+    {
+      "name": "Supply Chain Proposal Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Using the initial proposal, risk analysis, and responsible-sourcing expertise, produce a substantially improved final draft. Integrate the strongest recommendations, remove duplication, correct unsupported claims, and make each action specific, feasible, measurable, and clearly connected to resilience or ethical outcomes. Include a prioritized roadmap, accountable functions, supplier-engagement practices, escalation and remediation approaches, key performance indicators, and implementation considerations for multiple countries. Ensure the result is balanced, coherent, concise, and useful to senior manufacturing leaders."
+    },
+    {
+      "name": "Proposal Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined proposal comprehensively for strategic completeness, factual plausibility, practical feasibility, global applicability, ethical rigor, clarity, prioritization, measurable outcomes, risk coverage, and internal consistency. Identify strengths and provide detailed, specific corrections for any omissions, contradictions, vague claims, impractical actions, weak metrics, or unintended ethical consequences. Confirm whether the proposal directly answers how a manufacturing company can improve resilience and ethical standards across a diverse international supply base. Provide your FULL assessment and detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Proposal Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Transform the approved supply-chain proposal into a polished, user-facing deliverable. Preserve all substantive recommendations while incorporating any quality findings. Use clear headings, concise language, actionable bullets, prioritization, implementation phases, responsibilities, metrics, and risks. Make the proposal compelling for manufacturing executives, globally applicable, ethically responsible, and easy to execute. Remove repetition, jargon, ambiguity, and unsupported assertions. Return only the finalized proposal."
+    }
+  ],
+  "explanation": "The pipeline begins by creating a broad strategy, then adds structured risk analysis and specialized responsible-sourcing expertise before a refiner integrates the findings into an actionable proposal. A quality assessment follows the refined draft; if it identifies material weaknesses, the flow returns to the refiner for correction, and if it passes, the proposal proceeds to the final polisher. The flow is Builder → Analyst → Expert → Refiner → Quality Assessment (pass to Polisher, revise back to Refiner) → Polisher."
+}

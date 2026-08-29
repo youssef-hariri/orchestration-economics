@@ -1,0 +1,1009 @@
+# Operations Improvement Plan  
+## Reducing quoted lead time without compromising certified quality or reliability
+
+## 1. Executive recommendation
+
+Do not match the competitor’s six-week quote by shortening, bypassing, or retrospectively completing certified inspections. The prior compression attempt and subsequent warranty increase show that uncontrolled acceleration can transfer schedule pressure into field failures.
+
+The company should first establish an auditable order-to-delivery fact base, then remove measured waiting, queueing, shortages, engineering holds, schedule instability, rework, documentation delays, and unnecessary quotation padding. All contractual, regulatory, certified, inspection, test, traceability, calibration, nonconformance, and release requirements remain non-negotiable.
+
+The program will:
+
+1. Diagnose the complete 14-week timeline using one order-level event clock.
+2. Identify the largest avoidable loss categories by product family and order segment.
+3. Pilot changes on one standard or configured product family.
+4. Apply defined quality, reliability, service, and financial guardrails.
+5. Replace the blanket 14-week promise with family-specific dates based on demonstrated performance and variability.
+6. Scale only when evidence shows shorter flow without increased warranty, escape, compliance, or economic risk.
+
+The competitor’s six-week promise is a **benchmark to investigate, not a result to promise**. A six-week offer may ultimately be feasible only for a tightly defined standard configuration with controlled engineering, pre-positioned materials, reserved capacity, and dedicated inspection support.
+
+### Provisional horizons
+
+| Horizon | Objective or decision |
+|---|---|
+| Days 0–30 | Establish the baseline; do not change external quote policy |
+| Days 31–90 | Run controlled experiments and determine the measured opportunity |
+| After the evidence gate | Offer shorter dates only for qualifying configurations |
+| Months 4–9 | Scale proven changes by product family |
+| Months 9–18 | Decide whether a six-week standard-product tier is feasible and economical |
+
+The plan does not promise a 10-, 8-, or 6-week result. These are scenario points for decision-making, not commitments.
+
+---
+
+## 2. Known facts, hypotheses, and required data
+
+### 2.1 Known facts
+
+1. The company currently quotes approximately 14 weeks.
+2. The fastest competitor quotes approximately six weeks.
+3. Sales reports losing approximately one in three deals where delivery speed is the deciding factor.
+4. The product requires certified inspections at multiple stages.
+5. A prior compression attempt was followed by a substantial increase in warranty claims.
+6. Production, Quality, and Sales disagree about the principal causes of delay.
+
+### 2.2 Hypotheses to test
+
+The following are not findings until supported by data:
+
+- A significant portion of the 14 weeks is queue, waiting, or commercial buffer rather than touch time.
+- Orders may be released before engineering information, materials, certifications, or inspection capacity are ready.
+- Supplier promise-date variation, defects, or missing certificates may block orders.
+- Engineering clarification and late changes may create holds, rework, and schedule disruption.
+- Production scheduling may optimize local utilization rather than end-to-end customer flow.
+- Inspection may be necessary, while inspection readiness, queueing, documentation, disposition, or release creates avoidable delay.
+- Large batches and long setups may increase customer waiting.
+- Rework and nonconformance disposition may consume constrained resources.
+- The 14-week quote may contain an undifferentiated commercial buffer.
+- The prior warranty increase may have resulted from rushed work, fatigue, inexperienced personnel, substitutions, configuration-control failures, incomplete records, inadequate retesting, or weakened process controls.
+- The competitor’s six-week promise may not cover the same product scope, configuration, certification, delivery point, or customer approval requirements.
+
+### 2.3 Required data
+
+Use the full available population for basic analysis, preferably at least 12 months of history. Supplement it with:
+
+- 30–50 completed orders from the selected pilot family.
+- Standard, configured, engineered, on-time, late, and expedited orders.
+- All open pilot-family orders that are aging or at risk.
+- 15–25 lost opportunities where delivery speed was cited.
+- Records associated with the prior compression effort, including warranty, return, nonconformance, supplier, engineering-change, staffing, overtime, and production data.
+
+Required data includes:
+
+- Quote, order, release, promised shipment, actual shipment, and customer receipt dates where available.
+- Production, queue, setup, downtime, hold, rework, inspection, test, disposition, documentation, and release timestamps.
+- Material requirement, purchase-order, supplier-promise, receipt, incoming-inspection, and certification-document dates.
+- WIP age, current operation, last-touch date, shortage status, quality hold, engineering hold, and expedite status.
+- First-pass yield, rework, nonconformances, escapes, warranty claims, and failure modes.
+- Work-center load, practical capacity, setup time, batch size, staffing, downtime, and schedule changes.
+- Inspection and test capacity, readiness failures, queue time, touch time, equipment availability, calibration status, and release turnaround.
+- Inventory, stockouts, lead-time variability, criticality, obsolescence, and carrying cost.
+- Quote win/loss data, requested dates, quoted dates, competitor claims, configurations, price, and other loss reasons.
+- Contractual, regulatory, customer-specific, and certified quality requirements.
+
+---
+
+## 3. Authoritative lead-time clock
+
+### 3.1 Official definitions
+
+Use calendar days for customer-facing reporting and working days for internal capacity analysis. Report both where necessary.
+
+#### Commercial measures
+
+1. **Quote response time:** quote request received to quote issued.
+2. **Order acceptance lead time:** customer order received to formal order acceptance.
+3. **Quoted lead time:** order acceptance to promised shipment date.
+4. **Actual customer lead time:** order acceptance to actual shipment date.
+5. **Delivered lead time:** order acceptance to customer receipt, where available.
+
+#### Operational measures
+
+1. **Release-to-ship-ready:** production or planning release to shipment-ready.
+2. **Manufacturing flow time:** first production activity to certified release.
+3. **Quality flow time:** inspection-ready to final quality release.
+
+The principal customer metric is **order acceptance to actual shipment**. Internal metrics must not improve by merely moving waiting before production release.
+
+### 3.2 Clock rules
+
+The Order Management Manager owns the clock policy, approved by the Lead-Time Council.
+
+- The clock starts at formal order acceptance.
+- The stop event is the contractually agreed shipment event: carrier pickup, shipment authorization, or another defined milestone.
+- Customer-caused pauses may be reported separately only when:
+  - the customer request or missing information is documented;
+  - the request genuinely prevents work;
+  - Sales Operations and Planning approve the classification;
+  - the delay was not caused by an internal failure to request information promptly.
+- Force majeure is reported separately and may not conceal recurring internal delay.
+- Internal shortages, engineering queues, quality holds, supplier delays, documentation delays, and planning delays remain on the customer clock.
+- Each interval receives one primary cause code. Secondary contributing-cause tags may also be recorded.
+- For overlapping causes, the primary code is the condition that prevented the next shipment-critical step. All contributing factors remain in the event record.
+- Reopened orders and post-acceptance engineering changes remain on the original customer clock unless a formally approved customer change resets the contractual promise.
+- Contract-specific shipment-event mappings must be documented and used consistently.
+
+---
+
+## 4. Method for decomposing the 14-week timeline
+
+### 4.1 Required event clock
+
+For every pilot order, capture the following.
+
+#### Commercial and engineering
+
+- Quote request received.
+- Technical clarification started and completed.
+- Quote issued.
+- Customer order received.
+- Commercial review complete.
+- Order accepted.
+- Engineering review started and completed.
+- Customer information requested and received.
+- Engineering release completed.
+- Post-release engineering change issued.
+- Inspection and certification requirements confirmed.
+
+#### Planning, materials, and suppliers
+
+- Material requirement generated.
+- Purchase order placed.
+- Supplier acknowledgment.
+- Supplier promised date.
+- Supplier shipment and receipt.
+- Incoming inspection completed.
+- Certification documents received and accepted.
+- Material kit complete.
+- Order released to production.
+
+#### Production
+
+For each operation:
+
+- Ready-for-operation.
+- Queue entry.
+- Setup start and completion.
+- Processing start and completion.
+- Transfer to next operation.
+- Equipment downtime.
+- Labor or skill shortage.
+- Schedule change and reason.
+- Hold, nonconformance, rework, and release.
+
+#### Quality, test, and release
+
+- Inspection request submitted.
+- First-time-ready confirmation.
+- Inspector or equipment assigned.
+- Inspection or test started and completed.
+- Nonconformance opened.
+- Containment initiated.
+- Technical disposition requested and approved.
+- Rework started and completed.
+- Retest or reinspection completed.
+- Documentation package completed.
+- Quality release authorized.
+- Shipment authorization.
+- Shipment-ready and actual shipment.
+
+### 4.2 Primary delay codes
+
+Every pause receives one primary code:
+
+- Customer.
+- Sales/commercial.
+- Engineering.
+- Planning.
+- Material shortage.
+- Supplier lateness.
+- Supplier defect or missing certification.
+- Production capacity.
+- Setup or batching.
+- Equipment downtime.
+- Labor or skill shortage.
+- Inspection queue.
+- Inspection not ready.
+- Test-equipment availability.
+- Quality failure/rework.
+- Nonconformance disposition.
+- Documentation.
+- Management decision.
+- Shipping.
+
+Secondary tags may identify contributing conditions, such as “late supplier certificate” during a broader supplier delay.
+
+### 4.3 Required analysis
+
+For each product family and order segment, produce:
+
+- Lead-time waterfall.
+- Touch time versus queue, transfer, hold, rework, and administrative time.
+- P50, P80, P90, and P95 actual lead time.
+- WIP age and no-touch age by operation.
+- Delay Pareto by total days, frequency, delayed order-days, revenue or margin risk, and recovery cost.
+- Schedule-adherence and expedite-displacement analysis.
+- Quote-padding analysis.
+- Constraint heat map covering production, engineering, suppliers, inspection, test, and release resources.
+
+\[
+\text{Touch-time ratio}
+=
+\frac{\text{value-added production and inspection touch time}}
+{\text{total order-to-shipment elapsed time}}
+\]
+
+If the ratio is low, the principal opportunity is waiting and flow—not faster execution of required work.
+
+\[
+\text{WIP}=\text{Throughput}\times\text{Lead time}
+\]
+
+Use this as a consistency check for reported WIP, throughput, and lead time.
+
+---
+
+## 5. Loss categories to test
+
+### Commercial and engineering
+
+- Quote approvals.
+- Incomplete customer requirements.
+- Configuration errors.
+- Engineering queue and touch time.
+- Customer clarification.
+- Late design changes.
+- Nonstandard inspection or certification requirements.
+- Contract review.
+- Quote-policy padding.
+
+### Material and supplier
+
+- Late purchasing action.
+- Supplier promise-date error.
+- Long or variable supplier lead time.
+- Short shipments.
+- Supplier defects.
+- Missing certification or traceability documents.
+- Incoming inspection queue.
+- Material available but not allocated or kitted.
+- One low-value item blocking the order.
+
+### Production flow
+
+- Work-center queue.
+- WIP aging and no-touch jobs.
+- Batch-fill waiting.
+- Transfer-batch delay.
+- Setup and changeover.
+- Equipment downtime.
+- Labor or skill shortage.
+- Schedule changes.
+- Expedite displacement.
+- Excessive bottleneck utilization.
+
+### Quality and reliability
+
+- Defect creation.
+- Setup-related defects.
+- Inspection-not-ready events.
+- Inspection queue.
+- Test-equipment shortage or downtime.
+- Nonconformance disposition.
+- Rework and repeat inspection.
+- Incomplete documentation.
+- Traceability failures.
+- Warranty-leading defects and escapes.
+
+### Documentation and shipment
+
+- Traveler completion.
+- Certification-package assembly.
+- Customer witness notifications.
+- Final release.
+- Staging.
+- Carrier booking.
+- Shipment authorization.
+
+---
+
+## 6. Product-family and order-segment policies
+
+| Segment | Characteristics | Operating policy | Initial quoting method |
+|---|---|---|---|
+| Standard repeatable | Stable design, common materials, predictable routing | Common-component inventory; reserved production and inspection capacity | P80/P85 after validation |
+| Configured standard | Standard platform with controlled options | Configure-to-order; validated postponement; option-specific material checks | P85/P90 |
+| Engineered-to-order | Significant engineering or customer-specific content | Launch packet; engineering-capacity reservation; formal change control | P90/P95 |
+| High-risk/custom | Novel design, unusual certification, single-source material, customer witness points | Individual risk and capacity review | Individually approved |
+| Premium expedite | Standard configuration with confirmed material and capacity | Dedicated slot, premium price, explicit scope and limits | Confirmed finite-capacity date |
+
+These percentiles are starting points, not conclusions. The Lead-Time Council will approve the final percentile by product risk and customer lateness cost.
+
+---
+
+## 7. Prioritized improvement actions
+
+### Priority 1: Establish the baseline and stabilize the pilot
+
+**Timing:** Days 0–30  
+**Accountable owner:** Operations Excellence Manager  
+**Approvers:** COO/General Manager, Planning, Quality, Sales Operations
+
+Actions:
+
+- Select one high-volume standard or configured family.
+- Freeze uncontrolled compression efforts.
+- Deploy the order clock and primary/secondary cause codes.
+- Complete the quality gate register.
+- Create an aging board for open orders, shortages, engineering holds, and quality holds.
+- Begin daily constraint and shortage reviews.
+- Investigate the prior warranty spike.
+- Establish baseline metrics and data-quality audits.
+
+**Gate:** At least 90% of pilot orders have usable timestamps; all mandatory quality gates are documented; and the top five delay causes are quantified by order-days.
+
+---
+
+### Priority 2: Remove waiting around existing quality gates
+
+**Timing:** Days 31–90  
+**Accountable owner:** Quality Operations Manager  
+**Supporting owners:** Planning, Production, Engineering
+
+Actions:
+
+- Reserve inspection and test slots against the production schedule.
+- Require first-time-ready inspection calls.
+- Pre-review drawings, revisions, traceability, calibration, records, and test requirements.
+- Pre-notify customers of witness points.
+- Pre-stage approved fixtures, gauges, forms, and standard test plans.
+- Cross-train and qualify additional inspectors where permitted.
+- Reduce time from inspection completion to authorized release.
+- Digitize records with required fields and audit trails.
+
+Measure separately:
+
+- Inspection touch time.
+- Inspection queue.
+- Inspection-not-ready time.
+- Test-equipment waiting.
+- Disposition time.
+- Rework.
+- Retest.
+- Documentation and release time.
+
+**Evidence status:** Hypothesis pending baseline. No impact range is assumed until queue data confirms an opportunity.
+
+---
+
+### Priority 3: Improve order readiness and engineering release
+
+**Timing:** Days 31–90  
+**Accountable owner:** Engineering Release Manager  
+**Supporting owners:** Sales Operations, Quality, Planning
+
+Actions:
+
+- Require a complete launch packet before production release.
+- Confirm configuration, drawings, revisions, materials, inspection plan, test plan, certifications, customer approvals, and date assumptions.
+- Measure engineering touch time versus queue time.
+- Track post-release changes and their impact.
+- Use pre-approved standard configurations and test plans where applicable.
+- Escalate incomplete customer requirements before acceptance where practical.
+
+Front-end work may increase quote or acceptance time if total order-to-shipment time and promise reliability improve.
+
+---
+
+### Priority 4: Implement finite-capacity scheduling and a frozen zone
+
+**Timing:** Days 31–120  
+**Accountable owner:** Planning Manager  
+**Supporting owners:** Production, Quality, Procurement, Engineering
+
+Actions:
+
+- Model practical capacity for production, engineering, inspection, test, suppliers, and release.
+- Include setup, downtime, staffing, rework, absence, maintenance, and product mix.
+- Schedule against the true constraint.
+- Freeze the next one to two weeks for the pilot except approved safety, quality, regulatory, or strategic exceptions.
+- Record every schedule break and displaced job.
+- Limit WIP before bottlenecks.
+- Establish explicit rules for standard, expedite, engineering-change, and quality-hold orders.
+- Measure schedule adherence within a defined tolerance.
+
+Overtime, additional shifts, and outsourcing may be considered only after measured queue and variability causes are addressed and the quality-system review is complete.
+
+---
+
+### Priority 5: Improve material and supplier readiness
+
+**Timing:** Days 31–150  
+**Accountable owner:** Supply Chain Manager  
+**Supporting owners:** Procurement, Supplier Quality, Planning, Finance
+
+Actions:
+
+- Classify parts by demand variability, supplier lead time, criticality, certification, substitutability, cost, and obsolescence.
+- Use targeted safety stock for common, long-lead, production-blocking parts.
+- Use blanket orders or scheduled releases for predictable demand.
+- Consider generic subassemblies or postponement only where configuration and certification controls remain intact.
+- Review critical shortages daily.
+- Measure supplier promise-date accuracy, on-time-in-full delivery, defects, certification completeness, and expedite frequency.
+- Establish supplier recovery plans and capacity reservations.
+- Qualify alternate sources where justified.
+- Use source inspection for selected suppliers without silently eliminating required receiving controls.
+
+Every inventory or supplier investment requires the financial review in Section 11.
+
+---
+
+### Priority 6: Reduce batching, setups, and rework
+
+**Timing:** Days 61–180  
+**Accountable owner:** Manufacturing Engineering Manager  
+**Supporting owner:** Quality Engineering Manager
+
+Actions:
+
+- Measure batch-fill waiting, transfer-batch delay, setup time, first-piece approval, and setup-related defects.
+- Pilot setup reduction or smaller batches at one work center.
+- Sequence similar work where it reduces setup without damaging due-date performance.
+- Use error-proofing, standardized work, parameter capture, first-piece verification, and layered audits.
+- Analyze defects by creation point, detection point, disposition, rework, retest, and repeat inspection.
+- Update PFMEA, control plans, work instructions, training, and test plans before implementation.
+
+**Evidence status:** Hypothesis pending batch, setup, and rework data.
+
+---
+
+### Priority 7: Recalibrate quotation policy
+
+**Timing:** After the first evidence gate and stable pilot performance  
+**Accountable owner:** Commercial Operations Manager  
+**Approvers:** Planning, Quality, Finance, COO/General Manager
+
+Actions:
+
+- Replace the blanket 14-week promise with family-specific bands.
+- Add a promise-confidence indicator:
+  - **Green:** materials, capacity, engineering, and quality requirements confirmed.
+  - **Amber:** one defined dependency remains with an owner and recovery date.
+  - **Red:** date depends on unconfirmed capacity, supplier, engineering, or customer action.
+- Offer standard, premium expedite, alternative-configuration, or split-shipment options where technically and contractually acceptable.
+- Prevent Sales from promising dates outside approved family policies without formal approval.
+
+---
+
+## 8. Protecting every certified quality gate
+
+### 8.1 Non-negotiable controls
+
+The following may not be removed, informally shortened, deferred, or retrospectively completed:
+
+- Contractual inspection and witness points.
+- Regulatory and certification requirements.
+- Approved inspection and test procedures.
+- Acceptance criteria and required test duration.
+- Calibration and measurement-system controls.
+- Qualified-personnel requirements.
+- Approved material, process, and supplier qualifications.
+- Serial, lot, heat, batch, and revision traceability.
+- Nonconformance containment and disposition.
+- Customer deviations, concessions, and approvals.
+- Required records and final release authority.
+
+Quality retains independent authority to stop production or shipment.
+
+### 8.2 Quality gate register
+
+Each gate must define:
+
+- Requirement source.
+- Characteristic.
+- Acceptance criterion.
+- Method.
+- Equipment and calibration status.
+- Personnel qualification.
+- Required record.
+- Hold-point status.
+- Release authority.
+- Failure and containment response.
+- Disposition, retest, and reinspection rules.
+
+### 8.3 Safeguards based on the prior warranty failure
+
+Before any compression change:
+
+- Reconstruct the prior failure by serial number, product, process, supplier, shift, staffing, overtime, material, configuration, inspection, test, and rework history.
+- Classify each proposed causal mechanism as confirmed, probable, possible, or undetermined.
+- Review whether the prior effort involved rushed work, fatigue, inexperienced personnel, substitutions, setup errors, missing records, traceability loss, calibration issues, changed test methods, weak disposition, or incomplete retesting.
+- Update PFMEA, control plans, standard work, and training.
+- Identify critical characteristics and reaction plans.
+- Require first-piece verification after relevant changes.
+- Require complete retest after defined rework.
+- Use layered audits during the pilot.
+- Link pilot serial numbers to all production, inspection, test, nonconformance, and warranty data.
+- Prohibit shipment with incomplete records, unresolved traceability, unauthorized deviations, or open quality holds.
+
+### 8.4 Formal change control
+
+Quality-system change review is mandatory for any change affecting:
+
+- Inspection sequence or method.
+- Test method, duration, limits, or equipment.
+- Approved supplier or material.
+- Process qualification.
+- Work instruction.
+- Personnel qualification.
+- Traceability.
+- Customer witness point.
+- Certification basis.
+- Deviation or concession process.
+
+---
+
+## 9. Prior warranty investigation
+
+**Accountable owner:** Reliability Manager  
+**Approvers:** Quality Director and Engineering Director  
+**Sponsor:** COO/General Manager
+
+The investigation must include:
+
+- Affected serial-number population.
+- Warranty and return data.
+- Field failure modes and timing.
+- Production and test records.
+- Nonconformances and rework.
+- Engineering changes.
+- Supplier and material records.
+- Overtime, shift, staffing, and qualification records.
+- Inspection and calibration records.
+- Compression-program changes.
+- Customer usage conditions.
+
+The output must state:
+
+- Confirmed causal mechanisms.
+- Probable mechanisms.
+- Possible mechanisms.
+- Unresolved mechanisms.
+- Containment status.
+- Corrective-action status.
+- Controls required for the new pilot.
+
+If the cause remains uncertain, the pilot must use narrower scope, enhanced inspection and reliability surveillance, and additional validation before any similar change is scaled.
+
+---
+
+## 10. Controlled pilot design
+
+Each intervention must have its own baseline, comparison, owner, stop rule, and scale rule.
+
+### 10.1 Pilot scope
+
+Before launch, approve:
+
+- Product family and configuration range.
+- Serial-number or order range.
+- Minimum completed orders.
+- Minimum production cycles.
+- Minimum number of changeovers and inspection/test cycles.
+- Exposure duration.
+- Baseline period.
+- Matched control or comparison group.
+- Data-quality requirements.
+- Quality and reliability review frequency.
+- Reliability exposure appropriate to failure-mode latency.
+
+A 30–50-order diagnostic sample is a starting point, not proof of reliability. Where randomization is impractical, use matched historical controls, concurrent comparison cells, or stepped-wedge rollout by work center, shift, or product variant.
+
+Do not introduce all changes simultaneously when individual effects or risks need to be understood. If the purpose is combined-system validation, measure the package and do not claim isolated impact for individual actions.
+
+### 10.2 Initial experiments
+
+#### Experiment A: Inspection readiness and reserved capacity
+
+**Hypothesis:** Inspection queue and rejected calls add avoidable delay.  
+**Measures:** Queue, touch, readiness failures, release delay, first-pass yield, and escapes.  
+**Stop condition:** Any missed certified requirement, traceability failure, or critical defect.
+
+#### Experiment B: Frozen schedule
+
+**Hypothesis:** Frequent priority changes create queue and setup losses.  
+**Measures:** Schedule adherence, displaced work, WIP age, overtime, and customer lead time.  
+**Stop condition:** Quality or regulatory risk, or unacceptable customer impact under approved limits.
+
+#### Experiment C: Material-ready release
+
+**Hypothesis:** Releasing incomplete orders creates aging WIP and rescheduling.  
+**Measures:** Order acceptance to material-ready, material-ready to shipment, total customer lead time, WIP, and stockouts.  
+**Control:** Do not claim improvement by moving waiting before the operational clock.
+
+#### Experiment D: Engineering launch packet
+
+**Hypothesis:** Incomplete release information causes downstream holds and rework.  
+**Measures:** Engineering queue, late changes, holds, rework, and total order lead time.
+
+#### Experiment E: Setup or batch reduction
+
+**Hypothesis:** Batching and changeovers create avoidable waiting.  
+**Measures:** Queue, setup, throughput, first-pass yield, setup defects, and total lead time.
+
+#### Experiment F: Targeted inventory or supplier reservation
+
+**Hypothesis:** Selected critical items control the lead-time tail.  
+**Measures:** Material-ready rate, shortage duration, supplier variability, inventory, cash, and total lead time.
+
+---
+
+## 11. Financial decision model
+
+Every inventory, capacity, supplier, overtime, inspection, test, outsourcing, or systems investment requires an approved business case.
+
+\[
+\text{Net benefit}
+=
+\text{incremental gross margin}
++
+\text{recovered sales}
++
+\text{expedite savings}
++
+\text{rework savings}
++
+\text{warranty savings}
+-
+\text{inventory carrying cost}
+-
+\text{obsolescence}
+-
+\text{overtime and labor cost}
+-
+\text{supplier reservation cost}
+-
+\text{inspection/test capacity cost}
+-
+\text{outsourcing cost}
+-
+\text{implementation cost}
+\]
+
+Evaluate low, expected, and high cases for:
+
+- Demand.
+- Supplier failure.
+- Obsolescence.
+- Win-rate improvement.
+- Warranty deterioration.
+- Capacity utilization.
+- Customer willingness to pay for expedite service.
+
+Finance will define the approval hurdle before significant inventory, capacity, or supplier commitments are made. A speed improvement is not successful if it reduces margin or increases expected warranty cost beyond the approved case.
+
+---
+
+## 12. Governance, owners, and decision rights
+
+### 12.1 Lead-Time Council
+
+**Executive sponsor:** COO or business-unit president  
+**Program leader:** Operations Excellence Manager
+
+Members:
+
+- Sales and Sales Operations.
+- Planning.
+- Production.
+- Procurement and Supplier Quality.
+- Engineering.
+- Quality and Reliability.
+- Finance.
+- Customer Service.
+- IT/Systems.
+
+The Council approves pilot scope, investments, quote-policy changes, exceptions, and scale decisions.
+
+### 12.2 Accountability
+
+| Deliverable | Accountable owner | Required approvers/support |
+|---|---|---|
+| Official clock and data quality | Order Management Manager | Operations Excellence, IT, Finance |
+| Baseline and delay Pareto | Operations Excellence Manager | Planning, Sales Operations, Quality |
+| Quality gate register | Quality Systems Manager | Quality Director |
+| Prior warranty investigation | Reliability Manager | Quality and Engineering Directors |
+| Finite-capacity schedule | Planning Manager | Operations Director |
+| Inspection-capacity plan | Quality Operations Manager | Planning, Production |
+| Critical inventory policy | Supply Chain Manager | Finance, Procurement |
+| Supplier recovery | Procurement Manager | Supplier Quality, Planning |
+| Engineering launch packet | Engineering Release Manager | Sales Operations, Quality |
+| Setup/batch experiment | Manufacturing Engineering Manager | Production, Quality |
+| Quote-policy change | Commercial Operations Manager | Planning, Quality, Finance |
+| Scale decision | COO/General Manager | Lead-Time Council |
+
+Quality approves quality-system changes and retains independent release authority. It is not accountable for general flow execution.
+
+### 12.3 Governance cadence
+
+#### Daily, 15 minutes
+
+Review:
+
+- Orders at risk.
+- Shortages.
+- Quality holds.
+- Inspection readiness.
+- Engineering holds.
+- Bottleneck load.
+- Schedule breaks.
+- Expedites.
+- Displaced work.
+
+#### Weekly Council
+
+Review:
+
+- P50/P80/P90 lead time.
+- WIP age.
+- Schedule adherence.
+- First-pass yield and rework.
+- Supplier performance.
+- Inspection queue.
+- Quote wins/losses.
+- Inventory and cash.
+- Warranty-leading indicators.
+- Stop-condition status.
+
+#### Monthly operating review
+
+Review:
+
+- Product-family performance.
+- Structural capacity.
+- Supplier strategy.
+- Investment cases.
+- Reliability evidence.
+- Quote-policy performance.
+- Scale or rollback decisions.
+
+---
+
+## 13. KPIs and threshold-setting
+
+Thresholds must be set before each experiment using historical baseline, product risk, contract requirements, and measurement capability. The values below define the required measures; they are not assumed company targets.
+
+| KPI | Definition | Decision rule |
+|---|---|---|
+| Actual lead time | Order acceptance to actual shipment | Compare median and P80/P90 with matched baseline |
+| Quoted lead time | Order acceptance to promised shipment | Must be supported by the selected service percentile |
+| On-time shipment | Shipment on or before confirmed promise | Set target from customer requirement and baseline |
+| P50/P80/P90/P95 | Distribution of actual lead time | P90/P95 required for promise-risk decisions |
+| Touch-time ratio | Value-added touch divided by elapsed time | Improve versus baseline; use to target waiting |
+| Queue time | Time awaiting each resource | Reduce measured top causes |
+| WIP age | Order/job age and last-touch age | Establish work-center warning and action limits |
+| Material-ready-at-release | Critical materials and documents ready at release | Set product-specific threshold before pilot |
+| Supplier promise accuracy | Receipt versus supplier promise within tolerance | Set by supplier criticality and capability |
+| Schedule adherence | Operations completed within defined tolerance | Establish baseline and action limit |
+| Expedite rate | Orders requiring exceptional intervention | Must not rise as a side effect |
+| First-pass yield | Accepted without rework | Remain within approved baseline tolerance |
+| Rolled throughput yield | Probability of passing all required stages first time | Stable or improved |
+| Rework hours/order | Rework labor per order | Action limit set by baseline and product risk |
+| Inspection queue | Inspection-ready to inspection start | Reduce if confirmed as a cause |
+| Inspection first-time-ready | Calls accepted without missing prerequisites | Set threshold before trial |
+| Quality hold age | Hold start to authorized disposition | Establish warning and escalation limits |
+| Traceability completeness | Units with complete required records | 100% for pilot units |
+| Calibration compliance | Required equipment in calibration at use | 100% |
+| Critical escapes | Critical defects reaching customer or next protected stage | Zero permitted |
+| Warranty rate | Claims per unit shipped by failure mode | No adverse trend versus matched baseline |
+| Early-life failure | Failures in defined early-life window | No new critical failure mode |
+| Inventory impact | Incremental cash, turns, obsolescence | Within approved business case |
+| Total cost/order | Labor, inventory, expedite, rework, warranty, and capacity costs | Positive approved economic case |
+
+### 13.1 Stop conditions
+
+Immediate stop or rollback if:
+
+- A required inspection, test, witness point, approval, or release is missed.
+- Records are incomplete.
+- Traceability is lost.
+- Uncalibrated equipment or unqualified personnel are used.
+- Unauthorized substitution or deviation occurs.
+- A critical or safety-related defect is detected.
+- A quality hold is overridden.
+- Test data is missing, altered, or misidentified.
+- Product ships with unresolved quality requirements.
+
+Trend-based stop if preapproved action limits are exceeded for:
+
+- First-pass yield.
+- Critical defect rate.
+- Rework.
+- Repeat inspection.
+- Inspection escapes.
+- Quality-hold age.
+- Warranty-leading defects.
+- Schedule improvement dependent on undocumented overtime or workarounds.
+
+Each measure must have a baseline, warning limit, action limit, stop limit, review frequency, exposure requirement, and decision owner before the experiment starts.
+
+---
+
+## 14. Scale-up evidence requirements
+
+No change scales beyond the pilot without a signed evidence package containing:
+
+### Flow evidence
+
+- Complete order-clock data.
+- P50, P80, and P90 performance.
+- Reduced queue and WIP aging.
+- Improved or stable schedule adherence.
+- Reduced expedite frequency.
+- Confirmed production, supplier, inspection, test, and release capacity.
+
+### Quality evidence
+
+- First-pass and rolled-throughput yield stable or improved.
+- No increase in critical defects or escapes.
+- Complete traceability and records for all pilot units.
+- Updated PFMEA, control plans, work instructions, and test plans.
+- Training and qualification complete.
+- Calibration and measurement capability confirmed.
+- Approved deviations and corrective actions closed or controlled.
+
+### Reliability evidence
+
+- Serial-number-linked production and test records.
+- Prior warranty mechanisms addressed or controlled.
+- No unresolved systemic failure mode with plausible field impact.
+- Early-life and reliability surveillance completed to the risk-based exposure requirement.
+- Additional validation or accelerated testing completed where warranty latency exceeds the pilot observation period.
+
+Absence of short-term warranty claims does not, by itself, prove long-term reliability.
+
+### Commercial and financial evidence
+
+- Proposed quote supported by demonstrated service percentile.
+- Customer scope matches the pilot.
+- Inventory, capacity, supplier, overtime, outsourcing, and inspection costs known.
+- Margin and warranty exposure understood.
+- Sales trained on family-specific rules.
+- Competitor scope sufficiently validated for comparison.
+
+---
+
+## 15. Competitor-scope validation
+
+Sales Operations and Commercial will document whether the six-week competitor promise covers the same:
+
+- Configuration and customization.
+- Engineering content.
+- Certification and inspection requirements.
+- Customer witness points.
+- Shipment versus receipt.
+- Documentation package.
+- Warranty terms.
+- Inventory availability.
+- Expedite pricing.
+- Change-order treatment.
+- Split-shipment assumptions.
+
+Customer interviews and lost-deal reviews should distinguish actual competitor delivery performance from quoted claims. The competitor’s six weeks must not become the company’s universal target without comparable scope.
+
+---
+
+## 16. Roadmap
+
+### Phase 0 — Mobilize and protect quality: Days 0–14
+
+- Appoint sponsor, program leader, and accountable owners.
+- Select pilot family.
+- Approve clock policy, event taxonomy, and quality gate register.
+- Freeze uncontrolled compression.
+- Launch prior warranty investigation.
+- Assemble historical and pilot data.
+
+### Phase 1 — Diagnose and stabilize: Days 15–45
+
+- Complete event-clock collection.
+- Launch daily constraint, shortage, engineering-hold, and quality-hold reviews.
+- Implement launch packet.
+- Introduce frozen schedule.
+- Measure inspection readiness and queue.
+- Produce delay Pareto, WIP aging, bottleneck, and quote-padding analyses.
+
+**Gate 1:** Proceed only when data quality is adequate and major delay mechanisms are quantified.
+
+### Phase 2 — Controlled experiments: Days 46–90
+
+Run selected experiments with defined controls, owners, exposure, metrics, and stop conditions:
+
+- Inspection readiness and reserved capacity.
+- Frozen schedule.
+- Material-ready policy.
+- Engineering launch packet.
+- Targeted inventory or supplier reservation.
+- Setup or batch reduction.
+- Rework prevention.
+- Internal quote-band trial.
+
+**Gate 2:** No external shorter quote unless flow improvement is demonstrated and all quality thresholds are met.
+
+### Phase 3 — Limited commercial rollout: Months 4–6
+
+Offer shorter dates only for configurations where:
+
+- Demonstrated P80/P90 performance supports the promise.
+- Materials and finite capacity are confirmed.
+- Inspection and test capacity is available.
+- Records and traceability remain complete.
+- Quality and reliability guardrails are met.
+- The financial case is approved.
+
+### Phase 4 — Scale proven changes: Months 4–9
+
+Extend changes by product family, not by company-wide average. Revalidate capacity, suppliers, inspection support, quality risk, and economics for each family.
+
+### Phase 5 — Six-week feasibility review: Months 9–18
+
+Determine whether a six-week tier is feasible only for a defined standard product scope, with validated operational and commercial support.
+
+---
+
+## 17. Establishing a defensible quoted lead time
+
+For each product family and order segment:
+
+1. Use the official order-acceptance-to-shipment clock.
+2. Analyze at least 12 months of history where available, plus all detailed pilot orders.
+3. Segment by configuration, engineering content, supplier risk, inspection complexity, order size, and capacity condition.
+4. Calculate P50, P80, P90, and P95 actual performance.
+5. Separate normal variation from special causes, but do not exclude recurring internal problems as exceptions.
+6. Confirm that the new operating model has performed consistently over the required number of orders, production cycles, and reliability exposure.
+7. Confirm finite capacity for production, engineering, materials, inspection, test, documentation, and release.
+8. Select the service percentile based on customer lateness cost and product risk.
+9. Add only a documented residual contingency for known remaining variability.
+10. Review actual performance monthly after rollout.
+
+\[
+\text{Quoted lead time}
+=
+\text{demonstrated service percentile}
++
+\text{documented residual contingency}
+\]
+
+The quoted date is defensible only if actual on-time performance at that date meets the approved service target without quality or reliability deterioration.
+
+A family with a nine-week median but a 13-week P90 should not receive a universal nine-week promise when reliable delivery is required. The objective is to reduce both the center and the spread of the distribution.
+
+---
+
+## 18. Immediate next steps
+
+Within five working days:
+
+1. Appoint the COO or business-unit president as executive sponsor.
+2. Appoint the Operations Excellence Manager as program leader.
+3. Name one accountable owner for each deliverable.
+4. Select a standard or configured pilot family.
+5. Freeze uncontrolled compression initiatives.
+6. Approve the official clock policy and event taxonomy.
+7. Approve the quality gate register and change-control process.
+8. Extract 12 months of order, production, supplier, inspection, nonconformance, warranty, and quote data.
+9. Select and stratify the detailed order sample.
+10. Start the prior warranty-failure investigation.
+11. Launch daily pilot-family constraint, shortage, engineering-hold, and quality-hold reviews.
+12. Publish the first common scorecard within two weeks.
+13. Define numerical warning, action, and stop limits before any process experiment.
+14. Do not change external quoted lead times until the first evidence gate is passed.
+
+## Final recommendation
+
+Compete on **shorter, more reliable lead time**, not merely a shorter promise. The safest first gains are likely to come from order readiness, finite-capacity scheduling, WIP and queue reduction, material and supplier readiness, inspection scheduling, first-time-ready quality calls, documentation discipline, and defect prevention.
+
+The company should not claim a new lead time until measured performance and variability support it. Success means:
+
+> A shorter and more reliable customer promise, supported by complete certified evidence, stable process capability, intact traceability, controlled economics, and no increase in warranty or field risk.

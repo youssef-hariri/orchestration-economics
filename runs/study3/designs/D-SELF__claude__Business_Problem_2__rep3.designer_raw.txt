@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategies and best practices for improving communication in geographically dispersed teams"
+    },
+    {
+      "name": "Cultural & Domain Expert",
+      "role": "expert",
+      "description": "Provides domain-specific insights on cross-cultural communication, time zone management, and distributed team dynamics"
+    },
+    {
+      "name": "Collaboration Framework Analyst",
+      "role": "analyst",
+      "description": "Analyzes communication gaps, identifies root causes of misunderstandings, and produces data-driven insights on team dynamics"
+    },
+    {
+      "name": "Conflict Resolution Strategist",
+      "role": "strategist",
+      "description": "Develops conflict resolution strategies and escalation protocols tailored to distributed, culturally diverse teams"
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "description": "Synthesizes insights from expert, analyst, and strategist into cohesive, actionable recommendations"
+    },
+    {
+      "name": "Quality Assurance Reviewer",
+      "role": "critic",
+      "description": "Reviews completeness, feasibility, cultural sensitivity, and practical applicability of all recommendations"
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "description": "Formats final deliverables for user consumption with clear structure, actionable steps, and implementation guidance"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are tasked with creating initial comprehensive strategies to improve communication in geographically dispersed, culturally diverse project teams. Develop best practices covering: 1) Asynchronous communication protocols, 2) Synchronous meeting optimization across time zones, 3) Documentation and knowledge sharing systems, 4) Communication tools and platforms selection, 5) Language and cultural considerations. Provide detailed, practical recommendations grounded in team communication science."
+    },
+    {
+      "name": "Cultural & Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural communication and distributed team dynamics expert. Review the communication strategies and provide domain-specific insights on: 1) Cultural nuances that impact communication in multinational teams, 2) Time zone optimization strategies, 3) Implicit vs explicit communication preferences across cultures, 4) Building psychological safety in remote teams, 5) High-context vs low-context communication styles. Enhance and validate the initial strategies with expert perspective."
+    },
+    {
+      "name": "Collaboration Framework Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an analyst specializing in team dynamics and communication effectiveness. Analyze the proposed strategies to: 1) Identify potential communication gaps and bottlenecks, 2) Determine root causes of typical misunderstandings in distributed teams, 3) Assess barriers to collaboration (technical, cultural, temporal), 4) Produce insights on team cohesion metrics and measurement approaches, 5) Highlight which recommendations directly address documented pain points. Provide data-backed analysis and recommendations."
+    },
+    {
+      "name": "Conflict Resolution Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a specialist in conflict resolution for distributed, multicultural teams. Develop comprehensive conflict management strategies including: 1) Early warning systems for communication breakdowns, 2) De-escalation protocols adapted for remote settings, 3) Mediation approaches respecting cultural differences, 4) Escalation pathways and dispute resolution procedures, 5) Preventative conflict mitigation through improved processes. Ensure strategies integrate with the communication and collaboration framework."
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic refiner synthesizing inputs from communication strategy, cultural expertise, collaboration analysis, and conflict resolution into one cohesive framework. Your task: 1) Integrate all recommendations into a unified strategy with clear priorities, 2) Resolve any contradictions between approaches, 3) Ensure cultural sensitivity throughout all recommendations, 4) Create an implementation roadmap with phases and milestones, 5) Develop success metrics for each strategy area. Produce a comprehensive, actionable master strategy document."
+    },
+    {
+      "name": "Quality Assurance Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assurance reviewer. Assess the integrated strategy framework across these dimensions: 1) COMPLETENESS: Are all key communication, collaboration, and conflict resolution areas addressed? 2) FEASIBILITY: Are recommendations practical for global teams with budget constraints? 3) CULTURAL SENSITIVITY: Do recommendations respect diverse cultural norms? 4) IMPLEMENTATION CLARITY: Are steps specific, measurable, and actionable? 5) EVIDENCE: Are recommendations grounded in distributed team research? 6) COHERENCE: Is the framework internally consistent? Provide detailed assessment of strengths and any gaps. On the VERY LAST LINE, output exactly ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are the final quality polisher for user-facing output. Format the strategy framework into a comprehensive, well-structured deliverable including: 1) Executive summary of key strategies, 2) Communication best practices section with protocols and tools, 3) Collaboration frameworks with specific processes, 4) Conflict resolution playbook with scenarios, 5) Implementation roadmap with timeline, 6) Success metrics and KPIs, 7) Quick reference guides and checklists. Ensure clarity, professional formatting, and immediate actionability for the technology company."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce comprehensive, culturally-aware communication and collaboration strategies for distributed teams. The flow: (1) Builder creates initial communication strategies, (2) Expert adds cross-cultural and domain-specific depth, (3) Analyst identifies communication gaps and root causes, (4) Strategist develops conflict resolution approaches, (5) Refiner synthesizes all inputs into one cohesive, implementation-ready framework. The Quality Gate then assesses completeness, feasibility, cultural sensitivity, and clarity—if issues exist, it loops back to Refiner to integrate improvements. Once quality passes, Polisher formats the final deliverable. This multi-perspective approach ensures recommendations are strategically sound, culturally informed, analytically grounded, and practically implementable."
+}
+```

@@ -1,0 +1,522 @@
+# Global Inclusive Product Recommendations
+
+A global product should not treat any country, language, religion, ethnicity, disability group, or region as homogeneous. Establish universal foundations for accessibility, privacy, safety, internationalization, and clear communication. Validate market-specific decisions with diverse local users, community organizations, and qualified linguistic, legal, accessibility, and safety specialists.
+
+Claim support for a market only when critical interface, account, payment, support, safety, moderation, recovery, and accessibility experiences meet defined quality thresholds—not merely because some text has been translated.
+
+## 1. Prioritize inclusion from the start
+
+### Define scope and risks before architecture
+
+Document:
+
+- Launch and future markets.
+- Supported languages, locales, dialects, scripts, and writing directions.
+- Supported devices, browsers, operating systems, and assistive technologies.
+- Connectivity and performance targets.
+- Accessibility conformance targets.
+- Payment, identity, support, and notification channels.
+- Known exclusions and their likely impact.
+- Local privacy, legal, cultural, safety, and moderation risks.
+- Whether the product involves children, dependent adults, health, finance, location, biometrics, political content, or user-generated content.
+
+For each deferred or unsupported capability, record:
+
+1. Why it is deferred.
+2. Who may be excluded or harmed.
+3. What alternative is available.
+4. Who accepted the residual risk.
+5. When the decision will be reviewed.
+
+### Use clear release gates
+
+**Before architecture**
+
+- Choose Unicode- and locale-capable frameworks.
+- Design flexible models for names, addresses, dates, currencies, identities, and time zones.
+- Establish accessibility, privacy, safety, and internationalization owners.
+- Threat-model shared devices, monitored users, unsafe recovery, and high-risk features.
+- Define what “supported” means for every launch market.
+
+**Before first release**
+
+- Implement localized data models and externalized strings.
+- Test critical flows with local users and users with disabilities.
+- Provide accessible authentication, recovery, reporting, blocking, and appeals.
+- Review critical translations by qualified human linguists.
+- Test low-bandwidth, older-device, small-screen, keyboard, screen-reader, RTL, and text-expansion scenarios.
+- Resolve barriers affecting core tasks, safety, access, or legal obligations before launch.
+
+**Before market expansion**
+
+- Add local payment, authentication, support, moderation, and escalation capacity.
+- Validate terminology, safety controls, calendars, units, address formats, and notification practices.
+- Confirm that critical content is understandable, not merely translated.
+- Establish locale-specific monitoring and incident-response procedures.
+
+### Establish accountability
+
+Create a cross-functional review group representing product, design, engineering, research, content, localization, accessibility, privacy, trust and safety, legal, and regional operations.
+
+Assign named owners for:
+
+- Internationalization and localization.
+- Accessibility quality.
+- Inclusive content and representation.
+- Privacy and sensitive data.
+- Trust and safety.
+- Regional legal review.
+- Customer support and incident response.
+- Third-party and vendor compliance.
+
+High-risk features require documented review before launch, including those involving:
+
+- Government IDs, biometrics, age assurance, or identity inference.
+- Location, health, finances, minors, or political or religious content.
+- Automated eligibility, recommendation, or moderation.
+- Public profiles, messaging, or user-generated content.
+- Shared devices or delegated access.
+- Voice, facial recognition, payments, maps, or external analytics.
+
+The review should document benefits, affected users, potential harms, evidence, alternatives, fallback paths, monitoring indicators, rollback criteria, decision owners, and revalidation dates. Define who has authority to block, pause, or approve a release and its exceptions.
+
+---
+
+## 2. Design flexible, understandable experiences
+
+### Give users control
+
+- Make important tasks understandable without specialized cultural knowledge.
+- Allow users to save progress and return later.
+- Confirm destructive actions and make them reversible where possible.
+- Provide more than one practical path for critical tasks.
+- Explain why sensitive information is requested.
+- Let users change incorrect defaults without restarting.
+- Preserve entered information after validation errors.
+- Allow language switching without losing work.
+- Do not silently infer high-impact information from a name, language, location, photo, or device.
+
+Review defaults for:
+
+- Language, country, locale, and time zone.
+- Calendar, currency, and measurement system.
+- Name and address format.
+- Pronouns and forms of address.
+- Gender and relationship status.
+- Notification channels and privacy settings.
+- Payment and authentication methods.
+
+### Support diverse names and identities
+
+Prefer a flexible **name as displayed** field. Where relevant, provide separate fields for:
+
+- Display name.
+- Username.
+- Legal or administrative name.
+- Pronunciation.
+- Form of address.
+
+Support mononyms, multiple family names, compound names, patronymics, matronymics, prefixes, suffixes, spaces, hyphens, apostrophes, and non-Latin characters. Do not assume the first word is a given name or the last word is a family name.
+
+Do not reject names because they resemble prohibited words or do not match a Western format. Do not use culturally narrow security questions such as a parent’s maiden name.
+
+Identity fields should be purpose-specific and optional where possible. Explain why each field is collected, provide “prefer not to say” or equivalent choices when appropriate, and do not infer gender, nationality, religion, pronouns, or relationship status.
+
+If self-description or multiple selections are offered, provide safe defaults and clear visibility controls. Do not collect these fields merely for appearance or analytics.
+
+### Design for varied devices and connectivity
+
+Support:
+
+- Small screens and low-end hardware.
+- Slow, intermittent, or high-latency networks.
+- Reduced-data modes.
+- Resumable uploads and transactions.
+- Clear network status and retry behavior.
+- Offline or cached essential content where safe.
+- Older browsers and regional operating systems.
+- Shared devices and local input methods.
+
+Offline storage must not expose sensitive information. Clearly distinguish deleting local history from deleting server-side data.
+
+### Avoid interaction barriers
+
+Do not rely on:
+
+- Color alone.
+- Position alone.
+- Icons without labels.
+- Hover-only interactions.
+- Dragging or swiping as the only way to complete a task.
+- Voice input as the only alternative to typing.
+- Direction-specific instructions without labelled visual context.
+- Complex gestures without an accessible alternative.
+
+Use examples as examples, not requirements. For example:
+
+> Enter a postal code using a format accepted in your selected country.
+
+---
+
+## 3. Build strong internationalization foundations
+
+### Engineer for languages and scripts
+
+- Store and process Unicode throughout the system.
+- Externalize all user-facing strings.
+- Use locale-aware formatting libraries.
+- Support plural rules, grammatical gender, cases, honorifics, politeness, and variable word order.
+- Never concatenate sentence fragments that require translation.
+- Provide translators with context, screenshots, variables, tone, and length constraints.
+- Maintain versioned glossaries and terminology decisions.
+- Support content updates without unnecessary application releases.
+
+Instead of:
+
+```text
+"Welcome, " + firstName + "!"
+```
+
+use a localized message template that permits language-specific grammar and word order.
+
+Test:
+
+- Accented characters and combining marks.
+- Non-Latin fonts and fallback fonts.
+- Indic shaping and conjuncts.
+- Thai, Khmer, Burmese, Sinhala, CJK, Hangul, Ethiopic, Armenian, Georgian, and other supported scripts.
+- Languages without spaces between words.
+- Mobile keyboards, IMEs, handwriting input, voice input, and transliteration.
+- Long and short translations.
+- Copy, paste, truncation, line wrapping, sorting, and searching.
+
+Search may support accents, transliteration, and alternate spellings, but do not over-normalize names or treat transliterations as identity equivalents without explicit policy and user control.
+
+### Support right-to-left and mixed-direction content
+
+Test RTL behavior in:
+
+- Forms, tables, charts, emails, exports, and notifications.
+- Cursor movement, selection, deletion, and copy/paste.
+- Mixed Arabic/Latin and Hebrew/Latin content.
+- Numbers, URLs, names, usernames, and user-generated text.
+- Screen-reader navigation and pronunciation.
+
+Use bidirectional isolation for user-generated strings and security-sensitive identifiers. Mirror layouts where appropriate, but do not automatically mirror maps, scientific diagrams, media controls, or other directional content without validation.
+
+### Localize data formats
+
+Support locale-aware:
+
+- Dates and calendars.
+- Time zones and daylight-saving changes.
+- Week-start conventions.
+- Decimal and thousands separators.
+- Percentages and negative numbers.
+- Currency symbols, codes, precision, fees, taxes, and rounding.
+- Metric, imperial, and locally used units.
+- Phone numbers, postal codes, and variable address structures.
+
+Never parse dates or numbers with one fixed format. In consequential contexts, use unambiguous formats such as:
+
+> 6 September 2026  
+> 2026-09-06
+
+Always identify the time zone for appointments, deadlines, and events.
+
+---
+
+## 4. Make accessibility a product requirement
+
+Use recognized accessibility standards as a baseline, with a defined conformance target for each product surface. Do not treat automated tools as proof of usability.
+
+Provide:
+
+- Full keyboard access and visible focus states.
+- Semantic headings, landmarks, labels, and form controls.
+- Screen-reader compatibility.
+- Sufficient contrast and non-color status indicators.
+- Captions, transcripts, and meaningful alternatives.
+- Audio description or equivalent access for important visual information.
+- Text resizing and reflow without loss of function.
+- Reduced-motion settings.
+- Adequate touch targets.
+- Accessible CAPTCHA alternatives.
+- Warnings before timeouts and options to pause or extend.
+- Consistent layouts and terminology.
+- No unexpected sounds, flashing, or autoplay.
+
+Test with:
+
+- Screen readers on supported platforms.
+- Keyboard-only navigation.
+- Magnification and high zoom.
+- Voice control and switch access.
+- Mobile accessibility tools.
+- Localized speech output.
+- Deaf and hard-of-hearing users.
+- Users with cognitive, learning, motor, sensory, and speech disabilities.
+- Older devices, browsers, and low-quality displays.
+
+Make barriers affecting core tasks, authentication, safety, or essential content release-blocking. Assign owners and remediation dates for other defects. Require documented approval for exceptions. Do not use an accessibility overlay as a substitute for accessible product architecture.
+
+---
+
+## 5. Use respectful visual design and representation
+
+Use imagery that reflects real target users and the product context without turning representation into a checklist. Consider varied:
+
+- Ages and skin tones.
+- Body types and disabilities.
+- Clothing and work contexts.
+- Family and household structures.
+- Assistive technologies.
+
+Review whether imagery repeatedly associates particular groups with danger, poverty, service work, exoticism, or dependency. Show assistive technology naturally, not only in disability-focused campaigns.
+
+Validate symbols, gestures, animals, landmarks, religious imagery, medical icons, warning signs, check marks, crosses, stars, and payment symbols locally. Meanings can vary between and within countries.
+
+For high-risk content involving disability, religion, ethnicity, migration, poverty, political identity, or trauma, use compensated review by relevant community or disability organizations where feasible. Document alternative safeguards when such review is not possible.
+
+---
+
+## 6. Write clear, respectful, translatable content
+
+Use:
+
+- Plain, direct sentences.
+- Concrete instructions.
+- Consistent terminology.
+- Action-oriented headings.
+- Short, scannable content.
+- Specific error messages explaining recovery.
+- Respectful, non-blaming language.
+
+Avoid:
+
+- Idioms, puns, sarcasm, slang, and unexplained abbreviations.
+- Unnecessarily gendered language.
+- Culture-specific humor.
+- Claims that a group “always” behaves or believes in a particular way.
+- Assumptions about religion, nationality, family, work, or body type.
+- Shame, blame, or moral judgment.
+
+Example:
+
+> **Avoid:** “Invalid information.”  
+> **Use:** “Enter a postal code using a format accepted in your selected country.”
+
+Use qualified human review for safety, emergency, consent, privacy, financial, medical, legal, account-recovery, moderation, and age-verification content. Machine translation may assist drafting but should not be the only review for consequential content.
+
+Global announcements should include exact dates, time zones, regional availability, eligibility, exceptions, and localized pricing or tax information where relevant. Do not treat one country’s holidays, calendar, workweek, or observances as universal.
+
+---
+
+## 7. Protect privacy, safety, and vulnerable users
+
+### Minimize and explain data collection
+
+Clearly explain:
+
+- What is collected.
+- Why it is needed.
+- Who can access it.
+- How long it is retained.
+- Whether it is used for personalization, analytics, safety, or eligibility.
+- What happens if the user declines.
+
+Provide access, correction, deletion, and export mechanisms where applicable. Do not infer sensitive identity from names, location, language, contacts, photos, or behavior without a compelling purpose, review, and strong safeguards.
+
+Consider risks involving:
+
+- Domestic or interpersonal surveillance.
+- Stalking and location exposure.
+- Outing of identity.
+- Political or religious persecution.
+- Shared-device access.
+- Financial fraud.
+- Child safety.
+- Harassment and hate speech.
+- Local censorship or network shutdowns.
+
+Potential protections include neutral notification text, per-device session visibility, remote logout, sensitive-content hiding, optional app locks, discreet navigation, location-sharing warnings, and recovery methods that do not expose the user to another person. Validate these features locally because a safety feature can create risk in some circumstances.
+
+### Children and dependent adults
+
+Where relevant:
+
+- Apply age-appropriate privacy defaults.
+- Minimize age and identity data collection.
+- Distinguish parental consent, user assent, and legal requirements.
+- Provide accessible safety education and reporting.
+- Do not assume a caregiver is safe or should see all information.
+- Support delegated access without exposing private messages or identity attributes by default.
+- Provide escalation routes for exploitation, abuse, grooming, or coercion.
+- Review age thresholds and requirements by jurisdiction.
+- Do not make an unsafe family or guardian relationship a prerequisite for access where alternatives exist.
+
+### Review legal requirements
+
+This guidance is not legal advice. Requirements vary by jurisdiction, product function, sector, user age, and data type. Obtain advice from qualified professionals in the jurisdictions where the product operates.
+
+Maintain a jurisdictional matrix covering, as relevant:
+
+- Privacy and data protection.
+- Children’s access and age assurance.
+- Accessibility obligations.
+- Consumer protection and subscriptions.
+- Payments and financial services.
+- Identity verification.
+- Content moderation and appeals.
+- Data transfer and residency.
+- Emergency or law-enforcement requests.
+- Sector-specific requirements.
+
+Record responsible reviewers, effective dates, uncertainties, and product implications. Do not present one country’s legal requirement as a universal cultural preference.
+
+---
+
+## 8. Design fair moderation and recourse
+
+Policies should:
+
+- Define prohibited conduct with concrete examples.
+- Explain how context is considered.
+- Distinguish disagreement, criticism, reclaimed language, harassment, and threats.
+- Address dialects, code-switching, transliteration, and image-based content.
+- Provide understandable reporting outcomes and appeals.
+
+Do not rely on profanity lists alone. Do not launch automated enforcement in a language without sufficient evaluation, human review, user support, and appeal capacity.
+
+Preserve original content when translation is used for review. Audit false positives across language varieties, disability-related language, gendered language, and reclaimed terms. Provide accessible, language-appropriate appeals without requiring government identification for ordinary disputes.
+
+Offer:
+
+- Reporting, blocking, and muting.
+- Evidence preservation.
+- Protection against retaliation and unwanted identity disclosure.
+- Clear explanations of enforcement.
+- Indication, where appropriate, of automated versus human review.
+
+Define when to pause or roll back a feature, disable an automated model, notify affected users, restore access, correct records, refund or compensate users, and escalate an incident. Document root causes, affected populations, remediation, and follow-up testing.
+
+---
+
+## 9. Research with diverse users and reliable evidence
+
+### Recruit intersectionally
+
+Include combinations of:
+
+- Language and region.
+- Disability and assistive technology.
+- Age and digital experience.
+- Rural or urban location and connectivity.
+- Socioeconomic circumstances.
+- Gender, family structure, and identity where relevant and safe.
+- Migrant, displaced, minoritized, or high-risk users where appropriate.
+
+Do not treat one participant, translator, consultant, or urban sample as representative of an entire population. Majority preferences should not automatically override minority or vulnerable users.
+
+Protect participants through:
+
+- Consent in their preferred language.
+- Confidential interpreters.
+- Private research settings.
+- Safe compensation.
+- Alternatives to real-name, video, or voice participation.
+- Stopping research when participation could create legal, social, employment, family, or physical risk.
+
+### Record evidence for local decisions
+
+For each locally variable decision, document:
+
+1. The assumption.
+2. Affected users and possible harms.
+3. Existing evidence and its limitations.
+4. Who provided the evidence.
+5. Conflicting preferences or regional differences.
+6. The decision owner and rationale.
+7. User controls or fallback mechanisms.
+8. The revalidation date.
+
+Test comprehension, not only translation accuracy, for consent, policies, errors, payments, and safety content. Include edge cases such as mononyms, long names, mixed scripts, RTL, non-Gregorian dates, declined optional fields, shared devices, and interrupted connectivity.
+
+---
+
+## 10. Review third parties and dependent systems
+
+Evaluate vendors, SDKs, and external services for:
+
+- Unicode and RTL support.
+- Accessibility compatibility.
+- Data collection, retention, and transfer practices.
+- Regional hosting and legal requirements.
+- Language and moderation coverage.
+- Bias or exclusion in automated systems.
+- Accessibility of payment, identity, map, analytics, voice, and support components.
+
+Third-party limitations remain the product team’s responsibility. Provide alternatives when an external service creates an access, privacy, safety, or localization barrier.
+
+---
+
+## 11. Monitor outcomes and improve continuously
+
+Track, using privacy-preserving aggregation:
+
+- Critical task completion and abandonment by locale, device, and language.
+- Error rates and time on task.
+- Translation defects and resolution times.
+- Accessibility defects and assistive-technology failures.
+- RTL, keyboard, screen-reader, and text-expansion regressions.
+- Performance under low-bandwidth conditions.
+- Account-recovery success by method and locale.
+- Payment failures, refunds, and cancellation problems.
+- Moderation false positives, appeals, and reversals by language variety.
+- Support response and resolution times by language.
+- Notification or privacy incidents involving shared devices.
+- Use of opt-outs and alternative paths.
+
+Use minimum group-size thresholds, access controls, retention limits, and aggregation to reduce re-identification risk. Combine metrics with qualitative research; disparities may reflect small samples, privacy constraints, or other confounding factors.
+
+Provide:
+
+- In-product feedback in supported languages.
+- Accessible support channels, including non-voice options.
+- Separate routes for accessibility, translation, cultural, safety, and moderation concerns.
+- Language-specific escalation where feasible.
+- Response and resolution targets by severity.
+- A change log for terminology, policies, and localized behavior.
+- User notification and remedy procedures for material defects.
+
+---
+
+## 12. Minimum launch checklist
+
+Before claiming global or market support, confirm that:
+
+- Critical strings are externalized and professionally reviewed.
+- Names, addresses, dates, numbers, currencies, units, and time zones work for target locales.
+- RTL and text expansion are tested where relevant.
+- Core flows work with keyboard navigation and screen readers.
+- Important media has captions, transcripts, and accessible alternatives.
+- Performance is tested on representative low-end devices and networks.
+- Authentication and recovery have accessible alternatives.
+- Privacy, notification, shared-device, and location risks are reviewed.
+- Reporting, blocking, moderation, and appeals are available in supported languages where feasible.
+- Payment, tax, cancellation, refund, and support flows are locally appropriate.
+- Children and dependent-adult risks are assessed where relevant.
+- Vendors and third-party components pass inclusion and privacy review.
+- Local users, including users with intersecting access needs, have tested the product.
+- Known gaps, alternatives, owners, residual risks, and review dates are documented.
+
+## Operating principle
+
+An inclusive global product combines:
+
+1. **Universal foundations:** accessibility, privacy, safety, clear communication, flexible data models, resilient performance, and user control.
+2. **Local validation:** evidence from diverse users and qualified linguistic, cultural, legal, accessibility, and safety specialists.
+3. **Safe alternatives:** fallback paths when a default, identity requirement, payment method, device, or language path does not work.
+4. **Accountability:** named owners, release gates, measurable outcomes, incident response, and continuous correction.
+
+This approach avoids imposing one culture’s assumptions globally while giving multidisciplinary product teams practical standards they can design, build, test, and improve.

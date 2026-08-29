@@ -1,0 +1,92 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Crisis Context Analyzer",
+      "role": "analyst",
+      "description": "Analyzes the cultural incident, local market context, and brand impact to provide factual assessment"
+    },
+    {
+      "name": "PR Strategy Developer",
+      "role": "strategist",
+      "description": "Develops a comprehensive crisis response strategy with timeline, messaging, and stakeholder engagement plan"
+    },
+    {
+      "name": "Response Content Builder",
+      "role": "builder",
+      "description": "Creates initial drafts of public statements, internal communications, and corrective actions based on strategy"
+    },
+    {
+      "name": "Crisis Response Critic",
+      "role": "critic",
+      "description": "Reviews response content for gaps, inconsistencies, tone misalignment, and cultural appropriateness concerns"
+    },
+    {
+      "name": "Response Refiner",
+      "role": "refiner",
+      "description": "Revises response content to address all identified issues and align with cultural sensitivity and strategic goals"
+    },
+    {
+      "name": "Implementation Quality Validator",
+      "role": "reviewer",
+      "description": "Performs final validation that response meets all criteria for reputation restoration"
+    },
+    {
+      "name": "Final Polish Coordinator",
+      "role": "polisher",
+      "description": "Formats final deliverables including public statements, timeline, media strategy, and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Crisis Context Analyzer",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a crisis management analyst. Analyze the cultural incident comprehensively: (1) Identify what specifically was misinterpreted and why based on local cultural values, (2) Assess current brand sentiment and reach of negative reaction, (3) Determine key affected stakeholder groups, (4) Evaluate immediate risks to brand reputation and business, (5) Provide context on local cultural sensitivities and norms violated. Include expert insight on cultural appropriateness. Provide factual, data-driven analysis with strategic recommendations for response approach."
+    },
+    {
+      "name": "PR Strategy Developer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a PR crisis strategist with cultural expertise. Based on the crisis analysis, develop a comprehensive response strategy including: (1) Immediate actions (within 24-48 hours), (2) Short-term recovery plan (1-2 weeks), (3) Long-term reputation rebuilding (1-3 months), (4) Key messages and tone for each phase respectful of local culture, (5) Stakeholder communication priorities and channels, (6) Specific corrective actions that demonstrate genuine respect and understanding, (7) Internal alignment steps, (8) Metrics to track recovery. Be specific, actionable, and culturally appropriate."
+    },
+    {
+      "name": "Response Content Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a communications content creator. Using the strategy provided, create initial drafts of: (1) Public apology statement for media/social channels, (2) Internal memo to employees explaining the response, (3) Letter to key local influencers/community leaders, (4) Corrective action plan (campaign modifications, training commitments, etc.), (5) FAQ addressing common concerns. Focus on authenticity, accountability, specific acknowledgment of harm, and cultural respect throughout."
+    },
+    {
+      "name": "Crisis Response Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a crisis response quality reviewer. Conduct thorough analysis of all drafted content. Provide FULL assessment addressing: (1) Does the apology acknowledge specific harm caused without deflection? (2) Are cultural sensitivities fully respected in language and tone? (3) Are corrective actions concrete and meaningful? (4) Could any phrasing be misinterpreted or cause additional offense? (5) Is the response proportional and timely? (6) Are there gaps in addressing stakeholder concerns? Detail all strengths and every weakness found with specific examples. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass OR revise"
+    },
+    {
+      "name": "Response Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner specializing in crisis communications and cultural sensitivity. Revise all drafted content to address every issue identified in the critique. Improve: (1) Specificity and sincerity of apology, (2) Clarity of accountability and corrective measures, (3) Cultural appropriateness and respectful tone throughout, (4) Stakeholder relevance and messaging precision, (5) Any language that could cause additional misunderstanding. Produce refined versions of all content."
+    },
+    {
+      "name": "Implementation Quality Validator",
+      "role": "reviewer",
+      "type": "while",
+      "systemPrompt": "You are the final validation gate for crisis response quality. Review the refined content against these criteria: (1) Is the public apology sincere, specific, and culturally appropriate? (2) Are corrective actions concrete, meaningful, and timely? (3) Does the strategy comprehensively address reputation restoration? (4) Will local stakeholders view the response as genuine? (5) Are there any remaining risks or blind spots? Provide FULL assessment with specific reasoning for each criterion. Output on the VERY LAST LINE EXACTLY ONE keyword: pass (if all criteria met and response is ready) OR retry (if improvements needed)",
+      "whileOptions": ["pass", "retry"],
+      "whileMappings": {
+        "pass": 7,
+        "retry": 5
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Final Polish Coordinator",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are the final delivery coordinator. Format and organize all validated crisis response materials into a comprehensive, ready-to-execute package: (1) Executive summary of crisis response strategy, (2) Final public statement with media release format, (3) Internal communications and employee guidance, (4) Stakeholder outreach communications with culturally appropriate messaging, (5) Detailed implementation timeline with responsibilities, (6) 90-day reputation recovery roadmap with KPIs, (7) Risk mitigation guidelines. Ensure all formatting is professional, messaging is consistent across channels, and the entire package is immediately actionable."
+    }
+  ],
+  "explanation": "This 7-step pipeline produces a comprehensive, culturally-sensitive crisis response strategy and implementation plan. Execution flow: (1) Crisis Context Analyzer gathers factual assessment and cultural context, (2) PR Strategy Developer creates the overall response roadmap, (3) Response Content Builder drafts all necessary communications and actions, (4) Crisis Response Critic reviews drafts against quality and cultural appropriateness standards and routes to revision if needed, (5) Response Refiner improves content based on feedback, (6) Implementation Quality Validator performs final validation with up to 3 retry loops to ensure response excellence and cultural sensitivity, (7) Final Polish Coordinator formats deliverables for immediate execution. The analyst-strategist sequence ensures comprehensive strategy development before content creation. The builder-critic-refiner-validator sequence with looping ensures crisis response quality meets strict standards for reputation restoration while preventing further cultural missteps. Ending with polisher ensures all outputs are professionally formatted and actionable."
+}
+```

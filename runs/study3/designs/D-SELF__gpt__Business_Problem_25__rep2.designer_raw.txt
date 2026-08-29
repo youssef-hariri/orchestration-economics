@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, decision-ready plan for transitioning a software company from perpetual licenses with paid upgrades to subscription revenue. Address the offer structure, treatment of existing license rights, migration incentives, pricing and packaging, adoption scenarios, revenue-trough mitigation, customer retention risks, sales compensation redesign, operating implications, and investor and board communication. Use explicit assumptions, illustrative financial logic, risks, milestones, and measurable success metrics. Tailor the recommendations to the facts that revenue is lumpy, salespeople are rewarded for large upfront deals, long-standing customers feel ownership of purchased licenses, and an abrupt competitor transition lost 20% of its installed base. Produce a coherent initial strategy, not generic advice.",
+      "description": "Creates the initial end-to-end business-model transition strategy."
+    },
+    {
+      "name": "Transition Economics Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed subscription-transition strategy and make its economics and decision logic concrete. Evaluate alternative migration paths, subscription price points, discounts, credits, grandfathering, term lengths, and upgrade or support bundles. Explain how each option affects adoption, annual recurring revenue, recognized revenue, cash flow, gross margin, renewal risk, customer lifetime value, sales productivity, and the depth and duration of the revenue trough. Include scenario assumptions and sensitivity analysis where exact company data is unavailable. Identify missing data and state practical assumptions rather than inventing false precision. Recommend target ranges and leading indicators that leadership, the board, and investors should monitor.",
+      "description": "Quantifies the strategic tradeoffs and exposes assumptions, sensitivities, and financial risks."
+    },
+    {
+      "name": "Executive Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the previous strategy and economic analysis into a single actionable plan for executive decision-making. Resolve contradictions, distinguish facts from assumptions, and ensure the recommendations directly address customer entitlement, installed-base retention, pricing and adoption, trough management, compensation behavior, and investor confidence. Specify a phased commercial transition, migration offers and eligibility rules, pricing architecture, sales-compensation mechanics, financial targets and scenarios, governance cadence, communication messages, risks, mitigations, and implementation milestones. Make the plan sufficiently specific to execute while clearly labeling illustrative figures that require company validation. Preserve customer trust and avoid recommending an abrupt transition that could repeat the competitor's installed-base loss.",
+      "description": "Turns analysis into a coherent, practical, and financially disciplined transition plan."
+    },
+    {
+      "name": "Strategy Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Review the refined transition plan as a skeptical SaaS strategist, CFO, sales-leader, customer advocate, and public-market investor. Assess whether it is internally consistent, financially credible, commercially executable, customer-safe, and clear about tradeoffs. Check specifically for: a defensible offer structure for new and existing customers; fair handling of perpetual-license rights; incentives that drive migration without destroying price integrity; pricing that balances adoption and trough depth; compensation that rewards durable recurring revenue; realistic retention safeguards; explicit scenarios and metrics; credible trough funding and governance; and an investor and board communication plan with milestones and leading indicators. Identify omissions, unsupported assumptions, unintended incentives, legal or accounting dependencies, and recommendations that need qualification. Provide detailed corrective guidance. On the very last line output exactly one keyword: pass or revise.",
+      "description": "Performs a rigorous multi-stakeholder quality assessment and determines whether revision is needed."
+    },
+    {
+      "name": "Board-Ready Plan Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer using the refined plan and quality assessment. Present a concise but sufficiently detailed business-model transition plan with clear headings and practical tables or bullets where useful. Cover: strategic objectives; customer offer and migration paths; treatment of existing perpetual rights; pricing and incentives; adoption and revenue-trough scenarios; sales compensation redesign; implementation roadmap; risks and mitigations; KPIs; and the financial communication plan for investors and the board. Include illustrative assumptions and scenario ranges rather than pretending to know missing company data. Make tradeoffs explicit, explain why the recommended path protects the installed base, and distinguish accounting revenue, recurring revenue, billings, cash flow, and bookings where relevant. Ensure the result is actionable, credible, and suitable for executive and board discussion. Do not mention agents, pipeline steps, or internal review.",
+      "description": "Formats and finalizes the strategy as a clear, executive-ready deliverable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, decision-ready plan for transitioning a software company from perpetual licenses with paid upgrades to subscription revenue. Address the offer structure, treatment of existing license rights, migration incentives, pricing and packaging, adoption scenarios, revenue-trough mitigation, customer retention risks, sales compensation redesign, operating implications, and investor and board communication. Use explicit assumptions, illustrative financial logic, risks, milestones, and measurable success metrics. Tailor the recommendations to the facts that revenue is lumpy, salespeople are rewarded for large upfront deals, long-standing customers feel ownership of purchased licenses, and an abrupt competitor transition lost 20% of its installed base. Produce a coherent initial strategy, not generic advice."
+    },
+    {
+      "name": "Transition Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed subscription-transition strategy and make its economics and decision logic concrete. Evaluate alternative migration paths, subscription price points, discounts, credits, grandfathering, term lengths, and upgrade or support bundles. Explain how each option affects adoption, annual recurring revenue, recognized revenue, cash flow, gross margin, renewal risk, customer lifetime value, sales productivity, and the depth and duration of the revenue trough. Include scenario assumptions and sensitivity analysis where exact company data is unavailable. Identify missing data and state practical assumptions rather than inventing false precision. Recommend target ranges and leading indicators that leadership, the board, and investors should monitor."
+    },
+    {
+      "name": "Executive Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize the previous strategy and economic analysis into a single actionable plan for executive decision-making. Resolve contradictions, distinguish facts from assumptions, and ensure the recommendations directly address customer entitlement, installed-base retention, pricing and adoption, trough management, compensation behavior, and investor confidence. Specify a phased commercial transition, migration offers and eligibility rules, pricing architecture, sales-compensation mechanics, financial targets and scenarios, governance cadence, communication messages, risks, mitigations, and implementation milestones. Make the plan sufficiently specific to execute while clearly labeling illustrative figures that require company validation. Preserve customer trust and avoid recommending an abrupt transition that could repeat the competitor's installed-base loss."
+    },
+    {
+      "name": "Strategy Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined transition plan as a skeptical SaaS strategist, CFO, sales-leader, customer advocate, and public-market investor. Assess whether it is internally consistent, financially credible, commercially executable, customer-safe, and clear about tradeoffs. Check specifically for: a defensible offer structure for new and existing customers; fair handling of perpetual-license rights; incentives that drive migration without destroying price integrity; pricing that balances adoption and trough depth; compensation that rewards durable recurring revenue; realistic retention safeguards; explicit scenarios and metrics; credible trough funding and governance; and an investor and board communication plan with milestones and leading indicators. Identify omissions, unsupported assumptions, unintended incentives, legal or accounting dependencies, and recommendations that need qualification. Provide detailed corrective guidance. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Board-Ready Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer using the refined plan and quality assessment. Present a concise but sufficiently detailed business-model transition plan with clear headings and practical tables or bullets where useful. Cover: strategic objectives; customer offer and migration paths; treatment of existing perpetual rights; pricing and incentives; adoption and revenue-trough scenarios; sales compensation redesign; implementation roadmap; risks and mitigations; KPIs; and the financial communication plan for investors and the board. Include illustrative assumptions and scenario ranges rather than pretending to know missing company data. Make tradeoffs explicit, explain why the recommended path protects the installed base, and distinguish accounting revenue, recurring revenue, billings, cash flow, and bookings where relevant. Ensure the result is actionable, credible, and suitable for executive and board discussion. Do not mention agents, pipeline steps, or internal review."
+    }
+  ],
+  "explanation": "The flow is Builder → Analyst → Refiner → Quality Assessor → Polisher. The builder creates the full strategic baseline, the analyst tests its economics and surfaces assumptions, and the refiner integrates those findings into an executable plan. The quality assessor reviews the completed refined plan after it exists; if it outputs revise, execution returns to the refiner, while pass proceeds to the polisher. The polisher produces the final board-ready deliverable."
+}

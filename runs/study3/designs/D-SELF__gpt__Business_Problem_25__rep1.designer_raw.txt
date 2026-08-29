@@ -1,0 +1,85 @@
+{
+  "agents": [
+    {
+      "name": "Transition Strategy Architect",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive business-model transition plan from perpetual licenses with paid upgrades to subscription revenue. Address: subscription offer structure; treatment of previously purchased licenses; migration incentives and customer rights; pricing and contract terms that balance adoption with the revenue trough; customer segmentation and migration sequencing; sales compensation redesign; retention and churn risk; implementation milestones; key assumptions; and investor and board communication. Make the plan commercially realistic, financially coherent, and sensitive to the risk of losing long-standing customers. Clearly distinguish recommendations, assumptions, risks, and measurable success metrics. Produce a complete initial plan for subsequent financial and strategic refinement.",
+      "description": "Creates the initial end-to-end transition strategy covering customers, pricing, sales incentives, economics, execution, and stakeholder communication."
+    },
+    {
+      "name": "Subscription Economics Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed transition plan in the previous output. Test its economic logic using explicit assumptions and scenario reasoning, including current license and upgrade economics, subscription annual recurring revenue, contract duration, migration discounts, renewal rates, churn, bookings, cash flow, deferred revenue, sales-cycle timing, compensation costs, and the depth and duration of the revenue trough. Identify missing data and provide sensitivity scenarios such as conservative, base, and accelerated adoption. Recommend pricing, incentive, migration, and compensation parameters that improve adoption without creating unsustainable economics. Also assess what financial metrics and disclosure framing investors and the board will need. Return detailed findings and concrete corrections for the plan.",
+      "description": "Stress-tests the strategy's economics, adoption assumptions, trough profile, pricing, and financial communication requirements."
+    },
+    {
+      "name": "Executive Transition Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy into a unified, decision-ready business-model transition plan using the economic analysis provided. Resolve contradictions and unsupported assumptions. Specify subscription tiers and entitlements, conversion paths for each major installed-base segment, migration incentives with limits and expiration rules, grandfathering and license-rights treatment, pricing architecture, adoption scenarios, revenue and cash-flow implications, sales compensation mechanics and transition guarantees, retention safeguards, implementation governance, risks with mitigations, and a multi-year investor and board communication plan. Include illustrative assumptions and formulas where useful, clearly label items requiring validation, and provide a phased timeline with measurable leading and lagging indicators. Ensure the plan balances customer fairness, sales motivation, adoption, revenue continuity, and long-term recurring-revenue quality.",
+      "description": "Integrates strategic and economic findings into a coherent, actionable executive plan."
+    },
+    {
+      "name": "Transition Plan Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined transition plan as a skeptical executive committee, CFO, CRO, customer advocate, and investor. Assess whether it fully and credibly answers the requested outcomes: offer structure and migration incentives for existing license holders; pricing that balances adoption against trough depth; sales compensation redesign; and a financial communication plan that sustains commitment through the trough. Examine customer-rights fairness, competitive churn risk, revenue and cash-flow logic, incentive alignment, operational feasibility, disclosure credibility, scenario transparency, and decision usefulness. Identify specific omissions, contradictions, unrealistic assumptions, ambiguous terms, and recommendations that need correction. Provide a full assessment with detailed strengths, weaknesses, and exact improvements required. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      },
+      "description": "Determines whether the integrated plan is complete, economically credible, customer-safe, and suitable for executive and investor use."
+    },
+    {
+      "name": "Board-Ready Transition Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing business-model transition plan from the refined draft and quality review. Incorporate every material correction identified by the review while preserving sound detail. Present the result with clear headings and concise executive language covering: executive recommendation; customer offer and license-holder migration paths; pricing and incentive design; adoption and revenue-trough scenarios; sales compensation redesign; implementation roadmap; risks and mitigations; KPIs; and investor and board communication cadence, metrics, milestones, and messaging. Use tables or structured bullets where they improve clarity. Distinguish illustrative assumptions from decisions requiring validation. Do not mention agents, pipeline steps, quality reviews, or drafting processes. Ensure the final plan is actionable, financially transparent, customer-conscious, and appropriately cautious about churn and forecast uncertainty.",
+      "description": "Formats and finalizes the strategy as a clear, board-ready operating and communication plan."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Transition Strategy Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive business-model transition plan from perpetual licenses with paid upgrades to subscription revenue, covering offer structure, existing-customer migration, pricing, adoption, sales compensation, risks, milestones, metrics, and investor and board communication."
+    },
+    {
+      "name": "Subscription Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Stress-test the preceding plan's assumptions and economics, including revenue trough depth and duration, ARR, cash flow, churn, migration discounts, pricing, sales compensation, adoption scenarios, and financial disclosure requirements. Recommend concrete corrections."
+    },
+    {
+      "name": "Executive Transition Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate the strategy and economic analysis into a complete, decision-ready transition plan with explicit customer migration paths, pricing, incentives, compensation, scenarios, implementation milestones, risks, KPIs, and stakeholder communications."
+    },
+    {
+      "name": "Transition Plan Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined plan for completeness, economic credibility, customer fairness, sales alignment, execution feasibility, and investor communication quality. Provide full detailed reasoning and specific corrections. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Board-Ready Transition Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Finalize the reviewed plan into a concise, actionable, board-ready business-model transition plan. Include offer structure, migration incentives, pricing and trough scenarios, sales compensation, implementation roadmap, risks, KPIs, and investor and board communications. Incorporate all material review corrections and omit any discussion of the pipeline."
+    }
+  ],
+  "explanation": "The flow is Transition Strategy Architect → Subscription Economics Analyst → Executive Transition Plan Refiner → Transition Plan Quality Review → Board-Ready Transition Plan Polisher. The builder establishes the complete strategic answer, the analyst tests its financial and adoption logic, and the refiner integrates those findings. The quality review occurs after the refined output it assesses; if it outputs revise, execution returns to the refiner for correction, and if it outputs pass, the plan proceeds to the final polisher. The pipeline ends with a polished, user-facing deliverable and remains within the eight-step limit."
+}

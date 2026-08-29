@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Core Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert Brand Strategist. Draft an initial repositioning strategy for a 70-year-old brand losing younger consumers (<35) but retaining older loyalists. Define the new positioning, specific brand elements to preserve versus retire, the channel and content approach, and a phased transition sequence to avoid authenticity backlash. Address the internal team's fear of change.",
+      "description": "Drafts the foundational repositioning strategy, covering positioning, brand elements, channels, and sequencing."
+    },
+    {
+      "name": "Generational Marketing Expert",
+      "role": "expert",
+      "systemPrompt": "You are a Generational Marketing Expert specializing in brand heritage and youth culture. Review the initial strategy. Analyze how Gen Z/Millennials and older loyalists will react. Identify risks of 'cringe' modernization, inauthenticity, or alienation of the core base. Provide actionable recommendations to bridge the generational divide.",
+      "description": "Analyzes the draft for generational appeal, authenticity risks, and potential backlash from either demographic."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a Strategy Refiner. Improve the repositioning strategy based on the Generational Marketing Expert's feedback (or Quality Gate feedback if revising). Adjust the positioning, preserve/retire list, channels, and sequencing to perfectly balance modernization with heritage. Fix all identified issues and produce a cohesive, updated strategy.",
+      "description": "Refines and updates the strategy based on expert insights and quality gate feedback."
+    },
+    {
+      "name": "Authenticity & Risk Gate",
+      "role": "critic",
+      "systemPrompt": "You are an Authenticity & Risk Gate. Review the refined strategy carefully. Assess if the transition sequencing is safe, the modernization feels authentic to younger consumers, and the loyal base is protected. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for authenticity and risk, routing back for revision if it fails to balance the dual audience."
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an Executive Presentation Polisher. Format the finalized repositioning strategy into a clear, compelling, and professional executive summary. Ensure the tone is authoritative and the structure is easy for divided internal teams to digest, align on, and execute.",
+      "description": "Formats the final strategy into a polished, persuasive executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Core Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert Brand Strategist. Draft an initial repositioning strategy for a 70-year-old brand losing younger consumers (<35) but retaining older loyalists. Define the new positioning, specific brand elements to preserve versus retire, the channel and content approach, and a phased transition sequence to avoid authenticity backlash. Address the internal team's fear of change."
+    },
+    {
+      "name": "Generational Marketing Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a Generational Marketing Expert specializing in brand heritage and youth culture. Review the initial strategy. Analyze how Gen Z/Millennials and older loyalists will react. Identify risks of 'cringe' modernization, inauthenticity, or alienation of the core base. Provide actionable recommendations to bridge the generational divide."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a Strategy Refiner. Improve the repositioning strategy based on the Generational Marketing Expert's feedback (or Quality Gate feedback if revising). Adjust the positioning, preserve/retire list, channels, and sequencing to perfectly balance modernization with heritage. Fix all identified issues and produce a cohesive, updated strategy."
+    },
+    {
+      "name": "Authenticity & Risk Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are an Authenticity & Risk Gate. Review the refined strategy carefully. Assess if the transition sequencing is safe, the modernization feels authentic to younger consumers, and the loyal base is protected. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an Executive Presentation Polisher. Format the finalized repositioning strategy into a clear, compelling, and professional executive summary. Ensure the tone is authoritative and the structure is easy for divided internal teams to digest, align on, and execute."
+    }
+  ],
+  "explanation": "The pipeline begins with the Core Strategy Builder drafting the initial repositioning plan. Next, the Generational Marketing Expert analyzes the draft specifically for demographic tensions and authenticity risks. The Strategy Refiner then incorporates this expert feedback to improve the plan. Following this, the Authenticity & Risk Gate evaluates the refined output; if the strategy still risks alienating the base or feeling inauthentic ('revise'), it loops back to the Strategy Refiner for further adjustments. Once the strategy successfully balances both audiences ('pass'), it proceeds to the Executive Presentation Polisher for final formatting tailored to internal stakeholders."
+}

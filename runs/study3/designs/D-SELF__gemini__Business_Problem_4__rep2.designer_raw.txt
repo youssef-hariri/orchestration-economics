@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze a target international market to identify specific flavor profiles, local ingredients, and cultural consumption occasions. Provide a detailed brief for a new snack product line.",
+      "description": "Researches and identifies market-specific snack opportunities."
+    },
+    {
+      "name": "ProductBuilder",
+      "role": "builder",
+      "systemPrompt": "Using the provided market brief, create a comprehensive proposal for a new snack product line. Include product names, flavor profiles, key ingredients, and the specific consumption occasion it targets.",
+      "description": "Drafts the initial snack product line concept."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "You are a cultural and culinary expert. Evaluate the snack proposal for authenticity, taste compatibility with the target market, and cultural sensitivity. Provide a detailed assessment. On the last line, output either 'pass' or 'revise'.",
+      "description": "Validates the snack concept against local cultural and taste standards."
+    },
+    {
+      "name": "ConceptRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a product refiner. Review the feedback from the CulturalExpert and update the snack proposal to address all identified issues, ensuring the product is perfectly aligned with the target market.",
+      "description": "Iteratively improves the product concept based on expert feedback."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final product proposal into a professional, investor-ready document. Ensure clarity, tone consistency, and persuasive language.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze a target international market to identify specific flavor profiles, local ingredients, and cultural consumption occasions. Provide a detailed brief for a new snack product line."
+    },
+    {
+      "name": "ProductBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Using the provided market brief, create a comprehensive proposal for a new snack product line. Include product names, flavor profiles, key ingredients, and the specific consumption occasion it targets."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "if",
+      "systemPrompt": "You are a cultural and culinary expert. Evaluate the snack proposal for authenticity, taste compatibility with the target market, and cultural sensitivity. Provide a detailed assessment. On the last line, output either 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "ConceptRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a product refiner. Review the feedback from the CulturalExpert and update the snack proposal to address all identified issues, ensuring the product is perfectly aligned with the target market."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final product proposal into a professional, investor-ready document. Ensure clarity, tone consistency, and persuasive language."
+    }
+  ],
+  "explanation": "The pipeline begins with a MarketAnalyst to ground the product in data. The ProductBuilder creates the initial concept, which is then vetted by the CulturalExpert. The CulturalExpert acts as a quality gate; if the concept is culturally misaligned or lacks local appeal, it routes back to the ConceptRefiner to iterate. Finally, the FinalPolisher formats the approved concept into a professional document."
+}

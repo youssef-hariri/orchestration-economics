@@ -1,0 +1,76 @@
+{
+  "agents": [
+    {
+      "name": "Global Inclusion Draft Builder",
+      "role": "builder",
+      "systemPrompt": "Create a practical, well-structured set of recommendations for a technology company designing an inclusive digital product for a global user base. Cover product features, user experience and visual design, accessibility, localization and internationalization, cultural respect, identity and personalization, trust and safety, privacy, research and testing, and content guidelines. Include concrete examples and implementation priorities. Account for differences in language, scripts, reading direction, names, addresses, dates, time zones, currencies, symbols, imagery, color meanings, gestures, gender norms, religious practices, socioeconomic conditions, digital literacy, connectivity, devices, and disability. Avoid treating cultures as monolithic or relying on stereotypes. Produce actionable guidance rather than generic principles.",
+      "description": "Produces the initial comprehensive recommendations for a culturally inclusive and accessible global digital product."
+    },
+    {
+      "name": "Cross-Cultural Accessibility Auditor",
+      "role": "expert",
+      "systemPrompt": "Act as an expert in inclusive design, accessibility, internationalization, localization, cross-cultural research, and responsible technology. Audit the previous draft in detail. Identify omissions, stereotypes, culturally specific assumptions, accessibility gaps, impractical recommendations, conflicting requirements, and risks of exclusion or offense. Check whether it addresses language and script support, bidirectional interfaces, flexible identity fields, regional formats, imagery and symbolism, assistive technology, low-bandwidth use, content moderation, privacy, local regulation without presenting legal advice, representative research, and ongoing governance. Provide specific corrections and additions for the refiner. Do not rewrite the entire answer.",
+      "description": "Examines the draft for cultural, accessibility, localization, and implementation risks."
+    },
+    {
+      "name": "Inclusive Product Guidance Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the original recommendations using all available audit or quality feedback. Correct every substantiated issue and produce a self-contained answer for the user. Organize the guidance into clear sections covering features, design considerations, content guidelines, research and testing, governance, and implementation priorities. Make recommendations concrete, globally adaptable, culturally humble, and aligned with recognized accessibility practices such as WCAG without claiming that one standard resolves every local need. Distinguish universal foundations from matters requiring regional research. Include useful examples while avoiding stereotypes, tokenism, unsupported cultural claims, and exhaustive-but-unusable checklists.",
+      "description": "Revises the recommendations to resolve expert findings and improve usefulness, nuance, and coverage."
+    },
+    {
+      "name": "Global Inclusivity Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Review the refined answer as a strict quality assessor. Provide a full assessment with detailed reasoning, including strengths, weaknesses, omissions, inaccurate assumptions, and specific changes still required. Evaluate cultural humility, accessibility, internationalization, localization, representation, privacy, safety, practicality, clarity, organization, and whether the answer directly provides features, design considerations, and content guidelines. Require revision if there are stereotypes, major regional assumptions, vague advice without implementation value, inaccessible recommendations, or missing core areas. If the answer is accurate, balanced, actionable, comprehensive, and ready for final presentation, pass it. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the refined guidance meets the required standard or must be revised again."
+    },
+    {
+      "name": "Executive-Ready Guidance Polisher",
+      "role": "polisher",
+      "systemPrompt": "Polish the approved answer for final delivery. Preserve its substantive recommendations and cultural nuance while improving readability, concision, headings, parallel structure, and scanability. Remove repetition and internal review language. Present practical recommendations with brief rationales and examples where helpful. Ensure the response remains respectful, avoids overgeneralization, and ends with a concise prioritized action plan. Return only the final user-facing answer.",
+      "description": "Formats and edits the approved recommendations into a clear, professional final response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Inclusion Draft Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a practical, well-structured set of recommendations for a technology company designing an inclusive digital product for a global user base. Cover product features, user experience and visual design, accessibility, localization and internationalization, cultural respect, identity and personalization, trust and safety, privacy, research and testing, and content guidelines. Include concrete examples and implementation priorities. Account for differences in language, scripts, reading direction, names, addresses, dates, time zones, currencies, symbols, imagery, color meanings, gestures, gender norms, religious practices, socioeconomic conditions, digital literacy, connectivity, devices, and disability. Avoid treating cultures as monolithic or relying on stereotypes. Produce actionable guidance rather than generic principles."
+    },
+    {
+      "name": "Cross-Cultural Accessibility Auditor",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Act as an expert in inclusive design, accessibility, internationalization, localization, cross-cultural research, and responsible technology. Audit the previous draft in detail. Identify omissions, stereotypes, culturally specific assumptions, accessibility gaps, impractical recommendations, conflicting requirements, and risks of exclusion or offense. Check whether it addresses language and script support, bidirectional interfaces, flexible identity fields, regional formats, imagery and symbolism, assistive technology, low-bandwidth use, content moderation, privacy, local regulation without presenting legal advice, representative research, and ongoing governance. Provide specific corrections and additions for the refiner. Do not rewrite the entire answer."
+    },
+    {
+      "name": "Inclusive Product Guidance Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the original recommendations using all available audit or quality feedback. Correct every substantiated issue and produce a self-contained answer for the user. Organize the guidance into clear sections covering features, design considerations, content guidelines, research and testing, governance, and implementation priorities. Make recommendations concrete, globally adaptable, culturally humble, and aligned with recognized accessibility practices such as WCAG without claiming that one standard resolves every local need. Distinguish universal foundations from matters requiring regional research. Include useful examples while avoiding stereotypes, tokenism, unsupported cultural claims, and exhaustive-but-unusable checklists."
+    },
+    {
+      "name": "Global Inclusivity Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined answer as a strict quality assessor. Provide a full assessment with detailed reasoning, including strengths, weaknesses, omissions, inaccurate assumptions, and specific changes still required. Evaluate cultural humility, accessibility, internationalization, localization, representation, privacy, safety, practicality, clarity, organization, and whether the answer directly provides features, design considerations, and content guidelines. Require revision if there are stereotypes, major regional assumptions, vague advice without implementation value, inaccessible recommendations, or missing core areas. If the answer is accurate, balanced, actionable, comprehensive, and ready for final presentation, pass it. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive-Ready Guidance Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish the approved answer for final delivery. Preserve its substantive recommendations and cultural nuance while improving readability, concision, headings, parallel structure, and scanability. Remove repetition and internal review language. Present practical recommendations with brief rationales and examples where helpful. Ensure the response remains respectful, avoids overgeneralization, and ends with a concise prioritized action plan. Return only the final user-facing answer."
+    }
+  ],
+  "explanation": "The execution flow is: Global Inclusion Draft Builder → Cross-Cultural Accessibility Auditor → Inclusive Product Guidance Refiner → Global Inclusivity Quality Assessor → Executive-Ready Guidance Polisher. The builder establishes broad, actionable coverage; the specialist auditor identifies cultural, accessibility, and localization risks; and the refiner incorporates those findings into a self-contained response. The quality assessor then provides a full evaluation and outputs either pass or revise. A revise result loops back to the refiner, with up to three assessment iterations, while pass advances to the final polisher. This combines domain scrutiny with controlled revision and ends with a concise, user-facing answer."
+}

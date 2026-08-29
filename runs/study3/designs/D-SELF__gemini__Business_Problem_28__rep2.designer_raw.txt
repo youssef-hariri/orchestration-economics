@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "TurnaroundBuilder",
+      "role": "builder",
+      "systemPrompt": "You are a corporate turnaround specialist. Draft a comprehensive assessment for an industrial-services unit that has lost money for three years. Include: 1) Diagnosis of structural vs. execution issues, 2) Identification of profitable segments/service lines, 3) A 12-month turnaround plan with quarterly milestones, and 4) Exit alternatives with decision criteria (turnaround vs. divestment).",
+      "description": "Generates the initial comprehensive turnaround-or-exit assessment."
+    },
+    {
+      "name": "StrategyExpert",
+      "role": "expert",
+      "systemPrompt": "You are a senior management consultant. Evaluate the turnaround plan for logical consistency, financial realism, and strategic rigor. Ensure the distinction between structural and execution issues is well-supported.",
+      "description": "Provides domain-specific critique of the turnaround strategy."
+    },
+    {
+      "name": "Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic refiner. Incorporate the feedback from the StrategyExpert to strengthen the diagnosis, clarify the milestones, and refine the exit criteria.",
+      "description": "Improves the draft based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Review the refined turnaround plan. Check for: 1) Clear diagnosis, 2) Actionable milestones, 3) Logical exit criteria. Provide a full assessment. On the last line, output 'pass' if ready, or 'revise' if further improvement is needed.",
+      "description": "Final validation gate before polishing."
+    },
+    {
+      "name": "Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final assessment into a professional executive report. Ensure tone is objective, authoritative, and clear for a Board of Directors.",
+      "description": "Finalizes the document for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "TurnaroundBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a corporate turnaround specialist. Draft a comprehensive assessment for an industrial-services unit that has lost money for three years. Include: 1) Diagnosis of structural vs. execution issues, 2) Identification of profitable segments/service lines, 3) A 12-month turnaround plan with quarterly milestones, and 4) Exit alternatives with decision criteria (turnaround vs. divestment)."
+    },
+    {
+      "name": "StrategyExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a senior management consultant. Evaluate the turnaround plan for logical consistency, financial realism, and strategic rigor. Ensure the distinction between structural and execution issues is well-supported."
+    },
+    {
+      "name": "Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic refiner. Incorporate the feedback from the StrategyExpert to strengthen the diagnosis, clarify the milestones, and refine the exit criteria."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined turnaround plan. Check for: 1) Clear diagnosis, 2) Actionable milestones, 3) Logical exit criteria. Provide a full assessment. On the last line, output 'pass' if ready, or 'revise' if further improvement is needed.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final assessment into a professional executive report. Ensure tone is objective, authoritative, and clear for a Board of Directors."
+    }
+  ],
+  "explanation": "The pipeline starts with the TurnaroundBuilder to generate the core assessment. The StrategyExpert reviews the draft to ensure high-level business logic. The Refiner then incorporates these insights. The QualityGate assesses the output; if 'revise' is selected, it loops back to the Refiner to ensure the plan meets the board's standard. Once 'pass' is triggered, the Polisher formats the final report for the Board."
+}

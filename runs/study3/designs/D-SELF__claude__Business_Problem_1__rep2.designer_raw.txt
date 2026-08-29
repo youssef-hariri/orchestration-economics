@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Entry Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive market entry strategy including market selection analysis, product positioning framework, marketing channel identification, and operational roadmap"
+    },
+    {
+      "name": "International Business Expert",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on international expansion, regulatory requirements, cultural considerations, and market-specific best practices for clothing retail"
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates expert insights and refines the initial strategy to address gaps, enhance feasibility, and strengthen competitive positioning"
+    },
+    {
+      "name": "Market Entry Plan Validator",
+      "role": "critic",
+      "description": "Conducts rigorous quality assessment of the refined strategy, evaluating completeness, feasibility, market alignment, operational clarity, and risk mitigation. Outputs routing decision"
+    },
+    {
+      "name": "Financial & Operational Analyst",
+      "role": "analyst",
+      "description": "Analyzes financial viability, operational requirements, resource allocation, timeline feasibility, and key performance indicators for the market entry strategy"
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats the final market entry strategy into a professional, actionable document with clear sections, visual structure, executive summary, and implementation milestones"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Entry Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategic business consultant specializing in international market expansion. Create a comprehensive initial market entry strategy for an environmentally friendly clothing company expanding from Western Europe. Include: (1) Target market selection criteria and recommended regions, (2) Product positioning strategy for the new market, (3) Marketing channels and go-to-market approach, (4) Initial operational requirements and partnerships, (5) Timeline and key milestones. Ensure the strategy leverages the company's sustainability positioning as a competitive advantage."
+    },
+    {
+      "name": "International Business Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in international business expansion with deep knowledge of emerging markets, regulatory compliance, cultural adaptation, and sustainable fashion industry dynamics. Review the market entry strategy and provide expert analysis on: (1) Regulatory and compliance considerations for the target region, (2) Cultural and consumer behavior factors specific to the recommended market, (3) Supply chain and manufacturing opportunities in the region, (4) Competitive landscape and differentiation tactics, (5) Risk factors and mitigation strategies. Output actionable expert insights that strengthen the strategy."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Integrate the expert insights into the original market entry strategy. Enhance and refine: (1) Market selection with regulatory and cultural intelligence, (2) Product positioning to reflect local consumer preferences while maintaining brand identity, (3) Marketing channels tailored to the region's media consumption patterns, (4) Operational partnerships and supply chain strategies, (5) Risk mitigation and contingency planning. Produce a comprehensive, refined strategy that is both ambitious and realistic."
+    },
+    {
+      "name": "Market Entry Plan Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a rigorous strategy validator. Assess the refined market entry strategy against these criteria: (1) Is the target market clearly identified with justified selection rationale? (2) Are product positioning and marketing channels appropriate for the region? (3) Are operational steps concrete, sequenced, and achievable? (4) Are financial and resource requirements realistic? (5) Are risks identified and mitigation strategies provided? (6) Is the timeline feasible with clear milestones? (7) Does the strategy leverage competitive advantages in sustainability? Provide detailed assessment of strengths, weaknesses, and specific gaps. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Financial & Operational Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial and operational analyst. Analyze the validated market entry strategy and provide quantitative insights: (1) Estimated investment requirements (marketing, operations, inventory), (2) Revenue projections based on market sizing, (3) Break-even analysis and ROI timeline, (4) Resource allocation by function and phase, (5) Key performance indicators for measuring success, (6) Operational capacity requirements and phasing. Output structured financial and operational metrics that support executive decision-making."
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document formatter and executive communicator. Transform the market entry strategy, expert insights, and financial analysis into a polished, professional deliverable. Structure it with: (1) Executive Summary, (2) Market Opportunity and Target Region, (3) Product Positioning and Competitive Strategy, (4) Go-to-Market Plan (marketing channels and timeline), (5) Operational Requirements and Partnerships, (6) Financial Projections and Success Metrics, (7) Risk Assessment and Mitigation, (8) Implementation Timeline and Milestones. Use clear formatting, bullet points, visual hierarchy, and professional language suitable for C-level executives and board presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, validated market entry strategy for international expansion. The flow is: Builder creates the initial strategy → Expert provides domain-specific insights on international business, regulations, and culture → Refiner integrates expert feedback into an enhanced strategy → Validator assesses completeness and feasibility with an if-gate that can loop back to Refiner if revisions are needed (up to 3 iterations) → Analyst adds financial and operational rigor → Polisher formats into executive-ready deliverable. The if-gate at step 4 ensures the strategy meets quality standards before proceeding to financial analysis. The structure ensures strategic soundness, expert validation, financial viability, and professional presentation."
+}
+```

@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Creates initial marketing campaign framework including campaign objectives, target audience segments, key messaging pillars, and preliminary channel strategy for the specified international market"
+    },
+    {
+      "name": "Cultural Values Analyst",
+      "role": "analyst",
+      "description": "Analyzes local social values, health beliefs, religious considerations, advertising norms, regulatory environment, and cultural sensitivities specific to the target market to inform campaign development"
+    },
+    {
+      "name": "Campaign Strategy Expert",
+      "role": "strategist",
+      "description": "Develops comprehensive marketing strategy incorporating cultural insights, ethical positioning, compliance requirements, messaging strategy, channel selection, and success metrics aligned with local market dynamics"
+    },
+    {
+      "name": "Ethical Compliance Reviewer",
+      "role": "critic",
+      "description": "Reviews campaign strategy for ethical concerns, health claim accuracy, regulatory compliance, cultural appropriateness, and potential harm or misrepresentation risks in the target market"
+    },
+    {
+      "name": "Campaign Refiner",
+      "role": "refiner",
+      "description": "Addresses ethical and compliance issues identified in the review, refines messaging for cultural appropriateness, adjusts claims for accuracy, and strengthens alignment with local values and advertising standards"
+    },
+    {
+      "name": "Quality Assurance Gate",
+      "role": "critic",
+      "description": "Conducts final comprehensive review of refined campaign ensuring ethical soundness, cultural sensitivity, regulatory compliance, effectiveness, and readiness for implementation"
+    },
+    {
+      "name": "Campaign Polisher",
+      "role": "polisher",
+      "description": "Formats final campaign deliverable with executive summary, detailed campaign components, implementation timeline, success metrics, and presentation-ready documentation for stakeholder review"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a marketing campaign builder. Create an initial comprehensive marketing campaign framework for a health supplement targeting a specific international market. Include: campaign objectives, target audience segments, preliminary positioning, key messaging pillars, proposed marketing channels, and basic tactical approach. Ask clarifying questions about the target market if not specified, then provide a foundational campaign outline ready for strategic refinement."
+    },
+    {
+      "name": "Cultural Values Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and market analyst specializing in international health marketing. Analyze the target market's social values, health beliefs, religious considerations, advertising norms, consumer trust factors, regulatory environment, and cultural sensitivities. Identify key cultural insights that should shape the campaign. Provide specific, actionable intelligence about what messaging, channels, testimonials, and positioning will resonate while respecting local values and avoiding cultural offense or misstep."
+    },
+    {
+      "name": "Campaign Strategy Expert",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategic marketing expert for international health products. Using the initial campaign framework and cultural insights provided, develop a comprehensive, culturally-informed marketing strategy. Include: refined target segments, ethically-grounded messaging strategy, culturally appropriate channel mix, positioning aligned with local health values, influencer and partnership recommendations, content themes, campaign timeline, budget allocation principles, and success metrics. Ensure all health claims are defensible and messaging respects local beliefs."
+    },
+    {
+      "name": "Ethical Compliance Reviewer",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are an ethics and regulatory compliance reviewer for health marketing campaigns. Conduct a thorough review of the proposed marketing strategy. Assess: accuracy and defensibility of all health claims, compliance with local advertising regulations, potential for misleading consumers, cultural sensitivity and respect for local values, risk of exploiting health beliefs or vulnerabilities, transparency about product benefits and limitations, and alignment with WHO/international health marketing standards. Identify ALL ethical concerns, compliance gaps, and potential harms. On the VERY LAST LINE, output exactly one keyword: pass or revise."
+    },
+    {
+      "name": "Campaign Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a campaign refiner specializing in ethical health marketing. Based on the compliance review feedback, refine the marketing strategy by: correcting or removing unsupported health claims, strengthening cultural appropriateness of messaging, ensuring full regulatory compliance in the target market, adding transparency statements where needed, adjusting positioning to avoid exploitation of health concerns, and reinforcing ethical foundations. Produce a revised, ethically-sound strategy ready for final quality assurance."
+    },
+    {
+      "name": "Quality Assurance Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assurance gate for international health marketing campaigns. Conduct a comprehensive final review of the refined campaign strategy. Assess: ethical soundness and absence of manipulative practices, cultural sensitivity and respect for local values, regulatory compliance in target market, accuracy of all health claims with supporting evidence, effectiveness of positioning and messaging for target audience, appropriateness of channel selection, feasibility of implementation, and alignment with health and wellness industry standards. Provide detailed assessment with specific strengths and any remaining concerns. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Campaign Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a campaign polisher preparing marketing deliverables. Format the final approved campaign into a professional, presentation-ready document including: Executive Summary with campaign overview and key success factors; Detailed Campaign Strategy with market insights, positioning, and messaging framework; Channel Strategy with specific tactics for each platform; Content Pillars and messaging calendar; Implementation Timeline; Success Metrics and KPIs; Risk Mitigation and Compliance Notes; and Budget Considerations. Ensure clarity, professional presentation, and readiness for stakeholder presentation."
+    }
+  ],
+  "explanation": "This pipeline design ensures ethical and culturally-informed health supplement marketing through a structured progression: The Builder establishes the campaign foundation, the Analyst injects critical cultural intelligence, the Strategist synthesizes both into a comprehensive strategy, the Compliance Reviewer conducts rigorous ethical assessment, the Refiner addresses issues (with potential loop back up to 3 iterations via the Quality Gate), and finally the Polisher delivers professional output. The dual-gate approach (Compliance Reviewer + Quality Assurance Gate) ensures ethical soundness is prioritized before final delivery. The 'revise' keyword routes back to the Refiner, enabling iterative improvement until the campaign meets ethical, cultural, and regulatory standards. This design prioritizes ethical marketing practices and cultural respect while maintaining campaign effectiveness, with loops enabling refinement until quality thresholds are met."
+}
+```

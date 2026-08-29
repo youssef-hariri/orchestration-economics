@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "Distributed Team Communication Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, practical set of strategies and best practices for improving communication, collaboration, and conflict resolution in geographically dispersed, culturally diverse project teams at a multinational technology company. Address asynchronous and synchronous communication, time-zone coordination, communication norms, documentation, technology tools, cultural intelligence, inclusion, psychological safety, escalation paths, conflict mediation, leadership practices, and measurable outcomes. Make the recommendations actionable for project managers and team members across continents. Produce a structured initial guidance document.",
+      "description": "Creates the initial strategy document for communication, collaboration, and conflict resolution in globally distributed teams."
+    },
+    {
+      "name": "Global Team Context Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the initial strategy document for coverage of the operational realities of geographically distributed, culturally diverse technology project teams. Identify likely communication failure points, time-zone and language barriers, cultural misunderstandings, collaboration bottlenecks, conflict patterns, implementation risks, and opportunities to make the recommendations more practical and measurable. Provide detailed findings and prioritized improvement recommendations for the refining stage.",
+      "description": "Examines the draft against the practical challenges and risks faced by multinational distributed project teams."
+    },
+    {
+      "name": "Cross-Cultural Collaboration Expert",
+      "role": "expert",
+      "systemPrompt": "Review the draft and analysis from the perspective of cross-cultural organizational communication, distributed software and technology delivery, inclusive leadership, and workplace conflict resolution. Supply evidence-informed guidance on cultural sensitivity, communication style differences, feedback norms, psychological safety, facilitation, mediation, and avoiding stereotypes. Identify any recommendations that could be impractical, culturally narrow, inequitable, or insufficiently specific, and propose precise improvements.",
+      "description": "Adds domain expertise on cross-cultural communication, inclusive collaboration, and conflict resolution."
+    },
+    {
+      "name": "Actionable Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy document using all available analysis and expert feedback. Produce a coherent, actionable, culturally inclusive guide for multinational technology project teams. Include clear practices for communication channels and response expectations, meeting and handoff design, documentation, time-zone fairness, language accessibility, cultural intelligence, team cohesion, conflict prevention, conflict resolution, escalation, leadership responsibilities, implementation steps, and success metrics. Remove redundancy, vague advice, unsupported assumptions, and culturally insensitive language. Ensure recommendations are practical across continents and adaptable to different team sizes and project contexts.",
+      "description": "Integrates analysis and expertise into a practical, complete, and culturally sensitive strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "systemPrompt": "Assess the refined strategy comprehensively for accuracy, completeness, practicality, clarity, cultural sensitivity, inclusiveness, conflict-resolution usefulness, applicability to multinational technology teams, and measurable implementation guidance. Explain strengths, weaknesses, omissions, contradictions, risks, and specific corrections needed. Confirm whether the document directly addresses communication delays, misunderstandings, project timelines, and team cohesion. Provide a FULL assessment with detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Evaluates whether the refined guidance is sufficiently complete, actionable, inclusive, and fit for the stated business context."
+    },
+    {
+      "name": "Executive Guidance Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing guidance based on the refined strategy and quality assessment. Preserve substantive recommendations while correcting any remaining issues. Present the result in a clear, professional structure with an executive summary, core principles, actionable practices, conflict-resolution process, implementation roadmap, role-specific responsibilities, and measurable indicators of success. Use concise language, practical examples where useful, culturally respectful terminology, and formatting suitable for leaders and project teams. Do not mention agents, drafts, quality checks, or internal workflow.",
+      "description": "Produces the final polished, reader-ready strategy and best-practice guide."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Distributed Team Communication Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, practical set of strategies and best practices for improving communication, collaboration, and conflict resolution in geographically dispersed, culturally diverse project teams at a multinational technology company. Address asynchronous and synchronous communication, time-zone coordination, communication norms, documentation, technology tools, cultural intelligence, inclusion, psychological safety, escalation paths, conflict mediation, leadership practices, and measurable outcomes. Make the recommendations actionable for project managers and team members across continents. Produce a structured initial guidance document."
+    },
+    {
+      "name": "Global Team Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial strategy document for coverage of the operational realities of geographically distributed, culturally diverse technology project teams. Identify likely communication failure points, time-zone and language barriers, cultural misunderstandings, collaboration bottlenecks, conflict patterns, implementation risks, and opportunities to make the recommendations more practical and measurable. Provide detailed findings and prioritized improvement recommendations for the refining stage."
+    },
+    {
+      "name": "Cross-Cultural Collaboration Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the draft and analysis from the perspective of cross-cultural organizational communication, distributed software and technology delivery, inclusive leadership, and workplace conflict resolution. Supply evidence-informed guidance on cultural sensitivity, communication style differences, feedback norms, psychological safety, facilitation, mediation, and avoiding stereotypes. Identify any recommendations that could be impractical, culturally narrow, inequitable, or insufficiently specific, and propose precise improvements."
+    },
+    {
+      "name": "Actionable Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy document using all available analysis and expert feedback. Produce a coherent, actionable, culturally inclusive guide for multinational technology project teams. Include clear practices for communication channels and response expectations, meeting and handoff design, documentation, time-zone fairness, language accessibility, cultural intelligence, team cohesion, conflict prevention, conflict resolution, escalation, leadership responsibilities, implementation steps, and success metrics. Remove redundancy, vague advice, unsupported assumptions, and culturally insensitive language. Ensure recommendations are practical across continents and adaptable to different team sizes and project contexts."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy comprehensively for accuracy, completeness, practicality, clarity, cultural sensitivity, inclusiveness, conflict-resolution usefulness, applicability to multinational technology teams, and measurable implementation guidance. Explain strengths, weaknesses, omissions, contradictions, risks, and specific corrections needed. Confirm whether the document directly addresses communication delays, misunderstandings, project timelines, and team cohesion. Provide a FULL assessment with detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Guidance Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing guidance based on the refined strategy and quality assessment. Preserve substantive recommendations while correcting any remaining issues. Present the result in a clear, professional structure with an executive summary, core principles, actionable practices, conflict-resolution process, implementation roadmap, role-specific responsibilities, and measurable indicators of success. Use concise language, practical examples where useful, culturally respectful terminology, and formatting suitable for leaders and project teams. Do not mention agents, drafts, quality checks, or internal workflow."
+    }
+  ],
+  "explanation": "The workflow begins by drafting a comprehensive strategy, then adds operational analysis and specialized cross-cultural expertise before a refiner integrates the guidance into one actionable document. A quality assessment follows the refiner; if it outputs revise, execution returns to the refiner for correction, while pass proceeds to the final polisher. The process therefore flows as: Builder → Analyst → Expert → Refiner → Quality Assessment (revise loops to Refiner; pass continues) → Polisher."
+}

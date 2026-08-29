@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Regional Customer Service Concept Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial, practical proposal for improving customer service, satisfaction, and loyalty for an online retailer operating in a specific regional market. Include innovative service approaches, locally relevant customer expectations, communication preferences, cultural considerations, accessibility, trust-building measures, operational improvements, measurable outcomes, implementation priorities, risks, and examples of how initiatives could work in practice. Because the region is not specified, state reasonable assumptions and identify which recommendations should be localized after collecting regional data. Produce a structured but comprehensive draft for subsequent analysis.",
+      "description": "Creates the initial regional customer service improvement proposal."
+    },
+    {
+      "name": "Regional Customer Insight Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed customer service improvement plan in light of the stated objective: increasing satisfaction and building stronger customer relationships in a regional online retail market. Assess likely customer needs, pain points, cultural and linguistic relevance, channel preferences, trust concerns, accessibility, service expectations, and opportunities for personalization. Identify unsupported assumptions, missing evidence, risks, dependencies, and measurable indicators. Recommend customer research, feedback mechanisms, and data sources that would validate or refine the proposal. Provide detailed findings and actionable recommendations for the strategist.",
+      "description": "Evaluates regional customer needs, assumptions, evidence, risks, and measurement opportunities."
+    },
+    {
+      "name": "Customer Loyalty Strategy Designer",
+      "role": "strategist",
+      "systemPrompt": "Using the initial proposal and the regional customer insight analysis, design a coherent strategy to improve online retail customer service and strengthen loyalty in the target market. Prioritize innovative yet feasible initiatives across human support, self-service, digital channels, proactive communication, personalization, complaint recovery, delivery and returns support, inclusion, privacy, and community or local partnerships where relevant. Define target customer segments, value propositions, implementation phases, required capabilities, success metrics, and expected customer and business impact. Ensure recommendations are specific enough to execute while clearly distinguishing universal actions from region-dependent localization decisions.",
+      "description": "Transforms customer insights into a prioritized regional service and loyalty strategy."
+    },
+    {
+      "name": "Regional Service Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the proposed regional customer service strategy using all prior outputs. Resolve gaps, contradictions, unsupported claims, and feasibility concerns. Make the recommendations customer-centered, culturally appropriate, inclusive, privacy-conscious, operationally realistic, and clearly prioritized. Strengthen the connection between each initiative, customer satisfaction, loyalty, implementation requirements, and measurable outcomes. Add practical examples, sequencing, ownership considerations, risks, mitigation actions, and a concise approach for testing and learning. Produce a complete revised proposal suitable for executive and operational audiences.",
+      "description": "Integrates analysis and strategy into a stronger, actionable proposal."
+    },
+    {
+      "name": "Regional Strategy Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined proposal against the objective of increasing customer satisfaction and building stronger customer relationships for an online retailer in a specific regional market. Provide a FULL assessment with detailed reasoning. Evaluate regional relevance, customer centricity, innovation, feasibility, clarity, prioritization, inclusivity, privacy and trust, evidence and assumptions, implementation practicality, metrics, risks, and the credibility of the expected impact. Identify every material weakness and specify how it should be corrected. On the VERY LAST LINE output EXACTLY ONE keyword from this list: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      },
+      "description": "Determines whether the refined strategy is sufficiently complete and credible or needs another refinement cycle."
+    },
+    {
+      "name": "Executive Customer Service Proposal Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing answer from the approved regional customer service strategy. Present a clear, persuasive, and practical set of innovative approaches and improvements for increasing customer satisfaction and loyalty. Use concise headings, prioritized recommendations, regional localization considerations, implementation phases, examples, risks, and measurable KPIs. Clearly label assumptions caused by the unspecified region and explain how the company should validate them. Remove repetition, vague claims, unnecessary jargon, and internal drafting commentary. Ensure the final answer is polished, actionable, balanced, and suitable for business decision-makers.",
+      "description": "Formats and quality-checks the approved strategy into a clear final recommendation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Customer Service Concept Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial, practical proposal for improving customer service, satisfaction, and loyalty for an online retailer operating in a specific regional market. Include innovative service approaches, locally relevant customer expectations, communication preferences, cultural considerations, accessibility, trust-building measures, operational improvements, measurable outcomes, implementation priorities, risks, and examples of how initiatives could work in practice. Because the region is not specified, state reasonable assumptions and identify which recommendations should be localized after collecting regional data. Produce a structured but comprehensive draft for subsequent analysis."
+    },
+    {
+      "name": "Regional Customer Insight Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed customer service improvement plan in light of the stated objective: increasing satisfaction and building stronger customer relationships in a regional online retail market. Assess likely customer needs, pain points, cultural and linguistic relevance, channel preferences, trust concerns, accessibility, service expectations, and opportunities for personalization. Identify unsupported assumptions, missing evidence, risks, dependencies, and measurable indicators. Recommend customer research, feedback mechanisms, and data sources that would validate or refine the proposal. Provide detailed findings and actionable recommendations for the strategist."
+    },
+    {
+      "name": "Customer Loyalty Strategy Designer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using the initial proposal and the regional customer insight analysis, design a coherent strategy to improve online retail customer service and strengthen loyalty in the target market. Prioritize innovative yet feasible initiatives across human support, self-service, digital channels, proactive communication, personalization, complaint recovery, delivery and returns support, inclusion, privacy, and community or local partnerships where relevant. Define target customer segments, value propositions, implementation phases, required capabilities, success metrics, and expected customer and business impact. Ensure recommendations are specific enough to execute while clearly distinguishing universal actions from region-dependent localization decisions."
+    },
+    {
+      "name": "Regional Service Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the proposed regional customer service strategy using all prior outputs. Resolve gaps, contradictions, unsupported claims, and feasibility concerns. Make the recommendations customer-centered, culturally appropriate, inclusive, privacy-conscious, operationally realistic, and clearly prioritized. Strengthen the connection between each initiative, customer satisfaction, loyalty, implementation requirements, and measurable outcomes. Add practical examples, sequencing, ownership considerations, risks, mitigation actions, and a concise approach for testing and learning. Produce a complete revised proposal suitable for executive and operational audiences."
+    },
+    {
+      "name": "Regional Strategy Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined proposal against the objective of increasing customer satisfaction and building stronger customer relationships for an online retailer in a specific regional market. Provide a FULL assessment with detailed reasoning. Evaluate regional relevance, customer centricity, innovation, feasibility, clarity, prioritization, inclusivity, privacy and trust, evidence and assumptions, implementation practicality, metrics, risks, and the credibility of the expected impact. Identify every material weakness and specify how it should be corrected. On the VERY LAST LINE output EXACTLY ONE keyword from this list: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Customer Service Proposal Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing answer from the approved regional customer service strategy. Present a clear, persuasive, and practical set of innovative approaches and improvements for increasing customer satisfaction and loyalty. Use concise headings, prioritized recommendations, regional localization considerations, implementation phases, examples, risks, and measurable KPIs. Clearly label assumptions caused by the unspecified region and explain how the company should validate them. Remove repetition, vague claims, unnecessary jargon, and internal drafting commentary. Ensure the final answer is polished, actionable, balanced, and suitable for business decision-makers."
+    }
+  ],
+  "explanation": "The flow is Builder → Analyst → Strategist → Refiner → Quality Review → Polisher. The Builder creates a complete starting proposal, the Analyst identifies regional customer needs and evidence gaps, and the Strategist converts those insights into a prioritized loyalty plan. The Refiner integrates the strategy into an actionable version. The Quality Review then assesses the refined output in detail: if it passes, execution continues to the Polisher; if it returns revise, execution loops back to the Refiner for another correction cycle before the review is repeated. The final Polisher produces the user-facing recommendation."
+}

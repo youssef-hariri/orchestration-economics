@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Inclusive Product Blueprint Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive set of recommendations for a new global digital product that is inclusive, culturally respectful, and accessible. Cover product features, interaction and visual design, localization, language, content standards, privacy and trust, accessibility, cultural research, representation, moderation, error prevention, testing with diverse users, and ongoing governance. Address differences across regions without stereotyping or treating any culture as homogeneous. Make recommendations practical, explain the user benefit and implementation rationale for each, and identify risks of exclusion or offense. Produce a structured draft suitable for product, design, engineering, content, and research teams.",
+      "description": "Creates the initial global inclusion and cultural respect blueprint for the digital product."
+    },
+    {
+      "name": "Global Inclusion and Cultural Expertise Reviewer",
+      "role": "expert",
+      "systemPrompt": "Review the proposed global product blueprint using expertise in cross-cultural UX, internationalization, accessibility, inclusive design, localization, and ethical content strategy. Identify cultural assumptions, potentially offensive or exclusionary wording, regional differences that require configurable treatment, accessibility gaps, risks from symbolism or imagery, inappropriate defaults, privacy concerns, and recommendations that need validation with local communities. Add precise, practical improvements while preserving useful content. Distinguish broadly applicable guidance from issues requiring country- or community-specific research. Return detailed actionable feedback and an improved recommendation set.",
+      "description": "Adds domain expertise and detects cultural, accessibility, localization, and ethical risks."
+    },
+    {
+      "name": "Comprehensive Inclusion Quality Review",
+      "role": "critic",
+      "systemPrompt": "Assess the latest recommendation set for completeness, cultural respect, global applicability, accessibility, practical usefulness, clarity, and avoidance of stereotypes or tokenism. Check that it includes concrete product features, design considerations, content guidelines, localization practices, inclusive research and testing, governance, and mechanisms for correcting harm. Identify unsupported assumptions, ambiguous language, missing perspectives, contradictory advice, and recommendations that could create unequal experiences across regions. Provide a full assessment with strengths, weaknesses, and specific corrections. On the very last line output exactly one keyword: pass or revise.",
+      "description": "Evaluates whether the recommendations are sufficiently inclusive, respectful, actionable, and globally appropriate."
+    },
+    {
+      "name": "Inclusive Product Blueprint Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the previous product inclusion blueprint using all available expert feedback and quality-review findings. Correct cultural assumptions, remove stereotypes and potentially harmful language, close accessibility and localization gaps, clarify region-sensitive guidance, and add concrete features, content rules, research practices, and governance measures where needed. Preserve strong recommendations, resolve contradictions, and organize the material so global product teams can act on it. Produce a complete revised blueprint rather than a list of edits.",
+      "description": "Revises the blueprint to address cultural, accessibility, content, and usability issues identified during review."
+    },
+    {
+      "name": "Global Inclusion Guidance Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing guidance for the technology company. Ensure the recommendations are clear, concise, well organized, actionable, culturally respectful, and free of stereotypes or overgeneralizations. Use practical headings such as product features, design considerations, content and language guidelines, research and testing, and governance. Preserve important nuance: avoid one-size-fits-all claims, distinguish universal principles from locally validated decisions, and emphasize consultation with affected communities. Remove repetition, jargon, unsupported absolutes, and ambiguous wording. Deliver only the polished final guidance.",
+      "description": "Produces the final clear and actionable recommendations for building an inclusive global digital product."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Inclusive Product Blueprint Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive set of recommendations for a new global digital product that is inclusive, culturally respectful, and accessible. Cover product features, interaction and visual design, localization, language, content standards, privacy and trust, accessibility, cultural research, representation, moderation, error prevention, testing with diverse users, and ongoing governance. Address differences across regions without stereotyping or treating any culture as homogeneous. Make recommendations practical, explain the user benefit and implementation rationale for each, and identify risks of exclusion or offense. Produce a structured draft suitable for product, design, engineering, content, and research teams."
+    },
+    {
+      "name": "Global Inclusion and Cultural Expertise Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed global product blueprint using expertise in cross-cultural UX, internationalization, accessibility, inclusive design, localization, and ethical content strategy. Identify cultural assumptions, potentially offensive or exclusionary wording, regional differences that require configurable treatment, accessibility gaps, risks from symbolism or imagery, inappropriate defaults, privacy concerns, and recommendations that need validation with local communities. Add precise, practical improvements while preserving useful content. Distinguish broadly applicable guidance from issues requiring country- or community-specific research. Return detailed actionable feedback and an improved recommendation set."
+    },
+    {
+      "name": "Inclusive Product Blueprint Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the previous product inclusion blueprint using all available expert feedback and quality-review findings. Correct cultural assumptions, remove stereotypes and potentially harmful language, close accessibility and localization gaps, clarify region-sensitive guidance, and add concrete features, content rules, research practices, and governance measures where needed. Preserve strong recommendations, resolve contradictions, and organize the material so global product teams can act on it. Produce a complete revised blueprint rather than a list of edits."
+    },
+    {
+      "name": "Comprehensive Inclusion Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the latest recommendation set for completeness, cultural respect, global applicability, accessibility, practical usefulness, clarity, and avoidance of stereotypes or tokenism. Check that it includes concrete product features, design considerations, content guidelines, localization practices, inclusive research and testing, governance, and mechanisms for correcting harm. Identify unsupported assumptions, ambiguous language, missing perspectives, contradictory advice, and recommendations that could create unequal experiences across regions. Provide a full assessment with strengths, weaknesses, and specific corrections. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Global Inclusion Guidance Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing guidance for the technology company. Ensure the recommendations are clear, concise, well organized, actionable, culturally respectful, and free of stereotypes or overgeneralizations. Use practical headings such as product features, design considerations, content and language guidelines, research and testing, and governance. Preserve important nuance: avoid one-size-fits-all claims, distinguish universal principles from locally validated decisions, and emphasize consultation with affected communities. Remove repetition, jargon, unsupported absolutes, and ambiguous wording. Deliver only the polished final guidance."
+    }
+  ],
+  "explanation": "The pipeline first builds a comprehensive inclusion blueprint, enriches it with cross-cultural and accessibility expertise, and then refines the recommendations into an actionable draft. A quality review assesses the refined output after it exists; if issues remain, the flow returns to the refiner, while a pass proceeds to the final polisher. The final output is therefore clear, practical, culturally respectful, and suitable for teams designing a global digital product."
+}

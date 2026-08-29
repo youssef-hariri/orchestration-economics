@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an Initial Strategy Builder. Your task is to draft a foundational set of strategies for an international company to foster a culture of innovation, encourage creativity, and promote calculated risk-taking among employees across various global branches.",
+      "description": "Drafts the initial set of innovation strategies."
+    },
+    {
+      "name": "Global Culture Expert",
+      "role": "expert",
+      "systemPrompt": "You are a Global Culture Expert. Review the initial strategy draft. Provide expert insights on how cultural differences across international branches might affect these strategies. Suggest specific adaptations to accommodate varying levels of proactive innovation based on regional work cultures.",
+      "description": "Provides domain expertise on cross-cultural management and international business nuances."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a Strategy Refiner. Improve the initial strategy draft by integrating the insights from the Global Culture Expert and any feedback from the Quality Gate. Ensure the strategies are adaptable, culturally sensitive, and effectively address the varying levels of proactive innovation across international branches. Produce a cohesive, refined strategy document.",
+      "description": "Refines the strategy by incorporating expert cultural insights and fixing quality issues."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a Strategy Quality Gate. Review the refined strategy carefully. Assess whether it comprehensively addresses innovation, risk-taking, and international cultural variances. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Evaluates the refined strategy for completeness, feasibility, and cultural adaptability."
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a Final Output Polisher. Format the approved strategy into a professional, executive-ready document. Ensure the tone is inspiring and authoritative, the structure is logical with clear headings, and the language is impeccable.",
+      "description": "Formats the final strategy into an executive-ready presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an Initial Strategy Builder. Your task is to draft a foundational set of strategies for an international company to foster a culture of innovation, encourage creativity, and promote calculated risk-taking among employees across various global branches."
+    },
+    {
+      "name": "Global Culture Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a Global Culture Expert. Review the initial strategy draft. Provide expert insights on how cultural differences across international branches might affect these strategies. Suggest specific adaptations to accommodate varying levels of proactive innovation based on regional work cultures."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a Strategy Refiner. Improve the initial strategy draft by integrating the insights from the Global Culture Expert and any feedback from the Quality Gate. Ensure the strategies are adaptable, culturally sensitive, and effectively address the varying levels of proactive innovation across international branches. Produce a cohesive, refined strategy document."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a Strategy Quality Gate. Review the refined strategy carefully. Assess whether it comprehensively addresses innovation, risk-taking, and international cultural variances. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a Final Output Polisher. Format the approved strategy into a professional, executive-ready document. Ensure the tone is inspiring and authoritative, the structure is logical with clear headings, and the language is impeccable."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Strategy Builder drafting the core innovation strategies. Next, the Global Culture Expert analyzes this draft to provide crucial context on international workplace cultures and regional variances in risk-taking. The Strategy Refiner then synthesizes the initial draft and the expert's insights into a cohesive, culturally-aware plan. The Strategy Quality Gate acts as a 'while' loop, evaluating the refined output; if it lacks depth or cultural sensitivity, it outputs 'retry', looping back to the Strategy Refiner (up to 3 times) to improve the document. Once the quality gate outputs 'pass', the pipeline moves to the Final Output Polisher, which formats the content into an executive-ready deliverable."
+}

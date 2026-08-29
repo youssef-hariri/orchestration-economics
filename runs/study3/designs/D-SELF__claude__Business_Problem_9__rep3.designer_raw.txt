@@ -1,0 +1,83 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategy for fostering innovation culture across international offices, including foundational frameworks and recommendations"
+    },
+    {
+      "name": "Cultural Context Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional differences, cultural nuances, and local market dynamics to ensure strategies are contextually appropriate for different international branches"
+    },
+    {
+      "name": "Innovation Expert Advisor",
+      "role": "expert",
+      "description": "Provides domain-specific insights on best practices, proven innovation frameworks, and risk-taking mechanisms from leading organizations"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates cultural analysis and expert insights into the initial strategy, ensuring recommendations account for regional differences and global best practices"
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Evaluates refined strategy for completeness, feasibility, internal consistency, and practical implementability across diverse international settings"
+    },
+    {
+      "name": "Final Polish & Format",
+      "role": "polisher",
+      "description": "Formats final strategy into clear, actionable recommendations organized by theme, with implementation roadmap and success metrics"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are tasked with creating a comprehensive initial strategy for fostering innovation culture in an established international company. Develop foundational strategies covering: (1) organizational structures and incentives for idea generation, (2) frameworks for experimentation and calculated risk-taking, (3) mechanisms to surface and amplify local innovations globally, (4) leadership practices that encourage creativity, and (5) resource allocation approaches. Create a thorough, multi-faceted strategy document that addresses the core challenge of variability in innovation engagement across international branches."
+    },
+    {
+      "name": "Cultural Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the provided innovation strategy for cultural and regional context gaps. Research and document: (1) how innovation cultures differ across typical international markets (e.g., risk tolerance, hierarchy preferences, communication styles), (2) regional regulatory or business environment factors affecting experimentation, (3) local market dynamics that influence employee engagement, and (4) specific adaptations needed for different regions. Provide detailed insights on where the strategy requires localization and what regional variations would improve adoption and effectiveness."
+    },
+    {
+      "name": "Innovation Expert Advisor",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an innovation management expert. Review the current strategy and cultural analysis. Provide expert perspective on: (1) proven frameworks for building innovation cultures (e.g., innovation labs, intrapreneurship programs, fail-safe experimentation zones), (2) best practices in psychological safety and risk normalization, (3) effective mechanisms for cross-border idea sharing and learning, (4) incentive structures that drive sustained creativity without creating perverse outcomes, and (5) leadership competencies needed to champion innovation. Reference established practices from high-innovation organizations."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate and refine the innovation strategy by incorporating: (1) regional adaptations from cultural analysis, (2) proven best practices and expert recommendations, (3) specific mechanisms for addressing variability across branches, (4) concrete implementation approaches for each major strategy component, and (5) clear success metrics and monitoring approaches. Produce a cohesive, actionable strategy that balances global consistency with local relevance and incorporates expert-validated practices."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical evaluator of innovation strategy for international deployment. Assess the refined strategy on: (1) Completeness — does it address all dimensions of innovation culture (mindset, structure, incentives, processes, measurement)? (2) Feasibility — can it realistically be implemented across diverse international contexts with varying resources and cultures? (3) Specificity — are recommendations concrete and actionable, or too abstract? (4) Differentiation — does it adequately address why innovation varies by location and how to fix this? (5) Risk management — does it include safeguards against unintended consequences? (6) Sustainability — will changes persist over time or require constant reinforcement? Provide detailed analysis of strengths and gaps. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Polish & Format",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the approved innovation strategy into a professional, actionable deliverable. Organize content into clear sections: (1) Executive Summary with key objectives, (2) Strategic Pillars (innovation mindset, structures, processes, measurement), (3) Regional Adaptation Guide with specific tailoring by geography, (4) Implementation Roadmap with phased rollout, (5) Success Metrics and monitoring framework, (6) Leadership Playbook with specific behaviors and actions. Ensure clarity, logical flow, and ready-to-implement guidance. Use professional formatting, section headers, and visual organization for maximum usability by global leadership teams."
+    }
+  ],
+  "explanation": "This pipeline delivers a comprehensive, globally-applicable yet locally-adapted innovation strategy. It begins with a Builder creating foundational strategy, then uses an Analyst to identify regional context gaps and a domain Expert to inject proven best practices. The Refiner integrates these inputs into a cohesive strategy. The Critic validates completeness, feasibility, and appropriateness for international deployment with a single-pass decision gate (if the strategy lacks depth or feasibility, it loops back to the Refiner for targeted improvements). Finally, the Polisher formats the strategy for executive delivery with actionable implementation guidance. This design ensures the output is both strategically sound and practically implementable across diverse international branches while addressing the specific challenge of variability in innovation engagement."
+}
+```

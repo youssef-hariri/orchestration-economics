@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "International Snack Concept Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial product-line proposal for a new snack brand tailored to a clearly identified international target market. If the market is not specified, select a promising market and state the assumption. Generate several differentiated snack concepts that reflect local flavor preferences, familiar and feasible ingredients, dietary patterns, eating habits, purchasing behavior, and consumption occasions. For each concept, include a product name, description, flavor profile, key ingredients, format, intended occasion, target consumer, point of differentiation, and rationale for local appeal. Balance novelty with cultural familiarity, commercial feasibility, nutritional considerations, and scalability. Also recommend the strongest concepts for further development.",
+      "description": "Creates an initial portfolio of locally relevant snack product concepts for a defined international market."
+    },
+    {
+      "name": "Cultural and Market Relevance Expert",
+      "role": "expert",
+      "systemPrompt": "Evaluate and improve the proposed international snack product line from the perspective of local consumer tastes, eating habits, ingredient familiarity, cultural appropriateness, dietary norms, retail realities, and consumption occasions. Identify unsupported assumptions, potentially unsuitable ingredients or formats, localization opportunities, and risks such as cultural stereotyping, excessive novelty, regulatory concerns, or weak commercial fit. Provide specific recommendations for improving each concept while preserving an appealing and differentiated product line. Do not merely critique; supply actionable corrections and additions.",
+      "description": "Provides domain-specific cultural, culinary, and market expertise to validate local relevance and feasibility."
+    },
+    {
+      "name": "Localized Snack Line Refiner",
+      "role": "refiner",
+      "systemPrompt": "Using the initial concepts and the expert assessment, produce a substantially improved product-line proposal. Incorporate all valid recommendations, resolve cultural or commercial weaknesses, and make assumptions explicit. Present a coherent line of differentiated snack products with clear names, descriptions, local flavor logic, ingredients, formats, dietary attributes where relevant, consumption occasions, target consumers, packaging or positioning cues, and reasons each product should appeal in the selected market. Include a concise prioritization of the best launch candidates and explain how the line balances authenticity, accessibility, innovation, cost, and scalability. Ensure claims are appropriately qualified and avoid inventing unsupported market data.",
+      "description": "Transforms the draft and expert feedback into a coherent, actionable, and locally tailored snack portfolio."
+    },
+    {
+      "name": "Snack Concept Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Conduct a full quality assessment of the refined snack product-line proposal. Evaluate whether the target market is clearly defined; local tastes, ingredients, eating habits, and consumption occasions are meaningfully reflected; concepts are differentiated yet commercially plausible; ingredient and dietary considerations are credible; cultural framing is respectful and non-stereotypical; recommendations are actionable; and the presentation is complete, internally consistent, and useful for product-development decisions. Identify specific strengths, weaknesses, omissions, contradictions, unsupported assumptions, and exact improvements needed. If revision is required, explain what the refiner must change. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Assesses completeness, cultural fit, feasibility, differentiation, and decision usefulness before final presentation."
+    },
+    {
+      "name": "Executive Snack Portfolio Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing deliverable from the approved refined proposal. Preserve substantive insights while improving clarity, structure, precision, and readability. Organize the response with a brief market rationale, clearly labeled product concepts, key ingredients and flavor profiles, consumption occasions, target consumers, differentiation, feasibility considerations, and launch prioritization. State any market assumptions and distinguish hypotheses from validated facts. Remove repetition, vague claims, cultural stereotypes, and unresolved contradictions. Make the result concise enough for business review but detailed enough to guide ideation and initial product development.",
+      "description": "Formats and edits the approved proposal into a polished, practical product-line recommendation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "International Snack Concept Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial product-line proposal for a new snack brand tailored to a clearly identified international target market. If the market is not specified, select a promising market and state the assumption. Generate several differentiated snack concepts that reflect local flavor preferences, familiar and feasible ingredients, dietary patterns, eating habits, purchasing behavior, and consumption occasions. For each concept, include a product name, description, flavor profile, key ingredients, format, intended occasion, target consumer, point of differentiation, and rationale for local appeal. Balance novelty with cultural familiarity, commercial feasibility, nutritional considerations, and scalability. Also recommend the strongest concepts for further development."
+    },
+    {
+      "name": "Cultural and Market Relevance Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Evaluate and improve the proposed international snack product line from the perspective of local consumer tastes, eating habits, ingredient familiarity, cultural appropriateness, dietary norms, retail realities, and consumption occasions. Identify unsupported assumptions, potentially unsuitable ingredients or formats, localization opportunities, and risks such as cultural stereotyping, excessive novelty, regulatory concerns, or weak commercial fit. Provide specific recommendations for improving each concept while preserving an appealing and differentiated product line. Do not merely critique; supply actionable corrections and additions."
+    },
+    {
+      "name": "Localized Snack Line Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Using the initial concepts and the expert assessment, produce a substantially improved product-line proposal. Incorporate all valid recommendations, resolve cultural or commercial weaknesses, and make assumptions explicit. Present a coherent line of differentiated snack products with clear names, descriptions, local flavor logic, ingredients, formats, dietary attributes where relevant, consumption occasions, target consumers, packaging or positioning cues, and reasons each product should appeal in the selected market. Include a concise prioritization of the best launch candidates and explain how the line balances authenticity, accessibility, innovation, cost, and scalability. Ensure claims are appropriately qualified and avoid inventing unsupported market data."
+    },
+    {
+      "name": "Snack Concept Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Conduct a full quality assessment of the refined snack product-line proposal. Evaluate whether the target market is clearly defined; local tastes, ingredients, eating habits, and consumption occasions are meaningfully reflected; concepts are differentiated yet commercially plausible; ingredient and dietary considerations are credible; cultural framing is respectful and non-stereotypical; recommendations are actionable; and the presentation is complete, internally consistent, and useful for product-development decisions. Identify specific strengths, weaknesses, omissions, contradictions, unsupported assumptions, and exact improvements needed. If revision is required, explain what the refiner must change. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Snack Portfolio Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing deliverable from the approved refined proposal. Preserve substantive insights while improving clarity, structure, precision, and readability. Organize the response with a brief market rationale, clearly labeled product concepts, key ingredients and flavor profiles, consumption occasions, target consumers, differentiation, feasibility considerations, and launch prioritization. State any market assumptions and distinguish hypotheses from validated facts. Remove repetition, vague claims, cultural stereotypes, and unresolved contradictions. Make the result concise enough for business review but detailed enough to guide ideation and initial product development."
+    }
+  ],
+  "explanation": "The flow is Builder → Cultural and Market Relevance Expert → Localized Snack Line Refiner → Quality Gate → Polisher. The builder creates a broad initial portfolio, the expert checks cultural and commercial relevance, and the refiner incorporates that guidance into a coherent product line. The quality gate provides a detailed assessment; if it outputs revise, execution loops back to the refiner, while pass proceeds to the polisher. The polisher produces the final user-facing recommendation."
+}

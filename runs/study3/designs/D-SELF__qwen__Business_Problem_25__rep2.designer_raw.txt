@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive business-model transition plan from perpetual licenses to subscription revenue. The plan must include: 1) Offer structure and migration incentives for existing license holders, ensuring long-standing customers don't feel alienated. 2) Pricing strategy that balances the depth of the multi-year revenue trough against adoption rates, learning from a competitor's abrupt switch that lost 20% of its base. 3) Sales compensation redesign to shift focus from large upfront deals to recurring subscriptions. 4) A financial communication plan to keep investors and the board committed through the revenue trough. Provide a detailed, actionable, and financially sound strategy.",
+      "description": "Drafts the initial comprehensive transition plan covering offer structure, pricing, sales compensation, and investor communication."
+    },
+    {
+      "name": "Transition Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the business-model transition plan based on the provided quality feedback. Address all identified weaknesses, ensure the pricing balances the revenue trough, refine the sales compensation and migration incentives, and strengthen the investor communication plan. Produce a comprehensive, revised strategy.",
+      "description": "Refines the transition plan based on quality feedback to address weaknesses and improve strategic viability."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined business-model transition plan against the core objectives: Does it successfully mitigate the multi-year revenue trough? Are the migration incentives compelling enough to prevent customer churn (avoiding the competitor's 20% loss)? Is the sales compensation redesign practical for shifting behavior? Is the investor communication plan robust enough to maintain board commitment? Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Assesses the refined plan against core business objectives and routes to revision if standards are not met.",
+      "type": "if",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format and polish the final business-model transition plan for an executive audience. Ensure the tone is professional, authoritative, and persuasive. Use clear headings, bullet points for key strategies, and executive summaries for each section (Offer Structure, Pricing, Sales Compensation, Financial Communication). Ensure flawless grammar and impactful business language.",
+      "description": "Formats and polishes the final approved plan for executive presentation to the board and investors."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive business-model transition plan from perpetual licenses to subscription revenue. The plan must include: 1) Offer structure and migration incentives for existing license holders, ensuring long-standing customers don't feel alienated. 2) Pricing strategy that balances the depth of the multi-year revenue trough against adoption rates, learning from a competitor's abrupt switch that lost 20% of its base. 3) Sales compensation redesign to shift focus from large upfront deals to recurring subscriptions. 4) A financial communication plan to keep investors and the board committed through the revenue trough. Provide a detailed, actionable, and financially sound strategy."
+    },
+    {
+      "name": "Transition Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the business-model transition plan based on the provided quality feedback. Address all identified weaknesses, ensure the pricing balances the revenue trough, refine the sales compensation and migration incentives, and strengthen the investor communication plan. Produce a comprehensive, revised strategy."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined business-model transition plan against the core objectives: Does it successfully mitigate the multi-year revenue trough? Are the migration incentives compelling enough to prevent customer churn (avoiding the competitor's 20% loss)? Is the sales compensation redesign practical for shifting behavior? Is the investor communication plan robust enough to maintain board commitment? Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format and polish the final business-model transition plan for an executive audience. Ensure the tone is professional, authoritative, and persuasive. Use clear headings, bullet points for key strategies, and executive summaries for each section (Offer Structure, Pricing, Sales Compensation, Financial Communication). Ensure flawless grammar and impactful business language."
+    }
+  ],
+  "explanation": "The pipeline begins with a Builder to draft the comprehensive transition plan covering all required business areas (offer structure, pricing, sales comp, and investor comms). The Refiner then improves the draft based on initial structural checks. The Strategic Quality Gate assesses the refined plan against critical business constraints (trough mitigation, churn prevention, sales alignment, and investor communication). If the plan is inadequate, the gate routes it back to the Refiner for revision. Once the plan passes the quality gate, the Executive Polisher formats it for final presentation to the board and investors."
+}

@@ -1,0 +1,71 @@
+{
+  "agents": [
+    {
+      "name": "Transition Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert business strategist. Your objective is to produce a comprehensive business-model transition plan for a software company moving from perpetual licenses to subscriptions. The plan must detail: 1) Offer structure and migration incentives for existing license holders (avoiding the abrupt switch that lost a competitor 20% of its base), 2) Pricing strategy that balances the depth of the multi-year revenue trough against adoption rates, 3) Sales compensation redesign to shift from large upfront deals to recurring revenue, and 4) A financial communication plan to keep investors and the board committed through the revenue trough. Produce a detailed, structured draft covering all these areas.",
+      "description": "Drafts the initial comprehensive business-model transition plan covering offers, pricing, sales comp, and investor communications."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner and business strategy expert. Review the previous transition plan. Improve it based on any quality feedback provided. Ensure the pricing model realistically addresses the revenue trough, the sales comp plan practically shifts incentives without causing mass attrition, and the migration incentives are compelling enough to prevent the 20% churn seen by competitors. Fix all issues and produce a highly polished, improved version.",
+      "description": "Refines the transition plan to ensure financial realism, operational feasibility, and alignment with all business constraints."
+    },
+    {
+      "name": "Executive Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a critical executive reviewer assessing a business-model transition plan. Evaluate the plan on four criteria: 1) Offer structure & migration incentives (are they compelling and safe from 20% churn?), 2) Pricing strategy (does it balance trough depth and adoption?), 3) Sales compensation (does it effectively shift behavior?), 4) Financial communication (will it survive board/investor scrutiny during the trough?). Provide your FULL assessment with detailed reasoning, strengths, and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined plan against all prompt constraints and routes to revision if the plan is insufficient.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an expert executive communication specialist. Your objective is to take the approved business-model transition plan and format it for presentation to the C-suite and Board of Directors. Ensure the tone is authoritative, clear, and persuasive. Use professional formatting, clear headings, and executive summaries where appropriate to make the complex financial and operational strategies easily digestible and compelling.",
+      "description": "Formats and polishes the final approved plan for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Transition Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert business strategist. Your objective is to produce a comprehensive business-model transition plan for a software company moving from perpetual licenses to subscriptions. The plan must detail: 1) Offer structure and migration incentives for existing license holders (avoiding the abrupt switch that lost a competitor 20% of its base), 2) Pricing strategy that balances the depth of the multi-year revenue trough against adoption rates, 3) Sales compensation redesign to shift from large upfront deals to recurring revenue, and 4) A financial communication plan to keep investors and the board committed through the revenue trough. Produce a detailed, structured draft covering all these areas."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner and business strategy expert. Review the previous transition plan. Improve it based on any quality feedback provided. Ensure the pricing model realistically addresses the revenue trough, the sales comp plan practically shifts incentives without causing mass attrition, and the migration incentives are compelling enough to prevent the 20% churn seen by competitors. Fix all issues and produce a highly polished, improved version."
+    },
+    {
+      "name": "Executive Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical executive reviewer assessing a business-model transition plan. Evaluate the plan on four criteria: 1) Offer structure & migration incentives (are they compelling and safe from 20% churn?), 2) Pricing strategy (does it balance trough depth and adoption?), 3) Sales compensation (does it effectively shift behavior?), 4) Financial communication (will it survive board/investor scrutiny during the trough?). Provide your FULL assessment with detailed reasoning, strengths, and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an expert executive communication specialist. Your objective is to take the approved business-model transition plan and format it for presentation to the C-suite and Board of Directors. Ensure the tone is authoritative, clear, and persuasive. Use professional formatting, clear headings, and executive summaries where appropriate to make the complex financial and operational strategies easily digestible and compelling."
+    }
+  ],
+  "explanation": "The pipeline begins with the Transition Strategist (Builder) drafting the comprehensive business-model transition plan covering offers, pricing, sales comp, and investor communications. This draft is passed to the Plan Refiner (Refiner) to enhance the financial and operational details and address specific constraints like avoiding 20% churn. The Executive Quality Gate (Critic) then evaluates the refined plan. If the plan is insufficient, it routes back to the Plan Refiner for revision. Once it passes the quality gate, it goes to the Executive Polisher (Polisher) for final formatting and executive presentation."
+}

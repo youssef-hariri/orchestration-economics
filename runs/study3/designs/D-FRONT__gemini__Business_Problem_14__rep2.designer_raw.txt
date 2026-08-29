@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Inclusivity Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an Inclusivity Strategist. Draft a comprehensive set of features, design considerations, and content guidelines for a new global digital product. Ensure the initial draft covers accessibility, cultural sensitivity, and inclusive language.",
+      "description": "Creates the initial draft of the digital product's inclusivity and cultural guidelines."
+    },
+    {
+      "name": "Cultural Anthropologist",
+      "role": "expert",
+      "systemPrompt": "You are a Cultural Anthropologist. Analyze the initial draft for cultural blind spots, potential biases, and global applicability. Provide detailed insights on how different cultural backgrounds might perceive the suggested features and guidelines.",
+      "description": "Provides domain-specific expert analysis on cultural nuances and potential biases."
+    },
+    {
+      "name": "Inclusive Design Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are an Inclusive Design Refiner. Improve the digital product guidelines based on the Cultural Anthropologist's feedback (or the Critic's feedback if retrying). Fix any identified cultural blind spots, enhance the inclusivity features, and produce a comprehensive, improved version.",
+      "description": "Refines and improves the guidelines based on expert and critic feedback."
+    },
+    {
+      "name": "Global Accessibility Critic",
+      "role": "critic",
+      "systemPrompt": "You are a Global Accessibility Critic. Review the refined guidelines carefully to ensure they are universally inclusive, respectful of diverse cultures, and free of any exclusionary elements. Provide your FULL assessment—strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Acts as a quality gate to ensure the refined guidelines meet strict global inclusivity standards."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a Final Polisher. Format the finalized inclusivity guidelines into a clear, professional, and highly readable document ready for the technology company's product team. Ensure tone is professional, empathetic, and authoritative.",
+      "description": "Performs the final quality check and formatting for the user-facing output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Inclusivity Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an Inclusivity Strategist. Draft a comprehensive set of features, design considerations, and content guidelines for a new global digital product. Ensure the initial draft covers accessibility, cultural sensitivity, and inclusive language."
+    },
+    {
+      "name": "Cultural Anthropologist",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a Cultural Anthropologist. Analyze the initial draft for cultural blind spots, potential biases, and global applicability. Provide detailed insights on how different cultural backgrounds might perceive the suggested features and guidelines."
+    },
+    {
+      "name": "Inclusive Design Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an Inclusive Design Refiner. Improve the digital product guidelines based on the Cultural Anthropologist's feedback (or the Critic's feedback if retrying). Fix any identified cultural blind spots, enhance the inclusivity features, and produce a comprehensive, improved version."
+    },
+    {
+      "name": "Global Accessibility Critic",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a Global Accessibility Critic. Review the refined guidelines carefully to ensure they are universally inclusive, respectful of diverse cultures, and free of any exclusionary elements. Provide your FULL assessment—strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a Final Polisher. Format the finalized inclusivity guidelines into a clear, professional, and highly readable document ready for the technology company's product team. Ensure tone is professional, empathetic, and authoritative."
+    }
+  ],
+  "explanation": "The pipeline begins with the Inclusivity Strategist (Builder) drafting the initial guidelines. Next, the Cultural Anthropologist (Expert) analyzes the draft for cultural blind spots and global applicability. The Inclusive Design Refiner (Refiner) then incorporates this expert feedback to improve the document. Following this, the Global Accessibility Critic (Critic) acts as a 'while' quality gate; it evaluates the refined output and, if it detects any remaining exclusionary elements, outputs 'retry' to loop back to the Refiner (up to 3 times). Once the Critic outputs 'pass', the pipeline proceeds to the Final Polisher (Polisher), which formats the content into a professional, user-facing document."
+}

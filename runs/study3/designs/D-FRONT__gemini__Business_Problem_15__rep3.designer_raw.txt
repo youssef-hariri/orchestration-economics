@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Future of Work Strategist",
+      "role": "builder",
+      "systemPrompt": "You are a Future of Work Strategist. Draft a comprehensive framework and set of principles for a large international company re-evaluating its work environment. Address remote work policies, office space utilization, and team collaboration tools. Ensure the initial draft provides a strong foundation for a flexible and effective global work environment.",
+      "description": "Drafts the initial future of work framework and core principles."
+    },
+    {
+      "name": "Global HR & Culture Analyst",
+      "role": "expert",
+      "systemPrompt": "You are a Global HR & Culture Analyst. Review the initial framework draft. Analyze it through the lens of international diversity, varied cultural expectations, and localized employee needs. Provide detailed feedback on how to make the framework more inclusive, culturally aware, and globally applicable.",
+      "description": "Analyzes the draft for global cultural nuances and diverse employee needs."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on the expert's cultural analysis and any subsequent quality feedback provided. Fix all issues, seamlessly integrate the global perspectives, and produce a cohesive, improved version of the framework.",
+      "description": "Refines the framework by integrating expert feedback and fixing issues."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined framework carefully against the core objectives: flexibility, effectiveness, and global/cultural adaptability. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined framework and determines if further refinement is needed."
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an Executive Communications Polisher. Finalize the approved framework. Ensure the tone is professional, inspiring, and suitable for a global executive audience. Apply clear headings, bullet points, and professional formatting to make the document highly readable and ready for distribution.",
+      "description": "Formats and polishes the final framework for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Future of Work Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a Future of Work Strategist. Draft a comprehensive framework and set of principles for a large international company re-evaluating its work environment. Address remote work policies, office space utilization, and team collaboration tools. Ensure the initial draft provides a strong foundation for a flexible and effective global work environment."
+    },
+    {
+      "name": "Global HR & Culture Analyst",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a Global HR & Culture Analyst. Review the initial framework draft. Analyze it through the lens of international diversity, varied cultural expectations, and localized employee needs. Provide detailed feedback on how to make the framework more inclusive, culturally aware, and globally applicable."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on the expert's cultural analysis and any subsequent quality feedback provided. Fix all issues, seamlessly integrate the global perspectives, and produce a cohesive, improved version of the framework."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality gate. Review the refined framework carefully against the core objectives: flexibility, effectiveness, and global/cultural adaptability. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an Executive Communications Polisher. Finalize the approved framework. Ensure the tone is professional, inspiring, and suitable for a global executive audience. Apply clear headings, bullet points, and professional formatting to make the document highly readable and ready for distribution."
+    }
+  ],
+  "explanation": "The pipeline begins with the Future of Work Strategist (Builder) drafting the core framework. Next, the Global HR & Culture Analyst (Expert) evaluates the draft to ensure it addresses international nuances and cultural expectations. The Framework Refiner (Refiner) then integrates this expert feedback into a cohesive document. Following this, the Quality Gate (Critic) assesses the refined output; if it lacks global adaptability or flexibility, it outputs 'retry', looping back to the Framework Refiner up to 3 times. Once the quality gate outputs 'pass', the Executive Communications Polisher (Polisher) finalizes the formatting and tone for leadership presentation."
+}

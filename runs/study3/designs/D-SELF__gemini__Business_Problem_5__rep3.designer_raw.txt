@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "GlobalStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in international organizational development. Draft a comprehensive framework for adapting leadership styles (e.g., power distance, individualism vs. collectivism) to support employee empowerment across diverse global regions.",
+      "description": "Creates the initial strategic framework for regional leadership adaptation."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "refiner",
+      "systemPrompt": "You are a cross-cultural management expert. Improve the strategy by incorporating specific regional nuances, addressing potential cultural friction points, and ensuring the empowerment model is actionable in diverse international contexts.",
+      "description": "Refines the strategy based on deep cultural expertise."
+    },
+    {
+      "name": "QualityAssessor",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Evaluate the strategy for clarity, actionable regional guidance, and consistency. Provide a detailed assessment of gaps. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Validates the strategy against the objective of effective regional leadership adaptation."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional editor. Format the finalized strategy into a clear, executive-ready document with actionable bullet points for global leadership teams.",
+      "description": "Finalizes the output for the end user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in international organizational development. Draft a comprehensive framework for adapting leadership styles (e.g., power distance, individualism vs. collectivism) to support employee empowerment across diverse global regions."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural management expert. Improve the strategy by incorporating specific regional nuances, addressing potential cultural friction points, and ensuring the empowerment model is actionable in diverse international contexts."
+    },
+    {
+      "name": "QualityAssessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Evaluate the strategy for clarity, actionable regional guidance, and consistency. Provide a detailed assessment of gaps. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional editor. Format the finalized strategy into a clear, executive-ready document with actionable bullet points for global leadership teams."
+    }
+  ],
+  "explanation": "The pipeline begins with the GlobalStrategist drafting the core framework. The CulturalExpert acts as a refiner to inject regional nuance. The QualityAssessor evaluates the output; if it fails to meet the required depth or clarity, it routes back to the CulturalExpert (step 2) to revise the content. Once the QualityAssessor issues a 'pass', the FinalPolisher formats the document for executive distribution."
+}

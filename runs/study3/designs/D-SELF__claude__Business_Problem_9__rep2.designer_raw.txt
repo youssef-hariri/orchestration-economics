@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategies for fostering innovation culture across international offices, including culture change initiatives, employee engagement programs, and risk-taking frameworks."
+    },
+    {
+      "name": "Cultural Context Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional differences in innovation readiness, employee demographics, local market conditions, and cultural factors affecting risk-taking across international branches to inform localized strategy recommendations."
+    },
+    {
+      "name": "Innovation Expert Consultant",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on best practices for fostering innovation, psychological safety, experimentation frameworks, and proven methods for scaling innovation culture globally."
+    },
+    {
+      "name": "Comprehensive Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates analyst insights and expert recommendations into the initial strategy, addressing regional variations, creating actionable implementation pathways, and ensuring cultural sensitivity across all locations."
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "description": "Evaluates the refined strategy for internal consistency, feasibility, regional applicability, measurable outcomes, and completeness of addressing the stated challenge before final output."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "description": "Formats the final strategy into a professional, executive-ready document with clear sections, visual frameworks, and actionable recommendations ready for presentation to leadership."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an innovation strategy builder for an established international company. Create a comprehensive initial strategy addressing how to foster innovation culture and encourage employee creativity and risk-taking across offices in different countries. Include: (1) core cultural principles for innovation, (2) mechanisms for collecting and evaluating ideas globally, (3) frameworks for encouraging experimentation and calculated risk-taking, (4) methods to address varying innovation readiness by location, and (5) leadership alignment strategies. Produce a detailed, structured outline that will serve as the foundation for further refinement."
+    },
+    {
+      "name": "Cultural Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and regional analyst. Analyze the challenge of varying innovation levels across international branches. Provide data-driven insights on: (1) typical factors affecting innovation readiness in different regional contexts (legal, cultural, business environment), (2) common barriers to creativity and risk-taking in multinational companies, (3) regional differences in employee motivation and communication styles, (4) benchmarking data on innovation adoption across geographies. Structure your analysis to directly inform location-specific strategy recommendations."
+    },
+    {
+      "name": "Innovation Expert Consultant",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a world-class innovation and organizational culture expert. Provide expert recommendations on: (1) psychological safety frameworks proven to unlock employee creativity, (2) structured experimentation methodologies (innovation sprints, design thinking, agile pilots), (3) incentive and recognition systems that encourage risk-taking without recklessness, (4) leadership behaviors and practices that model and reinforce innovation values, (5) how to scale innovation culture globally while respecting local contexts. Reference established best practices and frameworks."
+    },
+    {
+      "name": "Comprehensive Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner integrating multiple perspectives. Enhance the initial innovation strategy by: (1) incorporating the analyst's regional insights to create location-tailored approaches, (2) weaving in the expert's best practices and proven frameworks, (3) developing specific, measurable, implementable action steps for each strategic pillar, (4) creating regional implementation pathways that account for different starting points and local contexts, (5) identifying quick wins and longer-term initiatives, (6) defining success metrics and governance structures. Produce a refined, actionable strategy that balances global coherence with local relevance."
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical quality gate for innovation strategy. Evaluate the refined strategy comprehensively on these dimensions: (1) Does it adequately address the core challenge of varying innovation levels across locations? (2) Are all recommendations actionable and specific, not generic? (3) Does it balance global consistency with local customization? (4) Are success metrics and accountability structures clearly defined? (5) Do the approaches reflect genuine best practices and psychological safety principles? (6) Are there gaps in addressing leadership alignment, resource allocation, or cultural barriers? (7) Would this strategy realistically transform an established company's innovation culture? Provide your FULL assessment with specific strengths and any gaps. On the VERY LAST LINE, output EXACTLY ONE keyword: pass, revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 4}
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive presentation specialist. Format the final innovation strategy into a polished, professional document suitable for C-suite and international leadership review. Structure with: (1) Executive Summary, (2) Situation Analysis, (3) Strategic Pillars and Initiatives, (4) Regional Implementation Framework, (5) Quick Wins (0-3 months), (6) Long-term Transformation (3-12 months), (7) Success Metrics and Governance, (8) Resource Requirements. Use clear headers, bullet points, and compelling language. Ensure the strategy is motivating, credible, and ready for immediate leadership presentation and decision-making."
+    }
+  ],
+  "explanation": "This pipeline is designed to transform a broad organizational challenge into a comprehensive, actionable strategy grounded in both expert knowledge and contextual analysis. The flow: (1) Builder creates an initial strategic framework; (2) Analyst provides regional and cultural insights that inform localized approaches; (3) Expert contributes proven best practices and psychological frameworks; (4) Refiner integrates all three perspectives into a coherent, location-sensitive strategy; (5) Critic conducts a rigorous quality gate assessing strategy completeness and feasibility, with potential revision loops back to Refiner if gaps exist; (6) Polisher delivers executive-ready output. This structure ensures the final strategy is simultaneously grounded in research, informed by global best practices, sensitive to local contexts, and presentation-ready for leadership decision-making. The single quality gate after Refiner (with revision loop) ensures strategic coherence without excessive iteration."
+}
+```

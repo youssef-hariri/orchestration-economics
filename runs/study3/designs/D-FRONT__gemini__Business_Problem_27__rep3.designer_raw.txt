@@ -1,0 +1,57 @@
+{
+  "agents": [
+    {
+      "name": "Financial Analyst Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert Financial Analyst. Draft an initial analysis comparing covenant-heavy debt, minority equity, hybrid instruments, and disciplined organic growth for a profitable scale-up doubling revenue every two years. Evaluate these against the founders' desire to maintain their 78% equity and independence, the company's cash flow constraints, and the urgent competitive window.",
+      "description": "Drafts the initial financial comparison of the available growth-financing options."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a Corporate Strategy Refiner. Based on the initial financial analysis and any subsequent feedback, develop a comprehensive growth-financing strategy. Propose a specific funding structure (e.g., hybrid, tranched), define the milestones it should be staged against, and establish clear walk-away conditions for each capital source. If feedback is provided, adjust the strategy to resolve all identified issues.",
+      "description": "Develops and refines the specific funding structure, milestones, and walk-away conditions."
+    },
+    {
+      "name": "Corporate Finance Gate",
+      "role": "critic",
+      "systemPrompt": "You are a Corporate Finance Quality Gate. Review the proposed growth-financing strategy. Assess whether it realistically balances the founders' control preferences (78% equity, independence) with the need for rapid capital to counter the heavily funded rival. Ensure milestones and walk-away conditions are highly specific and actionable. Provide a FULL assessment of strengths and weaknesses. On the VERY LAST LINE, output EXACTLY ONE of these keywords: retry, pass.",
+      "description": "Evaluates the strategy against founder constraints and competitive realities, triggering a retry if inadequate."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an Executive Communications Polisher. Format the finalized growth-financing strategy into a highly professional, structured, and compelling advisory report suitable for the founders and board of directors. Ensure clarity, precision, and an authoritative tone.",
+      "description": "Formats the final strategy into an executive-ready advisory report."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Financial Analyst Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert Financial Analyst. Draft an initial analysis comparing covenant-heavy debt, minority equity, hybrid instruments, and disciplined organic growth for a profitable scale-up doubling revenue every two years. Evaluate these against the founders' desire to maintain their 78% equity and independence, the company's cash flow constraints, and the urgent competitive window."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a Corporate Strategy Refiner. Based on the initial financial analysis and any subsequent feedback, develop a comprehensive growth-financing strategy. Propose a specific funding structure (e.g., hybrid, tranched), define the milestones it should be staged against, and establish clear walk-away conditions for each capital source. If feedback is provided, adjust the strategy to resolve all identified issues."
+    },
+    {
+      "name": "Corporate Finance Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a Corporate Finance Quality Gate. Review the proposed growth-financing strategy. Assess whether it realistically balances the founders' control preferences (78% equity, independence) with the need for rapid capital to counter the heavily funded rival. Ensure milestones and walk-away conditions are highly specific and actionable. Provide a FULL assessment of strengths and weaknesses. On the VERY LAST LINE, output EXACTLY ONE of these keywords: retry, pass.",
+      "maxIterations": 3,
+      "targetStep": 2
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an Executive Communications Polisher. Format the finalized growth-financing strategy into a highly professional, structured, and compelling advisory report suitable for the founders and board of directors. Ensure clarity, precision, and an authoritative tone."
+    }
+  ],
+  "explanation": "The pipeline begins with the Financial Analyst Builder to lay the groundwork by comparing the four financing options against the company's constraints. The Strategy Refiner then translates this analysis into a concrete, actionable plan featuring a specific funding structure, staged milestones, and walk-away conditions. The Corporate Finance Gate acts as a critical 'while' loop, rigorously evaluating the proposed strategy to ensure it adequately protects the founders' equity and independence while providing enough firepower to beat the rival; if the strategy falls short, it loops back to the Strategy Refiner up to 3 times. Finally, the Executive Polisher formats the approved strategy into a professional advisory report for the founders. Execution flow: Financial Analyst Builder -> Strategy Refiner -> Corporate Finance Gate (if retry, loops back to Strategy Refiner up to 3x) -> Executive Polisher."
+}

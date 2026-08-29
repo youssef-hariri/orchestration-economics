@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to propose comprehensive strategies and actionable steps to improve the resilience and ethical considerations within a global supply chain that sources from diverse international locations. Focus on risk mitigation, supplier diversification, ethical sourcing standards, and compliance.",
+      "description": "Creates the initial draft of supply chain resilience and ethical sourcing strategies."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous supply chain strategy output based on any quality feedback provided. Fix all issues, deepen the analysis, and produce a polished, improved version.",
+      "description": "Refines and improves the strategy draft based on critic feedback."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate critic. Review the refined supply chain strategy carefully. Provide your FULL assessment — strengths, weaknesses, specific issues regarding resilience and ethics. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for quality, depth, and alignment with the prompt."
+    },
+    {
+      "name": "Final Report Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a final report polisher. Format the approved supply chain strategy into a professional, executive-ready report. Use clear headings, bullet points, and a professional tone. Ensure the final output is highly readable and visually structured.",
+      "description": "Formats the final approved strategy into a polished, executive-ready report."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to propose comprehensive strategies and actionable steps to improve the resilience and ethical considerations within a global supply chain that sources from diverse international locations. Focus on risk mitigation, supplier diversification, ethical sourcing standards, and compliance."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous supply chain strategy output based on any quality feedback provided. Fix all issues, deepen the analysis, and produce a polished, improved version."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate critic. Review the refined supply chain strategy carefully. Provide your FULL assessment — strengths, weaknesses, specific issues regarding resilience and ethics. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Report Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final report polisher. Format the approved supply chain strategy into a professional, executive-ready report. Use clear headings, bullet points, and a professional tone. Ensure the final output is highly readable and visually structured."
+    }
+  ],
+  "explanation": "Initial Strategy Builder → Strategy Refiner → Strategy Quality Gate (if revise, loops back to Strategy Refiner) → Final Report Polisher. The Builder generates the initial supply chain resilience and ethics strategies. The Refiner enhances the draft. The Quality Gate evaluates the output for depth and accuracy, routing back to the Refiner if revisions are needed. Finally, the Polisher formats the approved strategy into an executive report."
+}

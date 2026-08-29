@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a corporate strategy builder. Draft a comprehensive turnaround-or-exit assessment for a failing industrial-services unit. Diagnose whether losses are structural or execution-driven. Identify profitable customer segments and service lines. Design a 1-year turnaround plan with specific milestones. Define exit alternatives and criteria for choosing between turnaround and divestment. Explicitly address the shared customers with profitable divisions, shrinking order book, and manager brain drain.",
+      "description": "Creates the initial draft of the turnaround and exit strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Improve the previous turnaround draft based on any quality feedback provided. Ensure the diagnosis deeply analyzes the shared customer dynamics and brain drain. Make the 1-year milestones highly specific and the exit criteria strictly quantifiable. Fix all identified issues and produce a polished, improved version.",
+      "description": "Refines and improves the strategy draft based on quality feedback."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined turnaround strategy carefully. Assess if the structural vs execution diagnosis is logically sound, if the 1-year milestones are realistic, and if the exit criteria are objective. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy and routes it for revision or approval."
+    },
+    {
+      "name": "M&A Expert Reviewer",
+      "role": "expert",
+      "systemPrompt": "You are an M&A and corporate restructuring expert. Review the approved turnaround strategy. Add expert insights on the divestment alternatives (e.g., carve-out, management buyout, liquidation) and refine the criteria for choosing between turnaround and exit based on current market conditions and the shared customer risks. Integrate your expert opinion seamlessly into the final document.",
+      "description": "Provides domain-specific expert opinion on M&A and restructuring alternatives."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a document polisher. Format the final turnaround-or-exit assessment for the board of directors. Ensure a professional, executive-level tone, clear headings, bullet points for milestones, and a compelling executive summary. Fix any minor grammatical or formatting issues to produce the final user-facing output.",
+      "description": "Performs final quality check, formatting, and polishing for the board presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a corporate strategy builder. Draft a comprehensive turnaround-or-exit assessment for a failing industrial-services unit. Diagnose whether losses are structural or execution-driven. Identify profitable customer segments and service lines. Design a 1-year turnaround plan with specific milestones. Define exit alternatives and criteria for choosing between turnaround and divestment. Explicitly address the shared customers with profitable divisions, shrinking order book, and manager brain drain."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Improve the previous turnaround draft based on any quality feedback provided. Ensure the diagnosis deeply analyzes the shared customer dynamics and brain drain. Make the 1-year milestones highly specific and the exit criteria strictly quantifiable. Fix all identified issues and produce a polished, improved version."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined turnaround strategy carefully. Assess if the structural vs execution diagnosis is logically sound, if the 1-year milestones are realistic, and if the exit criteria are objective. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "M&A Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an M&A and corporate restructuring expert. Review the approved turnaround strategy. Add expert insights on the divestment alternatives (e.g., carve-out, management buyout, liquidation) and refine the criteria for choosing between turnaround and exit based on current market conditions and the shared customer risks. Integrate your expert opinion seamlessly into the final document."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a document polisher. Format the final turnaround-or-exit assessment for the board of directors. Ensure a professional, executive-level tone, clear headings, bullet points for milestones, and a compelling executive summary. Fix any minor grammatical or formatting issues to produce the final user-facing output."
+    }
+  ],
+  "explanation": "This pipeline is designed to systematically develop, validate, and polish a high-stakes corporate turnaround strategy. Execution flow: Initial Strategy Builder (Step 1) drafts the comprehensive assessment and plan. Strategy Refiner (Step 2) enhances the draft, ensuring deep integration of complex constraints like shared customers and brain drain. Strategic Quality Gate (Step 3) assesses the refined output; if 'revise', it loops back to the Strategy Refiner (Step 2) to fix identified flaws; if 'pass', it proceeds to the M&A Expert Reviewer (Step 4) for domain-specific enhancements on divestment and exit criteria. Finally, the Final Polisher (Step 5) formats the document into a professional, board-ready presentation. This structure ensures rigorous quality control and expert validation while remaining fully automated and under the 8-step limit."
+}

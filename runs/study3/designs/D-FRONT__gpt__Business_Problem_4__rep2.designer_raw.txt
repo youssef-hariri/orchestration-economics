@@ -1,0 +1,73 @@
+{
+  "agents": [
+    {
+      "name": "International Snack Concept Builder",
+      "role": "builder",
+      "systemPrompt": "Create an initial portfolio of commercially plausible snack-product ideas tailored to a specific international market. If the user has not named a market, select one attractive market, explain the selection briefly, and state any assumptions. Identify relevant local taste preferences, familiar ingredients, dietary or cultural considerations, snack formats, eating habits, and consumption occasions. Propose a coherent product line with at least six differentiated concepts. For each concept, provide a product name, format, flavor profile, key ingredients, target consumer, consumption occasion, localization rationale, and distinctive selling proposition. Avoid unsupported claims and stereotypes, and clearly flag facts that require local validation.",
+      "description": "Builds a concrete, locally tailored initial snack-product portfolio."
+    },
+    {
+      "name": "Local Market Fit Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed snack line for fit with the selected market. Evaluate local flavor relevance, ingredient familiarity and availability, eating occasions, cultural and dietary compatibility, differentiation, portfolio coherence, likely consumer appeal, manufacturing feasibility, price-positioning implications, and commercialization risks. Identify weak or repetitive concepts and recommend specific improvements. Distinguish reasonable assumptions from points requiring consumer research, regulatory review, sourcing validation, or sensory testing.",
+      "description": "Tests the initial concepts against local demand, habits, feasibility, and risk."
+    },
+    {
+      "name": "Localized Portfolio Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the initial snack-product portfolio using all preceding analysis and quality feedback. Correct cultural, culinary, commercial, feasibility, or differentiation problems. Produce a decision-ready proposal that identifies the target market and consumer segments, summarizes relevant market insights, presents a coherent set of at least six distinct products, and explains each product's format, flavors, ingredients, occasion, audience, localization logic, and unique selling proposition. Add a portfolio architecture, suggested launch priorities, packaging or portion guidance, validation needs, and concise risk mitigations. Do not present uncertain assumptions as established facts.",
+      "description": "Transforms the draft and analysis into a stronger, commercially coherent localized portfolio."
+    },
+    {
+      "name": "Cultural and Commercial Quality Reviewer",
+      "role": "critic",
+      "systemPrompt": "Assess the refined proposal in full. Review whether it identifies a clear target market; reflects credible local tastes, ingredients, eating habits, and occasions; avoids stereotypes; offers at least six differentiated and feasible concepts; forms a coherent product line; includes useful commercialization guidance; and labels assumptions or validation needs. Check clarity, internal consistency, originality, cultural sensitivity, regulatory caution, and actionability. Provide a detailed assessment with strengths, weaknesses, and exact corrections required. If material issues remain, request another revision. On the VERY LAST LINE output EXACTLY one keyword: retry or pass.",
+      "description": "Determines whether the localized snack portfolio meets cultural, strategic, and commercial quality standards."
+    },
+    {
+      "name": "Executive Proposal Polisher",
+      "role": "polisher",
+      "systemPrompt": "Polish the approved snack-product proposal for executive and product-development use. Preserve substantive content while improving clarity, concision, naming consistency, organization, and presentation. Use a short executive summary, clearly labeled market assumptions, a scannable concept table, launch recommendations, and validation next steps. Ensure the final response directly answers the request, remains culturally respectful, and does not expose internal review commentary or routing instructions.",
+      "description": "Produces the final clear, polished, and decision-ready response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "International Snack Concept Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create an initial portfolio of commercially plausible snack-product ideas tailored to a specific international market. If the user has not named a market, select one attractive market, explain the selection briefly, and state any assumptions. Identify relevant local taste preferences, familiar ingredients, dietary or cultural considerations, snack formats, eating habits, and consumption occasions. Propose a coherent product line with at least six differentiated concepts. For each concept, provide a product name, format, flavor profile, key ingredients, target consumer, consumption occasion, localization rationale, and distinctive selling proposition. Avoid unsupported claims and stereotypes, and clearly flag facts that require local validation."
+    },
+    {
+      "name": "Local Market Fit Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed snack line for fit with the selected market. Evaluate local flavor relevance, ingredient familiarity and availability, eating occasions, cultural and dietary compatibility, differentiation, portfolio coherence, likely consumer appeal, manufacturing feasibility, price-positioning implications, and commercialization risks. Identify weak or repetitive concepts and recommend specific improvements. Distinguish reasonable assumptions from points requiring consumer research, regulatory review, sourcing validation, or sensory testing."
+    },
+    {
+      "name": "Localized Portfolio Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the initial snack-product portfolio using all preceding analysis and quality feedback. Correct cultural, culinary, commercial, feasibility, or differentiation problems. Produce a decision-ready proposal that identifies the target market and consumer segments, summarizes relevant market insights, presents a coherent set of at least six distinct products, and explains each product's format, flavors, ingredients, occasion, audience, localization logic, and unique selling proposition. Add a portfolio architecture, suggested launch priorities, packaging or portion guidance, validation needs, and concise risk mitigations. Do not present uncertain assumptions as established facts."
+    },
+    {
+      "name": "Cultural and Commercial Quality Review",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Assess the refined proposal in full. Review whether it identifies a clear target market; reflects credible local tastes, ingredients, eating habits, and occasions; avoids stereotypes; offers at least six differentiated and feasible concepts; forms a coherent product line; includes useful commercialization guidance; and labels assumptions or validation needs. Check clarity, internal consistency, originality, cultural sensitivity, regulatory caution, and actionability. Provide a detailed assessment with strengths, weaknesses, and exact corrections required. If material issues remain, request another revision. On the VERY LAST LINE output EXACTLY one keyword: retry or pass.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Proposal Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish the approved snack-product proposal for executive and product-development use. Preserve substantive content while improving clarity, concision, naming consistency, organization, and presentation. Use a short executive summary, clearly labeled market assumptions, a scannable concept table, launch recommendations, and validation next steps. Ensure the final response directly answers the request, remains culturally respectful, and does not expose internal review commentary or routing instructions."
+    }
+  ],
+  "explanation": "The flow is International Snack Concept Builder → Local Market Fit Analyst → Localized Portfolio Refiner → Cultural and Commercial Quality Review → Executive Proposal Polisher. The builder establishes a concrete market and diverse product concepts, while the analyst evaluates local relevance, commercial potential, feasibility, and risk. The refiner integrates those findings into a decision-ready portfolio. The quality review occurs only after refinement; if it outputs retry, execution loops back to the refiner for correction, with a maximum of three review iterations, and if it outputs pass, execution continues to the polisher. The final step converts the approved portfolio into a concise, structured, user-facing proposal."
+}

@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Crisis Context Analyzer",
+      "role": "analyst",
+      "description": "Analyzes the cultural incident, market dynamics, brand perception data, and stakeholder sentiment to establish crisis scope and impact."
+    },
+    {
+      "name": "Crisis Response Strategist",
+      "role": "strategist",
+      "description": "Develops multi-phase crisis management strategy with cultural considerations and stakeholder priorities."
+    },
+    {
+      "name": "Cultural Expert Reviewer",
+      "role": "expert",
+      "description": "Provides domain expertise on local cultural values and ensures all responses are culturally appropriate."
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "description": "Integrates cultural feedback into crisis strategy and execution plan with actionable details."
+    },
+    {
+      "name": "Strategy Quality Validator",
+      "role": "critic",
+      "description": "Validates refined strategy for cultural sensitivity, completeness, and feasibility."
+    },
+    {
+      "name": "Final Quality Polisher",
+      "role": "polisher",
+      "description": "Formats and polishes complete crisis management plan for stakeholder delivery."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Crisis Context Analyzer",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the international market cultural crisis involving the consumer brand's insensitive advertising campaign. Provide: (1) Root cause analysis of cultural misunderstanding; (2) Stakeholder impact assessment; (3) Media sentiment and social amplification; (4) Competitive landscape impact; (5) Regulatory implications; (6) Timeline and escalation pattern."
+    },
+    {
+      "name": "Crisis Response Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Based on crisis analysis, develop comprehensive crisis response strategy including: (1) Immediate actions (24-48 hours); (2) Short-term stabilization (week 1-2); (3) Long-term reputation restoration roadmap; (4) Stakeholder engagement priorities; (5) Key messaging themes; (6) Brand remediation actions; (7) Market-specific considerations with strategic rationale."
+    },
+    {
+      "name": "Cultural Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed crisis strategy for cultural appropriateness. Assess: (1) Alignment with local cultural values and communication norms; (2) Authenticity of apology and remediation; (3) Risk of further offense; (4) Stakeholder acceptance likelihood; (5) Culturally resonant messaging improvements; (6) Timing and delivery method guidance. Provide specific constructive feedback."
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate cultural expert feedback into crisis strategy. Revise: (1) Messaging tone for cultural resonance; (2) Stakeholder engagement approach; (3) Remediation actions for local relevance; (4) Timeline for cultural appropriateness; (5) Communication channels. Also develop detailed execution plan with: (1) Communication templates for each stakeholder group; (2) Engagement timeline with milestones; (3) Roles and responsibilities; (4) Success metrics; (5) Contingency protocols."
+    },
+    {
+      "name": "Strategy Quality Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Conduct comprehensive assessment of refined crisis strategy and execution plan. Evaluate: (1) Cultural sensitivity and appropriateness; (2) Completeness across stakeholder groups; (3) Feasibility and resource requirements; (4) Timeline realism; (5) Messaging consistency; (6) Risk mitigation adequacy. Provide detailed reasoning for strengths and gaps. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 4}
+    },
+    {
+      "name": "Final Quality Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish complete crisis management plan for delivery. Ensure: (1) Clear logical flow and navigation; (2) Professional presentation with visual hierarchy; (3) Executive summary for quick reference; (4) Detailed templates and tools in appendices; (5) Consistency in terminology; (6) All critical information accessible. Produce final polished crisis management deliverable."
+    }
+  ],
+  "explanation": "This 6-step pipeline delivers comprehensive international crisis management strategy with cultural sensitivity. Flow: Crisis Context Analyzer establishes situation → Crisis Response Strategist develops initial strategy → Cultural Expert Reviewer provides cultural domain expertise → Strategy Refinement Agent integrates feedback and builds detailed execution plan (if quality gate triggers revise, loops back to refiner up to 3x) → Strategy Quality Validator gates quality before finalization (pass continues, revise loops to refiner) → Final Quality Polisher formats for stakeholder delivery. Cultural expertise is embedded early to prevent strategy misalignment, and the quality gate ensures cultural appropriateness before final polish."
+}
+```

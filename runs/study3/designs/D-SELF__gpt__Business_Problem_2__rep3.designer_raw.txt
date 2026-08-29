@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, practical set of strategies and best practices for improving communication, collaboration, and conflict resolution in geographically dispersed, culturally diverse project teams within a multinational technology company. Address asynchronous and synchronous communication, time-zone coordination, language differences, cultural awareness, psychological safety, documentation, meeting practices, collaboration tools, escalation paths, and conflict-resolution methods. Include actionable recommendations, implementation guidance, and examples. Ensure the content is broadly applicable across continents and project contexts.",
+      "description": "Creates the initial comprehensive guidance for communication, collaboration, and conflict resolution in globally distributed technology project teams."
+    },
+    {
+      "name": "Global Team Dynamics Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed guidance from the perspective of an expert in cross-cultural management, distributed team communication, organizational behavior, and multinational technology operations. Identify cultural, operational, inclusion, time-zone, language, and conflict-management considerations that may be missing or insufficiently developed. Recommend evidence-informed improvements and practical safeguards. Preserve useful content while making the recommendations respectful, realistic, globally applicable, and sensitive to cultural differences.",
+      "description": "Adds specialist insight on cross-cultural collaboration, distributed work, inclusion, and organizational conflict resolution."
+    },
+    {
+      "name": "Actionability and Clarity Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the previous outputs into a coherent, accurate, and actionable guide for leaders and project team members. Incorporate all relevant expert feedback. Organize the guidance into clear sections such as communication norms, asynchronous work, meetings, documentation, cultural competence, collaboration practices, conflict resolution, leadership responsibilities, and implementation steps. Define practical behaviors, recommended team agreements, examples, and indicators of success. Remove redundancy, vague advice, unsupported assumptions, and culturally insensitive language. Produce a complete revised draft suitable for final review.",
+      "description": "Transforms the draft and expert input into a structured, practical, inclusive, and actionable guide."
+    },
+    {
+      "name": "Comprehensive Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined guide comprehensively for factual soundness, practical usefulness, cultural sensitivity, inclusiveness, clarity, completeness, internal consistency, and suitability for a multinational technology company. Check whether it directly addresses communication delays, misunderstandings, collaboration barriers, project timelines, team cohesion, and effective conflict resolution. Identify strengths and provide detailed, specific explanations of any weaknesses, omissions, ambiguity, redundancy, unrealistic recommendations, or potentially harmful cultural assumptions. If revisions are needed, explain exactly what should be improved. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Communication Guide Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing answer from the approved refined guide and quality assessment. Apply any necessary minor corrections, improve readability and flow, and use clear headings, concise explanations, practical bullet points, examples, and implementation guidance. Retain important nuance about cultural diversity, inclusion, time zones, asynchronous communication, psychological safety, and conflict resolution. Ensure the final response is professional, actionable, nonjudgmental, and appropriate for multinational technology project leaders and team members. Do not mention the review process or pipeline.",
+      "description": "Produces the final polished, readable, and implementation-ready guidance for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, practical set of strategies and best practices for improving communication, collaboration, and conflict resolution in geographically dispersed, culturally diverse project teams within a multinational technology company. Address asynchronous and synchronous communication, time-zone coordination, language differences, cultural awareness, psychological safety, documentation, meeting practices, collaboration tools, escalation paths, and conflict-resolution methods. Include actionable recommendations, implementation guidance, and examples. Ensure the content is broadly applicable across continents and project contexts."
+    },
+    {
+      "name": "Global Team Dynamics Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed guidance from the perspective of an expert in cross-cultural management, distributed team communication, organizational behavior, and multinational technology operations. Identify cultural, operational, inclusion, time-zone, language, and conflict-management considerations that may be missing or insufficiently developed. Recommend evidence-informed improvements and practical safeguards. Preserve useful content while making the recommendations respectful, realistic, globally applicable, and sensitive to cultural differences."
+    },
+    {
+      "name": "Actionability and Clarity Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize the previous outputs into a coherent, accurate, and actionable guide for leaders and project team members. Incorporate all relevant expert feedback. Organize the guidance into clear sections such as communication norms, asynchronous work, meetings, documentation, cultural competence, collaboration practices, conflict resolution, leadership responsibilities, and implementation steps. Define practical behaviors, recommended team agreements, examples, and indicators of success. Remove redundancy, vague advice, unsupported assumptions, and culturally insensitive language. Produce a complete revised draft suitable for final review."
+    },
+    {
+      "name": "Comprehensive Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined guide comprehensively for factual soundness, practical usefulness, cultural sensitivity, inclusiveness, clarity, completeness, internal consistency, and suitability for a multinational technology company. Check whether it directly addresses communication delays, misunderstandings, collaboration barriers, project timelines, team cohesion, and effective conflict resolution. Identify strengths and provide detailed, specific explanations of any weaknesses, omissions, ambiguity, redundancy, unrealistic recommendations, or potentially harmful cultural assumptions. If revisions are needed, explain exactly what should be improved. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Communication Guide Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing answer from the approved refined guide and quality assessment. Apply any necessary minor corrections, improve readability and flow, and use clear headings, concise explanations, practical bullet points, examples, and implementation guidance. Retain important nuance about cultural diversity, inclusion, time zones, asynchronous communication, psychological safety, and conflict resolution. Ensure the final response is professional, actionable, nonjudgmental, and appropriate for multinational technology project leaders and team members. Do not mention the review process or pipeline."
+    }
+  ],
+  "explanation": "The flow is Communication Strategy Builder → Global Team Dynamics Expert → Actionability and Clarity Refiner → Comprehensive Quality Assessment → Executive Communication Guide Polisher. The builder establishes broad coverage, the expert adds cross-cultural and distributed-work expertise, and the refiner integrates the material into an actionable guide. The quality assessment evaluates the refined output; if it outputs revise, execution returns to the refiner with the assessment so the guide can be improved, while pass proceeds to the polisher. The final polisher produces the clear, professional user-facing response."
+}

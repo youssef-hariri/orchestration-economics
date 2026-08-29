@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "International Market Entry Draft Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive initial strategy for an environmentally friendly clothing company based in Western Europe entering a new international market. Select and justify a promising target region or country, explicitly stating assumptions where current data is unavailable. Cover market attractiveness, customer segments, competitive context, product positioning, localization, pricing, sustainability claims, marketing channels, partnerships, regulatory considerations, supply chain and manufacturing opportunities, distribution, staffing, budget priorities, launch phases, risks, mitigation measures, and measurable success metrics. Produce a practical, evidence-informed business document with clear recommendations.",
+      "description": "Creates the initial comprehensive international market-entry strategy."
+    },
+    {
+      "name": "Market Opportunity Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed market-entry strategy and strengthen it with structured market insights. Evaluate target-market attractiveness, customer demand, cultural and purchasing differences, competitors, ecommerce and physical retail conditions, manufacturing and sourcing potential, logistics, tariffs, sustainability expectations, regulatory constraints, and major commercial risks. Identify unsupported assumptions and recommend credible validation methods. Preserve useful content while providing specific, actionable findings that can be incorporated into the strategy.",
+      "description": "Adds market, customer, competitive, operational, and risk analysis."
+    },
+    {
+      "name": "Sustainable Fashion Expansion Strategist",
+      "role": "strategist",
+      "systemPrompt": "Using the draft and market analysis, formulate an integrated and realistic market-entry plan for the sustainable clothing company. Resolve inconsistencies, prioritize the best market and entry approach, and connect product positioning, localized brand messaging, marketing channels, partnerships, pricing, sales, manufacturing, sourcing, fulfillment, compliance, organizational requirements, financial priorities, timelines, and KPIs. Ensure the strategy is suitable for a mid-sized company, distinguishes short-term launch actions from longer-term expansion, and avoids unsupported certainty or greenwashing.",
+      "description": "Transforms research and analysis into a coherent, prioritized expansion strategy."
+    },
+    {
+      "name": "Market Entry Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the previous strategy using all available analysis. Produce a complete revised strategy, not merely comments. Make the target market choice and rationale explicit; sharpen customer segments and product positioning; provide localized marketing channel recommendations; detail initial operational steps, regulatory and sustainability compliance, sourcing or manufacturing options, logistics, partnerships, budget categories, phased implementation, risks, contingencies, and KPIs. Correct gaps, contradictions, vague claims, and feasibility issues. Clearly distinguish verified facts, assumptions, and items requiring local validation.",
+      "description": "Integrates feedback and fixes strategic, commercial, operational, and presentation weaknesses."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Review the refined international market-entry strategy in full. Assess strategic coherence, target-market justification, customer and product positioning, marketing-channel fit, localization, sustainability credibility, regulatory awareness, operational practicality, manufacturing and supply-chain feasibility, financial realism, implementation sequencing, risk mitigation, measurable KPIs, clarity, and usefulness to decision-makers. Provide a detailed assessment with strengths, weaknesses, missing information, contradictions, and precise corrections needed. Treat unsupported assumptions and greenwashing exposure as material issues. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Performs a comprehensive automated quality assessment and routes the strategy for approval or revision."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing deliverable from the approved strategy. Preserve substantive recommendations while improving clarity, concision, structure, and professional tone. Present an executive summary followed by target-market rationale, customer segments, product positioning, marketing and sales channels, operational launch steps, manufacturing and supply-chain approach, compliance and sustainability safeguards, phased timeline, budget priorities, risks and mitigations, and KPIs. Use clear headings, tables where useful, and actionable bullets. State assumptions and validation needs explicitly. Do not mention agents, workflow, or internal review.",
+      "description": "Formats and finalizes the strategy as a polished executive-ready market-entry plan."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "International Market Entry Draft Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive initial strategy for an environmentally friendly clothing company based in Western Europe entering a new international market. Select and justify a promising target region or country, explicitly stating assumptions where current data is unavailable. Cover market attractiveness, customer segments, competitive context, product positioning, localization, pricing, sustainability claims, marketing channels, partnerships, regulatory considerations, supply chain and manufacturing opportunities, distribution, staffing, budget priorities, launch phases, risks, mitigation measures, and measurable success metrics. Produce a practical, evidence-informed business document with clear recommendations."
+    },
+    {
+      "name": "Market Opportunity Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed market-entry strategy and strengthen it with structured market insights. Evaluate target-market attractiveness, customer demand, cultural and purchasing differences, competitors, ecommerce and physical retail conditions, manufacturing and sourcing potential, logistics, tariffs, sustainability expectations, regulatory constraints, and major commercial risks. Identify unsupported assumptions and recommend credible validation methods. Preserve useful content while providing specific, actionable findings that can be incorporated into the strategy."
+    },
+    {
+      "name": "Sustainable Fashion Expansion Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using the draft and market analysis, formulate an integrated and realistic market-entry plan for the sustainable clothing company. Resolve inconsistencies, prioritize the best market and entry approach, and connect product positioning, localized brand messaging, marketing channels, partnerships, pricing, sales, manufacturing, sourcing, fulfillment, compliance, organizational requirements, financial priorities, timelines, and KPIs. Ensure the strategy is suitable for a mid-sized company, distinguishes short-term launch actions from longer-term expansion, and avoids unsupported certainty or greenwashing."
+    },
+    {
+      "name": "Market Entry Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the previous strategy using all available analysis. Produce a complete revised strategy, not merely comments. Make the target market choice and rationale explicit; sharpen customer segments and product positioning; provide localized marketing channel recommendations; detail initial operational steps, regulatory and sustainability compliance, sourcing or manufacturing options, logistics, partnerships, budget categories, phased implementation, risks, contingencies, and KPIs. Correct gaps, contradictions, vague claims, and feasibility issues. Clearly distinguish verified facts, assumptions, and items requiring local validation."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined international market-entry strategy in full. Assess strategic coherence, target-market justification, customer and product positioning, marketing-channel fit, localization, sustainability credibility, regulatory awareness, operational practicality, manufacturing and supply-chain feasibility, financial realism, implementation sequencing, risk mitigation, measurable KPIs, clarity, and usefulness to decision-makers. Provide a detailed assessment with strengths, weaknesses, missing information, contradictions, and precise corrections needed. Treat unsupported assumptions and greenwashing exposure as material issues. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing deliverable from the approved strategy. Preserve substantive recommendations while improving clarity, concision, structure, and professional tone. Present an executive summary followed by target-market rationale, customer segments, product positioning, marketing and sales channels, operational launch steps, manufacturing and supply-chain approach, compliance and sustainability safeguards, phased timeline, budget priorities, risks and mitigations, and KPIs. Use clear headings, tables where useful, and actionable bullets. State assumptions and validation needs explicitly. Do not mention agents, workflow, or internal review."
+    }
+  ],
+  "explanation": "The flow is Builder → Market Analyst → Expansion Strategist → Refiner → Quality Gate → Polisher. The builder establishes a complete baseline, while the analyst adds market and operational evidence. The strategist integrates those findings into a practical plan, and the refiner resolves gaps and improves feasibility. The quality gate then performs a full assessment; if it outputs revise, execution returns to the Refiner, and if it outputs pass, the strategy proceeds to the Polisher. The final step produces a clear executive-ready deliverable."
+}

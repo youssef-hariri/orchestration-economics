@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "International Campaign Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a complete initial marketing campaign for a recently launched dietary supplement in one clearly identified international market. Select the market based on available context and state your assumptions. Include target audience, positioning, campaign objectives, key message, culturally appropriate creative concept, sample copy, channels, launch plan, budget considerations, measurement framework, and risk assumptions. Ensure all health claims are evidence-based, non-misleading, and avoid promising diagnosis, treatment, prevention, or guaranteed outcomes. Produce a substantive campaign draft for expert review.",
+      "description": "Creates the initial market-specific dietary supplement campaign, including strategy, messaging, channels, execution, and measurement."
+    },
+    {
+      "name": "Cultural and Regulatory Health Marketing Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed campaign for the selected international market as an expert in cultural intelligence, health communication, dietary supplement regulation, advertising ethics, and local social values. Identify relevant beliefs and sensitivities concerning wellness, traditional and modern health practices, body image, family and community influence, religion, gender, language, trust, privacy, and acceptable advertising styles. Assess claims, disclaimers, influencer practices, imagery, targeting, data use, accessibility, and channel choices against likely local advertising norms. Distinguish verified facts from assumptions, flag issues requiring local legal verification, and provide precise recommendations for a compliant, respectful, and effective revision.",
+      "description": "Evaluates cultural fit, ethical considerations, health claims, and likely regulatory and advertising risks in the selected market."
+    },
+    {
+      "name": "Ethical Campaign Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the campaign using the builder's draft and the expert's findings. Resolve every identified cultural, ethical, strategic, and regulatory concern. Make the target market explicit and explain how local values and beliefs shape the campaign. Use only substantiated, carefully qualified supplement claims; include appropriate disclaimers and a recommendation to obtain local legal review where needed. Deliver a coherent final campaign with audience, insight, positioning, culturally adapted creative direction, sample advertisements, media and influencer plan, accessibility and privacy safeguards, implementation timeline, budget assumptions, KPIs, and contingency guidance. Do not stereotype or exploit health anxieties, and clearly label assumptions.",
+      "description": "Transforms the initial concept and expert findings into a culturally appropriate, ethically defensible, and actionable campaign."
+    },
+    {
+      "name": "Campaign Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Conduct a full quality assessment of the refined campaign. Evaluate completeness, strategic coherence, cultural respect, localization, factual and health-claim safety, advertising ethics, transparency, inclusivity, privacy, feasibility, measurement quality, and suitability for the selected market. Check whether the campaign avoids stereotypes, fear-based persuasion, deceptive endorsements, unsupported efficacy claims, and conflicts with likely local advertising norms. Identify strengths, weaknesses, and specific corrections required. Assess whether assumptions and legal-review limitations are clearly disclosed. Provide detailed reasoning and actionable feedback. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      },
+      "description": "Determines whether the refined campaign is sufficiently ethical, culturally appropriate, compliant-minded, complete, and actionable."
+    },
+    {
+      "name": "Campaign Presentation Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the approved campaign as a clear, professional, user-facing deliverable. Preserve all substantive safeguards and recommendations. Organize it with concise headings for market and cultural context, audience, objectives, positioning, messaging, creative examples, channels, influencer and privacy practices, compliance and disclaimer guidance, rollout, budget assumptions, KPIs, risks, and next steps. Improve clarity, tone, consistency, grammar, and usability without introducing unsupported claims or removing caveats. Clearly distinguish strategic recommendations from assumptions and advise local legal and regulatory validation before launch.",
+      "description": "Formats and improves the approved campaign into a polished, practical deliverable without weakening its ethical or compliance safeguards."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "International Campaign Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a complete initial marketing campaign for a recently launched dietary supplement in one clearly identified international market. Select the market based on available context and state your assumptions. Include target audience, positioning, campaign objectives, key message, culturally appropriate creative concept, sample copy, channels, launch plan, budget considerations, measurement framework, and risk assumptions. Ensure all health claims are evidence-based, non-misleading, and avoid promising diagnosis, treatment, prevention, or guaranteed outcomes. Produce a substantive campaign draft for expert review."
+    },
+    {
+      "name": "Cultural and Regulatory Health Marketing Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed campaign for the selected international market as an expert in cultural intelligence, health communication, dietary supplement regulation, advertising ethics, and local social values. Identify relevant beliefs and sensitivities concerning wellness, traditional and modern health practices, body image, family and community influence, religion, gender, language, trust, privacy, and acceptable advertising styles. Assess claims, disclaimers, influencer practices, imagery, targeting, data use, accessibility, and channel choices against likely local advertising norms. Distinguish verified facts from assumptions, flag issues requiring local legal verification, and provide precise recommendations for a compliant, respectful, and effective revision."
+    },
+    {
+      "name": "Ethical Campaign Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the campaign using the builder's draft and the expert's findings. Resolve every identified cultural, ethical, strategic, and regulatory concern. Make the target market explicit and explain how local values and beliefs shape the campaign. Use only substantiated, carefully qualified supplement claims; include appropriate disclaimers and a recommendation to obtain local legal review where needed. Deliver a coherent final campaign with audience, insight, positioning, culturally adapted creative direction, sample advertisements, media and influencer plan, accessibility and privacy safeguards, implementation timeline, budget assumptions, KPIs, and contingency guidance. Do not stereotype or exploit health anxieties, and clearly label assumptions."
+    },
+    {
+      "name": "Campaign Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Conduct a full quality assessment of the refined campaign. Evaluate completeness, strategic coherence, cultural respect, localization, factual and health-claim safety, advertising ethics, transparency, inclusivity, privacy, feasibility, measurement quality, and suitability for the selected market. Check whether the campaign avoids stereotypes, fear-based persuasion, deceptive endorsements, unsupported efficacy claims, and conflicts with likely local advertising norms. Identify strengths, weaknesses, and specific corrections required. Assess whether assumptions and legal-review limitations are clearly disclosed. Provide detailed reasoning and actionable feedback. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Campaign Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the approved campaign as a clear, professional, user-facing deliverable. Preserve all substantive safeguards and recommendations. Organize it with concise headings for market and cultural context, audience, objectives, positioning, messaging, creative examples, channels, influencer and privacy practices, compliance and disclaimer guidance, rollout, budget assumptions, KPIs, risks, and next steps. Improve clarity, tone, consistency, grammar, and usability without introducing unsupported claims or removing caveats. Clearly distinguish strategic recommendations from assumptions and advise local legal and regulatory validation before launch."
+    }
+  ],
+  "explanation": "The campaign is drafted first, then assessed for cultural, ethical, and regulatory suitability before being rewritten into an actionable plan. The quality gate follows the refiner and provides a full assessment; if it outputs revise, execution returns to the refiner with the identified issues, while pass proceeds to final presentation. The workflow ends with a polisher that produces a clear user-facing deliverable and preserves all compliance safeguards."
+}

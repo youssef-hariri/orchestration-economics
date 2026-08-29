@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GrowthStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are a top-tier venture finance strategist. Analyze the trade-offs between debt, minority equity, and hybrid instruments for a founder-led scale-up. Evaluate the impact on control, cash flow, and market competitiveness. Propose a specific funding structure, staged milestones, and walk-away conditions.",
+      "description": "Drafts the initial growth-financing strategy and financial roadmap."
+    },
+    {
+      "name": "FinanceExpert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in corporate finance and private equity. Review the proposed strategy for technical accuracy, risk assessment, and alignment with the founders' 78% equity control preference. Ensure the walk-away conditions are realistic and protective.",
+      "description": "Provides domain-specific critique of the financial strategy."
+    },
+    {
+      "name": "Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic refiner. Incorporate the FinanceExpert's feedback to strengthen the logic, clarify the milestones, and ensure the tone is professional and actionable.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Review the strategy for completeness: Does it address debt, equity, hybrid, and organic growth? Are milestones and walk-away conditions clearly defined? Provide a full assessment. On the last line, output 'pass' or 'revise'.",
+      "description": "Validates the strategy against the user's specific requirements."
+    },
+    {
+      "name": "Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a clear, executive-ready document with structured sections for the funding recommendation, milestone table, and risk management plan.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GrowthStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft the growth-financing strategy for a founder-led scale-up facing competitive pressure."
+    },
+    {
+      "name": "FinanceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy for financial rigor and alignment with founder control preferences."
+    },
+    {
+      "name": "Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Update the strategy based on the expert's critique."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate if the strategy meets all constraints. Last line: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy for the user."
+    }
+  ],
+  "explanation": "The pipeline begins with a GrowthStrategist to frame the complex trade-offs. A FinanceExpert provides a critical review to ensure the financial logic holds up against the founders' control preferences. The Refiner integrates this feedback, followed by a QualityGate that checks for completeness (debt, equity, hybrid, organic, milestones, and walk-away conditions). If the strategy is insufficient, it loops back to the Refiner (up to 3 times) before the Polisher formats the final output."
+}

@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Drafter",
+      "role": "builder",
+      "systemPrompt": "You are a strategic planner. Draft an initial comprehensive set of strategies and best practices to improve communication, foster collaboration, and resolve conflicts within geographically dispersed and culturally diverse project teams at a multinational tech company.",
+      "description": "Drafts the initial strategies and best practices for remote team collaboration."
+    },
+    {
+      "name": "Remote Work Expert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in organizational behavior and cross-cultural remote work. Review the initial draft. Provide detailed insights on asynchronous communication tools, cultural nuances in conflict resolution, and timezone management. Suggest specific additions or modifications.",
+      "description": "Provides domain expertise on cross-cultural communication and distributed teams."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the strategy document based on the expert's insights and any subsequent quality feedback. Fix all issues, seamlessly integrate the recommendations, and produce a highly actionable, cohesive strategy guide.",
+      "description": "Integrates expert feedback and refines the strategy document."
+    },
+    {
+      "name": "Quality Evaluator",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined strategy document carefully. Assess whether it provides highly actionable, culturally sensitive, and effective solutions for communication delays and conflict resolution in distributed teams. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for completeness, actionability, and cultural sensitivity."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional corporate communications specialist. Format the final strategy document into a polished, engaging, and easy-to-read executive guide. Use clear headings, bullet points, and a professional tone suitable for a multinational technology company. Do not change the core strategies, only enhance the presentation.",
+      "description": "Formats and polishes the final document for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategic planner. Draft an initial comprehensive set of strategies and best practices to improve communication, foster collaboration, and resolve conflicts within geographically dispersed and culturally diverse project teams at a multinational tech company."
+    },
+    {
+      "name": "Remote Work Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in organizational behavior and cross-cultural remote work. Review the initial draft. Provide detailed insights on asynchronous communication tools, cultural nuances in conflict resolution, and timezone management. Suggest specific additions or modifications."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the strategy document based on the expert's insights and any subsequent quality feedback. Fix all issues, seamlessly integrate the recommendations, and produce a highly actionable, cohesive strategy guide."
+    },
+    {
+      "name": "Quality Evaluator",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality gate. Review the refined strategy document carefully. Assess whether it provides highly actionable, culturally sensitive, and effective solutions for communication delays and conflict resolution in distributed teams. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional corporate communications specialist. Format the final strategy document into a polished, engaging, and easy-to-read executive guide. Use clear headings, bullet points, and a professional tone suitable for a multinational technology company. Do not change the core strategies, only enhance the presentation."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategy Drafter (Builder) creating an initial framework for remote team collaboration. The Remote Work Expert then analyzes the draft to inject domain-specific insights on cross-cultural dynamics and asynchronous workflows. The Strategy Refiner integrates this expertise into a cohesive document. Next, the Quality Evaluator acts as a 'while' gate, assessing the refined document for actionability and comprehensiveness; if it falls short, it loops back to the Strategy Refiner (up to 3 times) for further improvement. Finally, the Final Polisher formats the approved document into a professional, executive-ready guide."
+}

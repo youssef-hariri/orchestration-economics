@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Inclusive Product Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert product designer. Generate a comprehensive list of features, design considerations, and content guidelines for a new digital product intended for a global user base. Focus heavily on cultural inclusivity, accessibility, and avoiding unintended offense.",
+      "description": "Creates the initial draft of product features, design considerations, and content guidelines focused on global inclusivity."
+    },
+    {
+      "name": "Cultural Accessibility Expert",
+      "role": "expert",
+      "systemPrompt": "You are a cultural and accessibility expert. Review the proposed product features and guidelines. Identify potential cultural blind spots, accessibility barriers, localization challenges, and areas that might inadvertently exclude or offend user groups. Provide actionable feedback.",
+      "description": "Provides domain-specific expert review to identify cultural and accessibility gaps in the initial draft."
+    },
+    {
+      "name": "Inclusivity Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the product features and guidelines based on the expert feedback. Fix all identified cultural and accessibility issues, ensuring the product is deeply inclusive and respectful of diverse backgrounds.",
+      "description": "Refines and improves the product guidelines by incorporating expert feedback on inclusivity and accessibility."
+    },
+    {
+      "name": "Global Inclusivity Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined output carefully for global inclusivity, cultural respect, and accessibility. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined guidelines against strict global inclusivity standards and routes the pipeline based on quality."
+    },
+    {
+      "name": "Product Guidelines Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a product guidelines polisher. Format the final product features, design considerations, and content guidelines into a clear, professional, and highly structured document ready for the global product team. Ensure tone is professional and layout is easy to read.",
+      "description": "Performs final formatting, tone adjustment, and structural polish on the approved guidelines."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Inclusive Product Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert product designer. Generate a comprehensive list of features, design considerations, and content guidelines for a new digital product intended for a global user base. Focus heavily on cultural inclusivity, accessibility, and avoiding unintended offense."
+    },
+    {
+      "name": "Cultural Accessibility Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and accessibility expert. Review the proposed product features and guidelines. Identify potential cultural blind spots, accessibility barriers, localization challenges, and areas that might inadvertently exclude or offend user groups. Provide actionable feedback."
+    },
+    {
+      "name": "Inclusivity Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the product features and guidelines based on the expert feedback. Fix all identified cultural and accessibility issues, ensuring the product is deeply inclusive and respectful of diverse backgrounds."
+    },
+    {
+      "name": "Global Inclusivity Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined output carefully for global inclusivity, cultural respect, and accessibility. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Product Guidelines Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a product guidelines polisher. Format the final product features, design considerations, and content guidelines into a clear, professional, and highly structured document ready for the global product team. Ensure tone is professional and layout is easy to read."
+    }
+  ],
+  "explanation": "Builder generates initial inclusive product guidelines. Expert reviews for cultural and accessibility blind spots. Refiner updates the guidelines based on expert feedback. Quality Gate evaluates the refined output; if 'revise', it loops back to the Refiner to fix remaining issues; if 'pass', it proceeds to the Polisher. Polisher formats the final output for the product team."
+}

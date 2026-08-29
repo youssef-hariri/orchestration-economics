@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Operations Data Mapper",
+      "role": "builder",
+      "description": "Maps current state: collects production cycle data, quality checkpoint timings, supplier lead times, inventory patterns, and sales deal-loss metrics to establish baseline and identify where time is actually consumed."
+    },
+    {
+      "name": "Cross-Functional Root Cause Analyst",
+      "role": "analyst",
+      "description": "Analyzes baseline data to pinpoint time sinks: delays in quality gates, supplier dependencies, scheduling inefficiencies, and inter-function handoff losses. Produces quantified breakdown of where 14 weeks is consumed."
+    },
+    {
+      "name": "Operations Improvement Strategist",
+      "role": "strategist",
+      "description": "Develops comprehensive improvement plan: proposes changes to production scheduling, quality checkpoint placement, supplier agreements, and inventory strategy. Identifies which changes protect quality gates and reduce lead time with risk mitigation."
+    },
+    {
+      "name": "Quality & Compliance Expert",
+      "role": "expert",
+      "description": "Validates improvement plan from certified quality perspective: ensures inspection standards maintained, identifies non-negotiable quality gates, proposes quality-safe shortcuts, and mitigates warranty claim risk from previous failed attempt."
+    },
+    {
+      "name": "Plan Validation Critic",
+      "role": "critic",
+      "description": "Assesses plan viability: lead-time reduction targets, quality safety, operational feasibility, cross-functional alignment, and supplier dependency realism. Routes to refinement or forward to implementation."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "description": "Addresses validation gaps: strengthens weak areas, adds supplier timelines, details quality gate parallelization, proposes cross-functional KPIs, resolves inter-function conflicts, and translates strategy into phased implementation roadmap with clear ownership."
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats complete operations improvement plan for leadership and cross-functional teams: executive summary, key findings, improvement strategy, quality assurance framework, implementation roadmap, accountability matrix, and expected business impact."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Operations Data Mapper",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Map the current state of operations for an industrial equipment manufacturer with 14-week lead time. Collect and organize: (1) Production cycle breakdown with duration for each step; (2) Certified quality inspection checkpoints—when, where, duration; (3) Supplier lead times and dependencies; (4) Inventory patterns and rationale; (5) Quantified sales deal-loss data (1-in-3 losses attributed to delivery speed). Structure as itemized current-state baseline for analysis. Do not propose solutions."
+    },
+    {
+      "name": "Cross-Functional Root Cause Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Perform detailed time-loss analysis using the baseline map. Break down the 14 weeks into buckets: production, quality, supplier wait, inventory, handoffs, contingency. For each bucket identify root causes—unnecessary waiting, sequential processes that could be parallel, inefficiently placed quality gates, supplier delays, inter-function friction. Quantify each time loss. Rank top 5–8 time sinks. Note whether losses stem from process issues, supplier dependencies, or organizational friction between Production/Quality/Sales."
+    },
+    {
+      "name": "Operations Improvement Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop comprehensive improvement plan addressing each major time sink. For each change propose: specific action (parallelize stages, move quality gate, negotiate supplier lead time, reduce WIP); estimated lead-time reduction; whether it reduces production time, improves supplier responsiveness, or eliminates waste. For quality-critical steps specify: remains hard gate, is parallelized, moves earlier for defect prevention, or becomes more efficient. Propose realistic target lead time (8 weeks to match competitor). Flag risks: supplier cooperation needed, equipment/training required, resistance from Production/Quality/Sales. Show how changes align the three functions. Deliver prioritized strategy with lead-time trajectory and risk mitigation."
+    },
+    {
+      "name": "Quality & Compliance Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review proposed improvement plan for quality and compliance. Validate that certified inspection requirements are maintained and specify which inspections are mandatory and why. For each proposed change assess quality risk: Does parallelizing stages compromise traceability? Does moving a quality gate actually improve defect capture? Can in-process measurement replace post-stage inspection safely? Identify non-negotiable hard gates vs. flexible ones. Propose quality-safe shortcuts (statistical sampling, automated measurement, batch-hold-test protocols). Analyze the previous failed compression: what went wrong and how does this plan avoid that trap? Recommend quality assurance framework (defect audits, warranty monitoring, supplier audit frequency). Provide expert assessment of whether plan is quality-safe and warrant-claim-risk-mitigated."
+    },
+    {
+      "name": "Plan Validation Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Validate improvement plan across: (1) Lead-time reduction (6–8 weeks target) without quality cuts—aligned with expert validation? (2) All certified quality gates preserved/made efficient—avoids previous warranty-claim trap? (3) Root causes addressed—top time sinks tackled? (4) Operational feasibility—existing equipment/skills or new investment needed? (5) Cross-functional alignment—Production/Quality/Sales incentives aligned or friction removed? (6) Supplier dependencies realistic—contingency plan if suppliers don't cooperate? (7) Implementation clear—timeline, ownership, milestones defined? Provide full assessment of strengths, gaps, risks, contradictions. On VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Address all validation gaps identified by the critic. Strengthen weak areas: add supplier ramp-up timelines, detail quality gate parallelization mechanics, propose specific cross-functional KPIs and accountability, clarify feasibility and investment, resolve Production/Quality/Sales friction with concrete incentive alignment. Remove unworkable elements. Reinforce quality safety with verification checkpoints. Translate strategy into phased implementation roadmap (phases for supplier agreements, quality reconfiguration, scheduling updates, pilot validation). Assign clear ownership to Production, Quality, Sales for each phase. Define handoff protocols and quality result communication. Propose metrics dashboard (lead time, defect rate, warranty claims, deal-close rate, supplier on-time delivery). Include change-management steps to rebuild trust after previous failure. Produce robust, detailed, implementable improvement strategy and implementation plan."
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format complete operations improvement plan for leadership and cross-functional teams. Create polished executive document: (1) Executive Summary—problem (14-week lead time, 1-in-3 deal losses), goal (8 weeks, recover deals), approach (data-driven, quality-safe); (2) Key Findings—quantified top time sinks and root causes; (3) Improvement Strategy—proposed changes, lead-time target, phased roadmap; (4) Quality Assurance—how certified gates preserved/improved, lessons from previous failure, risk mitigation; (5) Implementation Roadmap—phases, timeline, ownership, milestones, metrics, success criteria; (6) Cross-Functional Accountability Matrix—Production/Quality/Sales/leadership roles; (7) Expected Business Impact—lead-time reduction (14→8 weeks), deal recovery (67%→90%+ close rate), warranty risk mitigation, competitive positioning. Use clear visual hierarchy and leadership decision-making format. Tone: data-driven, confident, forward-looking."
+    }
+  ],
+  "explanation": "Pipeline executes as: Data Mapper (builder) → Root Cause Analyst (analyst) → Improvement Strategist (strategist) → Quality Expert (expert) → Validation Critic (if gate) which routes to Plan Refiner (refiner) if issues found (revise) or directly to Polisher (polisher) if validated (pass). The if gate at step 5 loops back to step 5 (refiner) for revision, ensuring the plan is robust, quality-safe, and cross-functionally viable before polishing and delivery. Single conditional branch keeps pipeline under 8 steps. Two-refiner approach combines strategic gap-closure with tactical implementation planning. Quality expert positioned before validation ensures quality safety is built into plan assessment."
+}
+```

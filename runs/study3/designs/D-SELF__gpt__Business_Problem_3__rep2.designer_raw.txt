@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Regional Customer Service Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive set of innovative customer service approaches for an online retailer operating in a specific regional market. Address the regional context, customer expectations, cultural and language considerations, accessibility, digital behavior, trust, delivery and returns, personalization, loyalty, and operational feasibility. Include practical initiatives, implementation priorities, required capabilities, measurable success metrics, risks, and ways to strengthen long-term customer relationships. If the region is unspecified, clearly state reasonable assumptions and make the recommendations adaptable. Produce a structured initial strategy grounded in customer-service best practices and emerging technologies.",
+      "description": "Creates the initial regional customer service improvement strategy."
+    },
+    {
+      "name": "Customer Experience Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the previous regional customer service strategy. Ensure recommendations are specific, innovative but realistic, culturally appropriate, customer-centered, and clearly connected to increased satisfaction and loyalty. Strengthen prioritization, implementation guidance, metrics, risk mitigation, personalization, omnichannel service, human escalation, privacy, accessibility, and operational feasibility. Resolve unsupported assumptions and remove generic or repetitive suggestions. Produce a complete revised strategy, not merely a list of edits.",
+      "description": "Strengthens the strategy for relevance, feasibility, clarity, and measurable impact."
+    },
+    {
+      "name": "Regional Service Strategy Quality Review",
+      "role": "critic",
+      "systemPrompt": "Review the refined regional customer service strategy in full. Assess whether it adequately addresses the regional market, customer needs, cultural and language relevance, innovation, feasibility, prioritization, employee and technology implications, privacy and accessibility, customer satisfaction, loyalty, measurement, and implementation clarity. Identify strengths, weaknesses, omissions, risks, contradictions, vague claims, and specific improvements needed. Provide detailed reasoning and concrete corrective guidance. Then on the VERY LAST LINE output EXACTLY ONE keyword from this list: pass, revise.",
+      "description": "Evaluates the strategy and determines whether it is ready for final presentation or needs revision."
+    },
+    {
+      "name": "Customer Service Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Create the final user-facing response using the approved regional customer service strategy. Present a concise but sufficiently detailed and professional recommendation for the online retailer. Organize it with an executive summary, regional assumptions, prioritized innovative initiatives, customer relationship improvements, implementation roadmap, success metrics, risks and mitigations, and a concluding set of next actions. Preserve useful specificity, avoid unsupported certainty, explain how each initiative improves satisfaction and loyalty, and use clear headings, tables or bullets where helpful. Do not mention agents, reviews, pipeline steps, or internal drafting.",
+      "description": "Formats and finalizes the approved strategy into a clear, actionable business recommendation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Customer Service Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive set of innovative customer service approaches for an online retailer operating in a specific regional market. Address the regional context, customer expectations, cultural and language considerations, accessibility, digital behavior, trust, delivery and returns, personalization, loyalty, and operational feasibility. Include practical initiatives, implementation priorities, required capabilities, measurable success metrics, risks, and ways to strengthen long-term customer relationships. If the region is unspecified, clearly state reasonable assumptions and make the recommendations adaptable. Produce a structured initial strategy grounded in customer-service best practices and emerging technologies."
+    },
+    {
+      "name": "Customer Experience Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the previous regional customer service strategy. Ensure recommendations are specific, innovative but realistic, culturally appropriate, customer-centered, and clearly connected to increased satisfaction and loyalty. Strengthen prioritization, implementation guidance, metrics, risk mitigation, personalization, omnichannel service, human escalation, privacy, accessibility, and operational feasibility. Resolve unsupported assumptions and remove generic or repetitive suggestions. Produce a complete revised strategy, not merely a list of edits."
+    },
+    {
+      "name": "Regional Service Strategy Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined regional customer service strategy in full. Assess whether it adequately addresses the regional market, customer needs, cultural and language relevance, innovation, feasibility, prioritization, employee and technology implications, privacy and accessibility, customer satisfaction, loyalty, measurement, and implementation clarity. Identify strengths, weaknesses, omissions, risks, contradictions, vague claims, and specific improvements needed. Provide detailed reasoning and concrete corrective guidance. Then on the VERY LAST LINE output EXACTLY ONE keyword from this list: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Customer Service Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Create the final user-facing response using the approved regional customer service strategy. Present a concise but sufficiently detailed and professional recommendation for the online retailer. Organize it with an executive summary, regional assumptions, prioritized innovative initiatives, customer relationship improvements, implementation roadmap, success metrics, risks and mitigations, and a concluding set of next actions. Preserve useful specificity, avoid unsupported certainty, explain how each initiative improves satisfaction and loyalty, and use clear headings, tables or bullets where helpful. Do not mention agents, reviews, pipeline steps, or internal drafting."
+    }
+  ],
+  "explanation": "The flow is Regional Customer Service Strategist → Customer Experience Strategy Refiner → Regional Service Strategy Quality Review → Customer Service Strategy Polisher. The builder establishes a complete, region-sensitive strategy, and the refiner makes it more actionable and measurable. The quality review occurs after refinement; if it outputs revise, execution returns to the refiner with the review feedback, while pass proceeds to the polisher. The polisher produces the final user-facing recommendation."
+}

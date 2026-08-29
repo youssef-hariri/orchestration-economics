@@ -1,0 +1,92 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive business-model transition plan covering offer structure, migration incentives, pricing strategy, sales compensation redesign, and investor communication framework"
+    },
+    {
+      "name": "Financial & Risk Analyst",
+      "role": "analyst",
+      "description": "Analyzes revenue trough depth, customer retention risk, competitive benchmarks, and financial modeling to quantify transition impact and identify optimization opportunities"
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Reviews transition plan for internal contradictions, unaddressed stakeholder tensions (sales force, existing customers, investors), pricing viability, and realistic adoption curves"
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "description": "Revises strategy and financial projections based on critic feedback, strengthens offer design to reduce churn risk, rebalances compensation incentives, and adjusts communication messaging"
+    },
+    {
+      "name": "Domain Expert Review",
+      "role": "expert",
+      "description": "Evaluates refined plan against subscription-transition best practices, SaaS unit economics, customer psychology in model shifts, and board-communication precedents from successful transitions"
+    },
+    {
+      "name": "Quality Validation Gate",
+      "role": "critic",
+      "type": "if",
+      "description": "Final assessment: verifies plan addresses all five requirements (offer, incentives, pricing, compensation, investor communication), identifies remaining gaps, and confirms viability before polish"
+    },
+    {
+      "name": "Executive-Ready Polisher",
+      "role": "polisher",
+      "description": "Formats final transition plan with executive summaries, visual roadmaps, scenario tables, and clear implementation milestones for board and leadership presentation"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a business strategy builder designing a perpetual-license-to-subscription transition for a software company. Create a comprehensive initial plan that addresses: (1) Offer structure for existing license holders (e.g., grandfathering, upgrade paths, bundled migration incentives); (2) Migration incentives that reduce churn without destroying margins (e.g., loyalty discounts, early-adopter credits, bundle deals); (3) Subscription pricing that balances trough depth against adoption velocity (quantify projected Year 1-3 revenue impact); (4) Sales compensation redesign that reorients incentives from upfront deals to recurring revenue and customer retention; (5) Investor communication strategy that frames the trough as temporary and highlights long-term recurring-revenue benefits. Include assumptions, key trade-offs, and timeline. Produce a structured, detailed foundation for refinement."
+    },
+    {
+      "name": "Financial & Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the transition strategy provided. Quantify: (1) Projected revenue trough depth and duration (compare against competitor who lost 20% of base); (2) Customer retention rates under different incentive structures; (3) Win-back costs if churn exceeds thresholds; (4) Break-even timing for subscription model; (5) Sales compensation cost impact (compare old vs. new model); (6) Investor discount rates applied to lumpy vs. recurring revenue. Identify high-risk assumptions and provide sensitivity analysis. Flag any pricing, incentive, or timeline elements that appear unrealistic or under-optimized."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "Critically review the transition plan and financial analysis. Assess: (1) Does the offer structure genuinely address entitlement-driven resistance from long-standing customers, or does it underestimate churn risk? (2) Are migration incentives sufficient to offset the competitor's 20% loss benchmark, yet protect margins? (3) Does pricing balance investor comfort (recurring revenue visibility) against adoption velocity (adoption risk if too high)? (4) Is sales compensation redesign realistic—will the sales force actually accept lower near-term pay? (5) Does investor communication address the specific investor concern that lumpy revenue was 'heavily discounted'—does the plan credibly show why subscriptions warrant higher valuation multiples? (6) Are there hidden conflicts or sequencing risks? Provide detailed assessment of each element, then output EXACTLY ONE keyword: revise or pass."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Revise the transition plan based on critic feedback. Strengthen: (1) Offer structure—add tiered paths (e.g., loyalty tiers based on tenure/spend) to reduce perceived unfairness and churn; (2) Migration incentives—rebalance to minimize margin loss while credibly preventing 20%+ churn; (3) Pricing—adjust to optimize adoption curves and maintain investor confidence; (4) Sales compensation—redesign with phased transition (e.g., Year 1 hybrid pay, Year 2+ subscription-weighted) to ease acceptance; (5) Investor communication—develop narratives around recurring-revenue multiple uplift, predictability benefits, and multi-year customer lifetime value. Integrate financial analyst insights. Resolve any contradictions between customer retention, margin protection, and sales force alignment. Produce a cohesive, implementable revised plan."
+    },
+    {
+      "name": "Domain Expert Review",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a SaaS and business-model-transition expert. Evaluate the refined plan against: (1) Subscription transition precedents—does the offer structure match successful examples (e.g., Adobe, Autodesk, Salesforce migrations)? (2) Unit economics—do the pricing and incentive structures yield healthy annual contract value (ACV) and net retention rates? (3) Customer psychology—does the tiered incentive structure address loss aversion and entitlement without appearing punitive? (4) Sales force adoption—is the compensation redesign phased realistically, or will it trigger departures? (5) Board and investor communication—are the recurring-revenue narratives (predictability, lifetime value, multiple uplift) credible and supported by comparable-company data? (6) Timeline realism—is the transition pace (trough duration, migration velocity) achievable without operational overload? Identify any misalignments with best practice and flag for final validation."
+    },
+    {
+      "name": "Quality Validation Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a final validation gate. Review the refined plan and expert feedback. Confirm: (1) Does the plan comprehensively address all five requirements (offer structure, migration incentives, pricing, sales compensation, investor communication)? (2) Are customer retention projections credible relative to the competitor's 20% churn benchmark? (3) Is the revenue trough realistic and investor-communicable (e.g., 'trough in Year 2, recovery to profitability by Year 3')? (4) Does sales compensation redesign appear implementable without mass departure? (5) Are offer-structure details (tiering, eligibility, duration) clear and fair enough to withstand customer scrutiny? (6) Does investor communication adequately address why recurring revenue warrants valuation multiple uplift? Assess completeness, internal consistency, and stakeholder viability. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive-Ready Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the validated transition plan for executive and board presentation. Produce: (1) Executive summary (1 page): core strategy, timeline, and value proposition; (2) Offer structure table: tiers, eligibility, incentive levels, churn projections; (3) Financial scenarios: Base, Upside, Downside cases over 3 years (revenue, ACV, retention, profitability); (4) Sales compensation redesign summary: old vs. new structure, phased transition, projected costs; (5) Investor communication framework: key messages, multiple-uplift narrative, risk mitigations, FAQs addressing the trough; (6) Implementation roadmap: phases, milestones, dependencies, team ownership. Use clear visuals, concise prose, and definitive statements. Make it ready for board approval and investor communication."
+    }
+  ],
+  "explanation": "This pipeline systematically addresses a complex, multi-stakeholder business transformation. The Builder creates a comprehensive initial strategy covering all five dimensions (offer, incentives, pricing, compensation, communication). The Analyst then stress-tests with financial rigor, quantifying the critical risk (trough depth relative to competitor churn). The Critic applies strategic skepticism, examining whether the plan truly resolves stakeholder tensions and whether key assumptions are sound. The Refiner integrates feedback to strengthen weak points—particularly offer design and sales-force transition, which are high-risk. The Expert validates against industry best practices and comparable transitions, ensuring credibility with board and investors. The Quality Gate (if-step) confirms all five requirements are met and that the plan is implementable before final polish. If validation fails, it routes back to the Refiner (step 3) for targeted revision. The Polisher formats for executive consumption. This design ensures the plan is strategically coherent, financially rigorous, stakeholder-aligned, and investor-ready—critical for navigating a revenue trough without board rebellion or customer defection."
+}
+```

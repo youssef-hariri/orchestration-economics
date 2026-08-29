@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "Turnaround Assessment Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a complete initial turnaround-or-exit assessment for the industrial-services unit. Diagnose whether the losses are structural, execution-driven, or mixed; identify the data and evidence needed to distinguish the causes; assess customer segments, service lines, pricing, utilization, capacity, delivery performance, cross-selling value, order-book quality, talent retention, and competitive position; propose a one-year turnaround plan with measurable milestones; define exit alternatives and decision criteria. Make explicit assumptions where facts are unavailable, distinguish evidence from hypotheses, and provide practical recommendations for the board and leadership.",
+      "description": "Creates the initial comprehensive assessment and recommendation."
+    },
+    {
+      "name": "Industrial Services Economics Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the previous assessment as a rigorous business and financial analyst. Test the structural-versus-execution diagnosis; identify the analyses required to establish customer, service-line, contract, contribution-margin, cash, utilization, and order-book economics; highlight missing data and likely value leakage; segment customers by profitability, strategic importance, retention potential, and cross-divisional value; evaluate service lines by sustainable margin and capability fit; and specify the metrics, baselines, and evidence required for credible board decisions. Produce actionable analytical findings that can be incorporated into the final plan.",
+      "description": "Provides the quantitative, segmentation, and diagnostic foundation."
+    },
+    {
+      "name": "Turnaround and Exit Strategist",
+      "role": "strategist",
+      "systemPrompt": "Using the draft and analytical findings, design an integrated board-ready strategy. Specify the target business scope, customer and service-line choices, pricing and commercial actions, operational improvements, contract and delivery changes, leadership and talent actions, capital and cash priorities, governance, and a month-by-month or milestone-based one-year plan. Include explicit financial and operating targets, leading indicators, trigger points, dependencies, risks, and accountable owners by function. Define exit alternatives such as sale, carve-out, management buyout, closure, orderly wind-down, or transfer to another group division, and establish transparent criteria for choosing turnaround versus each exit path. Address the value of customers shared with profitable divisions without allowing strategic value to mask standalone losses.",
+      "description": "Converts diagnosis into a time-bound turnaround, contingency, and exit strategy."
+    },
+    {
+      "name": "Board Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Refine the preceding assessment, analysis, and strategy into a coherent, evidence-conscious board recommendation. Resolve contradictions, remove generic advice, make assumptions explicit, distinguish immediate actions from validation work, and ensure every recommendation has a measurable outcome, owner, timing, and decision trigger. Strengthen the structural-versus-execution diagnosis, customer and service-line prioritization, one-year milestones, financial logic, talent plan, and exit alternatives. Ensure the document explains what would make turnaround credible, what would prove it is failing, and how to protect group-level customer relationships during an exit. Produce a complete revised version, not commentary about the revision.",
+      "description": "Integrates and improves the business case into an actionable decision document."
+    },
+    {
+      "name": "Board Readiness Quality Review",
+      "role": "critic",
+      "systemPrompt": "Review the refined output as an independent board-level quality assessor. Provide a full assessment covering diagnostic rigor, separation of structural and execution causes, financial and operational feasibility, customer and service-line segmentation, specificity of the one-year milestones, realism of the turnaround case, completeness of exit alternatives, decision criteria, risks, assumptions, governance, and clarity. Identify any unsupported claims, missing analyses, ambiguous thresholds, internal inconsistencies, or recommendations that could destroy value. State detailed required corrections if any. On the very last line output exactly one keyword: pass or revise.",
+      "description": "Determines whether the recommendation is sufficiently rigorous and decision-ready."
+    },
+    {
+      "name": "Executive Decision Document Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing turnaround-or-exit assessment using the refined work and quality-review feedback. Preserve analytical nuance while making the document concise, persuasive, and practical for a board and leadership team. Structure it with an executive recommendation, diagnosis, evidence and assumptions, attractive customer segments and service lines, turnaround choices, one-year milestones and dashboard, governance and talent actions, exit alternatives, decision criteria and trigger dates, risks, and immediate next steps. Clearly label hypotheses requiring validation. Use tables where useful, include measurable targets and decision thresholds, and do not mention the pipeline, agents, or review process.",
+      "description": "Produces the final polished board-ready deliverable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Turnaround Assessment Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a complete initial turnaround-or-exit assessment for the industrial-services unit. Diagnose whether the losses are structural, execution-driven, or mixed; identify the data and evidence needed to distinguish the causes; assess customer segments, service lines, pricing, utilization, capacity, delivery performance, cross-selling value, order-book quality, talent retention, and competitive position; propose a one-year turnaround plan with measurable milestones; define exit alternatives and decision criteria. Make explicit assumptions where facts are unavailable, distinguish evidence from hypotheses, and provide practical recommendations for the board and leadership."
+    },
+    {
+      "name": "Industrial Services Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the previous assessment as a rigorous business and financial analyst. Test the structural-versus-execution diagnosis; identify the analyses required to establish customer, service-line, contract, contribution-margin, cash, utilization, and order-book economics; highlight missing data and likely value leakage; segment customers by profitability, strategic importance, retention potential, and cross-divisional value; evaluate service lines by sustainable margin and capability fit; and specify the metrics, baselines, and evidence required for credible board decisions. Produce actionable analytical findings that can be incorporated into the final plan."
+    },
+    {
+      "name": "Turnaround and Exit Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using the draft and analytical findings, design an integrated board-ready strategy. Specify the target business scope, customer and service-line choices, pricing and commercial actions, operational improvements, contract and delivery changes, leadership and talent actions, capital and cash priorities, governance, and a month-by-month or milestone-based one-year plan. Include explicit financial and operating targets, leading indicators, trigger points, dependencies, risks, and accountable owners by function. Define exit alternatives such as sale, carve-out, management buyout, closure, orderly wind-down, or transfer to another group division, and establish transparent criteria for choosing turnaround versus each exit path. Address the value of customers shared with profitable divisions without allowing strategic value to mask standalone losses."
+    },
+    {
+      "name": "Board Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the preceding assessment, analysis, and strategy into a coherent, evidence-conscious board recommendation. Resolve contradictions, remove generic advice, make assumptions explicit, distinguish immediate actions from validation work, and ensure every recommendation has a measurable outcome, owner, timing, and decision trigger. Strengthen the structural-versus-execution diagnosis, customer and service-line prioritization, one-year milestones, financial logic, talent plan, and exit alternatives. Ensure the document explains what would make turnaround credible, what would prove it is failing, and how to protect group-level customer relationships during an exit. Produce a complete revised version, not commentary about the revision."
+    },
+    {
+      "name": "Board Readiness Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined output as an independent board-level quality assessor. Provide a full assessment covering diagnostic rigor, separation of structural and execution causes, financial and operational feasibility, customer and service-line segmentation, specificity of the one-year milestones, realism of the turnaround case, completeness of exit alternatives, decision criteria, risks, assumptions, governance, and clarity. Identify any unsupported claims, missing analyses, ambiguous thresholds, internal inconsistencies, or recommendations that could destroy value. State detailed required corrections if any. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Decision Document Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing turnaround-or-exit assessment using the refined work and quality-review feedback. Preserve analytical nuance while making the document concise, persuasive, and practical for a board and leadership team. Structure it with an executive recommendation, diagnosis, evidence and assumptions, attractive customer segments and service lines, turnaround choices, one-year milestones and dashboard, governance and talent actions, exit alternatives, decision criteria and trigger dates, risks, and immediate next steps. Clearly label hypotheses requiring validation. Use tables where useful, include measurable targets and decision thresholds, and do not mention the pipeline, agents, or review process."
+    }
+  ],
+  "explanation": "The flow is Builder → Analyst → Strategist → Refiner → Quality Review → Polisher. The builder establishes a complete baseline, the analyst tests the economics and diagnosis, and the strategist converts those findings into a quantified one-year turnaround and exit decision framework. The refiner integrates the work and addresses ambiguity. The quality review then assesses board readiness; if it outputs revise, execution returns to the refiner, while pass proceeds to the final polisher. The polisher produces the concise, board-ready deliverable."
+}

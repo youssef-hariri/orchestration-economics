@@ -1,0 +1,78 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Sustainable Tourism Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive plan for sustainable tourism development addressing environmental protection, local community benefits, cultural heritage preservation, and international visitor attraction"
+    },
+    {
+      "name": "Environmental & Social Impact Analyst",
+      "role": "analyst",
+      "description": "Analyzes the proposed plan for potential environmental risks, social impacts, economic viability, and sustainability metrics. Provides data-driven insights on feasibility and gaps"
+    },
+    {
+      "name": "Sustainability Expert Reviewer",
+      "role": "expert",
+      "description": "Evaluates the plan from domain expertise perspective, assessing alignment with international sustainable tourism standards, best practices, and identifying missing elements or conflicts"
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "description": "Integrates analyst insights and expert feedback to strengthen the plan, addressing identified gaps, resolving conflicts, and enhancing strategies for balancing growth with sustainability"
+    },
+    {
+      "name": "Quality Assurance Critic",
+      "role": "critic",
+      "description": "Conducts final comprehensive quality assessment of the refined plan, checking completeness, coherence, feasibility, and readiness for stakeholder presentation"
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final plan into clear, professional, stakeholder-ready document with executive summary, structured sections, actionable recommendations, and implementation timeline"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Sustainable Tourism Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a tourism strategy builder. Create a comprehensive initial plan for sustainable tourism development that addresses: (1) attracting international visitors through unique value propositions, (2) environmental protection and conservation measures, (3) cultural heritage preservation and respect for local traditions, (4) economic benefits distribution to local communities, (5) infrastructure and capacity development. Organize the plan with clear sections covering vision, objectives, strategies, stakeholders, and preliminary implementation considerations."
+    },
+    {
+      "name": "Environmental & Social Impact Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an environmental and social impact analyst. Analyze the proposed tourism plan and provide detailed insights on: (1) potential environmental risks and mitigation strategies, (2) social impact assessment on local communities, (3) economic viability and revenue distribution mechanisms, (4) capacity constraints and carrying capacity limits, (5) gaps in sustainability metrics or monitoring frameworks. Use concrete data points and evidence-based reasoning. Provide constructive identification of weaknesses and opportunities."
+    },
+    {
+      "name": "Sustainability Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a sustainable tourism expert. Evaluate the plan against international best practices including UNWTO sustainability criteria, UNESCO heritage protection standards, and circular economy principles. Assess: (1) alignment with UN Sustainable Development Goals, (2) effectiveness of community engagement mechanisms, (3) cultural preservation adequacy, (4) environmental monitoring and adaptive management, (5) stakeholder benefit balance, (6) any conflicts or contradictions between objectives. Identify missing components or underexplored areas requiring strengthening."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a plan refiner. Based on the analyst's impact assessment and expert review, improve and strengthen the tourism plan by: (1) integrating sustainability metrics and monitoring frameworks, (2) enhancing environmental protection mechanisms based on identified risks, (3) strengthening community benefit mechanisms and local stakeholder engagement, (4) resolving any conflicts between growth and preservation objectives, (5) adding missing best-practice components, (6) improving implementation clarity. Produce a revised comprehensive plan that addresses all feedback while maintaining coherence and feasibility."
+    },
+    {
+      "name": "Quality Assurance Critic",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality assurance critic. Conduct a thorough assessment of the refined plan on these dimensions: (1) Completeness — does it address all required elements (environment, culture, community, economy, visitors)? (2) Internal Coherence — are strategies logically connected and mutually supportive? (3) Feasibility — are recommendations realistic and actionable? (4) Balance — does the plan equitably address all stakeholders? (5) Sustainability Integration — are environmental and social considerations adequately embedded? (6) Clarity — is the plan understandable for diverse stakeholders? Provide full detailed reasoning for each dimension with specific observations. THEN on the VERY LAST LINE output EXACTLY ONE keyword: pass or retry",
+      "whileOptions": ["pass", "retry"],
+      "whileMapping": 4,
+      "maxIterations": 3
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional output polisher. Format the approved plan into a compelling, stakeholder-ready document with: (1) Executive Summary (1 page) highlighting key objectives and outcomes, (2) Strategic Vision and Goals (clear, measurable objectives), (3) Environmental Sustainability Strategy (protection mechanisms, monitoring), (4) Cultural Heritage Protection Plan (respect for local traditions, preservation measures), (5) Community Economic Development (benefit-sharing mechanisms, local employment), (6) International Visitor Attraction Strategy (marketing, experiences, accessibility), (7) Implementation Timeline (phases, milestones, responsibilities), (8) Success Metrics and Monitoring Framework, (9) Risk Mitigation Strategies. Use professional formatting with clear headings, bullet points, and visual organization. Ensure language is accessible to diverse stakeholders (government, local communities, businesses, international partners)."
+    }
+  ],
+  "explanation": "This pipeline is designed to develop a comprehensive, balanced sustainable tourism plan through sequential expertise layers. The Builder creates the initial strategy, then the Analyst and Expert independently examine it from data-driven and best-practice perspectives respectively, identifying gaps and risks. The Refiner integrates both sets of insights to strengthen the plan coherently. The Quality Assurance Critic uses a while-loop (up to 3 iterations) to ensure the plan meets all completeness and feasibility standards before moving forward. Finally, the Polisher formats it into a professional, actionable document ready for stakeholder engagement. This approach ensures environmental protection, cultural respect, community benefits, and international competitiveness are all systematically addressed and balanced."
+}
+```

@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Drafter",
+      "role": "builder",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive negotiation strategy for establishing a joint venture with a foreign company. You must explicitly address potential differences in communication styles, decision-making processes, and relationship-building approaches. Provide actionable steps, cultural considerations, and risk mitigation tactics.",
+      "description": "Drafts the initial cross-cultural joint venture negotiation strategy."
+    },
+    {
+      "name": "Strategy Enhancer",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. If no specific feedback is provided, enhance the clarity, depth, and strategic value of the negotiation strategy. Fix all issues and produce a polished, improved version.",
+      "description": "Refines and improves the negotiation strategy based on expert feedback."
+    },
+    {
+      "name": "Cultural & Strategic Critic",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate and expert in cross-cultural negotiations. Review the refined negotiation strategy carefully. Assess its comprehensiveness, practical applicability, and depth regarding communication styles, decision-making, and relationship-building. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the strategy for cultural and strategic completeness, routing to refine or pass."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved negotiation strategy and format it for a C-suite audience. Ensure professional tone, clear headings, bullet points for readability, and flawless grammar. Do not change the core strategic advice, only enhance the presentation and readability.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive negotiation strategy for establishing a joint venture with a foreign company. You must explicitly address potential differences in communication styles, decision-making processes, and relationship-building approaches. Provide actionable steps, cultural considerations, and risk mitigation tactics."
+    },
+    {
+      "name": "Strategy Enhancer",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. If no specific feedback is provided, enhance the clarity, depth, and strategic value of the negotiation strategy. Fix all issues and produce a polished, improved version."
+    },
+    {
+      "name": "Cultural & Strategic Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate and expert in cross-cultural negotiations. Review the refined negotiation strategy carefully. Assess its comprehensiveness, practical applicability, and depth regarding communication styles, decision-making, and relationship-building. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved negotiation strategy and format it for a C-suite audience. Ensure professional tone, clear headings, bullet points for readability, and flawless grammar. Do not change the core strategic advice, only enhance the presentation and readability."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Strategy Drafter (Builder) to create a comprehensive baseline negotiation strategy addressing cross-cultural communication, decision-making, and relationship-building. This draft is passed to the Strategy Enhancer (Refiner) to improve depth and clarity. The Cultural & Strategic Critic (Quality Gate) then evaluates the enhanced strategy. If the strategy lacks depth or misses key cultural nuances, the gate outputs 'revise' and loops back to the Strategy Enhancer (up to 3 iterations) to fix the issues. Once the strategy meets the expert quality standards, the gate outputs 'pass', routing the content to the Executive Polisher (Polisher) to format the final output for a professional, C-suite presentation."
+}

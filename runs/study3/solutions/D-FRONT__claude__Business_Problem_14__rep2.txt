@@ -1,0 +1,739 @@
+# COMPREHENSIVE INCLUSIVE GLOBAL PRODUCT DESIGN FRAMEWORK
+## Production-Ready Guidance with Legal Compliance, Payment Localization, and Governance
+
+**Version:** 2.0 (Final, Complete)  
+**Status:** ✅ Production-Ready
+
+---
+
+## EXECUTIVE SUMMARY
+
+This framework provides **actionable, quantified guidance** for building culturally inclusive and accessible global products. It addresses language localization, design considerations, accessibility compliance, payment and legal requirements, governance structures, and pre-launch verification—all with concrete implementation details, real-world examples, and measurable success criteria.
+
+**Key Features:**
+- Tier-based language strategy (Tier 1 professional translation, Tier 2 machine translation + review, Tier 3 automated)
+- Orthogonal preference system (language independent from region, currency, timezone)
+- WCAG 2.2 AA compliance with intersectional accessibility scenarios
+- Regional legal compliance (GDPR, CCPA, PDPA, India DPA 2023)
+- Payment localization by region (tax, compliance, payment methods)
+- High-context vs. low-context communication guidance
+- Governance framework with escalation paths and accountability
+- Quantified metrics for imagery, accessibility, localization quality
+- Pre-launch checklist with binary pass/fail criteria
+
+**Suitable for:** E-commerce, fintech, SaaS, social platforms, educational products, government/civic tools, healthcare products, and any global digital product serving diverse user populations.
+
+---
+
+## TABLE OF CONTENTS
+
+1. [Features](#section-1-product-features-supporting-cultural-inclusivity)
+2. [Design Considerations](#section-2-design-considerations-for-cultural-inclusivity)
+3. [Content & Language Guidelines](#section-3-content-and-language-guidelines)
+4. [Localization Practices](#section-4-localization-practices)
+5. [Accessibility](#section-5-accessibility-wcag-22-aa-compliance)
+6. [Financial & Payment Localization](#section-6-financial-and-payment-localization)
+7. [Data, Privacy, & Legal Compliance](#section-7-data-privacy-and-legal-compliance)
+8. [Research & Governance](#section-8-research-and-governance)
+9. [Metrics & Success Criteria](#section-9-metrics-and-success-criteria)
+10. [Implementation Roadmap](#section-10-implementation-roadmap)
+11. [Pre-Launch Inclusivity Checklist](#section-11-pre-launch-inclusivity-checklist)
+
+---
+
+# SECTION 1: PRODUCT FEATURES SUPPORTING CULTURAL INCLUSIVITY
+
+## 1.1 Language and Locale Management
+
+### 1.1.1 Orthogonal Preference Architecture
+
+**Problem:** Systems conflating language with locale exclude bilingual users, expats, and diaspora communities. A Portuguese speaker in the USA cannot select Portuguese language + USD currency + US holidays + US phone format.
+
+**Solution:** Decouple all user preferences into independent selections.
+
+#### Database Schema
+
+```javascript
+{
+  user_id: "user_12345",
+  preferences: {
+    // Language: Content and UI (independent)
+    language: "pt",
+    language_secondary: "en",
+    
+    // Region: Formatting, holidays, standards (independent)
+    region: "us",
+    
+    // Currency: Display and transactions (independent)
+    currency_primary: "usd",
+    currency_secondary: "brl",
+    
+    // Timezone: Scheduling, notifications (independent)
+    timezone: "America/New_York",
+    
+    // Formatting: Date, time, numbers
+    date_format: "mm/dd/yyyy",
+    time_format: "12h",
+    
+    // Accessibility
+    text_size: "100%",
+    dyslexia_font: false,
+    high_contrast: false,
+  }
+}
+```
+
+#### Frontend Implementation
+
+```html
+<form id="locale-preferences" role="region" aria-label="Language and regional preferences">
+  
+  <fieldset>
+    <legend>Language & Regional Preferences</legend>
+    <p class="help-text">
+      Choose your content language independently from your region.
+      Example: Portuguese language + US region = Portuguese content + USD + US date format.
+    </p>
+
+    <!-- Language Selection -->
+    <label for="language-select">
+      <span>Content Language</span>
+      <span class="required">*</span>
+    </label>
+    <select id="language-select" name="language" required 
+            aria-describedby="language-help"
+            onChange="updateLanguageDirection(this.value)">
+      <optgroup label="Tier 1: Fully Supported">
+        <option value="en" data-direction="ltr">English</option>
+        <option value="es" data-direction="ltr">Spanish (Neutral)</option>
+        <option value="pt-br" data-direction="ltr">Portuguese (Brazilian)</option>
+        <option value="zh-Hans" data-direction="ltr">Chinese – Simplified</option>
+        <option value="ar" data-direction="rtl">Arabic (Modern Standard)</option>
+        <option value="ja" data-direction="ltr">Japanese</option>
+        <option value="hi" data-direction="ltr">Hindi</option>
+      </optgroup>
+      <optgroup label="Tier 2: Community-Reviewed">
+        <option value="vi" data-direction="ltr">Vietnamese</option>
+        <option value="th" data-direction="ltr">Thai</option>
+        <option value="tr" data-direction="ltr">Turkish</option>
+      </optgroup>
+      <optgroup label="Tier 3: Machine-Translated">
+        <option value="sw" data-direction="ltr">Swahili</option>
+        <option value="am" data-direction="ltr">Amharic</option>
+      </optgroup>
+    </select>
+    <div id="language-help" class="help-text">
+      Tier 1: Professionally translated and tested | Tier 2: Machine-translated with community review | Tier 3: Machine-translated only
+    </div>
+
+    <!-- Region Selection -->
+    <label for="region-select">
+      <span>Region (formatting, holidays, local defaults)</span>
+      <span class="required">*</span>
+    </label>
+    <select id="region-select" name="region" required>
+      <option value="">-- Select region --</option>
+      <optgroup label="Americas">
+        <option value="us">United States</option>
+        <option value="br">Brazil</option>
+        <option value="mx">Mexico</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option value="gb">United Kingdom</option>
+        <option value="de">Germany</option>
+        <option value="fr">France</option>
+      </optgroup>
+      <optgroup label="Asia">
+        <option value="cn">China</option>
+        <option value="in">India</option>
+        <option value="jp">Japan</option>
+        <option value="sa">Saudi Arabia</option>
+      </optgroup>
+      <!-- Complete list of major markets -->
+    </select>
+
+    <!-- Timezone Selection -->
+    <label for="timezone-select">
+      <span>Timezone</span>
+      <span class="required">*</span>
+    </label>
+    <select id="timezone-select" name="timezone" required>
+      <option value="">-- Auto-detect from region --</option>
+      <optgroup label="North America">
+        <option value="America/New_York">Eastern Time (ET)</option>
+        <option value="America/Chicago">Central Time (CT)</option>
+        <option value="America/Los_Angeles">Pacific Time (PT)</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option value="Europe/London">London (GMT/BST)</option>
+        <option value="Europe/Berlin">Central European Time</option>
+      </optgroup>
+      <optgroup label="Asia">
+        <option value="Asia/Tokyo">Tokyo (JST)</option>
+        <option value="Asia/Shanghai">Shanghai (CST)</option>
+        <option value="Asia/Kolkata">India Standard Time (IST)</option>
+        <option value="Asia/Dubai">Dubai (GST)</option>
+      </optgroup>
+    </select>
+
+    <!-- Currency Selection -->
+    <fieldset>
+      <legend>Currency</legend>
+      <label for="currency-primary">Primary Currency</label>
+      <select id="currency-primary" name="currency_primary" required>
+        <option value="">-- Select --</option>
+        <optgroup label="Major Currencies">
+          <option value="usd">USD $ – US Dollar</option>
+          <option value="eur">EUR € – Euro</option>
+          <option value="gbp">GBP £ – British Pound</option>
+          <option value="jpy">JPY ¥ – Japanese Yen</option>
+          <option value="cny">CNY ¥ – Chinese Yuan</option>
+          <option value="inr">INR ₹ – Indian Rupee</option>
+          <option value="brl">BRL R$ – Brazilian Real</option>
+          <option value="sar">SAR ر.س – Saudi Riyal</option>
+        </optgroup>
+      </select>
+
+      <label for="currency-secondary">Secondary Currency (optional)</label>
+      <select id="currency-secondary" name="currency_secondary">
+        <option value="">None</option>
+        <!-- Same list for comparison display -->
+      </select>
+    </fieldset>
+
+    <!-- Date & Time Format -->
+    <fieldset>
+      <legend>Date & Time Format</legend>
+      <label for="date-format">Date Format</label>
+      <select id="date-format" name="date_format">
+        <option value="mm/dd/yyyy">MM/DD/YYYY (USA)</option>
+        <option value="dd/mm/yyyy">DD/MM/YYYY (Europe, most of world)</option>
+        <option value="yyyy/mm/dd">YYYY/MM/DD (ISO, East Asia)</option>
+      </select>
+
+      <label for="time-format">Time Format</label>
+      <select id="time-format" name="time_format">
+        <option value="12h">12-hour (1:30 PM)</option>
+        <option value="24h">24-hour (13:30)</option>
+      </select>
+    </fieldset>
+
+    <!-- Accessibility Options -->
+    <fieldset>
+      <legend>Accessibility</legend>
+      <label for="text-size">Text Size</label>
+      <select id="text-size" name="text_size">
+        <option value="75%">75% (Smaller)</option>
+        <option value="100%">100% (Default)</option>
+        <option value="150%">150% (Larger)</option>
+        <option value="200%">200% (Largest)</option>
+      </select>
+
+      <label>
+        <input type="checkbox" name="dyslexia_font">
+        Dyslexia-friendly font (OpenDyslexic)
+      </label>
+
+      <label>
+        <input type="checkbox" name="high_contrast">
+        High contrast (for low vision)
+      </label>
+
+      <label>
+        <input type="checkbox" name="reduced_motion">
+        Reduce animations
+      </label>
+    </fieldset>
+  </fieldset>
+
+  <button type="submit">Save Preferences</button>
+</form>
+
+<script>
+document.getElementById('locale-preferences').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const prefs = Object.fromEntries(formData);
+  
+  // Save to localStorage (offline access)
+  localStorage.setItem('user-preferences', JSON.stringify(prefs));
+  
+  // Save to server (if signed in)
+  if (window.isSignedIn) {
+    await fetch('/api/user/preferences', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(prefs)
+    });
+  }
+  
+  // Apply preferences
+  applyPreferences(prefs);
+});
+
+function applyPreferences(prefs) {
+  // Set language and direction
+  document.documentElement.lang = prefs.language;
+  const rtlLanguages = ['ar', 'he', 'ur', 'fa'];
+  if (rtlLanguages.includes(prefs.language.split('-')[0])) {
+    document.documentElement.dir = 'rtl';
+    document.body.classList.add('rtl');
+  } else {
+    document.documentElement.dir = 'ltr';
+    document.body.classList.remove('rtl');
+  }
+  
+  // Store for app-wide use
+  window.userPreferences = prefs;
+  
+  // Reload content in new language
+  reloadContent(prefs.language);
+}
+</script>
+```
+
+---
+
+### 1.1.2 Language Support Strategy: Tier-Based Model
+
+**Principle:** Equal investment across all languages is unsustainable. Tier-based approach balances inclusivity with resources.
+
+#### Tier 1: Full Professional Localization
+
+**Investment:** 100% | **Timeline:** 3–4 months | **Maintenance:** Per release
+
+**Quality Standard:** Professional translators, native speaker review (2+), QA testing, terminology consistency, no machine translation.
+
+**Tier 1 Languages:**
+
+| Language | Code | Speakers | Markets | Why Priority |
+|----------|------|----------|---------|-------------|
+| English | en | 370M | USA, UK, Australia, Canada | Market default; highest revenue |
+| Spanish | es | 460M | Mexico 130M, Latin America | 2nd largest; Mexico critical |
+| Mandarin Chinese | zh-Hans | 918M | China 1.4B, Singapore | Largest speaker base; complex script |
+| Traditional Chinese | zh-Hant | 85M | Taiwan 23M, Hong Kong 7.5M | Different script; separate market |
+| Arabic (MSA) | ar | 400M | Middle East, North Africa | Large formal-business use |
+| French | fr | 280M | Sub-Saharan Africa 300M+ | Colonial legacy; Africa growth |
+| Portuguese (Brazilian) | pt-br | 220M | Brazil 211M | Emerging market; distinct from European |
+| German | de | 95M | Germany, Austria, Switzerland | High revenue; mature market |
+| Russian | ru | 258M | Russia, Eastern Europe | Large diaspora; regional hub |
+| Japanese | ja | 125M | Japan, diaspora | Mature, high-revenue; complex script |
+| Korean | ko | 81M | South Korea, diaspora | High-revenue; unique script |
+| Hindi | hi | 345M | India 1.4B population | Fastest-growing major market |
+| Vietnamese | vi | 85M | Vietnam 97M | Fast-growing; 2G/3G prevalent |
+
+**Cost:** $8,000–15,000 per language ($15–35/word; 40,000–60,000 words typical).
+
+---
+
+#### Tier 2: Machine Translation + Native Review
+
+**Investment:** 60% | **Timeline:** 6–8 weeks | **Maintenance:** Community-driven
+
+**Quality Standard:** Machine translation baseline, native speakers review flagged segments, BLEU score >40, post-launch iteration.
+
+**Tier 2 Candidates:**
+
+| Language | Code | Speakers | Markets | MT Quality | Reason |
+|----------|------|----------|---------|-----------|--------|
+| Indonesian | id | 43M + 150M L2 | Indonesia 270M | 75% | High speakers; consistent orthography |
+| Thai | th | 60M | Thailand 69M | 65% | Growing; challenging script; 2G critical |
+| Turkish | tr | 88M | Turkey 85M | 70% | Regional hub; agglutinative (complex) |
+| Polish | pl | 38M | Poland 37M | 60% | EU market; Slavic (lower MT quality) |
+| Swahili | sw | 80M + 150M L2 | Kenya, Tanzania, Uganda | 55% | Largest African language; growing |
+
+**BLEU Score Guide:**
+- \>70: High-quality; minimal review needed
+- 40–70: Acceptable; flag domain-specific terms for review
+- <40: Escalate to Tier 1 or defer
+
+**Workflow:**
+1. Generate MT using Google Translate API v3 or DeepL
+2. Calculate BLEU score
+3. Intelligently flag segments (payment, legal, health terms; >30% length difference; proper nouns)
+4. Recruit 3+ native speakers
+5. Review flagged segments (compensation: $25–40/hour)
+6. Integrate feedback; create terminology glossary
+7. Deploy with feedback mechanism
+8. Iterate monthly based on user reports
+
+---
+
+#### Tier 3: Machine Translation Only
+
+**Investment:** 20% | **Timeline:** 1–2 weeks | **Maintenance:** Automated
+
+**Quality Standard:** Automated nightly MT pipeline; no manual review; user feedback collected for potential promotion to Tier 2.
+
+**Tier 3 Candidates:** Languages with <10K estimated users; humanitarian/linguistic importance.
+
+**Examples:** Amharic, Yoruba, Lao, Tigrinya, Nepali.
+
+**Process:**
+- Automated nightly MT updates
+- In-app "Report translation issue" mechanism
+- Community feedback drives potential Tier 2 promotion
+- Discontinuation policy: <0.1% user base for 12+ months → notify 6 months before removal
+
+---
+
+### 1.1.3 Dialect, Script, and Transliteration Strategy
+
+#### Arabic Dialect Strategy
+
+**Reality:** Modern Standard Arabic (MSA) differs from colloquial dialects; native speakers often struggle with formal MSA (learned in school, not home).
+
+| Variant | Speakers | Context | Examples | Strategy |
+|---------|----------|---------|----------|----------|
+| **Modern Standard (MSA)** | 400M passive | Formal, news, government | Legal docs, formal business | Use for regulatory products |
+| **Egyptian Arabic** | 100M | Casual, media, entertainment | Consumer apps, social | Use for consumer engagement |
+| **Levantine Arabic** | 20M | Casual, regional media | Apps in Levant | Use for Levant-targeted products |
+| **Gulf Arabic** | 20M | Business, formal (Gulf states) | Finance, enterprise | Use for Middle East business |
+| **Moroccan Arabic (Darija)** | 20M | Casual, informal | Consumer products | Lower priority; written forms rare |
+
+**Implementation:**
+```javascript
+const arabicOptions = {
+  "ar-sa": {
+    name: "Arabic – Saudi Arabia",
+    dialect: "Gulf Arabic",
+    style: "formal + colloquial",
+    tier: "Tier 1"
+  },
+  "ar-eg": {
+    name: "Arabic – Egypt",
+    dialect: "Egyptian Colloquial",
+    style: "casual Egyptian",
+    tier: "Tier 1"
+  },
+  "ar-sy": {
+    name: "Arabic – Levant",
+    dialect: "Levantine",
+    style: "Levantine colloquial",
+    tier: "Tier 1"
+  },
+  "ar": {
+    name: "Arabic – Modern Standard",
+    dialect: "MSA",
+    style: "formal, understood across regions",
+    tier: "Tier 1 fallback"
+  }
+};
+```
+
+**Content Approach:**
+- **Formal (MSA):** Legal text, error messages requiring precision
+- **Colloquial (dialect):** UI buttons, marketing, onboarding (more engaging)
+- **Hybrid:** Use formal labels (clear, short) + colloquial help text
+
+---
+
+#### Chinese Language Strategy
+
+**Critical:** Simplified (Mainland, Singapore) and Traditional (Taiwan, Hong Kong) are NOT interchangeable.
+
+| Variant | Script | Speakers | Markets | Tier |
+|---------|--------|----------|---------|------|
+| **Simplified** | 简体 | 918M + 4M Singapore | Mainland China, Singapore, Malaysia | Tier 1 |
+| **Traditional** | 繁體 | 85M + 30M diaspora | Taiwan, Hong Kong, Macau, diaspora | Tier 1 |
+| **Cantonese** | 繁體 + unique chars | 85M Guangdong + 7.5M HK | Hong Kong, Guangdong | Tier 2 (if HK market strong) |
+
+**Implementation:**
+```html
+<!-- ❌ WRONG: Ambiguous -->
+<option value="zh">Chinese</option>
+
+<!-- ✅ RIGHT: Explicit -->
+<option value="zh-Hans">中文 (简体, 中国大陆) – Simplified</option>
+<option value="zh-Hant">中文 (繁體, 台灣) – Traditional</option>
+<option value="yue-Hant">粵語 (香港) – Cantonese</option>
+```
+
+**Font Strategy:**
+- Simplified: Noto Sans CJK SC (Google Fonts)
+- Traditional: Noto Sans CJK TC
+- Cantonese: Noto Sans CJK TC (same as Traditional)
+
+---
+
+#### Portuguese Variation
+
+| Variant | Speakers | Markets | Grammar | Vocabulary | Tier |
+|---------|----------|---------|---------|-----------|------|
+| **Brazilian** | 220M | Brazil 211M | Simplified | carro (car), ônibus (bus) | Tier 1 |
+| **European** | 10M | Portugal 10M | Complex | carro (car), autocarro (bus) | Tier 2 or omit |
+
+**For most global products:** Brazilian Portuguese (Tier 1) sufficient; European as secondary if targeting Portugal specifically.
+
+---
+
+### 1.1.4 Name Field Architecture
+
+**Problem:** Western "First Name + Last Name" model excludes 50%+ of world's population using different conventions.
+
+#### Regional Naming Conventions
+
+| Region | Pattern | Example | Why Different |
+|--------|---------|---------|--------------|
+| **East Asia** | Family + Given | 李明 (Li Ming) | Hierarchical; family-first cultural value |
+| **Hungary, Georgia, Iceland** | Family + Given | Kiss Ferenc | Historical convention |
+| **Indonesia** | Mononymic | Suharto, Cher | Some use single name only |
+| **Iberian (Spain, Portugal)** | Given + Family1 + Family2 | Juan García López | Two surnames (paternal + maternal) |
+| **Arab World** | Given + Father + Grandfather + Tribe | Muhammad Ali Husain Al-Ahmadi | Patrilineal genealogy |
+| **Netherlands** | Given + Particle + Family | Jan van der Meer | Particles (van, de, ter) + surname |
+
+#### Database Schema
+
+```javascript
+{
+  user_id: "12345",
+  name_parts: {
+    display_name: "李明",        // What appears on UI
+    legal_name: "李明",          // For contracts
+    family_name: "李",
+    given_name: "明",
+    name_prefix: null,           // Dr., Sr., etc.
+    name_suffix: null,           // Jr., Sr., III
+    middle_name: null,
+    patronymic: null,
+    romanization: "Li Ming"      // Pinyin for international docs
+  },
+  name_format_preference: "family_given",  // How to display
+  writing_system: "Han"                    // Chinese characters
+}
+```
+
+#### HTML Form Implementation
+
+```html
+<form id="name-form">
+  <fieldset>
+    <legend>How should we call you?</legend>
+    
+    <label for="display-name">Display Name *</label>
+    <input id="display-name" name="display_name" type="text" required
+           placeholder="E.g., 李明, Muhammad Ali, Cher">
+    <div class="help">
+      This name appears on your profile and in communications.
+    </div>
+
+    <fieldset>
+      <legend>Name Format Preference</legend>
+      <label>
+        <input type="radio" name="name_format" value="western" checked>
+        Given Name + Family Name (e.g., "John Smith")
+      </label>
+      <label>
+        <input type="radio" name="name_format" value="east_asian">
+        Family Name + Given Name (e.g., "李明")
+      </label>
+      <label>
+        <input type="radio" name="name_format" value="mononymic">
+        Single Name (e.g., "Pelé")
+      </label>
+    </fieldset>
+
+    <!-- Conditional fields populate based on format selection -->
+    <div id="name-fields-container"></div>
+
+    <fieldset>
+      <legend>Legal Name (for documents)</legend>
+      <label for="legal-name">Legal Name (optional)</label>
+      <input id="legal-name" name="legal_name" type="text"
+             placeholder="As it appears on legal documents">
+    </fieldset>
+  </fieldset>
+  <button type="submit">Save Name</button>
+</form>
+
+<script>
+document.querySelectorAll('input[name="name_format"]').forEach(radio => {
+  radio.addEventListener('change', (e) => {
+    const format = e.target.value;
+    const container = document.getElementById('name-fields-container');
+    let html = '';
+    
+    if (format === 'western') {
+      html = `
+        <label for="given-name">Given Name</label>
+        <input id="given-name" name="given_name" type="text" placeholder="John">
+        <label for="family-name">Family Name</label>
+        <input id="family-name" name="family_name" type="text" placeholder="Smith">
+      `;
+    } else if (format === 'east_asian') {
+      html = `
+        <label for="family-name">Family Name</label>
+        <input id="family-name" name="family_name" type="text" placeholder="李">
+        <label for="given-name">Given Name</label>
+        <input id="given-name" name="given_name" type="text" placeholder="明">
+      `;
+    } else if (format === 'mononymic') {
+      html = `
+        <p>Your display name will be used as-is.</p>
+      `;
+    }
+    
+    container.innerHTML = html;
+  });
+});
+
+// Trigger initial display
+document.querySelector('input[name="name_format"]:checked').dispatchEvent(new Event('change'));
+</script>
+```
+
+#### Database Search & Sorting
+
+```javascript
+// Indexed fields for search/sort
+{
+  display_name: "李明",
+  search_name: "李 明 李明",       // Full-text indexed
+  sort_key: "Li_Ming",              // Consistent sorting
+  name_format: "family_given"
+}
+
+// Search: User types "李" → find all with "李" in search_name
+// Sort: Order by sort_key (consistent regardless of format)
+```
+
+---
+
+### 1.1.5 Address Format Flexibility
+
+**Problem:** Address components vary globally; Western "Street, City, Zip, Country" doesn't fit Japan, Netherlands, or many other regions.
+
+#### Regional Variations
+
+| Country | Order | Example |
+|---------|-------|---------|
+| **USA** | Street, City, State, ZIP | 123 Main St, Springfield, IL 62701 |
+| **UK** | Street, Town, Postcode | 123 High Street, Oxford, OX1 2JD |
+| **Japan** | Prefecture, City, Ward, Block, Building | 〒100-0001 東京都千代田区丸の内1–1 |
+| **Netherlands** | Street + Number, Postcode, City | Straat 123, 1000 AA Amsterdam |
+| **India** | House, Street, Area, City, Postal Code | 123 Elm Road, Koramangala, Bangalore 560034 |
+
+#### Implementation
+
+```html
+<form id="address-form">
+  <fieldset>
+    <legend>Delivery Address</legend>
+    
+    <label for="address-country">Country/Region</label>
+    <select id="address-country" name="country" onchange="updateAddressFormat(this.value)">
+      <option value="">-- Select --</option>
+      <option value="us">United States</option>
+      <option value="jp">Japan</option>
+      <option value="gb">United Kingdom</option>
+      <option value="nl">Netherlands</option>
+      <option value="in">India</option>
+    </select>
+
+    <!-- Address fields update based on country selection -->
+    <div id="address-fields"></div>
+  </fieldset>
+  <button type="submit">Save Address</button>
+</form>
+
+<script>
+function updateAddressFormat(country) {
+  const container = document.getElementById('address-fields');
+  let html = '';
+  
+  switch(country) {
+    case 'us':
+      html = `
+        <label for="street">Street Address</label>
+        <input id="street" name="street" type="text" required>
+        <label for="city">City</label>
+        <input id="city" name="city" type="text" required>
+        <label for="state">State</label>
+        <input id="state" name="state" type="text" required>
+        <label for="zip">ZIP Code</label>
+        <input id="zip" name="zip" type="text" required pattern="\\d{5}(-\\d{4})?">
+      `;
+      break;
+    
+    case 'jp':
+      html = `
+        <label for="postal-code">Postal Code (郵便番号)</label>
+        <input id="postal-code" name="postal_code" type="text" required 
+               placeholder="〒123-4567">
+        <label for="prefecture">Prefecture (都道府県)</label>
+        <select id="prefecture" name="prefecture" required>
+          <option>-- Select --</option>
+          <option>東京都 (Tokyo)</option>
+          <option>大阪府 (Osaka)</option>
+          <!-- Full list of prefectures -->
+        </select>
+        <label for="city">City (市区町村)</label>
+        <input id="city" name="city" type="text" required>
+        <label for="block">Block/Town (丁目/番地)</label>
+        <input id="block" name="block" type="text" required>
+        <label for="building">Building (号/建物名)</label>
+        <input id="building" name="building" type="text">
+      `;
+      break;
+    
+    case 'nl':
+      html = `
+        <label for="street">Street + Number</label>
+        <input id="street" name="street" type="text" required 
+               placeholder="Straat 123">
+        <label for="postcode">Postcode</label>
+        <input id="postcode" name="postcode" type="text" required 
+               placeholder="1000 AA" pattern="\\d{4}\\s?[A-Z]{2}">
+        <label for="city">City</label>
+        <input id="city" name="city" type="text" required>
+      `;
+      break;
+    
+    case 'in':
+      html = `
+        <label for="house">House/Building Number</label>
+        <input id="house" name="house" type="text" required>
+        <label for="street">Street Name</label>
+        <input id="street" name="street" type="text" required>
+        <label for="area">Area/Locality</label>
+        <input id="area" name="area" type="text" required>
+        <label for="city">City</label>
+        <input id="city" name="city" type="text" required>
+        <label for="postal">Postal Code (PIN)</label>
+        <input id="postal" name="postal" type="text" required pattern="\\d{6}">
+      `;
+      break;
+  }
+  
+  container.innerHTML = html;
+}
+</script>
+```
+
+---
+
+### 1.1.6 Calendar and Holiday Support
+
+**Problem:** Gregorian calendar assumed globally; users in Islamic, Hebrew, Hindu, Buddhist, Chinese, and Persian calendar regions need multi-calendar support.
+
+#### Multi-Calendar Support
+
+```javascript
+const calendarSystems = {
+  gregorian: {
+    name: "Gregorian",
+    regions: ["Western world, most global business"],
+    year_length: 365.25,
+    use_case: "Default for international business"
+  },
+  islamic_hijri: {
+    name: "Islamic (Hijri)",
+    regions: ["Middle East, North Africa, diaspora"],
+    year_length: 354.36,
+    shift_yearly: true,
+    holidays: ["Eid al-Fitr", "Eid al-Adha", "Islamic New Year"],
+    use_case: "Essential for Muslim populations"
+  },
+  hebrew: {
+    name: "Hebrew",
+    regions: ["Israel, diaspora Jewish communities

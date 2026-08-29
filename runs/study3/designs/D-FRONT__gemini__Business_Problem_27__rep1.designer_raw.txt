@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a corporate finance builder. Draft an initial growth-financing strategy for a scale-up doubling revenue every 2 years. Compare covenant-heavy debt, low-valuation minority equity, hybrid instruments, and disciplined organic growth against the company's risk tolerance, the competitive window, and the founders' control preferences (currently 78% equity). Propose a specific funding structure, staging milestones, and walk-away conditions for each source.",
+      "description": "Drafts the initial comprehensive growth-financing strategy and comparison."
+    },
+    {
+      "name": "Financial Risk Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are a financial risk analyst. Review the initial strategy draft. Deeply analyze the proposed funding structure's impact on the founders' 78% equity, the risk of covenant breaches in the debt components, and whether the capital velocity is sufficient to outpace the heavily funded rival. Provide a detailed critique and actionable recommendations for improvement.",
+      "description": "Analyzes the initial draft for financial risks, dilution, and competitive viability."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic finance refiner. Revise the growth-financing strategy based on the analyst's critique and any subsequent quality gate feedback. Optimize the hybrid instrument structure (e.g., venture debt, mezzanine, or convertible notes), tighten the staging milestones, and clarify the walk-away conditions to ensure maximum competitive speed with minimal founder dilution. Fix all issues and produce a comprehensive, improved version.",
+      "description": "Refines and improves the strategy based on analytical feedback and quality gate reviews."
+    },
+    {
+      "name": "Investment Committee Gate",
+      "role": "critic",
+      "systemPrompt": "You are an Investment Committee quality gate. Review the refined strategy carefully. Assess whether it successfully balances the founders' desire for independence with the urgent need for capital to beat a heavily funded rival. Ensure the milestones and walk-away conditions are highly specific, realistic, and protect the founders' downside. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Evaluates the refined strategy for strategic balance and actionable milestones, looping back if necessary."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications polisher. Format the final approved growth-financing strategy into a crisp, authoritative board-level advisory report. Ensure a professional tone, clear headings, bulleted comparisons, and an impactful executive summary. Do not change the core financial recommendations.",
+      "description": "Formats the final strategy into a polished, board-ready advisory report."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a corporate finance builder. Draft an initial growth-financing strategy for a scale-up doubling revenue every 2 years. Compare covenant-heavy debt, low-valuation minority equity, hybrid instruments, and disciplined organic growth against the company's risk tolerance, the competitive window, and the founders' control preferences (currently 78% equity). Propose a specific funding structure, staging milestones, and walk-away conditions for each source."
+    },
+    {
+      "name": "Financial Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial risk analyst. Review the initial strategy draft. Deeply analyze the proposed funding structure's impact on the founders' 78% equity, the risk of covenant breaches in the debt components, and whether the capital velocity is sufficient to outpace the heavily funded rival. Provide a detailed critique and actionable recommendations for improvement."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic finance refiner. Revise the growth-financing strategy based on the analyst's critique and any subsequent quality gate feedback. Optimize the hybrid instrument structure (e.g., venture debt, mezzanine, or convertible notes), tighten the staging milestones, and clarify the walk-away conditions to ensure maximum competitive speed with minimal founder dilution. Fix all issues and produce a comprehensive, improved version."
+    },
+    {
+      "name": "Investment Committee Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are an Investment Committee quality gate. Review the refined strategy carefully. Assess whether it successfully balances the founders' desire for independence with the urgent need for capital to beat a heavily funded rival. Ensure the milestones and walk-away conditions are highly specific, realistic, and protect the founders' downside. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "maxIterations": 3,
+      "targetStep": 3
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications polisher. Format the final approved growth-financing strategy into a crisp, authoritative board-level advisory report. Ensure a professional tone, clear headings, bulleted comparisons, and an impactful executive summary. Do not change the core financial recommendations."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Strategy Builder (Step 1) drafting the foundational comparison and proposed funding structure. The Financial Risk Analyst (Step 2) then evaluates this draft specifically for dilution risks, covenant dangers, and competitive viability. The Strategy Refiner (Step 3) takes these insights to optimize the financial instruments and tighten milestones. The Investment Committee Gate (Step 4) acts as a 'while' loop quality check; if the strategy fails to perfectly balance founder control with competitive speed, it outputs 'retry', looping back to the Strategy Refiner (Step 3) for up to 3 iterations. Once the gate outputs 'pass', the pipeline advances to the Executive Polisher (Step 5), which formats the final output into a board-ready advisory report."
+}

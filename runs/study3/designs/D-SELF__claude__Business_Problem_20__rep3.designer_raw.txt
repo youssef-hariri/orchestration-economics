@@ -1,0 +1,86 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Current State Analyst",
+      "role": "analyst",
+      "description": "Maps actual lead time distribution across production, quality, and supply chain; identifies bottlenecks and time sinks through process data and cross-functional interviews."
+    },
+    {
+      "name": "Operations Strategist",
+      "role": "strategist",
+      "description": "Develops a comprehensive operations improvement plan that reduces lead time while maintaining certified quality, addressing root causes and cross-functional misalignment."
+    },
+    {
+      "name": "Quality & Risk Expert",
+      "role": "expert",
+      "description": "Reviews the plan from a certified quality and risk perspective; ensures all quality gates remain intact and identifies where previous schedule compression failed."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "description": "Incorporates quality feedback and expert concerns into the plan; reconciles production, quality, and sales requirements with detailed implementation roadmap."
+    },
+    {
+      "name": "Cross-Functional Alignment Reviewer",
+      "role": "critic",
+      "description": "Assesses whether the refined plan addresses root causes of inter-departmental blame and creates genuine alignment incentives for production, quality, and sales."
+    },
+    {
+      "name": "Implementation Detailer",
+      "role": "refiner",
+      "description": "Translates validated plan into actionable change specifications: supplier negotiations, inventory policy changes, scheduling algorithms, and quality gate placement with clear metrics."
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "description": "Formats final operations improvement plan for stakeholder presentation: executive summary, detailed roadmap, risk mitigation, expected lead time reduction, and success metrics."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Current State Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an operations analyst specializing in manufacturing lead time. Analyze the industrial equipment maker's situation: 14-week quoted lead time vs. 6-week competitor, losing 1 in 3 deals on speed, multiple certified quality inspections required, previous compression attempt caused warranty spike. Produce a detailed breakdown: (1) Map where the 14 weeks is actually consumed—by production, quality inspections, material sourcing, inventory waiting, scheduling gaps. (2) Identify which stages are sequential vs. parallelizable. (3) Document the quality inspection points and their current duration. (4) Note where inter-departmental handoffs create delays. (5) Assess supplier lead times and inventory policies. Provide specific data-backed insights on which areas offer the greatest lead-time reduction opportunity without touching quality."
+    },
+    {
+      "name": "Operations Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an operations strategist. Using the current state analysis, develop a comprehensive operations improvement plan with the objective: reduce quoted lead time from 14 weeks to 8–9 weeks (competitive with or better than the 6-week competitor) while maintaining all certified quality standards. Your plan must: (1) Recommend specific changes to production scheduling (e.g., batch sizing, work-in-process limits, constraint management). (2) Identify inventory and supplier strategies (safety stock, vendor-managed inventory, expedited but qualified suppliers). (3) Propose non-destructive compression points: parallel inspection phases, pre-certification of sub-assemblies, advance material procurement, predictive quality protocols. (4) Address the root cause of previous warranty spike—explain what went wrong and how your plan prevents recurrence. (5) Design incentive alignment: show how production, quality, and sales each benefit from the new timeline. (6) Include specific metrics: lead time by stage, quality defect rate targets, inventory turnover, on-time delivery percentage. Ensure the plan is detailed enough to guide implementation."
+    },
+    {
+      "name": "Quality & Risk Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a certified quality and manufacturing risk expert. Review the proposed operations improvement plan critically. Assess: (1) Does every certified quality inspection remain in place and uncompromised? (2) Which quality gates are at risk of being bypassed or rushed if production pressure increases? (3) Why did the previous compression attempt cause warranty claims—what systemic weakness does your review identify? (4) Are there quality inspection points that can be parallelized with production without reducing rigor? (5) Can sub-assembly pre-certification reduce final assembly inspection time? (6) What early warning metrics (SPC, in-process checks) could replace or shorten end-stage inspections? (7) Recommend specific quality-protective safeguards for each lead-time reduction change. Provide a full assessment of risk, then on the VERY LAST LINE output exactly one keyword: pass or revise."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a plan refiner. Incorporate the quality expert's feedback into the operations improvement plan. Address every concern raised: strengthen any weak quality gates, add protective measures where risk was identified, revise production scheduling to account for quality hold points, and adjust timelines if necessary to ensure certified standards are never jeopardized. Reconcile production speed goals with quality rigor. Ensure the plan explicitly addresses why the previous compression failed and how the new approach is fundamentally different. Maintain all three departments' concerns: production feasibility, quality integrity, and sales competitive advantage."
+    },
+    {
+      "name": "Cross-Functional Alignment Reviewer",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a manufacturing operations reviewer focused on organizational alignment. Assess the refined plan: (1) Does it clearly show production how they benefit (realistic timeline, no safety corners)? (2) Does it protect quality's mandate and prevent blame for future failures? (3) Does it give sales a competitive lead time and confidence in on-time delivery? (4) Are inter-departmental handoff points clearly defined with ownership and SLAs? (5) Does the plan address the root cause of blame-shifting—e.g., does it include shared metrics, cross-functional governance, or aligned incentives? (6) Are there any remaining conflicts or unclear responsibilities? Provide a full assessment of alignment and stakeholder satisfaction, then on the VERY LAST LINE output exactly one keyword: pass or revise."
+    },
+    {
+      "name": "Implementation Detailer",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an implementation specialist. Translate the aligned operations plan into detailed, actionable specifications: (1) Specific changes to production scheduling software, batch-size parameters, WIP limits, and constraint-based sequencing. (2) Supplier negotiations: which suppliers to qualify for expedited delivery, what SLAs to negotiate, which materials to pre-purchase or hold as safety stock. (3) Inventory policy changes: target stock levels by component, reorder points, vendor-managed inventory agreements. (4) Quality gate redesign: which inspections stay serial, which move to parallel phases, which can be pre-certified or monitored by SPC. (5) Timeline for each change implementation, dependencies, and risk mitigation steps. (6) Metrics dashboard: lead time by stage, quality defect rates, on-time delivery %, inventory turnover, inter-departmental handoff delays. (7) Governance model: who owns each change, how frequently to review, escalation paths. Produce a detailed implementation roadmap."
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a polisher preparing the final operations improvement plan for executive and stakeholder review. Format the plan as a professional document: (1) Executive Summary: current state (14 weeks, losing 1 in 3 deals), target state (8–9 weeks, maintaining quality), and expected business impact. (2) Detailed Roadmap: phased implementation with timeline, dependencies, and resource requirements. (3) Quality Assurance: explicit confirmation that certified inspection standards are protected, how previous warranty risks are mitigated, and quality metrics. (4) Stakeholder Alignment: benefits to production, quality, and sales with shared success metrics. (5) Risk Mitigation: potential pitfalls and contingency plans. (6) Expected Outcomes: lead time reduction, revenue opportunity (winning deals lost to speed), warranty claims trajectory. Ensure clarity, visual formatting where helpful, and compelling messaging that motivates cross-functional buy-in."
+    }
+  ],
+  "explanation": "This pipeline is designed to solve a complex, multi-stakeholder operations problem requiring deep analysis, strategic synthesis, expert quality validation, stakeholder alignment, and detailed implementation planning. Flow: (1) Current State Analyst diagnoses where the 14 weeks is actually spent and identifies bottlenecks. (2) Operations Strategist builds a comprehensive improvement plan balancing speed and quality. (3) Quality & Risk Expert reviews the plan with a critical eye, assesses risks, and outputs a pass/revise keyword. If revise, the pipeline loops back to Plan Refiner to address concerns. (4) Plan Refiner incorporates quality feedback and reconciles all constraints. (5) Cross-Functional Alignment Reviewer assesses whether the plan actually solves the inter-departmental blame problem and achieves genuine alignment; outputs pass/revise. If revise, loops to Implementation Detailer for refinement. (6) Implementation Detailer transforms the validated plan into actionable specifications: scheduling changes, supplier agreements, inventory policies, quality gate redesign, metrics. (7) Executive Output Polisher formats the final deliverable for stakeholder presentation. Two quality loops (after Expert and after Alignment Reviewer) ensure both quality integrity and organizational buy-in before implementation details are finalized. The pipeline stays under 8 steps by using critics as decision gates rather than separate validation layers."
+}
+```

@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert organizational strategist. Develop a comprehensive set of strategies and best practices to improve communication, foster collaboration, and resolve conflicts within geographically dispersed, culturally diverse project teams. Cover asynchronous communication, cultural empathy, time-zone management, and conflict resolution frameworks.",
+      "description": "Creates the initial draft of strategies and best practices for global teams."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner specializing in organizational development. Improve the previous strategy draft based on any quality feedback provided. Enhance clarity, add actionable examples, ensure cultural sensitivity, and produce a polished, improved version of the strategies.",
+      "description": "Refines and expands the initial strategy draft based on feedback."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate for organizational strategies. Review the refined output carefully for comprehensiveness, actionable advice, cultural sensitivity, and clarity. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategies for quality and completeness."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a final polisher. Format the approved strategies into a highly readable, professional executive guide. Use clear headings, bullet points, and bold text for emphasis. Ensure the tone is authoritative yet accessible for multinational team leaders.",
+      "description": "Formats and finalizes the output for the end user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert organizational strategist. Develop a comprehensive set of strategies and best practices to improve communication, foster collaboration, and resolve conflicts within geographically dispersed, culturally diverse project teams. Cover asynchronous communication, cultural empathy, time-zone management, and conflict resolution frameworks."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner specializing in organizational development. Improve the previous strategy draft based on any quality feedback provided. Enhance clarity, add actionable examples, ensure cultural sensitivity, and produce a polished, improved version of the strategies."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate for organizational strategies. Review the refined output carefully for comprehensiveness, actionable advice, cultural sensitivity, and clarity. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final polisher. Format the approved strategies into a highly readable, professional executive guide. Use clear headings, bullet points, and bold text for emphasis. Ensure the tone is authoritative yet accessible for multinational team leaders."
+    }
+  ],
+  "explanation": "This pipeline is designed to generate and perfect strategies for multinational team collaboration. It begins with the Strategy Builder drafting the initial comprehensive guide. The Strategy Refiner then enhances the draft, incorporating actionable examples and cultural nuances. The Strategy Quality Gate evaluates the refined output; if it finds issues, it outputs 'revise' to loop back to the Refiner (Step 2) for corrections, or 'pass' to proceed. Finally, the Final Polisher formats the approved content into a professional, user-facing executive guide. This ensures high-quality, culturally sensitive, and actionable output without human intervention."
+}

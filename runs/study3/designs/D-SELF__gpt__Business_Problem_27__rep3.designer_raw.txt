@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Growth Financing Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive recommendation for financing the company's next phase of growth. Address the tension between accelerating capacity, hiring, and market expansion; preserving founder independence and control; managing financial and execution risk; and responding to the rival's fundraising. Compare debt, minority equity, hybrid instruments, and disciplined organic growth. Propose a recommended funding structure, sequencing, use of proceeds, negotiation posture, milestones, and walk-away conditions. State assumptions explicitly and distinguish strategic judgment from facts requiring validation. Produce a decision-ready initial analysis.",
+      "description": "Creates the initial financing strategy and recommendation."
+    },
+    {
+      "name": "Capital Structure Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the initial financing strategy quantitatively and logically. Compare debt, minority equity, hybrid instruments, and organic growth across dilution, control, cost of capital, repayment burden, covenant risk, flexibility, speed, valuation risk, downside exposure, and ability to fund capacity, hiring, and market expansion. Identify missing assumptions and provide sensitivity considerations for growth slowdown, margin pressure, delayed capacity, and competitive escalation. Recommend measurable financing and operating milestones. Return detailed findings for incorporation into a revised strategy.",
+      "description": "Tests the alternatives, assumptions, risks, and milestones in the proposed financing plan."
+    },
+    {
+      "name": "Financing and Governance Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed strategy and analytical findings from the perspective of venture finance, private credit, corporate finance, governance, and transaction negotiation. Explain practical implications of covenants, security, guarantees, liquidation preferences, anti-dilution, board rights, investor protections, redemption rights, warrants, conversion terms, and founder control. Recommend founder-protective terms and identify terms that should trigger rejection or renegotiation. Assess whether the proposed structure is realistic for a profitable scale-up and refine the source-specific walk-away conditions. Flag legal, tax, accounting, and diligence matters that require professional confirmation.",
+      "description": "Provides domain-specific finance and governance judgment on structure and terms."
+    },
+    {
+      "name": "Integrated Financing Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the initial strategy, analytical findings, and expert review into one coherent, decision-ready recommendation. Improve the plan by resolving contradictions, making assumptions explicit, and balancing speed, control, dilution, liquidity, and competitive urgency. Include: an executive recommendation; a comparison table or clearly structured comparison of debt, minority equity, hybrid instruments, and organic growth; the proposed funding structure and tranche sequencing; allocation of proceeds; operating and financing milestones; governance and term protections; downside contingencies; and precise walk-away conditions for each source. Quantify where possible, but do not invent company-specific facts. Clearly label illustrative thresholds and diligence items. Ensure the recommendation is actionable for founders negotiating with financiers.",
+      "description": "Integrates all analysis into a rigorous and actionable financing plan."
+    },
+    {
+      "name": "Decision Readiness Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the integrated financing plan in full. Assess whether it directly answers the objective and adequately compares debt, minority equity, hybrid instruments, and disciplined organic growth against risk tolerance, competitive timing, and founder control preferences. Check the realism and internal consistency of the recommended structure, tranche sequencing, use of proceeds, milestones, contingencies, governance protections, and walk-away conditions. Identify unsupported assumptions, missing risks, ambiguous thresholds, overly generic advice, conflicts among terms, and any failure to distinguish negotiation preferences from non-negotiable conditions. Provide detailed, actionable corrections. On the VERY LAST LINE output exactly one keyword: pass if the plan is decision-ready, or revise if it requires substantive improvement.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      },
+      "description": "Determines whether the integrated recommendation is complete, coherent, and decision-ready."
+    },
+    {
+      "name": "Founder-Focused Financing Recommendation Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing recommendation using the refined financing plan and quality-review findings. Preserve sound analysis while fixing every issue identified by the review. Present a concise executive recommendation followed by: strategic context and assumptions; comparison of all four growth paths; recommended funding structure and sequencing; use of proceeds; milestone-linked tranches and decision metrics; founder-control and governance protections; source-specific walk-away conditions; downside scenarios and contingency actions; and a short implementation roadmap. Make trade-offs explicit, distinguish illustrative thresholds from facts requiring validation, and avoid pretending to provide legal, tax, or investment advice. Use clear headings, tables where useful, and precise business language.",
+      "description": "Formats and sharpens the validated plan into a clear final recommendation for the founders."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Growth Financing Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive recommendation for financing the company's next phase of growth. Address the tension between accelerating capacity, hiring, and market expansion; preserving founder independence and control; managing financial and execution risk; and responding to the rival's fundraising. Compare debt, minority equity, hybrid instruments, and disciplined organic growth. Propose a recommended funding structure, sequencing, use of proceeds, negotiation posture, milestones, and walk-away conditions. State assumptions explicitly and distinguish strategic judgment from facts requiring validation. Produce a decision-ready initial analysis."
+    },
+    {
+      "name": "Capital Structure Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial financing strategy quantitatively and logically. Compare debt, minority equity, hybrid instruments, and organic growth across dilution, control, cost of capital, repayment burden, covenant risk, flexibility, speed, valuation risk, downside exposure, and ability to fund capacity, hiring, and market expansion. Identify missing assumptions and provide sensitivity considerations for growth slowdown, margin pressure, delayed capacity, and competitive escalation. Recommend measurable financing and operating milestones. Return detailed findings for incorporation into a revised strategy."
+    },
+    {
+      "name": "Financing and Governance Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed strategy and analytical findings from the perspective of venture finance, private credit, corporate finance, governance, and transaction negotiation. Explain practical implications of covenants, security, guarantees, liquidation preferences, anti-dilution, board rights, investor protections, redemption rights, warrants, conversion terms, and founder control. Recommend founder-protective terms and identify terms that should trigger rejection or renegotiation. Assess whether the proposed structure is realistic for a profitable scale-up and refine the source-specific walk-away conditions. Flag legal, tax, accounting, and diligence matters that require professional confirmation."
+    },
+    {
+      "name": "Integrated Financing Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize the initial strategy, analytical findings, and expert review into one coherent, decision-ready recommendation. Improve the plan by resolving contradictions, making assumptions explicit, and balancing speed, control, dilution, liquidity, and competitive urgency. Include: an executive recommendation; a comparison table or clearly structured comparison of debt, minority equity, hybrid instruments, and organic growth; the proposed funding structure and tranche sequencing; allocation of proceeds; operating and financing milestones; governance and term protections; downside contingencies; and precise walk-away conditions for each source. Quantify where possible, but do not invent company-specific facts. Clearly label illustrative thresholds and diligence items. Ensure the recommendation is actionable for founders negotiating with financiers."
+    },
+    {
+      "name": "Decision Readiness Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the integrated financing plan in full. Assess whether it directly answers the objective and adequately compares debt, minority equity, hybrid instruments, and disciplined organic growth against risk tolerance, competitive timing, and founder control preferences. Check the realism and internal consistency of the recommended structure, tranche sequencing, use of proceeds, milestones, contingencies, governance protections, and walk-away conditions. Identify unsupported assumptions, missing risks, ambiguous thresholds, overly generic advice, conflicts among terms, and any failure to distinguish negotiation preferences from non-negotiable conditions. Provide detailed, actionable corrections. On the VERY LAST LINE output exactly one keyword: pass if the plan is decision-ready, or revise if it requires substantive improvement.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Founder-Focused Financing Recommendation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing recommendation using the refined financing plan and quality-review findings. Preserve sound analysis while fixing every issue identified by the review. Present a concise executive recommendation followed by: strategic context and assumptions; comparison of all four growth paths; recommended funding structure and sequencing; use of proceeds; milestone-linked tranches and decision metrics; founder-control and governance protections; source-specific walk-away conditions; downside scenarios and contingency actions; and a short implementation roadmap. Make trade-offs explicit, distinguish illustrative thresholds from facts requiring validation, and avoid pretending to provide legal, tax, or investment advice. Use clear headings, tables where useful, and precise business language."
+    }
+  ],
+  "explanation": "The pipeline starts with a strategic financing draft, adds quantitative comparison and domain-specific financing and governance analysis, then integrates those perspectives into a single plan. The quality review occurs after the refiner and branches to the polisher when the plan passes; if substantive issues remain, it routes back to the refiner for correction before being reviewed again. The final polisher converts the validated analysis into a concise, founder-focused recommendation covering structure, milestones, protections, and walk-away conditions."
+}

@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Business Context Analyzer",
+      "role": "analyst",
+      "description": "Analyzes financial constraints, labor market data, regulatory context, and competitor case studies to establish baseline metrics and risk factors for the automation roadmap"
+    },
+    {
+      "name": "Warehouse Automation Strategist",
+      "role": "strategist",
+      "description": "Develops phased automation and workforce transition strategy across five sites, balancing ROI targets with community impact, labor retention, and service continuity"
+    },
+    {
+      "name": "Operations & Logistics Expert",
+      "role": "expert",
+      "description": "Validates warehouse-specific automation sequencing, identifies implementation dependencies, operational risks, and service-level impact during each transition phase"
+    },
+    {
+      "name": "Workforce Transition Refiner",
+      "role": "refiner",
+      "description": "Refines retraining, redeployment, and severance plans based on expert feedback, ensuring responsible labor management aligned with company values and local economic impact"
+    },
+    {
+      "name": "Strategy Quality Validator",
+      "role": "critic",
+      "description": "Validates completeness of roadmap: automation sequencing logic, ROI feasibility, workforce transition responsibility, service continuity assurance, and measurable success metrics"
+    },
+    {
+      "name": "Risk & Measurement Framework Analyst",
+      "role": "analyst",
+      "description": "Develops KPI dashboards, risk mitigation contingencies, and measurement protocols to track payback timeline, service levels, labor outcomes, and strategic learning"
+    },
+    {
+      "name": "Executive Roadmap Polisher",
+      "role": "polisher",
+      "description": "Formats final automation and workforce-transition roadmap for executive communication with visual timelines, financial summaries, success metrics, and decision points"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Business Context Analyzer",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a business analyst specializing in warehouse labor economics and automation ROI. Analyze the distribution company's situation: five regional warehouses, $X capital available (not unlimited), 35% annual picker turnover, rising labor costs, service-damaging error rates, hundreds of long-tenured employees, one warehouse as town's primary employer, and a competitor's failed automation rollout that made national news. Produce a detailed baseline report covering: (1) Financial constraints and payback sensitivity; (2) Labor market dynamics—turnover drivers, wage pressure, local employment alternatives by region; (3) Regulatory/community risk factors, especially for the anchor warehouse; (4) Competitor case study—what failed and why; (5) Current error/cost metrics by warehouse size and function. Output structured findings that strategists will use to design phased approaches."
+    },
+    {
+      "name": "Warehouse Automation Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a warehouse automation strategist. Using the baseline analysis, design a phased automation roadmap across five regional warehouses that: (1) Sequences automation by warehouse, deciding degree of automation (low/medium/high) per site based on turnover, error rates, strategic importance, and local employment impact; (2) Proposes workforce transitions—retraining priorities, redeployment options to other sites/roles, and responsible severance/transition support for roles eliminated; (3) Identifies service continuity risks and proposes staffing models during each phase (hybrid human-automation); (4) Allocates capital efficiently across phases to meet 3-year payback while preserving community relationships; (5) Includes go/no-go decision milestones per phase. Sequence should minimize reputational risk and maximize learning. Output a detailed multi-phase roadmap (Phase 1, 2, 3...) with site-specific timelines, investment, expected headcount changes, and transition support."
+    },
+    {
+      "name": "Operations & Logistics Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a warehouse operations and logistics expert with deep experience in automation implementations. Review the proposed automation roadmap and validate: (1) Warehouse-specific technical feasibility—can the chosen automation (sortation, picking, packing, conveyor, robots, software) actually work at each site given layout, throughput, product mix?; (2) Sequencing logic—are phase dependencies correct? Can early wins fund later phases?; (3) Service continuity—how will picking accuracy, on-time shipping, and inventory control be maintained during transition? What staffing overlap is needed?; (4) Operational risks—integration complexity, vendor lock-in, training timeline for hybrid operations; (5) Error reduction pathway—how does automation specifically address the 35% turnover and quality issues? Provide detailed validation with specific operational concerns, constraints, and contingencies for each warehouse phase."
+    },
+    {
+      "name": "Workforce Transition Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a workforce transition specialist. Refine the roadmap's labor transition plans based on operational expert feedback. Improve: (1) Retraining programs—design curricula for displaced pickers moving to tech roles, quality roles, or supervision; (2) Redeployment logistics—which roles open at other sites? Can long-tenured employees relocate? What incentives?; (3) Severance and support—transparent, generous transition packages proportional to tenure; outplacement services for roles that cannot be redeployed; (4) Anchor warehouse protection—design workforce plan that minimizes layoffs at the town's primary employer, considers phased reduction, keeps critical staff; (5) Communication strategy—transparent messaging to workforce at each phase; partnership with unions if present. Ensure all labor transitions are documented with timelines, support packages, and success metrics (placement rates, retraining completion, retention of redeployed staff)."
+    },
+    {
+      "name": "Strategy Quality Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality validator for the automation and workforce transition roadmap. Assess the complete roadmap (from strategist, operations expert, and workforce refiner) against these criteria: (1) Does the automation sequencing achieve 3-year payback within capital constraints? (2) Are workforce transitions responsible and transparent—do they protect long-tenured employees and the anchor warehouse? (3) Is service continuity assured—picking accuracy, on-time delivery, inventory control maintained or improved during transition? (4) Does the plan mitigate reputational risk given the competitor's failed rollout? (5) Are success metrics clearly defined and measurable? (6) Are go/no-go decision points included to adapt if early phases underperform? Provide comprehensive assessment addressing all six criteria with specific strengths and gaps. Then output EXACTLY ONE keyword: pass (roadmap is complete and coherent) or revise (critical gaps exist that must be addressed).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Risk & Measurement Framework Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a measurement and risk analyst. Develop comprehensive KPI dashboards and contingency protocols for the roadmap: (1) Financial KPIs—actual vs. projected payback per phase, ROI by warehouse, capital spend variance; (2) Operational KPIs—picker error rates, on-time shipment %, inventory accuracy, picking speed/unit before and after automation; (3) Labor KPIs—retraining completion rates, redeployment success rates, retention of redeployed staff, severance package acceptance, time-to-employment for exited staff; (4) Service level KPIs—customer complaint rates, order fulfillment speed, damage rates before/after; (5) Risk triggers and contingencies—if payback slips >6 months, pause Phase 2; if error rates don't improve by 20% by Month 12, adjust automation scope; if redeployment success falls below 60%, increase training investment. Output a detailed measurement framework with baseline targets, monitoring cadence (weekly/monthly), and decision rules for go/no-go milestones."
+    },
+    {
+      "name": "Executive Roadmap Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communication specialist. Format the final automation and workforce-transition roadmap for board and leadership presentation. Produce a clear, compelling document including: (1) Executive summary—three-year vision, total investment, payback timeline, key risks mitigated; (2) Phased timeline chart showing each warehouse automation phase, staffing headcount by phase, and transition support; (3) Financial summary—capex per phase, opex savings, ROI curve, sensitivity analysis; (4) Workforce transition summary—total jobs affected, retraining/redeployment/severance plans, anchor warehouse protection; (5) Service continuity assurance—how error rates and fulfillment speed improve; (6) Reputational strategy—how this differs from competitor's failed approach; (7) KPI dashboard framework and go/no-go decision gates; (8) Next steps and immediate actions. Use tables, Gantt charts, and infographics. Output publication-ready roadmap document."
+    }
+  ],
+  "explanation": "This seven-step pipeline is designed to translate a complex workforce and automation challenge into a responsible, measurable, and executable roadmap. Execution flow: (1) Analyst establishes baseline—financial, labor market, competitive, and risk context; (2) Strategist proposes multi-phase automation and labor transition strategy across five sites; (3) Operations Expert validates technical and operational feasibility, surfacing constraints and continuity risks; (4) Workforce Refiner improves labor transition plans (retraining, redeployment, severance, anchor warehouse protection) based on expert feedback; (5) Quality Validator conducts a comprehensive if-gate assessment of the complete roadmap against six critical dimensions (payback, responsibility, continuity, reputation, metrics, decision gates); if gaps exist, it routes back to Workforce Refiner to address; if complete, advances; (6) Risk Analyst develops KPI dashboards and contingency triggers to monitor payback, operations, labor outcomes, and service levels; (7) Polisher formats the roadmap for executive communication. The if-gate after step 5 ensures the roadmap is defensible and complete before measurement frameworks and final presentation are built, reducing downstream rework and executive risk."
+}
+```

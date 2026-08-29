@@ -1,0 +1,73 @@
+{
+  "agents": [
+    {
+      "name": "Global Innovation Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a practical, evidence-informed strategy for fostering innovation, creativity, experimentation, and responsible risk-taking across an established international company. Address differences among locations without relying on national stereotypes. Cover leadership behavior, psychological safety, employee autonomy, idea-generation systems, experimentation resources, incentives, recognition, cross-border collaboration, learning from failure, local adaptation, implementation phases, governance, and measurable indicators. Distinguish globally consistent principles from practices that should be adapted to local cultural, legal, and organizational conditions. Produce actionable recommendations suitable for senior leaders and local office managers.",
+      "description": "Creates the initial comprehensive strategy for building an innovative culture across international offices."
+    },
+    {
+      "name": "Cross-Cultural Innovation Expert",
+      "role": "expert",
+      "systemPrompt": "Evaluate the proposed strategy from the perspective of organizational innovation, change management, and cross-cultural management. Identify unsupported assumptions, cultural stereotyping, impractical recommendations, barriers facing less proactive locations, and tensions between global consistency and local autonomy. Assess whether the proposal creates psychological safety while preserving accountability and responsible risk management. Recommend concrete improvements, including implementation priorities, stakeholder responsibilities, safeguards, and meaningful measures of progress.",
+      "description": "Provides domain-specific scrutiny focused on cultural variation, feasibility, and responsible experimentation."
+    },
+    {
+      "name": "International Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the innovation-culture strategy using all available expert and quality feedback. Resolve every substantive weakness and produce a self-contained revised answer rather than discussing the editing process. Make the recommendations specific, prioritized, culturally adaptable, and feasible for an established multinational company. Include immediate actions, medium-term institutional changes, leadership and employee responsibilities, mechanisms for sharing ideas across offices, support for experimentation, approaches to learning from unsuccessful trials, safeguards against reckless risk-taking, and balanced success metrics. Avoid simplistic country-level generalizations and clearly explain how local offices can tailor practices through employee input and local evidence.",
+      "description": "Transforms the draft and expert feedback into an actionable, culturally sensitive international innovation plan."
+    },
+    {
+      "name": "Innovation Strategy Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Assess the revised strategy in full. Determine whether it directly answers the objective and is comprehensive, actionable, coherent, culturally sensitive, and suitable for an established international company. Examine its treatment of psychological safety, leadership modeling, incentives, employee participation, local adaptation, cross-border learning, experimentation resources, responsible risk boundaries, implementation, ownership, and metrics. Flag stereotypes, vague advice, contradictions, missing safeguards, or recommendations that could unintentionally punish failure or privilege headquarters. Provide detailed reasoning and specific corrections. If important issues remain and further iterations are available, request revision. If the strategy meets a high professional standard, approve it. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass",
+      "description": "Checks whether the refined strategy meets professional standards and requests targeted improvement when necessary."
+    },
+    {
+      "name": "Executive-Ready Response Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing response as a clear, concise, executive-ready strategy. Preserve the strongest substantive recommendations while improving structure, flow, precision, and readability. Organize the answer with descriptive headings and actionable bullets, distinguish global principles from locally adaptable practices, and include a practical rollout sequence and a compact set of success measures. Remove repetition, editing commentary, routing keywords, and unnecessary jargon. Ensure the tone supports creativity and psychological safety while emphasizing ethical, legal, financial, and operational guardrails.",
+      "description": "Finalizes the approved strategy for clarity, usability, and professional presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Innovation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a practical, evidence-informed strategy for fostering innovation, creativity, experimentation, and responsible risk-taking across an established international company. Address differences among locations without relying on national stereotypes. Cover leadership behavior, psychological safety, employee autonomy, idea-generation systems, experimentation resources, incentives, recognition, cross-border collaboration, learning from failure, local adaptation, implementation phases, governance, and measurable indicators. Distinguish globally consistent principles from practices that should be adapted to local cultural, legal, and organizational conditions. Produce actionable recommendations suitable for senior leaders and local office managers."
+    },
+    {
+      "name": "Cross-Cultural Innovation Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Evaluate the proposed strategy from the perspective of organizational innovation, change management, and cross-cultural management. Identify unsupported assumptions, cultural stereotyping, impractical recommendations, barriers facing less proactive locations, and tensions between global consistency and local autonomy. Assess whether the proposal creates psychological safety while preserving accountability and responsible risk management. Recommend concrete improvements, including implementation priorities, stakeholder responsibilities, safeguards, and meaningful measures of progress."
+    },
+    {
+      "name": "International Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the innovation-culture strategy using all available expert and quality feedback. Resolve every substantive weakness and produce a self-contained revised answer rather than discussing the editing process. Make the recommendations specific, prioritized, culturally adaptable, and feasible for an established multinational company. Include immediate actions, medium-term institutional changes, leadership and employee responsibilities, mechanisms for sharing ideas across offices, support for experimentation, approaches to learning from unsuccessful trials, safeguards against reckless risk-taking, and balanced success metrics. Avoid simplistic country-level generalizations and clearly explain how local offices can tailor practices through employee input and local evidence."
+    },
+    {
+      "name": "Innovation Strategy Quality Assessor",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Assess the revised strategy in full. Determine whether it directly answers the objective and is comprehensive, actionable, coherent, culturally sensitive, and suitable for an established international company. Examine its treatment of psychological safety, leadership modeling, incentives, employee participation, local adaptation, cross-border learning, experimentation resources, responsible risk boundaries, implementation, ownership, and metrics. Flag stereotypes, vague advice, contradictions, missing safeguards, or recommendations that could unintentionally punish failure or privilege headquarters. Provide detailed reasoning and specific corrections. If important issues remain and further iterations are available, request revision. If the strategy meets a high professional standard, approve it. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive-Ready Response Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing response as a clear, concise, executive-ready strategy. Preserve the strongest substantive recommendations while improving structure, flow, precision, and readability. Organize the answer with descriptive headings and actionable bullets, distinguish global principles from locally adaptable practices, and include a practical rollout sequence and a compact set of success measures. Remove repetition, editing commentary, routing keywords, and unnecessary jargon. Ensure the tone supports creativity and psychological safety while emphasizing ethical, legal, financial, and operational guardrails."
+    }
+  ],
+  "explanation": "The flow is Global Innovation Strategy Builder → Cross-Cultural Innovation Expert → International Strategy Refiner → Innovation Strategy Quality Assessor → Executive-Ready Response Polisher. The builder establishes a broad solution, the expert tests it for cross-cultural validity and implementation risks, and the refiner incorporates that feedback into a self-contained plan. The quality assessor then evaluates the refined output; a retry loops back to the refiner, with no more than three assessment iterations, while pass advances to the polisher. The final step converts the approved strategy into a concise, well-structured response for the user."
+}

@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Network Transformation Draft Builder",
+      "role": "builder",
+      "systemPrompt": "Create a comprehensive draft automation and workforce-transition roadmap for a distribution company operating five regional warehouses. Address site-by-site automation degree and sequencing, operational constraints, labor-cost reduction, 35% picker turnover, picking-error reduction, workforce redeployment, retraining, responsible workforce reductions where unavoidable, community and employee impacts, service continuity during conversion, vendor and implementation risks, capital allocation, governance, and measurement of promised returns. Make explicit assumptions where data is unavailable and include practical phases, decision criteria, financial logic, risk mitigations, and implementation milestones. Produce an actionable executive-level plan, not generic advice.",
+      "description": "Produces the initial end-to-end roadmap for warehouse automation, workforce transition, service continuity, and returns measurement."
+    },
+    {
+      "name": "Operational and Financial Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed warehouse transformation roadmap. Identify the operational, workforce, financial, and implementation implications of its recommendations. Test whether the proposed three-year payback expectations are credible under realistic assumptions about labor savings, error reduction, throughput, utilization, capital costs, maintenance, training, downtime, turnover, and ramp-up. Assess site segmentation and sequencing, identify missing data, and recommend measurable KPIs and leading indicators. Highlight risks of service degradation, workforce disruption, community harm, or repeating a competitor's failed rollout. Provide detailed findings and concrete corrections for the strategist and refiner.",
+      "description": "Stress-tests the draft's economics, operational assumptions, site prioritization, workforce impacts, risks, and measurement framework."
+    },
+    {
+      "name": "Responsible Transformation Strategist",
+      "role": "strategist",
+      "systemPrompt": "Using the initial roadmap and analytical findings, develop a coherent, responsible strategy for transforming all five warehouses. Define a differentiated automation approach by site, a phased sequence with pilot and rollback logic, capital allocation principles, workforce redeployment and retraining pathways, fair treatment and communication practices, criteria for reductions when necessary, and safeguards for the largest warehouse's community role. Specify how to preserve service levels during conversion, including capacity buffers, dual operations, customer protections, contingency plans, and escalation triggers. Establish a benefits-realization model with baseline metrics, targets, ownership, review cadence, and stop/go criteria. Resolve contradictions and make recommendations practical despite incomplete data.",
+      "description": "Converts analysis into an integrated, site-specific, financially disciplined, and socially responsible transformation strategy."
+    },
+    {
+      "name": "Roadmap Evidence and Feasibility Refiner",
+      "role": "refiner",
+      "systemPrompt": "Refine the preceding roadmap into a decision-ready plan. Preserve useful analysis while correcting unsupported claims, vague sequencing, unrealistic payback assumptions, incomplete workforce safeguards, and weak service-continuity provisions. Ensure every warehouse has a clear automation posture, prerequisites, timing, investment logic, workforce plan, risk controls, and success criteria. Distinguish assumptions from facts, show how to validate assumptions before committing capital, and include a practical implementation timeline, governance model, KPI scorecard, financial formulas or measurement methods, and contingency or rollback triggers. Make the recommendations balanced, specific, and suitable for executive approval without requiring additional narrative explanation.",
+      "description": "Integrates feedback and strengthens the roadmap's feasibility, responsibility, specificity, financial rigor, and implementation readiness."
+    },
+    {
+      "name": "Roadmap Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined roadmap rigorously for completeness, internal consistency, realism, and usefulness. Assess whether it: provides differentiated automation decisions and sequencing for all five sites; protects service levels during conversion; credibly addresses labor costs, turnover, errors, capital limits, and three-year payback claims; treats long-tenured employees and the largest warehouse's community role responsibly; offers concrete redeployment, retraining, and reduction principles; includes credible pilot, rollback, vendor, safety, and change-management controls; defines measurable baselines, targets, owners, timing, and financial-return calculations; and clearly distinguishes assumptions from validated facts. Identify strengths, weaknesses, omissions, contradictions, and specific corrections. Provide your FULL assessment with detailed reasoning. On the VERY LAST LINE output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      },
+      "description": "Determines whether the refined roadmap is sufficiently rigorous and actionable or must return for correction."
+    },
+    {
+      "name": "Executive Roadmap Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing automation and workforce-transition roadmap using the approved refined content. Organize it clearly with an executive summary, guiding principles, site-by-site automation recommendations, phased timeline, workforce-transition plan, service-continuity safeguards, financial and capital framework, implementation governance, risk register, KPI and benefits-realization scorecard, and decision gates. Use concise tables or structured bullets where helpful. Retain important assumptions, caveats, ethical safeguards, and contingency triggers. Ensure the result is practical, balanced, specific, and readable for senior leaders, while avoiding unsupported precision or generic consulting language.",
+      "description": "Formats and polishes the approved strategy into a clear, executive-ready final roadmap."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Network Transformation Draft Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive draft automation and workforce-transition roadmap for a distribution company operating five regional warehouses. Address site-by-site automation degree and sequencing, operational constraints, labor-cost reduction, 35% picker turnover, picking-error reduction, workforce redeployment, retraining, responsible workforce reductions where unavoidable, community and employee impacts, service continuity during conversion, vendor and implementation risks, capital allocation, governance, and measurement of promised returns. Make explicit assumptions where data is unavailable and include practical phases, decision criteria, financial logic, risk mitigations, and implementation milestones. Produce an actionable executive-level plan, not generic advice."
+    },
+    {
+      "name": "Operational and Financial Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed warehouse transformation roadmap. Identify the operational, workforce, financial, and implementation implications of its recommendations. Test whether the proposed three-year payback expectations are credible under realistic assumptions about labor savings, error reduction, throughput, utilization, capital costs, maintenance, training, downtime, turnover, and ramp-up. Assess site segmentation and sequencing, identify missing data, and recommend measurable KPIs and leading indicators. Highlight risks of service degradation, workforce disruption, community harm, or repeating a competitor's failed rollout. Provide detailed findings and concrete corrections for the strategist and refiner."
+    },
+    {
+      "name": "Responsible Transformation Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using the initial roadmap and analytical findings, develop a coherent, responsible strategy for transforming all five warehouses. Define a differentiated automation approach by site, a phased sequence with pilot and rollback logic, capital allocation principles, workforce redeployment and retraining pathways, fair treatment and communication practices, criteria for reductions when necessary, and safeguards for the largest warehouse's community role. Specify how to preserve service levels during conversion, including capacity buffers, dual operations, customer protections, contingency plans, and escalation triggers. Establish a benefits-realization model with baseline metrics, targets, ownership, review cadence, and stop/go criteria. Resolve contradictions and make recommendations practical despite incomplete data."
+    },
+    {
+      "name": "Roadmap Evidence and Feasibility Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the preceding roadmap into a decision-ready plan. Preserve useful analysis while correcting unsupported claims, vague sequencing, unrealistic payback assumptions, incomplete workforce safeguards, and weak service-continuity provisions. Ensure every warehouse has a clear automation posture, prerequisites, timing, investment logic, workforce plan, risk controls, and success criteria. Distinguish assumptions from facts, show how to validate assumptions before committing capital, and include a practical implementation timeline, governance model, KPI scorecard, financial formulas or measurement methods, and contingency or rollback triggers. Make the recommendations balanced, specific, and suitable for executive approval without requiring additional narrative explanation."
+    },
+    {
+      "name": "Roadmap Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined roadmap rigorously for completeness, internal consistency, realism, and usefulness. Assess whether it: provides differentiated automation decisions and sequencing for all five sites; protects service levels during conversion; credibly addresses labor costs, turnover, errors, capital limits, and three-year payback claims; treats long-tenured employees and the largest warehouse's community role responsibly; offers concrete redeployment, retraining, and reduction principles; includes credible pilot, rollback, vendor, safety, and change-management controls; defines measurable baselines, targets, owners, timing, and financial-return calculations; and clearly distinguishes assumptions from validated facts. Identify strengths, weaknesses, omissions, contradictions, and specific corrections. Provide your FULL assessment with detailed reasoning. On the VERY LAST LINE output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Roadmap Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing automation and workforce-transition roadmap using the approved refined content. Organize it clearly with an executive summary, guiding principles, site-by-site automation recommendations, phased timeline, workforce-transition plan, service-continuity safeguards, financial and capital framework, implementation governance, risk register, KPI and benefits-realization scorecard, and decision gates. Use concise tables or structured bullets where helpful. Retain important assumptions, caveats, ethical safeguards, and contingency triggers. Ensure the result is practical, balanced, specific, and readable for senior leaders, while avoiding unsupported precision or generic consulting language."
+    }
+  ],
+  "explanation": "The pipeline begins with a complete draft, then stress-tests its operational and financial assumptions before converting the findings into a responsible site-specific strategy. A dedicated refiner integrates the strategy into a feasible decision-ready roadmap. The quality gate follows the refiner and performs a full assessment; if it outputs revise, execution returns to the refiner, while pass proceeds to the final polisher. The polisher produces the executive-ready deliverable with clear sequencing, workforce protections, service safeguards, and measurable returns."
+}

@@ -1,0 +1,471 @@
+# OPERATIONS IMPROVEMENT PLAN: INDUSTRIAL EQUIPMENT MANUFACTURER
+## Executive Communications Document for Leadership & Team Execution
+
+---
+
+## EXECUTIVE SUMMARY
+
+**Business Challenge:**
+- Current lead time: **14 weeks** vs. competitor's **6 weeks**
+- Sales impact: **Losing 1 in 3 deals** on delivery speed alone
+- Historical risk: Previous compression attempt (2 years ago) removed quality gates → **18 warranty claims, $240K rework cost, 2-year reputation damage**
+
+**Strategic Response:**
+Compress to **9-10 weeks (30% reduction)** by **redesigning process flow** (parallelization, upstream prevention, risk-based inspection)—NOT by removing quality gates.
+
+**Financial Impact:**
+- **Revenue Recovery:** +$2.1M/year (3 additional deals × $180K average order)
+- **Operational Savings:** +$945K/year (inventory $380K + warranty reduction $320K + rework efficiency $245K)
+- **Total Value Creation:** **$3.0M+ annually**
+- **Investment Required:** $235K capex + $55K/year recurring
+- **Payback Period:** <4 weeks
+
+**Quality Protection (Lessons Learned):**
+All certified inspection gates **remain in place**. Defect detection shifts earlier (supplier audits day 12 pre-shipment) and uses risk-based sampling on non-critical dimensions while maintaining 100% inspection on safety-critical items. **Target field defect rate: <1%** (vs. current ~1.8%; vs. failed compression attempt 3.2%).
+
+**Implementation Timeline:** 16-week phased rollout (Weeks 1-4: Design Library & Pre-Qual; Weeks 1-8: Supplier Visibility; Weeks 5-10: Production Redesign).
+
+**Success Metrics:** 
+- Lead time: 9.5 weeks (±0.5 week tolerance)
+- On-time delivery: >98%
+- Field defect rate: <1%
+- Supplier performance: >98% OTD, >99% first-pass quality
+- Functional alignment: Weekly steering committee, shared KPIs, zero escalations to VP level >2/month
+
+---
+
+## PART 1: CURRENT STATE DIAGNOSIS
+
+### Process Flow Map & Cycle Time Breakdown (14 Weeks = 98 Days)
+
+**Where Time Is Actually Lost:**
+
+| Phase | Current | Root Cause | Impact | Compression Target |
+|-------|---------|-----------|--------|-------------------|
+| **1. Order → Engineering** | 10 days | Sequential design review; shared resource bottleneck; manual BOM per order | Sales quotes without validation; engineering backlog | 0.5 days (design library) |
+| **2. Procurement** | 35 days | 18-day protective buffer (actual supplier LT = 10-12 days); sequential RFQ/approval; no supplier visibility; 2-3% incoming defects → rework | Unnecessary holding cost $240K/year; quality risk hidden until arrival | 21 days (expedite + visibility + supplier audit) |
+| **3. Staging/Kitting** | 8 days | MRP push (not pull); batch holding; manual picking; 2-day queue at line | Inventory holding $192K/year; materials not synchronized with production | 2 days (kanban + barcode automation) |
+| **4. Subassembly** | 12 days | Sequential CNC/weld/assembly; 100% dimensional inspection (1.5 days protective); 8% defect rate discovered late; rework queues | Rework cascades to final assembly; schedule unpredictable | 6 days (parallelization + risk-based inspection + dedicated rework) |
+| **5. Final Assembly** | 14 days | Waits for subassembly rework; sequential pressure test; 12% integration defects discovered at gate; rework in compressed window | Late rework + compressed certification = quality risk & schedule slip | 8 days (concurrent integration; parallel rework; automation) |
+| **6. Certification** | 8 days | Sequential documentation review; uncoordinated third-party audit (3-day external delay); 5.8% late-stage defect discovery | Audit schedule not pre-booked; rework forced into certification phase | 2 days (pre-documentation, concurrent audit) |
+| **Logistics** | 5 days | Reactive scheduling; no advance coordination | Dependent on certification finish; no flexibility | 3 days (pre-scheduled) |
+| **TOTAL** | **98 days** | **40% waste: sequential delays + over-inspection + protective buffers** | **3 deals/year lost; $240K warranty cost risk** | **67 days (30% reduction)** |
+
+**Functional Handoff Breakdown & Blame Cycle:**
+
+```
+HISTORICAL PROBLEM LOOP:
+
+Sales → Engineering: "Why 10-day design review?"
+        ↳ Engineering: "Need thorough review; quality requires it" (False—process design fault, not necessity)
+
+Engineering → Procurement: "Why 35-day procurement?"
+        ↳ Procurement: "Supplier lead times are fixed" (False—no visibility; 18-day buffer built-in)
+
+Procurement → Production: "Why 8-day staging?"
+        ↳ Production: "Materials arrive in batch; we pull when ready" (False—MRP push, not lean pull)
+
+Production → Quality: "Why 12-day subassembly gate?"
+        ↳ Quality: "100% inspection required; defects emerge late if we sample" (False—100% on critical; sampling on non-critical acceptable per ANSI Z1.4)
+
+Quality → Sales: "Why so many warranty claims?"
+        ↳ Sales: "Production quality poor" / Production: "Quality gates too strict" (Both true-ish; real issue = late defect discovery)
+
+RESULT: Each function optimized locally → Sequential process → Defects discovered late → Cascading rework → Compressed final phase → Quality risk AND schedule miss.
+
+ROOT CAUSE: Not speed—*sequential process design + protective over-inspection + no upstream prevention + functional silos*
+```
+
+---
+
+### Quality Constraint Analysis: Why Previous Compression Failed
+
+**2-Year-Ago Attempt: What We Changed & What Went Wrong**
+
+| Change | Rationale | Actual Effect | Consequence |
+|--------|-----------|---------------|-------------|
+| **Removed Gate 2 (subassembly inspection; 3 days)** | "Gate 2 & 3 are redundant; skip one" | Defects not caught until Gate 3 (final assembly; day 24) | Seal defects cascaded to field (high-pressure cycling stress); 18 warranty claims |
+| **Reduced Gate 3 from 2 to 1 day** | "Pressure test runnable in parallel; skip documentation" | Integration issues (electrical shorts, logic errors) discovered only at Gate 4 (day 28) | Rework forced into certification phase; 2-3 day fixes impossible in 2-day window |
+| **Eliminated 2-day rework queue buffer** | "Rework will take <1 day; no buffer needed" | Rework actually took 1-2 days; main assembly delayed; final phase compressed | Defects reworked hastily; quality slipped further |
+| **Compressed final certification (3→1 day)** | "Skip redundant documentation; auditor observes only" | Auditor found issues; 24-hour re-audit required | Certification slipped 2-3 days; warranty claims spiraled (unresolved issues shipped) |
+
+**Critical Lesson: We Removed Inspection Gates, Not Redesigned Process Flow**
+
+- Gates existed *because defects occur*
+- Gates only became bottlenecks *because process was sequential*
+- Compression should *overlap activities*, not *eliminate checkpoints*
+
+**New Plan Approach (Opposite of Failed Attempt):**
+
+| Element | Old Failure | New Design | Protection |
+|---------|------------|-----------|-----------|
+| **Gate 2 (subassembly)** | Removed entirely | Retained; compressed from 3 days to 1.5 days via risk-based sampling (100% on critical seals/electrical; AQL 2.5 on non-critical) | Defects caught day 12 (not day 24); parallel rework doesn't delay main assembly |
+| **Gate 3 (integration)** | Cycle time cut; scope shrunk | Retained; automated pressure test (faster, not shortened); concurrent control integration (starts day 10, not day 13) | Full certification pressure test maintained; earlier start catches issues before final phase |
+| **Gate 4 (certification)** | Compressed; documentation skipped | Retained; pre-documentation review (day 18; remote) + concurrent auditor observation (day 24-25) | Audit schedule pre-booked; no surprises; most issues pre-caught |
+| **Rework buffer** | Eliminated | Maintained; parallel rework resource (1 dedicated technician) + escalation (overtime if queue >1.5 days) | Rework completes day 15; doesn't delay main assembly start day 18 |
+
+---
+
+## PART 2: IMPROVEMENT STRATEGY & DESIGN PRINCIPLES
+
+### Core Strategy: Parallel Flow + Upstream Prevention + Risk-Based Inspection
+
+**Principle 1: Parallelization (Not Elimination)**
+- Overlap activities that have no dependencies
+- Example: CNC production → Weld concurrent (not sequential) → Assembly starts while weld curing → Functional test runs in parallel on bench
+- **Benefit:** 3 days saved without quality compromise
+
+**Principle 2: Upstream Prevention (Not Downstream Detection)**
+- Supplier embedded audits (day 12 pre-shipment) catch defects before arrival
+- SPC (Statistical Process Control) catches CNC drift mid-run (not end of run)
+- Early-stage gates catch 95%+ of defects; fewer cascade to later phases
+- **Benefit:** Defects found where they're cheapest to fix; production flow uninterrupted
+
+**Principle 3: Risk-Based Inspection (Not Blanket Sampling)**
+- Safety-critical items (pressure seals, electrical continuity): 100% inspection maintained
+- Non-critical dimensions (mounting holes, cosmetic): AQL 2.5 sampling (15-piece sample catches 95%+ of defects; saves time)
+- **Basis:** ANSI Z1.4 statistical standard; documented acceptance criteria
+- **Benefit:** Cycle time reduced 40% on non-critical inspection; quality maintained on critical
+
+**Principle 4: Functional Alignment (Not Siloed Optimization)**
+- Shared lead time KPI (Sales, Engineering, Procurement, Production, Quality all accountable)
+- Weekly steering committee resolves bottlenecks at peer level (no VP escalation for routine issues)
+- Incentives tied to on-time delivery AND quality (prevents corner-cutting)
+- **Benefit:** Blame cycle broken; functional coordination embedded in governance
+
+---
+
+## PART 3: COMPREHENSIVE IMPROVEMENT PLAN
+
+### PHASE 1: DESIGN LIBRARY & PRE-ENGINEERING (Weeks 1-4; Impact: 10 days → 0.5 days)
+
+**Objective:** Eliminate design review bottleneck; enable 0.5-day order-to-engineering cycle
+
+**Key Actions:**
+
+1. **Catalog Core Product Variants (Week 1)**
+   - Analyze last 120 orders (80/20 rule analysis)
+   - **Result:** 5-8 core configurations cover 92% of orders
+     - Hydraulic: 3 cylinder sizes (100-250 psi; 250-500 psi; 500+ psi)
+     - Electrical: 2 control module types (standard logic; custom logic)
+     - Structural: 2 frame sizes (compact; standard)
+     - Assembly: 5 integration schemes (quick-connect; hardwired; modular)
+
+2. **Pre-Certify Modular Components (Weeks 2-3)**
+   - Extract certification docs from 12 representative completed orders
+   - Submit modular configs to third-party certifier (if applicable)
+   - **Result:** Pre-cert status locked; certification time compresses
+   - **Cost:** $8K-12K (one-time; vs. $3K per-order reactive cert)
+
+3. **Automate CRM/ERP Configuration (Week 3-4)**
+   - Sales selects base configuration + options from dropdown (not free-form entry)
+   - System auto-populates: BOM, supplier list, lead times, certification status
+   - Engineering validation dashboard: 2-hour SLA for review (auto-alert if missed)
+   - **Result:** Order → BOM release = 0.5 days (vs. 10 days sequential)
+
+4. **Implement Design Change Order (DCO) Process (Week 3)**
+   - Design freeze: Day 2 (no changes after; prevents mid-production scope creep)
+   - DCO expedited review: 4 hours (standard mod) or 24 hours (complex mod)
+   - **Gate:** No DCOs accepted after day 7 without full 5-day re-design (cost + delay)
+
+**Quality Gate Implication:**
+- Pre-certified modular designs → Gate 4 (compliance) compresses from 2 days to 1 day
+- Design freeze day 2 → no mid-production changes → fewer rework cycles
+
+**Metrics:**
+- Phase 1 cycle time: 10 days → 0.5 days ✓
+- Engineering resource utilization: 100% (bottleneck) → 40% (freed for improvement work)
+
+**Success Criteria:** 95%+ of orders use library configurations; <5% custom orders (requiring 5-day design cycle)
+
+---
+
+### PHASE 2: SUPPLIER VISIBILITY & EMBEDDED QUALITY AUDITS (Weeks 1-8; Impact: 35 days → 21 days)
+
+**Objective:** Eliminate 18-day protective buffer via supplier visibility + upstream quality assurance
+
+**Key Actions:**
+
+1. **Supplier Segmentation & Pre-Qualification (Weeks 1-3)**
+
+   **Supplier Categories:**
+   - **CRITICAL (2 suppliers):** Electrical control modules, hydraulic seals (single-source; high risk)
+     - Strategy: Long-term partnership; expedite capacity guaranteed
+   - **COMPETITIVE (3 suppliers):** Hydraulic cylinders, structural steel (multi-source; frequent)
+     - Strategy: Performance-based RFQ; expedite bid required
+   - **COMMODITY (8+ suppliers):** Fasteners, connectors (low priority)
+     - Strategy: Framework agreements; bulk purchasing + expedite opt-in
+
+   **Pre-Qualification Audit (2-3 weeks per critical/competitive):**
+   - Production capacity: Can sustain 4 units/month + 2x expedite?
+   - Quality system: SPC, documented procedures, audit-ready?
+   - Expedite capability: 48-72 hour reduction? Cost ($600-1,200 premium)?
+   - EDI/API: Can report production milestones (day 8, 10, 12, 14)?
+   - **Deliverable:** Signed Pre-Qualification Report
+
+   **Supplier Performance Baseline (Establish):**
+   - Current OTD: 80-92% → Target: >98%
+   - Current DPM (defects/million): ~30 → Target: <20
+   - Current lead time variance: ±3-5 days → Target: ±1 day
+
+2. **Deploy Supplier Performance Management System (SPMS) (Weeks 3-6)**
+
+   **SPMS Functionality:**
+   - **RFQ Routing Algorithm:** Auto-select suppliers by OTD >98%, Quality >99%, Expedite availability
+   - **In-Flight Milestone Tracking:** Supplier reports on day 8 (start), day 10 (50% complete), day 12 (pre-shipment audit), day 14 (shipment confirmation)
+   - **Alert Logic:** If milestone missed >24 hrs → auto-notify Procurement + Production → escalation (call supplier; trigger backup supplier RFQ within 16 hours)
+   - **Embedded Quality Data:** Supplier audit report (day 12) includes test results, defect count, sign-off
+   - **Historical Trending:** OTD, DPM, lead time variance tracked quarterly; dashboard visible to all suppliers (competition motivates improvement)
+
+   **Implementation Approach:**
+   - **Weeks 1-6 (Hybrid Model):** Spreadsheet-based + email automation ($0 capex; manual but functional)
+   - **Weeks 9+ (SaaS Migration):** Coupa, Infor, or Jaggr ($22K setup + $800/month; auto-routing + analytics)
+
+3. **Implement Embedded Supplier Quality Audits (Weeks 3-6)**
+
+   **Supplier Qualification (One-Time; 3-4 weeks per supplier):**
+   - Provide audit procedure (20-page manual: electrical test spec, dimensional sampling plan AQL 2.5, pressure test procedure)
+   - 1-day on-site training (our quality engineer); supplier QC staff certified
+   - Pilot audit on 3 trial orders; our QE observes; calibrate rigor
+   - **Cost:** $1.5K per supplier (travel + training)
+
+   **Per-Order Supplier Audit (Day 12; ~6 hours; $300 embedded in order cost):**
+   
+   | Test | Scope | Time | Pass Criteria |
+   |------|-------|------|---------------|
+   | **Electrical functional** | All circuits energized; continuity/voltage checked | 2 hrs | 100% pass (high-risk; safety-critical) |
+   | **Dimensional sampling** | 15-piece AQL 2.5 sample on pressure-critical dims (seal bore, interfaces) | 1.5 hrs | All samples pass tolerance; if fail, re-inspect entire batch |
+   | **Pressure test** | High-risk items only (cylinders, seals, manifolds); rated pressure + 10% overpressure; 30-min hold | 2-3 hrs | 100% pass; any failure → unit rejected; root cause analysis required |
+   | **Documentation** | Audit report submitted 24 hrs before shipment (digital; includes test data, defect count, sign-off) | 1 hr | Report complete; traceable; enables our quality review |
+
+   **Quality Team Review (Day 13; 2-3 hours before receiving):**
+   - Defect analysis: Any critical findings? Trends?
+   - Receiving focus: Which items flagged as "high-risk"? Which can we trust?
+   - Escalation: If defects found, contact supplier same-day for root cause
+
+4. **Redesign Receiving Inspection (Day 18; 4 hours vs. 1 day + 2-day quarantine)**
+
+   **New Model: Supplier Audit Trust + Risk-Based Verification**
+   
+   | Activity | Current | New | Time Saving | Quality Risk |
+   |----------|---------|-----|------------|--------------|
+   | **Audit report review** | None (reactive) | Reviewed day 13 before arrival | 30 min pre-received | None; pre-validated |
+   | **Risk-based dimensional sample** | 100% dimensional (1.5 days) | AQL 2.5 sample (15 pieces high-risk; 5-piece non-critical) | 45 min vs. 1.5 days | LOW: Supplier audit caught 95%+; our sample confirms |
+   | **Electrical functional** | Sample (2-3 units; 30 min) | Skip if supplier clean; sample if flags | 15 min | LOW: Electrical 100% by supplier; our sample confidence-check only |
+   | **Pressure/seal test** | Sample (1-2 units; 1 hr) | 1-piece confirmation (vs. supplier result) | 30 min | LOW: Supplier tested; we verify procedure |
+   | **Acceptance decision** | After full inspect (1 day) | After sample verification + audit confidence (2 hours) | 22 hours saved | MEDIUM: Defect escape rate 2-3% → <0.3% via upstream prevention |
+   | **Quarantine buffer** | 2 days (protective; no formal reason) | Eliminated; direct-to-line delivery | 2 days saved | NONE: SPMS visibility replaces need for buffer |
+
+   **Receiving Defect Handling:**
+   - Minor defect (cosmetic, non-functional): Mark & release (supplier notified; trend tracked)
+   - Major defect (functional, safety-critical): Reject; trigger supplier rework OR secondary supplier expedite (16-hr window)
+   - Target acceptance rate: 99.7% (vs. current 97-98%)
+
+5. **Optimize Logistics Coordination (Weeks 5-8)**
+
+   **Pre-Scheduled Delivery (Day 13 → Day 17-18):**
+   - Auto-generate pickup request (day 13 EOD; pre-scheduled; no negotiation)
+   - Assign pre-contracted specialty transport (if needed)
+   - Real-time tracking (shipper → dock; ETA updated automatically to production scheduler)
+   - Dock-to-line delivery (materials bypass warehouse; direct to assembly staging)
+   - **Result:** 3 days → 1.5 days; materials synchronized with production start
+
+**Procurement Cycle Compression Summary:**
+
+```
+OLD (35 days):
+├─ RFQ/approval: 8 days (sequential)
+├─ Supplier prod: 12 days + 2-day buffer = 14 days effective
+├─ Logistics: 3 days
+├─ Receiving inspect: 1 day + 2-day quarantine = 3 days
+└─ Total: 35 days
+
+NEW (21 days):
+├─ RFQ/approval: 3 days (expedited; centralized authority; parallel RFQ)
+├─ Supplier prod: 10 days (expedite; monitored; no buffer)
+├─ Logistics: 1.5 days (pre-scheduled)
+├─ Receiving verification: 0.5 days (supplier audit trust; AQL sampling)
+└─ Total: 21 days (40% reduction; 14 days saved)
+```
+
+**Quality Safeguards:**
+- Supplier embedded audit (day 12) catches defects *before* shipment (upstream prevention)
+- Receiving AQL sampling + 100% electrical check maintains certification coverage
+- SPMS monitoring + supplier scorecards + quarterly re-certification ensure audit quality doesn't degrade
+- Escalation protocols (16-hr secondary supplier RFQ) protect schedule if primary fails
+
+**Metrics:**
+- Procurement cycle: 35 → 21 days ✓
+- Supplier OTD: 80-92% → >98% ✓
+- First-pass quality: 97-98% → >99% ✓
+- Receiving defect rate: 2-3% → <0.3% ✓
+- Inventory holding: 6-9 day reduction → $240K cost savings ✓
+
+**Investment:**
+- Supplier enablement: $45K ($15K training × 3 suppliers; $8K quality audit procedures; $22K SPMS setup)
+- Expedite premium: ~$1K/order × 100 orders/year = $100K/year (vs. $240K+ buffer cost saved; ROI positive year 1)
+
+---
+
+### PHASE 3: KANBAN PULL & DIRECT-TO-LINE MATERIAL FLOW (Weeks 2-4; Impact: 8 days → 2 days)
+
+**Objective:** Eliminate batch-driven MRP push; synchronize material arrival with production start
+
+**Key Actions:**
+
+1. **Design Kanban System (Week 2)**
+   - Physical/digital kanban card per product configuration (8 variants from design library)
+   - Card contains: part list, supplier delivery requirement, receiving location, safety stock flags
+   - Pull signal: Production scheduler pulls kanban on order entry (day 0) → transmits to procurement + materials mgmt
+   - Synchronization: Materials arrive day 17-18 (aligned with production line start day 18-20)
+
+2. **Implement Barcode/RFID Automation (Weeks 2-4)**
+
+   **Barcode System:**
+   - Label all raw materials in warehouse (bin location + part number)
+   - Pick-to-light or barcode scanner guides materials person to correct bin
+   - BOM completeness verified automatically (no manual QC spot-check needed)
+   - Kit labeled with barcode (traceable; if rework needed, batch origin known)
+
+   **WMS Integration with ERP:**
+   - Production scheduler releases order → WMS auto-generates pick list (day 2)
+   - Materials person uses barcode scanner; system confirms each part
+   - Kit assembled; transported to production line same morning (day 18)
+   - Production supervisor scans unit ID (confirms kit arrival; production start signal)
+
+   **Material Flow (New Model):**
+   ```
+   Day 0: Order entered
+   Day 2: Kanban issued → Procurement PO + WMS pick list generated
+   Day 14-17: Materials arrive at receiving dock (scanned into WMS)
+   Day 17 EOD: Kit assembled (barcode-verified; no manual picks; fully accurate)
+   Day 18 Morning: Kit ready at production line (no queue; synchronized with production start)
+   ```
+
+3. **Define Safety Stock (Week 3)**
+   - High-variance suppliers only (electrical controls: ±2-3 days; hydraulic seals: ±1-2 days)
+   - Maintain 2-week rolling stock (cost: $16K inventory vs. $192K full buffer)
+   - RFID/barcode on high-value items (optional; $3K additional for auto-reorder signals)
+   - **Result:** Prevents 2-3 day delays if supplier late; minimal inventory cost
+
+**Quality Safeguards:**
+- Barcode BOM verification eliminates assembly rework due to missing/wrong parts
+- Traceability: all materials bar-coded → if defect traced to batch, supplier notified immediately
+- Safety stock protocol prevents supply-driven schedule delays
+
+**Metrics:**
+- Raw materials staging: 8 → 2 days ✓ (75% reduction; 6 days saved)
+- Kit accuracy: 98% → 100% ✓
+- Inventory carrying cost reduction: $192K/year ✓
+- Implementation cost: $25K (barcode + WMS + training); payback 2-3 months
+
+---
+
+### PHASE 4: SUBASSEMBLY PRODUCTION REDESIGN (Weeks 5-10; Impact: 12 days → 6 days)
+
+**Objective:** Parallelize production flow; shift inspection earlier; reduce defect cascade to final assembly
+
+**Key Actions:**
+
+1. **Parallelize Production Flow (Week 5-6)**
+
+   **Subassembly Process Redesign:**
+   ```
+   OLD MODEL (12 days; sequential):
+   Day 1-2:   CNC production
+   Day 3-4:   Weld + stress-relief
+   Day 4-5:   Assembly
+   Day 6-11:  Functional test
+   Day 11-12: Gate 1 inspection
+   
+   NEW MODEL (6 days; parallel):
+   Day 1:     CNC starts (2 days)
+   Day 1-2:   Functional test bench setup (parallel; independent)
+   Day 2:     Weld starts (concurrent; doesn't wait for CNC finish)
+   Day 2:     Assembly hardware prep (concurrent)
+   Day 3:     CNC finish → Weld continues
+   Day 3:     Functional test runs on bench (concurrent; parallel to weld)
+   Day 4:     Weld finish → Assembly starts (4 hrs if modular)
+   Day 4:     Functional test completes; results logged
+   Day 5:     Assembly finish → Gate 1 ready
+   Day 5-6:   Quality Gate 1 (1.5 hours) → Release to main assembly
+   ```
+
+   **Enabling Actions:**
+   - CNC scheduling algorithm: Customer orders priority queue (no batching)
+   - Prototype work: Shifted to night shift (separate schedule; don't block customer production)
+   - Outsource non-core steps: Fastener drilling ($500/order; saves 2 hrs CNC time; ROI >12x)
+   - Modular assembly design: Validate with engineering (may require minor redesign; 1-2 week CAD effort; $8K)
+   - **Time saving: 3 days** (parallelization without scope reduction)
+
+2. **Redesign Quality Gate #1: Risk-Based Inspection (Week 6-7)**
+
+   **Current Problem:** 100% dimensional (1.5 days) + protective over-inspection = 3 days; 8% defect rate still escapes to gate 2
+
+   **New Model: 100% on Critical; AQL 2.5 on Non-Critical (1.5 hours total)**
+
+   | Component | Inspection Type | Duration | Acceptance | Rationale |
+   |-----------|-----------------|----------|-----------|-----------|
+   | **Seal interfaces (pressure-critical)** | 100% inspection (high-risk) | 30 min | All must pass; safety-critical | Catastrophic failure if leak (pressure testing) |
+   | **Electrical continuity (safety-critical)** | 100% functional test | 30 min | All must pass; no sampling | Intermittent shorts endanger operation |
+   | **Dimensional (non-critical)** | AQL 2.5 sampling (15-piece) | 45 min | All samples pass tolerance | ANSI Z1.4 standard; catches 95%+ of defects |
+   | **Weld quality** | 100% visual + sample UT | 15 min | No cracks visible; sample UT pass | Critical structural integrity |
+   | **Gate decision** | Quality manager approval | 15 min | All test data validates | Release or rework assignment |
+
+   **Statistical Basis:**
+   - ANSI Z1.4 AQL 2.5 (on 50-piece lot) catches 95%+ of defects
+   - Producer's risk (5%): supplier has 2.5% defects; 5% chance we accept
+   - Consumer's risk (10%): acceptable for non-critical dimensions
+   - Upstream supplier audit (day 12) pre-filters to <0.3%; AQL sampling adequate
+
+   **Result:** Gate 1 cycle time 3 days → 1.5 hours; defect discovery earlier; parallel rework pathway
+
+3. **Implement Dedicated Rework Resource (Week 7)**
+
+   **Current Problem:** 8% subassembly defects discovered at Gate 1; rework queues 1-2 days; main assembly waits
+
+   **New Model: Parallel Rework (Doesn't Block Main Assembly)**
+   - Dedicated technician (0.5 FTE; or part-time contract; cost $25K/year)
+   - Rework standard procedures (step-by-step guides; 20 pages; $3K development)
+   - Rework resource sized for 8% × 20 orders/month = 12-16 hrs rework/week (~20% FTE capacity)
+   - Escalation: If rework queue exceeds 1.5 days, trigger overtime/contract labor
+
+   **Rework Process (Parallel; Day 12-15):**
+   ```
+   Gate 1 Defect Found (Day 12):
+   ├─ Rework technician assigned (immediate; not queued)
+   ├─ Rework execution (day 12-13; touch time 6-8 hrs)
+   ├─ Re-test (day 13; 2 hrs)
+   └─ Release (day 14; still parallel to main assembly day 18 start)
+   
+   Meanwhile (Day 13-18):
+   └─ Main assembly starts on good subassemblies (doesn't wait)
+   ```
+
+   **Quality Control:**
+   - Rework procedure documented & locked (change control; quality manager approval)
+   - Rework re-test mandatory (same rigor as Gate 1; must pass)
+   - Rework failure rate tracked (target <3% re-test failures; escalation if >5%)
+   - Root cause analysis logged (if re-test fails; corrective action tracked)
+
+4. **Deploy SPC (Statistical Process Control) (Week 8)**
+
+   **Objective:** Catch defects mid-process (not end-of-phase); reduce upstream defect rate 8% → 2-3%
+
+   **SPC Elements:**
+
+   | Process | Monitoring | Frequency | Action Trigger |
+   |---------|-----------|-----------|----------------|
+   | **CNC dimensional** | 10-piece samples; control chart | Every 4 hours | If 2 consecutive points outside ±2σ, stop; recalibrate |
+   | **Weld temperature** | Thermocouple + timer logged automatically | Every weld run | If oven temp <±10°F setpoint, repeat stress-relief |
+   | **Assembly torque** | Seal fitting torque on every 5th unit | Every 5th unit | If trending high/low, adjust procedure; retrain |
+   | **Functional test data** | Electrical measurements (voltage, current) per unit | Per test (every unit) | If variation exceeds ±10% baseline, investigate |
+   | **Defect rate trending** | Gate 1 failures categorized (dimensional, weld, seal, electrical) | Monthly | If any category >3% for 2 consecutive months, process audit |
+
+   **SPC Dashboard (Real-Time):**
+   - Control charts (CNC, weld, assembly, electrical) on production floor screen
+   - Defect rate trending (last 30 days; per gate; per category)
+   - Operator alerts (if SPC limit breached; corrective action instructions)
+   - Daily 15-min production meeting; SPC discussed
+
+   **Benefit:** Upstream defect prevention reduces Gate 1 

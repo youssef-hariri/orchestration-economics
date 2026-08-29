@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "International Innovation Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, practical strategy for fostering innovation, creativity, experimentation, and responsible risk-taking among employees in an established international company. Address differences in proactive innovation across countries and branches. Cover leadership behavior, psychological safety, incentives, idea generation, experimentation processes, resource allocation, collaboration across locations, learning from failure, inclusion, cultural adaptation, measurement, and implementation. Distinguish globally consistent principles from locally adaptable practices. Provide concrete initiatives, examples, implementation steps, risks, and success indicators. Write for senior business leaders and ensure recommendations are actionable, ethical, culturally sensitive, and realistic.",
+      "description": "Creates the initial international innovation-culture strategy."
+    },
+    {
+      "name": "Cross-Cultural Innovation Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed innovation-culture strategy for applicability across international branches. Identify assumptions, cultural risks, barriers to participation, communication challenges, power-distance and psychological-safety considerations, local adaptation needs, equity concerns, and practical implementation constraints. Assess whether the recommendations adequately support both high- and low-initiative locations. Produce detailed findings and specific recommendations for improving relevance, feasibility, inclusiveness, and measurable impact.",
+      "description": "Evaluates the strategy through an international, cross-cultural, and implementation-focused lens."
+    },
+    {
+      "name": "Innovation Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the draft strategy using the cross-cultural analysis and any available feedback. Preserve strong ideas while resolving gaps, cultural risks, vague recommendations, feasibility problems, and measurement weaknesses. Produce a coherent final-form strategy with clear sections covering principles, leadership, employee participation, experimentation, incentives, local adaptation, global collaboration, implementation roadmap, governance, metrics, and mitigation of unintended consequences. Make the advice specific enough to apply but flexible enough for different countries and branches.",
+      "description": "Integrates analysis and feedback into a stronger, more actionable strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy comprehensively. Assess strategic coherence, practical usefulness, international applicability, cultural sensitivity, inclusiveness, psychological safety, responsible risk-taking, clarity, implementation detail, measurability, and balance between global consistency and local autonomy. Identify strengths and provide detailed, specific corrections for every weakness. Confirm that the recommendations directly answer how an established international company can increase employee creativity, experimentation, and proactive innovation across locations. Provide your FULL assessment and reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Innovation Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the approved strategy for presentation to senior leaders. Preserve the substance and international nuance while improving structure, readability, precision, and professional tone. Present a concise executive summary followed by practical recommendations, examples of initiatives, a phased implementation roadmap, roles and responsibilities, localization guidance, metrics, and key risks with mitigations. Avoid unsupported claims, culturally stereotypical language, and overly generic advice. Ensure the final output is self-contained, actionable, and clearly distinguishes universal principles from country-specific adaptations.",
+      "description": "Produces the final polished, executive-ready response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "International Innovation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, practical strategy for fostering innovation, creativity, experimentation, and responsible risk-taking among employees in an established international company. Address differences in proactive innovation across countries and branches. Cover leadership behavior, psychological safety, incentives, idea generation, experimentation processes, resource allocation, collaboration across locations, learning from failure, inclusion, cultural adaptation, measurement, and implementation. Distinguish globally consistent principles from locally adaptable practices. Provide concrete initiatives, examples, implementation steps, risks, and success indicators. Write for senior business leaders and ensure recommendations are actionable, ethical, culturally sensitive, and realistic."
+    },
+    {
+      "name": "Cross-Cultural Innovation Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed innovation-culture strategy for applicability across international branches. Identify assumptions, cultural risks, barriers to participation, communication challenges, power-distance and psychological-safety considerations, local adaptation needs, equity concerns, and practical implementation constraints. Assess whether the recommendations adequately support both high- and low-initiative locations. Produce detailed findings and specific recommendations for improving relevance, feasibility, inclusiveness, and measurable impact."
+    },
+    {
+      "name": "Innovation Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the draft strategy using the cross-cultural analysis and any available feedback. Preserve strong ideas while resolving gaps, cultural risks, vague recommendations, feasibility problems, and measurement weaknesses. Produce a coherent final-form strategy with clear sections covering principles, leadership, employee participation, experimentation, incentives, local adaptation, global collaboration, implementation roadmap, governance, metrics, and mitigation of unintended consequences. Make the advice specific enough to apply but flexible enough for different countries and branches."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy comprehensively. Assess strategic coherence, practical usefulness, international applicability, cultural sensitivity, inclusiveness, psychological safety, responsible risk-taking, clarity, implementation detail, measurability, and balance between global consistency and local autonomy. Identify strengths and provide detailed, specific corrections for every weakness. Confirm that the recommendations directly answer how an established international company can increase employee creativity, experimentation, and proactive innovation across locations. Provide your FULL assessment and reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Innovation Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the approved strategy for presentation to senior leaders. Preserve the substance and international nuance while improving structure, readability, precision, and professional tone. Present a concise executive summary followed by practical recommendations, examples of initiatives, a phased implementation roadmap, roles and responsibilities, localization guidance, metrics, and key risks with mitigations. Avoid unsupported claims, culturally stereotypical language, and overly generic advice. Ensure the final output is self-contained, actionable, and clearly distinguishes universal principles from country-specific adaptations."
+    }
+  ],
+  "explanation": "The flow is Builder → Cross-Cultural Analyst → Refiner → Quality Assessment (if revise, returns to the Refiner; if pass, continues) → Polisher. The builder establishes a comprehensive strategy, the analyst tests it against international and cultural realities, and the refiner integrates those insights. The quality assessment branches only after a complete refined output exists; revision routes back to the refiner so identified weaknesses can be corrected. Once the strategy passes, the polisher converts it into a clear, executive-ready response."
+}

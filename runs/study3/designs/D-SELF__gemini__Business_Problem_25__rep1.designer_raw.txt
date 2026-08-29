@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "StrategyArchitect",
+      "role": "strategist",
+      "systemPrompt": "You are a SaaS transition expert. Develop a comprehensive plan for moving from perpetual licenses to subscriptions. Address: 1) Offer structure/incentives for existing users, 2) Pricing strategy to mitigate the revenue trough, 3) Sales compensation redesign to align with ARR, and 4) Investor communication strategy to maintain confidence.",
+      "description": "Creates the initial comprehensive business model transition strategy."
+    },
+    {
+      "name": "FinancialRiskAnalyst",
+      "role": "analyst",
+      "systemPrompt": "You are a financial analyst specializing in SaaS metrics. Review the strategy for potential pitfalls regarding churn, revenue recognition, and investor sentiment. Identify gaps in the transition logic.",
+      "description": "Critiques the strategy for financial and operational risks."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic business consultant. Incorporate the feedback from the FinancialRiskAnalyst to strengthen the transition plan, specifically ensuring the sales compensation and customer migration incentives are robust enough to prevent churn.",
+      "description": "Refines the strategy based on analyst feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy against the following criteria: 1) Does it address the revenue trough? 2) Are sales incentives aligned with ARR? 3) Is the customer migration plan likely to retain the installed base? Provide a detailed assessment. On the last line, output 'pass' or 'revise'.",
+      "description": "Validates the strategy quality."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure clarity, tone, and logical flow.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyArchitect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a SaaS transition expert. Develop a comprehensive plan for moving from perpetual licenses to subscriptions. Address: 1) Offer structure/incentives for existing users, 2) Pricing strategy to mitigate the revenue trough, 3) Sales compensation redesign to align with ARR, and 4) Investor communication strategy to maintain confidence."
+    },
+    {
+      "name": "FinancialRiskAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst specializing in SaaS metrics. Review the strategy for potential pitfalls regarding churn, revenue recognition, and investor sentiment. Identify gaps in the transition logic."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic business consultant. Incorporate the feedback from the FinancialRiskAnalyst to strengthen the transition plan, specifically ensuring the sales compensation and customer migration incentives are robust enough to prevent churn."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy against the following criteria: 1) Does it address the revenue trough? 2) Are sales incentives aligned with ARR? 3) Is the customer migration plan likely to retain the installed base? Provide a detailed assessment. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure clarity, tone, and logical flow."
+    }
+  ],
+  "explanation": "The pipeline begins with the StrategyArchitect drafting the core transition plan. The FinancialRiskAnalyst reviews this draft to identify specific risks. The StrategyRefiner incorporates these insights. The QualityGate assesses the refined plan; if it fails, it routes back to the StrategyRefiner. Once the plan passes, the FinalPolisher formats it for executive presentation."
+}

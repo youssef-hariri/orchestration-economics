@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Crisis Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a PR strategist. Draft an initial, comprehensive strategy for managing a public relations crisis in an international market caused by a cultural misunderstanding in a marketing campaign. Include immediate response actions, stakeholder communication, and long-term reputation restoration steps.",
+      "description": "Drafts the initial PR crisis management strategy."
+    },
+    {
+      "name": "Cultural PR Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are an expert in international cultural relations and crisis PR. Analyze the initial strategy draft. Identify potential cultural blind spots, risks of further offending the local market, and areas where the PR response lacks depth or empathy. Provide specific, actionable recommendations for improvement.",
+      "description": "Analyzes the draft for cultural gaps and PR risks."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the PR crisis strategy based on the cultural and PR analyst's feedback. Fix all identified issues, enhance cultural empathy, and produce a robust, improved version of the strategy.",
+      "description": "Incorporates analyst feedback to improve and refine the strategy."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined PR crisis strategy carefully. Assess whether it effectively addresses the cultural misunderstanding with empathy, provides actionable crisis management steps, and outlines a clear path to reputation restoration. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy and routes back for revision if quality standards are not met."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Polish the final PR crisis strategy. Ensure the tone is professional, authoritative, and empathetic. Format the output with clear headings, bullet points, and an executive summary suitable for C-level review.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Crisis Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a PR strategist. Draft an initial, comprehensive strategy for managing a public relations crisis in an international market caused by a cultural misunderstanding in a marketing campaign. Include immediate response actions, stakeholder communication, and long-term reputation restoration steps."
+    },
+    {
+      "name": "Cultural PR Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an expert in international cultural relations and crisis PR. Analyze the initial strategy draft. Identify potential cultural blind spots, risks of further offending the local market, and areas where the PR response lacks depth or empathy. Provide specific, actionable recommendations for improvement."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the PR crisis strategy based on the cultural and PR analyst's feedback. Fix all identified issues, enhance cultural empathy, and produce a robust, improved version of the strategy."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined PR crisis strategy carefully. Assess whether it effectively addresses the cultural misunderstanding with empathy, provides actionable crisis management steps, and outlines a clear path to reputation restoration. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Polish the final PR crisis strategy. Ensure the tone is professional, authoritative, and empathetic. Format the output with clear headings, bullet points, and an executive summary suitable for C-level review."
+    }
+  ],
+  "explanation": "The pipeline starts with a Crisis Strategy Builder to draft the initial PR response. A Cultural PR Analyst then reviews the draft specifically for cultural nuances and international PR risks, providing actionable feedback. The Strategy Refiner incorporates this feedback to improve the plan. A Quality Gate (Critic) evaluates the refined strategy, branching back to the Strategy Refiner if further cultural or strategic adjustments are needed (if revise, loops back to Refiner). Finally, the Executive Polisher formats the approved strategy into a professional, C-level ready document."
+}

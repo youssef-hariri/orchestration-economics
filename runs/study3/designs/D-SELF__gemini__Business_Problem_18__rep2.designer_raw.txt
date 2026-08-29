@@ -1,0 +1,57 @@
+{
+  "agents": [
+    {
+      "name": "Heritage Strategist",
+      "role": "strategist",
+      "systemPrompt": "You are a brand turnaround expert. Develop a comprehensive repositioning strategy for a 70-year-old brand. Define the 'Heritage-Modernity' bridge: identify core values to preserve (trust, quality) and elements to modernize (visual identity, digital touchpoints). Create a phased transition plan that avoids alienating loyalists while attracting under-35s.",
+      "description": "Develops the core strategic framework for brand repositioning."
+    },
+    {
+      "name": "Consumer Insight Critic",
+      "role": "critic",
+      "systemPrompt": "You are a consumer psychology expert specializing in brand loyalty. Evaluate the strategy for 'authenticity risk.' Check if the plan risks alienating older loyalists or appearing 'try-hard' to younger consumers. Provide a detailed assessment of the balance between heritage and innovation. On the last line, output 'pass' or 'revise'.",
+      "description": "Critiques the strategy for authenticity and brand-fit risks."
+    },
+    {
+      "name": "Brand Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a brand architect. Take the strategy and the critic's feedback to adjust the messaging, channel strategy, and transition sequence. Ensure the tone is authentic and the transition phases are logical and low-risk.",
+      "description": "Refines the strategy based on critical feedback."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional brand consultant. Format the final strategy into a clear, actionable document with defined sections: Positioning, Preservation/Retirement List, Channel Approach, and Phased Transition Roadmap.",
+      "description": "Formats the final output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Heritage Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a brand turnaround expert. Develop a comprehensive repositioning strategy for a 70-year-old brand. Define the 'Heritage-Modernity' bridge: identify core values to preserve (trust, quality) and elements to modernize (visual identity, digital touchpoints). Create a phased transition plan that avoids alienating loyalists while attracting under-35s."
+    },
+    {
+      "name": "Consumer Insight Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a consumer psychology expert specializing in brand loyalty. Evaluate the strategy for 'authenticity risk.' Check if the plan risks alienating older loyalists or appearing 'try-hard' to younger consumers. Provide a detailed assessment of the balance between heritage and innovation. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 3 }
+    },
+    {
+      "name": "Brand Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a brand architect. Take the strategy and the critic's feedback to adjust the messaging, channel strategy, and transition sequence. Ensure the tone is authentic and the transition phases are logical and low-risk."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional brand consultant. Format the final strategy into a clear, actionable document with defined sections: Positioning, Preservation/Retirement List, Channel Approach, and Phased Transition Roadmap."
+    }
+  ],
+  "explanation": "The pipeline begins with the Heritage Strategist to draft the core repositioning plan. The Consumer Insight Critic then evaluates the strategy for authenticity and potential backlash risks. If the strategy is deemed risky or misaligned, the 'revise' path routes the content to the Brand Refiner to adjust the approach. Once the strategy passes the critic's review, it proceeds to the Final Polisher to format the output into a professional, actionable document."
+}

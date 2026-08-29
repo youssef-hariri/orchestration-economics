@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Brand Heritage & Positioning Architect",
+      "role": "builder",
+      "description": "Synthesizes brand history, current perception data, and strategic objectives to draft a comprehensive repositioning strategy with clear positioning statement, heritage preservation plan, and modernization roadmap"
+    },
+    {
+      "name": "Younger Demographic Relevance Analyst",
+      "role": "analyst",
+      "description": "Analyzes Gen Z and millennial consumer behavior, values, and media consumption patterns to assess how proposed positioning resonates with younger audiences and identifies authenticity risks"
+    },
+    {
+      "name": "Loyalty Risk & Authenticity Validator",
+      "role": "expert",
+      "description": "Domain expert in brand loyalty psychology and heritage brand transitions who evaluates whether repositioning preserves core brand equity, evaluates alienation risk to existing customer base, and identifies elements that must remain untouched"
+    },
+    {
+      "name": "Strategy Coherence Refiner",
+      "role": "refiner",
+      "description": "Integrates feedback from analyst and expert to refine positioning, channel strategy, content approach, and sequencing plan into a unified, internally consistent narrative"
+    },
+    {
+      "name": "Authenticity & Execution Critic",
+      "role": "critic",
+      "description": "Holistic quality gate that assesses whether the refined strategy avoids authenticity backlash, balances old and new audiences, is operationally feasible, and provides clear sequencing milestones"
+    },
+    {
+      "name": "Tactical Channel & Content Strategist",
+      "role": "strategist",
+      "description": "Translates approved positioning into specific channel recommendations, content pillars, partnership approaches, and phased rollout timeline with clear metrics for each audience segment"
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "description": "Formats the complete repositioning strategy into executive-ready deliverable with clear sections: positioning statement, heritage preservation matrix, retirement decisions, channel strategy, content approach, sequencing roadmap, and risk mitigation plan"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Build Initial Repositioning Draft",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a brand strategy architect analyzing a 70-year heritage brand facing declining relevance among consumers under 35 while maintaining strong loyalty from older customers. Using the context provided, create a comprehensive initial repositioning strategy that includes: (1) A new positioning statement that bridges heritage authenticity with contemporary relevance, (2) A matrix clearly identifying which brand elements to preserve (core values, visual heritage, distribution advantages) versus retire (dated communication styles, obsolete product features, legacy associations), (3) A preliminary channel and content strategy showing how different age segments will be reached differently, (4) A phased sequencing approach that introduces changes gradually to avoid authenticity backlash. Focus on genuine integration of heritage into modern context rather than forced reinvention."
+    },
+    {
+      "name": "Analyze Gen Z & Millennial Appeal",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a consumer behavior analyst specializing in younger demographics. Review the repositioning strategy and assess: (1) How the proposed positioning aligns with Gen Z and millennial values (sustainability, authenticity, social responsibility, digital-first engagement), (2) Whether the content approach and channels proposed will actually reach and resonate with consumers under 35, (3) Specific content themes, platforms (TikTok, Instagram, YouTube, podcasts, etc.), and influencer/community partnerships that would amplify relevance, (4) Potential perception risks where younger consumers might still view the brand as 'trying too hard' or inauthentic. Provide specific examples and data-backed insights."
+    },
+    {
+      "name": "Evaluate Loyalty Preservation & Authenticity Risk",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a heritage brand expert with deep experience in brand loyalty transitions. Critically evaluate the repositioning strategy on: (1) Whether the proposed changes preserve the emotional and functional essence that built loyalty over 70 years, (2) Which elements MUST remain completely untouched to avoid alienating the core base (e.g., packaging, product formula, tone of voice, distribution channels), (3) How previous 'modernization' campaigns failed and whether this strategy avoids those specific pitfalls, (4) Authenticity red flags — places where the strategy risks looking performative rather than genuine, (5) Recommendations to strengthen the authenticity narrative and ensure loyal customers feel the brand is evolving FOR them, not AWAY from them. Be direct about risks."
+    },
+    {
+      "name": "Refine Strategy for Coherence & Balance",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner integrating multiple expert perspectives. Taking the initial draft and feedback from the analyst and loyalty expert, revise and strengthen the repositioning strategy: (1) Reconcile any tensions between younger-audience appeals and loyalty preservation (e.g., if analyst suggests discontinuing a traditional touchpoint, confirm with heritage expert that this won't damage loyalty), (2) Sharpen the positioning statement to be simultaneously authentic to heritage AND relevant to younger consumers, (3) Clarify which channels and content approaches serve each audience without creating brand confusion, (4) Refine the sequencing roadmap to show exactly WHEN and HOW each change is introduced, including early touchpoints with loyal customers to explain the evolution. Ensure every decision is grounded in both data and brand authenticity logic."
+    },
+    {
+      "name": "Authenticity & Execution Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a holistic quality gate assessing the repositioning strategy. Provide FULL analysis across these dimensions: (1) Authenticity Test: Does the strategy feel like genuine evolution or forced trend-chasing? Are heritage elements truly integrated or just window-dressing? Would previous customers and new audiences both believe in this positioning? (2) Balance Test: Does it meaningfully address decline among under-35s without risking loyalty erosion? Are investment levels proportional? (3) Operational Feasibility: Can internal teams actually execute this with alignment, or does it require consensus-building that will dilute execution? (4) Sequencing Logic: Is the phasing smart and realistic? Does it give loyal customers time to understand changes before they feel abandoned? (5) Risk Mitigation: Are there clear guardrails to catch authenticity backlash early and course-correct? Identify specific strengths, weaknesses, and any sections that need refinement. On the VERY LAST LINE output EXACTLY ONE keyword: pass OR revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 4}
+    },
+    {
+      "name": "Develop Tactical Channel & Content Roadmap",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a go-to-market strategist. Given the approved repositioning strategy, develop a detailed tactical implementation plan: (1) Channel Strategy: Specify which channels (social, retail, digital, traditional, partnerships) will be prioritized for different age segments, with platform-specific approaches (e.g., TikTok differs from Facebook), (2) Content Pillars: Define 4-5 core content themes that bridge heritage and modernity, with specific content types for each pillar (video, user-generated, educational, entertainment, community), (3) Sequencing Timeline: Create a 12-24 month phased rollout showing which audiences see which messages in which channels first, (4) Metrics & Milestones: Define success measures for each phase — engagement rates, sales by age segment, brand perception shifts, retention of core customers, (5) Partnership & Influencer Strategy: Identify potential community ambassadors, micro-influencers, or brand collaborators that can authentically amplify the new positioning to younger audiences without alienating older ones. Be specific and actionable."
+    },
+    {
+      "name": "Polish Final Repositioning Strategy Deliverable",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final output polisher. Format the complete repositioning strategy into a clear, executive-ready deliverable with these sections: (1) Executive Summary (one-page overview of positioning, key changes, expected outcomes), (2) New Positioning Statement & Rationale, (3) Brand Preservation vs. Retirement Matrix (clear table: element, decision, rationale, impact on each audience), (4) Channel Strategy by Audience Segment, (5) Content Approach & Pillars, (6) Phased Sequencing Roadmap (visual timeline showing milestones), (7) Risk Mitigation Plan & Authenticity Safeguards, (8) Success Metrics by Phase. Use clear formatting, specific examples, and avoid jargon. Ensure the output is ready for board or leadership presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to solve a complex brand repositioning challenge requiring simultaneous optimization for conflicting audiences. The flow prioritizes authenticity and balance: (1) Builder creates comprehensive initial strategy, (2) Analyst brings younger-consumer behavioral expertise to identify real pathways to relevance, (3) Expert validates loyalty preservation and spots authenticity risks, (4) Refiner synthesizes these perspectives into a coherent, balanced strategy that addresses both tensions. The quality gate (step 5) acts as a holistic authenticity checkpoint—if the strategy still feels like it will trigger backlash or misses operational feasibility, it routes back to Refiner for improvement (max 3 iterations via 'revise'). Only after passing this gate does the pipeline move to Strategist who develops tactical, executable specifics (channel mix, content, phasing, partners), and finally Polisher formats for leadership consumption. The design ensures the strategy is grounded in both heritage wisdom and modern consumer insight before operationalization begins, reducing execution risk and authenticity backlash."
+}
+```

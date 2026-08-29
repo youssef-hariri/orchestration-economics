@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Warehouse Automation Strategist",
+      "role": "strategist",
+      "description": "Develops phased automation strategy, site sequencing, and workforce transition framework"
+    },
+    {
+      "name": "Financial & Workforce Analyst",
+      "role": "analyst",
+      "description": "Analyzes ROI, labor costs, capital allocation, and workforce redeployment economics across all five sites"
+    },
+    {
+      "name": "Implementation Roadmap Builder",
+      "role": "builder",
+      "description": "Synthesizes strategy and financial/workforce analysis into detailed 36-month implementation roadmap with phasing, gates, and contingencies"
+    },
+    {
+      "name": "Risk & Feasibility Critic",
+      "role": "critic",
+      "description": "Evaluates roadmap for execution, service, reputational, financial, and workforce risks"
+    },
+    {
+      "name": "Roadmap Refiner",
+      "role": "refiner",
+      "description": "Revises roadmap to strengthen risk mitigations, flexibility checkpoints, and governance safeguards"
+    },
+    {
+      "name": "Governance & Measurement Validator",
+      "role": "reviewer",
+      "description": "Validates KPIs, go/no-go gates, governance cadence, and feedback loops for ROI tracking"
+    },
+    {
+      "name": "Executive Roadmap Polisher",
+      "role": "polisher",
+      "description": "Formats final roadmap as board-ready deliverable with timelines, financials, and risk scenarios"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategic & Financial Foundation",
+      "type": "agent",
+      "role": "strategist",
+      "systemPrompt": "You are a warehouse automation strategist and financial analyst combined. Analyze the five-warehouse network (high turnover, error rates, community dependency, competitor PR risk, limited capital). Deliver: (1) phased automation strategy by site (full/partial/augmented) prioritized by ROI and risk; (2) sequencing rationale across 36 months protecting service and accounts; (3) labor cost savings and payback estimates per site; (4) capital allocation across phases; (5) workforce headcount reduction curve and reskilling pathways; (6) reputational risk mitigation approach. Output a cohesive strategic and financial foundation for the roadmap."
+    },
+    {
+      "name": "Roadmap Assembly",
+      "type": "agent",
+      "role": "builder",
+      "systemPrompt": "You are an implementation roadmap builder. Using the strategic and financial foundation provided, construct a detailed 36-month roadmap structured as: PHASE 1 (Months 1-12): Pilot site, baseline KPIs, workforce communication, initial automation. PHASE 2 (Months 13-24): Scale 2-3 sites, accelerate retraining, monitor metrics, refine playbook. PHASE 3 (Months 25-36): Migrate remaining sites, optimize, confirm payback. For each phase include: sites targeted, automation scope, capex, headcount changes, reskilling cohorts, service continuity measures, go/no-go decision gates, and success metrics. Produce a clear, actionable roadmap with dependencies and resource allocation."
+    },
+    {
+      "name": "Risk Assessment Gate",
+      "type": "if",
+      "role": "critic",
+      "systemPrompt": "You are a critical risk reviewer. Assess the roadmap for: (1) execution risks (vendor delays, skill gaps, change resistance); (2) service/account risks (accuracy, fulfillment, delivery during transitions); (3) reputational risks (community backlash, competitor comparison, employee morale); (4) financial risks (capex overruns, savings delays, payback slippage); (5) feasibility risks (capital constraints, headcount pace, reskilling capacity). Identify top 5-7 risks with likelihood and impact. Assess if roadmap structure, sequencing, or assumptions need strengthening. Provide full detailed analysis of each risk and mitigation needs. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Roadmap Risk Refinement",
+      "type": "agent",
+      "role": "refiner",
+      "systemPrompt": "You are a roadmap refiner. Based on risk assessment feedback, strengthen the roadmap: (1) adjust phase timing and sequencing to reduce execution and service risks; (2) embed explicit risk mitigations (contingency buffers, dual-vendor contracts, inventory buffers, communication cadence); (3) add flexibility checkpoints where roadmap can pivot based on Phase 1-2 results; (4) fortify workforce transition safeguards (slower reductions, extended reskilling, higher severance triggers); (5) add reputational protections (transparency reporting, community engagement, testimonials). Preserve financial targets but rebalance risk/return. Output a revised, resilient roadmap with embedded mitigations."
+    },
+    {
+      "name": "Governance & Measurement Validation",
+      "type": "while",
+      "role": "reviewer",
+      "systemPrompt": "You are a governance and measurement reviewer. Evaluate the roadmap for: (1) comprehensive KPIs per phase (labor cost/unit, error rate, throughput, order accuracy, retention, capex tracking, payback indicator); (2) explicit go/no-go gates with decision rules at phase ends; (3) governance cadence (weekly ops, monthly leadership, quarterly board); (4) feedback loops validating ROI assumptions in-flight; (5) measurement ownership and data flow. Check that roadmap includes clear metrics, decision thresholds, and governance structure. Provide full assessment of completeness. On the VERY LAST LINE output EXACTLY ONE keyword: pass or retry.",
+      "whileOptions": ["pass", "retry"],
+      "whileTarget": 5,
+      "whileMaxIterations": 2
+    },
+    {
+      "name": "Board-Ready Polisher",
+      "type": "agent",
+      "role": "polisher",
+      "systemPrompt": "You are a presentation polisher. Format the final validated roadmap as an executive deliverable: (1) create a 1-page executive summary (strategy, phasing, total capex, ROI, top risks/mitigations); (2) produce a 36-month timeline with phase gates and KPIs in visual format; (3) summarize financial projections (capex, payback, NPV); (4) outline workforce transition with headcount curves; (5) highlight governance, measurement framework, and contingency triggers; (6) include best/base/risk case scenarios. Deliver a clear, confident, board-ready roadmap."
+    }
+  ],
+  "explanation": "This 7-step pipeline delivers a validated automation and workforce roadmap. It begins with a combined strategist-analyst step establishing the foundation (strategy, financials, workforce plan). The builder synthesizes this into a detailed 36-month roadmap. A risk critic then assesses it; if risks are unmanageable ('revise'), the roadmap loops back to the refiner to strengthen mitigations and flexibility. If risks are acceptable ('pass'), it advances to governance validation via a while loop (up to 2 retries) ensuring KPIs, gates, and measurement frameworks are complete before final polish. The structure protects against both poor execution (through rigorous risk review) and hidden assumptions (through governance/measurement validation) while keeping the program on track to deliver its 3-year payback promise responsibly."
+}
+```

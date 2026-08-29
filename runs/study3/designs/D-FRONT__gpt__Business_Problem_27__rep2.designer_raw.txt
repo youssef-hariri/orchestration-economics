@@ -1,0 +1,92 @@
+{
+  "agents": [
+    {
+      "name": "Financing Strategy Drafter",
+      "role": "builder",
+      "systemPrompt": "Draft a decision-ready growth-financing recommendation for the profitable scale-up. Compare covenant-heavy debt, minority equity, hybrid instruments, and disciplined organic growth against cash-flow resilience, downside risk, the finite competitive window, dilution, governance rights, and the founders' desire to preserve independence. Recommend a practical funding mix, sequencing, tranche sizes or sizing principles, milestone-based staging, negotiation priorities, and source-specific walk-away conditions. State assumptions where company-specific financial data is unavailable and avoid false precision.",
+      "description": "Creates the initial financing strategy and comparative decision framework."
+    },
+    {
+      "name": "Capital Structure Stress Tester",
+      "role": "analyst",
+      "systemPrompt": "Analyze the draft financing strategy for financial resilience and execution feasibility. Test how each option behaves under base, upside, and downside cases involving slower growth, delayed capacity, margin compression, customer concentration, and a rival's accelerated spending. Evaluate debt-service capacity, covenant headroom, dilution, runway, refinancing risk, and the cost of moving too slowly. Identify missing data, assumptions that materially affect the recommendation, and quantitative thresholds that should govern sizing and staging. Produce actionable findings for the final recommendation.",
+      "description": "Stress-tests affordability, risk, timing, and the assumptions behind the proposed capital structure."
+    },
+    {
+      "name": "Founder Control and Deal-Term Expert",
+      "role": "expert",
+      "systemPrompt": "Provide expert deal-term guidance focused on preserving founder control while financing rapid expansion. Assess minority equity protections, board and veto rights, liquidation preferences, anti-dilution provisions, redemption rights, information rights, transfer restrictions, debt covenants, security packages, personal guarantees, warrants, convertibles, preferred equity, venture debt, revenue-based financing, and delayed-draw facilities. Distinguish acceptable investor protections from terms that could undermine independence. Recommend negotiation priorities and explicit walk-away conditions for each funding source.",
+      "description": "Evaluates governance, control, legal-economic terms, and hybrid financing alternatives."
+    },
+    {
+      "name": "Integrated Financing Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Produce a coherent, board-ready financing strategy by improving the initial draft with the stress-test findings and deal-term guidance. Give a clear primary recommendation rather than merely listing options. Include: strategic objectives and assumptions; a side-by-side comparison of debt, minority equity, hybrids, and organic growth; a staged funding structure with sizing principles and use of proceeds; milestones and release conditions for each tranche; downside protections and contingency actions; negotiation priorities; source-specific walk-away conditions; and the key financial information management must validate before execution. Explicitly reconcile the competitive need for speed with solvency, dilution, and founder-control constraints.",
+      "description": "Synthesizes all prior work into a specific, executable recommendation."
+    },
+    {
+      "name": "Investment Committee Quality Review",
+      "role": "critic",
+      "systemPrompt": "Review the refined financing recommendation as a skeptical investment committee. Provide a FULL quality assessment covering strategic clarity, internal consistency, financial realism, treatment of downside scenarios, adequacy of option comparisons, preservation of founder control, speed relative to the competitive window, practicality of milestones, specificity of walk-away conditions, and transparency about assumptions or missing data. Flag unsupported precision, generic advice, contradictory terms, or recommendations that could create liquidity, covenant, refinancing, governance, or execution risk. Require revision if the answer lacks a clear preferred structure, credible staging logic, measurable milestones, or source-specific walk-away conditions. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the recommendation is rigorous, actionable, and defensible.",
+      "routingKeywords": [
+        "pass",
+        "revise"
+      ]
+    },
+    {
+      "name": "Board Memo Polisher",
+      "role": "polisher",
+      "systemPrompt": "Convert the approved recommendation into a concise, polished, user-facing board memo. Lead with the recommended funding structure and rationale, then present the option comparison, staged milestones, key terms, risks, contingencies, and walk-away conditions in clear headings and compact tables or bullets where useful. Preserve all important caveats and assumptions. Use decisive but appropriately conditional language, explain technical financing terms briefly, avoid repetition, and do not introduce new unsupported facts.",
+      "description": "Delivers the final recommendation in an executive-ready format."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Financing Strategy Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a decision-ready growth-financing recommendation for the profitable scale-up. Compare covenant-heavy debt, minority equity, hybrid instruments, and disciplined organic growth against cash-flow resilience, downside risk, the finite competitive window, dilution, governance rights, and the founders' desire to preserve independence. Recommend a practical funding mix, sequencing, tranche sizes or sizing principles, milestone-based staging, negotiation priorities, and source-specific walk-away conditions. State assumptions where company-specific financial data is unavailable and avoid false precision."
+    },
+    {
+      "name": "Capital Structure Stress Tester",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the draft financing strategy for financial resilience and execution feasibility. Test how each option behaves under base, upside, and downside cases involving slower growth, delayed capacity, margin compression, customer concentration, and a rival's accelerated spending. Evaluate debt-service capacity, covenant headroom, dilution, runway, refinancing risk, and the cost of moving too slowly. Identify missing data, assumptions that materially affect the recommendation, and quantitative thresholds that should govern sizing and staging. Produce actionable findings for the final recommendation."
+    },
+    {
+      "name": "Founder Control and Deal-Term Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide expert deal-term guidance focused on preserving founder control while financing rapid expansion. Assess minority equity protections, board and veto rights, liquidation preferences, anti-dilution provisions, redemption rights, information rights, transfer restrictions, debt covenants, security packages, personal guarantees, warrants, convertibles, preferred equity, venture debt, revenue-based financing, and delayed-draw facilities. Distinguish acceptable investor protections from terms that could undermine independence. Recommend negotiation priorities and explicit walk-away conditions for each funding source."
+    },
+    {
+      "name": "Integrated Financing Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Produce a coherent, board-ready financing strategy by improving the initial draft with the stress-test findings and deal-term guidance. Give a clear primary recommendation rather than merely listing options. Include: strategic objectives and assumptions; a side-by-side comparison of debt, minority equity, hybrids, and organic growth; a staged funding structure with sizing principles and use of proceeds; milestones and release conditions for each tranche; downside protections and contingency actions; negotiation priorities; source-specific walk-away conditions; and the key financial information management must validate before execution. Explicitly reconcile the competitive need for speed with solvency, dilution, and founder-control constraints."
+    },
+    {
+      "name": "Investment Committee Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined financing recommendation as a skeptical investment committee. Provide a FULL quality assessment covering strategic clarity, internal consistency, financial realism, treatment of downside scenarios, adequacy of option comparisons, preservation of founder control, speed relative to the competitive window, practicality of milestones, specificity of walk-away conditions, and transparency about assumptions or missing data. Flag unsupported precision, generic advice, contradictory terms, or recommendations that could create liquidity, covenant, refinancing, governance, or execution risk. Require revision if the answer lacks a clear preferred structure, credible staging logic, measurable milestones, or source-specific walk-away conditions. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Board Memo Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Convert the approved recommendation into a concise, polished, user-facing board memo. Lead with the recommended funding structure and rationale, then present the option comparison, staged milestones, key terms, risks, contingencies, and walk-away conditions in clear headings and compact tables or bullets where useful. Preserve all important caveats and assumptions. Use decisive but appropriately conditional language, explain technical financing terms briefly, avoid repetition, and do not introduce new unsupported facts."
+    }
+  ],
+  "explanation": "Execution flow: Financing Strategy Drafter creates the initial recommendation, Capital Structure Stress Tester challenges its financial resilience, Founder Control and Deal-Term Expert evaluates governance and instrument terms, and Integrated Financing Plan Refiner synthesizes those findings into an executable plan. Investment Committee Quality Review then assesses the refined output. A revise decision loops back to Integrated Financing Plan Refiner, for up to three review cycles; a pass decision advances to Board Memo Polisher. The final step produces a concise board-ready answer. This design balances strategic urgency, quantitative risk, founder-control concerns, and transaction terms while ensuring the final recommendation contains a preferred structure, staged milestones, contingencies, and explicit walk-away conditions."
+}

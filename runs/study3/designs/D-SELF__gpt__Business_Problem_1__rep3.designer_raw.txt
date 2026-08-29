@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "International Market Entry Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive market-entry strategy for a mid-sized environmentally friendly clothing company expanding from Western Europe into a new international region. Select and justify a promising target market or region using explicit criteria such as customer demand, sustainability awareness, competitive intensity, purchasing power, e-commerce readiness, tariffs, regulatory complexity, manufacturing potential, logistics, and political or economic risk. Cover product positioning, target customer segments, localization, pricing, brand narrative, marketing channels, partnerships, distribution, manufacturing and sourcing opportunities, compliance, supply-chain requirements, staffing, budget categories, timeline, risks, mitigation measures, and measurable success indicators. Make reasonable assumptions where data is unavailable and clearly label them. Produce an actionable strategy suitable for executive decision-making.",
+      "description": "Creates the initial end-to-end international expansion strategy."
+    },
+    {
+      "name": "Market and Feasibility Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed international expansion strategy in depth. Assess the selected market, customer segments, demand assumptions, competitive landscape, sustainability trends, channel economics, pricing logic, manufacturing opportunities, logistics, regulatory considerations, and financial or operational feasibility. Identify missing evidence, unsupported assumptions, contradictions, and execution risks. Recommend concrete improvements and, where precise data is unavailable, provide practical validation methods and decision criteria. Return detailed findings that can be used to strengthen the strategy.",
+      "description": "Tests the strategy's market logic, feasibility, assumptions, and evidence requirements."
+    },
+    {
+      "name": "Sustainable Apparel Market Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed market-entry strategy from the perspective of international sustainable apparel, ethical sourcing, brand localization, consumer behavior, retail and digital commerce, and cross-border operations. Identify relevant issues involving environmental claims, certifications, product adaptation, labor standards, import requirements, data privacy, consumer protection, packaging, reverse logistics, and supplier due diligence. Recommend practical, commercially realistic improvements that protect credibility and support scalable growth. Distinguish universal best practices from market-specific matters requiring local counsel or validation.",
+      "description": "Adds specialist guidance on sustainable fashion, localization, compliance, and operational execution."
+    },
+    {
+      "name": "Executive Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite and improve the initial strategy using all available analytical and expert feedback. Resolve contradictions, remove unsupported claims, make assumptions explicit, and prioritize the most attractive target market or region. Produce a coherent, actionable plan covering: executive recommendation; market rationale; customer segments; product and brand positioning; localization; pricing; marketing and acquisition channels; sales and distribution; manufacturing and sourcing; legal, sustainability, and compliance requirements; initial operating model; phased launch roadmap; budget and resource priorities; risks and mitigations; KPIs; and go/no-go validation milestones. Use clear headings, tables where useful, and distinguish recommendations from items requiring local research. The result must be useful to company leadership and implementation teams.",
+      "description": "Integrates research and specialist feedback into a practical, decision-ready expansion plan."
+    },
+    {
+      "name": "Strategy Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined international market-entry strategy comprehensively. Assess whether it is specific, realistic, internally consistent, evidence-aware, financially and operationally plausible, suitable for an environmentally friendly clothing company, and actionable for the first 12 to 24 months. Check the target-market rationale, customer and product positioning, marketing channels, localization, manufacturing opportunities, compliance, sustainability claims, logistics, risks, sequencing, resource needs, KPIs, and validation milestones. Identify any material omissions, ambiguity, unsupported assumptions, or recommendations that could expose the company to reputational, legal, or commercial risk. Provide a full assessment with detailed strengths, weaknesses, and exact corrections needed. On the very last line output exactly one keyword: pass or revise.",
+      "description": "Determines whether the refined strategy is sufficiently complete, credible, and actionable."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing version of the approved international market-entry strategy. Preserve the strongest recommendations and incorporate any available corrections. Present it in a concise but comprehensive executive format with clear headings, prioritized actions, timelines, responsibilities or capability needs, risks, KPIs, assumptions, and next steps. Ensure the chosen market and rationale are explicit, and that product positioning, marketing channels, and initial operational steps are easy to find. Remove repetition, vague wording, unsupported certainty, and internal drafting commentary. Do not mention agents, reviews, pipeline steps, or quality assessments.",
+      "description": "Formats and finalizes the strategy for executive and operational use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "International Market Entry Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive market-entry strategy for a mid-sized environmentally friendly clothing company expanding from Western Europe into a new international region. Select and justify a promising target market or region using explicit criteria such as customer demand, sustainability awareness, competitive intensity, purchasing power, e-commerce readiness, tariffs, regulatory complexity, manufacturing potential, logistics, and political or economic risk. Cover product positioning, target customer segments, localization, pricing, brand narrative, marketing channels, partnerships, distribution, manufacturing and sourcing opportunities, compliance, supply-chain requirements, staffing, budget categories, timeline, risks, mitigation measures, and measurable success indicators. Make reasonable assumptions where data is unavailable and clearly label them. Produce an actionable strategy suitable for executive decision-making."
+    },
+    {
+      "name": "Market and Feasibility Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed international expansion strategy in depth. Assess the selected market, customer segments, demand assumptions, competitive landscape, sustainability trends, channel economics, pricing logic, manufacturing opportunities, logistics, regulatory considerations, and financial or operational feasibility. Identify missing evidence, unsupported assumptions, contradictions, and execution risks. Recommend concrete improvements and practical validation methods where data is unavailable. Return detailed findings for strategy improvement."
+    },
+    {
+      "name": "Sustainable Apparel Market Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed strategy from the perspective of international sustainable apparel, ethical sourcing, brand localization, consumer behavior, retail and digital commerce, and cross-border operations. Identify issues involving environmental claims, certifications, product adaptation, labor standards, import requirements, consumer protection, packaging, reverse logistics, and supplier due diligence. Recommend practical improvements and distinguish best practices from matters requiring local validation."
+    },
+    {
+      "name": "Executive Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite and improve the strategy using all available analytical and expert feedback. Resolve contradictions, make assumptions explicit, and prioritize the most attractive target market or region. Produce a coherent plan covering market rationale, customer segments, product and brand positioning, localization, pricing, marketing and acquisition channels, sales and distribution, manufacturing and sourcing, compliance, operating model, phased roadmap, resource priorities, risks, KPIs, and go/no-go validation milestones."
+    },
+    {
+      "name": "Strategy Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy for specificity, realism, internal consistency, evidence awareness, financial and operational plausibility, sustainability credibility, compliance coverage, sequencing, risks, and actionability over the first 12 to 24 months. Provide a full assessment with detailed strengths, weaknesses, omissions, unsupported assumptions, and exact corrections needed. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing version of the approved strategy. Present a concise but comprehensive executive plan with explicit market rationale, product positioning, marketing channels, initial operational steps, timeline, resource needs, risks, KPIs, assumptions, and next steps. Remove repetition and drafting commentary. Do not mention agents, reviews, pipeline steps, or quality assessments."
+    }
+  ],
+  "explanation": "The flow starts by producing a complete expansion strategy, then adds independent market-feasibility analysis and sustainable-apparel expertise before a refiner integrates the findings. A quality assessment follows the refined strategy; if it outputs revise, execution returns to the refiner, while pass proceeds to the final polisher. The final output is therefore both strategically comprehensive and presentation-ready."
+}

@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Crisis Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert PR strategist. Draft a comprehensive crisis management strategy for a global brand facing backlash in an international market due to a culturally insensitive humorous ad. Include immediate response steps, apology frameworks, stakeholder communication, and long-term reputation restoration initiatives.",
+      "description": "Creates the initial PR crisis strategy and reputation restoration plan."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a PR strategy refiner. Improve the crisis management strategy based on any provided feedback. Ensure all local cultural nuances are respected, the tone is appropriately contrite, and the action plan is highly actionable and realistic.",
+      "description": "Refines the strategy based on quality and cultural feedback."
+    },
+    {
+      "name": "Cultural and PR Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a cultural sensitivity and PR crisis expert. Review the refined strategy. Assess if it adequately addresses the cultural misunderstanding, avoids further alienation, and provides a realistic path to reputation restoration. Provide your FULL assessment — strengths, weaknesses, specific cultural or strategic issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the strategy for cultural sensitivity and PR viability."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications polisher. Format the final crisis management strategy into a professional, board-ready document with clear headings, bullet points, an executive summary, and impeccable grammar.",
+      "description": "Formats and finalizes the output for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Crisis Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert PR strategist. Draft a comprehensive crisis management strategy for a global brand facing backlash in an international market due to a culturally insensitive humorous ad. Include immediate response steps, apology frameworks, stakeholder communication, and long-term reputation restoration initiatives."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a PR strategy refiner. Improve the crisis management strategy based on any provided feedback. Ensure all local cultural nuances are respected, the tone is appropriately contrite, and the action plan is highly actionable and realistic."
+    },
+    {
+      "name": "Cultural and PR Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a cultural sensitivity and PR crisis expert. Review the refined strategy. Assess if it adequately addresses the cultural misunderstanding, avoids further alienation, and provides a realistic path to reputation restoration. Provide your FULL assessment — strengths, weaknesses, specific cultural or strategic issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications polisher. Format the final crisis management strategy into a professional, board-ready document with clear headings, bullet points, an executive summary, and impeccable grammar."
+    }
+  ],
+  "explanation": "Execution flow: Crisis Strategy Builder → Strategy Refiner → Cultural and PR Quality Gate (if revise, loops back to Strategy Refiner; if pass, proceeds to Executive Polisher) → Executive Polisher. This design starts with a Builder to draft the initial PR and cultural recovery strategy. The Refiner enhances the draft, and the Quality Gate evaluates it for cultural sensitivity and strategic soundness. If the gate identifies issues, it routes back to the Refiner for corrections. Once approved, the Polisher formats the final output for executive presentation, ensuring a fully automated, high-quality result."
+}

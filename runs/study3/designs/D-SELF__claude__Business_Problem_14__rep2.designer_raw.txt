@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cultural Inclusion Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive framework for inclusive digital product design, including feature suggestions, design considerations, and content guidelines"
+    },
+    {
+      "name": "Cultural Expert Validator",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on cultural sensitivity, accessibility standards, and global inclusive design best practices"
+    },
+    {
+      "name": "Diversity & Accessibility Analyst",
+      "role": "analyst",
+      "description": "Analyzes the proposed framework for gaps in cultural representation, accessibility compliance, and potential blind spots across different user demographics"
+    },
+    {
+      "name": "Inclusion Framework Refiner",
+      "role": "refiner",
+      "description": "Addresses identified gaps and weaknesses, strengthening cultural coverage, accessibility measures, and content guidelines based on expert feedback"
+    },
+    {
+      "name": "Comprehensive Quality Assessor",
+      "role": "critic",
+      "description": "Conducts thorough quality review ensuring all cultural perspectives are represented, recommendations are actionable, and no user groups are overlooked or offended"
+    },
+    {
+      "name": "Final Polish Formatter",
+      "role": "polisher",
+      "description": "Finalizes the deliverable with clear formatting, organized structure, and user-ready presentation of features, design considerations, and content guidelines"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cultural Inclusion Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing an inclusive digital product for global users. Create a comprehensive initial framework that includes: (1) Feature suggestions promoting accessibility and cultural inclusivity, (2) Design considerations for diverse backgrounds (visual, linguistic, religious, ability-based), (3) Content guidelines ensuring respectful representation. Cover at least 8 major cultural/accessibility dimensions. Be specific and actionable."
+    },
+    {
+      "name": "Cultural Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural sensitivity and global inclusion expert. Review the proposed framework and enhance it with: (1) Industry best practices for inclusive design, (2) Specific examples of cultural considerations that were missed or underexplored, (3) Accessibility standards (WCAG, ATAG) alignment, (4) Recommendations for community engagement and testing with diverse user groups. Identify strengths and gaps explicitly."
+    },
+    {
+      "name": "Diversity & Accessibility Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are analyzing a digital product inclusion framework. Identify: (1) Gaps in cultural coverage - which regions, religions, disabilities, or groups are underrepresented?, (2) Potential offense vectors - content, imagery, or terminology risks, (3) Accessibility compliance gaps, (4) Language and localization blind spots, (5) Data privacy/trust issues for non-Western users. Provide detailed analysis with specific examples of what's missing or problematic."
+    },
+    {
+      "name": "Inclusion Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Based on the expert feedback and gap analysis provided, strengthen the framework by: (1) Adding missing cultural dimensions and user groups, (2) Expanding design considerations for underserved accessibility needs, (3) Revising content guidelines to eliminate potential offense vectors, (4) Adding specific implementation guidance for identified gaps, (5) Including community co-design and testing recommendations. Preserve all previous strengths while addressing all identified weaknesses."
+    },
+    {
+      "name": "Comprehensive Quality Assessor",
+      "role": "critic",
+      "type": "while",
+      "maxIterations": 3,
+      "targetStep": "Inclusion Framework Refiner",
+      "systemPrompt": "You are a comprehensive quality assessor for an inclusive digital product framework. Conduct a thorough review: (1) Are all major global regions and cultural groups represented?, (2) Do design considerations cover visual accessibility, hearing, motor, cognitive, and language needs?, (3) Are content guidelines specific enough to prevent offense while enabling authentic cultural representation?, (4) Are recommendations actionable for a development team?, (5) Is there evidence of input from diverse stakeholders or communities?. Provide FULL detailed assessment with specific examples of strengths and remaining gaps. If the framework meets high standards for comprehensiveness, cultural respect, and actionability across 8+ dimensions, output: pass. Otherwise output: retry."
+    },
+    {
+      "name": "Final Polish Formatter",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing an inclusive digital product design framework for presentation to stakeholders. Format the output with: (1) Executive summary of inclusion approach, (2) Organized sections for Features (grouped by inclusion dimension), (3) Design Considerations (categorized by user need type), (4) Content Guidelines (with specific do's and don'ts), (5) Implementation checklist, (6) Community engagement strategy. Ensure clarity, professional presentation, and accessibility of the document itself. Make it ready for product team use."
+    }
+  ],
+  "explanation": "This pipeline ensures comprehensive, culturally-informed product design through structured collaboration: The Builder establishes the initial framework, the Expert validates against global standards and identifies domain-specific best practices, the Analyst performs gap analysis to find blind spots and potential offense vectors, and the Refiner strengthens the framework based on combined feedback. The while-loop Quality Assessor (max 3 iterations) ensures the framework achieves high standards across multiple inclusion dimensions before routing to the Polisher. This design prevents premature approval of incomplete cultural coverage while maintaining efficiency. The flow: Builder → Expert → Analyst → Refiner → Quality Check (while loop, max 3x, routes back to Refiner if needed) → Polisher, ensuring no user groups are inadvertently excluded or offended."
+}
+```

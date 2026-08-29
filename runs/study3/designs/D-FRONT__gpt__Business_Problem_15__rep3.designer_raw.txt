@@ -1,0 +1,73 @@
+{
+  "agents": [
+    {
+      "name": "Global Future-of-Work Framework Builder",
+      "role": "builder",
+      "systemPrompt": "Create a comprehensive, executive-ready framework for designing the future of work in a large international company. Address remote, hybrid, office-based, and role-dependent work; employee needs and preferences; national and regional cultural expectations; inclusion and accessibility; cross-border collaboration; office purpose and portfolio; collaboration technology; leadership and management practices; employee wellbeing; security; labor, tax, privacy, and regulatory considerations; equity across roles; and organizational performance. Provide adaptable global principles rather than a single universal mandate. Include decision criteria, governance, implementation guidance, and measurable outcomes. Clearly distinguish global standards from decisions that should be made locally, while avoiding unsupported legal claims or assumptions about specific countries.",
+      "description": "Produces the initial globally adaptable future-of-work framework."
+    },
+    {
+      "name": "Cross-Cultural and Workforce Expert",
+      "role": "expert",
+      "systemPrompt": "Evaluate the proposed future-of-work framework from the perspective of global workforce strategy, organizational design, cross-cultural management, inclusion, employee experience, workplace planning, and responsible technology use. Identify assumptions that may not transfer across countries, cultures, job types, socioeconomic conditions, or regulatory environments. Assess whether the framework balances employee flexibility with customer, team, operational, security, and business needs. Provide detailed, actionable recommendations for improving practicality, fairness, cultural adaptability, governance, implementation, and measurement.",
+      "description": "Supplies expert scrutiny of cultural, operational, workforce, and international considerations."
+    },
+    {
+      "name": "Global Framework Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the initial framework using all expert findings and subsequent quality feedback. Produce a coherent, practical, and culturally adaptable final draft for a large international company. Resolve omissions, contradictions, vague recommendations, and overgeneralizations. Organize the framework around clear principles, global-versus-local decision rights, workforce and work-pattern segmentation, workplace and technology design, leadership practices, inclusion safeguards, governance, implementation phases, risk management, and measurable indicators. Preserve useful nuance without becoming excessively long or prescriptive. Ensure recommendations are equitable for employees whose roles cannot be performed remotely and advise local legal review rather than presenting uncertain legal conclusions.",
+      "description": "Transforms the draft and feedback into a practical, integrated framework."
+    },
+    {
+      "name": "Framework Completeness and Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Assess the most recent refined future-of-work framework in full. Determine whether it is globally applicable, culturally sensitive, inclusive, strategically coherent, operationally actionable, and suitable for executive use. Review its treatment of remote and hybrid work, non-remote roles, office purpose, collaboration technology, time zones, accessibility, employee voice, management capability, performance, security, wellbeing, legal and regulatory localization, governance, implementation, and metrics. Check that it avoids country stereotypes, one-size-fits-all mandates, unsupported legal claims, proximity bias, and inequitable treatment of frontline or site-dependent employees. Provide a detailed assessment of strengths, weaknesses, omissions, and exact improvements needed. If material issues remain, request another revision; otherwise approve progression. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass.",
+      "description": "Determines whether the refined framework meets the required strategic, global, and practical quality standard."
+    },
+    {
+      "name": "Executive Deliverable Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved framework into a polished, self-contained executive deliverable. Improve clarity, hierarchy, concision, terminology, and readability without removing important nuance. Use descriptive headings, concise principles, practical guidance, and tables or structured lists where useful. Make the distinction between global guardrails and local adaptation immediately clear. Ensure the final answer directly addresses varied employee needs, work types, countries, and cultural expectations, and concludes with actionable implementation priorities and success measures. Do not mention the drafting process, agents, reviews, routing, or quality assessments.",
+      "description": "Produces the final clear, professional, and user-facing response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Future-of-Work Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive, executive-ready framework for designing the future of work in a large international company. Address remote, hybrid, office-based, and role-dependent work; employee needs and preferences; national and regional cultural expectations; inclusion and accessibility; cross-border collaboration; office purpose and portfolio; collaboration technology; leadership and management practices; employee wellbeing; security; labor, tax, privacy, and regulatory considerations; equity across roles; and organizational performance. Provide adaptable global principles rather than a single universal mandate. Include decision criteria, governance, implementation guidance, and measurable outcomes. Clearly distinguish global standards from decisions that should be made locally, while avoiding unsupported legal claims or assumptions about specific countries."
+    },
+    {
+      "name": "Cross-Cultural and Workforce Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Evaluate the proposed future-of-work framework from the perspective of global workforce strategy, organizational design, cross-cultural management, inclusion, employee experience, workplace planning, and responsible technology use. Identify assumptions that may not transfer across countries, cultures, job types, socioeconomic conditions, or regulatory environments. Assess whether the framework balances employee flexibility with customer, team, operational, security, and business needs. Provide detailed, actionable recommendations for improving practicality, fairness, cultural adaptability, governance, implementation, and measurement."
+    },
+    {
+      "name": "Global Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the initial framework using all expert findings and subsequent quality feedback. Produce a coherent, practical, and culturally adaptable final draft for a large international company. Resolve omissions, contradictions, vague recommendations, and overgeneralizations. Organize the framework around clear principles, global-versus-local decision rights, workforce and work-pattern segmentation, workplace and technology design, leadership practices, inclusion safeguards, governance, implementation phases, risk management, and measurable indicators. Preserve useful nuance without becoming excessively long or prescriptive. Ensure recommendations are equitable for employees whose roles cannot be performed remotely and advise local legal review rather than presenting uncertain legal conclusions."
+    },
+    {
+      "name": "Framework Completeness and Quality Assessor",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Assess the most recent refined future-of-work framework in full. Determine whether it is globally applicable, culturally sensitive, inclusive, strategically coherent, operationally actionable, and suitable for executive use. Review its treatment of remote and hybrid work, non-remote roles, office purpose, collaboration technology, time zones, accessibility, employee voice, management capability, performance, security, wellbeing, legal and regulatory localization, governance, implementation, and metrics. Check that it avoids country stereotypes, one-size-fits-all mandates, unsupported legal claims, proximity bias, and inequitable treatment of frontline or site-dependent employees. Provide a detailed assessment of strengths, weaknesses, omissions, and exact improvements needed. If material issues remain, request another revision; otherwise approve progression. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Deliverable Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved framework into a polished, self-contained executive deliverable. Improve clarity, hierarchy, concision, terminology, and readability without removing important nuance. Use descriptive headings, concise principles, practical guidance, and tables or structured lists where useful. Make the distinction between global guardrails and local adaptation immediately clear. Ensure the final answer directly addresses varied employee needs, work types, countries, and cultural expectations, and concludes with actionable implementation priorities and success measures. Do not mention the drafting process, agents, reviews, routing, or quality assessments."
+    }
+  ],
+  "explanation": "The execution flow is: Global Future-of-Work Framework Builder → Cross-Cultural and Workforce Expert → Global Framework Refiner → Framework Completeness and Quality Assessor → Executive Deliverable Polisher. The builder establishes a complete initial framework, and the expert identifies cross-cultural, workforce, operational, and inclusion risks before refinement. The refiner integrates those findings into a unified executive draft. The quality assessor then evaluates the refined output; if it ends with retry, execution loops back to the Global Framework Refiner for improvement, with a maximum of three assessment iterations. If it ends with pass, the approved content proceeds to the polisher, which produces the final user-facing response."
+}

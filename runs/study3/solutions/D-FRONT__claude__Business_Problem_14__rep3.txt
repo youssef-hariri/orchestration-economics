@@ -1,0 +1,650 @@
+# COMPREHENSIVE BLUEPRINT FOR CULTURALLY INCLUSIVE GLOBAL DIGITAL PRODUCT
+
+## EXECUTIVE SUMMARY
+
+This document provides product teams with implementable guidance for designing digitally inclusive products across 190+ countries, multiple writing systems, diverse cultural contexts, and accessibility standards. It addresses technical internationalization (i18n), WCAG 2.2 AA+ compliance, cultural risk governance, privacy/regulatory requirements, and operational implementation frameworks. Every recommendation includes concrete examples, code samples, decision trees, measurement criteria, and pre-launch checklists.
+
+**Three foundational principles**:
+1. **Population-metric prioritization**: Language and feature investment based on user population and regional opportunity, never GDP alone
+2. **Genuine optionality and safety-first governance**: Identity data collected only when necessary; all fields truly optional; criminalization and persecution risks assessed before deployment
+3. **Accessibility and inclusion from day one**: Core product features work for users with disabilities, low literacy, low bandwidth, and assistive technology
+
+---
+
+## GUIDING PRINCIPLES
+
+### For All Teams
+
+- **Transparency over assumption**: Document design rationales; acknowledge gaps; publish roadmaps; solicit community feedback
+- **User agency over convenience**: Users control language, locale, display settings, data visibility—never auto-select on behalf of users
+- **Safety over data maximization**: Minimize sensitive identity data collection; assess criminalization/persecution risks; provide encryption and deletion mechanisms
+- **Evidence-based over intuition**: Use speaker population data, user analytics, community input—not corporate headquarters preferences or stereotypes
+- **Intersectionality and overlap**: Design for users experiencing multiple marginalization (disabled + minority language + LGBTQ+), not siloed identity categories
+- **Accountability through measurement**: Define inclusion KPIs; audit regularly; publish results; respond to equity gaps
+
+### For Product & Design Teams
+
+- Users are experts in their own contexts; listen more than you assume
+- Diversity checklists prevent token solutions, not actual bias; test with real users from target communities
+- "Neutral" is a cultural choice (US corporate neutrality ≠ German formality ≠ Japanese politeness); adapt tone per culture
+- Accessibility is inclusion; include disabled users from the start, not as an afterthought
+
+### For Engineering Teams
+
+- Internationalization is infrastructure, not a feature; plan accordingly in data models, APIs, and deployment
+- Logical CSS properties and Unicode standards are non-negotiable; technical debt in i18n is expensive to remediate
+- Test on actual devices, keyboards, and assistive technology in target locales; simulators miss real-world complexity
+- Performance optimization (especially offline and low-bandwidth) is inclusion for users in emerging markets
+
+### For Legal & Compliance Teams
+
+- Privacy laws vary significantly by jurisdiction (GDPR ≠ CCPA ≠ PIPL); map compliance requirements by region
+- Criminalization of LGBTQ+ identity, caste-based discrimination, and ethnic profiling are real user safety risks; assess and mitigate
+- Data collection should meet a legitimate business need; minimize for inclusion/personalization features
+- Moderation policies apply globally; conflicting cultural norms require explicit decision-making and transparent escalation
+
+---
+
+# SECTION 1: PRODUCT FEATURES FOR CULTURAL INCLUSIVITY
+
+## 1.1 LANGUAGE & LOCALIZATION INFRASTRUCTURE
+
+### 1.1.1 Multi-Language Support: Population-Weighted Framework
+
+**Principle**: Language prioritization is evidence-based, transparent, and grounded in speaker population + regional opportunity—not GDP-only.
+
+#### Tier 1 Launch Languages (15 languages, ~3.5 billion speakers, ~60% global population)
+
+| Language | Native Speakers | Region(s) | Strategic Rationale |
+|----------|-----------------|-----------|-------------------|
+| Mandarin Chinese | 920M | East Asia (China) | Largest native speaker base; China's economic/tech significance |
+| Spanish | 475M | Latin America, Spain, US Hispanic | Largest Americas population; second-most globally |
+| Arabic | 380M | MENA, North Africa, Gulf | 26 countries; regional lingua franca; diverse sub-dialects |
+| Hindi | 345M | South Asia (India) | India's fastest-growing tech economy; underserved globally |
+| Portuguese | 252M | Brazil, Portugal, Angola, Mozambique | Brazil economic weight; African growth markets (Angola, Mozambique) |
+| French | 280M | Africa (francophone), France, Belgium, Canada | Highest growth in Sub-Saharan Africa; 43% of Tier 1 African speakers |
+| Russian | 154M | Russia, Eastern Europe, Central Asia | Geopolitical significance; post-Soviet tech adoption |
+| Japanese | 125M | Japan, diaspora | Developed economy; tech-native user base; innovation leader |
+| Bengali | 265M | Bangladesh, India (West Bengal) | Second-largest after Mandarin; chronically underserved in tech |
+| Punjabi | 125M | India, Pakistan, diaspora | Major South Asian language; diaspora in North America, UK |
+| Marathi | 83M | India (Maharashtra) | Economic hub (Mumbai); regional dominance; underrepresented |
+| Gujarati | 66M | India (Gujarat), diaspora | Regional economic significance; diaspora in East Africa, US |
+| Swahili | 140M | East Africa (Kenya, Tanzania, Uganda, Rwanda, Burundi) | Fastest-growing tech market; regional lingua franca; 5-nation bloc |
+| Vietnamese | 95M | Vietnam, diaspora | Emerging economy; rapid tech adoption; diaspora communities |
+| Turkish | 88M | Turkey, Cyprus, diaspora | Asia-Europe bridge; regional economic significance; underrepresented |
+
+**Rationale for Tier 1 selection**: These 15 languages represent 60% of global population, cover all major economic regions (Asia, Africa, Latin America, Europe, Middle East), include underserved high-population languages (Bengali, Swahili, Marathi), and balance emerging markets with developed economies.
+
+#### Tier 2 Expansion (6–12 months post-launch)
+
+Thai (70M), Polish (38M), Yoruba (45M), Amharic (32M), Ukrainian (41M), Hausa (72M), Igbo (27M), Indonesian (43M), Tagalog/Filipino (48M), Somali (19M), Korean (81M), Italian (67M)
+
+**Rationale**: Regional dominance; fast-growing tech adoption; diaspora communities; African language representation.
+
+#### Tier 3 Regional & Minority Expansion (12–24 months)
+
+Kurdish (20M), Dari (20M), Pashto (50M), Uyghur (11M), Sindhi (25M), Assamese (13M), Kannada (44M), Telugu (74M), Tamil (74M), Malayalam (35M), Catalan (7.5M), Basque (1.3M), Welsh (880K), Irish (1.9M), Sami (30K)
+
+#### Tier 4: Community-Requested Expansion (Ongoing)
+
+Publish quarterly language roadmap with community voting; allocate 10–15% of translation budget to nominated under-resourced languages.
+
+#### Transparency & Public Reporting
+
+```
+[Product Name] Language Coverage Dashboard
+─────────────────────────────────────────────
+✓ Tier 1 Live (15 languages): 3.5B speakers, 60% coverage
+  Mandarin, Spanish, Arabic, Hindi, Portuguese, Russian, Japanese, 
+  Bengali, Punjabi, Marathi, Gujarati, Swahili, Vietnamese, Turkish
+
+⏳ Tier 2 In Development (12 languages): Target Q3 2025
+  Thai, Polish, Yoruba, Amharic, Ukrainian, Hausa, Igbo, 
+  Indonesian, Tagalog, Somali, Korean, Italian
+
+📋 Tier 3 Planned (15+ languages): Q4 2025–Q4 2026
+  Kurdish, Dari, Pashto, Tamil, Telugu, Kannada, etc.
+
+🗳️ COMMUNITY VOTE: Vote for next language
+  Hausa (450 votes) – Tier 2, targeting Q3 2025
+  Sami (280 votes) – Tier 3, targeting Q2 2026
+  Sindhi (520 votes) – Tier 3, targeting Q4 2025
+  [Suggest New Language]
+
+Quarterly Metrics Published:
+• % of user base with primary language supported
+• Unmet demand by region
+• Translation budget allocation per language
+```
+
+**Do's**:
+- ✓ Prioritize by population + regional economic opportunity (not GDP-only)
+- ✓ Include African, South Asian, Southeast Asian languages from Tier 1
+- ✓ Publish transparent, data-driven roadmap; update quarterly
+- ✓ Allocate budget for minority/endangered languages; demonstrate commitment
+- ✓ Track adoption per language; adjust priorities based on demand
+- ✓ Be honest: "We currently support 60% of global population; these 25 languages remain unmet"
+
+**Don'ts**:
+- ✗ Don't claim "global product" with 5–10 languages (excludes 80% of population)
+- ✗ Don't use GDP-only metric (perpetuates wealth-based exclusion)
+- ✗ Don't delay launch waiting for all languages; phase implementation
+- ✗ Don't promise support for 50+ languages without resource plan
+- ✗ Don't neglect minority languages; set aside dedicated budget
+
+---
+
+### 1.1.2 Language & Script Selection Interface
+
+**Problem**: Device language detection assumes single-user ownership; fails in shared-device contexts (internet cafés, family computers, workplaces) prevalent in emerging markets. Language selection is also a cultural/political decision—not purely technical.
+
+#### Persistent Language Selector (Always Visible, Never Hidden)
+
+Language selection must be prominently accessible in header/footer—not buried in Settings. One-click language change; no page reload.
+
+```html
+<!-- Header Language Selector -->
+<header class="app-header" role="banner">
+  <div class="language-selector" role="navigation" aria-label="Language selection">
+    <label for="language-select" class="visually-hidden">Select language</label>
+    <select 
+      id="language-select" 
+      aria-label="Select language"
+      class="language-dropdown"
+    >
+      <optgroup label="Tier 1 (Most Common)">
+        <option value="es" data-flag="🇪🇸">Español — 475M speakers</option>
+        <option value="zh-Hans" data-flag="🇨🇳">中文 — 920M speakers</option>
+        <option value="hi" data-flag="🇮🇳">हिन्दी — 345M speakers</option>
+        <option value="ar" data-flag="🇸🇦">العربية — 380M speakers</option>
+        <option value="en" selected data-flag="🇺🇸">English — 1.5B fluent</option>
+      </optgroup>
+    </select>
+    
+    <!-- Audio Pronunciation (Accessibility) -->
+    <button id="language-pronounce" aria-label="Hear pronunciation" type="button">🔊</button>
+  </div>
+</header>
+
+<script>
+// Client-side language switching (no page reload)
+document.getElementById('language-select').addEventListener('change', (e) => {
+  const lang = e.target.value;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = ['ar', 'he', 'ur', 'fa'].includes(lang) ? 'rtl' : 'ltr';
+  
+  // Load localized strings from JSON
+  fetch(`/locales/${lang}.json`)
+    .then(res => res.json())
+    .then(strings => updateUIStrings(strings));
+  
+  // Update formatting (dates, numbers, calendar)
+  updateLocaleSettings(lang);
+  
+  // Persist choice
+  localStorage.setItem('userLanguage', lang);
+});
+</script>
+```
+
+#### First-Load Onboarding (Non-Assumptive)
+
+```
+Screen 1: Language Selection
+┌─────────────────────────────────────────┐
+│   Welcome to [Product Name]             │
+│                                         │
+│   Which language do you prefer?         │
+│                                         │
+│   Suggested: English (based on device)  │
+│                                         │
+│   Tier 1 (Most Common):                 │
+│   ☐ Español 🇪🇸 "Hola"                │
+│   ☐ 中文 🇨🇳 "你好"                   │
+│   ☐ हिन्दी 🇮🇳 "नमस्ते"               │
+│   ☐ العربية 🇸🇦 "مرحبا"               │
+│   ☐ Português 🇧🇷 "Olá"               │
+│   ☐ English 🇺🇸 "Hello"               │
+│   [View all 15 languages ▼]             │
+│                                         │
+│   [🔊 Hear it] [Continue] [Skip]       │
+└─────────────────────────────────────────┘
+
+Screen 2: Interface vs. Content Language (Optional)
+┌─────────────────────────────────────────┐
+│   Language Preferences                  │
+│                                         │
+│   Interface (menus, buttons):           │
+│   [English ▼]                           │
+│                                         │
+│   Content (articles, descriptions):     │
+│   [English ▼]                           │
+│                                         │
+│   ☑ Use different languages for UI     │
+│      and content (e.g., UI in English,  │
+│      articles in Hindi)                 │
+│                                         │
+│   [Continue]                            │
+└─────────────────────────────────────────┘
+```
+
+**Do's**:
+- ✓ Always ask user to confirm language; never auto-select
+- ✓ Show language names in their native script (العربية, हिन्दी)
+- ✓ Include visual cues (flag emojis, script samples, audio pronunciation)
+- ✓ Support interface language independent from content language
+- ✓ Make language selection persist across sessions
+- ✓ Support low-literacy users with icon-based language picker
+
+**Don'ts**:
+- ✗ Don't auto-select device language without confirmation
+- ✗ Don't hide language selector in Settings
+- ✗ Don't require page reload for language change
+- ✗ Don't assume all users prefer English
+- ✗ Don't force language choice; allow "Continue without selecting"
+
+---
+
+### 1.1.3 Right-to-Left (RTL) & Bidirectional Text Support
+
+**Critical requirement**: Proper RTL/BiDi implementation is non-negotiable for Arabic, Hebrew, Urdu, Persian, N'Ko (450M+ speakers). Broken RTL makes product unusable.
+
+#### HTML Fundamentals
+
+```html
+<!-- Document-level directionality -->
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <!-- All content flows RTL by default -->
+  </body>
+</html>
+
+<!-- Mixed-direction content (English in Arabic text) -->
+<p dir="rtl" lang="ar">
+  زر موقعنا على 
+  <bdi dir="ltr">example.com</bdi>  <!-- bdi = isolate LTR content -->
+  للمزيد من المعلومات
+</p>
+
+<!-- Form in RTL context -->
+<form dir="rtl" lang="ar">
+  <div class="form-group">
+    <label for="email">البريد الإلكتروني</label>
+    <input type="email" id="email" dir="ltr" placeholder="example@email.com">
+  </div>
+  <button type="submit">إرسال</button>
+</form>
+```
+
+#### CSS: Use Logical Properties (Auto-Flip for RTL)
+
+```css
+/* ✓ Good: Logical properties flip automatically for RTL */
+.button {
+  padding-inline: 16px;        /* margin on start/end */
+  padding-block: 8px;          /* margin on top/bottom */
+  margin-inline-start: auto;   /* aligns to logical start */
+  border-inline-start: 2px solid; /* border on logical start */
+  text-align: start;           /* aligns to logical start */
+}
+
+/* ✓ Alternative: Direction-aware selectors */
+[dir="rtl"] .sidebar {
+  inset-inline-start: 0;  /* sidebar on right in RTL, left in LTR */
+}
+
+/* ✗ Bad: Physical properties (don't flip) */
+.button {
+  margin-left: 16px;  /* Always left, breaks in RTL! */
+  float: left;
+}
+```
+
+#### Component RTL Checklist
+
+| Component | RTL Requirement | Implementation |
+|-----------|-----------------|-----------------|
+| Navigation | Items flow right-to-left | `flex-direction: row-reverse` for RTL |
+| Sidebar | Appears on right | `inset-inline-start: 0` (auto-flips) |
+| Tabs | Tab bar flows RTL | `flex-direction: row-reverse` |
+| Buttons | Icon + text positioned correctly | Flexbox with `flex-direction: row-reverse` for RTL |
+| Forms | Labels and inputs aligned properly | CSS Grid; label and input swap columns for RTL |
+| Modal | Close button in top-left (RTL) or top-right (LTR) | `inset-inline-end` (logical property) |
+| Breadcrumb | Flows RTL with correct separators | `flex-direction: row-reverse`; separator icon reversed |
+| Pagination | Previous/Next positioned correctly | Reverse button order for RTL |
+| Progress Bar | Fills right-to-left | CSS adjusts for RTL direction |
+| Numbers | Always read LTR (123 = 1-2-3, never 3-2-1) | Use `dir="ltr"` on numeric inputs; text-direction LTR |
+| Images | Photos don't mirror; UI chrome does | Mirror only procedurally-generated icons, never photos |
+
+#### Bidirectional Algorithm (BiDi) Integration
+
+```javascript
+// Using ICU (International Components for Unicode)
+// Problem: English domain in Arabic sentence
+const arabicText = "Visit example.com for info زيارة الموقع";
+
+// Solution: Use ICU Bidi class
+const bidi = new ICU.Bidi(arabicText, ICU.Bidi.DEFAULT_LTR);
+const reorderedText = bidi.getResultString(); // Correct visual order
+
+// Or use HTML markup with bdi tags
+// <p dir="rtl">زيارة <bdi dir="ltr">example.com</bdi> للمعلومات</p>
+```
+
+**Common RTL Errors & Fixes**:
+
+| Error | Example | Fix |
+|-------|---------|-----|
+| Mirroring photos | Logo flipped for RTL | Don't mirror photos; mirror only UI icons |
+| RTL applied to code | `<code>var x = 123;</code>` reversed | Use `<code dir="ltr">` for technical content |
+| Form labels separated | Label floated left, input floated right | Use flexbox/grid with logical properties |
+| Truncation from wrong end | Text truncated from right in RTL | Truncate from logical end; use `text-align: end` |
+| Scrollbar position | Scrollbar on right in RTL | Browser handles automatically if `dir="rtl"` set |
+| Arrows point wrong way | Forward arrow → stays right in RTL | Rotate/mirror arrows per direction context |
+
+**Do's**:
+- ✓ Use `<html dir="rtl">` at document level
+- ✓ Use logical CSS properties (`padding-inline`, `margin-block-start`, `text-align: start`)
+- ✓ Wrap mixed-direction content with `<bdi>` or `dir="ltr"`
+- ✓ Test on actual RTL physical keyboards (Arabic, Hebrew, Urdu)
+- ✓ Mirror UI chrome (navigation, buttons, icons); keep photos/code LTR
+
+**Don'ts**:
+- ✗ Don't mirror photos, logos, or imagery
+- ✗ Don't apply RTL to code, URLs, technical content
+- ✗ Don't use physical properties (`margin-left`, `float: left`)
+- ✗ Don't use CSS `transform: scaleX(-1)` for RTL (breaks text)
+
+---
+
+### 1.1.4 Multi-Script Typography
+
+**Challenge**: Different scripts have different rendering requirements, line heights, and font support levels.
+
+#### Script-Specific Font Stacks
+
+```css
+/* Latin (comprehensive system support) */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+               "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+/* Arabic (requires contextual shaping) */
+[lang="ar"], [lang="ur"], [lang="fa"] {
+  font-family: "Noto Sans Arabic", -apple-system, sans-serif;
+  font-feature-settings: 'liga' on, 'calt' on; /* Ligatures required */
+}
+
+/* Indic Scripts (require ligatures for conjuncts) */
+[lang="hi"], [lang="mr"], [lang="bn"], [lang="ta"], [lang="te"] {
+  font-family: "Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Tamil", 
+               -apple-system, sans-serif;
+  font-feature-settings: 'liga' on, 'calt' on; /* Conjuncts/ligatures critical */
+  line-height: 1.7; /* Indic requires extra space for vowel marks */
+}
+
+/* CJK (no ligatures; wider spacing) */
+[lang="zh"], [lang="ja"], [lang="ko"] {
+  font-family: -apple-system, "Noto Sans CJK SC", sans-serif;
+  font-feature-settings: 'liga' off; /* No ligatures in CJK */
+  line-height: 1.9; /* Extra space for dense characters */
+}
+
+/* Thai (requires space for tone marks) */
+[lang="th"] {
+  font-family: "Noto Sans Thai", -apple-system, sans-serif;
+  line-height: 1.75; /* Tone marks above/below */
+}
+```
+
+#### Script-Specific Line-Height Table
+
+| Script | Line-Height | Minimum Font Size | Rationale |
+|--------|-------------|------------------|-----------|
+| Latin | 1.5 | 14px body, 12px UI | Standard Western typography |
+| Arabic/Hebrew | 1.6–1.7 | 15px body, 13px UI | Diacritics and vowel marks |
+| Indic | 1.7–1.8 | 15px body, 13px UI | Complex vowel marks above/below |
+| CJK | 1.8–2.0 | 16px body, 14px UI | Dense characters need space |
+| Thai/Lao | 1.7–1.75 | 15px body, 13px UI | Tone marks positioned above/below |
+
+**Do's**:
+- ✓ Use Noto Sans family as fallback (comprehensive Unicode coverage)
+- ✓ Define font stacks per script using `[lang="xx"]` selectors
+- ✓ Enable ligatures/contextual alternates for Indic and Arabic
+- ✓ Adjust line-height per script
+- ✓ Test with native speakers; verify readability
+
+**Don'ts**:
+- ✗ Don't use single font stack for all scripts
+- ✗ Don't set minimum font size < 14px for body text (WCAG violation)
+- ✗ Don't enable ligatures for CJK (causes corruption)
+
+---
+
+### 1.1.5 Locale-Aware Data Formatting
+
+**Principle**: Format numbers, dates, currencies, addresses per locale; always allow user override.
+
+#### Dates: Multiple Calendar Systems
+
+```javascript
+// Using Intl.DateTimeFormat
+
+// User in Egypt (ar-EG)
+const egyptDate = new Intl.DateTimeFormat('ar-EG', {
+  year: 'numeric', month: 'long', day: 'numeric'
+}).format(new Date(2024, 0, 15));
+// Output: "١٥ يناير ٢٠٢٤" (Islamic numerals, Arabic month names)
+
+// Support multiple calendars
+const gregorianDate = "January 15, 2024"; // 2024 CE
+const islamicDate = "Rajab 25, 1445 AH";
+const persianDate = "Dey 25, 1402 SH";
+
+// User settings: Allow calendar selection
+<select name="calendar">
+  <option value="gregorian">Gregorian (2024 CE)</option>
+  <option value="islamic">Islamic Hijri (1445 AH)</option>
+  <option value="persian">Persian Jalali (1402 SH)</option>
+  <option value="hebrew">Hebrew (5784)</option>
+</select>
+```
+
+#### Numbers & Currency: Region-Specific Formatting
+
+```javascript
+// India: 2-digit grouping
+const indiaFormat = new Intl.NumberFormat('en-IN', {
+  style: 'currency', currency: 'INR'
+}).format(123456789);
+// Output: "₹1,23,45,789"
+
+// Germany: Period for thousands, comma for decimal
+const germanyFormat = new Intl.NumberFormat('de-DE', {
+  style: 'currency', currency: 'EUR'
+}).format(1234.56);
+// Output: "1.234,56 €"
+
+// US: Comma for thousands, period for decimal
+const usFormat = new Intl.NumberFormat('en-US', {
+  style: 'currency', currency: 'USD'
+}).format(1234.56);
+// Output: "$1,234.56"
+
+// Arabic: Use Arabic-Indic numerals
+const arabicFormat = new Intl.NumberFormat('ar-EG', {
+  style: 'currency', currency: 'EGP'
+}).format(1234.56);
+// Output: "١٬٢٣٤٫٥٦ ج.م."
+```
+
+#### Addresses: Country-Specific Field Order
+
+```javascript
+// US: [Street, City, State, ZIP]
+const usAddress = {
+  street: "123 Main St",
+  city: "New York",
+  state: "NY",
+  zip: "10001"
+};
+
+// Japan: [Postal Code, Prefecture, City, District, Building]
+const japanAddress = {
+  postalCode: "100-0001",
+  prefecture: "東京都",
+  city: "千代田区",
+  district: "丸の内",
+  building: "123"
+};
+
+// India: [Flat/House, Street, Area, City, State, PIN]
+const indiaAddress = {
+  flat: "Apt 123",
+  street: "Main Road",
+  area: "Bandra",
+  city: "Mumbai",
+  state: "Maharashtra",
+  pin: "400050"
+};
+
+// Implementation: Use CLDR address format data
+const addressFormat = getAddressFormatByLocale(userLocale); // from CLDR
+generateAddressForm(addressFormat);
+```
+
+**Do's**:
+- ✓ Use Intl.DateTimeFormat, Intl.NumberFormat for locale-aware formatting
+- ✓ Allow user to override auto-detected locale
+- ✓ Support multiple calendar systems
+- ✓ Document locale-specific formatting per field
+
+**Don'ts**:
+- ✗ Don't assume date format is universally MM/DD/YYYY
+- ✗ Don't hardcode currency symbols or decimal separators
+- ✗ Don't assume address structure is same globally
+
+---
+
+## 1.2 FLEXIBLE IDENTITY FIELDS
+
+### 1.2.1 Name Structure Flexibility
+
+**Problem**: Western form design assumes [First Name] [Last Name], which breaks for mononyms, patronymics, matronymics, and cultures with different name structures.
+
+#### Flexible Name Field Implementation
+
+```html
+<!-- Simple Default: Full Name (works globally) -->
+<div class="form-group">
+  <label for="fullname">Full Name</label>
+  <input type="text" id="fullname" name="fullname" placeholder="As it appears on documents">
+  <small>How should we address you? (e.g., "María José García Rodríguez")</small>
+</div>
+
+<!-- Advanced Options (Optional Settings) -->
+<details>
+  <summary>Edit name components (optional)</summary>
+  
+  <div class="form-group">
+    <label for="givenname">Given Name(s)</label>
+    <input type="text" id="givenname" placeholder="First, middle name(s)">
+  </div>
+  
+  <div class="form-group">
+    <label for="familyname">Family/Surname</label>
+    <input type="text" id="familyname" placeholder="Last name(s)">
+  </div>
+  
+  <div class="form-group">
+    <label for="patronymic">Patronymic / Matronymic (optional)</label>
+    <input type="text" id="patronymic" placeholder="e.g., 'Sergeyevich' (Russian), 'ibn Abdulaziz' (Arabic)">
+  </div>
+  
+  <div class="form-group">
+    <label for="honorific">Title / Honorific (optional)</label>
+    <select id="honorific">
+      <option value="">None</option>
+      <option value="dr">Dr. / Dr</option>
+      <option value="prof">Prof. / Professor</option>
+      <option value="mr">Mr. / Señor / السيد</option>
+      <option value="ms">Ms. / Señora / السيدة</option>
+      <option value="shri">Shri (India)</option>
+      <option value="custom">Custom:</option>
+    </select>
+    <input type="text" id="honorific-custom" placeholder="Your preferred title" style="display:none;">
+  </div>
+  
+  <div class="form-group">
+    <label for="preferredname">Preferred Name (if different from legal name)</label>
+    <input type="text" id="preferredname" placeholder="Nickname, shortened name, etc.">
+  </div>
+  
+  <div class="form-group">
+    <label for="pronunciation">Pronunciation Guide (optional)</label>
+    <input type="text" id="pronunciation" placeholder="e.g., 'peh-TRAH' or in IPA: /pəˈtrɑː/">
+  </div>
+</details>
+```
+
+#### Backend Storage & Display Logic
+
+```javascript
+// Store components separately
+const nameData = {
+  fullName: "María José García Rodríguez",      // Always captured
+  givenName: "María José",
+  familyName: "García Rodríguez",
+  patronymic: null,
+  honorific: null,
+  preferredName: "María",
+  pronunciation: null,
+  sortBy: "familyName",                         // User's choice for sorting
+  displayFormat: "givenName familyName"         // User's choice for display
+};
+
+// Display logic
+function displayName(nameData, context) {
+  if (context === "formal") {
+    // Formal: Use full name with honorific
+    if (nameData.honorific) {
+      return `${nameData.honorific} ${nameData.fullName}`;
+    }
+    return nameData.fullName;
+  } else if (context === "casual") {
+    // Casual: Use preferred or given name
+    return nameData.preferredName || nameData.givenName;
+  }
+  return nameData.fullName; // Default
+}
+
+// Sorting logic (respects user's sort preference)
+function sortNames(names, collator, sortField) {
+  return names.sort((a, b) => {
+    const aValue = a[sortField] || a.familyName;
+    const bValue = b[sortField] || b.familyName;
+    return collator.compare(aValue, bValue);
+  });
+}
+
+// Collation per locale (Spanish 'ñ', Hungarian 'ö', Chinese Pinyin, etc.)
+const hungarianCollator = new Intl.Collator('hu');
+const spanishCollator = new Intl.Collator('es');
+```
+
+#### Support for Mononyms (Single Names)
+
+```html
+<!-- Gate: Do you use a surname? -->
+<fieldset>
+  <legend>Name structure</legend>
+  
+  <div class="form-group">
+    <label>
+      <input type="radio" name="nameType" value="full-name" checked>
+      I use both

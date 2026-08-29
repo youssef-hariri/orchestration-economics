@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategies for supply chain resilience and ethical sourcing, including risk identification, diversification approaches, and ethical frameworks."
+    },
+    {
+      "name": "Supply Chain Expert Reviewer",
+      "role": "expert",
+      "description": "Provides domain-specific expert analysis on global supply chain best practices, regulatory requirements, and industry standards for resilience and ethical sourcing."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates expert feedback and critical analysis into the strategy, strengthening weak areas, addressing gaps, and enhancing practical implementation details."
+    },
+    {
+      "name": "Resilience & Ethics Critic",
+      "role": "critic",
+      "description": "Conducts thorough quality assessment of the refined strategy, evaluating completeness, feasibility, ethical depth, and alignment with global supply chain resilience standards."
+    },
+    {
+      "name": "Implementation Analyst",
+      "role": "analyst",
+      "description": "Analyzes the strategy for actionable metrics, KPIs, timelines, resource requirements, and produces a detailed implementation roadmap with measurable outcomes."
+    },
+    {
+      "name": "Final Quality Polisher",
+      "role": "polisher",
+      "description": "Performs final formatting, structure optimization, and ensures the deliverable is clear, professional, and ready for stakeholder presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert supply chain strategist. Develop comprehensive initial strategies to enhance resilience and ethical standards in a global multi-country supply chain. Address: (1) Risk identification and mitigation (geopolitical, supplier concentration, logistics), (2) Supplier diversification strategies, (3) Ethical sourcing frameworks and standards, (4) Transparency and monitoring mechanisms, (5) Contingency and recovery planning. Provide detailed, strategic recommendations covering both immediate and long-term actions."
+    },
+    {
+      "name": "Supply Chain Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a global supply chain resilience and ethics expert with 20+ years experience. Review and enhance the initial strategy by providing expert insights on: (1) Industry best practices and proven models from Fortune 500 companies, (2) Regulatory compliance requirements (EU Due Diligence, USMCA, local labor laws), (3) Advanced resilience techniques (nearshoring, supplier relationship management, digital visibility), (4) Ethical sourcing certification standards (Fair Trade, SA8000, RBA), (5) Technology solutions for supply chain transparency. Provide specific, actionable expert recommendations and identify any gaps or oversights in the initial strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refinement specialist. Integrate the expert feedback into the initial strategy to produce an enhanced version. Strengthen weak areas, fill identified gaps, add specific compliance requirements, incorporate advanced resilience techniques and certification standards, and enhance implementation feasibility. Maintain strategic coherence while incorporating all valuable expert insights. Produce a comprehensive, refined strategy document ready for quality assessment."
+    },
+    {
+      "name": "Resilience & Ethics Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical quality assessor for supply chain strategies. Thoroughly evaluate the refined strategy across these dimensions: (1) Comprehensiveness—does it address all major resilience pillars (diversification, redundancy, agility, visibility)? (2) Ethical depth—are ethical considerations substantive and actionable, not superficial? (3) Global applicability—does it account for regional differences across multiple countries? (4) Feasibility—are recommendations realistic and implementable? (5) Measurability—are outcomes quantifiable with clear success metrics? (6) Risk coverage—are geopolitical, supplier, logistics, and regulatory risks adequately addressed? Provide detailed assessment with specific strengths and weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Implementation Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain implementation analyst. Transform the approved strategy into a detailed implementation roadmap. Produce: (1) Phased action plan (Phase 1-3, 6-month, 12-month, 24-month milestones), (2) Key Performance Indicators (KPIs) for resilience and ethics (supplier diversification ratio, risk exposure metrics, ethical audit compliance %, supply chain visibility %, lead time variability), (3) Resource requirements (budget, personnel, technology investments), (4) Responsible parties and governance structure, (5) Risk mitigation timeline, (6) Expected outcomes and business impact. Create an analyst-grade, data-driven implementation blueprint with concrete timelines and measurable targets."
+    },
+    {
+      "name": "Final Quality Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final quality polisher and formatter. Prepare the complete supply chain strategy and implementation roadmap for executive presentation. Ensure: (1) Clear executive summary (1-2 pages) highlighting key resilience and ethical improvements, (2) Logical structure with compelling sections on strategy, implementation, metrics, and governance, (3) Professional formatting with diagrams, tables, and visual hierarchies where helpful, (4) Consistent terminology and no grammatical errors, (5) Balance of strategic vision and tactical detail appropriate for C-level stakeholders. Produce publication-ready deliverable optimized for stakeholder understanding and decision-making."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, expert-informed, and implementable supply chain resilience and ethical sourcing strategy. Execution flow: (1) Builder creates initial strategy covering resilience, ethics, diversification, and risk mitigation. (2) Expert Reviewer analyzes gaps and integrates industry best practices, regulations, and advanced techniques—expert insight enriches the foundation. (3) Refiner incorporates expert feedback to strengthen weak areas and ensure completeness. (4) Resilience & Ethics Critic performs quality gate assessment—if deficiencies remain, routes back to Refiner for iterative improvement (up to 3 cycles); if quality passes, proceeds to implementation. (5) Implementation Analyst translates approved strategy into actionable roadmap with KPIs, timelines, and resource requirements. (6) Final Polisher formats deliverable for executive presentation. This structure ensures depth (expert review), coherence (refinement integration), rigor (quality gate), and actionability (implementation analysis) while maintaining under-8-step efficiency."
+}
+```

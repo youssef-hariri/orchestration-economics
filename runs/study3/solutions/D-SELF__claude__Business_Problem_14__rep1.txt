@@ -1,0 +1,679 @@
+# COMPREHENSIVE INCLUSIVE DIGITAL PRODUCT FRAMEWORK
+## Final Deliverable for Stakeholder Implementation
+
+---
+
+## EXECUTIVE SUMMARY
+
+This framework provides a structured, actionable approach to designing and building digital products that are genuinely inclusive of global audiences across diverse cultural backgrounds, abilities, socioeconomic statuses, and identities. It addresses **technical accessibility, cultural sensitivity, design flexibility, regional compliance, and evidence-based user research methodologies** while acknowledging real-world implementation constraints and trade-offs.
+
+**Key Differentiators:**
+- **Regional depth:** Comprehensive guidance for East Asia, Southeast Asia, South Asia, Sub-Saharan Africa, MENA, Americas, and Europe
+- **Underrepresented populations:** Explicit focus on invisible disabilities, children, older adults, LGBTQ+ persons, low-income users, and intersectional identities
+- **Honest assessment:** Acknowledges competing priorities, resource constraints, and implementation trade-offs rather than presenting an idealized vision
+- **Phased implementation:** Provides MVP scope vs. aspirational scope with clear prioritization
+
+**Framework Scope:**
+This document is designed for product leadership, development teams, designers, content creators, and research stakeholders. It balances aspiration with realism, providing both ideals to aim toward and practical starting points for implementation.
+
+---
+
+# CORE INCLUSIVE FEATURES & SPECIFICATIONS
+
+## 1. MULTILINGUAL & LOCALIZATION SUPPORT
+
+### 1.1 Language Implementation Strategy
+
+#### Language Tier System (By Market Priority & Resources)
+
+**TIER 1 - LAUNCH LANGUAGES (Minimum 2-3 for global products)**
+- English (global reference)
+- Mandarin Chinese (1.1B speakers; critical for Asia)
+- Spanish (500M+ speakers; Americas + Spain)
+- French (280M+ speakers; Africa + Europe)
+- Arabic (400M+ speakers; MENA + beyond)
+- Hindi (340M+ speakers; South Asia)
+
+**TIER 2 - EXPANSION (6-12 months post-launch)**
+- German, Portuguese, Japanese, Russian, Korean, Italian
+- Bengali, Turkish, Vietnamese, Thai, Polish, Dutch
+- Indonesian, Filipino, Swahili, Hausa, Yoruba
+
+**TIER 3 - REGIONAL GROWTH (12-24 months post-launch)**
+- Regional languages by market: Gujarati, Marathi, Tamil, Telugu, Kannada, Malayalam, Urdu (India); Thai, Khmer, Lao (SE Asia); Amharic, Oromo, Tigrinya (East Africa); Zulu, Xhosa, Sotho (Southern Africa)
+- Indigenous languages where significant user base exists
+
+#### Implementation Approach
+- **Recruit native speakers from target regions** (not just translation services)
+- **Create language quality councils** (native speakers review translations quarterly)
+- **Hire linguists, not just translators** (understand context, culture, nuance)
+- **Maintain ongoing localization budget** (language changes, cultural updates, 20-30% annual refresh)
+
+**Implementation Checklist - Language Tiers:**
+- [ ] Identify target markets by revenue potential / user base size
+- [ ] Prioritize languages by: market size, team expertise, localization difficulty
+- [ ] Allocate budget for Tier 1 languages (5-8% of eng budget)
+- [ ] Plan Tier 2 expansion roadmap (6-12 month timeline)
+- [ ] Establish language quality review process (native speaker review every release)
+- [ ] Contract native speakers long-term (not one-time translation)
+- [ ] Create language style guide per language (tone, terminology, cultural norms)
+- [ ] Budget for ongoing maintenance (20-30% annual refresh for linguistic/cultural changes)
+
+---
+
+### 1.2 Localization Beyond Translation
+
+#### Regional Variations Framework
+
+| Element | Variation Across Regions | Implementation |
+|---|---|---|
+| **Date Format** | MM/DD/YYYY (US) vs. DD/MM/YYYY (EU) vs. YYYY-MM-DD (ISO) | Auto-detect by locale; allow user override |
+| **Number Formatting** | 1,000.00 (US) vs. 1.000,00 (Europe) vs. 1 000,00 (Nordic) | System locale auto-setting; manual override option |
+| **Currency Display** | $100 (US) vs. £100 (UK) vs. 100 EUR (EU) | Show both symbol and code; use locale currency by default |
+| **Phone Number Format** | +1-555-123-4567 (US) vs. +44 20 7946 0958 (UK) | Country code prefix; format by country |
+| **Time Zones & Daylight Saving** | Varies globally; DST not universal | User timezone selector; not auto-detected (unreliable) |
+| **Measurement Units** | Metric (most of world) vs. Imperial (US, Myanmar, Liberia) | Allow preference selection; show both with primary by locale |
+| **Calendar Systems** | Gregorian (most); Islamic (Islamic communities); Hindu (India) | Support multiple calendars; highlight holidays/observances by user locale |
+| **Week Start** | Monday (Europe) vs. Sunday (US/Middle East) | User preference selector; default by locale |
+
+#### Holiday & Observance Recognition
+
+**Implementation Requirements:**
+- Research major holidays for each target country (minimum 15-20 per country)
+- Create database: Holiday name, date(s), religions/cultures, relevance to product
+- Highlight holidays in calendar views
+- Adjust promotional messaging during observances (e.g., no "spend money" messaging during fasting)
+- Show greetings in local language (auto-translate with review)
+
+**Holiday Categories by Region:**
+
+| Region | Key Observances | Product Impact |
+|---|---|---|
+| **India** | Diwali, Holi, Raksha Bandhan, Navratri, Ganesh Chaturthi | Festive messaging; e-commerce sales surges; financial planning adjustments |
+| **Islamic (global)** | Ramadan (fasting), Eid al-Fitr, Eid al-Adha | Adjust energy expectations during Ramadan; no food ads; increase prayer time awareness |
+| **Christian (global)** | Christmas, Easter, Pentecost, Good Friday | Regional celebration variations; no one-size-fits-all |
+| **Jewish** | Rosh Hashanah, Yom Kippur, Passover, Hanukkah | Sabbath observance (Friday-Saturday online unavailability); dietary laws (Passover) |
+| **Buddhist/Hindu** | Vesak, Bodhi Day, Diwali, Chinese New Year | Regional calendar variations |
+| **Secular** | Thanksgiving (US/Canada), Independence Days, Women's Day | Regional significance varies |
+
+**Implementation Checklist - Holiday Recognition:**
+- [ ] Create holiday database (date, name, religions, regions)
+- [ ] Audit marketing calendar (avoid insensitive promotions during observances)
+- [ ] Add holiday highlighting to calendar features
+- [ ] Create cultural sensitivity guidelines for holiday messaging
+- [ ] Partner with cultural organizations for accuracy
+- [ ] Test greetings with native speakers (auto-translation unreliable)
+- [ ] Document regional variations (same holiday observed differently by country)
+- [ ] Update annually (holidays change dates, new holidays emerge)
+
+---
+
+### 1.3 Right-to-Left (RTL) Language Support
+
+#### Critical Implementation (Arabic, Hebrew, Urdu, Farsi, Uyghur)
+
+**Mandatory RTL Components:**
+- Text alignment (right-aligned by default)
+- Number display (often LTR within RTL text; requires bidirectional text handling)
+- Navigation mirrors (menu items in reverse order)
+- Form layout flips (labels on right; inputs on left)
+- Icon directionality (arrows reverse; left-pointing becomes right-pointing)
+- Tab order reverses (TAB key navigates right-to-left)
+- Margins and padding reverse (margin-left becomes margin-right in RTL)
+
+**Technical Implementation:**
+```
+CSS Logical Properties (Recommended):
+- Use: margin-inline-start, margin-inline-end (auto-adjusts per text direction)
+- Avoid: margin-left, margin-right (forces direction)
+- Use: padding-block-start, padding-block-end (works for all writing systems)
+- Avoid: padding-top, padding-bottom
+
+HTML Attribute:
+<html dir="rtl" lang="ar">  <!-- Arabic RTL -->
+<html dir="rtl" lang="ur">  <!-- Urdu RTL -->
+<html dir="ltr" lang="en">  <!-- English LTR -->
+
+Bidirectional Text Handling:
+<p>Hello <span lang="ar" dir="rtl">مرحبا</span> World</p>
+<!-- Mixes LTR (English) with RTL (Arabic) -->
+```
+
+**RTL Language Complexity:**
+
+| Language | Speakers | Script Complexity | Implementation Difficulty |
+|---|---|---|---|
+| **Arabic** | 400M | Cursive; connects letters; 30+ dialects | HIGH — MSA vs. dialects; no spaces |
+| **Urdu** | 70M | Nastaliq script; Persian-influenced; RTL | HIGH — Nastaliq is cursive; combines characters |
+| **Hebrew** | 9M | Ancient script; modern usage | MEDIUM — fewer resources than Arabic |
+| **Farsi/Persian** | 90M | Similar to Urdu; Persian loanwords | MEDIUM — similar to Arabic; fewer English resources |
+| **Uyghur** | 12M | Arabic script; Chinese influences; minority language | HIGH — limited resources; political sensitivity |
+
+**Implementation Checklist - RTL:**
+- [ ] Set `dir="rtl"` and `lang="[language]"` on HTML root
+- [ ] Use CSS logical properties (margin-inline-start, not margin-left)
+- [ ] Test layout at 100%, 200% zoom (no horizontal scroll)
+- [ ] Mirror images/icons that show direction
+- [ ] Test form input/label alignment
+- [ ] Test number input (bidirectional text tricky)
+- [ ] Reverse navigation menus
+- [ ] Test breadcrumbs (right-to-left reading order)
+- [ ] Audit CSS for absolute positioning (often breaks in RTL)
+- [ ] Test with screen readers on RTL content
+- [ ] Test with actual RTL users (not just LTR developers)
+
+---
+
+## 2. ACCESSIBILITY FEATURES
+
+### 2.1 WCAG 2.1 Level AA Compliance Framework
+
+#### Visual Accessibility Standards
+
+**Color Contrast Requirements:**
+- Normal text: 4.5:1 contrast minimum (black on white, or equivalent)
+- Large text (18pt+): 3:1 contrast minimum
+- UI components (buttons, form fields): 3:1 contrast
+- Graphical elements: 3:1 contrast for meaningful elements
+
+**Test & Remediation Approach:**
+```
+Tools:
+- WebAIM Contrast Checker (online, free)
+- Axe DevTools (browser extension, free)
+- WAVE (accessibility audit tool, free)
+- Contrast Analyzer (advanced, free)
+
+Testing Process:
+1. Audit every text color against background
+2. Test with colorblind simulation (Coblis, Color Oracle)
+3. Verify 4.5:1 for normal text
+4. Verify 3:1 for large text + UI elements
+5. Fix failures (adjust color, add background, change font weight)
+6. Test with actual colorblind users (final validation)
+
+Common Fixes:
+- Increase font weight (400 → 600) instead of darkening color
+- Add subtle background behind text (works even with light text)
+- Use texture/pattern in addition to color for differentiation
+```
+
+**Text Readability Standards:**
+- Font size minimum: 12px body text (14px preferred for accessibility)
+- Line height: 1.5x within paragraphs (e.g., 18px for 12px font)
+- Line spacing: 2.25x between paragraphs (space between paragraphs)
+- Line length: 45-75 characters maximum (longer lines harder to read)
+- Font choice: sans-serif or serif; avoid script/decorative fonts for body text
+- Font weight: minimum 400 (300 too thin; unreadable)
+
+**Resizable & Zoom Support:**
+- Support browser zoom to 200% without horizontal scroll (no overflow:hidden)
+- Use relative units (em, rem, %) not fixed pixels
+- Test at 200% zoom in all browsers (Chrome, Firefox, Safari, Edge)
+- Content reflows to single column at 320px width (mobile optimization)
+
+**Visual Indicators:**
+- Never convey information by color alone
+- Pair color with: icon, text label, pattern, or additional visual cue
+- Example: Error message must show red color AND error icon AND text
+
+**Implementation Checklist - Visual Accessibility:**
+- [ ] All body text passes 4.5:1 contrast test
+- [ ] All UI elements pass 3:1 contrast test
+- [ ] Test with colorblind simulation tools (3+ variants)
+- [ ] Verify browser zoom works to 200%
+- [ ] No overflow:hidden; no horizontal scroll
+- [ ] Font sizes 12px minimum (14px+ preferred)
+- [ ] Line-height 1.5x; paragraph spacing 2.25x
+- [ ] No information conveyed by color alone
+- [ ] Test with actual users: colorblind, low vision, aging eyes
+
+---
+
+### 2.2 Auditory Accessibility
+
+#### Captions & Audio Description Standards
+
+**Captions Requirements:**
+- **All video content must have synchronized, accurate captions**
+- Include speaker identification (e.g., "[John] Hello there")
+- Describe relevant sound effects ("[door slams]")
+- Describe music/tone when relevant ("[tense music plays]")
+- No "music playing" generic descriptions; specify emotion/type
+- Captions in all supported languages (not English only)
+
+**Caption Quality Standards:**
+- **Never rely on auto-generated captions alone** (Google's auto-captions have 20-40% error rate)
+- Professional human review minimum (error rate <5%)
+- For non-native English speakers: additional review (accents cause AI caption errors)
+- For music/songs: verify accuracy (AI misses slang, dialect terms)
+
+**Audio Description:**
+- Describe visual information essential to understanding video
+- Include: scene context, character actions, text displayed, visual cues
+- Spoken audio description or separate audio track (both options better)
+- Do not over-describe (let dialogue/sounds carry narrative)
+- Include for videos with complex visual information (tutorials, science, narrative)
+
+**Transcript Requirements:**
+- Full transcript accompanying all audio content (podcasts, videos, interviews)
+- Include: speaker names, [important sounds], descriptions of music/tone
+- Transcript format: searchable text (not PDF images of transcripts)
+- Readable-grade: 8th-grade reading level or lower
+
+**Implementation Checklist - Captions/Audio Description:**
+- [ ] Every video has synchronized captions (not just YouTube auto-generated)
+- [ ] Captions reviewed by human (error rate <5%)
+- [ ] Captions include speaker ID + sound descriptions
+- [ ] Audio description provided for complex visual content
+- [ ] Transcripts in plain text format (searchable)
+- [ ] Transcripts include speaker names + sound descriptions
+- [ ] Captions translated to all supported languages (professional translation)
+- [ ] Test with deaf users (caption quality feedback)
+- [ ] Test with blind users (audio description quality feedback)
+- [ ] Video player supports caption toggling + sizing
+
+#### Audio Alternatives
+
+**Notification Design:**
+- Never communicate critical information via sound alone
+- Pair audio alerts with: visual indicator (icon/color), haptic feedback (vibration), text message
+- Provide text alternative for all spoken alerts
+
+**Example - Banking App Alert:**
+- ✗ **Bad:** Beeping alert when payment received
+- ✓ **Good:** Bell icon + color change + vibration + text notification "Payment received"
+
+---
+
+### 2.3 Motor & Mobility Accessibility
+
+#### Keyboard Navigation Requirements
+
+**Mandatory Keyboard Functionality:**
+- All features accessible via keyboard only (Tab key primary navigation)
+- No keyboard traps (Tab key doesn't get stuck; Escape key always exits)
+- Logical tab order (top→bottom, left→right; not random)
+- Focus indicator visible (minimum 3px outline; 3:1 contrast to background)
+- Keyboard shortcuts documented (Help menu includes all shortcuts)
+
+**Tab Order Implementation:**
+```
+Logical Order Example:
+1. Page heading
+2. Main navigation menu
+3. Search box (if primary feature)
+4. Main content area
+   4a. First article heading
+   4b. Article content
+   4c. Article links
+5. Sidebar
+6. Footer
+
+NOT:
+- Tab jumping to footer midway
+- Tab order skipping content areas
+- Tab order reversing unexpectedly
+```
+
+**Skip Links:**
+- "Skip to main content" link at top of page (hidden until focused)
+- "Skip to navigation" link (if navigation long)
+- Allows keyboard users to bypass repetitive content
+
+**Keyboard Shortcut Documentation:**
+```
+Help/Accessibility Page Should Include:
+- Global shortcuts (work everywhere)
+  * Alt + S: Search
+  * Alt + H: Help
+  * Alt + L: Feedback
+  
+- Content-specific shortcuts
+  * J: Jump to next article (only on article pages)
+  * ? : Show all shortcuts on current page
+
+- Customizable shortcuts
+  * User can reprogram shortcuts
+  * Avoid conflicts with browser shortcuts (Ctrl+S, Ctrl+P, etc.)
+  * Single-letter shortcuts marked (conflict risk)
+```
+
+**Motor Disability Accommodations:**
+- Target sizes: 48×48px minimum (60×60px preferred for tremor users)
+- Spacing: 8px minimum between interactive elements
+- No double-click requirement (tremor makes double-click difficult)
+- Provide undo/redo for all actions
+- No time-based interactions that require precise timing
+- Voice input as primary alternative (for users with tremor/limited dexterity)
+
+**Implementation Checklist - Keyboard Navigation:**
+- [ ] Test Tab key navigation (follows logical order top→bottom)
+- [ ] Verify no keyboard traps (Escape key exits all contexts)
+- [ ] Focus indicator visible (≥3px; 3:1 contrast)
+- [ ] "Skip to main content" link present
+- [ ] All dropdowns/modals keyboard operable
+- [ ] Form validation keyboard accessible (not just on blur)
+- [ ] Keyboard shortcuts documented (Help page)
+- [ ] Single-character shortcuts optional (configurable or disabled)
+- [ ] Test with screen readers (focus announcements clear)
+- [ ] Test with voice control software (Dragon NaturallySpeaking)
+
+---
+
+### 2.4 Cognitive Accessibility
+
+#### Clear Navigation & Language Standards
+
+**Heading Hierarchy:**
+- H1: Page title (one per page, not multiple)
+- H2: Main sections
+- H3: Subsections under H2
+- H4: Subsections under H3
+- No skipped levels (H1 → H3 is wrong; should be H1 → H2 → H3)
+- Headings describe content accurately (not "Click Here"; describe destination)
+
+**Language Clarity:**
+- Target reading level: 8th grade (12-14 year olds) for mainstream content
+- Sentence length: 15-20 words average (15 is ideal)
+- Paragraph length: 2-4 sentences (under 100 words per paragraph)
+- Word choice: common words over complex synonyms
+  * Use: "help" not "assistance"
+  * Use: "use" not "utilize"
+  * Use: "end" not "terminate"
+  * Use: "start" not "commence"
+- Active voice preferred over passive
+  * Use: "The user enters data" (active)
+  * Avoid: "Data should be entered by the user" (passive)
+
+**Jargon & Technical Terms:**
+- Define on first use OR provide glossary
+- Example: "Phishing emails (fraudulent emails designed to steal passwords) are dangerous"
+- Avoid unnecessary jargon (don't use "utilize" when "use" works)
+
+**Cultural References:**
+- Avoid culture-specific idioms (don't translate directly; explain)
+- Example: ✗ "Break a leg" → ✓ "Good luck"
+- Example: ✗ "Raining cats and dogs" → ✓ "Heavy rain"
+
+**Error Messages:**
+- Specific (describe what went wrong, not just "Error")
+- Actionable (tell user how to fix it)
+- Polite (don't blame user; "We couldn't find your account" not "You entered wrong password")
+- Visible (red text + icon; accessible to colorblind)
+
+**Example - Good Error Message:**
+```
+✗ Bad: "Error 403"
+✓ Good: "We couldn't find an account with that email address. 
+         Did you mean: john.smith@example.com?
+         (No? Try another email or create an account)"
+```
+
+#### Cognitive Load Reduction
+
+**Progressive Disclosure:**
+- Show only essential information initially
+- Hide advanced options (reveal on demand)
+- Simplify complex workflows into steps
+
+**Chunking Content:**
+- Break into short sections (under 300 words each)
+- Use headings to separate topics
+- Use bullet points for lists (not paragraphs)
+
+**Confirmation & Undo:**
+- Confirm before destructive actions (delete, submit sensitive data)
+- Provide undo for user actions (not permanent on first click)
+- Allow recovery from mistakes
+
+**Distraction Minimization:**
+- Option for "Focus Mode" (minimize notifications, ads, animations)
+- Disable autoplaying videos (user must click to start)
+- Limit animations (favor subtlety over motion)
+- Quiet notification defaults (user opts into alerts)
+
+**Implementation Checklist - Cognitive Accessibility:**
+- [ ] Heading hierarchy H1 → H2 → H3 (no skipped levels)
+- [ ] Headings accurately describe content
+- [ ] Reading level: 8th grade or lower (use Flesch-Kincaid calculator)
+- [ ] Sentence length: ~15 words average
+- [ ] Paragraph length: under 100 words; 2-4 sentences
+- [ ] Jargon defined on first use OR in glossary
+- [ ] Error messages specific + actionable
+- [ ] Confirmation before destructive actions
+- [ ] Undo/redo available for user actions
+- [ ] No autoplay video/audio (user-triggered)
+- [ ] Distraction-free mode available
+- [ ] Help text available on every major screen
+
+#### ADHD-Specific Features
+
+**Hyperfocus Support:**
+- Full-screen mode (eliminate desktop distractions)
+- Timer/deadline visibility (shows time remaining for time-bounded tasks)
+- Progress tracking (shows accomplishment)
+- Interruption suppression (turn off notifications during focus sessions)
+
+**Time Management:**
+- Deadline reminders (customizable escalation: gentle → urgent)
+- Estimated time displays (how long will this task take?)
+- Time blocking support (schedule tasks for specific times)
+- Audit trail (shows what was accomplished when)
+
+**Executive Function Support:**
+- Task breakdown wizard (splits complex task into steps)
+- Checklist support (shows progress visually)
+- Decision narrowing (limits options to prevent overwhelm)
+- Bookmark/save progress (returns to exact spot later)
+
+**Example - ADHD-Friendly Task Interface:**
+```
+Standard Task:
+- "Complete project"
+
+ADHD-Friendly Breakdown:
+1. Open project template (2 min)
+2. Fill in project details (5 min)
+3. Attach project files (3 min)
+4. Invite team members (2 min)
+5. Review and submit (2 min)
+
+Total: 14 minutes [Timer showing progress]
+[✓] Step 1 Complete
+[→] Step 2 In Progress
+[ ] Steps 3-5 Remaining
+
+[SAVE PROGRESS] [TAKE BREAK] [CONTINUE]
+```
+
+---
+
+### 2.5 Customizable Interfaces
+
+#### Personalization Engine
+
+**User Preference Profile Settings:**
+
+```
+Account Settings → Accessibility & Personalization
+
+Visual Preferences:
+  [ ] Light Mode (default)
+  [ ] Dark Mode
+  [ ] High Contrast Mode
+  [ ] Inverted Colors Mode
+  [ ] Custom Color Scheme
+  
+Font Settings:
+  Font Family: [Sans-serif ▼] (options: Arial, Helvetica, Comic Sans, Dyslexie, Open Dyslexic)
+  Font Size: [16px ▼] (options: 12, 14, 16, 18, 20, 22, 24, 28, 32px)
+  Line Height: [1.5 ▼] (options: 1.3, 1.5, 1.75, 2.0)
+  Letter Spacing: [0 ▼] (options: 0, 0.05em, 0.1em, 0.15em)
+  Font Weight: [400 ▼] (options: 400, 500, 600, 700)
+  
+Motion & Animation:
+  [ ] Reduce animations (respects prefers-reduced-motion)
+  [ ] Disable autoplay video
+  [ ] Disable autoplay audio
+  Animation Speed: [Normal ▼] (options: Slow, Normal, Fast - for animations that remain)
+  
+Audio:
+  [ ] Captions (on by default)
+  Caption Size: [Normal ▼] (options: Small, Normal, Large)
+  Caption Background: [Transparent ▼] (options: Transparent, Semi-opaque, Opaque)
+  Audio Descriptions: [On/Off]
+  
+Cognitive:
+  [ ] Simple Mode (fewer features, clearer paths)
+  [ ] Focus Mode (minimize notifications)
+  [ ] Reading Guide (show one line at a time)
+  [ ] Text Highlight (highlight current reading line)
+  
+Language & Content:
+  Language: [English ▼] (all supported languages)
+  Content Filter: [None ▼] (options: None, Mild, Moderate, Strict)
+  Reading Level: [Standard ▼] (options: Basic [3rd-5th grade], Standard [6th-8th], Advanced [9th+])
+  
+Notifications:
+  Notification Frequency: [Standard ▼] (options: Minimal, Standard, Frequent)
+  Notification Delivery: [Quiet ▼] (options: Quiet, Moderate, Loud, Custom)
+  Do Not Disturb: [Schedule ▼] (e.g., 10pm-8am)
+  
+Interaction:
+  [ ] Confirm before destructive actions
+  [ ] Undo/redo enabled
+  [ ] Keyboard shortcuts [Show Documentation]
+  
+Privacy & Data:
+  [ ] Allow targeted ads
+  [ ] Allow data collection for product improvement
+  [ ] Share demographics (optional)
+  Data Export: [Download my data]
+  [ ] Delete account & all data
+```
+
+#### Theme Options Framework
+
+**Minimum Themes (4 options):**
+1. **Light Mode:** Default; high brightness for daylight use
+2. **Dark Mode:** Low brightness for low-light environments; OLED-friendly
+3. **High Contrast:** Maximum contrast (white text on black); for users with low vision
+4. **Custom:** User-defined colors (background, text, accent, links)
+
+**Dyslexia-Friendly Mode:**
+- Font: Open Dyslexic or Dyslexie (fonts designed for dyslexic readers)
+- Line spacing: 2.0+ (increased spacing)
+- Letter spacing: 0.1em+ (increased spacing between letters)
+- No justified text (use left-aligned; spacing variation causes reading difficulty)
+- Serif fonts optional (some dyslexic readers prefer sans-serif; varies individually)
+
+**Color Blindness Support:**
+- Deuteranopia: Red-green color blindness (most common; affects 1% of males)
+- Protanopia: Red-green color blindness (red appears darker)
+- Tritanopia: Blue-yellow color blindness (rarest; 0.001% of population)
+- Achromatopsia: Complete color blindness (sees only grayscale; extremely rare)
+
+**Monochrome Mode:**
+- Removes all color (grayscale only)
+- Useful for: color blindness, reducing sensory overload, print preview
+- Ensures product usable in b&w (forces removal of color-only information)
+
+#### Layout Flexibility
+
+**Responsive Design Breakpoints:**
+- Mobile: 320px-480px (small phones)
+- Tablet: 480px-768px (large phones/small tablets)
+- Tablet: 768px-1024px (medium tablets)
+- Desktop: 1024px-1200px (small desktops)
+- Desktop: 1200px-1920px (large desktops)
+- Ultra-wide: 1920px+ (monitors, multiple windows)
+
+**Responsive Behavior:**
+```
+Mobile (320px):
+- Single column layout
+- Full-width buttons (touch-friendly)
+- Bottom navigation (thumb-friendly)
+- Hamburger menu (saves space)
+
+Tablet (768px):
+- Can support 2-column layout
+- Side-by-side navigation + content
+- Optional sidebar
+- Adaptive typography (larger fonts)
+
+Desktop (1024px+):
+- Multi-column layout possible
+- Sidebar navigation
+- Main content + supplementary columns
+- Optional: 3-column layouts
+```
+
+**Content Reflow:**
+- At 200% zoom: content must reflow without horizontal scroll
+- Layout must adapt to any width (not hardcoded pixels)
+- Text must wrap (not overflow hidden)
+- Images must resize/crop responsively
+
+**User Layout Control:**
+- Single/multi-column toggle (if multi-column typically used)
+- Sidebar collapse option (expand/minimize)
+- Feature visibility customization (hide unused features)
+- Grid/list view toggle (data display options)
+
+**Implementation Checklist - Customizable Interfaces:**
+- [ ] Create Accessibility Settings panel (centralized)
+- [ ] Support light/dark/high-contrast/custom themes
+- [ ] Font family options (min 3 including dyslexia-friendly)
+- [ ] Font size range (12-32px or larger)
+- [ ] Line height adjustment (1.3-2.0)
+- [ ] Motion reduction support (respects prefers-reduced-motion)
+- [ ] Captions on by default (enable for deaf/hard of hearing)
+- [ ] Audio descriptions toggle
+- [ ] Reading level selection (basic/standard/advanced)
+- [ ] Simple mode (fewer features, clearer paths)
+- [ ] Focus mode (minimize notifications)
+- [ ] Persistent settings (saved across sessions/devices)
+- [ ] Settings export/import (backup/share)
+- [ ] Reset to defaults option
+- [ ] Test with actual users using accessibility features
+
+---
+
+## 3. DESIGN CONSIDERATIONS BY CATEGORY
+
+### 3.1 Color Symbolism & Cultural Meaning
+
+#### Global Color Meaning Matrix
+
+| Color | Positive Meanings | Negative/Cautionary | Specific Cultures | Product Implementation |
+|---|---|---|---|---|
+| **Red** | Energy, passion, urgency | Danger, loss, debt, fire | China: luck, prosperity; India: purity, marriage; Western: stop, error | Use carefully in East Asia; pair with icons/text; avoid for errors in China |
+| **Green** | Growth, health, safety, prosperity | Envy, money, sickness (context) | Middle East: sacred; Western: go, permission; Some cultures: decay | Generally safe; use for positive actions; verify in target regions |
+| **White** | Purity, cleanliness, peace | Death, mourning, ghosts | East Asia: death, funeral; Western: purity; Middle East: positive | Avoid white backgrounds in funeral/solemn contexts; pair with color for meaning |
+| **Black** | Sophistication, power, elegance | Death, evil, darkness | Western: formal; East Asia: negative, mourning; Africa: context-dependent | Use for typography; avoid in solemn/negative contexts; test with regions |
+| **Yellow/Gold** | Optimism, happiness, joy | Cowardice, deceit, caution | China: imperial, precious; Western: caution; Some: negative connotations | Use intentionally; pair with supporting visual cues; test cultural reactions |
+| **Blue** | Trust, stability, calm, security | Cold, sadness, distance | Generally positive globally; research local variations | Safe choice for trust (banking, healthcare); most globally accepted |
+| **Purple** | Creativity, luxury, spirituality | Mourning, negative (context) | Western: royalty; Some cultures: sacred or negative | Use for creativity/premium; research specific audience; less universal than blue |
+| **Orange** | Enthusiasm, warmth, energy | Unfriendliness, aggression | India: sacred; Western: caution; Asian: prosperity | Use intentionally; pair with clear messaging; test with regions |
+| **Pink** | Femininity, softness, care | Weakness, frivolity (context) | Western gendered (female); Japanese: not inherently gendered | Avoid assuming pink=female; use for target audience only |
+| **Brown** | Reliability, earthiness, comfort | Drabness, heaviness | Western: earthy, natural; Less significant elsewhere | Good for neutral backgrounds; less commonly problematic |
+| **Gray** | Neutrality, formality, sophistication | Sadness, boredom, dullness | Generally neutral; avoids cultural associations | Use as neutral choice; adequate but not engaging |
+
+#### Implementation Strategy - Color as Secondary Indicator
+
+**Principle: Never convey information by color alone**
+
+```
+DON'T:
+- "Click the red button to delete"
+- Error shown in red color only
+- Status indicated by green/red/yellow circles only
+
+DO:
+- "Click the red [trash] icon to delete"
+- Error shown in red color + error icon + error text
+- Status indicated by color + icon + text label
+  * Green checkmark + "Approved"
+  * Red X + "

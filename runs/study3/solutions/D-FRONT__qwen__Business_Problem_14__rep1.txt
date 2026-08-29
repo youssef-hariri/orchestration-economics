@@ -1,0 +1,70 @@
+# Global Product Inclusivity & Accessibility Guidelines
+
+**Document Purpose:** To establish a comprehensive, actionable framework for designing a digital product that is deeply inclusive, culturally respectful, and accessible to a global user base. These guidelines move beyond superficial translation to address structural flexibility, socio-economic realities, and diverse cognitive and physical needs.
+
+---
+
+## 1. Core Product Features for Global Inclusivity
+*Functional capabilities required to dynamically adapt to a global user base, ensuring safety, privacy, and structural flexibility.*
+
+*   **Flexible, Modular Data Structures:** Western address and phone formats are globally incompatible. Implement modular form fields for addresses that allow users to skip non-applicable fields (e.g., "State" or "Zip") and use free-text fallbacks for rural areas without street names. Use international input components for phone numbers that handle country codes dynamically without forcing rigid visual formatting.
+*   **Shared Device Privacy & Safety:** In many regions, a single smartphone is shared by an entire family. Implement robust, privacy-focused "Quick Switch" profiles or a "Private Mode." This is a critical safety feature, particularly for women and marginalized groups in conservative cultures, ensuring their data and browsing history remain hidden.
+*   **Adaptive Information Density:** Allow users to toggle between "compact" and "comfortable" views. Frame this around *Information Density Familiarity* rather than geographic stereotypes. Users in regions with highly complex digital ecosystems often prefer multi-layered, dense navigation, while others prefer guided, sparse layouts. Base defaults on user preference and digital familiarity.
+*   **Contextual Onboarding Flows:** Adapt onboarding based on the user's region and digital literacy. Users in regions with lower digital literacy may need guided, step-by-step tutorials, while highly digitized users may prefer a "skip and explore" approach.
+*   **Inclusive Identity & Profile Fields:** Allow flexible name inputs supporting mononyms, patronymics, and multi-part surnames without forcing "First/Last" paradigms. Include diverse, globally recognized pronoun options and gender identities, or allow users to opt-out.
+*   **Nuanced Moderation & Anti-Weaponization Reporting:** Implement reporting tools for "cultural insensitivity," but require users to provide specific context and evidence to prevent bad actors from weaponizing the feature to silence minority voices. Ensure regional moderation teams are trained in universal human rights frameworks.
+
+---
+
+## 2. UX/UI Design Considerations
+*Visual and interactive design must be scrutinized for cultural bias, physical space constraints, and religious/dietary taboos.*
+
+*   **Fluid Typography & Diacritic Stress-Testing:** Never use fixed-height text boxes. Enforce fluid, auto-expanding UI containers in the design system. German or Finnish text can expand by 30%, while Vietnamese and Thai require significant vertical space for tonal diacritics. Mandate "stress tests" on all components by injecting the longest possible translated strings and tallest possible diacritics to prevent text clipping.
+*   **Regional Imagery Matrix & Visual Taboos:** Create a metadata-tagged "Regional Imagery Matrix" for the design system to flag dietary and religious taboos (e.g., avoiding imagery of pigs/pork/alcohol in MENA regions, and cows/beef in India). Ensure illustrative hands in UI graphics default to right-handed or neutral grips, as the left hand is considered unclean in several cultures.
+*   **Color Psychology & Symbolism:** Use color semantically only when universally understood, reinforcing meanings with iconography and text labels. Ensure high contrast for colorblind users. (e.g., Red signifies danger in Western finance but prosperity in China; white is for mourning in parts of Asia).
+*   **Universal Iconography:** Use abstract, universally understood icons. Conduct iconography audits with regional cultural consultants to ensure no hidden cultural offenses (e.g., avoiding animals with negative religious connotations).
+*   **Flawless RTL Mirroring:** Implement Right-to-Left (RTL) mirroring that correctly flips UI elements, progress bars, and navigation, while intelligently preserving universal elements like media playback controls, global brand logos, and numeric inputs.
+
+---
+
+## 3. Content & Copywriting Guidelines
+*Localization must address grammar, tone, and cultural context to dictate a respectful and clear product voice.*
+
+*   **Grammatical Formality & Honorifics:** Languages like French, Spanish, and German have the T-V distinction (*tu* vs. *vous/du*), while Japanese and Korean have complex honorific systems. Mandate that localization teams define the **formality register** (e.g., formal, informal, respectful) for the brand in each language. Ensure translation memory and glossaries strictly enforce this register.
+*   **Strict Ban on Humor, Sarcasm, & Anthropomorphism:** Sarcasm, wit, and playful AI micro-interactions rarely translate and can be perceived as rude or confusing. Explicitly ban humor in core UX copy. Maintain a neutral, helpful, and polite baseline tone globally. Playful copy must be natively written by local copywriters, never translated.
+*   **High-Context vs. Low-Context Communication:** Allow localization teams to adapt the *tone* of the copy, not just the literal translation. A direct "Delete Account" button might need to be softened to "Are you sure you wish to leave us?" in high-context cultures to preserve harmony.
+*   **Strict Avoidance of Idioms & Metaphors:** Ban phrases like "hit it out of the park," "ballpark figure," or "touch base." Use literal, universally understood language.
+*   **Inclusive, Gender-Neutral, & Empathetic Language:** Avoid gendered pronouns and culturally specific metaphors. For error messaging, avoid blaming the user (e.g., "You entered the wrong password"). Use neutral, system-focused language (e.g., "The password entered does not match our records") to prevent "loss of face."
+
+---
+
+## 4. Technical & Accessibility Considerations
+*Accessibility must encompass physical disabilities, cognitive needs, and the harsh socio-economic realities of the Global South.*
+
+*   **Data Poverty & "Data Saver" Mode:** Users in developing nations often operate under strict, prepaid data caps. Include a strict "Data Saver" mode that disables auto-play videos, background telemetry, and high-res image loading. Make this mode easily accessible and prompt it on the very first launch.
+*   **Dark Mode as an Economic Necessity:** Treat Dark Mode as a core socio-economic accessibility feature. In regions with expensive or unreliable electricity, dark mode significantly extends battery life on older OLED screens. Ensure it is available out-of-the-box and respects OS-level battery-saving triggers.
+*   **Low Literacy & Native Audio-First Design:** Over 700 million adults globally have low literacy skills. Introduce Audio-First and Visual-First fallbacks. **Implementation Note:** Leverage native OS-level accessibility APIs (e.g., system-level screen readers, native keyboard voice typing) rather than building bespoke, in-app Voice UI from scratch, ensuring broader language support and technical feasibility.
+*   **Motor, Age, & Physical Accessibility:** Ensure adequate touch target sizes (minimum 44x44pt) and spacing. Avoid complex multi-finger gestures. Provide alternative input methods and simplified interaction flows for older adults or users with motor impairments, tremors, or limited dexterity.
+*   **Cognitive & Neurodivergent Accessibility:** Offer a "Focus Mode" or "Reduced Motion" toggle. Ensure consistent navigation and predictable layouts to reduce cognitive load for neurodivergent users or those in highly distracting environments.
+*   **Assistive Technology Compatibility:** Ensure screen readers correctly announce localized text and handle RTL layouts. Ensure full keyboard navigability and support for switch devices, recognizing that many users rely on older hardware or shared devices with broken touchscreens.
+
+---
+
+## 5. Research, Testing, and Governance
+*Inclusivity must be structurally embedded into the product development lifecycle with real authority and operational workflows.*
+
+*   **Cultural Governance Board with Veto Power:** Elevate the Cultural Advisory Board to a Governance Board. **Operationalization:** This veto power must be integrated directly into product management tooling (e.g., as a mandatory "Inclusivity & Accessibility Sign-off" ticket/gate in Jira or Linear that strictly blocks deployment if not cleared).
+*   **Ethical Compensation for User Testing:** Mandate that user testers in all regions are compensated at a fair, localized living wage via accessible methods (e.g., mobile money, direct bank transfer), avoiding unusable Western gift cards or "company swag."
+*   **Decentralized, Contextual User Testing:** Establish local testing panels in target regions. Test with users of varying digital literacy levels and physical abilities in their *actual* environmental contexts (e.g., testing outdoors in bright sunlight, on a 3G connection, or on a shared, low-end device).
+*   **Inclusive Design System Governance:** Create a centralized, globally-aware Design System. Include strict guidelines on what *not* to do (e.g., a "Cultural Pitfalls" section). Mandate that all new components are audited for RTL compatibility, text expansion, screen-reader support, and cultural neutrality before being merged.
+*   **Continuous Feedback Loops:** Implement an easily accessible "Feedback" mechanism within the product that allows users to report cultural insensitivity, accessibility barriers, or privacy concerns directly to the design and governance teams.
+
+---
+
+## Immediate Next Steps for the Product Team
+
+1.  **Audit Data Structures:** Review all database schemas and form inputs (names, addresses, phone numbers, dates) to dismantle Western-centric rigidity and implement modular fallbacks.
+2.  **Stress-Test the Design System:** Run all UI components through extreme text expansion (German/Finnish) and diacritic height tests (Vietnamese/Thai) to enforce fluid, auto-expanding containers.
+3.  **Implement Socio-Economic & Safety Toggles:** Add "Data Saver," "Dark Mode," "Shared Device/Private Mode," and "Motor Accessibility" adjustments to the core feature list for immediate development.
+4.  **Revise Copy & Localization Guidelines:** Explicitly ban humor/sarcasm in core UX, define grammatical formality registers for all target languages, and update the translation memory.
+5.  **Restructure Governance & Tooling:** Establish the Cultural Governance Board, integrate the mandatory "Inclusivity Sign-off" gate into Jira/Linear, and finalize an ethical, localized compensation model (mobile money/bank transfers) for all user researchers.

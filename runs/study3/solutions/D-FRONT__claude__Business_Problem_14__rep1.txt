@@ -1,0 +1,616 @@
+# Comprehensive Guide to Culturally Inclusive & Accessible Product Design
+## A Framework for Global Digital Products
+
+---
+
+## TABLE OF CONTENTS
+
+1. [Executive Summary](#executive-summary)
+2. [Guiding Principles for Cultural Inclusion](#guiding-principles-for-cultural-inclusion)
+3. [Accessibility as Foundation](#accessibility-as-foundation)
+4. [Product Features for Inclusion](#product-features-for-inclusion)
+5. [Inclusive Design Checklist](#inclusive-design-checklist)
+6. [Metrics & Ongoing Governance](#metrics--ongoing-governance)
+7. [Common Pitfalls to Avoid](#common-pitfalls-to-avoid)
+8. [Implementation Roadmap](#implementation-roadmap)
+
+---
+
+## EXECUTIVE SUMMARY
+
+Global digital products must prioritize cultural inclusion and accessibility from inception, not as afterthoughts. This framework provides concrete, actionable guidance for product, design, engineering, and content teams to serve diverse users across languages, abilities, cultural backgrounds, and socioeconomic contexts.
+
+### Highest-Impact Recommendations
+
+- **Accessibility as Foundation**: Meet WCAG 2.1 Level AA minimum for all features; Level AAA for critical workflows (login, payment, content creation). Test with disabled users early and continuously. Incorporate accessibility testing into every code commit.
+- **Localization Beyond Translation**: Move beyond literal translation to transcreation (cultural adaptation). Hire native speakers and cultural consultants, not just translation vendors. Test UI, imagery, and messaging with diverse users from each market before launch.
+- **Flexible Data Models**: Replace Western-centric assumptions (binary gender, "First Name/Last Name," Gregorian calendar) with customizable options. Allow users to specify name order, address structure, calendar system, pronouns, and visibility preferences.
+- **Safety for Vulnerable Users**: Implement geofenced privacy and pronouns controls for users in countries where LGBTQ+ identity or activism is criminalized. Use encryption, data minimization, and transparent government request policies.
+- **Multilingual, Bias-Aware Moderation**: Hire native-speaker moderators for each language; conduct quarterly fairness audits to detect systematic bias against minority-language content; commit to remediation if disparities are found.
+- **Performance & Offline-First Design**: Optimize for low-cost devices (2–4 GB RAM), 2G/3G networks, and offline usage. Implement service workers, lazy loading, and server-side rendering to serve 4+ billion users on constrained infrastructure.
+- **Governance & Measurement**: Establish clear KPIs for inclusion (% of features at WCAG AA, language translation coverage, moderation fairness metrics), a Community Advisory Board representing diverse users, and quarterly transparency reporting.
+
+---
+
+## GUIDING PRINCIPLES FOR CULTURAL INCLUSION
+
+### Core Principles
+
+These principles should anchor all product decisions and trade-offs:
+
+| Principle | Definition | Application |
+|-----------|-----------|-------------|
+| **Dignity** | Every user deserves respect for their identity, beliefs, and circumstances | Avoid stereotypes; offer granular customization; never assume user attributes |
+| **Universal Design** | Design for the widest range of users, including marginalized groups, from the start—not as an afterthought | Include disabled users, non-native speakers, low-income users, minority communities, and elderly users in core product design |
+| **Localization as Strategy** | Move beyond translation to culturally contextual adaptation | Adapt UI, messaging, imagery, and workflows to local norms; prioritize transcreation; involve local communities in design decisions |
+| **Transparency & Agency** | Users should understand how the product works and have control over their data and experience | Explain algorithmic decisions; offer opt-outs; provide clear privacy and moderation policies; respect user choice |
+| **Continuous Learning** | Cultural contexts evolve; design is never "done" | Establish feedback mechanisms; conduct regular audits; respond to community input; iterate based on real-world usage |
+| **Intersectionality** | Users have multiple, overlapping identities (e.g., deaf + non-binary + from restrictive country) | Design for combinations of characteristics; test edge cases where identities intersect; do not assume isolation of needs |
+| **Do No Harm** | Anticipate and mitigate negative impacts on vulnerable groups | Conduct bias audits; involve ethicists and community advocates; test edge cases; implement legal/safety safeguards |
+| **Accessibility as Foundation** | Disability inclusion is non-negotiable; 1.3 billion people globally are disabled | Meet WCAG 2.1 AA minimum; test with disabled users; ensure keyboard navigation, screen reader support, captions, and cognitive accessibility |
+
+### Anti-Patterns to Avoid
+
+- **"One-size-fits-all" design** — A single English-first interface excludes non-English speakers and those with different cultural norms.
+- **Tokenism** — Adding a few translated strings or diverse stock photos without structural changes is performative and risks offense.
+- **"Export" mindset** — Treating non-English markets as secondary, lower-priority versions.
+- **Assumptions about "normal"** — Default settings (Western naming conventions, Christian calendar, binary gender) should not be presented as universal.
+- **Delayed accessibility** — Retrofitting accessibility after launch is costly, misses intersectional needs, and may violate legal requirements (ADA, AODA, EN 301 549).
+- **Translation without transcreation** — Literal translation ignores cultural context, idiom, and tone; may produce offensive results.
+- **Moderation without diversity** — English-only or majority-culture-only moderation teams systematically misinterpret minority-language content and bias removals against marginalized users.
+- **Surveillance by design** — Collecting data on vulnerable groups without safeguards creates safety risks in restrictive regimes; privacy must be default.
+
+---
+
+## ACCESSIBILITY AS FOUNDATION
+
+### Mandatory Standards & Conformance
+
+**Legal & Technical Baseline:**
+
+- **WCAG 2.1 Level AA minimum** for all pages and features.
+- **WCAG 2.1 Level AAA** for critical workflows (registration, login, payment, content creation, search, account deletion).
+- **Zero critical/serious accessibility violations** (per Axe DevTools severity) on any page before public release.
+- **Automated accessibility tests** run on every code commit; build fails if new violations introduced.
+- **Success Criteria**:
+  - ✅ 100% of critical workflows conform to WCAG 2.1 AAA before launch.
+  - ✅ 95% of non-critical pages conform to WCAG 2.1 AA before launch.
+  - ✅ Roadmap for AAA compliance on non-critical pages within 12 months.
+
+**Regional Legal Requirements:**
+
+| Region | Standard | Notes |
+|--------|----------|-------|
+| **USA** | ADA Section 508 (2017) | Covers federal contractors and many private entities |
+| **EU** | EN 301 549:2021 | Public sector requirement; private sector increasingly liable |
+| **UK** | Equality Act 2010 | Public and private organizations must ensure accessible websites/apps |
+| **Canada** | AODA (Accessibility for Ontarians with Disabilities Act) | WCAG 2.1 AA required; AODA 2025 deadline |
+| **Australia** | DDA (Disability Discrimination Act) | WCAG 2.1 AA increasingly enforced via litigation |
+| **Global Trend** | Increasing litigation risk | Even without formal law, accessibility failures can result in lawsuits (e.g., Brazil, India) |
+
+### Accessibility by Disability Type
+
+#### Visual Disabilities (Blind & Low-Vision Users)
+
+**Screen Reader Compatibility:**
+- All interactive elements labeled with descriptive text (`aria-label`, `aria-labelledby`, or visible text).
+- Form inputs have associated labels: `<label for="email">Email Address</label><input id="email" type="email">`.
+- Images have alt text (≤125 characters, descriptive, context-aware): ❌ "Image" | ✅ "Graph showing Q3 revenue: US $2M, EU $1.5M, Asia $3M."
+- Decorative images marked as `<img alt="" role="presentation">`.
+- Icon-only buttons include text label: ❌ `<button>🔍</button>` | ✅ `<button aria-label="Search">🔍</button>`.
+- Semantic HTML (headings, lists, landmarks) so screen readers can navigate structure.
+- ARIA roles used correctly: `role="button"` for clickable divs; `role="alert"` for dynamic errors.
+
+**Color Contrast:**
+- Text/background contrast ≥4.5:1 (WCAG AA); ≥7:1 (WCAG AAA) for normal text.
+- Large text (18pt+ or 14pt+ bold) ≥3:1 (AA); ≥4.5:1 (AAA).
+- Never convey information by color alone: ❌ "Required fields are red" | ✅ "Required fields marked with * (red)".
+- Test using WebAIM Contrast Checker, Axe DevTools, or Lighthouse.
+
+**Zoom & Magnification:**
+- All content usable at 200% zoom (no horizontal scrolling; layout reflows).
+- Font sizes in relative units (`em`, `rem`, `%`), not fixed pixels.
+- High-contrast mode toggle: white-on-black or black-on-white.
+- Dyslexia-friendly font option: OpenDyslexic or similar.
+
+**Testing Protocol:**
+- [ ] Screen reader testing on NVDA (Windows), JAWS (Windows), VoiceOver (Mac/iOS), TalkBack (Android).
+- [ ] Manual contrast checking on all UI elements.
+- [ ] Zoom testing at 200%; verify no horizontal scroll.
+- [ ] Alt text quality review with blind testers.
+
+#### Motor Disabilities (Limited Movement, Tremor, Paralysis)
+
+**Keyboard Navigation:**
+- All interactive elements reachable via Tab; logical tab order (left-to-right, top-to-bottom).
+- No keyboard traps; always able to Tab out of components.
+- Focus indicator visible with ≥3:1 contrast.
+- Escape key closes modals/overlays.
+- Enter key activates buttons; Space key activates buttons/checkboxes.
+- No time-dependent interactions (auto-logout disabled or extendable).
+- Drag-and-drop not sole interaction; keyboard alternative required.
+
+**Motor Accessibility Features:**
+- Large touch targets: minimum 48×48 pixels.
+- Single-click preferred over double-click.
+- Voice input support for key actions (e.g., "Submit form," "Search").
+- Switch control for users with severe motor disabilities.
+- Undo functionality on all actions; confirmation on destructive actions.
+
+**Testing Protocol:**
+- [ ] Keyboard-only navigation: use product with mouse disabled; all workflows completable.
+- [ ] Tab order inspection for logical flow.
+- [ ] Focus indicator check: visible on all interactive elements.
+- [ ] Switch control testing with adaptive switch devices.
+
+#### Deaf & Hard-of-Hearing Users
+
+**Captions & Transcripts:**
+- All video must have accurate captions (not auto-generated without human review; accuracy ≥95%).
+- Captions include speaker identification and sound descriptions: `[door slams], [music plays], ALEX: "Did you hear that?".`
+- All audio must have full transcript (verbatim text + timestamps; linked prominently).
+- Live video requires real-time CART (≥99% accuracy) or live captions (≥95% with human review).
+
+**Visual Alerts:**
+- Sound-based alerts must have visual equivalent (flashing border, icon, banner).
+- Never convey critical information by sound alone.
+
+**Testing Protocol:**
+- [ ] Caption accuracy check: watch with captions off; read captions; verify comprehension.
+- [ ] Transcript quality review for standalone understandability.
+- [ ] Visual alert testing with sound disabled.
+
+#### Cognitive Disabilities (Intellectual Disability, Dyslexia, ADHD, Autism Spectrum)
+
+**Plain Language & Clarity:**
+- Core UI: 8th-grade reading level (Flesch Reading Ease ≥60 for English).
+- Avoid idioms, jargon, complex nested sentences.
+- ❌ "Please ensure that your credentials align with the requisite authentication parameters."
+- ✅ "Enter your email and password to sign in."
+- Headings, bullets, short paragraphs (≤3 sentences) for scannability.
+- Consistent terminology throughout product.
+
+**Predictable & Consistent Navigation:**
+- Navigation structure same across all pages.
+- Buttons, links, labels consistent in placement and appearance.
+- Consistent error messaging.
+- No unexpected page transitions; warn if button opens new window.
+
+**Cognitive Load Reduction:**
+- Progressive disclosure: hide advanced options by default.
+- Chunking: break complex tasks into small steps ("Step 2 of 4").
+- Disable auto-playing videos and animations by default.
+- Support `prefers-reduced-motion: reduce` CSS setting.
+- Undo and confirm-before-delete on all destructive actions.
+
+**Dyslexia-Friendly Design:**
+- Font options: OpenDyslexic or similar (distinctive shapes, increased spacing).
+- Line spacing ≥1.5; letter spacing ≥0.12em.
+- Left-aligned text; avoid justified.
+- No ALL CAPS; use title case or sentence case.
+
+**ADHD-Friendly Design:**
+- Clear visual hierarchy: most important info largest/boldest.
+- Minimize distractions: remove unnecessary animations, auto-play videos.
+- Clear focus indicators on interactive elements.
+- Notifications optional; allow quiet hours.
+- Auto-save progress; do not require manual save.
+
+**Testing Protocol:**
+- [ ] Plain language audit: read UI aloud; check Flesch score; get feedback from users with intellectual disability.
+- [ ] Consistency audit: identify inconsistencies in terminology, button behavior, error messaging.
+- [ ] Cognitive load testing: observe ADHD/autism users completing core task; measure time, errors, frustration.
+- [ ] Animation testing: verify `prefers-reduced-motion` is supported.
+
+---
+
+## PRODUCT FEATURES FOR INCLUSION
+
+### 1. Language & Locale Selection
+
+**Core Features:**
+
+- Offer 40–80+ languages with native-script names: "Español," "العربية," "日本語."
+- Separate language and region selection (e.g., Portuguese (Brazil) vs. Portuguese (Portugal)).
+- No IP-based auto-detection; always allow manual override.
+- Easy language switching anytime without app restart.
+- CLDR locale identifiers for consistent combinations.
+
+**Implementation Checklist:**
+- [ ] Language picker shows native-script names for all supported languages.
+- [ ] Locale selection independent of language.
+- [ ] Language switching accessible from main settings.
+- [ ] "More languages coming soon" list with community voting option.
+- [ ] All locales validated against CLDR; fallback chains documented.
+
+**Localization Beyond Translation:**
+
+- Hire transcreators (translators + copywriters), not just translation vendors.
+- All UI copy, error messages, marketing reviewed by cultural consultants before localization.
+- Transcreators adapt for cultural context, idiom, and tone.
+- **Example**: English "Move fast and break things" → "Innovate responsibly" for cultures valuing caution.
+
+**Localized Imagery & Symbols:**
+
+| Element | Guidance |
+|---------|----------|
+| **Color** | White (purity in West, mourning in East Asia); red (prosperity in East Asia, warning in West). Use neutral palettes as default; allow user theming. |
+| **Animals/Symbols** | Avoid sacred imagery: cows (Hindu/Jain), pigs (Islamic/Jewish), serpents (context-dependent). Never use as placeholder or negative symbol. |
+| **Gestures** | Thumbs up (offensive in Middle East/West Africa); peace sign backwards (rude in UK/Ireland/Australia). Test avatar poses with users in each market. |
+| **Icons** | Ensure globally recognized: envelope (not mailbox); hamburger menu (needs label for clarity). |
+
+**Implementation Checklist:**
+- [ ] Transcreators hired; review all UI copy before localization vendor.
+- [ ] Cultural consultants approve launch in each major market.
+- [ ] Avatar imagery, colors, and symbols tested with diverse users per region.
+- [ ] Translation management system (Lokalise, Crowdin, Phrase) integrated with CI/CD.
+- [ ] Language feedback widget allows user-reported corrections with escalation path.
+
+---
+
+### 2. Name, Address, Date, Number, and Currency Handling
+
+**Name Handling:**
+
+- Primary input: **"Full Name"** field (freeform).
+- Optional "Name Parts" interface for users who want structure:
+  - Predefined orders: "Given first," "Family first," "Mononym," "Custom."
+  - Store exactly as entered; parse only with explicit user consent.
+  - Never auto-parse or assume structure.
+
+**Data Model Example:**
+```json
+{
+  "full_name": "李明",
+  "name_order_preference": "family_first",
+  "display_name": "李明",
+  "transliteration": {"system": "pinyin", "value": "Li Ming"},
+  "sort_name": "李,明"
+}
+```
+
+**Address Handling:**
+
+- Freeform text field as primary; optional structured fields toggle-able.
+- Region-specific forms for critical services:
+  - **USA**: Street, City, State, ZIP
+  - **Japan**: Prefecture, City, Town, House
+  - **UK**: House, Street, Postcode
+  - **India**: Address, City, State, PIN
+  - **Brazil**: Address, City, State, CEP
+- Test with real addresses: rural (no postal code), compounds (family dwellings), non-Latin scripts, landmark-based systems.
+
+**Date Format:**
+
+- Detect and respect locale-appropriate formats:
+  - **US**: MM/DD/YYYY | **Europe**: DD/MM/YYYY | **Japan**: YYYY/MM/DD
+  - ISO 8601 (YYYY-MM-DD) for storage/APIs.
+- Date picker displays user's format; allow manual override.
+- For mixed-context display, use fully spelled format (e.g., "25 December 2024").
+
+**Number & Currency Format:**
+
+- Respect thousands separators: 1,000.00 (US); 1.000,00 (Germany); 1 000,00 (France); 10,00,000 (India).
+- Display currency by locale: $100.00 (US); €100,00 (EU); ₹100.00 (India); ¥100.00 (China).
+- Allow users to set preferred display currency (distinct from transaction currency).
+- Support edge cases: hyperinflation contexts, multiple currencies, discontinued currencies for historical data.
+
+**Implementation Checklist:**
+- [ ] Data schema supports free-form names and optional structured parsing under user control.
+- [ ] Address form adapts to selected country.
+- [ ] Date picker respects locale format; allows manual entry in user-preferred format.
+- [ ] Number/currency display tested with real locale data (using ICU libraries).
+- [ ] Unicode normalization applied to all text input.
+- [ ] Collation/sorting rules configured per locale.
+- [ ] Edge cases documented and tested.
+
+**Example DO/DON'T:**
+
+| ❌ DON'T | ✅ DO |
+|----------|-------|
+| "First Name" + "Last Name" fields; assume Western order | "Full Name" field; optional "Name Parts" with user-specified order |
+| Address form: Street, City, State, ZIP globally | Region-specific forms: Japan gets Prefecture/City/Town; India gets State/PIN; Brazil gets State/CEP |
+| Dates in MM/DD/YYYY globally | Detect locale; display DD/MM/YYYY in Europe, YYYY/MM/DD in Japan; allow override |
+| Number format 1,000.50 globally | German user sees 1.000,50; Indian user sees 10,00,000; US user sees 1,000.00 |
+
+---
+
+### 3. Calendars & Holidays
+
+**Supported Calendar Systems:**
+
+Offer users choice of primary display calendar:
+- **Gregorian** (ISO 8601)
+- **Hijri** (Islamic; ~2 billion users)
+- **Hindu** (Vikram Samvat, Shaka Samvat)
+- **Hebrew/Jewish**
+- **Buddhist** (used in Southeast Asia)
+- **Chinese Lunisolar** (used in East Asia)
+- **Coptic** (Egypt, Ethiopia)
+
+**Implementation:**
+
+- Allow users to select primary display calendar; applies consistently.
+- Support dual calendars side-by-side for users navigating multiple traditions.
+- Provide native calendar input where possible (Hijri picker for Arabic users, Hebrew picker for Israeli users).
+- Automatically convert between calendars in backend.
+
+**Holiday & Observance Calendar:**
+
+Create comprehensive repository by country, region, religious tradition:
+
+| Category | Examples |
+|----------|----------|
+| **Statutory Holidays** | New Year, Independence Day, Constitution Day |
+| **Religious Observances** | Eid, Ramadan, Yom Kippur, Easter, Christmas, Diwali, Hanukkah, Navratri, Vesak |
+| **Cultural/Secular** | Int'l Women's Day (March 8), Juneteenth (June 19), Nowruz (March 20/21), Onam, Songkran, Day of the Dead |
+| **Optional/Observant-Specific** | Muharram, Lent/Ash Wednesday, Mahavir Jayanti |
+| **Regional/Indigenous** | Waitangi Day (NZ), NAIDOC Week (Australia), Indigenous ceremony dates |
+
+**User Control:**
+
+- Allow users to select which holidays to display/receive notifications for.
+- **Never assume a holiday**; all non-statutory observances must be opt-in.
+- Provide multiple holiday calendar imports for religious/cultural calendars.
+- Show holiday context/significance.
+- For teams, allow shared holiday calendars (avoid scheduling during Ramadan if team member observes).
+
+**Implementation Checklist:**
+- [ ] Date picker supports ≥6 major calendar systems with native input capability.
+- [ ] Users can select primary calendar; applies consistently across product.
+- [ ] Dual calendar view available.
+- [ ] Holiday calendar community-maintained with submission/correction process.
+- [ ] Notifications respect user-selected holidays.
+- [ ] Statutory holidays accurate per market with local significance noted.
+- [ ] Religious/cultural observances opt-in, not defaulted to majority religion.
+- [ ] Holiday data includes multiple language names and context.
+- [ ] Tested with users from each supported calendar tradition.
+
+---
+
+### 4. Pronouns & Gender Options
+
+**Core Features:**
+
+- Gender field is **optional**; no mandatory selection.
+- Predefined options with culture-specific variants (where appropriate):
+  - Universal: Man, Woman, Non-binary, Transgender Man, Transgender Woman, Genderqueer, Agender
+  - Culture-specific (with local consultation): fa'afafine (Samoa), hijra/khwaja sira (South Asia), kathoey (Thailand), Two-Spirit (Indigenous North America)
+  - Open text field: "Prefer to describe yourself"
+  - "Prefer not to disclose"
+- Separate **Pronouns field** with common options by locale:
+  - **English**: he/him, she/her, they/them, he/they, she/they, custom
+  - **Spanish**: él, ella, elle, otro
+  - **German**: er, sie, es, xier, custom
+  - Support multiple pronouns (e.g., "he/they").
+  - Support custom neopronoun entry.
+
+**Visibility & Usage:**
+
+- Users choose who can see gender/pronouns: Public, Private, Connections-only.
+- Do not auto-populate emails/system messages with pronouns; only if user explicitly enables.
+- All generated content tested to respect pronouns correctly.
+
+**Safety for At-Risk Users:**
+
+- In countries where LGBTQ+ identity is criminalized (60+ countries): pronouns private-only by default with warning.
+- App store compliance: offer binary-only options in restrictive markets; maintain feature on web via VPN.
+- Data encryption where feasible; user-held keys so company cannot decrypt.
+- No visible audit trail for pronoun changes.
+
+**Implementation Checklist:**
+- [ ] Gender field optional; no mandatory selection.
+- [ ] Gender and pronouns updatable independently without email verification.
+- [ ] Pronouns field supports custom entry and multiple pronouns.
+- [ ] Culture-specific gender options offered with community consultation.
+- [ ] Visibility settings control who can see gender/pronouns.
+- [ ] All generated content (emails, notifications) tested to respect pronouns.
+- [ ] Geofenced defaults in criminalized countries; users warned before public visibility.
+- [ ] Grammar rules support non-binary pronouns correctly.
+
+---
+
+### 5. Avatar & Identity Representation
+
+**Avatar Options:**
+
+Users can:
+- Upload a custom photo.
+- Use a generated avatar (Gravatar, DiceBear, or custom generator).
+- Use initials or monogram.
+- Use non-representative glyph/icon.
+- Use no avatar (blank state valid; no errors).
+
+**Inclusive Avatar Customization:**
+
+- **Skin tone palette**: Fitzpatrick 1–6 and variations.
+- **Clothing**: Diverse global styles (not just Western business casual).
+- **Hairstyles**: Natural and styled hair from many cultures, including textured/coily hair.
+- **Abilities**: Wheelchairs, guide dogs, hearing aids, visible prosthetics.
+- **Gender options**: Gender-neutral and non-binary.
+- **Cultural/religious items**: Hijab, turban, kippah, tilaka, etc. (opt-in, not assumed).
+
+**Quality & Testing:**
+
+- Diverse illustrated figures, not photos.
+- Avoid tokenism: representation across full spectrum, not 1–2 darker-skinned options.
+- Test with cultural consultants; gather feedback on respectful representation.
+- Ensure all avatar components not exoticized or stereotyped.
+
+**Implementation Checklist:**
+- [ ] Users can skip avatar upload; blank/anonymous profiles supported.
+- [ ] Avatar generator includes diverse skin tones, body types, ages, abilities.
+- [ ] Clothing and hairstyle options reflect global diversity without stereotyping.
+- [ ] Cultural/religious items opt-in, not assumed based on other profile data.
+- [ ] All avatar images tested for offense and stereotyping by cultural consultants.
+- [ ] Skin tone palette verified against Fitzpatrick scale or similar standard.
+
+---
+
+### 6. Right-to-Left (RTL) Language Support
+
+**Full RTL Support:**
+
+- Mirror entire layout when RTL language selected: buttons, navigation, form fields, content alignment.
+- Icons denoting directionality reverse (e.g., "back" arrow).
+- Use CSS logical properties (`margin-inline`, `padding-inline-start`) instead of directional properties.
+- Test with native RTL speakers; do not rely on automated mirroring.
+
+**Text & Typography:**
+
+- All text renders correctly in RTL scripts (Arabic, Hebrew, Urdu).
+- Test mixed LTR/RTL content for correct bidirectional text (bidi) handling.
+- Use monospace or robust font supporting RTL scripts clearly.
+
+**Interactive Elements:**
+
+- Date pickers, number inputs, form fields support RTL input and display.
+- Keyboard navigation follows RTL conventions (right arrow = move left in text cursor).
+- Dropdown menus appear in RTL-logical positions.
+
+**Implementation Checklist:**
+- [ ] CSS uses logical properties (start/end) rather than directional (left/right).
+- [ ] All UI elements tested in RTL layout with native speakers; not auto-mirrored.
+- [ ] Text input, date pickers, form fields support RTL script and bidi text.
+- [ ] Icons and directional arrows reverse in RTL context.
+- [ ] QA testing includes RTL + complex content (mixed LTR/RTL, numbers, special characters).
+
+**CSS Example:**
+```css
+/* ✅ DO: Logical properties */
+.sidebar {
+  margin-inline-start: 20px;
+  float: inline-start;
+}
+```
+
+---
+
+### 7. Offline & Low-Bandwidth Modes
+
+**Offline-First Architecture:**
+
+- Critical features work offline: read/access saved content, create drafts, queue actions, access reference materials.
+- Service workers cache: UI elements, static assets, recently accessed content, user configuration.
+- Queue user actions (form submissions, comments) for sync when online.
+
+**Low-Bandwidth Mode:**
+
+- "Low Data Mode" or "Lite Mode" toggle in settings.
+- Images load on-demand or reduced resolution.
+- Auto-play videos disabled.
+- Animations/transitions disabled.
+- Form validation shown inline without re-rendering.
+- Minimal JavaScript execution.
+
+**Data Usage Transparency:**
+
+- Display estimated data cost for key actions (e.g., "Uploading this video: ~50 MB").
+- Allow users to set data limits and receive warnings.
+- Provide usage stats: "You've used 200 MB this month; plan allows 500 MB."
+
+**Testing & Validation:**
+
+- Test on real networks with throttled speeds (2G, 3G simulation).
+- Use Chrome DevTools to throttle bandwidth and test offline scenarios.
+- Partner with local networks in target markets to validate real-world performance.
+
+**Implementation Checklist:**
+- [ ] Service workers cache critical UI and static assets.
+- [ ] Core functionality (read, search, create drafts) works offline.
+- [ ] User actions queued and synced when online.
+- [ ] "Low Data Mode" reduces image/video sizes; disables heavy JavaScript.
+- [ ] Transparent data usage estimates provided for key actions.
+- [ ] Tested on 2G/3G simulation and real low-bandwidth networks.
+- [ ] Offline/low-bandwidth mode documented for users with clear sync status indicators.
+
+---
+
+### 8. Low-Cost Device Support
+
+**Performance Targets:**
+
+- Lighthouse Score: 90+ across Performance, Accessibility, Best Practices (mid-range device on 3G).
+- Bundle size: Core app JavaScript ≤150 KB gzipped.
+- Time to Interactive: ≤3 seconds on 3G, mid-range phone.
+- Memory footprint: ≤100 MB resident memory.
+
+**Code & Asset Optimization:**
+
+- Lazy-load non-critical JavaScript; defer analytics.
+- Code splitting and dynamic imports for feature-gated content.
+- Minify and compress all assets (CSS, JavaScript, images).
+- Use WebP or JPEG-XL with PNG/JPEG fallbacks; responsive srcset.
+- Remove unused CSS/JavaScript libraries; prefer lightweight alternatives.
+
+**Server & Network Optimization:**
+
+- Content delivery network (CDN) to reduce latency.
+- HTTP/2 server push for critical assets.
+- Gzip and Brotli compression for text.
+- Aggressive caching for static assets; short TTLs for dynamic content.
+
+**UI/UX for Low-End Devices:**
+
+- Reduce animations and transitions (CPU-intensive).
+- Simplify visual effects (gradients, shadows, blur).
+- Progressive enhancement: core content first; enhancements layer on top.
+- Minimize large lists; paginate or lazy-load (not infinite scroll).
+
+**Testing & Validation:**
+
+- Use Lighthouse, WebPageTest, or Speedcurve for performance measurement.
+- Test on real low-end devices (e.g., $150 Android phone 2–3 years old) on actual 3G/4G networks, not simulation.
+- Test in target markets where these devices are common.
+- Monitor real-user metrics (RUM) for actual performance.
+
+**Implementation Checklist:**
+- [ ] Bundle size measured and kept ≤150 KB gzipped; monitored in CI/CD.
+- [ ] Lazy loading implemented; code splitting tested.
+- [ ] Performance tested on real low-end devices.
+- [ ] Time to Interactive ≤3 seconds on 3G, mid-range phone (per Lighthouse).
+- [ ] Images optimized with responsive srcsets; WebP with fallbacks.
+- [ ] Cache strategy documented; CDN configured for target regions.
+- [ ] Animations optional/disabled in performance mode.
+
+---
+
+### 9. Granular Privacy Controls
+
+**Privacy by Default:**
+
+- Collect only data necessary for core functionality.
+- No tracking or profiling without explicit, informed consent.
+- No data sharing with third parties without clear opt-in.
+- Delete user data upon account deletion (unless legally required).
+
+**Tiered Privacy Controls:**
+
+- **Simple View (Default)**: On/Off toggles for major categories (analytics, marketing, location, camera/microphone).
+- **Advanced View**: Fine-grained controls for each data type, retention period, third-party sharing.
+- **Privacy Presets**: "Minimal," "Balanced," "Detailed" profiles adjusting multiple settings.
+
+**Data Subject Rights:**
+
+Users can:
+- **Access**: Download copy of all personal data (JSON, CSV format).
+- **Correct**: Edit/update personal data.
+- **Delete**: Request account and data deletion.
+- **Port**: Export data to use with another service.
+- **Object**: Opt out of specific uses (profiling, marketing).
+- Tools accessible from settings, not buried in legal docs.
+
+**Transparency Tools:**
+
+- **Privacy Dashboard**: Show at a glance what data is collected, who it's shared with, how long it's retained, what it's used for.
+- **Data Request Log**: List all third-party data requests (if applicable).
+- **Ad Transparency**: Explain why user sees a particular ad.
+
+**Localization for Regulations:**
+
+- **GDPR (EU)**: Explicit consent for all non-essential processing; right to deletion prominent.
+- **CCPA (California)**: "Do Not Sell My Personal Information" link on homepage; opt-out simple.
+- **LGPD (Brazil)**: Similar to GDPR; localization required.
+- **PIPEDA (Canada)**: Consent for collection; transparent retention.
+- **POPIA (South Africa)**: Consent and transparency emphasized.
+- Deploy region-aware controls; do not

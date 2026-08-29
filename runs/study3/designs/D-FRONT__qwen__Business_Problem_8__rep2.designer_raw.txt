@@ -1,0 +1,107 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a supply chain strategist. Draft a comprehensive initial strategy to improve resilience and ethical considerations for a global manufacturing supply chain. Cover supplier diversification, risk management, ethical sourcing standards, and monitoring mechanisms.",
+      "description": "Drafts the initial supply chain resilience and ethics strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Review the initial supply chain strategy. Enhance it by adding specific, actionable steps, measurable KPIs, and addressing any gaps in resilience or ethical compliance. Incorporate any feedback provided.",
+      "description": "Refines and adds actionable depth to the strategy."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined supply chain strategy. Assess its comprehensiveness, actionability, and balance between resilience and ethics. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy for baseline quality and completeness."
+    },
+    {
+      "name": "Supply Chain Expert",
+      "role": "expert",
+      "systemPrompt": "You are a global supply chain and compliance expert. Review the approved strategy and inject domain-specific insights. Add advanced risk mitigation techniques (e.g., nearshoring, digital twins), international compliance frameworks (e.g., ESG reporting, modern slavery acts), and geopolitical risk assessments.",
+      "description": "Injects domain-specific supply chain and compliance expertise."
+    },
+    {
+      "name": "Expert Integration Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Integrate the expert's domain-specific insights into the main strategy document seamlessly. Ensure the tone is consistent, the flow is logical, and all expert recommendations are translated into clear, actionable corporate strategies.",
+      "description": "Seamlessly integrates expert insights into the main strategy."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a final quality gate. Review the integrated strategy for cohesion, professional tone, and completeness. Ensure expert insights are well-integrated and not just bolted on. Provide a FULL assessment. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Ensures the final integrated document is cohesive and complete."
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional document polisher. Format the final supply chain strategy for executive presentation. Use clear headings, bullet points, bold text for key terms, and ensure a highly professional, authoritative corporate tone. Fix any minor grammatical or formatting issues.",
+      "description": "Formats and polishes the final output for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain strategist. Draft a comprehensive initial strategy to improve resilience and ethical considerations for a global manufacturing supply chain. Cover supplier diversification, risk management, ethical sourcing standards, and monitoring mechanisms."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Review the initial supply chain strategy. Enhance it by adding specific, actionable steps, measurable KPIs, and addressing any gaps in resilience or ethical compliance. Incorporate any feedback provided."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined supply chain strategy. Assess its comprehensiveness, actionability, and balance between resilience and ethics. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Supply Chain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a global supply chain and compliance expert. Review the approved strategy and inject domain-specific insights. Add advanced risk mitigation techniques (e.g., nearshoring, digital twins), international compliance frameworks (e.g., ESG reporting, modern slavery acts), and geopolitical risk assessments."
+    },
+    {
+      "name": "Expert Integration Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Integrate the expert's domain-specific insights into the main strategy document seamlessly. Ensure the tone is consistent, the flow is logical, and all expert recommendations are translated into clear, actionable corporate strategies."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a final quality gate. Review the integrated strategy for cohesion, professional tone, and completeness. Ensure expert insights are well-integrated and not just bolted on. Provide a FULL assessment. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 7,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document polisher. Format the final supply chain strategy for executive presentation. Use clear headings, bullet points, bold text for key terms, and ensure a highly professional, authoritative corporate tone. Fix any minor grammatical or formatting issues."
+    }
+  ],
+  "explanation": "This pipeline is designed to systematically develop, refine, and validate a comprehensive global supply chain strategy. It begins with a Builder generating the initial framework, followed by a Refiner to add actionable depth. A Quality Gate ensures the strategy meets baseline requirements before a Supply Chain Expert injects advanced domain-specific insights (e.g., ESG compliance, geopolitical risk). An Expert Integration Refiner seamlessly weaves these insights into the main document, followed by a Final Quality Gate to ensure cohesion. The pipeline concludes with a Polisher to format the output for executive presentation. The use of 'if' gates after refiners ensures iterative improvement without violating routing rules, keeping the process fully automated and under the 8-step limit."
+}

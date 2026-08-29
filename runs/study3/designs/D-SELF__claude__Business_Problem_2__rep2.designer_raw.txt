@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategies for improving communication, collaboration, and conflict resolution in geographically dispersed teams"
+    },
+    {
+      "name": "Cultural & Organizational Analyst",
+      "role": "analyst",
+      "description": "Analyzes the strategies for cultural sensitivity, organizational feasibility, and alignment with multinational team dynamics"
+    },
+    {
+      "name": "Best Practices Expert",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on remote team management, cross-cultural communication, and distributed team best practices"
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Incorporates analyst insights and expert recommendations to enhance and deepen the strategies with actionable, culturally-aware improvements"
+    },
+    {
+      "name": "Implementation Quality Reviewer",
+      "role": "critic",
+      "description": "Conducts comprehensive quality assessment of the refined strategies, ensuring completeness, practicality, and effectiveness for the stated outcome"
+    },
+    {
+      "name": "Deliverable Polisher",
+      "role": "polisher",
+      "description": "Formats final strategies and best practices into clear, well-structured, user-ready documentation with prioritized recommendations"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategy builder specializing in distributed team communication. Create comprehensive, actionable strategies to improve communication, foster collaboration, and resolve conflicts within geographically dispersed, culturally diverse project teams. Address communication delays, misunderstandings, team cohesion, and cross-cultural challenges. Provide concrete strategies across communication tools, meeting cadences, documentation practices, cultural awareness, and conflict resolution frameworks."
+    },
+    {
+      "name": "Cultural & Organizational Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an organizational analyst focused on distributed teams. Analyze the provided strategies for: (1) cultural sensitivity across multiple continents, (2) practical feasibility for technology companies, (3) time zone and logistical considerations, (4) organizational scalability, (5) alignment with multinational team dynamics. Identify gaps, highlight strengths, and note areas needing enhancement. Provide structured analytical insights."
+    },
+    {
+      "name": "Best Practices Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a subject matter expert in remote team management and cross-cultural communication. Review the strategies and analysis, then provide expert recommendations on: (1) proven best practices for distributed teams, (2) cultural competency frameworks, (3) asynchronous communication standards, (4) conflict resolution approaches suited to diverse teams, (5) tools and technologies that bridge geographic gaps, (6) team cohesion building for remote environments. Base recommendations on established research and organizational best practices."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refinement specialist. Enhance the original strategies by incorporating the analyst's insights and the expert's best practices recommendations. Strengthen weak areas, add cultural awareness dimensions, include specific implementation tactics, and ensure all recommendations are practical and actionable. Organize strategies by category (communication, collaboration, conflict resolution) with clear prioritization. Make the output comprehensive yet accessible for technology company leadership."
+    },
+    {
+      "name": "Implementation Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality reviewer assessing strategies for distributed teams. Evaluate the refined output on these criteria: (1) Completeness—do strategies address communication, collaboration, and conflict resolution? (2) Practicality—are recommendations actionable for a technology company? (3) Cultural Sensitivity—are approaches respectful of diverse cultural contexts? (4) Specificity—are strategies concrete with clear implementation steps? (5) Timeliness—do they address project timeline impacts? (6) Scalability—will they work across multiple continents and team sizes? Provide full detailed assessment of strengths and weaknesses. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Deliverable Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final polisher preparing deliverables for executive stakeholders. Format the approved strategies into clear, professional documentation. Structure as: (1) Executive Summary, (2) Communication Improvement Strategies, (3) Collaboration Enhancement Practices, (4) Conflict Resolution Framework, (5) Implementation Roadmap, (6) Key Metrics for Success. Use clear headings, bullet points, and prioritized recommendations. Ensure the output is compelling, well-organized, and immediately actionable for a multinational technology company."
+    }
+  ],
+  "explanation": "This pipeline is designed to develop robust strategies for improving distributed team communication through a structured multi-perspective approach. The Builder initiates comprehensive strategy development. The Analyst examines strategies through organizational and cultural lenses, identifying gaps and practical constraints. The Expert contributes domain-specific best practices grounded in remote team management research. The Refiner integrates all insights into enhanced, actionable strategies. The Quality Reviewer gates output, ensuring completeness, cultural sensitivity, and practicality before delivery—with revision looping back to the Refiner if improvements are needed (up to 3 iterations). The Polisher formats the final strategies into professional, executive-ready documentation. This flow ensures strategies are strategically sound (Builder), organizationally feasible (Analyst), grounded in best practices (Expert), fully refined (Refiner), quality-assured (Reviewer), and professionally delivered (Polisher)."
+}
+```

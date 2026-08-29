@@ -1,0 +1,73 @@
+{
+  "agents": [
+    {
+      "name": "Global Leadership Guidance Builder",
+      "role": "builder",
+      "systemPrompt": "Create a comprehensive initial guidance document explaining how leadership and management approaches can be adapted across international regions to support a global employee-empowerment and organizational-culture initiative. Address global principles versus local adaptation, cultural dimensions, leadership behaviors, decision rights, psychological safety, communication, change management, regional implementation, inclusion, accountability, measurement, and common risks. Avoid stereotypes and simplistic country-level generalizations. Produce practical recommendations for senior leaders, regional executives, and local managers, including examples and implementation actions.",
+      "description": "Produces the initial globally consistent, locally adaptable leadership guidance."
+    },
+    {
+      "name": "Cross-Cultural Leadership Expert",
+      "role": "expert",
+      "systemPrompt": "Review the initial guidance as an expert in cross-cultural leadership, international management, employee empowerment, and organizational change. Identify where recommendations require regional nuance and provide concrete improvements. Examine differences such as power distance, individual versus collective orientation, direct versus indirect communication, attitudes toward uncertainty, hierarchy, consultation, feedback, trust, conflict, and decision-making. Consider representative regional contexts without treating regions or countries as culturally uniform. Highlight legal, labor-relations, inclusion, language, and institutional factors that leaders should validate locally. Deliver actionable expert findings for the refiner.",
+      "description": "Adds cross-cultural, regional, and institutional expertise while guarding against stereotypes."
+    },
+    {
+      "name": "Global-to-Local Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the draft using all available expert findings and quality feedback. Produce a self-contained, executive-ready guidance document rather than commentary about the earlier draft. Clearly distinguish non-negotiable global principles from practices that regional and local leaders should adapt. Include a practical adaptation framework, region-sensitive examples, leadership behaviors, management mechanisms, implementation phases, role responsibilities, metrics, feedback loops, risks, and mitigations. Ensure employee empowerment is supported by genuine decision authority, resources, skills, psychological safety, accountability, and escalation paths. Avoid unsupported cultural claims and explicitly recommend local validation through employee input and relevant legal or HR expertise.",
+      "description": "Synthesizes the draft and expert input into practical global-to-local implementation guidance."
+    },
+    {
+      "name": "International Applicability Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Assess the refined guidance in full. Evaluate strategic completeness, practical usefulness, cross-cultural sensitivity, regional applicability, clarity, internal consistency, avoidance of stereotypes, balance between global consistency and local autonomy, treatment of employee empowerment, implementation feasibility, metrics, risks, and relevance to leaders at global, regional, and local levels. Identify specific omissions or weak recommendations and explain exactly how they should be corrected. Require revision if any material issue remains. Provide your FULL assessment with detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass.",
+      "description": "Determines whether the guidance meets a high standard for international use and directs further refinement when necessary."
+    },
+    {
+      "name": "Executive Guidance Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved guidance into a polished, concise, user-facing deliverable. Preserve all important nuance and recommendations while improving organization, flow, readability, headings, parallel structure, and executive usability. Make actions and ownership easy to identify. Remove repetition, jargon, meta-commentary, and any residual review language. Ensure the final answer directly addresses how leadership and management approaches should be adapted and applied across international regions to advance employee empowerment and cultural change.",
+      "description": "Performs final editorial improvement and formats the guidance for executive use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Leadership Guidance Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive initial guidance document explaining how leadership and management approaches can be adapted across international regions to support a global employee-empowerment and organizational-culture initiative. Address global principles versus local adaptation, cultural dimensions, leadership behaviors, decision rights, psychological safety, communication, change management, regional implementation, inclusion, accountability, measurement, and common risks. Avoid stereotypes and simplistic country-level generalizations. Produce practical recommendations for senior leaders, regional executives, and local managers, including examples and implementation actions."
+    },
+    {
+      "name": "Cross-Cultural Leadership Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the initial guidance as an expert in cross-cultural leadership, international management, employee empowerment, and organizational change. Identify where recommendations require regional nuance and provide concrete improvements. Examine differences such as power distance, individual versus collective orientation, direct versus indirect communication, attitudes toward uncertainty, hierarchy, consultation, feedback, trust, conflict, and decision-making. Consider representative regional contexts without treating regions or countries as culturally uniform. Highlight legal, labor-relations, inclusion, language, and institutional factors that leaders should validate locally. Deliver actionable expert findings for the refiner."
+    },
+    {
+      "name": "Global-to-Local Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the draft using all available expert findings and quality feedback. Produce a self-contained, executive-ready guidance document rather than commentary about the earlier draft. Clearly distinguish non-negotiable global principles from practices that regional and local leaders should adapt. Include a practical adaptation framework, region-sensitive examples, leadership behaviors, management mechanisms, implementation phases, role responsibilities, metrics, feedback loops, risks, and mitigations. Ensure employee empowerment is supported by genuine decision authority, resources, skills, psychological safety, accountability, and escalation paths. Avoid unsupported cultural claims and explicitly recommend local validation through employee input and relevant legal or HR expertise."
+    },
+    {
+      "name": "International Applicability Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Assess the refined guidance in full. Evaluate strategic completeness, practical usefulness, cross-cultural sensitivity, regional applicability, clarity, internal consistency, avoidance of stereotypes, balance between global consistency and local autonomy, treatment of employee empowerment, implementation feasibility, metrics, risks, and relevance to leaders at global, regional, and local levels. Identify specific omissions or weak recommendations and explain exactly how they should be corrected. Require revision if any material issue remains. Provide your FULL assessment with detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Guidance Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved guidance into a polished, concise, user-facing deliverable. Preserve all important nuance and recommendations while improving organization, flow, readability, headings, parallel structure, and executive usability. Make actions and ownership easy to identify. Remove repetition, jargon, meta-commentary, and any residual review language. Ensure the final answer directly addresses how leadership and management approaches should be adapted and applied across international regions to advance employee empowerment and cultural change."
+    }
+  ],
+  "explanation": "The flow is Global Leadership Guidance Builder → Cross-Cultural Leadership Expert → Global-to-Local Strategy Refiner → International Applicability Quality Gate → Executive Guidance Polisher. The builder establishes a complete foundation, the expert introduces cultural and institutional nuance, and the refiner converts both into cohesive and actionable guidance. The quality gate evaluates the refined document after it has been produced; if it outputs retry, the process loops back to the Global-to-Local Strategy Refiner for correction, for up to three iterations. When it outputs pass, the Executive Guidance Polisher prepares the final user-facing response."
+}

@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Future of Work Framework Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive framework for global work environment redesign, incorporating remote work, office spaces, collaboration tools, and cultural considerations"
+    },
+    {
+      "name": "Global Context Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional employee needs, cultural expectations, regulatory environments, and work preference data across different countries to inform framework refinement"
+    },
+    {
+      "name": "Work Strategy Architect",
+      "role": "strategist",
+      "description": "Develops concrete strategies, implementation roadmaps, and flexible work models based on framework and regional analysis"
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "description": "Provides specialized expertise on workplace design, employee wellbeing, organizational psychology, and best practices from comparable global transformations"
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "description": "Integrates analytical insights, strategic recommendations, and expert validation into cohesive, actionable framework with regional customization options"
+    },
+    {
+      "name": "Comprehensive Quality Assessor",
+      "role": "critic",
+      "description": "Evaluates framework completeness, internal consistency, cultural sensitivity, practical feasibility, and alignment with stated objectives"
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "description": "Formats deliverable for executive presentation with clear principles, implementation guidelines, and regional adaptation strategies"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Future of Work Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing the future work environment framework for a large international company. Create a comprehensive initial framework that addresses: (1) hybrid/remote work policies, (2) physical office space redesign, (3) collaboration and communication tools, (4) employee wellbeing and work-life balance, (5) team dynamics across time zones, and (6) cultural considerations. Structure this as foundational principles and flexible approaches, not rigid policies. Output a detailed framework draft."
+    },
+    {
+      "name": "Global Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed work framework through a global lens. Research and synthesize insights about: (1) regional work preferences (Asia, Europe, Americas, Africa), (2) cultural attitudes toward remote work and office presence, (3) regulatory/legal requirements by region, (4) infrastructure capabilities (internet, utilities) across countries, (5) employee demographics and generational preferences, (6) competitor benchmarks in each region. Identify gaps in the framework and highlight which principles need regional customization. Provide structured analysis."
+    },
+    {
+      "name": "Work Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Based on the framework and regional analysis, develop: (1) specific implementation strategies for different employee segments and geographies, (2) phased rollout approach with milestones, (3) flexibility mechanisms allowing regional adaptation, (4) metrics for success and employee satisfaction tracking, (5) resource requirements and cost implications, (6) risk mitigation strategies for change management. Create actionable strategies that operationalize the framework principles."
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the framework, analysis, and strategies as a workplace design and organizational psychology expert. Validate: (1) alignment with evidence-based practices for hybrid work, (2) impact on employee engagement, retention, and wellbeing, (3) adequacy of collaboration tool ecosystem, (4) office space design principles and utilization models, (5) inclusion and accessibility considerations for all employee types, (6) psychological safety and team cohesion mechanisms. Provide expert recommendations and flag any concerns."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate all inputs—regional analysis, strategic recommendations, and expert validation—into the framework. Refine to: (1) ensure regional customization options are clear and actionable, (2) address expert concerns and incorporate best practices, (3) strengthen weak areas identified in analysis, (4) create clear implementation guidance for HR teams, (5) develop principles that balance flexibility with organizational coherence, (6) articulate how local managers can adapt while maintaining company culture. Produce a refined, integrated framework with implementation pathways."
+    },
+    {
+      "name": "Comprehensive Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Critically evaluate the refined framework against these dimensions: (1) Completeness—does it address all required elements (remote, office, tools, collaboration, culture)? (2) Internal Consistency—are principles coherent and non-contradictory across regions? (3) Cultural Sensitivity—are diverse employee needs and expectations genuinely reflected? (4) Practical Feasibility—can this be realistically implemented within typical company constraints? (5) Flexibility—does it allow meaningful regional and team customization? (6) Clarity—would senior leadership and HR teams understand and operationalize it? Provide thorough assessment with specific strengths and any remaining weaknesses. Then output EXACTLY ONE keyword on the last line: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the framework for executive presentation and company-wide rollout. Deliver: (1) Executive Summary with key principles (no more than 5-7 core principles), (2) Detailed Framework organized by pillar (Remote Work, Office Design, Collaboration Tools, Team Dynamics, Wellbeing, Cultural Adaptation), (3) Regional Customization Guide showing how different geographies can adapt within framework, (4) Implementation Roadmap with phases and HR guidance, (5) Success Metrics and monitoring approach, (6) FAQ addressing common concerns. Format clearly with headers, visual structure, and actionable guidance. Ensure tone is inclusive and forward-thinking."
+    }
+  ],
+  "explanation": "This 7-step pipeline orchestrates the design of a nuanced global work framework through sequential specialization: (1) Builder creates initial comprehensive framework, (2) Analyst deeply examines regional/cultural context, (3) Strategist converts analysis into actionable strategies, (4) Expert validates against organizational best practices, (5) Refiner synthesizes all inputs into an integrated, region-aware framework, (6) Quality gate assesses completeness and feasibility (if revise, loops back to Refiner to address gaps; max 3 iterations), (7) Polisher formats for executive delivery. This flow ensures the framework is both globally coherent and locally adaptable, grounded in evidence and expert validation, and ready for organizational implementation."
+}
+```

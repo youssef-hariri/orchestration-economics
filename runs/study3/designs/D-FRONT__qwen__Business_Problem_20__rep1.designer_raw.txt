@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Operations Plan Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert operations strategist. Draft a comprehensive operations improvement plan for an industrial equipment maker to reduce 14-week lead times closer to the 6-week competitor benchmark without compromising certified quality standards. Address: 1) Identifying where time is actually lost, 2) Process, inventory, scheduling, and supplier changes, 3) Protecting quality gates (avoiding past warranty spikes), and 4) Aligning Production, Quality, and Sales around the plan.",
+      "description": "Creates the initial comprehensive operations improvement plan addressing lead time, quality, and cross-functional alignment."
+    },
+    {
+      "name": "Operations Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are an operations improvement refiner. Review the drafted operations plan and enhance it. Ensure the lead time reduction strategies are realistic, quality gates are strictly protected with specific mechanisms, and the alignment strategy for Production, Quality, and Sales includes actionable conflict-resolution and shared KPIs. Fix any gaps, weak arguments, or missing details based on previous feedback.",
+      "description": "Refines and improves the operations plan, ensuring all constraints and strategic goals are robustly addressed."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate for operations strategy. Review the refined plan. Check if it substantially reduces lead time, explicitly protects certified quality standards (preventing warranty spikes), and provides a concrete alignment mechanism for the three feuding functions. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined plan against strict operational and quality criteria to determine if it is ready for final polishing."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications polisher. Format the final operations improvement plan into a professional, highly readable executive brief. Use clear headings, bullet points, and bold text for key metrics and action items. Ensure the tone is authoritative, objective, and unifying for Production, Quality, and Sales leadership.",
+      "description": "Formats and polishes the final approved plan into a professional executive brief."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Operations Plan Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert operations strategist. Draft a comprehensive operations improvement plan for an industrial equipment maker to reduce 14-week lead times closer to the 6-week competitor benchmark without compromising certified quality standards. Address: 1) Identifying where time is actually lost, 2) Process, inventory, scheduling, and supplier changes, 3) Protecting quality gates (avoiding past warranty spikes), and 4) Aligning Production, Quality, and Sales around the plan."
+    },
+    {
+      "name": "Operations Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an operations improvement refiner. Review the drafted operations plan and enhance it. Ensure the lead time reduction strategies are realistic, quality gates are strictly protected with specific mechanisms, and the alignment strategy for Production, Quality, and Sales includes actionable conflict-resolution and shared KPIs. Fix any gaps, weak arguments, or missing details based on previous feedback."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate for operations strategy. Review the refined plan. Check if it substantially reduces lead time, explicitly protects certified quality standards (preventing warranty spikes), and provides a concrete alignment mechanism for the three feuding functions. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications polisher. Format the final operations improvement plan into a professional, highly readable executive brief. Use clear headings, bullet points, and bold text for key metrics and action items. Ensure the tone is authoritative, objective, and unifying for Production, Quality, and Sales leadership."
+    }
+  ],
+  "explanation": "This pipeline is designed to systematically develop, refine, and validate a complex operations improvement plan. Execution flow: 1) The Operations Plan Builder generates the initial draft addressing lead times, quality gates, and cross-functional alignment. 2) The Operations Plan Refiner enhances the draft, adding depth to conflict resolution and quality protection mechanisms. 3) The Strategic Quality Gate evaluates the refined output; if it identifies weaknesses in quality protection or alignment, it outputs 'revise' and loops back to the Refiner (up to the system's max iterations) to fix the issues. If the plan meets all strict criteria, it outputs 'pass' and advances. 4) The Executive Polisher formats the approved plan into a professional, unified executive brief. This structure ensures rigorous quality control without human intervention while keeping the pipeline concise and under the 8-step limit."
+}

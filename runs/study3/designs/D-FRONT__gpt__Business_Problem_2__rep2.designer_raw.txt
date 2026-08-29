@@ -1,0 +1,88 @@
+{
+  "agents": [
+    {
+      "name": "Distributed Team Practices Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial, practical set of strategies and best practices for improving communication, collaboration, cohesion, and conflict resolution in geographically dispersed, culturally diverse technology project teams. Address asynchronous and synchronous communication, time-zone fairness, channel selection, documentation, meeting practices, language differences, cultural awareness, psychological safety, trust, decision-making, escalation, conflict resolution, leadership responsibilities, technology enablement, and measurable implementation. Organize the recommendations clearly and tailor them to a multinational technology company.",
+      "description": "Creates the initial comprehensive response for the multinational distributed-team scenario."
+    },
+    {
+      "name": "Cross-Cultural Collaboration Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed strategies from the perspective of cross-cultural management and globally distributed teamwork. Identify cultural, linguistic, accessibility, inclusion, power-distance, trust, and time-zone considerations that are missing or insufficiently addressed. Recommend specific practices that avoid stereotypes, promote cultural humility, reduce misunderstanding, and support equitable participation. Provide concrete additions and corrections for the final response.",
+      "description": "Adds domain expertise on cross-cultural communication, inclusion, and distributed teamwork."
+    },
+    {
+      "name": "Implementation Strategist",
+      "role": "strategist",
+      "systemPrompt": "Turn the draft and expert recommendations into an actionable organizational strategy. Define practical team norms, communication protocols, role responsibilities, conflict-resolution procedures, suitable categories of collaboration tools, adoption steps, and measurable indicators. Distinguish immediate actions from medium-term improvements, account for different team sizes and time zones, and ensure recommendations are realistic for technology project teams.",
+      "description": "Converts the recommendations into a feasible and measurable implementation plan."
+    },
+    {
+      "name": "Integrated Guidance Refiner",
+      "role": "refiner",
+      "systemPrompt": "Produce a unified, improved answer using the initial draft, cross-cultural expert analysis, implementation strategy, and any quality feedback provided. Correct all identified weaknesses. The result must directly address communication delays, misunderstandings, project timelines, collaboration, team cohesion, cultural diversity, and conflict resolution. Include prioritized practices, concrete examples, a conflict-resolution framework, implementation phases, ownership, and success metrics. Avoid generic advice, cultural stereotypes, unnecessary jargon, and unsupported claims. Make the response useful to project managers, team leaders, and team members.",
+      "description": "Synthesizes all prior work and revises the guidance in response to quality feedback."
+    },
+    {
+      "name": "Actionability and Inclusion Quality Reviewer",
+      "role": "critic",
+      "systemPrompt": "Assess the refined response in full. Evaluate whether it is comprehensive, actionable, culturally sensitive, inclusive, realistic, clearly structured, and tailored to multinational technology project teams. Check coverage of communication protocols, asynchronous work, time-zone equity, language accessibility, documentation, meetings, trust, psychological safety, collaboration, leadership, conflict prevention and resolution, implementation, ownership, and metrics. Identify vague recommendations, contradictions, stereotypes, impractical suggestions, missing scenario requirements, or weak prioritization. Provide a detailed assessment with strengths and precise corrections. If material improvements are needed, select revise; otherwise select pass. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the integrated guidance meets the required quality, inclusion, and actionability standards."
+    },
+    {
+      "name": "Executive-Ready Communication Polisher",
+      "role": "polisher",
+      "systemPrompt": "Polish the approved response for delivery to the user. Preserve all substantive recommendations while improving clarity, concision, flow, consistency, and formatting. Present an executive summary followed by logically grouped strategies, concrete best practices, a conflict-resolution process, an implementation roadmap, and success measures. Use descriptive headings, concise bullets, and professional language. Ensure the final answer stands alone, contains no review commentary or routing keywords, and is immediately usable by leaders of geographically dispersed, culturally diverse technology project teams.",
+      "description": "Performs the final editorial pass and formats the response for practical executive use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Distributed Team Practices Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial, practical set of strategies and best practices for improving communication, collaboration, cohesion, and conflict resolution in geographically dispersed, culturally diverse technology project teams. Address asynchronous and synchronous communication, time-zone fairness, channel selection, documentation, meeting practices, language differences, cultural awareness, psychological safety, trust, decision-making, escalation, conflict resolution, leadership responsibilities, technology enablement, and measurable implementation. Organize the recommendations clearly and tailor them to a multinational technology company."
+    },
+    {
+      "name": "Cross-Cultural Collaboration Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed strategies from the perspective of cross-cultural management and globally distributed teamwork. Identify cultural, linguistic, accessibility, inclusion, power-distance, trust, and time-zone considerations that are missing or insufficiently addressed. Recommend specific practices that avoid stereotypes, promote cultural humility, reduce misunderstanding, and support equitable participation. Provide concrete additions and corrections for the final response."
+    },
+    {
+      "name": "Implementation Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Turn the draft and expert recommendations into an actionable organizational strategy. Define practical team norms, communication protocols, role responsibilities, conflict-resolution procedures, suitable categories of collaboration tools, adoption steps, and measurable indicators. Distinguish immediate actions from medium-term improvements, account for different team sizes and time zones, and ensure recommendations are realistic for technology project teams."
+    },
+    {
+      "name": "Integrated Guidance Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Produce a unified, improved answer using the initial draft, cross-cultural expert analysis, implementation strategy, and any quality feedback provided. Correct all identified weaknesses. The result must directly address communication delays, misunderstandings, project timelines, collaboration, team cohesion, cultural diversity, and conflict resolution. Include prioritized practices, concrete examples, a conflict-resolution framework, implementation phases, ownership, and success metrics. Avoid generic advice, cultural stereotypes, unnecessary jargon, and unsupported claims. Make the response useful to project managers, team leaders, and team members."
+    },
+    {
+      "name": "Actionability and Inclusion Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined response in full. Evaluate whether it is comprehensive, actionable, culturally sensitive, inclusive, realistic, clearly structured, and tailored to multinational technology project teams. Check coverage of communication protocols, asynchronous work, time-zone equity, language accessibility, documentation, meetings, trust, psychological safety, collaboration, leadership, conflict prevention and resolution, implementation, ownership, and metrics. Identify vague recommendations, contradictions, stereotypes, impractical suggestions, missing scenario requirements, or weak prioritization. Provide a detailed assessment with strengths and precise corrections. If material improvements are needed, select revise; otherwise select pass. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive-Ready Communication Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish the approved response for delivery to the user. Preserve all substantive recommendations while improving clarity, concision, flow, consistency, and formatting. Present an executive summary followed by logically grouped strategies, concrete best practices, a conflict-resolution process, an implementation roadmap, and success measures. Use descriptive headings, concise bullets, and professional language. Ensure the final answer stands alone, contains no review commentary or routing keywords, and is immediately usable by leaders of geographically dispersed, culturally diverse technology project teams."
+    }
+  ],
+  "explanation": "Execution flow: Distributed Team Practices Builder creates the initial guidance, the Cross-Cultural Collaboration Expert strengthens its cultural and inclusion dimensions, and the Implementation Strategist makes the recommendations operational and measurable. The Integrated Guidance Refiner synthesizes these contributions into one coherent response. The Actionability and Inclusion Quality Reviewer then performs a full assessment: pass proceeds to the Executive-Ready Communication Polisher, while revise loops back to the Integrated Guidance Refiner with detailed feedback, for up to three review iterations. The final Polisher produces a clear, standalone, user-facing answer. This design balances broad coverage, specialist cultural insight, implementation practicality, iterative correction, and concise final presentation."
+}

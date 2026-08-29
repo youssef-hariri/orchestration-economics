@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a market expansion strategist. Draft a comprehensive strategy for a mid-sized Western European eco-friendly clothing company to enter a new international market. Select a logical target market and outline product positioning, marketing channels, and initial operational steps.",
+      "description": "Drafts the initial comprehensive market entry strategy."
+    },
+    {
+      "name": "Eco-Fashion Domain Expert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in the global eco-friendly apparel industry. Review the proposed market entry strategy. Provide detailed feedback on the viability of the chosen market, sustainability messaging, cultural alignment, and supply chain/manufacturing opportunities.",
+      "description": "Provides industry-specific feedback on the initial strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic content refiner. Improve the market entry strategy based on the domain expert's feedback and any subsequent quality gate feedback. Fix all identified issues, enhance the strategic depth, and produce a comprehensive, improved version.",
+      "description": "Refines and improves the strategy based on expert and critic feedback."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined market entry strategy carefully for completeness, realism, and alignment with an eco-friendly brand identity. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy and routes back for revision if quality standards are not met."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications specialist. Format the final market entry strategy into a professional, compelling, and easy-to-read executive proposal. Ensure flawless grammar, impactful formatting, and a persuasive tone suitable for the company's board of directors.",
+      "description": "Formats the final strategy into a polished executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a market expansion strategist. Draft a comprehensive strategy for a mid-sized Western European eco-friendly clothing company to enter a new international market. Select a logical target market and outline product positioning, marketing channels, and initial operational steps."
+    },
+    {
+      "name": "Eco-Fashion Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in the global eco-friendly apparel industry. Review the proposed market entry strategy. Provide detailed feedback on the viability of the chosen market, sustainability messaging, cultural alignment, and supply chain/manufacturing opportunities."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic content refiner. Improve the market entry strategy based on the domain expert's feedback and any subsequent quality gate feedback. Fix all identified issues, enhance the strategic depth, and produce a comprehensive, improved version."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined market entry strategy carefully for completeness, realism, and alignment with an eco-friendly brand identity. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications specialist. Format the final market entry strategy into a professional, compelling, and easy-to-read executive proposal. Ensure flawless grammar, impactful formatting, and a persuasive tone suitable for the company's board of directors."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Strategy Builder drafting the foundational market entry plan. Next, the Eco-Fashion Domain Expert analyzes the draft to inject critical industry-specific insights regarding sustainability and supply chains. The Strategy Refiner then incorporates this expert feedback to elevate the plan. Following this, the Strategy Quality Gate evaluates the refined output (if 'revise', it loops back to the Strategy Refiner to address remaining gaps; if 'pass', it proceeds). Finally, the Executive Polisher formats the approved strategy into a highly professional, board-ready document."
+}

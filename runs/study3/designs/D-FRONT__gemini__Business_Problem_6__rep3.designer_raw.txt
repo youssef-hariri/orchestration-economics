@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Initial Campaign Builder",
+      "role": "builder",
+      "systemPrompt": "You are a marketing builder. Draft an initial marketing campaign for a health supplement targeting a specific international market. Outline the core messaging, target demographic, and proposed advertising channels.",
+      "description": "Drafts the foundational marketing campaign and core messaging."
+    },
+    {
+      "name": "Cultural & Ethical Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are a cultural and ethical analyst. Review the initial campaign draft. Analyze it against the target market's unique social values, health beliefs, and local advertising norms. Identify any cultural insensitivities, ethical risks, or regulatory concerns.",
+      "description": "Analyzes the draft for cultural alignment and ethical marketing practices."
+    },
+    {
+      "name": "Campaign Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a campaign refiner. Improve the previous output based on the cultural and ethical feedback provided. Fix all identified issues, adapt the messaging to perfectly align with local values, and produce a culturally sensitive, ethical campaign.",
+      "description": "Refines the campaign to resolve cultural and ethical issues."
+    },
+    {
+      "name": "Compliance Gate",
+      "role": "critic",
+      "systemPrompt": "You are a compliance quality gate. Review the refined campaign carefully to ensure it fully respects local social values, beliefs, and advertising norms without any ethical compromises. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined campaign for strict ethical and cultural compliance, routing back for revision if necessary."
+    },
+    {
+      "name": "Campaign Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a marketing polisher. Format the final approved campaign into a highly professional, well-structured, and persuasive presentation document ready for executive review.",
+      "description": "Applies final formatting and professional polish to the campaign."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Campaign Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a marketing builder. Draft an initial marketing campaign for a health supplement targeting a specific international market. Outline the core messaging, target demographic, and proposed advertising channels."
+    },
+    {
+      "name": "Cultural & Ethical Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and ethical analyst. Review the initial campaign draft. Analyze it against the target market's unique social values, health beliefs, and local advertising norms. Identify any cultural insensitivities, ethical risks, or regulatory concerns."
+    },
+    {
+      "name": "Campaign Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a campaign refiner. Improve the previous output based on the cultural and ethical feedback provided. Fix all identified issues, adapt the messaging to perfectly align with local values, and produce a culturally sensitive, ethical campaign."
+    },
+    {
+      "name": "Compliance Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a compliance quality gate. Review the refined campaign carefully to ensure it fully respects local social values, beliefs, and advertising norms without any ethical compromises. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Campaign Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a marketing polisher. Format the final approved campaign into a highly professional, well-structured, and persuasive presentation document ready for executive review."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Campaign Builder drafting the core marketing strategy (Step 1). A Cultural & Ethical Analyst then reviews this draft to identify any local value conflicts or advertising norm violations (Step 2). The Campaign Refiner adjusts the campaign based on this analysis to ensure cultural alignment (Step 3). The Compliance Gate evaluates the refined campaign (Step 4); if ethical or cultural issues persist, it outputs 'revise' and loops back to the Campaign Refiner (Step 3). Once the campaign meets all standards, the gate outputs 'pass', and the Campaign Polisher (Step 5) formats the final output into a professional, stakeholder-ready document."
+}

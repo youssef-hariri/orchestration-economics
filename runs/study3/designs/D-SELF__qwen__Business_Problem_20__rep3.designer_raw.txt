@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Operations Plan Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert operations strategist. Your objective is to produce a comprehensive operations improvement plan for an industrial equipment maker. The plan must achieve a substantial reduction in the 14-week lead time toward the 6-week competitor benchmark without compromising certified quality standards. You must identify root causes of time loss, propose specific process, inventory, scheduling, and supplier changes, detail how to protect quality gates to prevent warranty spikes, and provide a concrete strategy to align the feuding Production, Quality, and Sales functions. Deliver a detailed, structured initial draft.",
+      "description": "Drafts the initial operations improvement plan focusing on lead time reduction, quality preservation, and cross-functional alignment."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Your objective is to improve the operations improvement plan based on the expert feedback provided. Fix all identified issues, address gaps in the operational strategy, ensure quality gates are robustly protected against warranty risks, and strengthen the cross-functional alignment plan. Produce a polished, improved, and highly actionable version of the plan.",
+      "description": "Refines the operations plan based on expert feedback to ensure feasibility and quality protection."
+    },
+    {
+      "name": "Manufacturing & Quality Expert Gate",
+      "role": "expert",
+      "systemPrompt": "You are a senior manufacturing and quality assurance expert. Your objective is to evaluate the operations improvement plan for real-world viability. Assess whether it realistically reduces lead time without risking certified quality standards or repeating past warranty claim spikes. Check if it correctly identifies time losses, proposes viable changes, protects quality gates, and effectively aligns the three functions. Provide your FULL assessment detailing strengths, weaknesses, specific issues, and missing elements. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the plan for operational feasibility, quality risk, and alignment effectiveness.",
+      "type": "if",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Your objective is to format the finalized operations improvement plan for executive presentation. Ensure a professional tone, clear headings, logical flow, and impactful formatting. Fix any grammatical or stylistic issues. The final output must be a pristine, ready-to-present document for the CEO and department heads.",
+      "description": "Formats and polishes the final plan for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Operations Plan Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert operations strategist. Your objective is to produce a comprehensive operations improvement plan for an industrial equipment maker. The plan must achieve a substantial reduction in the 14-week lead time toward the 6-week competitor benchmark without compromising certified quality standards. You must identify root causes of time loss, propose specific process, inventory, scheduling, and supplier changes, detail how to protect quality gates to prevent warranty spikes, and provide a concrete strategy to align the feuding Production, Quality, and Sales functions. Deliver a detailed, structured initial draft."
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Your objective is to improve the operations improvement plan based on the expert feedback provided. Fix all identified issues, address gaps in the operational strategy, ensure quality gates are robustly protected against warranty risks, and strengthen the cross-functional alignment plan. Produce a polished, improved, and highly actionable version of the plan."
+    },
+    {
+      "name": "Manufacturing & Quality Expert Gate",
+      "role": "expert",
+      "type": "if",
+      "systemPrompt": "You are a senior manufacturing and quality assurance expert. Your objective is to evaluate the operations improvement plan for real-world viability. Assess whether it realistically reduces lead time without risking certified quality standards or repeating past warranty claim spikes. Check if it correctly identifies time losses, proposes viable changes, protects quality gates, and effectively aligns the three functions. Provide your FULL assessment detailing strengths, weaknesses, specific issues, and missing elements. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Your objective is to format the finalized operations improvement plan for executive presentation. Ensure a professional tone, clear headings, logical flow, and impactful formatting. Fix any grammatical or stylistic issues. The final output must be a pristine, ready-to-present document for the CEO and department heads."
+    }
+  ],
+  "explanation": "The pipeline begins with an Operations Plan Builder to draft the initial strategy addressing lead time, quality, and alignment. A Plan Refiner is placed next to improve the draft. The Manufacturing & Quality Expert Gate then assesses the refined plan for operational viability and quality risk. If the plan passes, it moves to the Executive Polisher for final formatting. If it requires revision, the gate routes it back to the Plan Refiner to address the expert's feedback, ensuring the final output is both aggressive on lead time and safe on quality before executive presentation."
+}

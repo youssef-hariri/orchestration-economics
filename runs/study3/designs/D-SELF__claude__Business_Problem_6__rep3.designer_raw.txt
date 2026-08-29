@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Creates initial marketing campaign framework based on health supplement positioning and market research"
+    },
+    {
+      "name": "Cultural Values Analyst",
+      "role": "analyst",
+      "description": "Analyzes target market's social values, health beliefs, and advertising norms to inform campaign strategy"
+    },
+    {
+      "name": "Campaign Strategy Developer",
+      "role": "strategist",
+      "description": "Develops comprehensive marketing strategy aligned with local values, beliefs, and regulatory environment"
+    },
+    {
+      "name": "Ethics & Compliance Expert",
+      "role": "expert",
+      "description": "Reviews campaign for ethical considerations, health claims accuracy, and local advertising regulations"
+    },
+    {
+      "name": "Campaign Refiner",
+      "role": "refiner",
+      "description": "Incorporates feedback and revises campaign to address ethical concerns and cultural alignment"
+    },
+    {
+      "name": "Quality Assurance Critic",
+      "role": "critic",
+      "description": "Conducts comprehensive quality review of refined campaign across all dimensions"
+    },
+    {
+      "name": "Final Polish Agent",
+      "role": "polisher",
+      "description": "Formats final campaign deliverables with messaging, visuals guidance, and implementation recommendations"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a marketing campaign builder. Create an initial comprehensive marketing campaign framework for a health supplement product. Include: campaign objectives, target audience demographics, key messaging pillars, proposed channels (digital, traditional, influencer), creative concepts, timeline, and success metrics. Make this a strong foundation that can be refined based on cultural and ethical considerations."
+    },
+    {
+      "name": "Cultural Values Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a cultural analyst specializing in international markets. Analyze the target market's specific social values, health beliefs, religious considerations, family dynamics, trust factors, and local advertising norms. Identify: cultural sensitivities, preferred communication styles, trusted messengers, health perception frameworks, and regulatory constraints. Provide actionable insights that should shape the campaign."
+    },
+    {
+      "name": "Campaign Strategy Developer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a campaign strategist. Integrate the cultural insights with the initial campaign framework. Develop a refined strategy that: aligns messaging with local values, selects appropriate channels based on local media consumption, identifies culturally relevant influencers or spokespeople, addresses local health beliefs and concerns, respects religious or cultural practices, and builds trust through locally-preferred methods. Provide specific tactical recommendations."
+    },
+    {
+      "name": "Ethics & Compliance Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a health marketing ethics and compliance expert. Review the campaign strategy for: accuracy of health claims, adherence to local and international advertising regulations, avoidance of misleading statements, appropriate disclaimers, ethical positioning relative to competitors, consumer protection standards, and cultural sensitivity. Identify all risks and required modifications. Provide detailed feedback on what must be changed."
+    },
+    {
+      "name": "Campaign Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a campaign refiner. Take the strategy feedback from the ethics expert and revise the campaign to address all compliance concerns, ethical issues, and cultural alignment gaps. Maintain campaign effectiveness while ensuring full regulatory compliance and cultural appropriateness. Produce the refined campaign with all modifications incorporated and clearly articulated."
+    },
+    {
+      "name": "Quality Assurance Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assurance reviewer. Conduct a comprehensive final assessment of the refined campaign across these dimensions: (1) Cultural Alignment - Does it genuinely respect and reflect local values? (2) Ethical Integrity - Are all health claims accurate and properly qualified? (3) Regulatory Compliance - Does it meet local advertising standards? (4) Effectiveness - Will it resonate with and persuade the target audience? (5) Authenticity - Does it avoid stereotyping or patronizing the market? Provide detailed analysis of strengths and any remaining weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: pass (if campaign is ready for polish) or revise (if significant issues remain requiring refinement).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Final Polish Agent",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final polish agent. Take the approved campaign and prepare it for delivery. Format all elements professionally including: executive summary, campaign overview, messaging framework with localized copy examples, channel strategy with specific platform recommendations, creative direction guidelines, influencer/partnership approach, timeline and milestones, KPIs and measurement framework, risk mitigation strategies, and implementation checklist. Ensure all content is clear, compelling, and ready for stakeholder presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce an ethical, culturally-aligned, and effective health supplement marketing campaign through sequential expertise building. The builder establishes the initial campaign framework. The analyst then provides deep cultural context specific to the target market. The strategist integrates both to develop a coherent approach. The ethics expert ensures compliance and identifies risks. The refiner incorporates all feedback to improve the campaign. A quality gate (if step) validates that the refined campaign meets all standards before final polish; if issues remain, it loops back to the refiner for another iteration (max 3 times). Finally, the polisher formats the output for stakeholder use. This design ensures cultural sensitivity, regulatory compliance, and campaign effectiveness are all achieved before delivery, with quality gates preventing unsuitable campaigns from reaching final output."
+}
+```

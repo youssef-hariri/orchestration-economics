@@ -1,0 +1,94 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Initiative Context Builder",
+      "role": "builder",
+      "description": "Creates comprehensive initial draft addressing leadership adaptation strategies for employee empowerment and cultural change across international regions"
+    },
+    {
+      "name": "Regional Expert Analyst",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on cultural, regulatory, and business nuances across different international regions to ensure contextual relevance"
+    },
+    {
+      "name": "Strategic Adaptation Refiner",
+      "role": "refiner",
+      "description": "Integrates regional insights and refines guidance to ensure leadership approaches are realistically adapted for diverse international contexts while maintaining initiative coherence"
+    },
+    {
+      "name": "Comprehensive Critic",
+      "role": "critic",
+      "description": "Thoroughly reviews the adapted guidance for gaps, contradictions, practical applicability, cultural sensitivity, and alignment with empowerment and change objectives"
+    },
+    {
+      "name": "Implementation Strategist",
+      "role": "strategist",
+      "description": "Develops concrete implementation pathways, change management strategies, and success metrics tailored to different regional contexts based on reviewed guidance"
+    },
+    {
+      "name": "Quality Assurance Reviewer",
+      "role": "reviewer",
+      "description": "Performs final assessment of completeness, coherence, practical utility, and readiness for executive and regional leadership consumption"
+    },
+    {
+      "name": "Executive Polish Formatter",
+      "role": "polisher",
+      "description": "Finalizes output with professional formatting, clear structure, and executive-ready presentation for global distribution"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Initiative Context Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing leadership guidance for a global employee empowerment and cultural change initiative. Create a comprehensive initial draft that addresses: (1) core leadership principles for empowerment, (2) key cultural change drivers, (3) initial considerations for regional adaptation. Provide structured, detailed content that will serve as the foundation for regional customization."
+    },
+    {
+      "name": "Regional Expert Analyst",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regional business and cultural expert. Analyze the initial guidance and provide detailed insights on: (1) how leadership approaches differ across Asia-Pacific, Europe, Americas, Middle East/Africa regions, (2) cultural factors affecting employee empowerment in each region, (3) regulatory and business environment constraints, (4) specific adaptations needed for each region's context. Provide concrete, evidence-based recommendations."
+    },
+    {
+      "name": "Strategic Adaptation Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining global guidance based on regional expertise. Integrate the regional insights into the original guidance to create adapted leadership approaches for each major region. Ensure: (1) regional approaches maintain core initiative principles, (2) cultural and business nuances are respected, (3) practical implementation is feasible, (4) consistency across regions while allowing necessary flexibility. Produce region-specific guidance that balances global coherence with local relevance."
+    },
+    {
+      "name": "Comprehensive Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality critic reviewing regional adaptation guidance. Conduct thorough analysis of: (1) Is guidance practically implementable in each regional context? (2) Are cultural sensitivities and differences adequately addressed? (3) Does it support genuine employee empowerment and cultural change? (4) Are there gaps in guidance for specific regions or leadership scenarios? (5) Are there contradictions between regional approaches? (6) Does it address change management, resistance, and adoption strategies? Provide detailed assessment of strengths and identified issues. If significant gaps or practical concerns exist, output 'revise'. If guidance is comprehensive and actionable, output 'pass'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Implementation Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are developing implementation strategy based on the regional leadership guidance. Create: (1) phased rollout approach for each region, (2) specific change management tactics for regional contexts, (3) leadership development priorities by region, (4) success metrics and KPIs aligned with empowerment and cultural change, (5) stakeholder engagement strategies, (6) risk mitigation approaches for regional challenges. Ensure strategies are concrete, measurable, and grounded in the regional guidance."
+    },
+    {
+      "name": "Quality Assurance Reviewer",
+      "role": "reviewer",
+      "type": "while",
+      "systemPrompt": "You are performing final quality assurance on the complete guidance and strategy package. Assess: (1) Is all content addressing the core objective of adapting leadership for global employee empowerment and cultural change? (2) Is the guidance sufficiently detailed for executive and regional leader decision-making? (3) Are all major international regions adequately addressed? (4) Is there clarity on which approaches apply where and why? (5) Is implementation realistic and actionable? (6) Is the output coherent, well-organized, and ready for senior leadership? Provide detailed assessment. If refinement is needed, output 'retry' to loop back to refinement. If ready for polish, output 'pass'.",
+      "whileOptions": ["retry", "pass"],
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Polish Formatter",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing output for executive distribution. Format the complete guidance into a professional, structured document that includes: (1) executive summary, (2) global leadership principles and empowerment framework, (3) region-specific adaptation guidance organized by geography, (4) implementation roadmap with timelines and success metrics, (5) change management approach, (6) key leadership competencies required. Ensure clear navigation, professional tone, visual clarity, and executive readiness. This is the final deliverable for global corporate leadership."
+    }
+  ],
+  "explanation": "This pipeline is designed to systematically develop nuanced, regionally-adapted leadership guidance for a global initiative. Flow: Builder creates foundational guidance → Expert provides critical regional and cultural insights → Refiner integrates insights into region-specific approaches → Critic assesses comprehensiveness and practicality (if gaps exist, loops back to Refiner; otherwise continues) → Strategist develops concrete implementation tactics aligned with regional guidance → Quality Reviewer validates completeness and executive readiness (can loop back to Refiner up to 3 times if needed) → Polisher formats for executive delivery. This structure ensures global coherence, regional relevance, practical implementability, and executive-quality output for stakeholder consumption."
+}
+```

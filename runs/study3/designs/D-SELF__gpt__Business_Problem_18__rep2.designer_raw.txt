@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Heritage-to-Relevance Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive repositioning strategy for a 70-year-old consumer brand whose younger-consumer purchase share is declining while its older customer base remains loyal. Define a credible new positioning, target younger segments without stereotyping, identify the brand's authentic heritage strengths, specify which elements to preserve, evolve, or retire, and recommend channel, content, partnership, and activation approaches. Include a phased transition plan that minimizes authenticity backlash, protects the loyal base, uses existing distribution and awareness advantages, and resolves internal disagreement through clear decision principles. Make the strategy practical, distinctive, evidence-informed, and explicit about risks, tradeoffs, metrics, and next steps.",
+      "description": "Creates the initial end-to-end repositioning strategy."
+    },
+    {
+      "name": "Audience and Authenticity Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed repositioning strategy for audience relevance, authenticity, brand equity protection, and executional feasibility. Assess whether it would appeal to consumers under 35 without patronizing them or alienating older loyal customers. Identify unsupported assumptions, likely backlash triggers, contradictions between heritage and modernization, channel-content mismatches, sequencing risks, and missing measurement criteria. Recommend concrete improvements, including audience tensions, proof points, message territories, pilot approaches, and indicators of success. Provide detailed findings for a strategy refiner to use.",
+      "description": "Stress-tests the strategy against consumer, authenticity, and implementation risks."
+    },
+    {
+      "name": "Cross-Generational Positioning Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite and strengthen the previous strategy using the analyst's findings. Produce a cohesive, decision-ready repositioning strategy with: a concise positioning statement; target audiences and their relevant tensions; reasons to believe; brand elements to preserve, evolve, retire, or test; voice and visual guidance; channel roles; content territories and examples; partnership and creator principles; a phased transition roadmap; safeguards for loyal customers; internal alignment principles; success metrics; and key risks with mitigations. Ensure modernization is expressed through credible behavior and proof rather than superficial youth-coded aesthetics. Resolve contradictions and make recommendations specific enough to execute.",
+      "description": "Integrates analysis into a credible, actionable cross-generational strategy."
+    },
+    {
+      "name": "Strategic Authenticity Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Review the refined repositioning strategy in full. Assess strategic clarity, distinctiveness, relevance to consumers under 35, protection of the loyal base, authenticity, evidence and proof, preservation-versus-retirement decisions, channel and content coherence, transition sequencing, feasibility, measurement, and resistance to backlash. Identify any vague, contradictory, culturally tone-deaf, unsupported, or operationally impractical recommendations. Provide detailed corrective guidance that a refiner can act on. On the VERY LAST LINE output exactly one keyword: pass if the strategy is decision-ready and credible, or revise if substantive improvements are required.",
+      "description": "Determines whether the strategy is sufficiently authentic, balanced, and actionable."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved repositioning strategy into a polished, executive-ready final deliverable. Preserve the substance while improving clarity, structure, prioritization, concision, and persuasive force. Use clear headings and practical tables or bullets where useful. Make the positioning memorable, distinguish preserve/evolve/retire decisions, clarify channel and content roles, show the transition sequence and safeguards, and end with prioritized actions and measurable indicators. Do not introduce unsupported claims or omit important tradeoffs.",
+      "description": "Formats and sharpens the approved strategy for senior decision-makers and implementation teams."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Heritage-to-Relevance Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive repositioning strategy for a 70-year-old consumer brand whose younger-consumer purchase share is declining while its older customer base remains loyal. Define a credible new positioning, target younger segments without stereotyping, identify the brand's authentic heritage strengths, specify which elements to preserve, evolve, or retire, and recommend channel, content, partnership, and activation approaches. Include a phased transition plan that minimizes authenticity backlash, protects the loyal base, uses existing distribution and awareness advantages, and resolves internal disagreement through clear decision principles. Make the strategy practical, distinctive, evidence-informed, and explicit about risks, tradeoffs, metrics, and next steps."
+    },
+    {
+      "name": "Audience and Authenticity Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed repositioning strategy for audience relevance, authenticity, brand equity protection, and executional feasibility. Assess whether it would appeal to consumers under 35 without patronizing them or alienating older loyal customers. Identify unsupported assumptions, likely backlash triggers, contradictions between heritage and modernization, channel-content mismatches, sequencing risks, and missing measurement criteria. Recommend concrete improvements, including audience tensions, proof points, message territories, pilot approaches, and indicators of success. Provide detailed findings for a strategy refiner to use."
+    },
+    {
+      "name": "Cross-Generational Positioning Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite and strengthen the previous strategy using the analyst's findings. Produce a cohesive, decision-ready repositioning strategy with: a concise positioning statement; target audiences and their relevant tensions; reasons to believe; brand elements to preserve, evolve, retire, or test; voice and visual guidance; channel roles; content territories and examples; partnership and creator principles; a phased transition roadmap; safeguards for loyal customers; internal alignment principles; success metrics; and key risks with mitigations. Ensure modernization is expressed through credible behavior and proof rather than superficial youth-coded aesthetics. Resolve contradictions and make recommendations specific enough to execute."
+    },
+    {
+      "name": "Strategic Authenticity Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined repositioning strategy in full. Assess strategic clarity, distinctiveness, relevance to consumers under 35, protection of the loyal base, authenticity, evidence and proof, preservation-versus-retirement decisions, channel and content coherence, transition sequencing, feasibility, measurement, and resistance to backlash. Identify any vague, contradictory, culturally tone-deaf, unsupported, or operationally impractical recommendations. Provide detailed corrective guidance that a refiner can act on. On the VERY LAST LINE output exactly one keyword: pass if the strategy is decision-ready and credible, or revise if substantive improvements are required.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved repositioning strategy into a polished, executive-ready final deliverable. Preserve the substance while improving clarity, structure, prioritization, concision, and persuasive force. Use clear headings and practical tables or bullets where useful. Make the positioning memorable, distinguish preserve/evolve/retire decisions, clarify channel and content roles, show the transition sequence and safeguards, and end with prioritized actions and measurable indicators. Do not introduce unsupported claims or omit important tradeoffs."
+    }
+  ],
+  "explanation": "The pipeline moves from an initial strategic recommendation to audience and authenticity analysis, then to an integrated refinement. The quality gate evaluates the refined strategy after it exists; if it outputs revise, execution returns to the refiner, and if it outputs pass, the strategy proceeds to the final polisher. This ensures the final deliverable is both strategically complete and resistant to the authenticity failures described in the task."
+}

@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Current State Diagnostic Builder",
+      "role": "builder",
+      "description": "Conducts comprehensive root-cause analysis of the 14-week lead time by mapping process flows, identifying bottlenecks, quality gate delays, and inter-departmental handoff friction across production, quality, and sales."
+    },
+    {
+      "name": "Lead Time & Quality Data Analyst",
+      "role": "analyst",
+      "description": "Analyzes historical production data, quality inspection timelines, warranty claim patterns, and competitor benchmarks to quantify where time is actually lost and the cost-quality tradeoff of the previous failed compression attempt."
+    },
+    {
+      "name": "Operations Improvement Strategist",
+      "role": "strategist",
+      "description": "Synthesizes diagnostic and analytical findings into a comprehensive operations improvement strategy covering process redesign, inventory management, supplier coordination, scheduling optimization, and functional alignment mechanisms."
+    },
+    {
+      "name": "Quality & Risk Expert Reviewer",
+      "role": "expert",
+      "description": "Validates that the improvement plan maintains all certified quality inspection standards, identifies quality gate redesigns that preserve assurance while reducing cycle time, and flags residual risks to quality or regulatory compliance."
+    },
+    {
+      "name": "Cross-Functional Alignment Refiner",
+      "role": "refiner",
+      "description": "Integrates expert feedback by refining the improvement plan to address production, quality, and sales concerns explicitly, designs accountability mechanisms and incentive structures, and clarifies handoff protocols to eliminate inter-departmental blame."
+    },
+    {
+      "name": "Plan Completeness & Feasibility Critic",
+      "role": "critic",
+      "description": "Reviews the refined plan for gaps in implementation detail, supplier coordination feasibility, financial viability, timeline realism, and capacity to deliver quoted lead time reduction without regression. Determines if plan is production-ready or requires revision."
+    },
+    {
+      "name": "Executive Delivery Polisher",
+      "role": "polisher",
+      "description": "Formats the validated improvement plan into clear, executive-ready documentation with timeline, resource requirements, success metrics, governance structure, and communication strategy for stakeholder alignment."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Current State Diagnostic Builder",
+      "type": "agent",
+      "role": "builder",
+      "systemPrompt": "You are an operations diagnostic expert. Analyze the industrial equipment manufacturer's 14-week lead time problem. Map the end-to-end production process from order to delivery. Identify all process steps, certified quality inspection gates, supplier dependencies, inventory holding points, and scheduling constraints. Document where production, quality, and sales interfaces occur and where handoff delays or rework cycles are most likely occurring. Highlight the failed compression attempt: when was lead time compressed, by how much, what quality failures resulted, and what warranty claim spike occurred. Produce a detailed current-state process map with cycle time estimates for each major phase and annotated problem areas."
+    },
+    {
+      "name": "Lead Time & Quality Data Analyst",
+      "type": "agent",
+      "role": "analyst",
+      "systemPrompt": "You are an operations data analyst. Analyze the following using available operational data: (1) Breakdown of the 14-week lead time—how many weeks for raw materials, production stages, quality inspections, logistics, and customer delivery? (2) Duration of each certified quality inspection and any serialization, sampling, or documentation requirements. (3) Historical warranty claim data before and after the failed compression attempt—claim rate increases, failure modes, root causes. (4) Competitor's 6-week lead time—reverse-engineer what process or supply chain structure enables this. (5) Current inventory levels, supplier lead times, and production batch sizes. Produce a quantified gap analysis showing where time is lost relative to competitors and which process changes would have the highest time-reduction impact without compromising quality."
+    },
+    {
+      "name": "Operations Improvement Strategist",
+      "type": "agent",
+      "role": "strategist",
+      "systemPrompt": "You are an operations strategy leader. Using the diagnostic and analytical inputs, design a comprehensive operations improvement plan to reduce quoted lead time from 14 weeks to competitive levels (target: 8 weeks or better) while maintaining certified quality standards. Include: (1) Process redesign recommendations—parallel vs. sequential quality inspections, pre-production supplier qualification to eliminate rework, modular production strategies, batch size optimization. (2) Supplier and inventory strategy—can supplier lead times be shortened through contracts, advance ordering, or supply chain consolidation? Should inventory be repositioned? (3) Scheduling and capacity plan—how to increase throughput without additional capital, or justified capital investments. (4) Quality gate redesign—which inspections can be streamlined, automated, or combined without weakening assurance? (5) Sales-to-production alignment—demand forecasting, make-to-stock vs. make-to-order, order-to-cash cycle compression. (6) Functional accountability structure—how production, quality, and sales will jointly own lead time and share incentives. Present the plan with estimated lead time reduction, implementation phases, and key dependencies."
+    },
+    {
+      "name": "Quality & Risk Expert Reviewer",
+      "type": "agent",
+      "role": "expert",
+      "systemPrompt": "You are a quality and regulatory compliance expert. Review the operations improvement plan and assess: (1) Do all proposed quality gate redesigns maintain certified inspection coverage and regulatory compliance? Which inspections are critical and cannot be compressed? (2) Identify risks: what process changes could reintroduce the warranty claim failures from the prior compression attempt? (3) Recommend quality assurance mechanisms—real-time quality metrics, statistical process control, root-cause triggers, supplier quality audits—to detect degradation early. (4) Are there upstream prevention strategies (supplier qualification, incoming material inspection, process capability studies) that enable downstream inspection time reduction? (5) Flag any residual compliance, traceability, or assurance gaps. Provide a detailed quality impact assessment with safeguards and monitoring plan. On the VERY LAST LINE, output EXACTLY ONE keyword: pass (if quality gates are adequately protected) or revise (if plan poses quality risks)."
+    },
+    {
+      "name": "Cross-Functional Alignment Refiner",
+      "type": "agent",
+      "role": "refiner",
+      "systemPrompt": "You are a cross-functional operations refiner. Integrate the quality expert's feedback into the improvement plan. Specifically: (1) Incorporate all quality safeguards and monitoring mechanisms. (2) Redesign handoff protocols between production, quality, and sales to eliminate blame-shifting—define clear ownership of each process segment and time accountability. (3) Create explicit SLAs and KPIs for each function and link them to shared lead-time reduction incentives. (4) Design communication cadence and escalation paths for issues. (5) Add implementation governance: project phases, milestones, decision owners, and contingency triggers. (6) Address the root cause of inter-departmental friction by clarifying how sales input feeds production scheduling, how quality inspections are scheduled to prevent bottlenecks, and how production capacity is forecasted. Produce a refined, integrated improvement plan ready for organizational execution."
+    },
+    {
+      "name": "Plan Completeness & Feasibility Critic",
+      "type": "if",
+      "role": "critic",
+      "systemPrompt": "You are a critical operations reviewer. Assess the refined improvement plan for completeness and feasibility: (1) Are all process changes clearly specified with responsible teams and timelines? (2) Are supplier and capacity constraints realistically addressed? (3) Does the plan credibly deliver the target lead time reduction? (4) Are quality safeguards sufficient to prevent repeat of prior warranty failures? (5) Is the cross-functional alignment mechanism robust enough to hold through execution? (6) Are financial, resource, and capability requirements realistic? (7) Are success metrics and go/no-go checkpoints defined? Provide FULL analysis of strengths and critical gaps. If significant gaps remain (undefined dependencies, unrealistic timelines, insufficient quality controls, or weak functional alignment), the plan needs revision. If the plan is comprehensive, credible, and feasible, it is ready for polishing. On the VERY LAST LINE, output EXACTLY ONE keyword: pass (plan is ready for executive delivery) or revise (plan has critical gaps and must be refined).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Delivery Polisher",
+      "type": "agent",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications specialist. Format the validated operations improvement plan into a clear, compelling, actionable document for organizational leadership and team execution. Structure as: (1) Executive Summary—current lead time, target lead time, key levers for reduction, expected business impact (deal win rate, revenue, market share). (2) Current State Diagnosis—process map, bottleneck analysis, quality constraint analysis. (3) Improvement Plan—process redesigns, supplier/inventory changes, scheduling strategy, quality gate redesigns, functional alignment mechanisms. (4) Implementation Roadmap—phased timeline, milestones, resource requirements, decision gates. (5) Risk Management & Quality Assurance—residual risks, monitoring plan, early warning triggers, contingency actions. (6) Success Metrics—lead time reduction by phase, warranty claim rates, deal win rate impact, cross-functional KPIs. (7) Governance & Accountability—steering committee structure, escalation paths, communication cadence, ownership matrix. Use clear formatting, data-driven rationale, and actionable next steps. Ensure all three functions (production, quality, sales) see their concerns addressed and their roles clarified."
+    }
+  ],
+  "explanation": "This pipeline is designed to solve a complex, multi-stakeholder operations problem that requires deep diagnosis, data-driven strategy, expert validation, and cross-functional alignment. The flow is: (1) Builder diagnoses the current state and maps process bottlenecks. (2) Analyst quantifies lead time gaps and quality tradeoffs using data. (3) Strategist synthesizes findings into a comprehensive improvement plan targeting 8+ week reduction. (4) Expert validates that quality and compliance are protected—this is critical because the prior compression attempt failed and warranty issues took 2 years to repair. The expert outputs a quality gate (if/revise) that ensures quality safeguards are designed in, not bolted on after. (5) If quality gate passes, Refiner integrates expert feedback and adds explicit cross-functional alignment mechanisms (SLAs, shared incentives, clear handoffs) to resolve the production-quality-sales blame cycle. If quality gate requires revision, the plan loops back to Refiner to address risks. (6) Plan Completeness Critic performs a final feasibility check—is the plan complete, realistic, and ready? If gaps remain, it revises. If ready, it passes to Polisher. (7) Polisher transforms the validated plan into executive-ready documentation with roadmap, metrics, and governance. This design prioritizes quality protection (expert gate), cross-functional alignment (Refiner focus), and feasibility (Critic gate) while keeping the pipeline lean and focused on the outcome: a validated, executable operations improvement plan that reduces lead time without compromising quality or reigniting inter-departmental conflict."
+}
+```

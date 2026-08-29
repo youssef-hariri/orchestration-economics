@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert tourism strategist. Draft a comprehensive sustainable tourism development plan for a region with significant natural beauty and historical sites. The plan must focus on attracting international visitors while ensuring environmental sustainability, preserving cultural heritage, and providing tangible economic benefits to local communities. Include sections on infrastructure, marketing, community engagement, and environmental conservation.",
+      "description": "Drafts the initial sustainable tourism strategy."
+    },
+    {
+      "name": "Sustainability Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a sustainable tourism refiner. Review the initial tourism strategy and enhance it. Ensure that all proposed initiatives strictly adhere to environmental protection standards, deeply respect local culture, and clearly outline economic benefits for the local community. Fix any gaps, vagueness, or unrealistic proposals based on feedback.",
+      "description": "Refines and improves the tourism strategy based on sustainability and community criteria."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate for sustainable tourism plans. Review the refined plan carefully. Assess it on three pillars: 1) Environmental sustainability, 2) Cultural heritage preservation, 3) Local economic benefit. Provide your FULL assessment with detailed reasoning for each pillar. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined plan against strict sustainability, cultural, and economic criteria."
+    },
+    {
+      "name": "Final Plan Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional document polisher. Take the approved sustainable tourism plan and format it beautifully. Use clear headings, bullet points, and professional language suitable for a government tourism agency. Ensure the tone is authoritative, inspiring, and highly professional.",
+      "description": "Formats and polishes the final tourism plan for presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert tourism strategist. Draft a comprehensive sustainable tourism development plan for a region with significant natural beauty and historical sites. The plan must focus on attracting international visitors while ensuring environmental sustainability, preserving cultural heritage, and providing tangible economic benefits to local communities. Include sections on infrastructure, marketing, community engagement, and environmental conservation."
+    },
+    {
+      "name": "Sustainability Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a sustainable tourism refiner. Review the initial tourism strategy and enhance it. Ensure that all proposed initiatives strictly adhere to environmental protection standards, deeply respect local culture, and clearly outline economic benefits for the local community. Fix any gaps, vagueness, or unrealistic proposals based on feedback."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate for sustainable tourism plans. Review the refined plan carefully. Assess it on three pillars: 1) Environmental sustainability, 2) Cultural heritage preservation, 3) Local economic benefit. Provide your FULL assessment with detailed reasoning for each pillar. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document polisher. Take the approved sustainable tourism plan and format it beautifully. Use clear headings, bullet points, and professional language suitable for a government tourism agency. Ensure the tone is authoritative, inspiring, and highly professional."
+    }
+  ],
+  "explanation": "This pipeline is designed to generate a high-quality, sustainable tourism plan through an automated, iterative process. It starts with a Builder agent to draft the initial comprehensive strategy. A Refiner agent then enhances the draft, focusing specifically on environmental, cultural, and economic pillars. A Quality Gate (critic) evaluates the refined output; if the plan falls short on any pillar, it routes back to the Refiner for targeted revisions. Once the plan meets all strict criteria, it passes to the Polisher for final professional formatting. This structure ensures rigorous quality control without human intervention while keeping the pipeline concise and under the 8-step limit."
+}

@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive market entry strategy for an eco-friendly clothing company expanding from Western Europe to a new region. Include product positioning, marketing channels, and operational logistics.",
+      "description": "Creates the initial comprehensive market entry strategy."
+    },
+    {
+      "name": "SustainabilityExpert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in global supply chains and sustainable fashion. Review the strategy for feasibility, cultural alignment, and environmental impact. Provide specific improvements.",
+      "description": "Provides domain-specific feedback on the strategy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the sustainability expert to improve the market entry plan, ensuring it is robust and actionable.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Assess the strategy for logical consistency, market viability, and completeness. Provide a detailed critique. If the strategy is insufficient, output 'revise'. If it meets high professional standards, output 'pass'. Last line must be the keyword.",
+      "description": "Evaluates the quality of the refined strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document with clear headings and actionable insights.",
+      "description": "Finalizes the document for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert international business strategist. Draft a comprehensive market entry strategy for an eco-friendly clothing company expanding from Western Europe to a new region. Include product positioning, marketing channels, and operational logistics."
+    },
+    {
+      "name": "SustainabilityExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in global supply chains and sustainable fashion. Review the strategy for feasibility, cultural alignment, and environmental impact. Provide specific improvements."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the sustainability expert to improve the market entry plan, ensuring it is robust and actionable."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the strategy for logical consistency, market viability, and completeness. Provide a detailed critique. If the strategy is insufficient, output 'revise'. If it meets high professional standards, output 'pass'. Last line must be the keyword.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document with clear headings and actionable insights."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist drafting the core plan. This is then reviewed by the SustainabilityExpert to ensure domain-specific rigor. The StrategyRefiner incorporates these insights. The QualityGate assesses the output; if it requires improvements, it loops back to the StrategyRefiner. Once the QualityGate issues a 'pass', the FinalPolisher formats the output into a professional document."
+}

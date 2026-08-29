@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Work Environment Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive framework for future of work, synthesizing remote work, office space, and collaboration tool considerations"
+    },
+    {
+      "name": "Cultural & Regional Analyst",
+      "role": "analyst",
+      "description": "Analyzes employee needs, preferences, and cultural expectations across different geographic regions and business units"
+    },
+    {
+      "name": "Work Strategy Architect",
+      "role": "strategist",
+      "description": "Develops coherent strategy and principles that balance global consistency with regional flexibility"
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "description": "Provides expert assessment on feasibility, compliance, and best practices in global workplace design"
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "description": "Incorporates expert feedback and analytical insights to strengthen the framework and resolve identified gaps"
+    },
+    {
+      "name": "Quality Assessor",
+      "role": "critic",
+      "description": "Evaluates refined framework for internal consistency, completeness, applicability, and alignment with stated objectives"
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "description": "Formats final framework for executive presentation with clear principles, implementation guidance, and regional considerations"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Work Environment Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive framework for the future of work in a large international company. Create an initial draft framework that addresses: (1) flexible work arrangements (remote, hybrid, on-site), (2) office space strategy, (3) collaboration tools and technology, and (4) team collaboration approaches. Structure this as clear principles and guidelines. Consider that this must work across multiple countries and cultures."
+    },
+    {
+      "name": "Cultural & Regional Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed work framework through a lens of global diversity. Examine how different regions and cultures may have varying preferences, regulatory constraints, and expectations regarding: work location flexibility, collaboration styles, communication preferences, and work-life balance. Identify specific regional considerations (e.g., European labor laws, Asian cultural norms, Americas flexibility preferences). Provide detailed insights on where the framework may need regional adaptation."
+    },
+    {
+      "name": "Work Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Review the initial framework and regional analysis. Develop a comprehensive strategy that: (1) establishes core global principles that apply universally, (2) identifies areas where regional flexibility is essential, (3) proposes mechanisms for local customization within global guardrails, and (4) outlines how to measure effectiveness. Create a clear set of principles (5-8 key principles) that guide the future of work across all regions while respecting local needs."
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "As an expert in global workplace design, organizational behavior, and HR policy, evaluate the strategic framework for: (1) feasibility and implementability across diverse organizational contexts, (2) compliance with labor laws in major markets, (3) alignment with employee wellbeing research and productivity science, (4) effectiveness for team collaboration and innovation, (5) sustainability and scalability. Provide specific expert assessment of risks, gaps, and opportunities for strengthening the framework."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine and strengthen the work framework by integrating expert validation feedback, regional analysis insights, and strategic principles. Address all identified gaps, risks, and opportunities. Enhance the framework with: (1) more specific guidance on regional flexibility mechanisms, (2) implementation considerations, (3) stakeholder engagement strategies, and (4) success metrics. Produce a cohesive, comprehensive framework ready for executive review."
+    },
+    {
+      "name": "Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate for the final work framework. Conduct a thorough assessment examining: (1) Are all key dimensions addressed (remote work, office spaces, collaboration tools, team collaboration)? (2) Does the framework balance global consistency with regional flexibility? (3) Are principles clear, actionable, and implementable? (4) Have cultural and regional considerations been meaningfully integrated? (5) Is there sufficient guidance for diverse employee needs worldwide? (6) Are potential implementation challenges addressed? Provide detailed analysis of strengths and any remaining weaknesses or gaps. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final, executive-ready framework for the future of work. Format it professionally with: (1) Executive summary highlighting key principles, (2) Core principles clearly stated and explained, (3) Regional considerations and flexibility mechanisms, (4) Implementation roadmap, (5) Expected outcomes and success metrics, (6) FAQ addressing common concerns. Ensure language is clear, compelling, and accessible to a global audience. The output should be ready for senior leadership presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, globally-applicable yet regionally-sensitive framework for the future of work. Execution flow: (1) Builder creates initial framework addressing all dimensions; (2) Analyst examines regional/cultural implications; (3) Strategist synthesizes these into coherent global strategy with clear principles; (4) Expert validates feasibility, compliance, and best practices; (5) Refiner integrates all feedback into strengthened framework; (6) Quality Assessor evaluates completeness and coherence—if revise, loops back to Refiner to address gaps (up to 3 iterations); (7) Polisher formats for executive presentation. This structure ensures the final outcome is strategically sound, culturally informed, expert-validated, and implementable across diverse global contexts. The quality gate prevents delivery of incomplete or internally inconsistent frameworks."
+}
+```

@@ -1,0 +1,76 @@
+{
+  "agents": [
+    {
+      "name": "Cross-Border JV Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Create a comprehensive, practical negotiation strategy for establishing a joint venture with a company in another country. Address preparation and cultural due diligence, communication styles, language and interpretation, decision-making authority and pace, hierarchy and consensus, trust and relationship building, negotiation sequencing, interests and concessions, governance, ownership and control, intellectual property, funding, profit allocation, compliance, dispute resolution, exit provisions, implementation, and post-agreement relationship management. Because no countries or industries are specified, avoid stereotypes and unsupported country-specific assumptions. Present cultural tendencies as hypotheses to validate with local advisers and the prospective partner. Include phased actions, diagnostic questions, risk mitigations, and fallback positions.",
+      "description": "Produces the initial country-neutral and culturally adaptable joint-venture negotiation strategy."
+    },
+    {
+      "name": "International Negotiation Expert",
+      "role": "expert",
+      "systemPrompt": "Review and enrich the draft using expertise in cross-cultural negotiation and international joint ventures. Identify assumptions that need validation and add practical guidance on direct versus indirect communication, high- versus low-context signals, hierarchy, consensus, face-saving, attitudes toward time and contracts, trust formation, use of intermediaries, and virtual versus in-person engagement. Also check that the strategy recognizes legal, tax, regulatory, sanctions, antitrust, anti-bribery, foreign-investment, intellectual-property, data-transfer, employment, and dispute-resolution issues without pretending to provide jurisdiction-specific legal advice. Return a revised, complete strategy rather than comments alone.",
+      "description": "Adds cross-cultural negotiation expertise and essential international joint-venture risk considerations."
+    },
+    {
+      "name": "Actionable Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the previous output into a coherent, actionable negotiation plan. Incorporate all available substantive feedback. Organize it into clear phases such as internal alignment, cultural and partner due diligence, relationship building, negotiation design, substantive bargaining, documentation, and implementation. For each phase, specify objectives, actions, diagnostic questions, warning signs, and contingencies where useful. Include a negotiation team and authority matrix, stakeholder map, communication protocol, decision-process map, issue-priority matrix, BATNA and walk-away limits, concession plan, governance principles, escalation path, and a term-sheet checklist. Eliminate stereotypes, repetition, vague advice, contradictions, and unsupported legal conclusions. Preserve appropriate caveats and produce a self-contained answer for a business audience.",
+      "description": "Converts the expert-enhanced draft into a structured and implementable strategy."
+    },
+    {
+      "name": "JV Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Assess the refined strategy in full. Evaluate whether it is practical, logically sequenced, culturally sensitive, country-neutral, and sufficiently specific. Verify meaningful coverage of communication differences, language issues, decision authority, hierarchy or consensus, relationship-building expectations, trust, timing, face-saving, negotiation mechanics, BATNA, concessions, governance, ownership and control, intellectual property, compliance, dispute resolution, exit planning, and implementation. Check that cultural patterns are framed as testable hypotheses rather than stereotypes and that jurisdiction-specific professional advice is recommended where appropriate. Provide a detailed assessment of strengths, weaknesses, omissions, and exact corrections needed. If any material issue remains, select revise; otherwise select pass. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the strategy is complete, culturally responsible, and ready for final presentation."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer from the approved strategy. Preserve all important substance while improving clarity, concision, flow, headings, parallel structure, and executive readability. Use practical bullets, phased recommendations, and concise checklists where appropriate. Make the answer directly responsive to the request, avoid stereotypes and unnecessary jargon, and distinguish commercial strategy from matters requiring local legal, tax, or regulatory advice. Do not mention agents, pipeline steps, quality checks, routing, or internal feedback.",
+      "description": "Delivers a polished, executive-ready cross-border joint-venture negotiation strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cross-Border JV Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive, practical negotiation strategy for establishing a joint venture with a company in another country. Address preparation and cultural due diligence, communication styles, language and interpretation, decision-making authority and pace, hierarchy and consensus, trust and relationship building, negotiation sequencing, interests and concessions, governance, ownership and control, intellectual property, funding, profit allocation, compliance, dispute resolution, exit provisions, implementation, and post-agreement relationship management. Because no countries or industries are specified, avoid stereotypes and unsupported country-specific assumptions. Present cultural tendencies as hypotheses to validate with local advisers and the prospective partner. Include phased actions, diagnostic questions, risk mitigations, and fallback positions."
+    },
+    {
+      "name": "International Negotiation Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review and enrich the draft using expertise in cross-cultural negotiation and international joint ventures. Identify assumptions that need validation and add practical guidance on direct versus indirect communication, high- versus low-context signals, hierarchy, consensus, face-saving, attitudes toward time and contracts, trust formation, use of intermediaries, and virtual versus in-person engagement. Also check that the strategy recognizes legal, tax, regulatory, sanctions, antitrust, anti-bribery, foreign-investment, intellectual-property, data-transfer, employment, and dispute-resolution issues without pretending to provide jurisdiction-specific legal advice. Return a revised, complete strategy rather than comments alone."
+    },
+    {
+      "name": "Actionable Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the previous output into a coherent, actionable negotiation plan. Incorporate all available substantive feedback. Organize it into clear phases such as internal alignment, cultural and partner due diligence, relationship building, negotiation design, substantive bargaining, documentation, and implementation. For each phase, specify objectives, actions, diagnostic questions, warning signs, and contingencies where useful. Include a negotiation team and authority matrix, stakeholder map, communication protocol, decision-process map, issue-priority matrix, BATNA and walk-away limits, concession plan, governance principles, escalation path, and a term-sheet checklist. Eliminate stereotypes, repetition, vague advice, contradictions, and unsupported legal conclusions. Preserve appropriate caveats and produce a self-contained answer for a business audience."
+    },
+    {
+      "name": "JV Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy in full. Evaluate whether it is practical, logically sequenced, culturally sensitive, country-neutral, and sufficiently specific. Verify meaningful coverage of communication differences, language issues, decision authority, hierarchy or consensus, relationship-building expectations, trust, timing, face-saving, negotiation mechanics, BATNA, concessions, governance, ownership and control, intellectual property, compliance, dispute resolution, exit planning, and implementation. Check that cultural patterns are framed as testable hypotheses rather than stereotypes and that jurisdiction-specific professional advice is recommended where appropriate. Provide a detailed assessment of strengths, weaknesses, omissions, and exact corrections needed. If any material issue remains, select revise; otherwise select pass. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer from the approved strategy. Preserve all important substance while improving clarity, concision, flow, headings, parallel structure, and executive readability. Use practical bullets, phased recommendations, and concise checklists where appropriate. Make the answer directly responsive to the request, avoid stereotypes and unnecessary jargon, and distinguish commercial strategy from matters requiring local legal, tax, or regulatory advice. Do not mention agents, pipeline steps, quality checks, routing, or internal feedback."
+    }
+  ],
+  "explanation": "Execution flows from the Builder to the International Negotiation Expert, then to the Refiner. The Quality Gate assesses the resulting strategy only after it has been produced. A pass routes the strategy to the final Polisher; a revise decision routes it back to the Refiner with the gate's detailed feedback, for up to three refinement cycles. This design combines broad drafting, specialist cross-cultural and international-JV knowledge, implementation-focused restructuring, automated completeness review, and final executive formatting."
+}

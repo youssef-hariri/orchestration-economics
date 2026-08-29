@@ -424,3 +424,6 @@ These two files are source material for the paper's Methodology section.
 
 ## D57a. Author ruling on kimi inclusion (2026-08-29)
 - **Author decision:** KEEP kimi in the Study 3 factorial despite strictly missing the amended G1 threshold (5/7 = 71%). Rationale: kimi's designer-stage failures are the phenomenon under study (cheap-tier design fragility), dropping the family would bias the factorial; all three attrition cases are disclosed with causes in the participant flow. Recorded per D57's escalation.
+
+## D58. Study 3 kimi frontier rerouted Moonshot→Together (2026-08-29, author directive)
+- Moonshot credits exhausted mid-run (kimi lane auto-skipped at 10/114). Author directive (restating 2026-08-26 rule): kimi-k2.6 (cheap) on Moonshot direct, kimi-k3 (frontier designer) on Together.ai (`moonshotai/Kimi-K3` serverless) — same precedent as D53 in the wave. Same model weights; provider switch disclosed. The 10 kimi tasks completed pre-switch used k3 on Moonshot direct; provider recorded per-task in the ledger (endpoint in config at execution time) for sensitivity analysis. Both accounts recharged by author.

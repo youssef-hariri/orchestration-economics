@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Global Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert organizational development strategist. Draft a comprehensive set of strategies and best practices to improve communication, foster collaboration, and resolve conflicts within geographically dispersed, culturally diverse project teams. Include actionable steps for asynchronous communication, cultural sensitivity, and conflict resolution frameworks.",
+      "description": "Drafts the initial strategies for global team communication and conflict resolution."
+    },
+    {
+      "name": "Cross-Cultural Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner specializing in global team dynamics. Improve the previous output based on any quality feedback provided. Enhance the strategies to ensure they are highly practical, culturally inclusive, and specifically address the challenges of multinational, multi-continent teams. Fix all identified issues and produce a polished, improved version.",
+      "description": "Refines the drafted strategies to ensure cultural inclusivity and practical applicability."
+    },
+    {
+      "name": "Quality Assurance Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality assurance critic for multinational corporate strategies. Review the refined output carefully. Assess it for completeness, cultural sensitivity, practical applicability, and clarity. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy document for quality and completeness, routing to revision or final polish."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved strategy document and format it for a multinational technology company's leadership. Ensure professional tone, clear headings, bullet points for readability, and flawless grammar. The final output must be ready for immediate distribution to global project managers.",
+      "description": "Formats and polishes the final approved document for executive distribution."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert organizational development strategist. Draft a comprehensive set of strategies and best practices to improve communication, foster collaboration, and resolve conflicts within geographically dispersed, culturally diverse project teams. Include actionable steps for asynchronous communication, cultural sensitivity, and conflict resolution frameworks."
+    },
+    {
+      "name": "Cross-Cultural Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner specializing in global team dynamics. Improve the previous output based on any quality feedback provided. Enhance the strategies to ensure they are highly practical, culturally inclusive, and specifically address the challenges of multinational, multi-continent teams. Fix all identified issues and produce a polished, improved version."
+    },
+    {
+      "name": "Quality Assurance Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality assurance critic for multinational corporate strategies. Review the refined output carefully. Assess it for completeness, cultural sensitivity, practical applicability, and clarity. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved strategy document and format it for a multinational technology company's leadership. Ensure professional tone, clear headings, bullet points for readability, and flawless grammar. The final output must be ready for immediate distribution to global project managers."
+    }
+  ],
+  "explanation": "The pipeline begins with the Global Strategy Builder drafting the initial communication and conflict resolution strategies. The Cross-Cultural Refiner then enhances the draft to ensure cultural and geographical inclusivity. The Quality Assurance Gate acts as an IF condition to evaluate the refined output; if it passes, it moves to the Executive Polisher, but if it requires revision, it loops back to the Cross-Cultural Refiner. Finally, the Executive Polisher formats the approved content into a professional, executive-ready document. Execution flow: Builder -> Refiner -> Quality Gate (if revise, loops back to Refiner; if pass, goes to Polisher) -> Polisher."
+}

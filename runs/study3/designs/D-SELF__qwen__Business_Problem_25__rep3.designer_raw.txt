@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive business-model transition plan to move a software company from perpetual licenses to subscriptions. The plan must address: 1) Offer structure and migration incentives for existing license holders to prevent churn, 2) Pricing strategy that balances the depth of the multi-year revenue trough against adoption rates, 3) Sales compensation redesign to shift from large upfront deals to recurring revenue, and 4) A financial communication plan to keep investors and the board committed through the revenue trough. Provide a detailed, actionable strategy.",
+      "description": "Creates the initial comprehensive transition plan addressing all business constraints."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Review the previous output and improve it based on any quality feedback provided. Ensure all constraints (revenue trough, sales comp alignment, customer retention, investor communication) are robustly addressed. Fix any logical gaps, weak incentives, or unrealistic financial assumptions. Produce a highly polished, improved version of the transition plan.",
+      "description": "Refines the initial draft based on quality feedback to ensure all complex business constraints are met."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a critical business strategist evaluating a software company's transition plan from perpetual licenses to subscriptions. Assess the plan's viability regarding: 1) Customer migration incentives (will it prevent a 20% churn like the competitor?), 2) Pricing and revenue trough management, 3) Sales compensation alignment, and 4) Investor/board communication. Provide a FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy against business constraints and routes the pipeline based on quality.",
+      "type": "if",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communication polisher. Take the approved business transition plan and format it for presentation to the C-suite and Board of Directors. Ensure the tone is authoritative, clear, and persuasive. Use professional formatting, clear headings, and executive summaries where appropriate to make the complex financial and operational shifts easily digestible.",
+      "description": "Formats and polishes the final approved plan for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive business-model transition plan to move a software company from perpetual licenses to subscriptions. The plan must address: 1) Offer structure and migration incentives for existing license holders to prevent churn, 2) Pricing strategy that balances the depth of the multi-year revenue trough against adoption rates, 3) Sales compensation redesign to shift from large upfront deals to recurring revenue, and 4) A financial communication plan to keep investors and the board committed through the revenue trough. Provide a detailed, actionable strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Review the previous output and improve it based on any quality feedback provided. Ensure all constraints (revenue trough, sales comp alignment, customer retention, investor communication) are robustly addressed. Fix any logical gaps, weak incentives, or unrealistic financial assumptions. Produce a highly polished, improved version of the transition plan."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical business strategist evaluating a software company's transition plan from perpetual licenses to subscriptions. Assess the plan's viability regarding: 1) Customer migration incentives (will it prevent a 20% churn like the competitor?), 2) Pricing and revenue trough management, 3) Sales compensation alignment, and 4) Investor/board communication. Provide a FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communication polisher. Take the approved business transition plan and format it for presentation to the C-suite and Board of Directors. Ensure the tone is authoritative, clear, and persuasive. Use professional formatting, clear headings, and executive summaries where appropriate to make the complex financial and operational shifts easily digestible."
+    }
+  ],
+  "explanation": "The pipeline begins with a Builder agent to generate the initial comprehensive transition plan covering all required business areas (offers, pricing, sales comp, investor comms). This is followed by a Refiner to improve the draft. A Quality Gate (Critic) then assesses the refined plan against the specific constraints of the task, such as preventing competitor-level churn and managing the revenue trough. If the plan is inadequate, the gate outputs 'revise' and routes back to the Refiner for revision. Once the plan passes the quality check with 'pass', it moves to the Polisher to format the final output for executive presentation. This ensures a robust, highly vetted strategy is delivered."
+}

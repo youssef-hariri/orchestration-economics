@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "Joint Venture Negotiation Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive negotiation strategy for establishing a joint venture between a company and a potential partner in another country. Address strategic objectives, partner assessment, preparation, value creation, governance, ownership, capital contributions, intellectual property, risk allocation, decision-making, dispute resolution, milestones, and exit provisions. Explicitly account for differences in communication styles, negotiation norms, decision-making speed and authority, hierarchy, risk tolerance, formality, and relationship-building. Avoid cultural stereotypes; present cultural considerations as hypotheses to validate through respectful inquiry. Include practical meeting tactics, questions to ask, documentation practices, and fallback positions. State assumptions where the target country and industry are unspecified.",
+      "description": "Creates the initial cross-border joint venture negotiation strategy."
+    },
+    {
+      "name": "Cross-Cultural Negotiation Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed joint venture negotiation strategy from the perspective of cross-border business negotiations. Identify cultural, communication, legal, ethical, and relationship-management considerations that may have been overlooked. Recommend culturally adaptable practices rather than generalized national stereotypes. Explain how to handle indirect or direct communication, silence, disagreement, hierarchy, consensus-building, use of intermediaries, time expectations, trust formation, meeting etiquette, and translation or interpretation needs. Provide concrete improvements that make the strategy practical across different countries while noting the need for local legal and commercial advice.",
+      "description": "Adds specialized insight on cross-cultural communication and relationship-building."
+    },
+    {
+      "name": "Negotiation Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the draft negotiation strategy using the cross-cultural expert analysis. Produce a coherent, actionable, and well-structured final strategy draft. Integrate recommendations without assuming a specific national culture, distinguish universal negotiation principles from country-specific matters requiring validation, and ensure coverage of communication styles, decision-making processes, relationship-building, commercial terms, governance, risk management, legal diligence, and implementation. Include a phased negotiation plan, preparation checklist, sample questions, ways to confirm understanding, and contingency approaches for stalled discussions. Preserve useful detail while removing repetition, unsupported claims, and overly prescriptive language.",
+      "description": "Integrates expert feedback into a practical and culturally adaptable strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined cross-border joint venture negotiation strategy in full. Evaluate whether it is strategically sound, actionable, culturally sensitive, sufficiently specific despite the unspecified country, logically organized, and complete regarding communication styles, decision-making, relationship-building, commercial terms, governance, legal diligence, risk allocation, dispute resolution, and implementation. Identify any unsupported cultural assumptions, omissions, contradictions, vague recommendations, or advice that could create legal or commercial risk. Explain precise corrections needed if weaknesses exist. Then, on the very last line, output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      },
+      "description": "Determines whether the refined strategy is complete and suitable for final presentation."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer based on the approved negotiation strategy and any preceding analysis. Present a clear, concise, professional outline with useful headings and actionable bullet points. Cover preparation, cultural adaptation, communication, decision-making, relationship-building, negotiation phases, key joint venture terms, governance, risk controls, implementation, and fallback or exit planning. Make clear that cultural practices vary within countries and should be validated with the partner. Note where local legal, tax, regulatory, and competition counsel are essential. Remove internal review commentary, unsupported certainty, repetition, and unnecessary jargon.",
+      "description": "Formats and finalizes the strategy for executive use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Joint Venture Negotiation Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive negotiation strategy for establishing a joint venture between a company and a potential partner in another country. Address strategic objectives, partner assessment, preparation, value creation, governance, ownership, capital contributions, intellectual property, risk allocation, decision-making, dispute resolution, milestones, and exit provisions. Explicitly account for differences in communication styles, negotiation norms, decision-making speed and authority, hierarchy, risk tolerance, formality, and relationship-building. Avoid cultural stereotypes; present cultural considerations as hypotheses to validate through respectful inquiry. Include practical meeting tactics, questions to ask, documentation practices, and fallback positions. State assumptions where the target country and industry are unspecified."
+    },
+    {
+      "name": "Cross-Cultural Negotiation Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed joint venture negotiation strategy from the perspective of cross-border business negotiations. Identify cultural, communication, legal, ethical, and relationship-management considerations that may have been overlooked. Recommend culturally adaptable practices rather than generalized national stereotypes. Explain how to handle indirect or direct communication, silence, disagreement, hierarchy, consensus-building, use of intermediaries, time expectations, trust formation, meeting etiquette, and translation or interpretation needs. Provide concrete improvements that make the strategy practical across different countries while noting the need for local legal and commercial advice."
+    },
+    {
+      "name": "Negotiation Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the draft negotiation strategy using the cross-cultural expert analysis. Produce a coherent, actionable, and well-structured final strategy draft. Integrate recommendations without assuming a specific national culture, distinguish universal negotiation principles from country-specific matters requiring validation, and ensure coverage of communication styles, decision-making processes, relationship-building, commercial terms, governance, risk management, legal diligence, and implementation. Include a phased negotiation plan, preparation checklist, sample questions, ways to confirm understanding, and contingency approaches for stalled discussions. Preserve useful detail while removing repetition, unsupported claims, and overly prescriptive language."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined cross-border joint venture negotiation strategy in full. Evaluate whether it is strategically sound, actionable, culturally sensitive, sufficiently specific despite the unspecified country, logically organized, and complete regarding communication styles, decision-making, relationship-building, commercial terms, governance, legal diligence, risk allocation, dispute resolution, and implementation. Identify any unsupported cultural assumptions, omissions, contradictions, vague recommendations, or advice that could create legal or commercial risk. Explain precise corrections needed if weaknesses exist. Then, on the very last line, output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer based on the approved negotiation strategy and any preceding analysis. Present a clear, concise, professional outline with useful headings and actionable bullet points. Cover preparation, cultural adaptation, communication, decision-making, relationship-building, negotiation phases, key joint venture terms, governance, risk controls, implementation, and fallback or exit planning. Make clear that cultural practices vary within countries and should be validated with the partner. Note where local legal, tax, regulatory, and competition counsel are essential. Remove internal review commentary, unsupported certainty, repetition, and unnecessary jargon."
+    }
+  ],
+  "explanation": "The flow is Joint Venture Negotiation Strategist → Cross-Cultural Negotiation Expert → Negotiation Strategy Refiner → Strategy Quality Assessment → Executive Strategy Polisher. The quality assessment reviews the refined draft after it exists. If it outputs revise, execution returns to the refiner to address the identified weaknesses; if it outputs pass, execution proceeds to the polisher. The final step produces a clear, actionable strategy while preserving cultural nuance and appropriate legal and commercial caveats."
+}

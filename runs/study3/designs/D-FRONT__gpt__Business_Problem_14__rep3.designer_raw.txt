@@ -1,0 +1,73 @@
+{
+  "agents": [
+    {
+      "name": "Global Inclusion Draft Author",
+      "role": "builder",
+      "systemPrompt": "Create a practical, comprehensive set of recommendations for a technology company designing a digital product for a global user base. Suggest product features, UX and visual-design considerations, accessibility practices, localization and internationalization requirements, and content guidelines that make the product inclusive and respectful across diverse cultures. Address language, scripts, names, dates, numbers, currencies, imagery, symbols, color, identity fields, communication styles, regional norms, disability access, low-bandwidth contexts, privacy, moderation, testing, and user feedback. Distinguish broadly applicable practices from matters requiring local research. Avoid treating cultures as monolithic, making unsupported claims, or presenting stereotypes as facts. Organize the recommendations by category and include implementation examples, common pitfalls, and a prioritized launch checklist.",
+      "description": "Produces the initial actionable guidance for culturally inclusive and accessible global product design."
+    },
+    {
+      "name": "Cross-Cultural Accessibility Examiner",
+      "role": "expert",
+      "systemPrompt": "Examine the draft as an expert in cross-cultural design, internationalization, localization, accessibility, and inclusive content. Identify omissions, stereotypes, overgeneralizations, culturally specific assumptions, inaccessible recommendations, conflicts between regional expectations, and advice that is too vague to implement. Check coverage of bidirectional and non-Latin scripts, locale-aware formats, inclusive identity choices, assistive technology, cognitive accessibility, connectivity and device constraints, privacy, safety, moderation, local validation, and continuous user research. Provide detailed, prioritized corrections and additions for the next writer. Do not replace the draft with a final answer.",
+      "description": "Provides specialist analysis of cultural, linguistic, accessibility, and implementation risks."
+    },
+    {
+      "name": "Inclusive Product Guidance Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the draft using all available expert or quality feedback. Produce a self-contained answer to the original request rather than discussing the review process. Correct stereotypes and overgeneralizations, fill material gaps, and turn abstract principles into useful product features, design considerations, content rules, examples, pitfalls, and validation practices. Balance cultural respect with accessibility, usability, privacy, safety, and technical feasibility. Make clear that local research and testing are necessary and that no culture is homogeneous. Use a well-structured format suitable for product, design, engineering, content, localization, and research teams.",
+      "description": "Integrates expert feedback and converts the draft into comprehensive, implementable guidance."
+    },
+    {
+      "name": "Global Inclusion Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Assess the latest refined answer in full. Determine whether it directly answers the request with accurate, practical, and culturally respectful recommendations. Evaluate completeness across features, interaction and visual design, internationalization and localization, accessibility, content, privacy and safety, technical constraints, testing, governance, and feedback. Look for stereotypes, tokenism, universal claims about cultures, Western-centric defaults, inaccessible advice, internal contradictions, unsupported specificity, and recommendations that cannot be acted upon. Confirm that the answer includes concrete examples, cautions, and prioritization without becoming needlessly repetitive. Provide a detailed assessment naming strengths and every issue that still requires correction. Request another revision if any significant issue remains; otherwise approve continuation. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass.",
+      "description": "Evaluates the refined guidance and requests further improvement when substantive quality issues remain."
+    },
+    {
+      "name": "Executive-Ready Inclusion Editor",
+      "role": "polisher",
+      "systemPrompt": "Polish the approved answer for delivery to the user. Preserve all substantive recommendations while improving clarity, concision, hierarchy, consistency, and readability. Remove process commentary, duplication, and unnecessary jargon. Use descriptive headings, concise bullets, and a practical prioritized checklist. Ensure the final response remains nuanced, avoids stereotypes and absolute cultural claims, and clearly separates universal accessibility principles from locale-specific matters that require research and testing. Return only the final user-facing answer.",
+      "description": "Performs the final editorial pass and presents clear, professional, user-facing recommendations."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Inclusion Draft Author",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a practical, comprehensive set of recommendations for a technology company designing a digital product for a global user base. Suggest product features, UX and visual-design considerations, accessibility practices, localization and internationalization requirements, and content guidelines that make the product inclusive and respectful across diverse cultures. Address language, scripts, names, dates, numbers, currencies, imagery, symbols, color, identity fields, communication styles, regional norms, disability access, low-bandwidth contexts, privacy, moderation, testing, and user feedback. Distinguish broadly applicable practices from matters requiring local research. Avoid treating cultures as monolithic, making unsupported claims, or presenting stereotypes as facts. Organize the recommendations by category and include implementation examples, common pitfalls, and a prioritized launch checklist."
+    },
+    {
+      "name": "Cross-Cultural Accessibility Examiner",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Examine the draft as an expert in cross-cultural design, internationalization, localization, accessibility, and inclusive content. Identify omissions, stereotypes, overgeneralizations, culturally specific assumptions, inaccessible recommendations, conflicts between regional expectations, and advice that is too vague to implement. Check coverage of bidirectional and non-Latin scripts, locale-aware formats, inclusive identity choices, assistive technology, cognitive accessibility, connectivity and device constraints, privacy, safety, moderation, local validation, and continuous user research. Provide detailed, prioritized corrections and additions for the next writer. Do not replace the draft with a final answer."
+    },
+    {
+      "name": "Inclusive Product Guidance Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the draft using all available expert or quality feedback. Produce a self-contained answer to the original request rather than discussing the review process. Correct stereotypes and overgeneralizations, fill material gaps, and turn abstract principles into useful product features, design considerations, content rules, examples, pitfalls, and validation practices. Balance cultural respect with accessibility, usability, privacy, safety, and technical feasibility. Make clear that local research and testing are necessary and that no culture is homogeneous. Use a well-structured format suitable for product, design, engineering, content, localization, and research teams."
+    },
+    {
+      "name": "Global Inclusion Quality Assessor",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Assess the latest refined answer in full. Determine whether it directly answers the request with accurate, practical, and culturally respectful recommendations. Evaluate completeness across features, interaction and visual design, internationalization and localization, accessibility, content, privacy and safety, technical constraints, testing, governance, and feedback. Look for stereotypes, tokenism, universal claims about cultures, Western-centric defaults, inaccessible advice, internal contradictions, unsupported specificity, and recommendations that cannot be acted upon. Confirm that the answer includes concrete examples, cautions, and prioritization without becoming needlessly repetitive. Provide a detailed assessment naming strengths and every issue that still requires correction. Request another revision if any significant issue remains; otherwise approve continuation. On the VERY LAST LINE output EXACTLY ONE keyword: retry or pass.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive-Ready Inclusion Editor",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish the approved answer for delivery to the user. Preserve all substantive recommendations while improving clarity, concision, hierarchy, consistency, and readability. Remove process commentary, duplication, and unnecessary jargon. Use descriptive headings, concise bullets, and a practical prioritized checklist. Ensure the final response remains nuanced, avoids stereotypes and absolute cultural claims, and clearly separates universal accessibility principles from locale-specific matters that require research and testing. Return only the final user-facing answer."
+    }
+  ],
+  "explanation": "The flow is Global Inclusion Draft Author → Cross-Cultural Accessibility Examiner → Inclusive Product Guidance Refiner → Global Inclusion Quality Assessor → Executive-Ready Inclusion Editor. The builder establishes broad, actionable coverage; the domain expert then finds cultural, linguistic, and accessibility blind spots before the refiner produces a self-contained improved answer. The quality assessor runs only after that refinement and may output retry to loop back to the refiner for up to three iterations, or pass to continue. The final polisher converts the approved material into concise, well-organized guidance for the user."
+}
