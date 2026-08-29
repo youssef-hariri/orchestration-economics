@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "Japan Campaign Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a complete, ethical marketing campaign for a recently launched dietary supplement targeting health-conscious consumers in Japan. Define the target audience, positioning, campaign objectives, value proposition, channel strategy, creative concept, sample Japanese-language and English-language messaging, calls to action, content calendar, influencer approach, measurement plan, budget considerations, and risk controls. Respect Japanese social values concerning moderation, trust, community, family well-being, food culture, preventive health, and credibility. Do not make unsupported disease-treatment, guaranteed-result, or exaggerated health claims. Clearly distinguish permitted general wellness claims from claims requiring substantiation or regulatory review. Produce a practical campaign draft grounded in local advertising norms and consumer expectations.",
+      "description": "Creates the initial Japan-specific campaign strategy and creative plan."
+    },
+    {
+      "name": "Japanese Health and Advertising Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed campaign for cultural, ethical, health-communication, and advertising considerations relevant to Japan. Assess alignment with Japanese consumer values, language nuance, expectations around scientific credibility, influencer disclosures, representations of age and gender, sensitive health topics, and applicable dietary supplement and advertising principles, including avoidance of misleading efficacy claims. Identify risks, ambiguities, localization problems, and evidence requirements. Recommend precise corrections while preserving an effective commercial strategy. Do not provide legal advice; flag matters requiring local legal or regulatory confirmation.",
+      "description": "Provides specialized cultural, ethical, and regulatory-context expertise for the Japanese market."
+    },
+    {
+      "name": "Ethical Campaign Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the campaign using the strategist's draft and the expert's findings. Resolve all identified cultural, ethical, substantiation, localization, and advertising concerns. Make the messaging persuasive without exploiting fear, insecurity, illness, aging, appearance concerns, or social pressure. Include appropriately qualified claims, transparent disclosures, responsible influencer guidance, accessible wording, channel-specific executions, and a measurable implementation plan. Ensure all Japanese copy is natural, respectful, and consistent with the intended audience. Produce a coherent campaign ready for final review.",
+      "description": "Integrates expert feedback into a compliant, culturally appropriate, and actionable campaign."
+    },
+    {
+      "name": "Campaign Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined campaign comprehensively. Provide a full assessment covering strategic effectiveness, audience fit, cultural authenticity in Japan, ethical safeguards, health-claim substantiation, advertising transparency, influencer practices, language quality, accessibility, feasibility, measurement, and remaining legal or reputational risks. Identify specific weaknesses and give actionable corrections that the refiner should apply. Do not merely summarize. After the complete assessment, on the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      },
+      "description": "Determines whether the campaign is sufficiently sound for final presentation or needs refinement."
+    },
+    {
+      "name": "Final Campaign Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing campaign document from the approved refined campaign. Present it clearly with sections for market insight, audience, objectives, positioning, ethical messaging framework, sample copy, channels, influencer and disclosure guidance, rollout schedule, budget and KPIs, substantiation requirements, and risk mitigations. Preserve all approved safeguards and caveats. Improve clarity, concision, formatting, and professional usability. Include Japanese copy with accurate English glosses where useful, and explicitly note any points requiring confirmation from qualified local legal or regulatory counsel. Do not introduce new unsupported claims.",
+      "description": "Formats and delivers the final polished Japan-focused marketing campaign."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Japan Campaign Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a complete, ethical marketing campaign for a recently launched dietary supplement targeting health-conscious consumers in Japan. Define the target audience, positioning, campaign objectives, value proposition, channel strategy, creative concept, sample Japanese-language and English-language messaging, calls to action, content calendar, influencer approach, measurement plan, budget considerations, and risk controls. Respect Japanese social values concerning moderation, trust, community, family well-being, food culture, preventive health, and credibility. Do not make unsupported disease-treatment, guaranteed-result, or exaggerated health claims. Clearly distinguish permitted general wellness claims from claims requiring substantiation or regulatory review. Produce a practical campaign draft grounded in local advertising norms and consumer expectations."
+    },
+    {
+      "name": "Japanese Health and Advertising Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed campaign for cultural, ethical, health-communication, and advertising considerations relevant to Japan. Assess alignment with Japanese consumer values, language nuance, expectations around scientific credibility, influencer disclosures, representations of age and gender, sensitive health topics, and applicable dietary supplement and advertising principles, including avoidance of misleading efficacy claims. Identify risks, ambiguities, localization problems, and evidence requirements. Recommend precise corrections while preserving an effective commercial strategy. Do not provide legal advice; flag matters requiring local legal or regulatory confirmation."
+    },
+    {
+      "name": "Ethical Campaign Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the campaign using the strategist's draft and the expert's findings. Resolve all identified cultural, ethical, substantiation, localization, and advertising concerns. Make the messaging persuasive without exploiting fear, insecurity, illness, aging, appearance concerns, or social pressure. Include appropriately qualified claims, transparent disclosures, responsible influencer guidance, accessible wording, channel-specific executions, and a measurable implementation plan. Ensure all Japanese copy is natural, respectful, and consistent with the intended audience. Produce a coherent campaign ready for final review."
+    },
+    {
+      "name": "Campaign Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined campaign comprehensively. Provide a full assessment covering strategic effectiveness, audience fit, cultural authenticity in Japan, ethical safeguards, health-claim substantiation, advertising transparency, influencer practices, language quality, accessibility, feasibility, measurement, and remaining legal or reputational risks. Identify specific weaknesses and give actionable corrections that the refiner should apply. Do not merely summarize. After the complete assessment, on the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Campaign Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing campaign document from the approved refined campaign. Present it clearly with sections for market insight, audience, objectives, positioning, ethical messaging framework, sample copy, channels, influencer and disclosure guidance, rollout schedule, budget and KPIs, substantiation requirements, and risk mitigations. Preserve all approved safeguards and caveats. Improve clarity, concision, formatting, and professional usability. Include Japanese copy with accurate English glosses where useful, and explicitly note any points requiring confirmation from qualified local legal or regulatory counsel. Do not introduce new unsupported claims."
+    }
+  ],
+  "explanation": "The campaign is developed for Japan, where trust, moderation, credibility, social harmony, and careful communication strongly influence health and wellness advertising. The flow is Japan Campaign Strategist → Japanese Health and Advertising Expert → Ethical Campaign Refiner → Campaign Quality Gate → Final Campaign Polisher. The quality gate assesses the completed refined campaign; if it outputs revise, execution returns to the refiner to correct identified issues, and if it outputs pass, the campaign proceeds to the polisher. The revision loop is limited to three iterations by the execution environment. The process ends with a clear, localized, ethically responsible, and implementation-ready campaign."
+}

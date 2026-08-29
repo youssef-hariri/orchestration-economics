@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to draft a comprehensive proposal detailing strategies and actions to improve the resilience and ethical considerations within a global supply chain that sources from diverse international locations. Address risk mitigation, supplier diversification, ethical auditing, transparency, and contingency planning. Provide a structured, detailed initial draft.",
+      "description": "Drafts the initial supply chain resilience and ethics strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, enhance the strategic depth, ensure all ethical and resilience aspects are thoroughly covered, and produce a polished, improved version.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "Expert Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a global supply chain and ethics expert acting as a quality gate. Review the refined strategy carefully. Provide your FULL assessment — evaluate the depth of resilience strategies, the practicality of ethical sourcing actions, and overall comprehensiveness. Identify any missing elements or weak points. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the strategy for completeness, feasibility, and ethical rigor."
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive report polisher. Take the approved supply chain strategy and format it into a highly professional, clear, and compelling final document. Ensure excellent structure, use professional business language, fix any grammatical issues, and make it ready for presentation to executive leadership.",
+      "description": "Formats and polishes the final document for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to draft a comprehensive proposal detailing strategies and actions to improve the resilience and ethical considerations within a global supply chain that sources from diverse international locations. Address risk mitigation, supplier diversification, ethical auditing, transparency, and contingency planning. Provide a structured, detailed initial draft."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, enhance the strategic depth, ensure all ethical and resilience aspects are thoroughly covered, and produce a polished, improved version."
+    },
+    {
+      "name": "Expert Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a global supply chain and ethics expert acting as a quality gate. Review the refined strategy carefully. Provide your FULL assessment — evaluate the depth of resilience strategies, the practicality of ethical sourcing actions, and overall comprehensiveness. Identify any missing elements or weak points. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive report polisher. Take the approved supply chain strategy and format it into a highly professional, clear, and compelling final document. Ensure excellent structure, use professional business language, fix any grammatical issues, and make it ready for presentation to executive leadership."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Strategy Builder to draft a comprehensive supply chain strategy. The Strategy Refiner then improves the draft. The Expert Quality Gate assesses the refined output for depth, feasibility, and ethical rigor; if it requires revision, it loops back to the Strategy Refiner. Once the strategy passes the quality gate, the Executive Report Polisher formats it into a professional final document."
+}

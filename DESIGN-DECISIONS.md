@@ -414,3 +414,10 @@ These two files are source material for the paper's Methodology section.
 - **Timing integrity:** amendment driven by operational audit, not outcome data; OSF amendment registration `bwc93` timestamped BEFORE any v2 generation call. Original registration `9ukjz` retained as the v1 record.
 - **Academic grounding:** pre-registered amendments before data contact (Nosek et al. 2018); construct validity requires the instrument to instantiate the actual phenomenon under study (the shipped feature), cf. Shadish, Cook & Campbell (2002); AI-assistant silent defaults as a documented oversight case (paper §3.9).
 - **Implemented in:** `code/study3_design_run.py` (PROMPT_TAG `protocol13-v2`, ledger `study3_ledger_v2.jsonl`, store `study3_store_v2.json`); protocol §2 amendment; MANIFEST Entry 71.
+
+## D57. Study 3 G1 gate clarification — moderation blocks and design failures are disclosed attrition, not infeasibility (2026-08-29, OSF 639eq, pre-full-run)
+- **Trigger:** v2 pilot kimi completion 5/8 driven by (a) one persistent provider content-moderation block, (b) two empty-output generation failures at the designer/polisher stage — phenomena Study 3 exists to measure, not instrument defects (overall design validity 31/32 = 97%).
+- **Decision:** G1 clarified (OSF amendment 639eq, timestamped before the v2 full run and any v2 outcome analysis): provider moderation blocks and design_failed cases count as disclosed attrition in the participant flow; a family remains if completion ≥ 80% excluding moderation-blocked tasks from the denominator (reported both ways).
+- **Residual tension (disclosed):** kimi strictly misses even the amended threshold (5/7 = 71% excl. moderation). Escalated to the author rather than silently relaxing further; the runner proceeds with kimi included pending the author call, and kimi's designer-stage fragility is reported as a substantive finding.
+- **Grounding:** CONSORT-style attrition reporting (Schulz et al. 2010, doi:10.1136/bmj.c332); pre-registered gate amendments before outcome data (Nosek et al. 2018).
+- **Implemented in:** `results/study3_pilot_v2_gates.json`; MANIFEST Entry 72.

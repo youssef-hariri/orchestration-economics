@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "Tourism Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert tourism strategist. Draft a comprehensive sustainable tourism development plan for a region with significant natural beauty and historical sites. The plan must focus on attracting international visitors while ensuring environmental sustainability, preserving cultural heritage, and maximizing economic benefits for local communities. Include specific initiatives, infrastructure needs, marketing strategies, and community engagement frameworks.",
+      "description": "Creates the initial comprehensive sustainable tourism strategy."
+    },
+    {
+      "name": "Initial Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate evaluating a sustainable tourism strategy. Review the drafted plan for completeness, feasibility, and alignment with the core goals: international appeal, environmental protection, cultural respect, and local economic benefit. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the initial draft for strategic alignment and completeness."
+    },
+    {
+      "name": "Sustainable Tourism Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a sustainable tourism refiner. Improve the previous tourism strategy based on the quality feedback provided. Address all identified weaknesses, ensure strict alignment with environmental and cultural preservation goals, and enhance the economic benefits for the local community. Produce a polished, improved version of the plan.",
+      "description": "Refines and improves the tourism strategy based on critic feedback."
+    },
+    {
+      "name": "Refinement Iteration Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate evaluating the refined sustainable tourism strategy. Review the output carefully to ensure all previous feedback was addressed and the plan is highly actionable and sustainable. Provide a FULL assessment. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Iteratively checks the refined plan to ensure all issues are resolved."
+    },
+    {
+      "name": "Final Plan Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional document polisher. Take the finalized sustainable tourism strategy and format it into a highly professional, engaging, and well-structured report suitable for government officials and international stakeholders. Use clear headings, bullet points, and an executive summary. Ensure the tone is authoritative and inspiring.",
+      "description": "Formats and polishes the final strategy for professional presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Tourism Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert tourism strategist. Draft a comprehensive sustainable tourism development plan for a region with significant natural beauty and historical sites. The plan must focus on attracting international visitors while ensuring environmental sustainability, preserving cultural heritage, and maximizing economic benefits for local communities. Include specific initiatives, infrastructure needs, marketing strategies, and community engagement frameworks."
+    },
+    {
+      "name": "Initial Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate evaluating a sustainable tourism strategy. Review the drafted plan for completeness, feasibility, and alignment with the core goals: international appeal, environmental protection, cultural respect, and local economic benefit. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Sustainable Tourism Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a sustainable tourism refiner. Improve the previous tourism strategy based on the quality feedback provided. Address all identified weaknesses, ensure strict alignment with environmental and cultural preservation goals, and enhance the economic benefits for the local community. Produce a polished, improved version of the plan."
+    },
+    {
+      "name": "Refinement Iteration Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality gate evaluating the refined sustainable tourism strategy. Review the output carefully to ensure all previous feedback was addressed and the plan is highly actionable and sustainable. Provide a FULL assessment. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 4,
+        "retry": 2
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Final Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document polisher. Take the finalized sustainable tourism strategy and format it into a highly professional, engaging, and well-structured report suitable for government officials and international stakeholders. Use clear headings, bullet points, and an executive summary. Ensure the tone is authoritative and inspiring."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, high-quality sustainable tourism plan. Execution flow: The Tourism Strategy Builder (Step 0) drafts the initial plan. The Initial Strategy Quality Gate (Step 1) evaluates it; if 'pass', it jumps directly to the Polisher (Step 4); if 'revise', it routes to the Sustainable Tourism Refiner (Step 2). The Refiner improves the plan based on the gate's feedback. The Refinement Iteration Gate (Step 3) then evaluates the refined output in a while loop (up to 3 iterations); if 'retry', it loops back to the Refiner (Step 2) for further improvements; if 'pass', it proceeds to the Final Plan Polisher (Step 4), which formats the output into a professional report for government and international stakeholders."
+}

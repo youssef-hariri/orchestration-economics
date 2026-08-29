@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Global Innovation Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive strategy for fostering innovation, creativity, experimentation, and responsible risk-taking among employees in an established international company. Address differences in innovation activity across countries and branches. Include practical initiatives, leadership behaviors, incentives, psychological safety, resource allocation, experimentation methods, collaboration across locations, local cultural adaptation, inclusion, governance, measurement, and implementation considerations. Ensure the recommendations are actionable, culturally respectful, scalable, and suitable for offices with different levels of proactive innovation. Produce a structured draft for business leaders.",
+      "description": "Creates the initial international innovation-culture strategy."
+    },
+    {
+      "name": "Cross-Cultural Innovation Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed international innovation strategy for relevance across countries, organizational cultures, levels of branch maturity, employee motivations, regulatory contexts, communication norms, and operational realities. Identify likely barriers to creativity and responsible experimentation, risks of imposing headquarters-centric practices, and opportunities to adapt initiatives locally while preserving common principles. Provide specific insights and recommendations to strengthen the strategy.",
+      "description": "Assesses cross-country applicability, cultural risks, and implementation realities."
+    },
+    {
+      "name": "Innovation Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the existing innovation-culture strategy using the preceding analysis and feedback. Resolve weaknesses, make recommendations more concrete, distinguish globally consistent principles from locally adaptable practices, and clarify how leaders can encourage experimentation without promoting reckless behavior. Strengthen the treatment of psychological safety, incentives, inclusion, knowledge sharing, employee participation, measurement, pilots, and phased implementation. Produce a coherent, practical, executive-ready revised strategy.",
+      "description": "Integrates analysis into a stronger, more actionable global strategy."
+    },
+    {
+      "name": "Strategy Quality Reviewer",
+      "role": "critic",
+      "systemPrompt": "Review the revised strategy in depth. Assess whether it directly addresses the objective of increasing employee creativity, innovation, experimentation, and responsible risk-taking across international branches with uneven levels of proactive innovation. Evaluate strategic completeness, practicality, cultural sensitivity, inclusiveness, clarity, measurability, scalability, leadership applicability, risk management, and balance between global consistency and local adaptation. Identify specific omissions, contradictions, vague recommendations, unintended consequences, and any advice that could be difficult or inappropriate in particular countries. Provide a FULL assessment with detailed reasoning and precise corrective guidance. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the strategy is sufficiently rigorous, actionable, and globally appropriate."
+    },
+    {
+      "name": "Executive Innovation Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer based on the strongest available strategy and quality feedback. Present clear, practical strategies for fostering an innovative culture and encouraging creativity and responsible risk-taking across international offices. Use concise headings and actionable recommendations. Include guidance on global principles versus local adaptation, leadership and psychological safety, idea generation and experimentation, incentives and recognition, cross-branch collaboration, support for lower-activity locations, measurement, and implementation. Avoid unsupported claims, excessive jargon, and one-size-fits-all assumptions. Ensure the final answer is polished, balanced, culturally sensitive, and useful to senior leaders.",
+      "description": "Formats and finalizes the strategy as a clear executive-ready response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Innovation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive strategy for fostering innovation, creativity, experimentation, and responsible risk-taking among employees in an established international company. Address differences in innovation activity across countries and branches. Include practical initiatives, leadership behaviors, incentives, psychological safety, resource allocation, experimentation methods, collaboration across locations, local cultural adaptation, inclusion, governance, measurement, and implementation considerations. Ensure the recommendations are actionable, culturally respectful, scalable, and suitable for offices with different levels of proactive innovation. Produce a structured draft for business leaders."
+    },
+    {
+      "name": "Cross-Cultural Innovation Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed international innovation strategy for relevance across countries, organizational cultures, levels of branch maturity, employee motivations, regulatory contexts, communication norms, and operational realities. Identify likely barriers to creativity and responsible experimentation, risks of imposing headquarters-centric practices, and opportunities to adapt initiatives locally while preserving common principles. Provide specific insights and recommendations to strengthen the strategy."
+    },
+    {
+      "name": "Innovation Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the existing innovation-culture strategy using the preceding analysis and feedback. Resolve weaknesses, make recommendations more concrete, distinguish globally consistent principles from locally adaptable practices, and clarify how leaders can encourage experimentation without promoting reckless behavior. Strengthen the treatment of psychological safety, incentives, inclusion, knowledge sharing, employee participation, measurement, pilots, and phased implementation. Produce a coherent, practical, executive-ready revised strategy."
+    },
+    {
+      "name": "Strategy Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the revised strategy in depth. Assess whether it directly addresses the objective of increasing employee creativity, innovation, experimentation, and responsible risk-taking across international branches with uneven levels of proactive innovation. Evaluate strategic completeness, practicality, cultural sensitivity, inclusiveness, clarity, measurability, scalability, leadership applicability, risk management, and balance between global consistency and local adaptation. Identify specific omissions, contradictions, vague recommendations, unintended consequences, and any advice that could be difficult or inappropriate in particular countries. Provide a FULL assessment with detailed reasoning and precise corrective guidance. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Innovation Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer based on the strongest available strategy and quality feedback. Present clear, practical strategies for fostering an innovative culture and encouraging creativity and responsible risk-taking across international offices. Use concise headings and actionable recommendations. Include guidance on global principles versus local adaptation, leadership and psychological safety, idea generation and experimentation, incentives and recognition, cross-branch collaboration, support for lower-activity locations, measurement, and implementation. Avoid unsupported claims, excessive jargon, and one-size-fits-all assumptions. Ensure the final answer is polished, balanced, culturally sensitive, and useful to senior leaders."
+    }
+  ],
+  "explanation": "The flow is Global Innovation Strategy Builder → Cross-Cultural Innovation Analyst → Innovation Strategy Refiner → Strategy Quality Reviewer. If the reviewer outputs revise, execution returns to the refiner, which incorporates the detailed critique before the strategy is reviewed again; if it outputs pass, execution continues to Executive Innovation Strategy Polisher. The final polished output is therefore both actionable and adapted to international cultural and organizational differences."
+}

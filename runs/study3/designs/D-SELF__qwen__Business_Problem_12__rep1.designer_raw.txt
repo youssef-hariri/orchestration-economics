@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Sustainable Tourism Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert tourism strategist. Your task is to draft a comprehensive sustainable tourism development plan for a region with significant natural beauty and historical sites. The plan must explicitly address four key pillars: 1) Attracting international visitors, 2) Protecting the environment, 3) Respecting and preserving local culture and heritage, and 4) Providing tangible economic benefits to the local community. Provide a detailed, structured proposal with actionable initiatives, policies, and community engagement strategies.",
+      "description": "Drafts the initial comprehensive sustainable tourism development plan addressing all key pillars."
+    },
+    {
+      "name": "Sustainability & Culture Critic",
+      "role": "critic",
+      "systemPrompt": "You are a critical reviewer specializing in sustainable tourism, environmental conservation, and cultural heritage. Review the proposed tourism plan. Evaluate it strictly against the four pillars: international appeal, environmental protection, cultural respect, and local economic benefit. Identify any gaps, unrealistic assumptions, or missing strategies. Provide a FULL assessment with detailed reasoning, strengths, and specific weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the initial draft against sustainability and cultural pillars to identify gaps and weaknesses."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic plan refiner. Your task is to improve the previous tourism plan based on the critical feedback provided. Address all identified weaknesses, fill in missing details, and ensure the plan robustly covers international appeal, environmental sustainability, cultural preservation, and local economic benefits. Produce a fully revised, comprehensive, and improved version of the plan.",
+      "description": "Refines and improves the tourism plan based on critical feedback to address identified weaknesses."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are the final quality gate for a sustainable tourism development plan. Review the refined plan carefully. Ensure it perfectly balances international tourism growth with environmental protection, cultural respect, and local economic benefits. Check for coherence, feasibility, and completeness. Provide a FULL quality assessment detailing any remaining issues or confirming its readiness. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Conducts a final iterative quality check on the refined plan to ensure all standards are met before polishing."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved sustainable tourism plan and format it for final presentation to government stakeholders. Ensure a professional tone, clear headings, logical flow, and impeccable grammar. Do not change the core strategies, just elevate the presentation, structure, and readability for a high-level government audience.",
+      "description": "Formats and polishes the final approved plan for professional presentation to government stakeholders."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Sustainable Tourism Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert tourism strategist. Your task is to draft a comprehensive sustainable tourism development plan for a region with significant natural beauty and historical sites. The plan must explicitly address four key pillars: 1) Attracting international visitors, 2) Protecting the environment, 3) Respecting and preserving local culture and heritage, and 4) Providing tangible economic benefits to the local community. Provide a detailed, structured proposal with actionable initiatives, policies, and community engagement strategies."
+    },
+    {
+      "name": "Sustainability & Culture Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer specializing in sustainable tourism, environmental conservation, and cultural heritage. Review the proposed tourism plan. Evaluate it strictly against the four pillars: international appeal, environmental protection, cultural respect, and local economic benefit. Identify any gaps, unrealistic assumptions, or missing strategies. Provide a FULL assessment with detailed reasoning, strengths, and specific weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic plan refiner. Your task is to improve the previous tourism plan based on the critical feedback provided. Address all identified weaknesses, fill in missing details, and ensure the plan robustly covers international appeal, environmental sustainability, cultural preservation, and local economic benefits. Produce a fully revised, comprehensive, and improved version of the plan."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are the final quality gate for a sustainable tourism development plan. Review the refined plan carefully. Ensure it perfectly balances international tourism growth with environmental protection, cultural respect, and local economic benefits. Check for coherence, feasibility, and completeness. Provide a FULL quality assessment detailing any remaining issues or confirming its readiness. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 5,
+        "retry": 3
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved sustainable tourism plan and format it for final presentation to government stakeholders. Ensure a professional tone, clear headings, logical flow, and impeccable grammar. Do not change the core strategies, just elevate the presentation, structure, and readability for a high-level government audience."
+    }
+  ],
+  "explanation": "The pipeline begins with the Sustainable Tourism Strategist (Builder) to draft the initial comprehensive plan. This draft is immediately assessed by the Sustainability & Culture Critic (IF gate). If the plan passes, it moves directly to the Executive Polisher. If it requires revision, it routes to the Strategy Refiner. After refinement, the Final Quality Gate (WHILE gate) evaluates the updated plan. If it still needs work, it loops back to the Strategy Refiner (up to 3 iterations) to ensure all sustainability and cultural pillars are robustly addressed. Once the quality gate passes the plan, it proceeds to the Executive Polisher for final formatting and professional presentation. This structure ensures rigorous iterative refinement while keeping the pipeline efficient and under the 8-step limit."
+}

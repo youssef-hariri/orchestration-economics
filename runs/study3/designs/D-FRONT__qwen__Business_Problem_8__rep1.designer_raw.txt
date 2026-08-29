@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Global Supply Chain Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to propose comprehensive strategies and actionable steps to improve resilience and ethical considerations for a manufacturing company sourcing globally. Address risk mitigation, supplier diversification, ethical auditing, and sustainability. Produce a detailed initial draft.",
+      "description": "Drafts the initial strategies for enhancing supply chain resilience and ethical sourcing."
+    },
+    {
+      "name": "Supply Chain Expert Critic",
+      "role": "critic",
+      "systemPrompt": "You are a supply chain domain expert and critic. Review the initial strategy draft. Identify gaps in resilience planning (e.g., geopolitical risks, logistics bottlenecks) and ethical sourcing (e.g., labor rights, environmental impact). Provide constructive, specific feedback for improvement.",
+      "description": "Reviews the initial draft for domain accuracy, feasibility, and completeness regarding resilience and ethics."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner specializing in supply chain management. Improve the previous strategy draft based on the critic's feedback. Address all identified gaps, strengthen the actionable steps, and produce a polished, comprehensive revised version.",
+      "description": "Improves the strategy based on the critic's feedback."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate for supply chain strategies. Review the refined output carefully. Provide your FULL assessment — strengths, weaknesses, specific issues regarding resilience and ethical sourcing. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy to ensure it meets high standards before final polishing."
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Take the finalized supply chain strategy and format it into a highly professional, clear, and engaging executive report. Use appropriate headings, bullet points, and business language. Ensure the final output is ready for C-suite presentation.",
+      "description": "Formats the final strategy into a professional, executive-ready report."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Supply Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to propose comprehensive strategies and actionable steps to improve resilience and ethical considerations for a manufacturing company sourcing globally. Address risk mitigation, supplier diversification, ethical auditing, and sustainability. Produce a detailed initial draft."
+    },
+    {
+      "name": "Supply Chain Expert Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain domain expert and critic. Review the initial strategy draft. Identify gaps in resilience planning (e.g., geopolitical risks, logistics bottlenecks) and ethical sourcing (e.g., labor rights, environmental impact). Provide constructive, specific feedback for improvement."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner specializing in supply chain management. Improve the previous strategy draft based on the critic's feedback. Address all identified gaps, strengthen the actionable steps, and produce a polished, comprehensive revised version."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate for supply chain strategies. Review the refined output carefully. Provide your FULL assessment — strengths, weaknesses, specific issues regarding resilience and ethical sourcing. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Take the finalized supply chain strategy and format it into a highly professional, clear, and engaging executive report. Use appropriate headings, bullet points, and business language. Ensure the final output is ready for C-suite presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, executive-ready strategy for enhancing global supply chain resilience and ethical sourcing. Execution flow: Global Supply Chain Strategy Builder → Supply Chain Expert Critic → Strategy Refiner → Strategy Quality Gate (if revise, loops back to Strategy Refiner) → Executive Report Polisher. The Builder creates the initial draft, which is immediately reviewed by a domain Expert Critic to identify gaps in risk mitigation and ethical compliance. The Refiner then addresses this feedback. The Quality Gate evaluates the refined output; if it finds remaining issues, it routes back to the Refiner for further improvement, otherwise it passes to the Polisher for final executive formatting."
+}

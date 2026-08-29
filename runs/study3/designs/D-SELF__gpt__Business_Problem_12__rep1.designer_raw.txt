@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Sustainable Tourism Plan Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive initial plan for sustainable tourism in the described region. Address the goal of attracting international visitors while protecting ecosystems, preserving cultural heritage, respecting local communities, and generating equitable economic benefits. Include a situation overview, guiding principles, strategic objectives, priority initiatives, implementation phases, responsible stakeholders, funding considerations, international marketing approach, risks, measurable indicators, and mechanisms for community participation. Make practical assumptions where regional data is unavailable and clearly identify where local research is needed. Produce a well-structured draft intended for government decision-makers.",
+      "description": "Creates the initial comprehensive sustainable tourism development plan."
+    },
+    {
+      "name": "Regional Sustainability Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed tourism plan for strategic completeness and contextual realism. Identify likely environmental pressures, climate and biodiversity risks, cultural heritage vulnerabilities, infrastructure constraints, visitor-market opportunities, community livelihood considerations, and data gaps. Recommend relevant indicators, baseline studies, visitor-capacity methods, and evidence-based adjustments. Ensure the plan balances international competitiveness with local priorities and long-term resilience. Provide detailed findings and actionable recommendations for the plan's improvement.",
+      "description": "Assesses environmental, cultural, socioeconomic, market, and implementation implications."
+    },
+    {
+      "name": "Sustainable Tourism Strategy Expert",
+      "role": "strategist",
+      "systemPrompt": "Transform the draft and analytical findings into a coherent, realistic strategy for the tourism agency. Strengthen the destination positioning for international audiences without encouraging harmful over-tourism. Integrate destination management, conservation finance, low-impact infrastructure, responsible visitor behavior, cultural heritage protection, local ownership and employment, accessibility, digital promotion, partnerships, governance, financing, phased implementation, and monitoring. Resolve conflicts between growth and sustainability, prioritize feasible actions, and ensure recommendations are adaptable to the region's actual ecological, cultural, and institutional context. Produce detailed guidance for a subsequent writer.",
+      "description": "Converts analysis into an actionable and balanced tourism development strategy."
+    },
+    {
+      "name": "Sustainable Tourism Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous plan using all relevant analytical and strategic feedback. Produce a complete, decision-ready proposal rather than a list of disconnected ideas. Include: executive summary; regional opportunity and challenge assessment; vision and objectives; target international visitor segments and ethical positioning; conservation and climate measures; carrying-capacity and visitor-management policies; cultural heritage safeguards; community participation, ownership, skills, and benefit-sharing; infrastructure and transport guidance; marketing and communications; governance and partnerships; financing; phased implementation timeline; risk mitigation; and measurable environmental, cultural, visitor, and community economic indicators. Make every recommendation practical, inclusive, locally respectful, and clear about assumptions or required studies. Avoid unsupported statistics and avoid presenting tourism growth as an end in itself.",
+      "description": "Integrates evidence and strategy into a coherent, actionable proposal."
+    },
+    {
+      "name": "Plan Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined sustainable tourism proposal in full. Assess whether it is strategically coherent, actionable, environmentally credible, culturally respectful, economically beneficial to local communities, suitable for attracting international visitors, inclusive, measurable, and appropriate for government use. Check for omissions, contradictions, unrealistic assumptions, greenwashing, weak safeguards, inadequate community participation, insufficient heritage protection, vague implementation responsibilities, missing financing, and unsupported claims. Provide a detailed assessment with specific corrections needed. On the VERY LAST LINE output EXACTLY ONE keyword: pass if the proposal is ready for final presentation, or revise if substantive improvements are required.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Proposal Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing version of the sustainable tourism development proposal using the refined content and any quality assessment. Preserve substantive recommendations while correcting remaining issues. Improve clarity, flow, prioritization, precision, inclusiveness, and professional formatting. Use concise headings, tables where useful, actionable bullet points, and a clear implementation roadmap. Ensure the final document explicitly connects international visitor attraction with ecosystem protection, cultural heritage preservation, local participation, equitable economic benefits, and measurable accountability. Do not invent facts; label assumptions and research needs. Deliver only the polished proposal.",
+      "description": "Produces the final clear, professional, and decision-ready tourism proposal."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Sustainable Tourism Plan Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive initial plan for sustainable tourism in the described region. Address the goal of attracting international visitors while protecting ecosystems, preserving cultural heritage, respecting local communities, and generating equitable economic benefits. Include a situation overview, guiding principles, strategic objectives, priority initiatives, implementation phases, responsible stakeholders, funding considerations, international marketing approach, risks, measurable indicators, and mechanisms for community participation. Make practical assumptions where regional data is unavailable and clearly identify where local research is needed. Produce a well-structured draft intended for government decision-makers."
+    },
+    {
+      "name": "Regional Sustainability Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed tourism plan for strategic completeness and contextual realism. Identify likely environmental pressures, climate and biodiversity risks, cultural heritage vulnerabilities, infrastructure constraints, visitor-market opportunities, community livelihood considerations, and data gaps. Recommend relevant indicators, baseline studies, visitor-capacity methods, and evidence-based adjustments. Ensure the plan balances international competitiveness with local priorities and long-term resilience. Provide detailed findings and actionable recommendations for the plan's improvement."
+    },
+    {
+      "name": "Sustainable Tourism Strategy Expert",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Transform the draft and analytical findings into a coherent, realistic strategy for the tourism agency. Strengthen the destination positioning for international audiences without encouraging harmful over-tourism. Integrate destination management, conservation finance, low-impact infrastructure, responsible visitor behavior, cultural heritage protection, local ownership and employment, accessibility, digital promotion, partnerships, governance, financing, phased implementation, and monitoring. Resolve conflicts between growth and sustainability, prioritize feasible actions, and ensure recommendations are adaptable to the region's actual ecological, cultural, and institutional context. Produce detailed guidance for a subsequent writer."
+    },
+    {
+      "name": "Sustainable Tourism Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous plan using all relevant analytical and strategic feedback. Produce a complete, decision-ready proposal rather than a list of disconnected ideas. Include: executive summary; regional opportunity and challenge assessment; vision and objectives; target international visitor segments and ethical positioning; conservation and climate measures; carrying-capacity and visitor-management policies; cultural heritage safeguards; community participation, ownership, skills, and benefit-sharing; infrastructure and transport guidance; marketing and communications; governance and partnerships; financing; phased implementation timeline; risk mitigation; and measurable environmental, cultural, visitor, and community economic indicators. Make every recommendation practical, inclusive, locally respectful, and clear about assumptions or required studies. Avoid unsupported statistics and avoid presenting tourism growth as an end in itself."
+    },
+    {
+      "name": "Plan Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined sustainable tourism proposal in full. Assess whether it is strategically coherent, actionable, environmentally credible, culturally respectful, economically beneficial to local communities, suitable for attracting international visitors, inclusive, measurable, and appropriate for government use. Check for omissions, contradictions, unrealistic assumptions, greenwashing, weak safeguards, inadequate community participation, insufficient heritage protection, vague implementation responsibilities, missing financing, and unsupported claims. Provide a detailed assessment with specific corrections needed. On the VERY LAST LINE output EXACTLY ONE keyword: pass if the proposal is ready for final presentation, or revise if substantive improvements are required.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Proposal Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing version of the sustainable tourism development proposal using the refined content and any quality assessment. Preserve substantive recommendations while correcting remaining issues. Improve clarity, flow, prioritization, precision, inclusiveness, and professional formatting. Use concise headings, tables where useful, actionable bullet points, and a clear implementation roadmap. Ensure the final document explicitly connects international visitor attraction with ecosystem protection, cultural heritage preservation, local participation, equitable economic benefits, and measurable accountability. Do not invent facts; label assumptions and research needs. Deliver only the polished proposal."
+    }
+  ],
+  "explanation": "The flow is Builder → Analyst → Strategist → Refiner → Quality Assessment → Polisher. The builder creates the plan, the analyst identifies contextual and sustainability implications, and the strategist converts those findings into a balanced implementation approach. The refiner integrates all preceding work into a complete proposal. The quality assessment then evaluates the refined output; if it returns revise, execution loops back to the Refiner, while pass proceeds to the Polisher. The Polisher produces the final government-ready document."
+}

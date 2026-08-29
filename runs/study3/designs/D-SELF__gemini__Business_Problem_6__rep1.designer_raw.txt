@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the target international market's cultural values, health beliefs, and advertising regulations regarding dietary supplements. Provide a detailed report on what is acceptable and effective.",
+      "description": "Researches cultural and regulatory landscape."
+    },
+    {
+      "name": "CampaignStrategist",
+      "role": "strategist",
+      "systemPrompt": "Develop a comprehensive marketing strategy for a dietary supplement based on the provided market analysis. Ensure the tone and messaging align with local values.",
+      "description": "Creates the core campaign strategy."
+    },
+    {
+      "name": "ContentBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft the marketing campaign content (copy, slogans, and visual themes) based on the strategy. Ensure the language is culturally sensitive and persuasive.",
+      "description": "Writes the initial campaign materials."
+    },
+    {
+      "name": "CulturalCritic",
+      "role": "critic",
+      "systemPrompt": "Evaluate the campaign content for cultural appropriateness, ethical compliance, and effectiveness. Identify any tone-deaf elements or regulatory risks. Provide a full assessment and end with 'pass' or 'revise'.",
+      "description": "Critiques content for cultural and ethical alignment."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "systemPrompt": "Revise the campaign content based on the CulturalCritic's feedback. Ensure all cultural nuances are addressed and the message is optimized for the target audience.",
+      "description": "Fixes issues identified by the critic."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Perform a final quality check, ensure consistent formatting, and finalize the campaign assets for deployment.",
+      "description": "Finalizes the output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the target international market's cultural values, health beliefs, and advertising regulations regarding dietary supplements. Provide a detailed report on what is acceptable and effective."
+    },
+    {
+      "name": "CampaignStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive marketing strategy for a dietary supplement based on the provided market analysis. Ensure the tone and messaging align with local values."
+    },
+    {
+      "name": "ContentBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft the marketing campaign content (copy, slogans, and visual themes) based on the strategy. Ensure the language is culturally sensitive and persuasive."
+    },
+    {
+      "name": "CulturalCritic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the campaign content for cultural appropriateness, ethical compliance, and effectiveness. Identify any tone-deaf elements or regulatory risks. Provide a full assessment and end with 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Revise the campaign content based on the CulturalCritic's feedback. Ensure all cultural nuances are addressed and the message is optimized for the target audience."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Perform a final quality check, ensure consistent formatting, and finalize the campaign assets for deployment."
+    }
+  ],
+  "explanation": "The pipeline begins with a MarketAnalyst to ground the campaign in local reality, followed by a Strategist and Builder to create the initial content. The CulturalCritic acts as a quality gate; if the content fails to meet cultural or ethical standards, it routes back to the ContentRefiner to fix the issues before proceeding to the FinalPolisher. This ensures the campaign is both effective and culturally compliant."
+}

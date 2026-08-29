@@ -83,10 +83,10 @@ MODELS = {
     "claude": {
         "cheap": {"model": "claude-haiku-4-5-20251001",
                   "endpoint": "https://api.anthropic.com/v1",
-                  "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic"},
+                  "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic", "omit_temperature": True},
         "frontier": {"model": "claude-opus-5",
                      "endpoint": "https://api.anthropic.com/v1",
-                     "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic"},
+                     "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic", "omit_temperature": True},
     },
     "gemini": {
         "cheap": {"model": "gemini-3.1-flash-lite",
@@ -98,9 +98,9 @@ MODELS = {
     },
     "kimi": {
         "cheap": {"model": "kimi-k2.6", "endpoint": "https://api.moonshot.ai/v1",
-                  "env_key": "KIMI_API_KEY", "api_format": "openai"},
+                  "env_key": "KIMI_API_KEY", "api_format": "openai", "omit_temperature": True},
         "frontier": {"model": "kimi-k3", "endpoint": "https://api.moonshot.ai/v1",
-                     "env_key": "KIMI_API_KEY", "api_format": "openai",
+                     "env_key": "KIMI_API_KEY", "api_format": "openai", "omit_temperature": True,
                      "extra": {"reasoning_effort": "low"}},
     },
     "qwen": {
@@ -282,7 +282,7 @@ def _call_anthropic(cfg, messages, keys, temperature=None):
     payload = {"model": cfg["model"], "messages": msgs, "max_tokens": MAX_TOKENS}
     if sys_parts:
         payload["system"] = "\n\n".join(sys_parts)
-    if temperature is not None:
+    if temperature is not None and not cfg.get("omit_temperature"):
         payload["temperature"] = temperature
     req = urllib.request.Request(
         cfg["endpoint"].rstrip("/") + "/messages",
@@ -326,17 +326,26 @@ def in_window_utc(start, end):
 
 def load_ledger():
     done, exhausted = set(), set()
+    terminal, fail_count = set(), {}
     if LEDGER.exists():
         for line in LEDGER.read_text().splitlines():
             try:
                 r = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            if r.get("status") == "completed" and r.get("final_len", 0) > 0:
+            st = r.get("status")
+            if st == "completed" and r.get("final_len", 0) > 0:
                 done.add(r["key"])
-            if r.get("status") == "credit_exhausted":
+            if st == "credit_exhausted":
                 exhausted.add(r["family"])
-    return done, exhausted
+            if st == "design_failed":
+                terminal.add(r["key"])      # protocol: exclude after ONE repair retry
+            if st == "failed":
+                fail_count[r["key"]] = fail_count.get(r["key"], 0) + 1
+    # stop retrying keys that fail 3+ times (e.g. persistent content-moderation
+    # blocks); they are disclosed as attrition in the participant flow.
+    terminal |= {k for k, n in fail_count.items() if n >= 3}
+    return done, exhausted, terminal
 
 
 def append_ledger(rec):
@@ -394,11 +403,12 @@ def run_task(task, problems, keys, ignore_window):
         rec["designer_usage"] = du
         steps, err = validate_design(raw)
         if err:
-            raw2, du2 = call(cfg_d, [
-                {"role": "user", "content": DESIGN_PROMPT.format(problem_text=ptext)},
-                {"role": "assistant", "content": raw},
-                {"role": "user", "content": REPAIR_PROMPT.format(error=err)}], keys,
-                temperature=0.2)  # platform AutoDesign-retry uses 0.2
+            repair_msgs = [{"role": "user", "content": DESIGN_PROMPT.format(problem_text=ptext)}]
+            if raw.strip():  # Moonshot rejects empty assistant messages
+                repair_msgs.append({"role": "assistant", "content": raw})
+            repair_msgs.append({"role": "user", "content": REPAIR_PROMPT.format(error=err)})
+            raw2, du2 = call(cfg_d, repair_msgs, keys,
+                             temperature=0.2)  # platform AutoDesign-retry uses 0.2
             rec["designer_usage_repair"] = du2
             steps, err2 = validate_design(raw2)
             if err2:
@@ -480,6 +490,15 @@ def run_task(task, problems, keys, ignore_window):
         rec["executed_steps"] = executed
         final = next((l["output_len"] for l in reversed(step_logs)
                       if l["name"] == final_agent_name), step_logs[-1]["output_len"])
+        if final == 0:
+            # empty final-agent output (observed: kimi-k2.6 polisher) is a
+            # retriable failure, not a completed solution
+            rec.update(status="failed", error="empty final agent output",
+                       steps=step_logs, gate_counts=gate_counts,
+                       finished_at=datetime.now(timezone.utc).isoformat())
+            append_ledger(rec)
+            ckpt_file.unlink(missing_ok=True)
+            return "failed"
         rec.update(status="completed", executor_model=cfg_x["model"],
                    steps=step_logs, final_len=final,
                    finished_at=datetime.now(timezone.utc).isoformat())
@@ -548,9 +567,10 @@ def main():
     import random
     random.Random(42).shuffle(tasks)
 
-    done, exhausted = load_ledger()
+    done, exhausted, terminal = load_ledger()
     todo = [t for t in tasks
             if f"{t['arm']}__{t['family']}__{t['problem']}__rep{t['rep']}" not in done
+            and f"{t['arm']}__{t['family']}__{t['problem']}__rep{t['rep']}" not in terminal
             and t["family"] not in exhausted]
     print(f"Study 3 plan: {len(tasks)} tasks | done {len(tasks)-len(todo)-sum(1 for t in tasks if t['family'] in exhausted)} | "
           f"todo {len(todo)} | exhausted families: {sorted(exhausted) or 'none'}"

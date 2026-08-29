@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Sustainable Tourism Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive sustainable tourism development plan covering environmental protection, cultural heritage preservation, community benefits, and international visitor attraction"
+    },
+    {
+      "name": "Environmental Impact Analyst",
+      "role": "analyst",
+      "description": "Analyzes environmental sustainability metrics, carrying capacity, ecological risks, and proposes data-driven mitigation strategies"
+    },
+    {
+      "name": "Cultural Heritage & Community Expert",
+      "role": "expert",
+      "description": "Provides domain expertise on cultural preservation, community engagement, local benefit distribution, and stakeholder management"
+    },
+    {
+      "name": "Plan Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates environmental analysis and cultural expertise into the initial plan, resolving conflicts and ensuring holistic approach"
+    },
+    {
+      "name": "Comprehensive Plan Reviewer",
+      "role": "critic",
+      "description": "Conducts thorough quality assessment of the refined plan against sustainability criteria, feasibility, and stakeholder alignment"
+    },
+    {
+      "name": "Final Polish & Formatting",
+      "role": "polisher",
+      "description": "Formats final sustainable tourism development plan for government agency presentation with clear implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Sustainable Tourism Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategic tourism development expert. Create a comprehensive initial plan for sustainable tourism development that addresses: (1) attracting international visitors through unique natural and historical assets, (2) environmental protection and sustainability measures, (3) cultural heritage preservation strategies, (4) economic benefits for local communities, and (5) governance and monitoring frameworks. Produce a detailed, structured plan with specific initiatives, timelines, and success metrics."
+    },
+    {
+      "name": "Environmental Impact Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an environmental sustainability analyst. Analyze the tourism plan for environmental implications. Assess: carrying capacity of natural sites, potential ecological impacts, water/waste management needs, carbon footprint considerations, and biodiversity protection requirements. Provide quantitative metrics where possible and recommend specific environmental safeguards, monitoring systems, and mitigation strategies that should be integrated into the plan."
+    },
+    {
+      "name": "Cultural Heritage & Community Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural heritage and community development expert. Evaluate the tourism plan for cultural and social dimensions. Assess: cultural heritage protection mechanisms, community engagement and benefit-sharing models, local employment opportunities, capacity building needs, and potential cultural commodification risks. Recommend specific strategies for authentic cultural experiences, community ownership, equitable benefit distribution, and conflict prevention between tourism development and local interests."
+    },
+    {
+      "name": "Plan Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a plan refinement specialist. Integrate the environmental analysis and cultural/community expertise into the initial tourism development plan. Resolve any conflicts between objectives, strengthen weak areas, ensure all three pillars (environment, culture, economy) are equally robust, and create a cohesive, actionable plan. Maintain strategic clarity while incorporating specific recommendations from both analyses. Produce a unified, comprehensive sustainable tourism development plan."
+    },
+    {
+      "name": "Comprehensive Plan Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a comprehensive plan quality reviewer. Assess the refined sustainable tourism plan against these criteria: (1) Environmental sustainability - are protections adequate and measurable? (2) Cultural preservation - are heritage sites and local culture genuinely protected? (3) Community benefits - are economic gains equitably distributed and locally controlled? (4) International appeal - will the plan attract target visitors? (5) Feasibility - are timelines, budgets, and governance realistic? (6) Integration - do all components work together coherently? Provide detailed analysis of strengths, gaps, and specific improvement areas. Then output EXACTLY ONE keyword on the final line: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Polish & Formatting",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final polish specialist. Format the sustainable tourism development plan for government agency presentation. Organize into clear sections: Executive Summary, Environmental Strategy, Cultural Heritage Protection, Community Economic Benefits, International Marketing Approach, Implementation Timeline, Governance & Monitoring, Risk Management, and Success Metrics. Ensure professional formatting, clear language, compelling visuals descriptions, and actionable next steps. Produce a polished, presentation-ready sustainable tourism development plan."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, balanced sustainable tourism plan by combining strategic planning with specialized environmental and cultural expertise. The flow: (1) Builder creates initial strategic framework, (2) Environmental Analyst provides ecological data and safeguards, (3) Cultural Expert ensures heritage and community protection, (4) Refiner integrates all inputs into cohesive plan, (5) Reviewer conducts quality gate with potential loop-back to Refiner if revisions needed (max 3 iterations via implicit while), (6) Polisher formats for government presentation. This structure ensures the final outcome balances all three sustainability pillars—environmental protection, cultural preservation, and community economic benefit—while remaining attractive to international visitors."
+}
+```

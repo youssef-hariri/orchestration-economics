@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategies for fostering innovation culture across international offices"
+    },
+    {
+      "name": "Cultural Context Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional differences, local market conditions, and cultural factors affecting innovation adoption across branches"
+    },
+    {
+      "name": "Innovation Expert Advisor",
+      "role": "expert",
+      "description": "Provides domain-specific insights on best practices, proven frameworks, and implementation approaches for global innovation programs"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates analyst insights and expert recommendations into the initial strategy, addressing regional variations and practical constraints"
+    },
+    {
+      "name": "Comprehensive Reviewer",
+      "role": "critic",
+      "description": "Evaluates refined strategy for completeness, feasibility, cultural sensitivity, and alignment with international best practices"
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "description": "Formats final recommendations into clear, actionable strategies ready for executive presentation"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Innovation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in organizational innovation and change management. Create a comprehensive initial strategy for fostering innovation culture across an international company with multiple branches in different countries. Address: (1) overarching innovation framework, (2) employee engagement mechanisms, (3) risk-taking encouragement, (4) idea contribution channels, (5) resource allocation for experimentation, (6) leadership alignment. Provide a detailed, structured draft strategy."
+    },
+    {
+      "name": "Cultural Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an organizational analyst specializing in cross-cultural dynamics. Analyze the initial innovation strategy and identify: (1) regional and cultural variations that affect innovation adoption, (2) specific challenges in different geographic locations, (3) local market conditions impacting risk tolerance, (4) differences in employee motivation across cultures, (5) potential barriers to idea-sharing in different regions. Provide detailed insights on how the strategy must adapt for different international contexts."
+    },
+    {
+      "name": "Innovation Expert Advisor",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a global innovation management expert. Review the initial strategy and cultural analysis. Provide expert recommendations on: (1) proven frameworks for global innovation programs (e.g., innovation labs, hackathons, idea management systems), (2) best practices for encouraging calculated risk-taking, (3) mechanisms to address variance in innovation levels across locations, (4) incentive structures and recognition programs, (5) governance models for international innovation initiatives, (6) metrics for measuring innovation culture maturity. Cite specific approaches that work across diverse organizational contexts."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic refinement specialist. Integrate the cultural analysis and expert recommendations into the initial strategy. Enhance the strategy by: (1) incorporating region-specific adaptations, (2) addressing identified cultural barriers, (3) adding proven best-practice frameworks, (4) detailing implementation mechanisms for different office locations, (5) specifying how to measure and track innovation culture improvements, (6) creating phased rollout plans. Produce a comprehensive, actionable strategy that balances global consistency with local relevance."
+    },
+    {
+      "name": "Comprehensive Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strategic quality reviewer. Assess the refined innovation strategy comprehensively. Evaluate: (1) Does it address all aspects of fostering innovation culture? (2) Are regional variations adequately considered? (3) Is the strategy practical and implementable? (4) Does it encourage both creativity and calculated risk-taking? (5) Are there clear mechanisms for idea contribution across all locations? (6) Is cultural sensitivity demonstrated? (7) Are success metrics defined? Provide FULL detailed assessment of strengths and any gaps. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final presentation specialist. Polish the approved innovation strategy into executive-ready recommendations. Format as: (1) Executive Summary, (2) Strategic Pillars (3-5 core initiatives), (3) Regional Implementation Approach, (4) Risk-Taking & Experimentation Framework, (5) Measurement & Success Metrics, (6) Timeline & Phased Rollout, (7) Resource Requirements. Ensure clarity, professional formatting, and actionable specificity. Make it compelling for C-suite and implementable for regional leaders."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce comprehensive, culturally-informed strategies for fostering innovation across international offices. The flow: (1) Builder creates initial strategy framework, (2) Analyst examines regional/cultural variations that the initial strategy may miss, (3) Expert provides proven best-practice frameworks and mechanisms, (4) Refiner integrates all insights into a cohesive, region-aware strategy, (5) Critic performs comprehensive quality gate with detailed assessment—if gaps exist, loops back to Refiner to incorporate missing elements (up to 3 iterations), (6) Polisher formats final output for executive presentation. This structure ensures the outcome addresses both global innovation principles and local cultural contexts, with iterative refinement until quality standards are met."
+}
+```

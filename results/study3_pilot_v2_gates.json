@@ -1,0 +1,83 @@
+{
+  "study": "study3_pilot_v2",
+  "date_utc": "2026-08-29",
+  "preregistrations": [
+    "osf.io/9ukjz",
+    "osf.io/bwc93",
+    "osf.io/639eq"
+  ],
+  "instrument": "protocol13-v2 (platform-verbatim auto-design prompt; no approval steps; 1-7 steps; designer temp 0.3)",
+  "n_tasks": 40,
+  "completed_with_solution": 37,
+  "by_family": {
+    "gpt": "8/8",
+    "gemini": "8/8",
+    "claude": "8/8",
+    "qwen": "8/8 (window-gated)",
+    "kimi": "5/8"
+  },
+  "attrition": [
+    {
+      "key": "D-SELF__kimi__Business_Problem_6__rep1",
+      "cause": "design_failed: empty designer output, original + repair",
+      "class": "design failure (substantive finding)"
+    },
+    {
+      "key": "D-FRONT__kimi__Business_Problem_8__rep1",
+      "cause": "provider content moderation block x3 ('high risk')",
+      "class": "provider moderation"
+    },
+    {
+      "key": "D-SELF__kimi__Business_Problem_9__rep1",
+      "cause": "empty final-agent (polisher) output; redesign attempt then design_failed",
+      "class": "generation failure (substantive finding)"
+    }
+  ],
+  "design_validity": {
+    "first_try_valid": "high (exact count in ledger)",
+    "design_failed_tasks": 1,
+    "repair_retries": 1
+  },
+  "gate_G1": {
+    "amended_rule": "moderation blocks + design failures = disclosed attrition; family stays if completion>=80% excl. moderation-blocked",
+    "result_by_family": {
+      "gpt": "PASS 100%",
+      "gemini": "PASS 100%",
+      "claude": "PASS 100%",
+      "qwen": "PASS 100%",
+      "kimi": "FAIL strictly (5/7=71% excl. moderation) \u2014 decision escalated to author"
+    }
+  },
+  "gate_G2": {
+    "rule": "stop only if D-FRONT < C-T-N baseline by d < -0.30 (Novelty)",
+    "baseline_C-T-N": {
+      "n_solutions": 60,
+      "mean": 3.92
+    },
+    "D-FRONT": {
+      "n": 19,
+      "mean": 4.076,
+      "d": 0.42
+    },
+    "D-SELF": {
+      "n": 18,
+      "mean": 3.975,
+      "d": 0.144
+    },
+    "result": "PASS"
+  },
+  "judging": {
+    "panel": "deepseek-chat, GLM-5.2, Llama-3.3-70B x3 variants",
+    "judgments": 333,
+    "coverage": "37/37 valid solutions",
+    "window": "DeepSeek weekend off-peak"
+  },
+  "family_means_novelty": {
+    "kimi": 4.622,
+    "gemini": 4.139,
+    "qwen": 4.111,
+    "claude": 3.806,
+    "gpt": 3.681
+  },
+  "notes": "v1 instrument (bespoke prompt, 4-step cap): kimi 8/8. v2 platform-verbatim prompt: kimi 5/8. Designer-stage robustness to the production prompt is itself a measured finding."
+}
