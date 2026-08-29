@@ -57,7 +57,8 @@ EXHAUSTION = ROOT / "runs" / "logs" / "study3_credit_exhaustion.jsonl"
 STORE = ROOT / "runs" / "study3" / "study3_store.json"
 DESIGNS_DIR = ROOT / "runs" / "study3" / "designs"
 MAX_TOKENS = 8192
-WORKERS = 8
+WORKERS = 24  # raised from 8 (2026-08-29, author request): D34 calibrated high
+              # concurrency as non-distorting; 429 backoff already handled.
 PROMPT_TAG = "protocol13-v1"
 # Study-3 pilot draw (D55 amendment, 2026-08-28): deterministic seeded draw —
 # random.Random(20260828).sample of the 19 confirmatory problems (numeric-sorted),
