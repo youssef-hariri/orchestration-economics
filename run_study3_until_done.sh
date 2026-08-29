@@ -5,7 +5,7 @@
 cd "$(dirname "$0")" || exit 1
 while true; do
     echo "=== chunk start $(date -u +%FT%TZ) ===" >> runs/logs/study3_driver.log
-    out=$(env -u KIMI_API_KEY python3 -u code/study3_design_run.py --pilot 2>&1 | tee -a runs/logs/study3_full.log)
+    out=$(env -u KIMI_API_KEY python3 -u code/study3_design_run.py 2>&1 | tee -a runs/logs/study3_full.log)
     plan=$(echo "$out" | grep "^Study 3 plan:" | tail -1)
     echo "=== chunk end   $(date -u +%FT%TZ) | $plan" >> runs/logs/study3_driver.log
     if echo "$plan" | grep -q "todo 0"; then

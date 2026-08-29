@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Turnaround Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert corporate strategist and content builder. Draft a comprehensive turnaround-or-exit assessment for an industrial-services unit that has lost money for three years despite cost-cutting. The unit shares customers with profitable divisions, has a shrinking order book, and is losing top managers. Diagnose if losses are structural or execution-driven. Identify profitable customer segments and service lines. Design a 1-year turnaround plan with strict milestones. Define exit alternatives and criteria for choosing between turnaround and divestment.",
+      "description": "Creates the initial comprehensive turnaround and exit strategy draft."
+    },
+    {
+      "name": "Corporate Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a corporate restructuring expert. Review the initial turnaround strategy and refine it. Ensure the diagnosis clearly distinguishes between structural and execution issues. Strengthen the 1-year milestone plan to be highly specific and actionable. Ensure the exit criteria are quantifiable and the shared-customer risks are properly mitigated. Improve the overall strategic rigor and fix any identified weaknesses.",
+      "description": "Refines and strengthens the strategic plan based on restructuring best practices."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a board-level strategy reviewer. Evaluate the refined turnaround-or-exit plan. Check if it thoroughly diagnoses structural vs execution losses, identifies viable segments, provides a concrete 1-year milestone plan, and defines clear exit criteria. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the strategic rigor and completeness of the refined plan."
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Format the final turnaround-or-exit assessment into a polished, board-ready report. Use clear headings, executive summaries, bullet points for milestones, and professional corporate language. Ensure the tone is objective, urgent, and highly strategic.",
+      "description": "Formats and polishes the final output for board-level presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Turnaround Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert corporate strategist and content builder. Draft a comprehensive turnaround-or-exit assessment for an industrial-services unit that has lost money for three years despite cost-cutting. The unit shares customers with profitable divisions, has a shrinking order book, and is losing top managers. Diagnose if losses are structural or execution-driven. Identify profitable customer segments and service lines. Design a 1-year turnaround plan with strict milestones. Define exit alternatives and criteria for choosing between turnaround and divestment."
+    },
+    {
+      "name": "Corporate Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a corporate restructuring expert. Review the initial turnaround strategy and refine it. Ensure the diagnosis clearly distinguishes between structural and execution issues. Strengthen the 1-year milestone plan to be highly specific and actionable. Ensure the exit criteria are quantifiable and the shared-customer risks are properly mitigated. Improve the overall strategic rigor and fix any identified weaknesses."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a board-level strategy reviewer. Evaluate the refined turnaround-or-exit plan. Check if it thoroughly diagnoses structural vs execution losses, identifies viable segments, provides a concrete 1-year milestone plan, and defines clear exit criteria. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Format the final turnaround-or-exit assessment into a polished, board-ready report. Use clear headings, executive summaries, bullet points for milestones, and professional corporate language. Ensure the tone is objective, urgent, and highly strategic."
+    }
+  ],
+  "explanation": "The pipeline begins with the Turnaround Strategy Builder generating the initial comprehensive assessment and plan. The Corporate Strategy Refiner then enhances the draft, ensuring strategic rigor, quantifiable exit criteria, and actionable 1-year milestones. The Strategy Quality Gate evaluates the refined output; if it finds the plan lacks depth or misses critical constraints, it routes back to the Refiner (step 2) for revision, otherwise it passes to the final step. Finally, the Executive Report Polisher formats the approved strategy into a professional, board-ready document."
+}

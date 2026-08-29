@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Operations Analyst",
+      "role": "builder",
+      "systemPrompt": "You are an Operations Analyst. Draft an initial root-cause analysis and baseline improvement plan for an industrial equipment maker struggling with 14-week lead times while competitors are at 6 weeks. Identify potential areas where time is lost across process, inventory, scheduling, and suppliers.",
+      "description": "Drafts the initial analysis of lead time bottlenecks and baseline operational improvements."
+    },
+    {
+      "name": "Quality & Manufacturing Expert",
+      "role": "expert",
+      "systemPrompt": "You are a Quality & Manufacturing Expert. Review the initial analysis and provide specialized recommendations on how to compress the manufacturing schedule without compromising certified quality inspections. Specifically address how to protect quality gates to prevent the warranty claim spikes seen in past compression attempts.",
+      "description": "Injects domain expertise on protecting quality standards while compressing manufacturing schedules."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a Strategy Refiner. Integrate the baseline analysis and expert quality recommendations into a comprehensive, cohesive operations improvement plan. Explicitly detail process, inventory, and supplier changes. Crucially, develop a change management strategy to align the feuding production, quality, and sales departments. Improve the output based on any feedback provided if retrying.",
+      "description": "Synthesizes inputs into a cohesive strategy and refines the plan based on quality gate feedback."
+    },
+    {
+      "name": "Alignment & Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are an Alignment & Quality Gate. Review the refined strategy carefully. Provide your FULL assessment on whether the plan successfully balances substantial lead time reduction, strict quality gate protection, and cross-functional alignment between sales, production, and quality. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Evaluates the strategy for feasibility, quality protection, and departmental alignment, triggering retries if deficient."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an Executive Polisher. Format the final operations improvement plan into a clear, professional, and highly actionable executive document. Ensure perfect formatting, authoritative tone, and clarity for C-suite stakeholders.",
+      "description": "Formats the final approved strategy into an executive-ready document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Operations Analyst",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an Operations Analyst. Draft an initial root-cause analysis and baseline improvement plan for an industrial equipment maker struggling with 14-week lead times while competitors are at 6 weeks. Identify potential areas where time is lost across process, inventory, scheduling, and suppliers."
+    },
+    {
+      "name": "Quality & Manufacturing Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a Quality & Manufacturing Expert. Review the initial analysis and provide specialized recommendations on how to compress the manufacturing schedule without compromising certified quality inspections. Specifically address how to protect quality gates to prevent the warranty claim spikes seen in past compression attempts."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a Strategy Refiner. Integrate the baseline analysis and expert quality recommendations into a comprehensive, cohesive operations improvement plan. Explicitly detail process, inventory, and supplier changes. Crucially, develop a change management strategy to align the feuding production, quality, and sales departments. Improve the output based on any feedback provided if retrying."
+    },
+    {
+      "name": "Alignment & Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are an Alignment & Quality Gate. Review the refined strategy carefully. Provide your FULL assessment on whether the plan successfully balances substantial lead time reduction, strict quality gate protection, and cross-functional alignment between sales, production, and quality. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an Executive Polisher. Format the final operations improvement plan into a clear, professional, and highly actionable executive document. Ensure perfect formatting, authoritative tone, and clarity for C-suite stakeholders."
+    }
+  ],
+  "explanation": "The pipeline begins with the Operations Analyst (Builder) drafting a baseline assessment of lead time bottlenecks. The Quality & Manufacturing Expert then injects specialized domain knowledge on protecting certified quality gates to prevent warranty issues. The Strategy Refiner synthesizes these inputs into a comprehensive plan that also addresses the cross-functional feuding. The Alignment & Quality Gate (Critic) evaluates this cohesive plan; if the plan fails to adequately balance speed, quality, and alignment, it outputs 'retry', looping back to the Strategy Refiner (up to 3 times) to fix the deficiencies. Once the gate outputs 'pass', the Executive Polisher formats the final output into an actionable, C-suite ready document."
+}

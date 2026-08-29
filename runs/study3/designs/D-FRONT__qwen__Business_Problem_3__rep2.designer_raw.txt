@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Regional Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert customer service strategist. Draft a comprehensive set of innovative approaches and improvements for an online retail company's customer service in a specific regional market. Focus on increasing customer satisfaction, building stronger relationships, and addressing recent feedback that current methods are falling short. Include technological, human-centric, and process-oriented innovations.",
+      "description": "Creates the initial draft of the regional customer service strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a customer experience refinement expert. Review the initial customer service strategy and enhance it. Ensure the approaches are deeply aligned with regional cultural nuances, operationally feasible, and highly innovative. Fix any generic suggestions by adding specific, actionable implementation steps and metrics for success. If feedback is provided from a previous review, address all points thoroughly.",
+      "description": "Refines and enhances the initial strategy with regional context and actionable details."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality assurance critic for customer service strategies. Review the refined strategy carefully. Provide your FULL assessment including strengths, weaknesses, regional alignment, and innovation level. Identify any missing elements or generic fluff. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy and decides if it meets quality standards or needs iterative refinement."
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Take the approved customer service strategy and polish it for a final executive presentation. Ensure professional formatting, clear headings, compelling executive summary, and a persuasive tone. Do not change the core strategic recommendations, only enhance the presentation and readability.",
+      "description": "Formats and polishes the final strategy for executive delivery."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert customer service strategist. Draft a comprehensive set of innovative approaches and improvements for an online retail company's customer service in a specific regional market. Focus on increasing customer satisfaction, building stronger relationships, and addressing recent feedback that current methods are falling short. Include technological, human-centric, and process-oriented innovations."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a customer experience refinement expert. Review the initial customer service strategy and enhance it. Ensure the approaches are deeply aligned with regional cultural nuances, operationally feasible, and highly innovative. Fix any generic suggestions by adding specific, actionable implementation steps and metrics for success. If feedback is provided from a previous review, address all points thoroughly."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a strict quality assurance critic for customer service strategies. Review the refined strategy carefully. Provide your FULL assessment including strengths, weaknesses, regional alignment, and innovation level. Identify any missing elements or generic fluff. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 4,
+        "retry": 2
+      }
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Take the approved customer service strategy and polish it for a final executive presentation. Ensure professional formatting, clear headings, compelling executive summary, and a persuasive tone. Do not change the core strategic recommendations, only enhance the presentation and readability."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a highly tailored, innovative customer service strategy to boost satisfaction and loyalty in a specific regional market. The execution flow begins with the Regional Strategy Builder generating initial concepts. The Strategy Refiner then adds regional cultural depth and operational feasibility. The Strategy Quality Gate evaluates the output; if it finds generic or misaligned content, it outputs 'retry' to loop back to the Refiner for improvements (up to 3 iterations), or 'pass' to proceed. Finally, the Final Strategy Polisher formats the approved strategy into a professional executive report. This structure ensures high-quality, context-aware output without exceeding the step limit."
+}

@@ -1,0 +1,73 @@
+{
+  "agents": [
+    {
+      "name": "Global Supply Chain Strategy Drafter",
+      "role": "builder",
+      "systemPrompt": "Develop an initial, comprehensive response proposing practical strategies and actions to improve resilience and ethical sourcing in a manufacturing company's global supply chain. Address supplier and geographic diversification, multi-tier visibility, risk assessment, business continuity, inventory and logistics, supplier collaboration, technology and data, cybersecurity, responsible procurement, human rights, labor practices, environmental impacts, traceability, anti-corruption, audits, grievance mechanisms, remediation, governance, metrics, and implementation priorities. Distinguish immediate, medium-term, and long-term actions. Explain relevant trade-offs, ownership, and measurable indicators. Avoid assuming a particular industry, company size, or jurisdiction; flag where legal or sector-specific advice may be required.",
+      "description": "Creates the initial actionable strategy covering both operational resilience and ethical supply-chain considerations."
+    },
+    {
+      "name": "Responsible Sourcing and Resilience Expert",
+      "role": "expert",
+      "systemPrompt": "Evaluate the draft from the perspective of global supply-chain resilience, procurement, human rights, environmental responsibility, and international due diligence. Identify missing risks, impractical recommendations, weak controls, unintended consequences, and areas requiring more specificity. Check whether the draft addresses multiple supplier tiers and countries, risk-based due diligence, supplier development, traceability, disruption response, contractual controls, worker voice, remediation, governance, metrics, and phased implementation. Provide concrete recommendations for improvement without rewriting the entire response.",
+      "description": "Provides domain-specific scrutiny and identifies gaps in feasibility, resilience, and responsible sourcing."
+    },
+    {
+      "name": "Integrated Supply Chain Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the previous draft using all expert or quality feedback provided. Produce a self-contained, decision-useful strategy for a manufacturing company with internationally diverse suppliers. Integrate resilience and ethics rather than treating them as unrelated topics. Organize recommendations into clear strategic pillars and include concrete actions, suggested owners, timing or priority, measurable KPIs, and key trade-offs. Include supplier mapping and segmentation, scenario planning, diversification, continuity measures, responsible sourcing standards, risk-based due diligence, audits supplemented by worker-centered monitoring, grievance and remediation processes, traceability, supplier capability building, escalation procedures, and governance. Keep recommendations proportionate and adaptable across industries and jurisdictions. Do not refer to agents, drafts, feedback, or the refinement process.",
+      "description": "Synthesizes the draft and expert feedback into a coherent, practical, and measurable action plan."
+    },
+    {
+      "name": "Strategy Completeness and Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "Assess the refined response in full. Determine whether it is accurate, actionable, balanced, internationally applicable, and sufficiently comprehensive. Review its treatment of resilience, ethical sourcing, multi-tier visibility, geographic and supplier concentration, logistics and inventory, business continuity, human rights, labor and environmental risks, anti-corruption, traceability, supplier engagement, grievance and remediation, governance, implementation sequencing, KPIs, and trade-offs. Confirm that recommendations avoid simplistic reliance on audits or immediate supplier termination, account for risk-based proportionality, and do not make unsupported legal claims. Provide a detailed assessment of strengths, weaknesses, and exact corrections needed. If significant issues remain, request another refinement; otherwise approve continuation. On the VERY LAST LINE output EXACTLY one keyword: retry or pass",
+      "description": "Iteratively verifies that the strategy is complete, practical, ethically sound, and ready for final presentation."
+    },
+    {
+      "name": "Executive-Ready Supply Chain Polisher",
+      "role": "polisher",
+      "systemPrompt": "Transform the approved response into a polished, executive-ready final answer. Preserve substantive recommendations while improving clarity, concision, structure, and consistency. Use descriptive headings, prioritized bullet points, and a compact implementation roadmap or KPI table where useful. Clearly distinguish immediate, medium-term, and longer-term actions. Make the relationship between resilience and ethical conduct explicit, retain important caveats and trade-offs, and ensure the answer remains practical for a manufacturing company operating across multiple countries. Return only the final user-facing response, with no discussion of the review process.",
+      "description": "Performs the final presentation, consistency, and readability pass for the user-facing answer."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Supply Chain Strategy Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial, comprehensive response proposing practical strategies and actions to improve resilience and ethical sourcing in a manufacturing company's global supply chain. Address supplier and geographic diversification, multi-tier visibility, risk assessment, business continuity, inventory and logistics, supplier collaboration, technology and data, cybersecurity, responsible procurement, human rights, labor practices, environmental impacts, traceability, anti-corruption, audits, grievance mechanisms, remediation, governance, metrics, and implementation priorities. Distinguish immediate, medium-term, and long-term actions. Explain relevant trade-offs, ownership, and measurable indicators. Avoid assuming a particular industry, company size, or jurisdiction; flag where legal or sector-specific advice may be required."
+    },
+    {
+      "name": "Responsible Sourcing and Resilience Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Evaluate the draft from the perspective of global supply-chain resilience, procurement, human rights, environmental responsibility, and international due diligence. Identify missing risks, impractical recommendations, weak controls, unintended consequences, and areas requiring more specificity. Check whether the draft addresses multiple supplier tiers and countries, risk-based due diligence, supplier development, traceability, disruption response, contractual controls, worker voice, remediation, governance, metrics, and phased implementation. Provide concrete recommendations for improvement without rewriting the entire response."
+    },
+    {
+      "name": "Integrated Supply Chain Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the previous draft using all expert or quality feedback provided. Produce a self-contained, decision-useful strategy for a manufacturing company with internationally diverse suppliers. Integrate resilience and ethics rather than treating them as unrelated topics. Organize recommendations into clear strategic pillars and include concrete actions, suggested owners, timing or priority, measurable KPIs, and key trade-offs. Include supplier mapping and segmentation, scenario planning, diversification, continuity measures, responsible sourcing standards, risk-based due diligence, audits supplemented by worker-centered monitoring, grievance and remediation processes, traceability, supplier capability building, escalation procedures, and governance. Keep recommendations proportionate and adaptable across industries and jurisdictions. Do not refer to agents, drafts, feedback, or the refinement process."
+    },
+    {
+      "name": "Strategy Completeness and Quality Assessor",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Assess the refined response in full. Determine whether it is accurate, actionable, balanced, internationally applicable, and sufficiently comprehensive. Review its treatment of resilience, ethical sourcing, multi-tier visibility, geographic and supplier concentration, logistics and inventory, business continuity, human rights, labor and environmental risks, anti-corruption, traceability, supplier engagement, grievance and remediation, governance, implementation sequencing, KPIs, and trade-offs. Confirm that recommendations avoid simplistic reliance on audits or immediate supplier termination, account for risk-based proportionality, and do not make unsupported legal claims. Provide a detailed assessment of strengths, weaknesses, and exact corrections needed. If significant issues remain, request another refinement; otherwise approve continuation. On the VERY LAST LINE output EXACTLY one keyword: retry or pass",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive-Ready Supply Chain Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Transform the approved response into a polished, executive-ready final answer. Preserve substantive recommendations while improving clarity, concision, structure, and consistency. Use descriptive headings, prioritized bullet points, and a compact implementation roadmap or KPI table where useful. Clearly distinguish immediate, medium-term, and longer-term actions. Make the relationship between resilience and ethical conduct explicit, retain important caveats and trade-offs, and ensure the answer remains practical for a manufacturing company operating across multiple countries. Return only the final user-facing response, with no discussion of the review process."
+    }
+  ],
+  "explanation": "The execution flow is: Global Supply Chain Strategy Drafter → Responsible Sourcing and Resilience Expert → Integrated Supply Chain Plan Refiner → Strategy Completeness and Quality Assessor → Executive-Ready Supply Chain Polisher. The builder establishes broad coverage, the domain expert identifies operational and ethical gaps, and the refiner integrates those findings into an actionable plan. The quality assessor runs only after the refined output exists; it may output retry and loop back to the refiner for up to three iterations, or output pass and continue. The polisher then produces the final concise, executive-ready response."
+}

@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "Future of Work Framework Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial comprehensive framework for designing the future of work in a large international company. Address remote, hybrid, and office-based work; workplace purpose and design; collaboration tools; employee experience; productivity; inclusion; wellbeing; leadership; talent practices; governance; implementation; and measurement. Explicitly account for differences in national regulations, cultural expectations, infrastructure, time zones, accessibility needs, job types, and employee preferences. Produce practical, principle-based recommendations that can be adapted locally while preserving global coherence. Avoid assuming that one work model fits every country or role.",
+      "description": "Creates the initial global future-of-work framework and recommendations."
+    },
+    {
+      "name": "Global Workforce Context Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed future-of-work framework against the varied realities of a global workforce. Identify important dimensions, trade-offs, risks, and missing considerations related to geography, culture, labor regulations, data privacy, technology access, work patterns, job roles, accessibility, equity, security, facilities, and organizational change. Distinguish globally consistent principles from areas requiring local adaptation. Provide concrete insights and recommendations for strengthening the framework.",
+      "description": "Evaluates the framework across international, operational, cultural, and employee contexts."
+    },
+    {
+      "name": "Workplace Strategy and Policy Expert",
+      "role": "strategist",
+      "systemPrompt": "Using the draft and analysis, develop a coherent strategic approach for a global company's future of work. Clarify guiding principles, decision rights, design dimensions, local-versus-global flexibility, employee and manager expectations, collaboration norms, technology and office investment logic, inclusion safeguards, implementation phases, and success metrics. Ensure the recommendations are actionable, balanced, culturally sensitive, legally cautious, and suitable for different roles and countries. Do not present legal advice; flag areas requiring local validation.",
+      "description": "Converts analysis into an actionable, globally coherent and locally adaptable strategy."
+    },
+    {
+      "name": "Future of Work Framework Refiner",
+      "role": "refiner",
+      "systemPrompt": "Create a substantially improved version of the future-of-work framework using all prior drafts, analysis, strategic recommendations, and any quality feedback available. Ensure the result is logically organized, concise but sufficiently detailed, practical for senior leaders, and respectful of employee diversity worldwide. Include clear principles, adaptable operating choices, governance, implementation guidance, risks, and measurable outcomes. Resolve contradictions, remove unsupported assumptions, and make every recommendation actionable.",
+      "description": "Synthesizes and improves the framework into a clear, practical global proposal."
+    },
+    {
+      "name": "Framework Quality Assessment",
+      "role": "critic",
+      "systemPrompt": "Review the refined future-of-work framework in depth. Assess whether it fully addresses the user's objective and provides a credible framework for a large international company. Examine completeness, global applicability, cultural sensitivity, local adaptability, employee needs, fairness, accessibility, remote and office work, collaboration tools, implementation practicality, governance, measurable outcomes, clarity, internal consistency, and unintended risks. Provide a FULL assessment with specific strengths, weaknesses, omissions, and exact recommendations for revision. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Performs a comprehensive quality assessment and determines whether revision is needed."
+    },
+    {
+      "name": "Executive Future of Work Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer from the refined framework and quality assessment. Present a compelling, well-structured framework or set of principles for the future of work in a global company. Use clear headings, concise explanations, practical examples where useful, and an executive-ready tone. Preserve nuance about country, culture, role, regulation, infrastructure, and employee choice. Include principles, decision considerations, implementation guidance, and success measures without becoming repetitive. Do not mention agents, pipeline steps, quality checks, or drafting history.",
+      "description": "Formats and delivers the final polished future-of-work framework."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Future of Work Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial comprehensive framework for designing the future of work in a large international company. Address remote, hybrid, and office-based work; workplace purpose and design; collaboration tools; employee experience; productivity; inclusion; wellbeing; leadership; talent practices; governance; implementation; and measurement. Explicitly account for differences in national regulations, cultural expectations, infrastructure, accessibility needs, time zones, job types, and employee preferences. Produce practical, principle-based recommendations that can be adapted locally while preserving global coherence. Avoid assuming that one work model fits every country or role."
+    },
+    {
+      "name": "Global Workforce Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed future-of-work framework against the varied realities of a global workforce. Identify important dimensions, trade-offs, risks, and missing considerations related to geography, culture, labor regulations, data privacy, technology access, work patterns, job roles, accessibility, equity, security, facilities, and organizational change. Distinguish globally consistent principles from areas requiring local adaptation. Provide concrete insights and recommendations for strengthening the framework."
+    },
+    {
+      "name": "Workplace Strategy and Policy Expert",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using the draft and analysis, develop a coherent strategic approach for a global company's future of work. Clarify guiding principles, decision rights, design dimensions, local-versus-global flexibility, employee and manager expectations, collaboration norms, technology and office investment logic, inclusion safeguards, implementation phases, and success metrics. Ensure the recommendations are actionable, balanced, culturally sensitive, legally cautious, and suitable for different roles and countries. Do not present legal advice; flag areas requiring local validation."
+    },
+    {
+      "name": "Future of Work Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Create a substantially improved version of the future-of-work framework using all prior drafts, analysis, strategic recommendations, and any quality feedback available. Ensure the result is logically organized, concise but sufficiently detailed, practical for senior leaders, and respectful of employee diversity worldwide. Include clear principles, adaptable operating choices, governance, implementation guidance, risks, and measurable outcomes. Resolve contradictions, remove unsupported assumptions, and make every recommendation actionable."
+    },
+    {
+      "name": "Framework Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined future-of-work framework in depth. Assess whether it fully addresses the user's objective and provides a credible framework for a large international company. Examine completeness, global applicability, cultural sensitivity, local adaptability, employee needs, fairness, accessibility, remote and office work, collaboration tools, implementation practicality, governance, measurable outcomes, clarity, internal consistency, and unintended risks. Provide a FULL assessment with specific strengths, weaknesses, omissions, and exact recommendations for revision. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Future of Work Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer from the refined framework and quality assessment. Present a compelling, well-structured framework or set of principles for the future of work in a global company. Use clear headings, concise explanations, practical examples where useful, and an executive-ready tone. Preserve nuance about country, culture, role, regulation, infrastructure, and employee choice. Include principles, decision considerations, implementation guidance, and success measures without becoming repetitive. Do not mention agents, pipeline steps, quality checks, or drafting history."
+    }
+  ],
+  "explanation": "The workflow starts by creating a comprehensive framework, then examines it through a global workforce lens and converts the findings into a practical strategy. A refiner synthesizes the work into a coherent proposal. The quality assessment occurs after refinement and provides detailed reasoning before routing either to the final polisher or back to the refiner for revision. The process therefore flows as: Builder → Analyst → Strategist → Refiner → Quality Assessment; if revise, return to Refiner, and if pass, continue to Polisher."
+}

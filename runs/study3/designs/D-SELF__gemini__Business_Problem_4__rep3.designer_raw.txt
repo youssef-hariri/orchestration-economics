@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the target international market's demographics, cultural eating habits, and current snack trends. Identify three distinct consumption occasions and flavor profiles that are currently underserved.",
+      "description": "Analyzes market data to provide the foundation for product ideation."
+    },
+    {
+      "name": "ProductIdeator",
+      "role": "builder",
+      "systemPrompt": "Based on the market analysis, generate a comprehensive proposal for a new snack product line. Include product name, key ingredients, flavor profile, and the specific consumption occasion it targets.",
+      "description": "Creates the initial product concept."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed snack line for cultural sensitivity, ingredient availability in the target region, and alignment with local palate preferences. Identify any flaws.",
+      "description": "Validates the product concept against cultural and culinary standards."
+    },
+    {
+      "name": "ConceptRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate the feedback from the CulturalExpert to adjust ingredients, branding, or positioning to ensure the snack line is both appealing and culturally authentic.",
+      "description": "Refines the product concept based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined snack product proposal. Check for clarity, market viability, and cultural alignment. Provide a full assessment. If the proposal is ready, output 'pass'. If it needs further adjustments, output 'revise'.",
+      "description": "Determines if the product concept meets the required standards."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final product proposal into a professional, investor-ready document. Ensure tone is persuasive and professional.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the target international market's demographics, cultural eating habits, and current snack trends. Identify three distinct consumption occasions and flavor profiles that are currently underserved."
+    },
+    {
+      "name": "ProductIdeator",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Based on the market analysis, generate a comprehensive proposal for a new snack product line. Include product name, key ingredients, flavor profile, and the specific consumption occasion it targets."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed snack line for cultural sensitivity, ingredient availability in the target region, and alignment with local palate preferences. Identify any flaws."
+    },
+    {
+      "name": "ConceptRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate the feedback from the CulturalExpert to adjust ingredients, branding, or positioning to ensure the snack line is both appealing and culturally authentic."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined snack product proposal. Check for clarity, market viability, and cultural alignment. Provide a full assessment. If the proposal is ready, output 'pass'. If it needs further adjustments, output 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final product proposal into a professional, investor-ready document. Ensure tone is persuasive and professional."
+    }
+  ],
+  "explanation": "The pipeline begins with a MarketAnalyst to ground the product in data. The ProductIdeator drafts the initial concept, which is then vetted by a CulturalExpert. The ConceptRefiner addresses any cultural or technical issues. The QualityGate assesses the output; if it fails, it routes back to the ConceptRefiner. Once passed, the FinalPolisher formats the document for the user."
+}

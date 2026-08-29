@@ -57,8 +57,9 @@ EXHAUSTION = ROOT / "runs" / "logs" / "study3_credit_exhaustion.jsonl"
 STORE = ROOT / "runs" / "study3" / "study3_store_v2.json"
 DESIGNS_DIR = ROOT / "runs" / "study3" / "designs"
 MAX_TOKENS = 8192
-WORKERS = 24  # raised from 8 (2026-08-29, author request): D34 calibrated high
-              # concurrency as non-distorting; 429 backoff already handled.
+WORKERS = 64  # 2026-08-29 author directive: target ~100 calls/min/provider with
+              # dynamic adaptation (D34 calibration lineage); Google account
+              # upgraded to paid tier. 429 backoff handles throttle; watch and adapt.
 PROMPT_TAG = "protocol13-v2"
 # Study-3 pilot draw (D55 amendment, 2026-08-28): deterministic seeded draw —
 # random.Random(20260828).sample of the 19 confirmatory problems (numeric-sorted),
@@ -84,7 +85,7 @@ MODELS = {
         "cheap": {"model": "claude-haiku-4-5-20251001",
                   "endpoint": "https://api.anthropic.com/v1",
                   "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic", "omit_temperature": True},
-        "frontier": {"model": "claude-opus-5",
+        "frontier": {"model": "claude-opus-5", "max_tokens": 16384,
                      "endpoint": "https://api.anthropic.com/v1",
                      "env_key": "ANTHROPIC_API_KEY", "api_format": "anthropic", "omit_temperature": True},
     },
@@ -229,7 +230,7 @@ def call(cfg, messages, keys, temperature=None):
     if cfg["api_format"] == "anthropic":
         return _call_anthropic(cfg, messages, keys, temperature=temperature)
     payload = {"model": cfg["model"], "messages": messages}
-    payload[cfg.get("max_tokens_field", "max_tokens")] = MAX_TOKENS
+    payload[cfg.get("max_tokens_field", "max_tokens")] = cfg.get("max_tokens", MAX_TOKENS)
     if temperature is not None and not cfg.get("omit_temperature"):
         payload["temperature"] = temperature
     if cfg.get("reasoning_effort"):
@@ -279,7 +280,7 @@ def _call_anthropic(cfg, messages, keys, temperature=None):
     # Anthropic rejects system-role entries inside messages; hoist to top-level.
     sys_parts = [m["content"] for m in messages if m["role"] == "system"]
     msgs = [m for m in messages if m["role"] != "system"]
-    payload = {"model": cfg["model"], "messages": msgs, "max_tokens": MAX_TOKENS}
+    payload = {"model": cfg["model"], "messages": msgs, "max_tokens": cfg.get("max_tokens", MAX_TOKENS)}
     if sys_parts:
         payload["system"] = "\n\n".join(sys_parts)
     if temperature is not None and not cfg.get("omit_temperature"):
@@ -345,6 +346,16 @@ def load_ledger():
     # stop retrying keys that fail 3+ times (e.g. persistent content-moderation
     # blocks); they are disclosed as attrition in the participant flow.
     terminal |= {k for k, n in fail_count.items() if n >= 3}
+    # auditable corrections: keys whose terminal status was caused by an
+    # instrument bug (fixed since) are voided here with reason+timestamp,
+    # so they re-enter the plan. Never deletes ledger history.
+    voided_file = ROOT / "runs" / "logs" / "study3_voided.jsonl"
+    if voided_file.exists():
+        for line in voided_file.read_text().splitlines():
+            try:
+                terminal.discard(json.loads(line)["key"])
+            except Exception:
+                pass
     return done, exhausted, terminal
 
 

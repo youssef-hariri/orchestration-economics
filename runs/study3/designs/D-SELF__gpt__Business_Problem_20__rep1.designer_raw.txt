@@ -1,0 +1,107 @@
+{
+  "agents": [
+    {
+      "name": "Operations Improvement Plan Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial operations improvement plan for an industrial equipment maker that must substantially reduce its quoted lead time from 14 weeks toward the fastest competitor's 6 weeks without compromising certified quality standards or increasing warranty risk. Address the true sources of elapsed time, including production flow, queueing, rework, inspection timing, material availability, supplier performance, scheduling, engineering release, and administrative delays. Recommend practical changes to processes, inventory, capacity, scheduling, suppliers, inspection coordination, and cross-functional governance. Include a phased implementation plan, measurable targets, risks, controls, assumptions, and methods for aligning production, quality, and sales. Distinguish evidence-based conclusions from assumptions and avoid recommending removal or weakening of mandatory quality certifications.",
+      "description": "Creates the initial end-to-end operations improvement plan."
+    },
+    {
+      "name": "Lead-Time Loss and Constraint Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed operations improvement plan and diagnose where lead time is actually lost. Separate value-added work from waiting, batching, queueing, transport, rework, inspection delays, material shortages, supplier delays, engineering changes, and quote or order-management delays. Identify the data required to validate each conclusion, such as order timestamps, routing times, queue times, first-pass yield, inspection turnaround, supplier on-time delivery, inventory coverage, and warranty data. Quantify likely impact ranges where possible, expose unsupported assumptions, and recommend a prioritized fact-finding and measurement approach. Preserve certified quality requirements and explicitly flag any recommendation that could create warranty or compliance risk. Produce detailed findings for use in revising the plan.",
+      "description": "Finds the actual sources of delay and tests the plan's assumptions against operational evidence."
+    },
+    {
+      "name": "Quality-Safe Operations Strategist",
+      "role": "strategist",
+      "systemPrompt": "Using the initial plan and diagnostic analysis, design a practical, phased operations strategy that materially reduces quoted lead time while protecting certified quality standards. Prioritize changes by impact, feasibility, risk, and time to benefit. Address decoupling and safety inventory, supplier segmentation and expediting, capacity and bottleneck management, finite-capacity scheduling, lot sizing, prebuild or postponement options, inspection resource planning, digital traceability, standard work, engineering release discipline, and realistic quoting rules. Preserve all mandatory inspection, documentation, calibration, traceability, and release requirements; improve their timing and reliability rather than bypassing them. Include quantified targets, leading and lagging KPIs, pilot design, warranty safeguards, escalation rules, ownership, dependencies, financial considerations, and a cross-functional operating cadence that resolves production, quality, and sales conflicts.",
+      "description": "Converts the diagnosis into a risk-controlled, measurable transformation strategy."
+    },
+    {
+      "name": "Certified Quality and Warranty Risk Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed operations strategy from the perspective of certified quality systems, industrial manufacturing controls, supplier quality, inspection integrity, and warranty-risk prevention. Identify any hidden ways the plan could weaken quality, create undocumented process changes, overload inspectors, increase escape defects, reduce traceability, or repeat the prior failed schedule-compression effort. Recommend precise safeguards, validation requirements, control-plan updates, pilot boundaries, audit evidence, process-capability checks, supplier controls, and warranty monitoring. Also assess whether quoted lead-time targets are credible under the proposed controls. Provide actionable corrections and clearly distinguish mandatory compliance requirements from discretionary best practices.",
+      "description": "Stress-tests the strategy for certification, product-quality, and warranty consequences."
+    },
+    {
+      "name": "Integrated Operations Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous outputs into one coherent operations improvement plan. Reconcile the lead-time analysis, strategic recommendations, and quality-risk review rather than merely summarizing them. Make the plan specific enough for executive and functional use: define the current-state diagnosis, target lead-time ranges, value-stream interventions, inventory and supplier policies, scheduling and capacity changes, inspection and certification protections, warranty safeguards, implementation phases, owners, decision rights, KPIs, data requirements, financial tradeoffs, and contingency actions. Explicitly address how production, quality, and sales will share facts, resolve disputes, and avoid conflicting incentives. State assumptions and identify what must be validated before committing to customer-facing quotes. Do not recommend bypassing certified quality standards. Produce a complete revised plan.",
+      "description": "Integrates all analyses and expert feedback into an executable, quality-safe plan."
+    },
+    {
+      "name": "Plan Completeness and Feasibility Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the integrated operations improvement plan in full. Evaluate whether it correctly identifies actual lead-time loss, offers concrete and prioritized process, inventory, scheduling, capacity, and supplier changes, preserves every certified quality requirement, protects against warranty recurrence, provides credible lead-time targets, defines validation data and KPIs, assigns ownership, and resolves production-quality-sales conflict. Check for unsupported claims, missing dependencies, impractical sequencing, hidden compliance risks, vague recommendations, and contradictions between speed and control. Give detailed strengths, weaknesses, and specific corrections required. On the VERY LAST LINE output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 7,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Executive Operations Plan Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved integrated plan into a concise, executive-ready user-facing deliverable. Preserve the substantive recommendations, assumptions, risks, safeguards, metrics, owners, and implementation sequencing. Organize it with an executive summary, diagnosis of where time is lost, target state, prioritized interventions, certified-quality protections, warranty safeguards, cross-functional governance, phased roadmap, KPI dashboard, and immediate next steps. Use clear tables or structured bullets where useful. Make quoted lead-time improvement ambitious but credible, distinguish confirmed facts from validation needs, and ensure no wording implies bypassing mandatory inspections or certification controls. Do not mention the pipeline, agents, or review process.",
+      "description": "Produces the final clear, decision-ready operations improvement plan."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Operations Improvement Plan Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial operations improvement plan for an industrial equipment maker that must substantially reduce its quoted lead time from 14 weeks toward the fastest competitor's 6 weeks without compromising certified quality standards or increasing warranty risk. Address the true sources of elapsed time, including production flow, queueing, rework, inspection timing, material availability, supplier performance, scheduling, engineering release, and administrative delays. Recommend practical changes to processes, inventory, capacity, scheduling, suppliers, inspection coordination, and cross-functional governance. Include a phased implementation plan, measurable targets, risks, controls, assumptions, and methods for aligning production, quality, and sales. Distinguish evidence-based conclusions from assumptions and avoid recommending removal or weakening of mandatory quality certifications."
+    },
+    {
+      "name": "Lead-Time Loss and Constraint Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed operations improvement plan and diagnose where lead time is actually lost. Separate value-added work from waiting, batching, queueing, transport, rework, inspection delays, material shortages, supplier delays, engineering changes, and quote or order-management delays. Identify the data required to validate each conclusion, quantify likely impact ranges where possible, expose unsupported assumptions, and recommend a prioritized measurement approach. Preserve certified quality requirements and flag any warranty or compliance risk. Produce detailed findings for use in revising the plan."
+    },
+    {
+      "name": "Quality-Safe Operations Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using the initial plan and diagnostic analysis, design a practical, phased operations strategy that materially reduces quoted lead time while protecting certified quality standards. Prioritize changes by impact, feasibility, risk, and time to benefit. Address inventory, suppliers, capacity, finite-capacity scheduling, lot sizing, postponement, inspection planning, traceability, standard work, engineering release discipline, and realistic quoting rules. Preserve mandatory inspection, documentation, calibration, traceability, and release requirements. Include targets, KPIs, pilot design, warranty safeguards, ownership, dependencies, financial considerations, and a cross-functional operating cadence."
+    },
+    {
+      "name": "Certified Quality and Warranty Risk Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed operations strategy from the perspective of certified quality systems, industrial manufacturing controls, supplier quality, inspection integrity, and warranty-risk prevention. Identify hidden ways the plan could weaken quality, create undocumented process changes, overload inspectors, increase escape defects, reduce traceability, or repeat the prior failed schedule-compression effort. Recommend safeguards, validation requirements, control-plan updates, pilot boundaries, audit evidence, capability checks, supplier controls, and warranty monitoring. Assess whether quoted lead-time targets are credible under the proposed controls."
+    },
+    {
+      "name": "Integrated Operations Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous outputs into one coherent operations improvement plan. Reconcile the lead-time analysis, strategic recommendations, and quality-risk review. Define the diagnosis, target lead-time ranges, interventions, inventory and supplier policies, scheduling and capacity changes, quality protections, warranty safeguards, implementation phases, owners, decision rights, KPIs, data requirements, financial tradeoffs, and contingency actions. Address how production, quality, and sales will share facts, resolve disputes, and avoid conflicting incentives. State assumptions and validation requirements. Do not recommend bypassing certified quality standards."
+    },
+    {
+      "name": "Plan Completeness and Feasibility Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the integrated operations improvement plan in full for diagnostic accuracy, practical process and supply-chain changes, credible lead-time targets, preservation of certified quality requirements, warranty protection, measurable implementation, ownership, and cross-functional alignment. Identify unsupported claims, missing dependencies, impractical sequencing, compliance risks, vague recommendations, and speed-control contradictions. Provide detailed strengths, weaknesses, and corrections. On the VERY LAST LINE output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 7,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Executive Operations Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved plan into a concise, executive-ready deliverable with an executive summary, diagnosis of where time is lost, target state, prioritized interventions, certified-quality protections, warranty safeguards, cross-functional governance, phased roadmap, KPI dashboard, assumptions, and immediate next steps. Preserve all substantive safeguards and distinguish confirmed facts from validation needs. Do not mention the pipeline or review process."
+    }
+  ],
+  "explanation": "The pipeline starts with a complete draft, then diagnoses actual lead-time losses, develops a prioritized strategy, and subjects it to specialized certified-quality and warranty-risk scrutiny. A refiner integrates those findings into one plan before the feasibility gate assesses the complete output. If the gate outputs revise, execution returns to the refiner for correction; if it outputs pass, the plan proceeds to the final polisher. The flow is Builder → Analyst → Strategist → Quality Expert → Refiner → Quality Gate, with revise looping to the Refiner, then Polisher."
+}

@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cross-Cultural Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive negotiation strategy framework for international joint venture, incorporating cross-cultural considerations"
+    },
+    {
+      "name": "Cultural & Communication Analyst",
+      "role": "analyst",
+      "description": "Analyzes potential cultural differences, communication styles, decision-making processes, and relationship-building approaches between companies"
+    },
+    {
+      "name": "Domain Expert - International M&A",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on international joint venture negotiations, legal considerations, and best practices"
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates analyst insights and expert guidance into the strategy, addressing cultural nuances and operational gaps"
+    },
+    {
+      "name": "Comprehensiveness Critic",
+      "role": "critic",
+      "description": "Evaluates strategy completeness, cultural sensitivity, practical implementability, and identifies missing elements"
+    },
+    {
+      "name": "Final Quality Polisher",
+      "role": "polisher",
+      "description": "Formats final negotiation strategy for executive presentation, ensures clarity and actionability"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cross-Cultural Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing an international joint venture negotiation strategy. Create a comprehensive initial framework that addresses: (1) negotiation phases and timeline, (2) identified cultural and communication variables to investigate, (3) preliminary relationship-building approach, (4) decision-making process considerations, (5) risk areas requiring cultural adaptation. Structure this as a detailed outline ready for expert analysis and refinement."
+    },
+    {
+      "name": "Cultural & Communication Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed negotiation strategy for cultural intelligence. Investigate: (1) How different national business cultures typically approach negotiations, (2) Verbal and non-verbal communication style differences, (3) Time orientation and decision-making speed expectations, (4) Relationship vs. task-focused negotiation approaches, (5) Hierarchy and authority structures, (6) Contract interpretation philosophies. Provide specific, actionable insights that should shape the strategy."
+    },
+    {
+      "name": "Domain Expert - International M&A",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the negotiation strategy framework and cultural analysis as an international joint venture expert. Provide: (1) Legal and contractual frameworks for cross-border joint ventures, (2) Common pitfalls in international negotiations with mitigation strategies, (3) Governance structure recommendations for multicultural partnerships, (4) Communication protocols that bridge different business cultures, (5) Escalation and conflict resolution mechanisms, (6) Due diligence priorities. Ensure the strategy is both culturally sensitive and legally sound."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate all previous insights into a comprehensive, actionable negotiation strategy. Synthesize: (1) The initial framework, (2) Cultural and communication intelligence, (3) Expert domain guidance. Create: (1) A detailed phase-by-phase negotiation plan, (2) Communication style adaptation guidelines, (3) Decision-making process accommodations, (4) Relationship-building milestones, (5) Cultural sensitivity checkpoints, (6) Contingency plans for misunderstandings. Ensure the strategy is cohesive, practical, and culturally respectful."
+    },
+    {
+      "name": "Comprehensiveness Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical quality gate evaluating the international joint venture negotiation strategy. Assess: (1) Does it address all major cultural and communication dimensions? (2) Are negotiation phases clearly defined with cultural adaptations? (3) Is the relationship-building approach culturally appropriate and business-effective? (4) Are decision-making differences adequately addressed? (5) Are there gaps in legal, operational, or cultural considerations? (6) Is the strategy implementable and specific enough for executive action? Provide detailed analysis of strengths and weaknesses. If any significant gaps, inconsistencies, or improvements needed, output: revise. If comprehensive and strategically sound, output: pass. Output EXACTLY ONE keyword on the last line.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Final Quality Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the negotiation strategy for executive presentation. Format as a professional strategic brief: (1) Executive Summary, (2) Cultural Context Overview, (3) Negotiation Phases with Timelines, (4) Communication & Relationship Protocols, (5) Decision-Making Framework, (6) Risk Mitigation Strategies, (7) Success Metrics. Ensure clarity, professional tone, and actionable guidance for the negotiation team."
+    }
+  ],
+  "explanation": "This pipeline delivers a culturally-informed international joint venture negotiation strategy through progressive refinement. It begins with the Builder establishing a framework, followed by an Analyst providing cultural intelligence and an Expert delivering domain-specific guidance—both working in parallel to inform the strategy. The Refiner then synthesizes these perspectives into a comprehensive, actionable plan. A Critic gate validates completeness and cultural sensitivity; if gaps exist, the pipeline loops back to the Refiner for improvement (max 3 iterations). Finally, the Polisher formats the strategy for executive use. This structure ensures the outcome is strategically sound, culturally nuanced, and immediately implementable for the negotiation team."
+}
+```

@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Financial & Operational Diagnostician",
+      "role": "analyst",
+      "description": "Analyzes financial data and operational metrics to distinguish structural losses from execution-driven losses"
+    },
+    {
+      "name": "Segmentation & Strategy Architect",
+      "role": "strategist",
+      "description": "Identifies profitable customer segments, service lines, and designs 12-month turnaround plan with exit alternatives"
+    },
+    {
+      "name": "Assessment Refiner",
+      "role": "refiner",
+      "description": "Integrates diagnostic, segmentation, turnaround plan, and exit options into cohesive assessment with decision criteria"
+    },
+    {
+      "name": "Cross-Functional Expert Reviewer",
+      "role": "expert",
+      "description": "Validates assumptions, benchmarks recommendations, and assesses feasibility and sector realism"
+    },
+    {
+      "name": "Comprehensive Quality Validator",
+      "role": "critic",
+      "description": "Confirms assessment meets all board requirements: diagnosis, segments, 12-month roadmap, exit criteria, and decision framework"
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats final assessment into structured board-ready document"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Step 1: Financial & Operational Diagnostician",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial diagnostician for a struggling industrial-services division. Analyze: three years of consecutive losses despite two restructuring attempts; shrinking order book; departing managers; shared customers with profitable group divisions. Distinguish whether losses are STRUCTURAL (market decline, uncompetitive positioning, flawed business model) or EXECUTION-DRIVEN (cost overruns, operational inefficiency, weak sales, pricing power lost). Examine revenue per customer, gross margins by service line, customer retention/churn, overhead absorption, pricing vs. competition, capacity utilization. Output detailed diagnostic summary with root-cause analysis and structural vs. execution classification."
+    },
+    {
+      "name": "Step 2: Segmentation & Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategist designing turnaround and exit options. (A) Segment customers and service lines by profitability, growth potential, and strategic value (especially cross-sell with profitable group divisions). Rank by 12-month profit potential and retention risk. (B) Design a concrete 12-month turnaround plan addressing root causes: revenue initiatives (pricing, cross-sell, target wins), cost restructuring (headcount, overhead, procurement), operational improvements, talent actions. Specify month-by-month milestones with KPIs (revenue targets, margin improvement, order book growth, manager retention %). (C) Design alternative exit pathways (full divestment, partial sale, spin-off, wind-down) with financial scenarios. (D) Define CLEAR DECISION CRITERIA: What specific metrics and thresholds at Month 3, 6, 9 trigger divestment vs. turnaround continuation? (e.g., if order book declines >10% by Month 3 or EBIT margin does not improve 200bps by Month 6, initiate exit). Output profitable segments identified, 12-month roadmap with quarterly targets, exit alternatives, and turnaround-vs-exit decision rules."
+    },
+    {
+      "name": "Step 3: Assessment Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize diagnostic findings, customer segmentation, 12-month turnaround plan, and exit alternatives into ONE coherent, actionable assessment. Ensure: (1) Diagnosis is clear and evidence-based distinguishing structural vs. execution factors; (2) Profitable customer/service segments are explicitly identified with profit potential and strategic fit; (3) Turnaround plan is month-by-month with measurable milestones addressing root causes; (4) Exit criteria are precise with specific KPI thresholds and decision dates; (5) Turnaround-vs-exit decision framework is transparent showing what triggers each path. Integrate all findings into a structured, internally consistent assessment ready for board review."
+    },
+    {
+      "name": "Step 4: Expert Validation",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an industrial-services sector expert. Validate the integrated assessment on: (1) Realism of turnaround timelines and market assumptions; (2) Management capability to execute in 12 months given departures; (3) Customer risk for shared profitable division clients; (4) Benchmark comparison of proposed margins and KPIs vs. peer operators; (5) Critical hidden assumptions or dependencies. Provide expert validation, challenges, or refinements. If any major concerns require plan revision, output: revise. If assessment is sound, output: pass. Output EXACTLY ONE keyword on VERY LAST LINE: revise or pass."
+    },
+    {
+      "name": "Step 5: Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are the final quality validator. Confirm the assessment meets ALL board requirements: (1) Diagnosis clear with structural vs. execution root causes identified; (2) Profitable customer/service segments explicitly named and ranked; (3) 12-month turnaround roadmap with month-by-month milestones and quarterly KPI targets; (4) Exit alternatives fully scoped with financial implications; (5) Turnaround-vs-divestment criteria precise and measurable with specific decision gates at Month 3, 6, 9. Provide full validation assessment highlighting strengths and any gaps. Output EXACTLY ONE keyword on VERY LAST LINE: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Step 6: Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the complete assessment into professional board-ready output structured as: EXECUTIVE SUMMARY | DIAGNOSIS (root cause analysis, structural vs. execution findings) | CUSTOMER & SEGMENT ANALYSIS (profitable segments identified, cross-sell opportunities, retention risk) | 12-MONTH TURNAROUND ROADMAP (quarterly milestones, resource plan, KPI targets, risk mitigation) | EXIT ALTERNATIVES (divestment options, financial scenarios) | TURNAROUND-VS-EXIT DECISION FRAMEWORK (decision criteria with specific thresholds, trigger dates for Month 3, 6, 9 reassessment). Ensure all numbers, targets, and timelines are internally consistent and action-oriented. Format for professional board-level presentation."
+    }
+  ],
+  "explanation": "This 6-step pipeline delivers a comprehensive turnaround-or-exit assessment within platform constraints. Step 1 diagnoses root causes (structural vs. execution). Step 2 integrates segmentation, designs the 12-month turnaround plan with milestones, and defines exit alternatives with precise decision criteria. Step 3 refines all findings into one coherent assessment. Step 4 applies sector expertise (if revise, loops back to Refiner at Step 3; if pass, continues). Step 5 is a quality gate validating all board requirements are met (if revise, loops to Refiner; if pass, advances to polishing). Step 6 formats for executive delivery. The two quality checkpoints (Steps 4 and 5) ensure rigor before final output. Loops route to Step 3 (Refiner), the only agent capable of integrating feedback."
+}
+```

@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Tourism Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in sustainable tourism development. Create a comprehensive strategic plan for a region to attract international visitors while ensuring environmental protection, cultural preservation, and local economic growth. Include specific frameworks for community-based tourism and ecological conservation.",
+      "description": "Drafts the initial sustainable tourism development strategy."
+    },
+    {
+      "name": "Sustainability Expert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in environmental policy and cultural heritage preservation. Evaluate the proposed tourism plan for potential negative impacts on natural sites and local communities. Identify gaps in sustainability metrics or cultural sensitivity.",
+      "description": "Provides domain-specific critique of the strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic planner. Incorporate the feedback from the Sustainability Expert to strengthen the plan. Ensure that all proposed initiatives are actionable, environmentally sound, and economically beneficial to local populations.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Review the refined tourism plan. Assess if the plan effectively balances international growth with sustainability and community benefit. Provide a detailed assessment of the plan's robustness. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Validates the quality and completeness of the strategy."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional editor. Format the final strategy into a clear, professional, and persuasive document suitable for government stakeholders. Ensure tone is formal and the structure is logical.",
+      "description": "Finalizes the document formatting and tone."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Tourism Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in sustainable tourism development. Create a comprehensive strategic plan for a region to attract international visitors while ensuring environmental protection, cultural preservation, and local economic growth. Include specific frameworks for community-based tourism and ecological conservation."
+    },
+    {
+      "name": "Sustainability Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in environmental policy and cultural heritage preservation. Evaluate the proposed tourism plan for potential negative impacts on natural sites and local communities. Identify gaps in sustainability metrics or cultural sensitivity."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic planner. Incorporate the feedback from the Sustainability Expert to strengthen the plan. Ensure that all proposed initiatives are actionable, environmentally sound, and economically beneficial to local populations."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined tourism plan. Assess if the plan effectively balances international growth with sustainability and community benefit. Provide a detailed assessment of the plan's robustness. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional editor. Format the final strategy into a clear, professional, and persuasive document suitable for government stakeholders. Ensure tone is formal and the structure is logical."
+    }
+  ],
+  "explanation": "The pipeline begins with the Tourism Strategist drafting the core plan. The Sustainability Expert then evaluates the draft for environmental and cultural risks. The Strategy Refiner incorporates these insights. The Quality Gate assesses the output; if it fails, it routes back to the Strategy Refiner (up to 3 iterations). Once passed, the Final Polisher formats the document for professional presentation."
+}

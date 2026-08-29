@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "systemPrompt": "You are a supply chain expert. Draft an initial proposal outlining strategies and actions to improve the resilience and ethical considerations of a global supply chain. Cover supplier diversification, risk management, ESG (Environmental, Social, Governance) standards, and auditing.",
+      "description": "Drafts the initial supply chain resilience and ethical sourcing strategies."
+    },
+    {
+      "name": "RiskAndEthicsAnalyst",
+      "role": "analyst",
+      "systemPrompt": "You are a global supply chain analyst. Review the proposed strategies. Identify gaps related to geopolitical risks, practical implementation of ethical sourcing, and supply chain visibility. Provide a detailed critique.",
+      "description": "Analyzes the initial draft for gaps in risk mitigation and ethical compliance."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Improve the supply chain proposal based on the analyst's critique and any quality feedback. Ensure the strategies are actionable, robust, and comprehensively address both resilience and ethics. Fix all issues and produce an improved version.",
+      "description": "Refines and improves the strategy based on analytical feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined supply chain strategy carefully. Assess if it provides actionable, realistic, and comprehensive solutions for both resilience and ethical sourcing. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy and determines if it meets quality standards or needs further refinement."
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Polish the final supply chain strategy proposal. Ensure it is professionally formatted, highly readable, well-structured, and ready for presentation to C-level executives.",
+      "description": "Formats and polishes the final proposal for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain expert. Draft an initial proposal outlining strategies and actions to improve the resilience and ethical considerations of a global supply chain. Cover supplier diversification, risk management, ESG (Environmental, Social, Governance) standards, and auditing."
+    },
+    {
+      "name": "RiskAndEthicsAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a global supply chain analyst. Review the proposed strategies. Identify gaps related to geopolitical risks, practical implementation of ethical sourcing, and supply chain visibility. Provide a detailed critique."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Improve the supply chain proposal based on the analyst's critique and any quality feedback. Ensure the strategies are actionable, robust, and comprehensively address both resilience and ethics. Fix all issues and produce an improved version."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined supply chain strategy carefully. Assess if it provides actionable, realistic, and comprehensive solutions for both resilience and ethical sourcing. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Polish the final supply chain strategy proposal. Ensure it is professionally formatted, highly readable, well-structured, and ready for presentation to C-level executives."
+    }
+  ],
+  "explanation": "The pipeline begins with the StrategyBuilder drafting the initial supply chain proposal. The RiskAndEthicsAnalyst then reviews this draft specifically for geopolitical risks and ESG compliance gaps. The StrategyRefiner takes this critique to improve and consolidate the proposal. Next, the QualityGate (IF step) evaluates the refined output; if it lacks depth or actionability, it outputs 'revise' to loop back to the StrategyRefiner. Once the quality is sufficient, it outputs 'pass', routing the content to the ExecutivePolisher for final formatting suitable for C-level executives."
+}

@@ -1,0 +1,81 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "You are an expert market researcher. Analyze the target international market's demographics, cultural eating habits, flavor profiles, and snack consumption occasions. Provide a detailed report that identifies a specific country and a gap in the snack market.",
+      "description": "Analyzes market data to identify a target region and snack opportunity."
+    },
+    {
+      "name": "ProductIdeator",
+      "role": "builder",
+      "systemPrompt": "Based on the market analysis, generate a creative and viable snack product line. Include the product name, key ingredients, flavor profile, and the specific consumption occasion. Ensure the product aligns with local cultural preferences.",
+      "description": "Creates the initial snack product line concept."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "You are a specialist in international food trends and cultural nuances. Review the proposed snack line for cultural sensitivity, flavor appeal, and market fit. Identify any potential issues or improvements needed.",
+      "description": "Provides domain-specific critique on cultural and taste alignment."
+    },
+    {
+      "name": "ConceptRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a product developer. Take the initial concept and the feedback from the CulturalExpert to refine the product line. Ensure all suggestions are integrated and the product is optimized for the target market.",
+      "description": "Refines the product concept based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined snack product line for commercial viability, cultural alignment, and creativity. Provide a detailed assessment. If the concept is not fully optimized, output 'revise'. If it is ready for final presentation, output 'pass'. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "description": "Validates the quality of the refined concept."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final snack product line proposal into a professional, persuasive, and clear document suitable for stakeholders. Ensure all details are consistent and the tone is professional.",
+      "description": "Formats the final output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an expert market researcher. Analyze the target international market's demographics, cultural eating habits, flavor profiles, and snack consumption occasions. Provide a detailed report that identifies a specific country and a gap in the snack market."
+    },
+    {
+      "name": "ProductIdeator",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Based on the market analysis, generate a creative and viable snack product line. Include the product name, key ingredients, flavor profile, and the specific consumption occasion. Ensure the product aligns with local cultural preferences."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a specialist in international food trends and cultural nuances. Review the proposed snack line for cultural sensitivity, flavor appeal, and market fit. Identify any potential issues or improvements needed."
+    },
+    {
+      "name": "ConceptRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a product developer. Take the initial concept and the feedback from the CulturalExpert to refine the product line. Ensure all suggestions are integrated and the product is optimized for the target market."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined snack product line for commercial viability, cultural alignment, and creativity. Provide a detailed assessment. If the concept is not fully optimized, output 'revise'. If it is ready for final presentation, output 'pass'. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 5, "revise": 3 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final snack product line proposal into a professional, persuasive, and clear document suitable for stakeholders. Ensure all details are consistent and the tone is professional."
+    }
+  ],
+  "explanation": "The pipeline starts with a MarketAnalyst to identify the opportunity, followed by a ProductIdeator to draft the concept. A CulturalExpert reviews the draft, and the ConceptRefiner updates it. The QualityGate assesses the work; if 'revise' is triggered, it loops back to the ConceptRefiner. Once 'pass' is triggered, the FinalPolisher formats the output."
+}

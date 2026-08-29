@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert organizational strategist. Draft an initial comprehensive guide on how leadership and management approaches can be adapted across different international regions to support a global initiative focused on employee empowerment and cultural change. Include core principles and general regional adaptations.",
+      "description": "Drafts the foundational strategy for the global leadership initiative."
+    },
+    {
+      "name": "Cross-Cultural Expert",
+      "role": "expert",
+      "systemPrompt": "You are a cross-cultural management expert. Review the initial strategy draft. Provide deep insights into specific cultural dimensions (e.g., power distance, individualism vs. collectivism) for major global regions (e.g., Asia, Europe, Latin America, North America). Identify potential friction points where empowerment strategies might clash with local norms and suggest specific leadership adaptations.",
+      "description": "Analyzes the draft to provide specialized cross-cultural insights and regional nuances."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Improve the leadership guidance by integrating the cross-cultural expert's insights and any subsequent quality feedback. Ensure the strategy provides actionable, culturally sensitive management approaches for empowering employees in different regions. Fix all identified issues and produce a cohesive, improved version.",
+      "description": "Integrates expert insights and refines the strategy based on feedback."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate evaluating the refined global leadership strategy. Assess if the strategy effectively balances the global empowerment initiative with practical, culturally nuanced regional leadership adaptations. Provide your FULL assessment—strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for cultural accuracy and actionable guidance, triggering a retry if standards are not met."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications specialist. Take the final approved strategy and polish it for a C-suite and senior leadership audience. Ensure the tone is professional, inspiring, and authoritative. Use clear headings, bullet points, and formatting to make the document highly readable and impactful.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert organizational strategist. Draft an initial comprehensive guide on how leadership and management approaches can be adapted across different international regions to support a global initiative focused on employee empowerment and cultural change. Include core principles and general regional adaptations."
+    },
+    {
+      "name": "Cross-Cultural Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural management expert. Review the initial strategy draft. Provide deep insights into specific cultural dimensions (e.g., power distance, individualism vs. collectivism) for major global regions (e.g., Asia, Europe, Latin America, North America). Identify potential friction points where empowerment strategies might clash with local norms and suggest specific leadership adaptations."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Improve the leadership guidance by integrating the cross-cultural expert's insights and any subsequent quality feedback. Ensure the strategy provides actionable, culturally sensitive management approaches for empowering employees in different regions. Fix all identified issues and produce a cohesive, improved version."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a strict quality gate evaluating the refined global leadership strategy. Assess if the strategy effectively balances the global empowerment initiative with practical, culturally nuanced regional leadership adaptations. Provide your FULL assessment—strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "targetStep": 3,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications specialist. Take the final approved strategy and polish it for a C-suite and senior leadership audience. Ensure the tone is professional, inspiring, and authoritative. Use clear headings, bullet points, and formatting to make the document highly readable and impactful."
+    }
+  ],
+  "explanation": "Initial Strategy Builder -> Cross-Cultural Expert -> Strategy Refiner -> Quality Gate (while retry, loops back to Strategy Refiner up to 3x) -> Executive Polisher. The Initial Strategy Builder creates the foundational draft of the global initiative. The Cross-Cultural Expert analyzes it to provide specialized regional and cultural insights. The Strategy Refiner integrates these insights into a cohesive, actionable plan. The Quality Gate evaluates the refined plan to ensure it perfectly balances global empowerment goals with local cultural nuances, looping back to the Refiner if improvements are needed. Finally, the Executive Polisher formats the output for C-suite presentation."
+}

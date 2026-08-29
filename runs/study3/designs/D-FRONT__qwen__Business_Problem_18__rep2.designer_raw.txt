@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Brand Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert brand strategist. Draft a comprehensive repositioning strategy for a 70-year-old consumer brand to attract under-35 consumers without alienating the older loyal base. Define the new positioning, which brand elements to preserve versus retire, the channel and content approach, and how to sequence the transition to avoid authenticity backlash. Provide a detailed, structured initial draft.",
+      "description": "Creates the initial comprehensive brand repositioning strategy draft."
+    },
+    {
+      "name": "Brand Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a brand strategy refiner. Review the initial brand repositioning strategy. Enhance the sequencing and channel approach to specifically mitigate 'authenticity backlash' risks. Ensure the balance between heritage preservation and modernization is highly practical and internally feasible. Output the fully refined strategy.",
+      "description": "Refines the initial strategy to balance heritage and modernization while mitigating backlash risks."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict brand strategy quality gate. Review the refined repositioning strategy. Assess it for: 1) Clear definition of preserved vs retired elements, 2) Realistic sequencing that avoids authenticity backlash, 3) Strong appeal to under-35s without alienating the older base. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy for strategic soundness, authenticity, and feasibility."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive presentation polisher. Take the finalized brand repositioning strategy and format it into a crisp, professional executive brief. Use clear headings, bullet points for key strategic pillars, and ensure the tone is authoritative, persuasive, and ready for C-suite review.",
+      "description": "Formats and polishes the final strategy into an executive-ready brief."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Brand Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert brand strategist. Draft a comprehensive repositioning strategy for a 70-year-old consumer brand to attract under-35 consumers without alienating the older loyal base. Define the new positioning, which brand elements to preserve versus retire, the channel and content approach, and how to sequence the transition to avoid authenticity backlash. Provide a detailed, structured initial draft."
+    },
+    {
+      "name": "Brand Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a brand strategy refiner. Review the initial brand repositioning strategy. Enhance the sequencing and channel approach to specifically mitigate 'authenticity backlash' risks. Ensure the balance between heritage preservation and modernization is highly practical and internally feasible. Output the fully refined strategy."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict brand strategy quality gate. Review the refined repositioning strategy. Assess it for: 1) Clear definition of preserved vs retired elements, 2) Realistic sequencing that avoids authenticity backlash, 3) Strong appeal to under-35s without alienating the older base. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive presentation polisher. Take the finalized brand repositioning strategy and format it into a crisp, professional executive brief. Use clear headings, bullet points for key strategic pillars, and ensure the tone is authoritative, persuasive, and ready for C-suite review."
+    }
+  ],
+  "explanation": "This pipeline is designed to generate a nuanced brand repositioning strategy while strictly guarding against the 'authenticity backlash' risk highlighted in the prompt. It starts with a Builder to draft the comprehensive strategy, followed by a Refiner to specifically tune the sequencing and heritage balance. A Quality Gate (critic) then evaluates the refined output; if it detects risks of alienating the core base or inauthentic modernization, it routes back to the Refiner for corrections. Once the strategy passes the quality check, the Polisher formats it into a crisp, C-suite-ready executive brief. This 4-step flow ensures high strategic quality while remaining highly efficient and well under the 8-step limit."
+}

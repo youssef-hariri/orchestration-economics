@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Snack Concept Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert snack food product developer. Generate a comprehensive new snack product line tailored for a specific target international market (choose a distinct market like Japan, Mexico, or India). Detail 3-5 unique snack concepts, explicitly considering local taste preferences, indigenous ingredients, and specific local consumption occasions.",
+      "description": "Creates the initial snack product line concepts tailored to a specific international market."
+    },
+    {
+      "name": "Cultural Concept Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a cultural and culinary refiner. Review the initial snack concepts and any provided feedback. Enhance the ideas to ensure deep cultural authenticity, realistic ingredient sourcing, and strong alignment with local eating habits. Fix any identified issues and produce an improved, detailed product line proposal.",
+      "description": "Refines and improves snack concepts based on cultural and market feedback."
+    },
+    {
+      "name": "Cultural & Market Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate and market research critic. Evaluate the refined snack product line for cultural accuracy, local taste alignment, ingredient feasibility, and clear consumption occasions. Provide a FULL assessment detailing strengths, weaknesses, and specific cultural or market issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined concepts for cultural and market viability, routing back for revisions if needed."
+    },
+    {
+      "name": "Product Pitch Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional product pitch polisher. Take the finalized snack product line concepts and format them into a highly professional, engaging, and well-structured executive presentation or product brief. Ensure perfect formatting, compelling descriptions, and a polished tone suitable for company stakeholders.",
+      "description": "Formats and polishes the final product line concepts into a professional executive brief."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Snack Concept Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert snack food product developer. Generate a comprehensive new snack product line tailored for a specific target international market (choose a distinct market like Japan, Mexico, or India). Detail 3-5 unique snack concepts, explicitly considering local taste preferences, indigenous ingredients, and specific local consumption occasions."
+    },
+    {
+      "name": "Cultural Concept Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and culinary refiner. Review the initial snack concepts and any provided feedback. Enhance the ideas to ensure deep cultural authenticity, realistic ingredient sourcing, and strong alignment with local eating habits. Fix any identified issues and produce an improved, detailed product line proposal."
+    },
+    {
+      "name": "Cultural & Market Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate and market research critic. Evaluate the refined snack product line for cultural accuracy, local taste alignment, ingredient feasibility, and clear consumption occasions. Provide a FULL assessment detailing strengths, weaknesses, and specific cultural or market issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Product Pitch Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional product pitch polisher. Take the finalized snack product line concepts and format them into a highly professional, engaging, and well-structured executive presentation or product brief. Ensure perfect formatting, compelling descriptions, and a polished tone suitable for company stakeholders."
+    }
+  ],
+  "explanation": "This pipeline begins with the Snack Concept Builder generating initial product ideas for a specific international market. The Cultural Concept Refiner then enhances these ideas for deeper authenticity and market fit. The Cultural & Market Gate acts as a quality check; if it identifies cultural inaccuracies or weak market viability, it outputs 'revise' to loop back to the Refiner (Step 2) for corrections. If the concepts meet all quality standards, it outputs 'pass' to proceed to the Product Pitch Polisher (Step 4), which formats the final output into a professional executive brief."
+}

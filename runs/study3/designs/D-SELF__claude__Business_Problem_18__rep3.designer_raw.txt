@@ -1,0 +1,96 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategic Situation Analyst",
+      "role": "analyst",
+      "description": "Analyzes the brand's current market position, demographic shifts, previous campaign failures, and core assets to identify the core tension and opportunity space"
+    },
+    {
+      "name": "Positioning & Messaging Architect",
+      "role": "strategist",
+      "description": "Develops the new brand positioning, identifies which heritage elements to preserve and which to retire, and articulates the narrative bridge between old and new"
+    },
+    {
+      "name": "Transition Strategy Builder",
+      "role": "builder",
+      "description": "Creates a comprehensive repositioning strategy including channel selection, content approach, sequencing roadmap, and risk mitigation for authenticity concerns"
+    },
+    {
+      "name": "Heritage & Authenticity Critic",
+      "role": "critic",
+      "description": "Evaluates whether the strategy adequately preserves brand heritage, maintains loyalty of existing base, and avoids repeating past authenticity failures"
+    },
+    {
+      "name": "Youth Relevance Critic",
+      "role": "expert",
+      "description": "Domain expert review from younger demographic perspective—assesses whether positioning and execution actually resonates with under-35 consumers and addresses their values"
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates feedback from both critics, resolves tensions between preservation and modernization, strengthens sequencing and messaging for dual-audience appeal"
+    },
+    {
+      "name": "Executive Clarity Polisher",
+      "role": "polisher",
+      "description": "Final formatting and delivery—presents strategy as actionable executive roadmap with clear positioning statement, element inventory, channel/content blueprint, and phase timeline"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Analyze Current State",
+      "type": "agent",
+      "role": "analyst",
+      "systemPrompt": "You are a brand strategy analyst. Analyze this 70-year-old consumer brand's situation: (1) Current market reality—loyal older base, declining under-35 share, strong distribution and awareness, genuine heritage. (2) Past failures—previous 'modernization' campaigns perceived as inauthentic and alienated core base. (3) Internal misalignment on change tolerance. Identify: the core authenticity vulnerability, the demographic value gap, the heritage assets worth preserving, and the modernization pressures from market trends. Provide a clear diagnostic of what went wrong before and what assets exist to build on."
+    },
+    {
+      "name": "Develop Positioning Strategy",
+      "type": "agent",
+      "role": "strategist",
+      "systemPrompt": "You are a brand strategist. Based on the situation analysis, develop a NEW POSITIONING that serves both audiences. (1) Articulate a unifying brand purpose/narrative that connects heritage authenticity to contemporary relevance—not a pivot, but an evolution. (2) Audit all current brand elements (visual identity, messaging, product, retail experience, tone): specify which to PRESERVE (non-negotiable heritage markers), which to RETIRE (dated elements), and which to EVOLVE (modernize while maintaining core DNA). (3) Define the positioning statement for under-35s that honors rather than dismisses the brand's 70-year story. (4) Clarify internal narrative to resolve team disagreement—explain why this change is authentic, not abandonment. Output a clear strategy document with positioning, element decisions, and internal alignment rationale."
+    },
+    {
+      "name": "Build Transition Roadmap",
+      "type": "agent",
+      "role": "builder",
+      "systemPrompt": "You are a repositioning execution architect. Build a comprehensive transition strategy: (1) CHANNEL APPROACH—specify which channels to lead with (e.g., social, retail, partnerships, influencer, owned channels) to reach under-35s without alienating older base; explain channel sequencing. (2) CONTENT STRATEGY—design content pillars and formats that showcase evolution, not erasure; define tone and narrative voice; specify how to communicate change to both cohorts. (3) SEQUENCING PLAN—create a phased timeline (e.g., education phase, soft launch, full rollout) that prevents another authenticity backlash; include early testing and feedback loops. (4) RISK MITIGATION—identify where past failures could repeat and design safeguards (e.g., founder voice, legacy content, community co-creation). Output a detailed roadmap with decisions justified and dependencies clear."
+    },
+    {
+      "name": "Assess Heritage Preservation",
+      "type": "if",
+      "role": "critic",
+      "systemPrompt": "You are a heritage authenticity critic. Review the transition roadmap and positioning strategy. Assess: (1) Do PRESERVED elements genuinely protect the emotional contract with loyal customers? (2) Is the narrative bridge credible—does it explain evolution as organic, not reactive? (3) Are there warning signs of repeating past inauthenticity (e.g., forced language, superficial changes, ignoring loyal base feedback)? (4) Does the phasing plan allow loyal customers to see themselves in the new brand, or will they feel left behind? Provide detailed assessment of heritage risk and specific concerns. Then output EXACTLY ONE keyword on the VERY LAST LINE: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 6
+      }
+    },
+    {
+      "name": "Assess Youth Relevance",
+      "type": "if",
+      "role": "expert",
+      "systemPrompt": "You are a Gen Z/Millennial brand expert. Review the positioning, channels, and content strategy from a younger consumer perspective. Assess: (1) Does the new positioning actually feel relevant and non-patronizing to under-35s, or does it still feel like an old brand trying? (2) Are the channels and content formats where young consumers actually exist and engage? (3) Does the brand story resonate with younger values (sustainability, authenticity, social purpose, innovation)? (4) Would you, as a younger consumer skeptical of this brand, find this evolution credible and worth giving a try? Identify what would actually drive trial and repeat. Provide detailed assessment of youth market fit and specific gaps. Then output EXACTLY ONE keyword on the VERY LAST LINE: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 7,
+        "revise": 6
+      }
+    },
+    {
+      "name": "Refine Strategy for Dual Resonance",
+      "type": "agent",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refinement specialist. You have received feedback from heritage and youth experts. Integrate their concerns: (1) If heritage preservation is weak, strengthen the narrative bridge and elevate founder/legacy voices in the strategy. (2) If youth relevance is missing, sharpen positioning language, adjust channels and content formats to match where young consumers actually engage, and add credibility markers (partnerships, creators, values alignment). (3) Resolve any tension between the two critiques—find the common ground where authenticity AND relevance coexist. (4) Strengthen the phasing plan with specific feedback touchpoints and course-correction triggers. Revise and improve the full strategy, positioning, and roadmap. Output the enhanced, integrated transition strategy."
+    },
+    {
+      "name": "Polish Executive Roadmap",
+      "type": "agent",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communicator. Format the refined strategy into a clear, actionable positioning and transition roadmap for internal stakeholder alignment. Structure: (1) EXECUTIVE SUMMARY—concise overview of the strategic decision and why it protects AND grows the brand. (2) NEW POSITIONING STATEMENT—clear, single narrative for under-35s that honors heritage. (3) BRAND ELEMENT INVENTORY—table or list of what to PRESERVE, RETIRE, EVOLVE with rationale. (4) CHANNEL & CONTENT BLUEPRINT—specific channels, content pillars, tone, and formats by audience segment and phase. (5) PHASE TIMELINE—quarters/months, key milestones, launch sequences, feedback loops. (6) AUTHENTICITY SAFEGUARDS—specific protections against repeating past failures. Format professionally for C-suite and internal team presentation. Ensure clarity, brevity, and actionability."
+    }
+  ],
+  "explanation": "This 7-step pipeline tackles a complex dual-audience repositioning challenge by separating diagnosis, strategy development, execution design, and dual-perspective validation before integration. Flow: (1) Analyst diagnoses the situation and identifies the core tension. (2) Strategist develops the unifying positioning and element audit. (3) Builder creates the channel, content, and sequencing roadmap. (4-5) Two IF gates apply simultaneous critiques—heritage preservation and youth relevance—each independently assesses whether the strategy succeeds on their dimension, outputting pass/revise. Both gates route to the Refiner if either says revise. (6) Refiner integrates both critiques, resolves tensions, and strengthens the strategy. (7) Polisher converts to executive-ready format. This design ensures the strategy is vetted against both the risk of alienating loyalists AND the risk of irrelevance to younger consumers before final delivery. Dual gates (not sequential) allow parallel validation and catch blind spots in dual-audience positioning."
+}
+```

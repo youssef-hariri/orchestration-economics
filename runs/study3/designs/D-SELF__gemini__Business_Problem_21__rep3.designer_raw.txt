@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "LogisticsStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in warehouse automation and human capital management. Create a comprehensive roadmap that balances ROI, labor retention, and operational continuity. Address the 3-year payback, site-specific automation levels, and a phased transition plan that prioritizes the workforce in the main regional warehouse.",
+      "description": "Develops the core automation and workforce-transition strategy."
+    },
+    {
+      "name": "IndustryExpert",
+      "role": "expert",
+      "systemPrompt": "You are a warehouse operations expert. Review the strategy for feasibility, risk mitigation (specifically regarding the competitor's failed rollout), and social responsibility. Ensure the plan includes clear KPIs for measuring success.",
+      "description": "Validates the strategy against industry best practices and risk profiles."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate feedback from the IndustryExpert to strengthen the roadmap, ensuring the transition plan is actionable and the KPIs are robust.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Review the refined roadmap. Check for: 1. Clarity on site-specific automation, 2. Ethical workforce transition steps, 3. Measurable ROI/KPIs. Provide a full assessment. On the last line, output 'pass' or 'revise'.",
+      "description": "Final quality check of the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready roadmap document.",
+      "description": "Final formatting for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "LogisticsStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in warehouse automation and human capital management. Create a comprehensive roadmap that balances ROI, labor retention, and operational continuity. Address the 3-year payback, site-specific automation levels, and a phased transition plan that prioritizes the workforce in the main regional warehouse."
+    },
+    {
+      "name": "IndustryExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a warehouse operations expert. Review the strategy for feasibility, risk mitigation (specifically regarding the competitor's failed rollout), and social responsibility. Ensure the plan includes clear KPIs for measuring success."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate feedback from the IndustryExpert to strengthen the roadmap, ensuring the transition plan is actionable and the KPIs are robust."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined roadmap. Check for: 1. Clarity on site-specific automation, 2. Ethical workforce transition steps, 3. Measurable ROI/KPIs. Provide a full assessment. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready roadmap document."
+    }
+  ],
+  "explanation": "The pipeline starts with the LogisticsStrategist creating the initial roadmap. The IndustryExpert reviews the draft. The StrategyRefiner incorporates feedback. The QualityGate assesses the output; if 'revise' is triggered, it loops back to the StrategyRefiner. If 'pass' is triggered, it proceeds to the FinalPolisher."
+}

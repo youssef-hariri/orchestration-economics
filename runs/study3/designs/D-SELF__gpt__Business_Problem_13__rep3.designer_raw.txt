@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "Crisis Response Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, actionable strategy for managing an international public relations crisis caused by a culturally insensitive advertising campaign. Address the first 24 hours, public acknowledgment, apology principles, campaign withdrawal or modification, stakeholder communications, media and social media response, internal coordination, legal and regulatory considerations, and long-term reputation recovery. Tailor the recommendations to a specific international market while identifying assumptions that require local validation. Produce an initial strategic draft with clear priorities, timing, messaging guidance, risks, and success measures.",
+      "description": "Creates the initial crisis-management and reputation-recovery strategy."
+    },
+    {
+      "name": "Market and Stakeholder Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed international crisis-response strategy in light of local cultural values, public sentiment, relevant stakeholders, media dynamics, customer expectations, employees, regulators, community groups, and business partners. Identify likely interpretations of the campaign, escalation risks, credibility concerns, and evidence or local context needed to make the response authentic. Recommend culturally appropriate communication considerations and measurable indicators of reputation recovery. Preserve useful recommendations while clearly identifying unsupported assumptions.",
+      "description": "Adds market-specific context, stakeholder insight, risk analysis, and measurable objectives."
+    },
+    {
+      "name": "Cross-Cultural Communications Expert",
+      "role": "expert",
+      "systemPrompt": "Provide expert guidance on culturally respectful crisis communication for a global consumer brand responding to perceived disrespect in an international market. Evaluate apology language, accountability, spokesperson selection, translation and localization, community consultation, compensation or corrective action, and the balance between global consistency and local relevance. Flag wording or tactics that could appear defensive, performative, exploitative, or dismissive. Recommend practical, culturally credible actions that support trust repair.",
+      "description": "Ensures the response is culturally informed, respectful, authentic, and locally credible."
+    },
+    {
+      "name": "Reputation Recovery Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the preceding strategic draft, market analysis, and cultural communications guidance into one coherent final-answer candidate. Improve accuracy, cultural sensitivity, practicality, prioritization, and clarity. Include immediate response actions, recommended public messaging, stakeholder engagement, operational corrective actions, media and digital execution, internal governance, monitoring, and a phased plan for restoring reputation. Distinguish confirmed facts from assumptions, avoid stereotyping, avoid overpromising, and explain how success should be measured. Produce a self-contained strategy suitable for senior brand and communications leaders.",
+      "description": "Integrates expert input into a practical, culturally sensitive crisis-response plan."
+    },
+    {
+      "name": "Crisis Strategy Quality Reviewer",
+      "role": "critic",
+      "systemPrompt": "Review the refined crisis-management strategy in full. Assess whether it directly answers the objective, responds quickly without sacrificing cultural sensitivity, demonstrates accountability, avoids defensiveness and tokenism, addresses local stakeholders, provides actionable sequencing, includes realistic reputation-recovery steps, handles legal and operational risks responsibly, and offers useful measurement criteria. Identify omissions, contradictions, vague recommendations, unsupported assumptions, insensitive language, and any advice that could worsen the crisis. Provide detailed, specific revision instructions. On the very last line output exactly one keyword: pass or revise.",
+      "description": "Performs a comprehensive quality, cultural-sensitivity, feasibility, and completeness review."
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved crisis-response strategy into a clear, concise, executive-ready answer. Preserve all essential recommendations and nuance while improving organization, readability, tone, and actionability. Use useful headings, prioritized phases, concise bullet points, sample apology principles or language where appropriate, stakeholder-specific actions, and reputation-recovery measures. Do not invent market facts, imply certainty where assumptions remain, or use culturally insensitive generalizations. Ensure the final output directly answers how to manage the crisis and restore the brand's reputation.",
+      "description": "Produces the final polished, user-facing strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Crisis Response Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, actionable strategy for managing an international public relations crisis caused by a culturally insensitive advertising campaign. Address the first 24 hours, public acknowledgment, apology principles, campaign withdrawal or modification, stakeholder communications, media and social media response, internal coordination, legal and regulatory considerations, and long-term reputation recovery. Tailor the recommendations to a specific international market while identifying assumptions that require local validation. Produce an initial strategic draft with clear priorities, timing, messaging guidance, risks, and success measures."
+    },
+    {
+      "name": "Market and Stakeholder Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed international crisis-response strategy in light of local cultural values, public sentiment, relevant stakeholders, media dynamics, customer expectations, employees, regulators, community groups, and business partners. Identify likely interpretations of the campaign, escalation risks, credibility concerns, and evidence or local context needed to make the response authentic. Recommend culturally appropriate communication considerations and measurable indicators of reputation recovery. Preserve useful recommendations while clearly identifying unsupported assumptions."
+    },
+    {
+      "name": "Cross-Cultural Communications Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide expert guidance on culturally respectful crisis communication for a global consumer brand responding to perceived disrespect in an international market. Evaluate apology language, accountability, spokesperson selection, translation and localization, community consultation, compensation or corrective action, and the balance between global consistency and local relevance. Flag wording or tactics that could appear defensive, performative, exploitative, or dismissive. Recommend practical, culturally credible actions that support trust repair."
+    },
+    {
+      "name": "Reputation Recovery Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize the preceding strategic draft, market analysis, and cultural communications guidance into one coherent final-answer candidate. Improve accuracy, cultural sensitivity, practicality, prioritization, and clarity. Include immediate response actions, recommended public messaging, stakeholder engagement, operational corrective actions, media and digital execution, internal governance, monitoring, and a phased plan for restoring reputation. Distinguish confirmed facts from assumptions, avoid stereotyping, avoid overpromising, and explain how success should be measured. Produce a self-contained strategy suitable for senior brand and communications leaders."
+    },
+    {
+      "name": "Crisis Strategy Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined crisis-management strategy in full. Assess whether it directly answers the objective, responds quickly without sacrificing cultural sensitivity, demonstrates accountability, avoids defensiveness and tokenism, addresses local stakeholders, provides actionable sequencing, includes realistic reputation-recovery steps, handles legal and operational risks responsibly, and offers useful measurement criteria. Identify omissions, contradictions, vague recommendations, unsupported assumptions, insensitive language, and any advice that could worsen the crisis. Provide detailed, specific revision instructions. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved crisis-response strategy into a clear, concise, executive-ready answer. Preserve all essential recommendations and nuance while improving organization, readability, tone, and actionability. Use useful headings, prioritized phases, concise bullet points, sample apology principles or language where appropriate, stakeholder-specific actions, and reputation-recovery measures. Do not invent market facts, imply certainty where assumptions remain, or use culturally insensitive generalizations. Ensure the final output directly answers how to manage the crisis and restore the brand's reputation."
+    }
+  ],
+  "explanation": "The flow begins with a complete crisis-response strategy, enriches it with market and stakeholder analysis, applies cross-cultural communications expertise, and consolidates the findings into an actionable plan. A quality review follows the refiner: if weaknesses are found, the process routes back to the refiner for correction; if the plan passes, it proceeds to the final polisher. The sequence is Crisis Response Strategist → Market and Stakeholder Analyst → Cross-Cultural Communications Expert → Reputation Recovery Plan Refiner → Crisis Strategy Quality Reviewer (pass to Polisher, revise back to Refiner) → Executive Communications Polisher."
+}

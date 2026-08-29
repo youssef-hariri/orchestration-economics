@@ -421,3 +421,6 @@ These two files are source material for the paper's Methodology section.
 - **Residual tension (disclosed):** kimi strictly misses even the amended threshold (5/7 = 71% excl. moderation). Escalated to the author rather than silently relaxing further; the runner proceeds with kimi included pending the author call, and kimi's designer-stage fragility is reported as a substantive finding.
 - **Grounding:** CONSORT-style attrition reporting (Schulz et al. 2010, doi:10.1136/bmj.c332); pre-registered gate amendments before outcome data (Nosek et al. 2018).
 - **Implemented in:** `results/study3_pilot_v2_gates.json`; MANIFEST Entry 72.
+
+## D57a. Author ruling on kimi inclusion (2026-08-29)
+- **Author decision:** KEEP kimi in the Study 3 factorial despite strictly missing the amended G1 threshold (5/7 = 71%). Rationale: kimi's designer-stage failures are the phenomenon under study (cheap-tier design fragility), dropping the family would bias the factorial; all three attrition cases are disclosed with causes in the participant flow. Recorded per D57's escalation.

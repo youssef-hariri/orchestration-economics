@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Financial & Operational Diagnostician",
+      "role": "analyst",
+      "description": "Analyzes financial data, cost structures, customer segment profitability, service line performance, and operational metrics to distinguish structural vs. execution-driven losses"
+    },
+    {
+      "name": "Turnaround Strategy Designer",
+      "role": "strategist",
+      "description": "Develops a detailed turnaround plan with specific milestones, resource allocation, and viability thresholds for the one-year deadline"
+    },
+    {
+      "name": "Exit & Divestment Planner",
+      "role": "strategist",
+      "description": "Designs exit alternatives, valuation scenarios, divestment mechanics, and defines quantitative criteria for turnaround vs. exit decision"
+    },
+    {
+      "name": "Industrial Services Domain Expert",
+      "role": "expert",
+      "description": "Provides domain-specific insights on service line viability, customer segment sustainability, competitive positioning, and structural market constraints"
+    },
+    {
+      "name": "Assessment Integrator",
+      "role": "refiner",
+      "description": "Synthesizes diagnostic, turnaround, exit, and expert insights into a cohesive, internally consistent assessment and plan"
+    },
+    {
+      "name": "Credibility & Completeness Reviewer",
+      "role": "critic",
+      "description": "Validates that diagnosis is evidence-based, turnaround plan is executable with clear milestones, exit criteria are quantitative and defensible, and all board requirements are addressed"
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "description": "Formats the assessment into a boardroom-ready document with clear structure, executive summary, and decision framework"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Financial & Operational Diagnostician",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst specializing in business unit turnarounds. Analyze the industrial-services unit's situation: three years of losses despite two cost-cutting restructurings, shrinking order book, departing managers. Produce a diagnosis that answers: (1) Are losses structural (market shift, commoditization, over-capacity, fundamental competitive disadvantage) or execution-driven (pricing strategy, cost control failures, customer attrition mismanagement)? (2) What is the trend trajectory if nothing changes? (3) For each major customer segment and service line, estimate addressable market, margin potential, and current capture rate. (4) What are the fixed vs. variable cost breakdowns and contribution margins by service line? Provide specific data-driven observations, not generalizations. Output a comprehensive diagnostic memo."
+    },
+    {
+      "name": "Industrial Services Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an industrial services industry expert with deep knowledge of service consolidation trends, customer buying behavior, and profitability patterns. Review the diagnostic memo and add expert judgment on: (1) Are the identified service lines and customer segments inherently sustainable or facing structural headwinds (e.g., automation, commoditization, customer consolidation)? (2) Which segments have defensible moats or differentiation potential? (3) What is realistic margin recovery in this sector? (4) Is customer overlap with profitable group divisions a genuine competitive advantage or an illusion? (5) Why are top managers leaving — is it career ceiling, cultural fit, compensation, or signal of unit unviability? Provide critical expert assessment, flag unrealistic assumptions, and identify which elements are truly salvageable."
+    },
+    {
+      "name": "Turnaround Strategy Designer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a turnaround strategist. Based on the diagnostic analysis and expert assessment, design a specific turnaround plan for the one-year deadline. Include: (1) Target customer segments and service lines to retain, grow, or exit within the unit. (2) Specific pricing, cost, and operational actions with quantified targets (e.g., 'improve gross margin from 18% to 28% in segment X by Q3 via pricing and automation'). (3) Detailed milestones for each quarter with success metrics and decision points. (4) Cash flow bridge showing path from current EBITDA to profitability threshold (define what 'credible profitability' means). (5) Key resource needs (talent, capital, systems) and realistic constraints. (6) Breakeven assumptions and sensitivity to volume, pricing, and cost. (7) Key risks and mitigation. The plan must be specific enough that board can assess execution feasibility, not generic."
+    },
+    {
+      "name": "Exit & Divestment Planner",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a divestment and M&A strategist. Design the exit alternatives to turnaround: (1) Full divestment — identify potential buyers (competitors, private equity, management buyout), estimate valuation ranges, and timeline. (2) Partial sale — which customer segments or service lines might sell separately, and to whom? (3) Shutdown/liquidation — what are residual liabilities, asset recovery values, and wind-down costs? (4) Spin-off with partner — could this unit thrive as independent or combined with a complementary business? For each option, provide financial summary and execution steps. Then define the quantitative decision criteria: (1) What EBITDA or cash flow milestones in Year 1 would justify turnaround? (2) At what point should the board cut losses and exit? (3) What is the hurdle rate for turnaround investment? (4) How much shareholder value is destroyed by each path? Provide clear decision thresholds so board can evaluate options objectively."
+    },
+    {
+      "name": "Assessment Integrator",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an integrating strategist. Synthesize the diagnostic findings, expert assessment, turnaround plan, and exit alternatives into a single coherent assessment document. Ensure: (1) Diagnosis clearly explains root causes (structural vs. execution) with evidence. (2) Turnaround plan flows logically from diagnosis — if losses are structural, how does the plan address that? If execution-driven, what execution improvements are planned? (3) Exit alternatives are credible and priced fairly. (4) Decision criteria are clear and actionable — the board can apply them at month 6, 9, 12 to decide turnaround or exit. (5) No contradictions between sections. (6) Key assumptions are stated explicitly and tested for sensitivity. Produce a unified, board-ready assessment that integrates all four prior analyses into one coherent story and recommendation framework."
+    },
+    {
+      "name": "Credibility & Completeness Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a rigorous quality gate for business strategy. Review the integrated assessment against these criteria: (1) Is the diagnosis evidence-based and specific, or vague? Does it convincingly distinguish structural from execution-driven losses? (2) Is the turnaround plan concrete with quarterly milestones and quantified targets, or aspirational? Could an operations team execute it? (3) Are exit alternatives realistic and financially sound, or wishful thinking? (4) Are decision criteria quantitative, objective, and defensible to the board? (5) Are key assumptions transparent and stress-tested? (6) Does the assessment address all elements the board requested: diagnosis, customer/service line identification, turnaround plan with milestones, exit alternatives, and decision framework? (7) Are there logical gaps, contradictions, or undefended claims? Provide your FULL assessment of strengths and weaknesses, then on the VERY LAST LINE output EXACTLY ONE keyword: pass, revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a presentation specialist. Format the assessment into a boardroom-ready document with: (1) Executive summary (1 page) — diagnosis, recommended path (turnaround or exit, pending milestones), and decision timeline. (2) Diagnosis section — structural vs. execution root causes with data. (3) Customer segment and service line analysis — which are viable, which to exit. (4) Turnaround plan — detailed quarterly milestones, resource needs, cash flow bridge. (5) Exit alternatives — full divestment, partial sale, shutdown with financials. (6) Decision framework — quantitative go/no-go criteria at month 6, 9, 12. (7) Appendices — supporting data, assumptions, sensitivity analysis. Use clear headings, tables, charts, and concise language. The board should be able to understand the logic and act on it immediately."
+    }
+  ],
+  "explanation": "The pipeline is structured as a sequential synthesis model: (1) Diagnostician analyzes financial and operational data to isolate root causes. (2) Domain Expert applies industry judgment to validate and challenge the diagnosis. (3) Turnaround Strategist designs a specific, executable recovery plan. (4) Divestment Planner develops credible exit options and decision criteria. (5) Integrator synthesizes all four analyses into one coherent assessment with no contradictions. (6) Credibility Reviewer (if gate) validates the integrated output against board requirements — if gaps remain, it routes back to Integrator for one revision cycle. (7) Polisher formats for board presentation. The if gate occurs AFTER Integrator produces output (correct placement), allowing the Reviewer to assess completeness and route revision back to Integrator (the refiner). This design ensures rigor in diagnosis, realism in both turnaround and exit planning, and defensibility of the final go/no-go framework."
+}
+```

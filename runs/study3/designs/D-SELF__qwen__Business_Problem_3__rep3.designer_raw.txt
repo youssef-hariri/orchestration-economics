@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert retail strategist. Your task is to draft a comprehensive proposal for innovative customer service approaches tailored to a specific regional market for an online retail company. Focus on increasing customer satisfaction, building loyalty, and addressing recent feedback indicating current support methods fall short. Include specific, actionable, and culturally/regionally relevant strategies.",
+      "description": "Drafts the initial innovative customer service strategy for the regional market."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, enhance the innovation level, ensure regional relevance, and produce a polished, improved version of the customer service strategy.",
+      "description": "Refines the strategy draft based on quality gate feedback."
+    },
+    {
+      "name": "Innovation & Relevance Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate evaluating a customer service strategy proposal. Assess the output for: 1) Innovation and creativity of the approaches, 2) Relevance to a specific regional market, 3) Actionability and potential to increase customer satisfaction/loyalty, 4) Clarity and structure. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy for innovation, relevance, and actionability, routing back for revision if needed."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive editor. Take the approved customer service strategy and format it into a professional, highly readable, and persuasive final document. Ensure perfect grammar, engaging headings, and a clear, logical flow. Do not change the core content, just elevate the presentation.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert retail strategist. Your task is to draft a comprehensive proposal for innovative customer service approaches tailored to a specific regional market for an online retail company. Focus on increasing customer satisfaction, building loyalty, and addressing recent feedback indicating current support methods fall short. Include specific, actionable, and culturally/regionally relevant strategies."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, enhance the innovation level, ensure regional relevance, and produce a polished, improved version of the customer service strategy."
+    },
+    {
+      "name": "Innovation & Relevance Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate evaluating a customer service strategy proposal. Assess the output for: 1) Innovation and creativity of the approaches, 2) Relevance to a specific regional market, 3) Actionability and potential to increase customer satisfaction/loyalty, 4) Clarity and structure. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive editor. Take the approved customer service strategy and format it into a professional, highly readable, and persuasive final document. Ensure perfect grammar, engaging headings, and a clear, logical flow. Do not change the core content, just elevate the presentation."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Strategy Builder, which drafts a comprehensive and innovative customer service strategy tailored to the specific regional market. This draft is passed to the Strategy Refiner to improve and address any initial gaps. The Innovation & Relevance Gate then evaluates the refined output for creativity, regional relevance, and actionability. If the strategy does not meet the high standards (outputting 'revise'), the pipeline loops back to the Strategy Refiner to fix the identified issues. Once the gate approves the strategy (outputting 'pass'), it moves to the Executive Polisher, which formats and refines the final document for professional presentation. This ensures a high-quality, innovative, and regionally appropriate customer service strategy."
+}

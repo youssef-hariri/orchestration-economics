@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Financial Situation Analyzer",
+      "role": "analyst",
+      "description": "Analyzes the company's financial position, growth trajectory, cash generation, capacity constraints, and competitive urgency to establish baseline data for strategy development."
+    },
+    {
+      "name": "Funding Strategy Builder",
+      "role": "builder",
+      "description": "Develops a comprehensive growth-financing strategy comparing debt, minority equity, hybrid instruments, and organic growth options against the founders' control preferences and risk tolerance."
+    },
+    {
+      "name": "Financial Structure Refiner",
+      "role": "refiner",
+      "description": "Improves the funding strategy by integrating financial analysis insights, stress-testing assumptions, and ensuring alignment between capital sources, company constraints, and founder objectives."
+    },
+    {
+      "name": "Competitive & Structural Critic",
+      "role": "critic",
+      "description": "Reviews the refined strategy for internal consistency, competitive window timing, covenant feasibility, and founder control preservation; identifies gaps in milestone staging and walk-away conditions."
+    },
+    {
+      "name": "Domain Expert in Growth Finance",
+      "role": "expert",
+      "description": "Provides specialized assessment of the proposed funding structure, validates instrument selection, benchmark terms against market standards, and flags execution risks specific to scale-up financing."
+    },
+    {
+      "name": "Strategy Consolidator",
+      "role": "strategist",
+      "description": "Synthesizes all feedback into a final, integrated growth-financing strategy with explicit milestone triggers, capital staging, and walk-away conditions for each funding source."
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats the final strategy into a clear, executive-ready recommendation document with decision matrices, term sheets frameworks, and implementation roadmap."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Financial Situation Analyzer",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst specializing in growth-stage companies. Analyze the following scenario: A scale-up doubling revenue every two years has demand exceeding capacity. Founders hold 78% equity and prize independence. The company generates cash but insufficient for simultaneous capacity, hiring, and market expansion. Competitors are raising heavily. Banks offer covenant-heavy debt; growth funds offer capital at a low valuation. Provide detailed analysis of: (1) Current financial position and cash generation capacity; (2) Capital requirements for capacity, hiring, and market expansion; (3) Competitive timeline and market window urgency; (4) Financial constraints and leverage capacity; (5) Cash flow implications under different scenarios. Output complete analytical findings with data-driven insights."
+    },
+    {
+      "name": "Funding Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a growth-financing strategist. Using the financial analysis provided, develop a comprehensive growth-financing strategy. Compare four primary approaches: (1) Debt financing (bank covenants, terms, risks); (2) Minority equity (dilution, control, valuation); (3) Hybrid instruments (convertible debt, revenue-based financing, warrants); (4) Disciplined organic growth (pace, market risk). For each option, address: capital capacity, founder control impact, covenant burden, execution feasibility, and alignment with the competitive window. Propose a recommended financing structure that balances capital access, control preservation, and risk tolerance. Include specific instrument mix, target capital raise, expected dilution, and rationale. Output a detailed strategy proposal."
+    },
+    {
+      "name": "Financial Structure Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a financial structure refinement expert. Improve the proposed funding strategy by: (1) Integrating the financial analysis data—validate capital requirements and cash flow assumptions; (2) Stress-testing the strategy against three scenarios: accelerated growth, market slowdown, and competitive escalation; (3) Designing milestone-based capital staging—specify trigger events for each funding tranche and conditions for capital deployment; (4) Defining walk-away thresholds—at what metrics, valuation levels, or covenant terms should the founders reject each source; (5) Ensuring founder control preservation—model ownership dilution under different scenarios and confirm 51%+ control or alternative governance protections; (6) Clarifying trade-offs explicitly—articulate what each option sacrifices. Produce a refined, integrated strategy with detailed milestone triggers and rejection criteria for each funding source."
+    },
+    {
+      "name": "Competitive & Structural Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer of growth-financing strategies. Assess the refined strategy against these criteria: (1) COMPLETENESS: Are milestone triggers specific and measurable? Are walk-away conditions clearly defined for debt, equity, and hybrid options? (2) CONSISTENCY: Do capital timing and deployment align with competitive urgency? Can the company execute hiring and capacity expansion in the proposed timeline? (3) CONTROL PRESERVATION: Does the structure adequately protect founder control and decision-making autonomy? Are covenant terms manageable? (4) RISK ALIGNMENT: Does the strategy match the company's stated risk tolerance? Are downside scenarios addressed? (5) COMPETITIVE WINDOW: Does the funding pace match market window timing, or does it risk losing market share? (6) FEASIBILITY: Are the proposed terms realistic for a scale-up in this position? Provide FULL assessment covering strengths, gaps, and specific recommendations. On the VERY LAST LINE, output EXACTLY ONE keyword: pass, revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Domain Expert in Growth Finance",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a domain expert in scale-up growth financing. Provide specialized validation and insights on the refined strategy: (1) INSTRUMENT SUITABILITY: Are the proposed debt terms, equity structures, and hybrid instruments appropriate for this company stage and market context? (2) BENCHMARK ANALYSIS: How do the proposed terms compare to market standards for similar scale-ups? What are typical founder control outcomes and covenant structures? (3) EXECUTION RISKS: What specific challenges might arise during fundraising, capital deployment, and operational scaling? (4) ALTERNATIVE STRUCTURES: Are there hybrid or creative financing options not yet considered (e.g., structured equity, earnouts, vendor financing)? (5) TIMELINE FEASIBILITY: Is the proposed capital staging realistic given fundraising timelines and board decision cycles? Provide expert assessment covering market benchmarks, execution risks, and optimization opportunities."
+    },
+    {
+      "name": "Strategy Consolidator",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a growth strategy consolidator. Synthesize all preceding analyses and feedback into a final, integrated growth-financing recommendation. Produce a comprehensive strategy document that includes: (1) RECOMMENDED STRUCTURE: Primary funding mix (e.g., 60% hybrid convertible + 40% organic/cash management) with clear rationale; (2) CAPITAL STAGING: Specific milestones triggering each funding tranche—revenue targets, customer metrics, product milestones, or operational KPIs; (3) WALK-AWAY CONDITIONS: Explicit rejection criteria for each funding source—valuation floors, maximum dilution, covenant limits, timeline constraints; (4) CONTROL PRESERVATION: Ownership modeling and governance protections ensuring founders maintain decision authority; (5) COMPETITIVE TIMELINE: Explicit mapping of funding pace to market window and competitor threat timeline; (6) DOWNSIDE SCENARIOS: How the strategy performs if growth slows, competitive pressure intensifies, or market conditions deteriorate; (7) DECISION MATRIX: Side-by-side comparison table of debt vs. equity vs. hybrid vs. organic with scores on capital access, control, covenant risk, and execution feasibility. Output a final, integrated strategy ready for board/founder decision."
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Format the consolidated growth-financing strategy into a polished, decision-ready document suitable for founder review and board presentation. Structure the output as: (1) EXECUTIVE SUMMARY: 1-page overview of recommended strategy, capital amount, dilution, and key milestones; (2) STRATEGIC RATIONALE: Why this structure balances capital access, control, and competitive urgency; (3) DETAILED FUNDING OPTIONS: Debt, equity, hybrid, and organic paths with terms, pros, cons, and walk-away thresholds; (4) MILESTONE ROADMAP: Quarterly or event-driven triggers for each capital tranche with KPI targets; (5) CONTROL & GOVERNANCE: Ownership structure, board composition, and decision-making protections under each scenario; (6) RISK ASSESSMENT: Downside scenarios and mitigation strategies; (7) DECISION MATRIX: Comparative table enabling rapid option evaluation. Ensure all text is clear, jargon minimized, and recommendations are actionable. Output final, polished recommendation document."
+    }
+  ],
+  "explanation": "This pipeline is designed to deliver a comprehensive, data-driven growth-financing strategy that directly addresses the founders' core tensions: capital need, control preservation, and competitive urgency. Execution flow: (1) Financial Situation Analyzer gathers baseline data on cash capacity, capital requirements, and competitive timeline. (2) Funding Strategy Builder synthesizes this into four primary options with explicit trade-offs. (3) Financial Structure Refiner integrates analysis, stress-tests assumptions, and designs specific milestone triggers and walk-away thresholds—the critical missing layer in most financing advice. (4) Competitive & Structural Critic (if-gate) validates completeness and consistency; if gaps remain, loops back to Refiner to refine milestone triggers, walk-away conditions, and control preservation. (5) Domain Expert provides market benchmarks and execution insights, enriching the strategy without looping. (6) Strategy Consolidator synthesizes all feedback into a single, integrated recommendation with decision matrices and scenario modeling. (7) Executive Summary Polisher formats for founder/board decision-making. The if-gate after the Critic ensures milestone staging and walk-away conditions are specific and testable before expert review; the expert then adds market-context without triggering rework. This avoids analysis loops while ensuring the founders receive actionable, comparable options with explicit decision triggers—the key gap in generic financing advice."
+}
+```

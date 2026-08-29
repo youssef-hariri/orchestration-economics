@@ -1,0 +1,83 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategies for improving communication, collaboration, and conflict resolution in geographically dispersed teams"
+    },
+    {
+      "name": "Cultural & Operational Analyst",
+      "role": "analyst",
+      "description": "Analyzes cultural diversity factors, time zone challenges, communication barriers, and operational pain points affecting distributed teams"
+    },
+    {
+      "name": "Best Practices Expert",
+      "role": "expert",
+      "description": "Provides domain-specific expert insights on distributed team management, cross-cultural communication, and remote collaboration frameworks"
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates analytical insights and expert recommendations into the initial strategy, enhancing specificity and actionability"
+    },
+    {
+      "name": "Completeness & Quality Reviewer",
+      "role": "critic",
+      "description": "Conducts thorough quality assessment of strategies for completeness, coherence, cultural sensitivity, and implementation feasibility"
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "description": "Formats final strategies into clear, structured, professional output suitable for stakeholder delivery"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Communication Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategic communication designer for multinational organizations. Create a comprehensive initial framework addressing communication delays, misunderstandings, and team cohesion in geographically dispersed, culturally diverse project teams. Outline strategic pillars including communication protocols, collaboration mechanisms, conflict resolution approaches, cultural integration practices, and technology enablement."
+    },
+    {
+      "name": "Cultural & Operational Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an expert analyst of distributed team dynamics. Analyze the communication and collaboration challenges in geographically dispersed, culturally diverse teams. Provide data-driven insights on time zone coordination barriers, cultural communication differences, language barriers, trust-building challenges, and technological gaps. Identify specific pain points and root causes that strategies must address."
+    },
+    {
+      "name": "Best Practices Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a global team leadership expert. Provide authoritative best practices for: asynchronous communication frameworks, cultural intelligence development, conflict resolution in remote settings, collaboration technology tools, documentation standards, meeting protocols across time zones, and team cohesion building. Ground recommendations in evidence-based practices from leading multinational organizations."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic refiner. Take the initial communication strategy and integrate the analytical insights and expert best practices. Enhance by making each strategy specific and actionable, adding concrete examples, incorporating cultural sensitivity, addressing identified pain points directly, and strengthening weak areas. Produce a comprehensive, integrated strategy document."
+    },
+    {
+      "name": "Completeness & Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a comprehensive quality reviewer for strategic frameworks. Assess the strategy on: (1) Comprehensive coverage of communication delays, misunderstandings, and team cohesion; (2) Specific, measurable, implementable strategies; (3) Genuine cultural diversity integration; (4) Practical conflict resolution approaches; (5) Aligned technology recommendations; (6) Internal coherence; (7) Identification of gaps or contradictions. Provide detailed assessment of strengths and weaknesses. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are the final polish specialist. Format the strategy into an executive-ready deliverable with: (1) Clear structure covering communication protocols, collaboration frameworks, conflict resolution, cultural integration, and technology enablement; (2) Executive summary highlighting key outcomes; (3) Actionable recommendations grouped by implementation phase; (4) Practical tools and templates; (5) Success metrics; (6) Professional formatting suitable for stakeholder presentation."
+    }
+  ],
+  "explanation": "This 6-step pipeline produces comprehensive strategies and best practices for distributed team communication. Execution flow: Builder creates initial strategic framework → Analyst and Expert agents provide critical parallel insights on barriers and best practices → Refiner integrates all inputs into a cohesive strategy → Critic reviews for completeness and coherence (if revise, loops back to Refiner to address gaps) → Polisher formats for executive delivery. The parallel analyst and expert agents enrich the strategy before refinement, and the quality gate ensures all issues are resolved before final presentation."
+}
+```
