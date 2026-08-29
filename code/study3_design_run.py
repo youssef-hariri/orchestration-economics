@@ -52,14 +52,14 @@ def load_key(env_key):
                 return v.strip().strip('"').strip("'")
     sys.exit(f"{env_key} not set (env or .env)")
 
-LEDGER = ROOT / "runs" / "logs" / "study3_ledger.jsonl"
+LEDGER = ROOT / "runs" / "logs" / "study3_ledger_v2.jsonl"
 EXHAUSTION = ROOT / "runs" / "logs" / "study3_credit_exhaustion.jsonl"
-STORE = ROOT / "runs" / "study3" / "study3_store.json"
+STORE = ROOT / "runs" / "study3" / "study3_store_v2.json"
 DESIGNS_DIR = ROOT / "runs" / "study3" / "designs"
 MAX_TOKENS = 8192
 WORKERS = 24  # raised from 8 (2026-08-29, author request): D34 calibrated high
               # concurrency as non-distorting; 429 backoff already handled.
-PROMPT_TAG = "protocol13-v1"
+PROMPT_TAG = "protocol13-v2"
 # Study-3 pilot draw (D55 amendment, 2026-08-28): deterministic seeded draw —
 # random.Random(20260828).sample of the 19 confirmatory problems (numeric-sorted),
 # rejection-resampled until 4 distinct domains per domain_map.json. Result:
@@ -115,32 +115,66 @@ MODELS = {
     },
 }
 
-DESIGN_PROMPT = """You are an expert designer of multi-step LLM pipelines for business problem solving.
+DESIGN_PROMPT = """You are an expert AI Pipeline Designer. Analyze the user's task and design the optimal multi-agent pipeline.
 
-Design a pipeline to answer the business problem below. The pipeline will be executed
-step by step by the SAME language model on every step; each step receives the problem
-and all previous step outputs. Intermediate steps may analyze, draft, critique or
-refine; the FINAL step must produce the complete answer to the problem.
+TASK: "{problem_text}"
 
-Rules:
-1. Output ONLY a JSON object of the form:
-   {{"steps": [{{"name": str, "role": str, "systemPrompt": str}}, ...]}}
-2. Use 1 to 4 steps. Each systemPrompt instructs the model what to produce at that step.
-3. No commentary outside the JSON. No markdown fences.
-4. systemPrompt text must not include the problem itself (it is provided at run time).
+CRITICAL INSTRUCTION: Describe the OUTCOME you want (e.g., "Translate legal contracts from English to Arabic"), NOT the pipeline architecture (e.g., "Create a quality gate that checks..."). The designer will infer the optimal structure. Do NOT prescribe pipeline structure, quality gates, or specific agent arrangements in your task — just state the objective.
 
-=== BUSINESS PROBLEM ===
-{problem_text}"""
+Available agent roles:
+- builder: Creates initial content/draft
+- critic: Reviews and identifies issues
+- refiner: Fixes issues based on feedback
+- polisher: Final quality check and formatting
+- analyst: Analyzes data and produces insights
+- strategist: Develops strategies and plans
+- expert: Domain-specific expert opinion
+- reviewer: General review and feedback
 
-REPAIR_PROMPT = """Your previous output was not valid. Error: {error}
+Design rules:
+1. Always start with a Builder agent
+2. CRITICAL: An IF or WHILE quality gate MUST be placed AFTER the agent it assesses, not before. The agent being assessed must already have produced output before the gate can review it.
+   CORRECT: Builder → Refiner → QualityGate(IF, "revise"→Refiner) ✓
+   WRONG: Builder → QualityGate(IF) → Refiner ✗ (gate has nothing to assess!)
+3. Use "if" steps for decision points. The "revise" keyword should route back to the most recent REFINER or BUILDER step — the agent that can actually fix the content.
+4. Use "while" steps for iterative refinement (retry until quality met). Max 3 iterations.
+5. Approval (human-in-the-loop) steps are NOT allowed: this pipeline runs fully automated.
+6. End with Polisher for user-facing output
+7. Keep pipelines under 8 steps
+8. Give each agent a descriptive name reflecting its purpose
+9. When using "if" or "while" steps, the agent MUST provide full analysis AND the routing keyword on the last line
 
-Output ONLY the corrected JSON object:
-{{"steps": [{{"name": str, "role": str, "systemPrompt": str}}, ...]}} — 1 to 4 steps,
-no commentary, no markdown fences."""
+For "if" steps: The agent provides a FULL quality assessment with detailed reasoning, then on the VERY LAST LINE outputs ONE keyword from a predefined list (e.g., "pass" or "revise"). The "revise" mapping MUST point to a REFINER or BUILDER agent that exists in the pipeline — never to a non-existent step.
+For "while" steps: The agent provides a FULL quality assessment, then on the VERY LAST LINE outputs "retry" (to loop back and improve) or "pass" (to continue). Max 3 iterations. The targetStep MUST point to a REFINER or BUILDER agent.
+
+IMPORTANT: In the explanation, clearly describe the execution flow including which steps may loop or branch. Example: "Builder → Refiner → Quality Check (if revise, loops back to Refiner up to 3x) → Polisher".
+
+OUTPUT FORMAT: STRICT JSON ONLY. No markdown, no explanation outside JSON, no prose. The JSON must contain exactly these three top-level keys: "agents", "pipeline", "explanation".
+{{
+  "agents": [
+    {{ "name": "Display Name", "role": "builder|critic|refiner|polisher|analyst|strategist|expert|reviewer", "systemPrompt": "Detailed prompt...", "description": "What this agent does" }}
+  ],
+  "pipeline": [
+    {{ "name": "Builder", "role": "builder", "type": "agent", "systemPrompt": "..." }},
+    {{ "name": "Refiner", "role": "refiner", "type": "agent", "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues and produce a polished, improved version." }},
+    {{ "name": "Quality Gate", "role": "critic", "type": "if", "systemPrompt": "You are a quality gate. Review the refined output carefully. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.", "ifOptions": ["pass", "revise"], "ifMappings": {{ "pass": 4, "revise": 2 }} }},
+    {{ "name": "Polisher", "role": "polisher", "type": "agent", "systemPrompt": "..." }}
+  ],
+  "explanation": "Why this design was chosen"
+}}"""
+
+REPAIR_PROMPT = """That was not valid. Error: {error}
+
+Output ONLY valid JSON matching the exact format requested (top-level keys
+"agents", "pipeline", "explanation"; no "approval" steps; under 8 steps).
+No markdown code blocks, no prose, no explanation — just raw JSON."""
 
 
 def validate_design(text):
-    """Return (steps, error). steps = list of {name, role, systemPrompt}."""
+    """Return (steps, error). Platform-schema validation (D56):
+    steps = pipeline array; each step {name, type: agent|if|while, ...}.
+    Free roles accepted (platform does not enforce the role vocabulary).
+    No 'approval' steps (fully automated experiment). Under 8 steps total."""
     t = text.strip()
     if t.startswith("```"):
         t = t.strip("`")
@@ -150,15 +184,33 @@ def validate_design(text):
         obj = json.loads(t)
     except Exception as e:
         return None, f"JSON parse error: {e}"
-    steps = obj.get("steps") if isinstance(obj, dict) else None
-    if not isinstance(steps, list) or not (1 <= len(steps) <= 4):
-        return None, "need 1-4 steps"
+    if not isinstance(obj, dict):
+        return None, "top-level JSON object required"
+    steps = obj.get("pipeline")
+    if not isinstance(steps, list) or not steps:
+        agents = obj.get("agents")
+        if isinstance(agents, list) and agents:
+            # platform fallback: sequential pipeline from agents
+            steps = [{"name": a.get("name", f"Step{i+1}"), "role": a.get("role", "custom"),
+                      "type": "agent", "systemPrompt": a.get("systemPrompt", "")}
+                     for i, a in enumerate(agents) if isinstance(a, dict)]
+        else:
+            return None, "missing 'pipeline' (and no 'agents' to derive it from)"
+    if not (1 <= len(steps) <= 7):
+        return None, f"need 1-7 steps (platform: under 8); got {len(steps)}"
     for i, s in enumerate(steps):
-        if not isinstance(s, dict) or not isinstance(s.get("systemPrompt"), str) \
-                or not s["systemPrompt"].strip():
+        if not isinstance(s, dict):
+            return None, f"step {i} not an object"
+        stype = s.get("type", "agent")
+        if stype == "approval":
+            return None, f"step {i} is an approval step — not allowed (automated run)"
+        if stype not in ("agent", "if", "while"):
+            return None, f"step {i} unknown type {stype!r}"
+        if not isinstance(s.get("systemPrompt"), str) or not s["systemPrompt"].strip():
             return None, f"step {i} missing systemPrompt"
+        s["type"] = stype
         s.setdefault("name", f"Step{i+1}")
-        s.setdefault("role", s["name"].lower())
+        s.setdefault("role", "custom")
     return steps, None
 
 
@@ -172,12 +224,14 @@ def looks_like_credit(msg):
                                 "exceeded_current_quota", "payment required"))
 
 
-def call(cfg, messages, keys):
+def call(cfg, messages, keys, temperature=None):
     """One chat completion; returns (content, usage). Raises CreditExhausted."""
     if cfg["api_format"] == "anthropic":
-        return _call_anthropic(cfg, messages, keys)
+        return _call_anthropic(cfg, messages, keys, temperature=temperature)
     payload = {"model": cfg["model"], "messages": messages}
     payload[cfg.get("max_tokens_field", "max_tokens")] = MAX_TOKENS
+    if temperature is not None and not cfg.get("omit_temperature"):
+        payload["temperature"] = temperature
     if cfg.get("reasoning_effort"):
         payload["reasoning_effort"] = cfg["reasoning_effort"]
     if cfg.get("extra"):
@@ -221,13 +275,15 @@ def call(cfg, messages, keys):
     raise RuntimeError("call(): retry loop exhausted")
 
 
-def _call_anthropic(cfg, messages, keys):
+def _call_anthropic(cfg, messages, keys, temperature=None):
     # Anthropic rejects system-role entries inside messages; hoist to top-level.
     sys_parts = [m["content"] for m in messages if m["role"] == "system"]
     msgs = [m for m in messages if m["role"] != "system"]
     payload = {"model": cfg["model"], "messages": msgs, "max_tokens": MAX_TOKENS}
     if sys_parts:
         payload["system"] = "\n\n".join(sys_parts)
+    if temperature is not None:
+        payload["temperature"] = temperature
     req = urllib.request.Request(
         cfg["endpoint"].rstrip("/") + "/messages",
         data=json.dumps(payload).encode(),
@@ -330,8 +386,10 @@ def run_task(task, problems, keys, ignore_window):
         if ck.get("steps"):
             raw, du, steps = ck["raw"], {}, ck["steps"]
         else:
+            # platform autoDesignService uses temperature 0.3 for the design call
             raw, du = call(cfg_d, [{"role": "user",
-                                    "content": DESIGN_PROMPT.format(problem_text=ptext)}], keys)
+                                    "content": DESIGN_PROMPT.format(problem_text=ptext)}],
+                           keys, temperature=0.3)
         rec["designer_model"] = cfg_d["model"]
         rec["designer_usage"] = du
         steps, err = validate_design(raw)
@@ -339,7 +397,8 @@ def run_task(task, problems, keys, ignore_window):
             raw2, du2 = call(cfg_d, [
                 {"role": "user", "content": DESIGN_PROMPT.format(problem_text=ptext)},
                 {"role": "assistant", "content": raw},
-                {"role": "user", "content": REPAIR_PROMPT.format(error=err)}], keys)
+                {"role": "user", "content": REPAIR_PROMPT.format(error=err)}], keys,
+                temperature=0.2)  # platform AutoDesign-retry uses 0.2
             rec["designer_usage_repair"] = du2
             steps, err2 = validate_design(raw2)
             if err2:
@@ -353,37 +412,82 @@ def run_task(task, problems, keys, ignore_window):
         rec["n_steps"] = len(steps)
         ckpt_file.parent.mkdir(parents=True, exist_ok=True)
 
-        # 2) execute steps on the cheap sibling (checkpoint after each step)
-        prior, step_logs = ck.get("prior", ""), ck.get("step_logs", [])
-        ckpt_file.write_text(json.dumps({"raw": raw, "steps": steps,
-                                         "prior": prior, "step_logs": step_logs}))
-        done_names = {s["name"] for s in step_logs}
-        for s in steps:
-            if s["name"] in done_names:
-                continue
+        # 2) execute pipeline on the cheap sibling (gate-aware; checkpoint each step)
+        prior = ck.get("prior", "")
+        step_logs = ck.get("step_logs", [])
+        pc = ck.get("pc", 0)
+        gate_counts = ck.get("gate_counts", {})
+        final_agent_name = next((s["name"] for s in reversed(steps)
+                                 if s["type"] == "agent"), steps[-1]["name"])
+
+        def save_ckpt():
+            ckpt_file.write_text(json.dumps({"raw": raw, "steps": steps, "pc": pc,
+                                             "prior": prior, "step_logs": step_logs,
+                                             "gate_counts": gate_counts}))
+
+        save_ckpt()
+        executed = 0
+        while pc < len(steps) and executed < 40:  # hard cap vs runaway loops
+            s = steps[pc]
+            executed += 1
             user = (f"=== BUSINESS PROBLEM ===\n{ptext}\n\n"
                     + (f"=== PREVIOUS STEP OUTPUTS ===\n{prior}\n\n" if prior else "")
                     + "Produce your step's output now.")
             out, u = call(cfg_x, [{"role": "system", "content": s["systemPrompt"]},
                                   {"role": "user", "content": user}], keys)
-            print(f"  [{key}] step {s['name']} done ({len(out)} chars)", flush=True)
-            step_logs.append({"name": s["name"], "role": s["role"],
+            print(f"  [{key}] step {pc+1}/{len(steps)} {s['name']} ({s['type']}, "
+                  f"{len(out)} chars)", flush=True)
+            step_logs.append({"name": s["name"], "role": s["role"], "type": s["type"],
                               "system_prompt": s["systemPrompt"],
                               "output_len": len(out), "usage": u})
             prior += f"\n\n--- {s['name']} ---\n{out}"
-            ckpt_file.write_text(json.dumps({"raw": raw, "steps": steps,
-                                             "prior": prior, "step_logs": step_logs}))
+
+            nxt = pc + 1
+            if s["type"] in ("if", "while"):
+                last = next((l.strip().lower().strip("*. ")
+                             for l in reversed(out.splitlines()) if l.strip()), "")
+                gid = f"{pc}:{s['name']}"
+                gate_counts[gid] = gate_counts.get(gid, 0)
+                if s["type"] == "if":
+                    mappings = s.get("ifMappings") or {}
+                    tgt = mappings.get(last)
+                    step_logs[-1]["gate_keyword"] = last
+                    if isinstance(tgt, int) and 1 <= tgt <= len(steps) \
+                            and tgt - 1 < pc and gate_counts[gid] < 3:
+                        gate_counts[gid] += 1
+                        nxt = tgt - 1
+                        step_logs[-1]["gate_routed_to"] = steps[nxt]["name"]
+                else:  # while
+                    step_logs[-1]["gate_keyword"] = last
+                    if last.startswith("retry") and gate_counts[gid] < 3:
+                        tgt = s.get("targetStep")
+                        if isinstance(tgt, int) and 1 <= tgt <= len(steps) and tgt - 1 < pc:
+                            gate_counts[gid] += 1
+                            nxt = tgt - 1
+                        else:  # fallback: re-run the immediately preceding agent step
+                            for j in range(pc - 1, -1, -1):
+                                if steps[j]["type"] == "agent":
+                                    gate_counts[gid] += 1
+                                    nxt = j
+                                    break
+                        if nxt != pc + 1:
+                            step_logs[-1]["gate_routed_to"] = steps[nxt]["name"]
+            pc = nxt
+            save_ckpt()
+
         ckpt_file.unlink(missing_ok=True)
-        final = step_logs[-1]["output_len"]
+        rec["gate_counts"] = gate_counts
+        rec["executed_steps"] = executed
+        final = next((l["output_len"] for l in reversed(step_logs)
+                      if l["name"] == final_agent_name), step_logs[-1]["output_len"])
         rec.update(status="completed", executor_model=cfg_x["model"],
                    steps=step_logs, final_len=final,
                    finished_at=datetime.now(timezone.utc).isoformat())
         append_ledger(rec)
-        # solution text for the judging store
+        # solution text for the judging store: output of the final AGENT step
         sol_file = ROOT / "runs" / "study3" / "solutions" / f"{key}.txt"
         sol_file.parent.mkdir(parents=True, exist_ok=True)
-        # final step output = last element of prior block
-        sol_file.write_text(prior.split(f"--- {steps[-1]['name']} ---\n")[-1])
+        sol_file.write_text(prior.split(f"--- {final_agent_name} ---\n")[-1])
         return "completed"
     except CreditExhausted as e:
         rec.update(status="credit_exhausted", error=str(e)[:300],

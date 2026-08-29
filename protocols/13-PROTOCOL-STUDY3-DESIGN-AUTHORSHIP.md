@@ -2,6 +2,14 @@
 
 **Status: REGISTERED — OSF Open-Ended Registration `9ukjz` (https://osf.io/9ukjz),
 timestamped 2026-08-28 BEFORE first data collection (D55; runner `code/study3_design_run.py`).**
+**Instrument v2 amendment (D56, 2026-08-29):** designer stage re-instrumented to the
+platform-verbatim auto-design prompt (free roles, if/while gates, 1–7 steps, temp 0.3,
+no approval steps) after human audit found the v1 instrument silently diverged from the
+platform (bespoke prompt, 4-step cap). The 73 v1 runs (40 pilot + 33 full-run starts) are
+archived as superseded pilot-extension data (`runs/study3/*_v1_superseded*`,
+`runs/logs/study3_ledger_v1_superseded.jsonl`), never pooled into Study 3 results.
+Amendment registered on OSF BEFORE any v2 generation: **`bwc93`**
+(https://osf.io/bwc93; MANIFEST Entry 71).
 
 **Lineage:** executes and completes the pre-registered-but-unexecuted arm A7 (D30, D31),
 expanded from a single-designer policy arm to a Designer-Tier × Executor design.
@@ -27,13 +35,28 @@ pipeline rather than to cheap-model execution. Study 3 removes that confound.
 | D-SELF | family's own cheap sibling (T per D27 precedent) | same cheap sibling | self-orchestration at the cheap end |
 | D-FRONT | family's own frontier (pinned registry version) | cheap sibling | downward transfer of design capability |
 
-- Designer receives: problem text (verbatim rendering rule, D32) + the frozen pipeline schema
-  (DeeWaanAI `exportPipeline` format: steps, roles, system prompts, temperatures, maxTokens,
-  optional if/while configs) + instruction to stay within the platform schema.
-- Design output validated programmatically (schema parse + model availability check).
-  Invalid designs: one repair retry with the validation error appended; second failure →
-  design recorded as FAILED, problem falls back to… (decide before registration: exclude vs
-  fixed-pipeline fallback; recommendation: exclude and disclose rate — no silent substitution).
+- **Designer instrument (AMENDED 2026-08-29, D56 — supersedes the v1 bespoke prompt):** the
+  designer stage uses the DeeWaanAI platform's **verbatim auto-design prompt**
+  (`api/services/autoDesignService.ts`): free-form task-adapted roles (the 8-role vocabulary
+  is suggestive, not enforced — verified against platform validation code), Builder-first
+  guidance, if/while quality gates with routing keywords (while: max 3 iterations),
+  "keep pipelines under 8 steps" (validator enforces 1–7), designer temperature 0.3
+  (platform value; retry 0.2; gpt-5.6 omits temperature per D27 provider constraint).
+  **Single disclosed modification:** "approval" (human-in-the-loop) steps are disallowed,
+  because the experiment measures autonomous pipeline quality.
+- Designer input = the problem text ONLY (D32.3 verbatim rendering), as in the platform
+  (`task` field).
+- Design output validated programmatically (JSON parse; `pipeline` array of 1–7 steps,
+  types agent/if/while; no approval steps; systemPrompt present per step; `agents`-only
+  responses recovered into a sequential pipeline exactly as the platform does).
+  Invalid designs: ONE repair retry with the validation error appended; second failure →
+  `design_failed`, excluded and disclosed (no fixed-pipeline fallback — D55).
+- Gate execution is faithful to the platform: `if` gates parse the last-line keyword and
+  route via `ifMappings` (max 3 revisits per gate, matching the while-iteration bound);
+  `while` gates parse retry/pass and jump to `targetStep` (fallback: previous agent step);
+  a global 40-executed-steps cap guards against pathological loops (disclosed).
+- The judged artifact is the output of the **final agent step** (gates produce assessments,
+  not deliverable content).
 - **Designer tokens are charged to arm cost** (D30 precedent: designer/probe/staffing tokens
   count). Cost reported per arm including design overhead.
 - Executor runs the designed pipeline verbatim, model-homogeneous cheap sibling, temp per D27.
