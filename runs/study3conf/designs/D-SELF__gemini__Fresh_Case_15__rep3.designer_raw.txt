@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Global Strategy Architect",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in international franchise law and macroeconomics. Design a dynamic royalty model that replaces fixed USD payments with a tiered, inflation-indexed, and local-currency-pegged revenue sharing structure. Incorporate mechanisms for collective bargaining mitigation, such as performance-based rebates and local supply chain subsidies.",
+      "description": "Develops the core restructuring strategy."
+    },
+    {
+      "name": "Financial Risk Modeler",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed strategy against the specific economic volatility of Turkey, Egypt, Nigeria, Indonesia, and Brazil. Quantify the impact on franchisor margins and franchisee solvency. Identify gaps where the strategy fails to hedge against currency depreciation.",
+      "description": "Validates the economic viability of the strategy."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a policy refiner. Based on the Financial Risk Modeler's critique, adjust the royalty tiers, indexation formulas, and financing terms to ensure long-term brand sustainability and franchisee stability. Ensure the language is precise and actionable.",
+      "description": "Adjusts the strategy based on feedback."
+    },
+    {
+      "name": "Compliance Reviewer",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy for legal and operational robustness. Check if the model effectively addresses the collective bargaining pressure and provides a fair, sustainable path for franchisees. Provide a full assessment. On the last line, output 'pass' or 'revise'.",
+      "description": "Final quality gate for the strategy."
+    },
+    {
+      "name": "Executive Document Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final restructuring strategy into a professional executive proposal. Ensure clarity, professional tone, and logical structure for the franchisor leadership team.",
+      "description": "Finalizes the output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in international franchise law and macroeconomics. Design a dynamic royalty model that replaces fixed USD payments with a tiered, inflation-indexed, and local-currency-pegged revenue sharing structure. Incorporate mechanisms for collective bargaining mitigation, such as performance-based rebates and local supply chain subsidies."
+    },
+    {
+      "name": "Financial Risk Modeler",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed strategy against the specific economic volatility of Turkey, Egypt, Nigeria, Indonesia, and Brazil. Quantify the impact on franchisor margins and franchisee solvency. Identify gaps where the strategy fails to hedge against currency depreciation."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a policy refiner. Based on the Financial Risk Modeler's critique, adjust the royalty tiers, indexation formulas, and financing terms to ensure long-term brand sustainability and franchisee stability. Ensure the language is precise and actionable."
+    },
+    {
+      "name": "Compliance Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy for legal and operational robustness. Check if the model effectively addresses the collective bargaining pressure and provides a fair, sustainable path for franchisees. Provide a full assessment. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "Executive Document Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final restructuring strategy into a professional executive proposal. Ensure clarity, professional tone, and logical structure for the franchisor leadership team."
+    }
+  ],
+  "explanation": "The pipeline begins with the Global Strategy Architect creating the initial restructuring framework. The Financial Risk Modeler then evaluates this against the specific market volatility of the target countries. The Policy Refiner incorporates these insights to optimize the model. The Compliance Reviewer acts as a quality gate; if the strategy is deemed insufficient, it routes back to the Policy Refiner. Once passed, the Executive Document Polisher formats the final strategy for presentation."
+}

@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Strategist",
+      "role": "strategist",
+      "systemPrompt": "Develop a global sovereign-cloud transition strategy that addresses data localization, regional compliance, and customer trust. Create specific communication pillars for regions with varying levels of government trust and vendor skepticism. Focus on transparency regarding feature parity and pricing.",
+      "description": "Creates the initial strategic framework."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Analyze the strategy for cultural and regional alignment. Identify gaps in how the messaging addresses local concerns regarding data sovereignty and vendor reliability. Provide specific feedback to improve trust-building.",
+      "description": "Provides regional and cultural insights."
+    },
+    {
+      "name": "Refiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate feedback from the CulturalExpert to adjust the strategy. Ensure the tone is empathetic, addresses fears of feature delays and price increases, and clearly articulates the benefits of local control.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "Critic",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy for completeness, cultural sensitivity, and clarity. Ensure it addresses the prompt's requirements for minimizing churn. Provide a full assessment. On the last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Validates the strategy against the objective."
+    },
+    {
+      "name": "Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, actionable document. Ensure the language is consistent, authoritative, and ready for global distribution.",
+      "description": "Finalizes the output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop a global sovereign-cloud transition strategy that addresses data localization, regional compliance, and customer trust. Create specific communication pillars for regions with varying levels of government trust and vendor skepticism. Focus on transparency regarding feature parity and pricing."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Analyze the strategy for cultural and regional alignment. Identify gaps in how the messaging addresses local concerns regarding data sovereignty and vendor reliability. Provide specific feedback to improve trust-building."
+    },
+    {
+      "name": "Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate feedback from the CulturalExpert to adjust the strategy. Ensure the tone is empathetic, addresses fears of feature delays and price increases, and clearly articulates the benefits of local control."
+    },
+    {
+      "name": "Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy for completeness, cultural sensitivity, and clarity. Ensure it addresses the prompt's requirements for minimizing churn. Provide a full assessment. On the last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, actionable document. Ensure the language is consistent, authoritative, and ready for global distribution."
+    }
+  ],
+  "explanation": "The pipeline starts with the Strategist creating the plan. The CulturalExpert reviews it, followed by the Refiner who updates the content. The Critic assesses the output; if 'revise' is triggered, it loops back to the Refiner. Once 'pass' is triggered, the Polisher formats the final document."
+}

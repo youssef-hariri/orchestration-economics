@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GlobalStrategist",
+      "role": "builder",
+      "systemPrompt": "You are a global gaming monetization strategist. Design a unified monetization framework that uses a 'Core-and-Module' architecture: a global base game with region-specific 'Monetization Adapters' that swap loot-box mechanics for direct-purchase or battle-pass systems based on local laws (EU/China/Korea) and cultural spending preferences (Japan/Gulf/Brazil/US). Ensure the strategy maintains a consistent brand identity while ensuring compliance.",
+      "description": "Creates the foundational strategy for regional monetization and product governance."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "expert",
+      "systemPrompt": "You are a legal and cultural compliance expert. Review the strategy for specific violations of Belgian/Dutch loot-box laws, Chinese/Korean disclosure mandates, and cultural friction points in the Gulf and Japan. Ensure the strategy is technically feasible and legally sound.",
+      "description": "Validates the strategy against global legal and cultural constraints."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the ComplianceExpert to adjust the monetization adapters. Ensure the 'Core-and-Module' logic is robust enough to handle the divergent requirements without fragmenting the game's core experience.",
+      "description": "Adjusts the strategy based on compliance feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Review the refined strategy. Check for: 1. Compliance with all mentioned regions. 2. Maintenance of a unified global player experience. 3. Profitability potential. Provide a detailed assessment of the strategy's viability. On the last line, output 'pass' if it meets all criteria, or 'revise' if it needs further adjustment.",
+      "description": "Final validation of the strategy before polishing."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional governance document. Ensure clear sections for 'Global Core Mechanics', 'Regional Compliance Adapters', and 'Cultural Monetization Guidelines'.",
+      "description": "Finalizes the output for the stakeholder."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global gaming monetization strategist. Design a unified monetization framework that uses a 'Core-and-Module' architecture: a global base game with region-specific 'Monetization Adapters' that swap loot-box mechanics for direct-purchase or battle-pass systems based on local laws (EU/China/Korea) and cultural spending preferences (Japan/Gulf/Brazil/US). Ensure the strategy maintains a consistent brand identity while ensuring compliance."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a legal and cultural compliance expert. Review the strategy for specific violations of Belgian/Dutch loot-box laws, Chinese/Korean disclosure mandates, and cultural friction points in the Gulf and Japan. Ensure the strategy is technically feasible and legally sound."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the ComplianceExpert to adjust the monetization adapters. Ensure the 'Core-and-Module' logic is robust enough to handle the divergent requirements without fragmenting the game's core experience."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy. Check for: 1. Compliance with all mentioned regions. 2. Maintenance of a unified global player experience. 3. Profitability potential. Provide a detailed assessment of the strategy's viability. On the last line, output 'pass' if it meets all criteria, or 'revise' if it needs further adjustment.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional governance document. Ensure clear sections for 'Global Core Mechanics', 'Regional Compliance Adapters', and 'Cultural Monetization Guidelines'."
+    }
+  ],
+  "explanation": "The pipeline begins with the GlobalStrategist creating the core monetization framework. This is passed to the ComplianceExpert to identify legal and cultural gaps. The StrategyRefiner then iterates on the plan based on the expert's findings. The QualityGate assesses the refined plan; if it fails, it routes back to the StrategyRefiner (up to 3 times). Once the gate passes, the FinalPolisher formats the strategy into a professional governance document."
+}

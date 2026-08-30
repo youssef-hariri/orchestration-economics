@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Context Analyst",
+      "role": "analyst",
+      "description": "Analyzes labor laws, cultural attitudes, and operational constraints across twelve countries to establish factual baseline for policy design"
+    },
+    {
+      "name": "Policy Framework Builder",
+      "role": "builder",
+      "description": "Drafts initial flexible-work policy framework incorporating country-specific provisions, legal compliance paths, and fairness principles"
+    },
+    {
+      "name": "Cultural & Legal Validator",
+      "role": "expert",
+      "description": "Reviews policy draft against labor law requirements and cultural norms in each of twelve markets, identifying conflicts and compliance risks"
+    },
+    {
+      "name": "Operational Feasibility Assessor",
+      "role": "critic",
+      "description": "Evaluates policy draft for internal consistency, client-facing implications, and team coordination challenges across distributed markets"
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "description": "Revises policy based on validator and feasibility feedback, creating country-tiered implementation approach with harmonized core principles"
+    },
+    {
+      "name": "Coherence Quality Gate",
+      "role": "critic",
+      "description": "Assesses refined policy for logical consistency, fairness across markets, legal soundness, and operational workability before finalization"
+    },
+    {
+      "name": "Executive Policy Polisher",
+      "role": "polisher",
+      "description": "Formats final policy into user-facing deliverable with clear country-specific implementation guides, FAQ, and roll-out timeline"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a global labor-market analyst. Research and document: (1) Current labor laws regarding work time, right to disconnect, and four-day weeks in all twelve countries; (2) Cultural attitudes toward visible presence, remote work legitimacy, and career advancement visibility in each market; (3) Client service requirements and timezone constraints; (4) Existing company precedents or pilot data. Produce a structured fact sheet organized by country with legal summaries, cultural notes, and operational constraints. This becomes the foundation for policy design."
+    },
+    {
+      "name": "Policy Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a policy architect designing a global flexible-work framework. Using the context analysis provided, create an initial policy draft that: (1) Establishes core principles (fairness, legal compliance, operational viability); (2) Creates a tiered country structure (Tier 1: four-day week permitted; Tier 2: flexible compressed weeks; Tier 3: traditional with flexible hours); (4) Addresses visibility concerns with transparent outcomes-based performance metrics; (5) Includes transition guidance and role-specific carve-outs (client-facing, critical operations). Output a comprehensive policy skeleton with all major sections."
+    },
+    {
+      "name": "Cultural & Legal Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a labor law and organizational culture expert. Review the policy draft against: (1) Specific labor law requirements in each country (enforcement risk, compliance gaps); (2) Cultural fit with local employee expectations and company brand perception in each market; (3) Equity risks (e.g., does the policy advantage certain markets unfairly?); (4) Client and partner relationship implications. Provide detailed feedback organized by country and by legal/cultural domain. Identify every compliance risk and cultural misalignment. End with: pass or revise"
+    },
+    {
+      "name": "Operational Feasibility Assessor",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are an operational and HR feasibility reviewer. Assess the policy draft for: (1) Internal consistency (do country tiers contradict each other?); (2) Team coordination logistics (can distributed teams on different schedules collaborate effectively?); (3) Client expectation management (will service levels suffer?); (4) Performance management workability (are outcomes-based metrics measurable and fair?); (5) Enforcement and exceptions (is the policy administrable or will exceptions overwhelm it?). Provide specific operational concerns and clarification needs. End with: pass or revise"
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a policy refiner. Based on validator and feasibility feedback, revise the policy to: (1) Fix all legal compliance gaps identified by country; (2) Adjust country tiers to better align with cultural expectations; (3) Add operational guardrails (e.g., core collaboration hours, role exemptions, team-level negotiation processes); (4) Strengthen fairness across markets through transparent criteria; (5) Create implementation playbooks for HR teams and managers. Maintain policy coherence while accommodating divergent needs. Produce a revised, more robust policy document."
+    },
+    {
+      "name": "Coherence Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a final coherence and quality gate. Assess the refined policy holistically: (1) Is it legally compliant in all twelve countries? (2) Does it treat employees fairly despite divergent country tiers? (3) Is it operationally viable (can it be implemented without chaos)? (4) Does it genuinely address younger employee demands while respecting cultures that value visible effort? (5) Are all contradictions resolved? Provide a complete assessment with specific strengths and any remaining issues. If any major gap remains, output: retry. If the policy is sound and ready for presentation, output: pass.",
+      "targetStep": 4,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Policy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final executive communication specialist. Format the approved policy into a polished, user-facing deliverable including: (1) Executive summary (1 page); (2) Core principles and fairness framework; (3) Country-by-country implementation guide (tiered structure clearly explained); (4) Manager FAQ addressing visibility, career impact, and fairness concerns; (5) Employee FAQ addressing flexibility, legal protections, and transition timeline; (6) 12-month roll-out plan with change management milestones; (7) Metrics for pilot success. Output should be professional, clear, and ready for board review and employee communication."
+    }
+  ],
+  "explanation": "This pipeline follows a research-then-design-then-validate-then-refine-then-polish sequence optimized for complex global policy design. The Global Context Analyst establishes factual grounding (labor laws, cultural data) essential for legitimate policy. The Policy Framework Builder then translates context into an initial coherent structure. Two specialized reviewers in parallel—Cultural & Legal Validator (compliance risk) and Operational Feasibility Assessor (workability)—identify distinct failure modes that a single reviewer would miss. The Policy Refiner incorporates both streams of feedback to create a robust, legally sound, and operationally viable revised policy. A 3-iteration while loop at the Coherence Quality Gate (not a simple pass/fail if) ensures the refined policy actually resolves identified issues rather than masking them; if gaps remain after iteration 1 or 2, the gate routes back to the Refiner for additional cycles. Finally, the Executive Polisher formats the validated policy for stakeholder communication. This design explicitly separates analysis (grounding), creation (drafting), validation (multi-dimensional review), refinement (iterative correction), and presentation (final polish), reducing risk of legal non-compliance, fairness blindspots, or operationally unworkable requirements while ensuring the final policy truly accommodates divergent cultural and market needs."
+}
+```

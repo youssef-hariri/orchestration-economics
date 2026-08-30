@@ -1,0 +1,90 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Creates initial product-adaptation strategy framework covering interaction style, household roles, privacy signaling, and feature prioritization for honorific-language markets (Japan, Korea, Thailand, Gulf)"
+    },
+    {
+      "name": "Localization Expert",
+      "role": "expert",
+      "description": "Provides domain-specific insights on honorific systems, cultural communication norms, and household structure expectations across target markets"
+    },
+    {
+      "name": "Privacy & Compliance Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional privacy regulations, cultural expectations around surveillance, and consent frameworks for always-listening devices in each market"
+    },
+    {
+      "name": "Strategy Synthesizer",
+      "role": "strategist",
+      "description": "Integrates localization insights and privacy analysis into a cohesive adaptation strategy with prioritized feature recommendations and interaction guidelines"
+    },
+    {
+      "name": "Adaptation Refiner",
+      "role": "refiner",
+      "description": "Strengthens strategy based on critical feedback—deepens market-specific detail, reconciles contradictions, and ensures all four pillars (interaction, household roles, privacy, features) are fully addressed"
+    },
+    {
+      "name": "Completeness Critic",
+      "role": "critic",
+      "description": "Evaluates whether the adaptation strategy is comprehensive, market-specific, actionable, and internally consistent across all regions and dimensions"
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy document for clarity, ensures executive readability, and structures recommendations for implementation by product and regional teams"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "type": "agent",
+      "role": "builder",
+      "systemPrompt": "You are designing a product-adaptation strategy for a smart-home voice assistant entering Japan, Korea, Thailand, and the Gulf region in 2026. Create an initial framework addressing: (1) Interaction style—how users in each market prefer to engage with voice devices (honorific formality, command vs. conversation, comfort with spoken requests); (2) Household roles—account for multigenerational homes, decision-making hierarchies, and who controls the device; (3) Privacy signaling—how to communicate always-listening status, build trust, and align with local expectations; (4) Feature prioritization—which capabilities matter most in each market. Structure your output as a comprehensive first draft with country-specific considerations and cross-cutting themes."
+    },
+    {
+      "name": "Localization Expert",
+      "type": "agent",
+      "role": "expert",
+      "systemPrompt": "You are a cultural and linguistic expert in honorific-language markets. Review the initial adaptation strategy and provide deep insights on: (1) How Japanese keigo (respectful language), Korean formal/informal registers, Thai hierarchical speech levels, and Gulf Arabic formality norms should shape voice assistant tone and response templates; (2) Cultural norms around commanding devices aloud (dignity, femininity, class perception); (3) Multigenerational household dynamics—elder authority, child-parent communication styles, spousal patterns; (4) Regional taboos or sensitivities regarding listening, data retention, and smart-home surveillance. Provide specific examples and implementation implications for each market."
+    },
+    {
+      "name": "Privacy & Compliance Analyst",
+      "type": "agent",
+      "role": "analyst",
+      "systemPrompt": "Analyze privacy regulations and cultural privacy expectations for always-listening devices in Japan, Korea, Thailand, and the Gulf. Investigate: (1) Local data-protection laws (APPI, PIPA, Thailand's PDA, UAE/Saudi data governance); (2) Cultural attitudes toward surveillance—trust in corporations, government, family monitoring norms; (3) Preferred privacy controls (physical mute buttons, audio deletion timelines, transparent logging); (4) Consent models and notification requirements by region; (5) Alignment gaps between Western design (always-on convenience) and local expectations (privacy-first defaults). Provide market-by-market regulatory and cultural findings."
+    },
+    {
+      "name": "Strategy Synthesizer",
+      "type": "agent",
+      "role": "strategist",
+      "systemPrompt": "Integrate the localization insights and privacy analysis into a unified product-adaptation strategy. Synthesize findings into: (1) Interaction Style—specific tone templates, honorific levels, and conversation patterns for each market; (2) Household Roles—recommended features and permissions models for multigenerational use (e.g., parental locks, elder-friendly modes, guest controls); (3) Privacy Signaling—visual/audio indicators, default privacy settings, user education materials; (4) Feature Prioritization—rank capabilities (voice commands, automation, information retrieval, entertainment, home control) by market demand and regulatory fit. Organize as a strategic roadmap with implementation priorities and risk mitigation."
+    },
+    {
+      "name": "Adaptation Refiner",
+      "type": "agent",
+      "role": "refiner",
+      "systemPrompt": "Strengthen and deepen the adaptation strategy based on critical feedback. Expand market-specific detail, resolve any contradictions between localization guidance and feature recommendations, ensure all four pillars (interaction, household roles, privacy, features) are equally developed, add concrete examples of voice interaction scripts or UI text adaptations, and verify that recommendations respect both business feasibility and cultural authenticity. Produce a refined, comprehensive strategy document."
+    },
+    {
+      "name": "Completeness Critic",
+      "type": "if",
+      "systemPrompt": "You are a quality critic evaluating the product-adaptation strategy. Assess: (1) Coverage—are all four pillars (interaction style, household roles, privacy signaling, feature prioritization) thoroughly addressed for all four markets? (2) Specificity—are recommendations concrete and market-differentiated, not generic? (3) Coherence—do interaction guidelines align with privacy safeguards and feature choices? (4) Feasibility—are suggestions implementable by a product team? (5) Cultural sensitivity—do recommendations respect local norms without stereotyping? Provide detailed strengths, specific gaps, and actionable improvement areas. Output EXACTLY ONE keyword on the VERY LAST LINE: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Output Polisher",
+      "type": "agent",
+      "role": "polisher",
+      "systemPrompt": "Format the final product-adaptation strategy for executive and product-team readership. Structure as: (1) Executive Summary—key adaptation insights and business implications; (2) Market-by-Market Profiles—interaction style, household-role guidance, privacy approach, and feature priorities for Japan, Korea, Thailand, Gulf; (3) Cross-Cutting Implementation Guidelines—tone templates, consent workflows, hardware/software considerations; (4) Risk Mitigation—cultural pitfalls to avoid, compliance checkpoints; (5) Roadmap—phased rollout and localization milestones. Use clear headings, bullet points, and examples. Ensure the document is ready for stakeholder review and regional team distribution."
+    }
+  ],
+  "explanation": "This pipeline is designed to develop a culturally nuanced, comprehensive product-adaptation strategy for a voice assistant in honorific-language markets. Execution flow: Builder creates initial framework → Localization Expert adds deep cultural and linguistic insights → Privacy Analyst provides regulatory and trust-building analysis → Strategy Synthesizer integrates all inputs into a unified roadmap → Adaptation Refiner strengthens detail and coherence → Completeness Critic evaluates coverage and feasibility (if revise, loops back to Refiner to deepen market-specific recommendations and resolve gaps, up to 3 iterations) → Output Polisher formats for stakeholder consumption. This structure ensures the strategy balances cultural authenticity (expert input), legal compliance (analyst), business coherence (strategist), and implementation rigor (refiner + critic feedback loop) before final delivery."
+}
+```

@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Compensation Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive compensation policy framework addressing cost-of-labor logic, fairness perceptions, and transparency requirements across 30 countries"
+    },
+    {
+      "name": "Legal & Compliance Analyzer",
+      "role": "analyst",
+      "description": "Analyzes pay-transparency laws across all 30 jurisdictions, identifies disclosure requirements, legal risks, and compliance obligations"
+    },
+    {
+      "name": "Labor Market & Fairness Expert",
+      "role": "expert",
+      "description": "Provides domain expertise on location-adjusted pay band benchmarking, internal equity metrics, market data interpretation, and salary compression mitigation strategies"
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "description": "Integrates legal constraints, market data insights, and fairness principles into a coherent, implementable policy recommendation"
+    },
+    {
+      "name": "Coherence & Feasibility Critic",
+      "role": "critic",
+      "description": "Reviews refined policy for internal consistency, practical implementation feasibility, legal soundness, and fairness perception risks across stakeholder groups"
+    },
+    {
+      "name": "Final Polish & Formatting",
+      "role": "polisher",
+      "description": "Formats final policy recommendation with clear governance structure, implementation roadmap, FAQ section, and communication templates for stakeholder rollout"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Compensation Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a global compensation policy for a 30-country remote software company. Create an initial comprehensive framework that addresses: (1) location-adjusted pay bands that reflect cost-of-labor while managing internal fairness perceptions, (2) approaches to handle public salary comparison forums and peer benchmarking concerns, (3) compliance with varying pay-transparency disclosure laws across jurisdictions, (4) methods to reduce salary compression and internal equity friction. Structure your output as: Executive Summary | Policy Pillars | Key Challenges Addressed | Preliminary Governance Model."
+    },
+    {
+      "name": "Legal & Compliance Analyzer",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a legal compliance analyst for global compensation. Analyze pay-transparency laws across 30 countries (focus on EU, North America, APAC regions where remote workers concentrate). For each major jurisdiction or regional cluster, identify: (1) mandatory pay disclosure requirements (job postings, internal equity reports, gender pay gap), (2) penalties and enforcement mechanisms, (3) exemptions for remote/global companies, (4) timing and reporting deadlines, (5) conflicts between different jurisdictions. Provide a compliance obligation matrix and identify which policy approaches create legal risk vs. safe harbor."
+    },
+    {
+      "name": "Labor Market & Fairness Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a compensation expert specializing in global workforce equity. Analyze: (1) How location-adjusted pay bands can be transparently justified using market data without appearing arbitrary, (2) Fairness perception psychology—what communication strategies reduce resentment when similar roles have 30-40% salary variance by geography, (3) Salary compression risks in tight labor markets (e.g., external hires in expensive cities vs. internal Warsaw engineers), (4) Best practices from other global tech companies managing transparency, (5) Role-leveling and skill-adjusted pay models as alternatives to pure location adjustment. Provide evidence-based recommendations on balancing cost logic with perceived fairness."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are integrating multiple expert inputs into a coherent global compensation policy. Take the initial framework, legal obligations, and fairness insights. Produce a refined policy that: (1) Defines transparent pay band methodology (e.g., market-rate benchmarking + location multiplier with published rationale), (2) Specifies what MUST be disclosed vs. what can remain confidential per jurisdiction, (3) Proposes internal communication strategy to address forum-based peer comparisons, (4) Includes governance—who reviews bands annually, how new market data is incorporated, dispute resolution, (5) Suggests pilot implementation sequence. Ensure policy is legally defensible, practically implementable, and addresses fairness concerns. Flag any unresolved tensions."
+    },
+    {
+      "name": "Coherence & Feasibility Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are reviewing a global compensation policy for coherence, legal compliance, and feasibility. Assess: (1) Are transparency disclosures consistent with legal requirements across all 30 jurisdictions? Any conflicts or gaps? (2) Is the pay-band methodology clearly justified and defensible if challenged? (3) Will the internal communication strategy realistically reduce friction from forum comparisons, or create new tensions? (4) Are governance processes realistic for a remote company of this size? (5) Does the policy address salary compression and internal equity risks? (6) Are there any practical implementation obstacles or unintended consequences? Provide your FULL assessment with specific strengths, weaknesses, and required fixes. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 5, "revise": 3}
+    },
+    {
+      "name": "Final Polish & Formatting",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing a global compensation policy for executive and HR stakeholder presentation. Format the approved policy as: (1) 1-page Executive Summary with key decisions, (2) Detailed Policy Document with sections on pay methodology, location adjustment rationale, transparency disclosures by country, governance, and dispute resolution, (3) Implementation Roadmap (6-12 month phased rollout), (4) Employee FAQ addressing common concerns about fairness and transparency, (5) HR Manager Communication Kit with talking points for difficult conversations. Ensure language is professional, clear, and appropriate for legal review. Include sample pay band visualizations and comparison matrices."
+    }
+  ],
+  "explanation": "This 6-step pipeline is designed to synthesize legal, market, and organizational fairness constraints into a defensible global compensation policy. EXECUTION FLOW: (1) Builder creates initial framework, (2) Analyst independently maps legal compliance obligations across 30 jurisdictions, (3) Expert provides fairness and market-rate justification strategies in parallel, (4) Refiner integrates all three inputs into coherent policy addressing root causes (transparency laws, forum comparisons, internal equity), (5) Critic reviews coherence/feasibility with IF gate—if 'revise', loops back to Refiner to address gaps; if 'pass', continues, (6) Polisher formats for stakeholder communication. The IF gate ensures refinement cycles (max 3 loops back to Refiner) until policy is legally sound, practically implementable, and addresses fairness perceptions. Parallel analyst + expert work (steps 2-3) reduces latency while building independent evidence for policy justification."
+}
+```

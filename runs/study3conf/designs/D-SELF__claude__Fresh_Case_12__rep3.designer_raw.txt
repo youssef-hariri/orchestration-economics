@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Creates initial market-specific pricing framework by synthesizing income levels, payment infrastructure, household norms, and billing preferences across African, South Asian, and Latin American markets"
+    },
+    {
+      "name": "Financial Modeling Analyst",
+      "role": "analyst",
+      "description": "Analyzes unit economics, currency conversion implications, payment processing costs, and consolidated USD reporting impact across localized pricing tiers"
+    },
+    {
+      "name": "Business Model Strategist",
+      "role": "strategist",
+      "description": "Develops localized subscription strategies including tier design, family-sharing mechanics, payment rail optimization, and revenue recognition approaches that balance local market needs with investor-facing consolidated metrics"
+    },
+    {
+      "name": "Regional Pricing Expert",
+      "role": "expert",
+      "description": "Provides domain-specific validation of pricing sensitivity, payment behavior authenticity, regulatory compliance, and competitive benchmarking across target markets"
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Reviews complete strategy for internal consistency, investor defensibility, operational feasibility, and identifies gaps or risks in the localization approach"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Resolves identified weaknesses, strengthens investor narrative, addresses operational concerns, and ensures consolidated unit economics remain defensible"
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into investor-ready executive summary with clear pricing matrices, financial projections, and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a market research expert designing localized pricing strategy. Create a comprehensive framework that identifies: (1) income distribution and purchasing power by region (Africa, South Asia, Latin America); (2) dominant payment methods (mobile money, QR, installments, card penetration); (3) family/household sharing norms and multi-user expectations; (4) cultural attitudes toward subscription billing and recurring charges. Organize findings by market segment with specific characteristics and implications for subscription design. Output a structured, detailed market analysis ready for strategic modeling."
+    },
+    {
+      "name": "Financial Modeling Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst specializing in global pricing strategy. Based on the market research provided, develop: (1) localized pricing tiers for each region with justification; (2) payment processing cost modeling (fees vary by payment rail); (3) currency volatility buffers and hedging considerations; (4) family-share plan economics and revenue impact; (5) monthly/annual prepay incentive structures. Calculate unit economics at each tier, aggregate to consolidated USD basis, and model sensitivity to exchange rate fluctuations. Show how localized prices translate to defensible blended USD per-user economics for investor reporting. Provide detailed financial tables and assumptions."
+    },
+    {
+      "name": "Business Model Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a subscription business model strategist. Synthesize the market research and financial analysis into a complete localization strategy: (1) define tier architecture (e.g., Light/Standard/Premium with region-specific pricing); (2) design family-sharing features aligned with local household norms (group size, payment responsibility, content access rules); (3) optimize payment rail strategy per market (which payment methods to prioritize, incentives, friction reduction); (4) model billing cycle strategies (monthly vs. annual; installment options; grace periods for payment failures); (5) articulate consolidated revenue recognition and investor narrative that justifies local price variation as strategy, not currency arbitrage. Create an integrated playbook showing how all elements work together. Include risk mitigation for exchange volatility and payment fraud."
+    },
+    {
+      "name": "Regional Pricing Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regional pricing and payment expert for emerging markets (Africa, South Asia, Latin America). Review the proposed localized strategy for: (1) pricing realism — do the proposed tiers reflect actual purchasing power and willingness to pay in each market? (2) payment method fit — are the recommended payment rails actually accessible and preferred in these regions? (3) family-share norms — does the proposed sharing model align with actual household behaviors? (4) competitive positioning — how do these prices compare to local and global competitors? (5) regulatory/compliance risks — any concerns with pricing discrimination, consumer protection, or FX regulations? (6) cultural sensitivity — any tone-deaf elements in how recurring billing or family access is framed? Provide detailed validation with specific market examples and flag any authenticity concerns. Output full expert assessment."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer of localization strategy. Assess the complete strategy (market research, financial model, business model, expert validation) for: (1) Internal coherence — do all components support each other logically? (2) Investor defensibility — does the consolidated USD economics story hold up? Can you explain local price variation credibly to a skeptical CFO? (3) Operational feasibility — can the billing, payment, and family-sharing systems actually be built and maintained? (4) Completeness — are all three regions adequately addressed? Are edge cases covered? (5) Risk exposure — what could go wrong (FX shock, payment processor failure, share cannibalization)? Is mitigation addressed? (6) Specificity — are recommendations concrete enough to execute, or too abstract? Provide a detailed critical assessment identifying strengths and any material gaps or logical inconsistencies. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refinement expert. The strategy has received critical feedback. Address all identified gaps, inconsistencies, and weaknesses: (1) strengthen the investor narrative by clarifying how localized pricing is a strategic moat, not a compliance burden; (2) add operational safeguards for FX exposure and payment processor integration; (3) deepen any underdeveloped regions or use cases; (4) resolve logical conflicts between components; (5) add specific KPIs and success metrics for monitoring each market; (6) create a phased rollout plan showing how to validate and scale. Maintain all the good elements while making the strategy more robust, specific, and defensible. Output the complete refined strategy."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Transform the refined strategy into a polished, investor-ready executive summary (5-7 pages max). Structure as: (1) Executive Summary (1 page) — why localize, what this delivers, key metrics; (2) Market Strategy (1.5 pages) — overview of each region, pricing tiers, payment strategy; (3) Financial Model (1.5 pages) — pricing tables, blended USD economics, margin impact, sensitivity; (4) Implementation Roadmap (1 page) — phasing, risk mitigation, success metrics; (5) Appendix — detailed pricing matrices by region, payment processor economics, family-share feature matrix. Use clear visuals (pricing tables, charts, waterfall). Write for CFO/investor audience. Ensure every claim is justified and consolidated USD story is crystal clear. Output final polished strategy document."
+    }
+  ],
+  "explanation": "This pipeline is designed to deliver a comprehensive, investor-defensible localized pricing strategy through sequential expertise layers: (1) Market Research Builder establishes ground truth about regional differences; (2) Financial Modeling Analyst translates market insights into USD-consolidated unit economics; (3) Business Model Strategist integrates both into an executable operational model; (4) Regional Expert validates authenticity and competitive fit; (5) Strategy Critic performs rigorous quality gate, checking for internal consistency, investor narrative strength, and operational feasibility — if gaps exist, routing back to Refiner; (6) Strategy Refiner (if triggered) deepens underdeveloped areas and strengthens the narrative; (7) Executive Polisher formats for investor delivery. The IF gate after Critic ensures the strategy is bulletproof before executive presentation. No approval steps — the critic's criteria are deterministic (coherence, defensibility, feasibility, completeness, risk mitigation, specificity). Maximum one refinement loop to stay efficient. Final output is a board-ready pricing strategy that balances aggressive localization with consolidated reporting credibility."
+}
+```

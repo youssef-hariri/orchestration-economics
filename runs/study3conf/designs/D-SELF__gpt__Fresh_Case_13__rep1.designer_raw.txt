@@ -1,0 +1,88 @@
+{
+  "agents": [
+    {
+      "name": "Cross-Regional Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, decision-ready design for climate-linked microinsurance distribution and business models for smallholder farmers in East Africa, South Asia, and Central America in 2026. Compare cooperatives, mobile-network agents, religious community groups, and fintech apps as distribution channels. Address regional differences in trust in formal insurance, intermediary legitimacy, claims-speed expectations, digital access, regulatory context, and actuarial-data quality. Propose multiple viable options rather than one universal model, including acquisition-cost assumptions, premium collection, product design, claims verification and payment, partner incentives, reinsurance or risk-transfer structures, basis-risk mitigation, portfolio diversification, and scale-up conditions. Make assumptions explicit, distinguish evidence from hypotheses, and present clear regional recommendations, trade-offs, implementation requirements, and metrics.",
+      "description": "Creates the initial cross-regional strategy and business-model options."
+    },
+    {
+      "name": "Regional Evidence and Economics Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed climate microinsurance strategy and strengthen it with structured regional reasoning. Examine likely differences across East Africa, South Asia, and Central America in customer trust, distribution norms, mobile and financial inclusion, cooperative and faith-group roles, claims expectations, climate exposure, data availability, and regulatory or consumer-protection constraints. Stress-test acquisition-cost logic, willingness to pay, premium collection economics, claims operating costs, fraud and basis risk, adverse selection, correlation risk, and portfolio diversification. Identify unsupported assumptions and provide practical proxy metrics or pilot tests where reliable actuarial data is unavailable. Produce specific corrections and additions for the strategy, without inventing precise facts.",
+      "description": "Tests regional assumptions, economics, data limitations, and portfolio-risk logic."
+    },
+    {
+      "name": "Insurance and Climate-Risk Expert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy and analytical findings as an expert in inclusive insurance, climate risk, agricultural insurance, distribution partnerships, and emerging-market regulation. Assess whether proposed products and operating models could make claims credible, affordable, timely, understandable, and legally defensible. Recommend suitable combinations of parametric, index, indemnity, hybrid, bundled, and pay-as-you-go approaches by context. Address basis risk, data validation, trigger transparency, independent loss verification, grievance handling, reinsurance, catastrophe accumulation, intermediary conduct, customer consent, and solvency considerations. Highlight material risks and give concrete, region-sensitive remedies. Ensure recommendations are commercially realistic and do not overstate certainty.",
+      "description": "Provides specialized insurance, climate-risk, consumer-protection, and operating-model judgment."
+    },
+    {
+      "name": "Integrated Model Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, decision-ready final draft using the analyst and expert feedback. Preserve useful analysis while fixing unsupported claims, contradictions, missing regional distinctions, weak economics, and inadequately addressed trust or claims-credibility issues. Present a comparative option matrix covering each intermediary type and region; recommended product and business-model archetypes; acquisition, servicing, and claims economics; partner incentives; data and risk-transfer approaches; portfolio construction; pilot sequencing; key metrics; and explicit go/no-go conditions. Separate assumptions, scenario ranges, and facts. Make the output actionable for an insurer while acknowledging uncertainty and avoiding false precision.",
+      "description": "Integrates all findings into a rigorous, practical, and regionally differentiated strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the integrated strategy in full. Assess whether it directly answers the objective across all three regions and all four distribution candidates; differentiates trust regimes and intermediation norms; offers credible acquisition-cost and claims-credibility mechanisms; addresses uneven actuarial data; manages basis, catastrophe, adverse-selection, fraud, and concentration risks; explains business-model trade-offs; and provides actionable pilots, metrics, and assumptions. Identify specific omissions, contradictions, unsupported certainty, impractical recommendations, and presentation problems. If substantial improvements are needed, explain exactly what the refiner must change. After the full assessment, output exactly one routing keyword on the final line: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 3
+      },
+      "description": "Determines whether the integrated strategy is sufficiently complete, credible, and actionable."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing deliverable from the refined strategy and quality assessment. Improve clarity, structure, concision, and executive usability without removing important caveats or substantive recommendations. Use clear headings, comparison tables or compact matrices where helpful, and explicitly distinguish regional recommendations, channel economics, claim-credibility mechanisms, data requirements, portfolio-risk controls, pilot priorities, assumptions, and success metrics. Ensure every distribution option is evaluated fairly, recommendations are actionable for a 2026 insurer pilot, and no unsupported precise claims are presented as facts. Return only the polished strategy document.",
+      "description": "Formats and quality-checks the approved strategy for executive and implementation use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cross-Regional Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, decision-ready design for climate-linked microinsurance distribution and business models for smallholder farmers in East Africa, South Asia, and Central America in 2026. Compare cooperatives, mobile-network agents, religious community groups, and fintech apps as distribution channels. Address regional differences in trust in formal insurance, intermediary legitimacy, claims-speed expectations, digital access, regulatory context, and actuarial-data quality. Propose multiple viable options rather than one universal model, including acquisition-cost assumptions, premium collection, product design, claims verification and payment, partner incentives, reinsurance or risk-transfer structures, basis-risk mitigation, portfolio diversification, and scale-up conditions. Make assumptions explicit, distinguish evidence from hypotheses, and present clear regional recommendations, trade-offs, implementation requirements, and metrics."
+    },
+    {
+      "name": "Regional Evidence and Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed climate microinsurance strategy and strengthen it with structured regional reasoning. Examine likely differences across East Africa, South Asia, and Central America in customer trust, distribution norms, mobile and financial inclusion, cooperative and faith-group roles, claims expectations, climate exposure, data availability, and regulatory or consumer-protection constraints. Stress-test acquisition-cost logic, willingness to pay, premium collection economics, claims operating costs, fraud and basis risk, adverse selection, correlation risk, and portfolio diversification. Identify unsupported assumptions and provide practical proxy metrics or pilot tests where reliable actuarial data is unavailable. Produce specific corrections and additions for the strategy, without inventing precise facts."
+    },
+    {
+      "name": "Insurance and Climate-Risk Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy and analytical findings as an expert in inclusive insurance, climate risk, agricultural insurance, distribution partnerships, and emerging-market regulation. Assess whether proposed products and operating models could make claims credible, affordable, timely, understandable, and legally defensible. Recommend suitable combinations of parametric, index, indemnity, hybrid, bundled, and pay-as-you-go approaches by context. Address basis risk, data validation, trigger transparency, independent loss verification, grievance handling, reinsurance, catastrophe accumulation, intermediary conduct, customer consent, and solvency considerations. Highlight material risks and give concrete, region-sensitive remedies. Ensure recommendations are commercially realistic and do not overstate certainty."
+    },
+    {
+      "name": "Integrated Model Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, decision-ready final draft using the analyst and expert feedback. Preserve useful analysis while fixing unsupported claims, contradictions, missing regional distinctions, weak economics, and inadequately addressed trust or claims-credibility issues. Present a comparative option matrix covering each intermediary type and region; recommended product and business-model archetypes; acquisition, servicing, and claims economics; partner incentives; data and risk-transfer approaches; portfolio construction; pilot sequencing; key metrics; and explicit go/no-go conditions. Separate assumptions, scenario ranges, and facts. Make the output actionable for an insurer while acknowledging uncertainty and avoiding false precision."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the integrated strategy in full. Assess whether it directly answers the objective across all three regions and all four distribution candidates; differentiates trust regimes and intermediation norms; offers credible acquisition-cost and claims-credibility mechanisms; addresses uneven actuarial data; manages basis, catastrophe, adverse-selection, fraud, and concentration risks; explains business-model trade-offs; and provides actionable pilots, metrics, and assumptions. Identify specific omissions, contradictions, unsupported certainty, impractical recommendations, and presentation problems. If substantial improvements are needed, explain exactly what the refiner must change. After the full assessment, output exactly one routing keyword on the final line: pass or revise."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing deliverable from the refined strategy and quality assessment. Improve clarity, structure, concision, and executive usability without removing important caveats or substantive recommendations. Use clear headings, comparison tables or compact matrices where helpful, and explicitly distinguish regional recommendations, channel economics, claim-credibility mechanisms, data requirements, portfolio-risk controls, pilot priorities, assumptions, and success metrics. Ensure every distribution option is evaluated fairly, recommendations are actionable for a 2026 insurer pilot, and no unsupported precise claims are presented as facts. Return only the polished strategy document."
+    }
+  ],
+  "explanation": "The pipeline first builds a broad cross-regional strategy, then tests its assumptions through regional economic analysis and specialist insurance and climate-risk review. A refiner integrates those findings into one coherent operating and business-model recommendation. The quality assessment occurs after refinement; if it outputs revise, execution returns to the refiner, while pass proceeds to the final polisher. The polisher produces the executive-ready deliverable."
+}

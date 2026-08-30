@@ -1,0 +1,57 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in global educational technology expansion. Develop a comprehensive product strategy for localizing an adaptive-learning platform in Vietnam, Saudi Arabia, France, and Kenya. Address curriculum alignment, cultural attitudes toward screen time/testing, and procurement models (B2G vs B2C).",
+      "description": "Develops the core localization strategy for the four target markets."
+    },
+    {
+      "name": "LocalizationRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a localization expert. Review the strategy and ensure it addresses specific local nuances: Vietnam (curriculum mandates), Saudi Arabia (cultural/procurement), France (pedagogical standards), and Kenya (infrastructure/accessibility). Fix any gaps in regional alignment.",
+      "description": "Refines the strategy to ensure regional compliance and cultural fit."
+    },
+    {
+      "name": "ComplianceCritic",
+      "role": "critic",
+      "systemPrompt": "You are a regulatory and cultural compliance auditor. Evaluate the strategy for potential failures in local curriculum alignment, procurement feasibility, and cultural sensitivity. Provide a detailed assessment. On the last line, output either 'pass' or 'revise'.",
+      "description": "Validates the strategy against local constraints."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a documentation specialist. Format the finalized strategy into a clear, actionable executive roadmap for the expansion team, ensuring professional tone and structural clarity.",
+      "description": "Formats the final output for stakeholders."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in global educational technology expansion. Develop a comprehensive product strategy for localizing an adaptive-learning platform in Vietnam, Saudi Arabia, France, and Kenya. Address curriculum alignment, cultural attitudes toward screen time/testing, and procurement models (B2G vs B2C)."
+    },
+    {
+      "name": "LocalizationRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a localization expert. Review the strategy and ensure it addresses specific local nuances: Vietnam (curriculum mandates), Saudi Arabia (cultural/procurement), France (pedagogical standards), and Kenya (infrastructure/accessibility). Fix any gaps in regional alignment."
+    },
+    {
+      "name": "ComplianceCritic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a regulatory and cultural compliance auditor. Evaluate the strategy for potential failures in local curriculum alignment, procurement feasibility, and cultural sensitivity. Provide a detailed assessment. On the last line, output either 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a documentation specialist. Format the finalized strategy into a clear, actionable executive roadmap for the expansion team, ensuring professional tone and structural clarity."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist creating the initial localization roadmap. This draft is passed to the LocalizationRefiner, which tailors the content to the specific regulatory and cultural requirements of the four target countries. The ComplianceCritic then evaluates the output for potential risks; if the strategy is insufficient, it routes back to the LocalizationRefiner to address specific gaps. Once the strategy passes the audit, the FinalPolisher formats the document for executive use."
+}

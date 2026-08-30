@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Supplier Onboarding Strategy Builder",
+      "role": "builder",
+      "description": "Creates a comprehensive supplier onboarding and integration plan addressing cultural differences, quality standards, communication protocols, and delivery commitments across Mexico, Morocco, and Vietnam"
+    },
+    {
+      "name": "Cultural & Operational Intelligence Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional business customs, quality-management traditions, workforce communication styles, and identifies specific gaps between manufacturer expectations and supplier capabilities"
+    },
+    {
+      "name": "Integration Framework Refiner",
+      "role": "refiner",
+      "description": "Incorporates cultural and operational insights into the onboarding strategy, creating region-specific protocols, communication bridges, quality assurance frameworks, and trust-building milestones"
+    },
+    {
+      "name": "Supply Chain Risk & Quality Critic",
+      "role": "critic",
+      "description": "Reviews integrated plan for specification clarity, delivery commitment mechanisms, quality auditing rigor, communication redundancy, and identifies remaining misalignment risks"
+    },
+    {
+      "name": "Implementation Completeness Validator",
+      "role": "expert",
+      "description": "Domain expert validates that all three regions' unique requirements are addressed, practical execution timelines are defined, escalation procedures exist, and early-audit findings are resolved"
+    },
+    {
+      "name": "Stakeholder-Ready Polisher",
+      "role": "polisher",
+      "description": "Formats final onboarding plan into executive summary, region-specific playbooks, communication templates, and quality checkpoints ready for manufacturer deployment"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Supplier Onboarding Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive supplier onboarding and integration plan for a consumer-electronics manufacturer rapidly shifting supply base to Mexico, Morocco, and Vietnam due to tariff and export-control changes. The manufacturer faces misunderstandings about specifications, delivery commitments, and cultural business practices. Draft a complete strategy covering: 1) regional supplier assessment and selection criteria, 2) onboarding timeline and milestones, 3) specification communication and documentation standards, 4) quality management alignment, 5) trust-building and relationship protocols, 6) delivery commitment mechanisms with accountability, 7) cross-cultural communication frameworks, 8) early audit findings resolution plan, 9) escalation and issue-resolution procedures, 10) success metrics. Be thorough and address all three regions holistically while noting where region-specific approaches are needed."
+    },
+    {
+      "name": "Cultural & Operational Intelligence Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the supplier onboarding strategy with deep focus on cultural and operational intelligence for Mexico, Morocco, and Vietnam. Research and provide: 1) Business customs in each region (decision-making hierarchies, negotiation styles, relationship emphasis vs. transaction focus), 2) Quality-management traditions and certifications prevalence, 3) Workforce communication preferences and language considerations, 4) Supply-chain maturity and regulatory environments, 5) Historical quality issues and how they were resolved, 6) Trust-building timeframes and mechanisms that work in each region, 7) Common specification misunderstandings in electronics manufacturing, 8) Delivery commitment reliability factors. For each finding, explain how it impacts the manufacturer's integration plan and where current gaps exist."
+    },
+    {
+      "name": "Integration Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the onboarding strategy by integrating cultural and operational intelligence findings. Create a detailed implementation plan that includes: 1) Region-specific communication protocols (preferred languages, meeting cadences, documentation standards), 2) Customized specification documentation with visual aids and examples for each region, 3) Phased quality assurance roadmap with early win opportunities, 4) Trust-building activities and relationship milestones tailored to each region's business culture, 5) Delivery commitment mechanisms with clear accountability and contingency procedures, 6) Training programs for manufacturer teams on regional practices, 7) Issue escalation matrix with cultural awareness, 8) Resolution of early audit findings with root-cause analysis by region. Ensure the plan acknowledges that these are unfamiliar relationships and addresses the lack of historical working knowledge."
+    },
+    {
+      "name": "Supply Chain Risk & Quality Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the integrated supplier onboarding framework comprehensively. Assess: 1) Does it adequately address specification misunderstandings with concrete prevention mechanisms? 2) Are delivery commitments enforceable and do they account for regional logistics realities? 3) Is quality management alignment realistic given different traditions—are there bridging standards? 4) Are communication protocols robust enough to prevent future misunderstandings? 5) Does the plan handle the unfamiliarity of these supplier relationships with appropriate oversight? 6) Are early audit findings specifically addressed with root causes? 7) Is there sufficient redundancy in communication and escalation? 8) Are trust-building activities evidence-based for each region? Provide FULL detailed analysis of strengths and weaknesses. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 4, "revise": 2}
+    },
+    {
+      "name": "Implementation Completeness Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "As a supply-chain integration expert, validate the finalized onboarding framework for completeness and practical feasibility. Confirm: 1) All three regions' unique business customs are explicitly addressed in protocols, 2) Quality-management alignment plans are detailed and achievable, 3) Specification communication includes region-specific formats and examples, 4) Delivery commitment mechanisms have clear enforcement and escalation paths, 5) Early audit findings have specific resolution owners and timelines, 6) Communication protocols account for language, timezone, and cultural preferences, 7) Trust-building activities are sequenced logically and have measurable outcomes, 8) Workforce communication style differences are understood and accommodated, 9) Timelines are realistic given rapid nearshoring shift, 10) Success metrics are defined and measurable. Flag any remaining gaps or inconsistencies. Provide final validation that the plan is ready for manufacturing deployment."
+    },
+    {
+      "name": "Stakeholder-Ready Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish the supplier onboarding and integration plan into executive-ready deliverables. Produce: 1) Executive Summary (1 page) highlighting key outcomes and approach, 2) Mexico Supplier Playbook (specifications, communication protocols, quality standards, trust-building calendar, escalation contacts), 3) Morocco Supplier Playbook (same structure, region-adapted), 4) Vietnam Supplier Playbook (same structure, region-adapted), 5) Quality Assurance Framework (audit schedule, specification verification process, delivery tracking), 6) Communication Templates (initial contact, specification clarification, issue escalation, audit reports), 7) Success Metrics Dashboard (on-time delivery, quality conformance, specification accuracy, relationship maturity indicators). Ensure all deliverables are clear, actionable, and immediately usable by the manufacturer's procurement and supply-chain teams. Use professional formatting with tables, timelines, and contact matrices where appropriate."
+    }
+  ],
+  "explanation": "This pipeline addresses the complex challenge of rapid supplier integration across three culturally distinct regions by combining strategic planning, data-driven analysis, and domain expertise. The flow begins with the Builder creating a comprehensive onboarding strategy framework. The Analyst then provides deep cultural and operational intelligence specific to Mexico, Morocco, and Vietnam—essential context for understanding where specification misunderstandings and trust gaps originate. The Refiner integrates these insights into practical, region-specific protocols, communication bridges, and quality frameworks. A critic-based IF gate then rigorously validates the integrated plan against supply-chain risks and quality standards; if issues remain, the pipeline loops back to the Refiner to incorporate feedback. The Expert validator performs final completeness checking, ensuring all three regions' nuances are properly addressed and the plan is deployment-ready. Finally, the Polisher transforms the validated strategy into executive-facing, actionable deliverables (playbooks, templates, dashboards) ready for immediate use by procurement and supply-chain teams. The pipeline is under 8 steps, incorporates one quality gate with revision loop capability, and delivers a complete onboarding solution that directly addresses unfamiliar business customs, different quality traditions, and distinct communication styles across all three regions."
+}
+```

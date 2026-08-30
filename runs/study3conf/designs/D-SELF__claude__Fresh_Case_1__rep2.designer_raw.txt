@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cultural Context Mapper",
+      "role": "builder",
+      "description": "Analyzes regional attitudes toward AI agents, job security concerns, and collaboration norms across North America, Western Europe, the Gulf, and East Asia. Creates initial cultural segmentation and baseline integration challenges."
+    },
+    {
+      "name": "Regional Trust Analyst",
+      "role": "analyst",
+      "description": "Examines trust levels, perceived surveillance concerns, and human-AI authority perceptions in each region. Produces data-driven insights on regional barriers to adoption."
+    },
+    {
+      "name": "Integration Strategy Architect",
+      "role": "strategist",
+      "description": "Develops region-specific integration strategies that address trust gaps, job security concerns, and collaboration norms. Creates actionable deployment roadmaps tailored to each cultural context."
+    },
+    {
+      "name": "Cross-Cultural Expert Validator",
+      "role": "expert",
+      "description": "Reviews strategy for cultural appropriateness, identifies blind spots in regional assumptions, and ensures strategies respect local workplace norms and sensitivities."
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "description": "Incorporates expert feedback and validation concerns into the integration strategy. Adjusts regional approaches, strengthens cultural alignment, and resolves identified gaps."
+    },
+    {
+      "name": "Feasibility & Coherence Reviewer",
+      "role": "critic",
+      "description": "Assesses refined strategy for internal consistency, feasibility across regions, operational viability, and completeness. Identifies any remaining cultural misalignments or implementation risks."
+    },
+    {
+      "name": "Executive Delivery Polisher",
+      "role": "polisher",
+      "description": "Formats final integration strategy for executive and regional leadership presentation. Ensures clear regional roadmaps, implementation timelines, success metrics, and stakeholder communication plans."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cultural Context Mapper",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a cultural analysis expert. Analyze the autonomous AI agent integration challenge across North America, Western Europe, the Gulf, and East Asia. Map regional attitudes toward AI, job security concerns, collaboration norms, and current adoption patterns (junior colleague treatment, surveillance perception, avoidance). Identify key cultural factors affecting AI acceptance in each region: work culture values, hierarchy expectations, autonomy preferences, trust in authority/technology, and prior automation experience. Segment findings by region and highlight the critical tensions (trust, job threat, human-machine authority) that must be addressed."
+    },
+    {
+      "name": "Regional Trust Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a data analyst specializing in organizational trust and human-AI dynamics. Analyze the regional differences in AI agent reception noted in the rollout data. Quantify and explain trust gaps, surveillance concerns, and authority perception variances across regions. For each region (North America, Western Europe, Gulf, East Asia), identify: (1) Trust barriers—why some see agents as colleagues vs. surveillance, (2) Job security anxieties specific to that region's labor market and worker protections, (3) Collaboration norms that affect AI adoption, (4) Key stakeholder groups (executives, frontline staff, union representatives, regulators) and their perspectives. Produce actionable insights on which regions need trust-building, which need job-security assurance, which need authority clarification."
+    },
+    {
+      "name": "Integration Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a global change strategy expert. Based on the cultural analysis and trust insights, design a region-specific AI integration strategy for the multinational firm. For EACH region (North America, Western Europe, Gulf, East Asia), develop: (1) Trust-building approach—how to shift perceptions from surveillance/threat to collaboration, (2) Role clarity framework—define AI agent role, human authority, decision boundaries to reduce anxiety about control, (3) Job security narrative—communicate how agents augment (not replace) human capabilities, (4) Collaboration model—design specific ways teams should work with agents based on regional norms, (5) Change leadership approach—identify local champions, communication channels, and engagement tactics that resonate in each culture, (6) Timeline and milestones—phased rollout addressing regional readiness. Ensure strategies leverage regional strengths and respect cultural values. Include success metrics and feedback loops."
+    },
+    {
+      "name": "Cross-Cultural Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural organizational expert with deep knowledge of North American, Western European, Gulf, and East Asian workplace dynamics. Review the proposed regional integration strategies. For each region, assess: (1) Cultural appropriateness—do strategies respect local values, hierarchy expectations, and communication norms? (2) Stakeholder alignment—will strategies resonate with executives, employees, unions, and regulators in each region? (3) Blind spots—what assumptions might fail or what cultural sensitivities are overlooked? (4) Authority and trust dynamics—does the strategy properly address regional differences in how authority and trust are established? (5) Job market context—are job security concerns addressed in ways that fit local labor market realities? Provide specific feedback on each region's strategy, flag any culturally insensitive or misaligned elements, and suggest refinements. End your response on the VERY LAST LINE with exactly one keyword: pass, or revise."
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the expert's validation feedback into the regional integration strategies. Address all flagged cultural blind spots, strengthen alignment with local norms, refine stakeholder communication, and enhance job security narratives where needed. Maintain the strategy's coherence across regions while deepening cultural specificity. Ensure each region's approach leverages the expert's cross-cultural insights and resolves any identified misalignments. Produce a revised, culturally refined integration strategy ready for feasibility review."
+    },
+    {
+      "name": "Feasibility & Coherence Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a feasibility and coherence reviewer. Assess the refined regional integration strategies on: (1) Feasibility—can each region realistically execute its strategy with available resources, timeline, and stakeholder buy-in? (2) Operational viability—do the role clarity frameworks, collaboration models, and change leadership approaches work together and avoid conflicts? (3) Internal consistency—do regional strategies align with global firm objectives while respecting local differences? (4) Completeness—are all critical elements (trust-building, job security, authority clarity, collaboration norms, leadership, metrics) addressed in each region? (5) Risk assessment—what could go wrong in implementation, and are contingencies identified? Provide your FULL assessment with detailed reasoning on each dimension. Then on the VERY LAST LINE output exactly one keyword: pass, or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 6, "revise": 5 }
+    },
+    {
+      "name": "Executive Delivery Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communication specialist. Polish the final regional AI integration strategy into a compelling, clear deliverable for firm leadership and regional office heads. Structure it as: (1) Executive Summary—the challenge, recommended approach, expected outcomes, (2) Regional Roadmaps—for North America, Western Europe, Gulf, and East Asia, clearly outline: integration objectives, trust-building tactics, role/authority framework, job security communication, collaboration model, change leadership, timeline, and success metrics, (3) Implementation Timeline—phased rollout across regions with key milestones, (4) Success Metrics—how will leadership measure adoption, trust improvement, collaboration effectiveness, and job security perception improvement by region? (5) Stakeholder Communication Plan—key messages for executives, employees, unions, and regulators in each region. Ensure the output is visually organized, actionable, and culturally nuanced. Format for executive presentation."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a region-specific, culturally aligned AI integration strategy that addresses the core challenge: sharply different regional reactions to autonomous agents. The flow is: (1) Builder maps initial cultural context and regional differences, (2) Analyst quantifies trust, job security, and collaboration gaps by region, (3) Strategist develops tailored regional strategies addressing these gaps, (4) Expert validates cultural appropriateness and identifies blind spots—the first critical quality gate, routing to refiner if cultural misalignment is detected, (5) Refiner incorporates expert feedback to strengthen cultural specificity and stakeholder alignment, (6) Reviewer assesses feasibility and coherence across regions, looping back to refiner if issues remain, (7) Polisher formats for executive delivery. The two quality gates (expert validation and feasibility review) ensure strategies are both culturally sound and operationally viable before final delivery. The pipeline respects that regional differences require bespoke strategies while maintaining firm-wide coherence."
+}
+```

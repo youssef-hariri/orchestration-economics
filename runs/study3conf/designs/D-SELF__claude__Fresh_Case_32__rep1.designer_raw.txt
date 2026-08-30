@@ -1,0 +1,74 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Labor Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive labor-relations strategy framework addressing EU worker councils, Latin American reclassification pressures, Southeast Asian self-regulatory codes, and informal rider collectives"
+    },
+    {
+      "name": "Regional Legal & Compliance Analyst",
+      "role": "analyst",
+      "description": "Analyzes jurisdictional differences across EU, Latin America, and Southeast Asia; identifies legal gaps, contradictions, and enforcement risks in the proposed strategy"
+    },
+    {
+      "name": "Labor Relations Expert",
+      "role": "expert",
+      "description": "Provides domain-specific guidance on gig-worker representation best practices, collective bargaining frameworks, and precedents from platform economy cases"
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates analyst findings and expert recommendations into the strategy; resolves regional conflicts; operationalizes engagement structures and bargaining boundaries"
+    },
+    {
+      "name": "Coherence & Risk Validator",
+      "role": "critic",
+      "description": "Evaluates internal consistency across regions, identifies unresolved tensions between engagement norms, flags implementation risks and stakeholder conflict points"
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "description": "Formats validated labor-relations strategy into actionable roadmap with regional frameworks, engagement structures, bargaining boundaries, and consistency principles"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Labor Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive labor-relations strategy for a global delivery platform facing divergent gig-worker representation regimes in 2026. Create an initial strategic framework that: (1) Defines engagement structures for EU worker councils, Latin American reclassification requirements, and Southeast Asian self-regulatory codes; (2) Proposes bargaining boundaries for each region that clarify what is negotiable vs. non-negotiable; (3) Identifies core platform principles that provide consistency across regions while respecting local legal/cultural norms; (4) Addresses integration of informal rider collectives already organizing in cities; (5) Outlines how management's single-market engagement norms must evolve. Be comprehensive but acknowledge uncertainties and regional complexity. Output the complete initial strategy framework."
+    },
+    {
+      "name": "Integrated Compliance & Expert Analysis",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are both legal analyst and labor relations expert. Analyze the strategy provided: (1) Map EU worker council requirements (codetermination, information rights); (2) Identify Latin American reclassification pressures (Argentina, Brazil, Mexico); (3) Assess Southeast Asian self-regulatory code feasibility; (4) Provide labor-relations best practices from platform economy precedents (Uber, Deliveroo cases); (5) Identify legal contradictions and propose resolutions; (6) Suggest mechanisms for integrating informal rider collectives; (7) Address how single-market engagement norms scale to multi-jurisdictional frameworks. Output comprehensive regulatory assessment plus expert recommendations with specific solutions to identified tensions."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining the labor-relations strategy by integrating all compliance and expert analysis. Your task: (1) Revise engagement structures to address all legal requirements; (2) Redefine bargaining boundaries with specificity for each region (algorithmic terms, compensation, safety, scheduling, dispute resolution); (3) Reconcile regional conflicts by developing tiered consistency principles: universal platform values vs. localized implementation paths; (4) Operationalize rider collective integration through specific governance mechanisms; (5) Translate single-market norms into regionalized but coherent frameworks. Output the refined, operationalized strategy incorporating all inputs."
+    },
+    {
+      "name": "Coherence & Risk Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer assessing the refined labor-relations strategy for internal coherence, implementation feasibility, and unresolved tensions. Evaluate: (1) Does the strategy clearly separate negotiable from non-negotiable issues across regions? (2) Are engagement structures practical given informal collectives' decentralized nature? (3) Do bargaining boundaries avoid legal reclassification risk while enabling meaningful worker voice? (4) Are universal platform principles clearly distinguished from localized implementations? (5) What implementation risks remain? Provide comprehensive assessment of strengths, weaknesses, and residual tensions. Then output EXACTLY ONE keyword on the final line: pass (if coherent and implementable) or revise (if significant gaps remain).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are formatting the validated labor-relations strategy for executive stakeholder presentation. Structure the output as: (1) Executive Summary (strategic objectives, key principles); (2) Regional Frameworks (EU worker councils, Latin American reclassification approach, Southeast Asian self-regulatory codes, informal collective integration) with specific engagement structures and bargaining boundaries for each; (3) Consistency Principles (universal values, localized implementation, governance coherence); (4) Implementation Roadmap (phasing, pilot regions, success metrics); (5) Risk Mitigation (legal, operational, political). Ensure clarity, actionability, and professional presentation. Output the final, polished labor-relations strategy document ready for stakeholder review."
+    }
+  ],
+  "explanation": "This 5-step pipeline delivers a comprehensive, legally compliant, and operationally coherent labor-relations strategy. Flow: (1) Builder creates initial framework; (2) Integrated Analyst-Expert performs dual legal-compliance and labor-relations assessment across all three regions and informal collectives in a single pass; (3) Refiner operationalizes the strategy by integrating all findings into concrete engagement structures and bargaining boundaries; (4) Critic validates coherence and feasibility with an if-gate—if gaps exist, loops back to Refiner (step 3) to fix; (5) Polisher formats validated strategy for stakeholder use. The if-gate at step 4 ensures the strategy passes coherence validation before final output. This design prioritizes legal rigor, operational feasibility, and cross-regional consistency within the 7-step limit."
+}
+```

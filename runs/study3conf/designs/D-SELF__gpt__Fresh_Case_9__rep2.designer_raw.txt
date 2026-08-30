@@ -1,0 +1,86 @@
+{
+  "agents": [
+    {
+      "name": "Global Activism Framework Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive framework for how a global food-and-beverage consumer brand should act and communicate when geopolitically motivated consumer activism affects regional markets in opposing directions. Address governance, principles, decision rights, regional adaptation, franchisee relations, employee concerns, stakeholder mapping, risk assessment, communications, crisis response, social media, operational continuity, human rights, legal and regulatory considerations, measurement, and implementation. Distinguish universal corporate commitments from locally adaptable expression. Include practical decision criteria, escalation triggers, sample communication principles, and illustrative scenarios. Produce a substantive initial framework grounded in the 2025-2026 context without making unsupported factual claims.",
+      "description": "Creates the initial strategic framework and practical recommendations for navigating opposing regional boycott pressures."
+    },
+    {
+      "name": "Geopolitical and Stakeholder Risk Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed framework for geopolitical sensitivity, regional asymmetry, stakeholder conflicts, reputational risk, employee relations, franchisee tensions, legal and regulatory exposure, human-rights implications, misinformation, and unintended consequences. Identify where global consistency should be maintained and where regional adaptation is legitimate. Recommend improvements that preserve authenticity, avoid political partisanship, protect people and operations, and remain actionable across markets. Provide detailed findings and concrete revision guidance for the framework."
+      ,
+      "description": "Stress-tests the draft against geopolitical, operational, legal, reputational, and stakeholder risks."
+    },
+    {
+      "name": "Cross-Regional Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite and substantially improve the framework using the initial draft and the analyst's findings. Deliver a coherent, executive-ready framework with clear principles, a decision model, governance and escalation processes, regional playbooks, communication guidance for customers, franchisees, employees, investors, and media, crisis-response steps, sample message architecture, ethical and legal guardrails, and metrics. Ensure recommendations are culturally aware without stereotyping, consistent without demanding identical messaging everywhere, and practical for a global food-and-beverage company. Resolve contradictions, remove vague advice, label assumptions, and avoid advising unlawful or deceptive conduct."
+      ,
+      "description": "Integrates risk analysis into a clearer, more actionable, and globally adaptable framework."
+    },
+    {
+      "name": "Framework Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined framework in full. Assess strategic coherence, practical usability, regional sensitivity, balance between global principles and local adaptation, treatment of franchisees and employees, legal and ethical safeguards, crisis communications, scenario usefulness, clarity, completeness, unsupported assumptions, and risk of appearing partisan or inconsistent. Provide detailed strengths, weaknesses, and specific corrections required. Determine whether the framework is ready for final presentation. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer from the refined framework and quality assessment. Preserve substantive recommendations while improving structure, precision, readability, and executive usefulness. Present a clear framework with headings, principles, decision criteria, governance, regional operating guidance, stakeholder-specific communications, crisis-response actions, illustrative scenarios, metrics, and implementation steps. Make the answer balanced and nonpartisan, explicitly distinguish universal commitments from locally adapted messaging, acknowledge legal and cultural variation, and avoid unsupported claims. Do not mention agents, drafts, quality checks, or this prompt."
+      ,
+      "description": "Formats and polishes the approved framework into a clear, authoritative final response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Activism Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive framework for how a global food-and-beverage consumer brand should act and communicate when geopolitically motivated consumer activism affects regional markets in opposing directions. Address governance, principles, decision rights, regional adaptation, franchisee relations, employee concerns, stakeholder mapping, risk assessment, communications, crisis response, social media, operational continuity, human rights, legal and regulatory considerations, measurement, and implementation. Distinguish universal corporate commitments from locally adaptable expression. Include practical decision criteria, escalation triggers, sample communication principles, and illustrative scenarios. Produce a substantive initial framework grounded in the 2025-2026 context without making unsupported factual claims."
+    },
+    {
+      "name": "Geopolitical and Stakeholder Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed framework for geopolitical sensitivity, regional asymmetry, stakeholder conflicts, reputational risk, employee relations, franchisee tensions, legal and regulatory exposure, human-rights implications, misinformation, and unintended consequences. Identify where global consistency should be maintained and where regional adaptation is legitimate. Recommend improvements that preserve authenticity, avoid political partisanship, protect people and operations, and remain actionable across markets. Provide detailed findings and concrete revision guidance for the framework."
+    },
+    {
+      "name": "Cross-Regional Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite and substantially improve the framework using the initial draft and the analyst's findings. Deliver a coherent, executive-ready framework with clear principles, a decision model, governance and escalation processes, regional playbooks, communication guidance for customers, franchisees, employees, investors, and media, crisis-response steps, sample message architecture, ethical and legal guardrails, and metrics. Ensure recommendations are culturally aware without stereotyping, consistent without demanding identical messaging everywhere, and practical for a global food-and-beverage company. Resolve contradictions, remove vague advice, label assumptions, and avoid advising unlawful or deceptive conduct."
+    },
+    {
+      "name": "Framework Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined framework in full. Assess strategic coherence, practical usability, regional sensitivity, balance between global principles and local adaptation, treatment of franchisees and employees, legal and ethical safeguards, crisis communications, scenario usefulness, clarity, completeness, unsupported assumptions, and risk of appearing partisan or inconsistent. Provide detailed strengths, weaknesses, and specific corrections required. Determine whether the framework is ready for final presentation. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer from the refined framework and quality assessment. Preserve substantive recommendations while improving structure, precision, readability, and executive usefulness. Present a clear framework with headings, principles, decision criteria, governance, regional operating guidance, stakeholder-specific communications, crisis-response actions, illustrative scenarios, metrics, and implementation steps. Make the answer balanced and nonpartisan, explicitly distinguish universal commitments from locally adapted messaging, acknowledge legal and cultural variation, and avoid unsupported claims. Do not mention agents, drafts, quality checks, or this prompt."
+    }
+  ],
+  "explanation": "The flow is Builder → Analyst → Refiner → Quality Assessment. If the assessment outputs revise, execution returns to the Refiner with the identified corrections; if it outputs pass, execution continues to the Polisher. This creates a focused revision branch while keeping the pipeline under eight steps. The Polisher then produces the final user-facing framework."
+}

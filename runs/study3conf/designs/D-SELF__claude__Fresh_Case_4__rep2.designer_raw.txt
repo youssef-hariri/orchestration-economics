@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Context Analyzer",
+      "role": "analyst",
+      "description": "Analyzes labor laws, cultural attitudes, and employee demographics across twelve countries"
+    },
+    {
+      "name": "Policy Framework Builder",
+      "role": "builder",
+      "description": "Creates initial draft global flexible-work policy with country-specific variations"
+    },
+    {
+      "name": "Compliance & Fairness Expert",
+      "role": "expert",
+      "description": "Reviews policy against legal requirements, cultural equity, and operational viability across all jurisdictions"
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "description": "Integrates expert feedback to resolve legal conflicts, cultural concerns, and operational bottlenecks"
+    },
+    {
+      "name": "Implementation Strategist",
+      "role": "strategist",
+      "description": "Designs rollout strategy and change management to address competing employee demands"
+    },
+    {
+      "name": "Quality Assurance Gate",
+      "role": "critic",
+      "description": "Final comprehensive validation across legal, fairness, operational, and cultural dimensions"
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "description": "Formats policy and strategy into board-ready presentation"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Context Analyzer",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a global labor market analyst. Research and document for each of the twelve country offices: current labor laws including 'right to disconnect' status, cultural attitudes toward working hours and visible effort, client expectations regarding team availability, and generational demographics focusing on younger employees. Identify key tensions such as mandatory disconnect rights versus cultures emphasizing loyalty through presence. Produce a structured country-by-country baseline report organized by autonomy clusters."
+    },
+    {
+      "name": "Policy Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a policy architect. Based on the context analysis, create a draft global flexible-work policy that: (1) establishes a core global principle balancing flexibility with operational needs, (2) defines country-specific policy tracks adapted to local law and culture, (3) allows office-level customization within guardrails, (4) addresses visibility concerns through outcome-based evaluation rather than hours, (5) includes opt-in/opt-out provisions respecting cultural preferences. Organize by country clusters: high-autonomy markets, moderate-autonomy, conservative markets. Include implementation phases and success metrics."
+    },
+    {
+      "name": "Compliance & Fairness Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a multinational labor law expert and organizational psychologist. Comprehensively review the draft policy across three dimensions: (1) LEGAL—Does it comply with each country's labor laws, 'right to disconnect' mandates, and employee protection requirements without creating litigation risk?, (2) CULTURAL FAIRNESS—Is the policy equitable across cultural contexts? Does it avoid inadvertently penalizing cultures valuing in-office presence or creating a hierarchy of 'preferred' working styles?, (3) OPERATIONAL—Is it realistic to implement across time zones and distributed offices without creating inefficiency or hidden overhead? Can client expectations be consistently met? Identify all unresolved conflicts, equity issues, and bottlenecks. On the VERY LAST LINE output exactly one keyword: 'pass' if all three dimensions are sound, or 'revise' if issues remain."
+    },
+    {
+      "name": "Quality Gate Check",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the expert assessment from the previous step. The assessment has already identified all legal, fairness, and operational issues. Your task: does the assessment indicate 'pass' or 'revise' on the last line? If 'revise', the policy has unresolved issues and must loop back to the builder for restructuring. If 'pass', all dimensions are sound and proceed to refinement. Output on the VERY LAST LINE exactly one keyword: 'revise' or 'proceed'.",
+      "ifOptions": ["revise", "proceed"],
+      "ifMappings": {"revise": 2, "proceed": 4}
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a policy refiner. Integrate the expert feedback from the compliance and fairness review. Revise the policy to address ALL identified legal risks, cultural equity concerns, and operational bottlenecks. Where conflicts exist (e.g., compressed weeks conflicting with client expectations in conservative markets), design country-specific hybrid solutions. Ensure the revised policy maintains global consistency on core principles while preserving necessary local flexibility. Produce a consolidated revised policy document with clear justification for each modification."
+    },
+    {
+      "name": "Implementation Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategic change manager. Design a comprehensive implementation and change strategy addressing: (1) how to position flexible work as commitment-neutral in markets where loyalty concerns exist, (2) how to empower local leaders to customize within policy guardrails without creating unfair variation, (3) how to manage competing employee demands (compressed weeks for younger staff versus visibility concerns for ambitious or culture-conscious employees), (4) market-specific communication strategies emphasizing cultural respect and local context, (5) governance model ensuring consistency and fairness review across all offices. Produce a phased rollout plan with stakeholder communication strategy and success metrics."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications specialist. Format the final policy and implementation strategy into a board-ready deliverable structured as: (1) Executive Summary with core principle and expected outcomes, (2) Country-Specific Policy Tracks grouped by autonomy level with justification, (3) Implementation Roadmap with phased rollout and milestones, (4) Risk Mitigation and Fairness Safeguards, (5) Success Metrics and Review Cadence. Use clear headings, bullet points, and visual frameworks. Ensure the document articulates how the policy balances divergent cultural attitudes while maintaining operational coherence and legal compliance. Output must be ready for board presentation."
+    }
+  ],
+  "explanation": "This 7-step pipeline synthesizes global expertise to resolve competing demands across twelve jurisdictions. Flow: (1) Context Analyzer establishes baseline constraints across countries, (2) Policy Framework Builder drafts country-clustered policy addressing core tensions between compressed weeks and loyalty concerns, (3) Compliance & Fairness Expert conducts comprehensive review across legal, cultural, and operational dimensions—outputting 'pass' or 'revise' on the last line, (4) Quality Gate Check routes based on expert assessment—if 'revise', loops back to Policy Framework Builder (step 2) for restructuring; if 'proceed', advances, (5) Policy Refiner integrates expert feedback into a revised policy addressing all identified issues, (6) Implementation Strategist designs rollout strategy managing competing demands through governance and communication, (7) Executive Polisher produces final board-ready deliverable. The if-gate at step 4 ensures no unresolved conflicts proceed past expert review, creating a clean handoff to implementation strategy."
+}
+```

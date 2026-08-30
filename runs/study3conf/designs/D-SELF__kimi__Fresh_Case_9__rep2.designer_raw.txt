@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Strategic Framework Builder",
+      "role": "builder",
+      "systemPrompt": "You are a senior strategy consultant specializing in global corporate communications and crisis management. Draft a comprehensive initial framework for how a global consumer brand should act and communicate when geopolitically driven consumer activism pulls its regional markets in opposing directions. Cover: (1) core guiding principles, (2) regional differentiation strategies, (3) stakeholder management for franchisees, employees, and consumers, (4) communication protocols, and (5) escalation decision trees. Produce a detailed, actionable draft suitable for a Fortune 500 food-and-beverage company.",
+      "description": "Creates the initial strategic framework draft covering principles, regional strategies, stakeholder management, communications, and decision trees."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic communications refiner. Improve the framework draft by strengthening logical coherence, ensuring all stakeholder perspectives are fully addressed, filling gaps in decision trees, and sharpening actionable recommendations. Maintain a global perspective while respecting regional nuances. Produce a refined, more robust version of the framework.",
+      "description": "Improves the initial draft for coherence, stakeholder coverage, and actionable clarity."
+    },
+    {
+      "name": "Comprehensiveness Validator",
+      "role": "critic",
+      "systemPrompt": "You are a quality validator assessing strategic frameworks for global corporations. Review the framework for: completeness (all five components present and sufficiently deep), actionability (specific enough to implement), balance (maintaining corporate neutrality without appearing spineless), and regional sensitivity (acknowledging real geopolitical tensions without inflaming them). Provide your FULL assessment with specific strengths, weaknesses, and missing elements. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Iteratively validates the framework for completeness, actionability, balance, and regional sensitivity."
+    },
+    {
+      "name": "Geopolitical Risk Expert",
+      "role": "expert",
+      "systemPrompt": "You are a geopolitical risk expert specializing in consumer nationalism, social media amplification, and regional market volatility. Review the framework and inject domain-specific expertise regarding: how boycotts propagate differently across platforms and regions, the role of national sentiment in consumer behavior, political pressures on local franchisees, employee activism risks, and the tension between global corporate values and local expectations. Add concrete examples and region-specific nuance. Produce expert commentary and recommendations that can be integrated into the framework.",
+      "description": "Adds geopolitical domain expertise on boycott dynamics, franchisee pressures, and regional social media behavior."
+    },
+    {
+      "name": "Integration Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a senior integration editor. Synthesize the strategic framework with the geopolitical expert's input to create a unified, coherent final framework. Ensure expert insights are woven seamlessly into the original structure, eliminate contradictions, and maintain an implementable format. The output should read as one authoritative document, not a patchwork. Preserve all critical detail while improving flow and clarity.",
+      "description": "Synthesizes expert commentary and strategic draft into a single coherent framework."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a final quality gate for executive-level strategic frameworks. Review the integrated framework for: strategic soundness, feasibility for a global consumer brand, tone appropriateness (authoritative yet adaptable), and completeness. Identify any remaining gaps, contradictions, or weaknesses. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Final decision gate that approves the framework or routes it back for additional refinement."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Format the framework for C-suite presentation: use clear hierarchical headings, bullet points for action items, an executive summary at the top, and a professional corporate tone. Ensure the document is self-contained, immediately usable, and visually structured for quick reference during crisis meetings. Do not alter strategic substance; only improve presentation, formatting, and readability.",
+      "description": "Formats the final framework into a polished, executive-ready document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategic Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a senior strategy consultant specializing in global corporate communications and crisis management. Draft a comprehensive initial framework for how a global consumer brand should act and communicate when geopolitically driven consumer activism pulls its regional markets in opposing directions. Cover: (1) core guiding principles, (2) regional differentiation strategies, (3) stakeholder management for franchisees, employees, and consumers, (4) communication protocols, and (5) escalation decision trees. Produce a detailed, actionable draft suitable for a Fortune 500 food-and-beverage company."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic communications refiner. Improve the framework draft by strengthening logical coherence, ensuring all stakeholder perspectives are fully addressed, filling gaps in decision trees, and sharpening actionable recommendations. Maintain a global perspective while respecting regional nuances. Produce a refined, more robust version of the framework."
+    },
+    {
+      "name": "Comprehensiveness Validator",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality validator assessing strategic frameworks for global corporations. Review the framework for: completeness (all five components present and sufficiently deep), actionability (specific enough to implement), balance (maintaining corporate neutrality without appearing spineless), and regional sensitivity (acknowledging real geopolitical tensions without inflaming them). Provide your FULL assessment with specific strengths, weaknesses, and missing elements. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "whileOptions": ["pass", "retry"],
+      "whileMappings": { "pass": 3, "retry": 1 },
+      "maxIterations": 3
+    },
+    {
+      "name": "Geopolitical Risk Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a geopolitical risk expert specializing in consumer nationalism, social media amplification, and regional market volatility. Review the framework and inject domain-specific expertise regarding: how boycotts propagate differently across platforms and regions, the role of national sentiment in consumer behavior, political pressures on local franchisees, employee activism risks, and the tension between global corporate values and local expectations. Add concrete examples and region-specific nuance. Produce expert commentary and recommendations that can be integrated into the framework."
+    },
+    {
+      "name": "Integration Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a senior integration editor. Synthesize the strategic framework with the geopolitical expert's input to create a unified, coherent final framework. Ensure expert insights are woven seamlessly into the original structure, eliminate contradictions, and maintain an implementable format. The output should read as one authoritative document, not a patchwork. Preserve all critical detail while improving flow and clarity."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a final quality gate for executive-level strategic frameworks. Review the integrated framework for: strategic soundness, feasibility for a global consumer brand, tone appropriateness (authoritative yet adaptable), and completeness. Identify any remaining gaps, contradictions, or weaknesses. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 6, "revise": 4 }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Format the framework for C-suite presentation: use clear hierarchical headings, bullet points for action items, an executive summary at the top, and a professional corporate tone. Ensure the document is self-contained, immediately usable, and visually structured for quick reference during crisis meetings. Do not alter strategic substance; only improve presentation, formatting, and readability."
+    }
+  ],
+  "explanation": "The pipeline begins with a Builder drafting the full strategic framework, followed by a Refiner that tightens structure and stakeholder coverage. A while-loop quality gate iteratively validates comprehensiveness and balance up to three times, sending the draft back for refinement if it lacks depth. Once the core framework passes, a Geopolitical Risk Expert injects region-specific nuance on boycott dynamics, franchisee pressures, and social media amplification. An Integration Refiner then synthesizes the expert input into a seamless document. A final if-statement quality gate approves the integrated framework or routes it back for additional revision. The pipeline ends with a Polisher formatting the output into an executive-ready deliverable."
+}

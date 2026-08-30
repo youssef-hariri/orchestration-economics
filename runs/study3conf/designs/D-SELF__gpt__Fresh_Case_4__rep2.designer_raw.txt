@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Global Flexible-Work Policy Architect",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive draft global flexible-work policy for a software company operating in twelve countries. The policy must address compressed workweeks, remote and hybrid work, right-to-disconnect requirements, working-time limits, overtime, availability, visibility, performance evaluation, career progression, client coverage, team coordination, security, accessibility, and exceptions. Balance employee choice with business continuity and avoid treating any single cultural model as universally correct. Include global principles, locally adaptable provisions, decision rights, implementation guidance, and measurable outcomes. Make the draft practical, equitable, culturally responsive, and suitable for later legal validation. Clearly distinguish requirements that should be universal from provisions that must be localized.",
+      "description": "Creates the initial global flexible-work policy and operating model."
+    },
+    {
+      "name": "Cross-Market Impact Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed policy in light of the twelve-country context described by the user. Identify likely differences in labor-law constraints, right-to-disconnect rules, working-time regulation, collective bargaining, employee expectations, client-service needs, office norms, perceived visibility, promotion practices, and cultural attitudes toward commitment. Produce a structured impact analysis showing where the policy can be globally consistent, where localization is required, and what risks could create inequity or operational failure. Do not invent country-specific laws; identify information that must be confirmed by local counsel or HR. Recommend practical metrics and implementation safeguards.",
+      "description": "Maps legal, cultural, workforce, and operational implications across markets."
+    },
+    {
+      "name": "Employment and Workforce Strategy Expert",
+      "role": "expert",
+      "systemPrompt": "Provide expert guidance for converting the draft policy and impact analysis into a legally cautious, culturally intelligent, and operationally workable global framework. Assess fairness between employees in different countries, consistency of career opportunities, treatment of visible effort, compressed schedules, remote work, client coverage, manager discretion, accommodations, privacy, and enforcement. Flag provisions that require local legal review and propose precise alternative language that preserves global principles while allowing lawful local variation. Ensure the framework does not reward presenteeism or penalize legally protected flexibility, while still meeting client and collaboration obligations.",
+      "description": "Tests the policy against employment, workforce, cultural, and operational requirements."
+    },
+    {
+      "name": "Policy Integration Refiner",
+      "role": "refiner",
+      "systemPrompt": "Using the initial draft, cross-market analysis, and expert guidance, produce a substantially improved final candidate policy. Resolve identified legal, cultural, fairness, and operational weaknesses. Include: global non-negotiable principles; a localization framework for each country office; eligibility and approval rules; compressed-week and hybrid-work options; right-to-disconnect protections; coverage and handoff requirements; performance and promotion standards based on outcomes rather than visibility; manager responsibilities; employee safeguards; exceptions and appeals; implementation phases; communications; training; metrics; and a review process. Use clear policy language, explicitly label items requiring local counsel confirmation, and explain how divergent cultural attitudes can be accommodated without creating arbitrary favoritism or unequal career access.",
+      "description": "Integrates the analyses into a coherent, actionable, and locally adaptable policy."
+    },
+    {
+      "name": "Policy Quality and Readiness Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined policy comprehensively for legal caution, cross-country fairness, cultural responsiveness, operational feasibility, clarity, internal consistency, and usefulness to employees, managers, HR, and business leaders. Check that it accommodates different attitudes toward compressed weeks, office presence, visible effort, and commitment without endorsing discrimination or presenteeism. Check that it distinguishes global standards from local adaptations, protects right-to-disconnect principles where applicable, avoids unsupported legal claims, addresses client coverage and time zones, provides equitable career evaluation, and includes implementation and measurement guidance. Identify concrete omissions, contradictions, ambiguous language, and risks, and explain exactly how they should be corrected. Provide a full assessment. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      },
+      "description": "Determines whether the integrated policy is sufficiently robust or needs another refinement cycle."
+    },
+    {
+      "name": "Executive Policy Publisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved policy into a polished, user-facing deliverable for global executives, HR leaders, managers, and employees. Preserve all substantive safeguards and approved local flexibility. Organize it with an executive summary, policy principles, global standards, localization rules, available work-pattern options, employee and manager responsibilities, client and collaboration coverage, performance and career protections, legal-review cautions, implementation roadmap, metrics, and governance. Use concise, inclusive, plain language and clearly distinguish mandatory requirements, recommended practices, and country-specific items requiring confirmation. Remove repetition, unsupported legal certainty, and ambiguous wording. Ensure the result is practical to implement across twelve countries and makes fairness, commitment, and visibility expectations explicit.",
+      "description": "Formats the validated policy as a clear, executive-ready global deliverable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Flexible-Work Policy Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive draft global flexible-work policy for a software company operating in twelve countries. The policy must address compressed workweeks, remote and hybrid work, right-to-disconnect requirements, working-time limits, overtime, availability, visibility, performance evaluation, career progression, client coverage, team coordination, security, accessibility, and exceptions. Balance employee choice with business continuity and avoid treating any single cultural model as universally correct. Include global principles, locally adaptable provisions, decision rights, implementation guidance, and measurable outcomes. Clearly distinguish requirements that should be universal from provisions that must be localized."
+    },
+    {
+      "name": "Cross-Market Impact Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed policy in light of the twelve-country context described by the user. Identify likely differences in labor-law constraints, right-to-disconnect rules, working-time regulation, collective bargaining, employee expectations, client-service needs, office norms, perceived visibility, promotion practices, and cultural attitudes toward commitment. Show where the policy can be globally consistent, where localization is required, and what risks could create inequity or operational failure. Do not invent country-specific laws; identify information that must be confirmed by local counsel or HR. Recommend practical metrics and implementation safeguards."
+    },
+    {
+      "name": "Employment and Workforce Strategy Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide expert guidance for converting the draft policy and impact analysis into a legally cautious, culturally intelligent, and operationally workable global framework. Assess fairness between employees in different countries, consistency of career opportunities, treatment of visible effort, compressed schedules, remote work, client coverage, manager discretion, accommodations, privacy, and enforcement. Flag provisions that require local legal review and propose precise alternative language that preserves global principles while allowing lawful local variation."
+    },
+    {
+      "name": "Policy Integration Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Using all previous outputs, produce a substantially improved final candidate policy. Resolve legal, cultural, fairness, and operational weaknesses. Include global non-negotiable principles, a localization framework, eligibility and approval rules, compressed-week and hybrid-work options, right-to-disconnect protections, coverage and handoffs, outcome-based performance and promotion standards, manager responsibilities, safeguards, exceptions, appeals, implementation phases, communications, training, metrics, and review governance. Label items requiring local counsel confirmation."
+    },
+    {
+      "name": "Policy Quality and Readiness Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined policy comprehensively for legal caution, cross-country fairness, cultural responsiveness, operational feasibility, clarity, and internal consistency. Identify concrete omissions, contradictions, ambiguous language, and risks, with exact correction guidance. Provide a full assessment. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Policy Publisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved policy into a polished, user-facing deliverable for global executives, HR leaders, managers, and employees. Preserve substantive safeguards and approved local flexibility. Organize it with an executive summary, principles, global standards, localization rules, work-pattern options, responsibilities, coverage, performance and career protections, legal-review cautions, implementation roadmap, metrics, and governance. Use concise, inclusive, plain language and distinguish mandatory requirements, recommended practices, and country-specific items requiring confirmation."
+    }
+  ],
+  "explanation": "The pipeline first drafts the policy, then analyzes cross-market implications and obtains specialized workforce guidance before integrating those findings into a stronger candidate. A readiness review assesses the refined policy; if it identifies substantive issues, routing returns to the refiner for correction, while a pass proceeds to final publication. The last step produces a clear, executive-ready deliverable suitable for global adoption and local legal adaptation."
+}

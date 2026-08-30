@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "GlobalStrategyArchitect",
+      "role": "builder",
+      "systemPrompt": "You are an expert in sustainable finance. Draft a comprehensive green bond strategy that reconciles EU Taxonomy, ASEAN Green Bond Standards, and Gulf regional ESG frameworks. Address the data inconsistency issue by proposing a tiered 'Green Bond Framework' that uses a conservative 'lowest common denominator' emissions baseline for reporting while allowing for regional 'add-on' disclosures to satisfy local regulators.",
+      "description": "Creates the initial multi-market financing strategy."
+    },
+    {
+      "name": "ComplianceValidator",
+      "role": "critic",
+      "systemPrompt": "You are an expert in international financial regulation and ESG reporting. Evaluate the strategy for alignment with EU CSRD, ASEAN Taxonomy, and Gulf investor expectations. Identify gaps where measurement quality risks could lead to accusations of greenwashing. Provide a full assessment. On the last line, output 'pass' if the strategy is robust, or 'revise' if it needs further refinement.",
+      "description": "Analyzes the strategy for regulatory and reputational risk."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a financial strategist. Incorporate the feedback from the ComplianceValidator to strengthen the data governance section, ensuring the strategy includes a robust verification protocol for disparate plant-level emissions data.",
+      "description": "Refines the strategy based on compliance feedback."
+    },
+    {
+      "name": "DocumentPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional executive document. Ensure the tone is authoritative and suitable for board-level review and investor relations.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalStrategyArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in sustainable finance. Draft a comprehensive green bond strategy that reconciles EU Taxonomy, ASEAN Green Bond Standards, and Gulf regional ESG frameworks. Address the data inconsistency issue by proposing a tiered 'Green Bond Framework' that uses a conservative 'lowest common denominator' emissions baseline for reporting while allowing for regional 'add-on' disclosures to satisfy local regulators."
+    },
+    {
+      "name": "ComplianceValidator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are an expert in international financial regulation and ESG reporting. Evaluate the strategy for alignment with EU CSRD, ASEAN Taxonomy, and Gulf investor expectations. Identify gaps where measurement quality risks could lead to accusations of greenwashing. Provide a full assessment. On the last line, output 'pass' if the strategy is robust, or 'revise' if it needs further refinement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a financial strategist. Incorporate the feedback from the ComplianceValidator to strengthen the data governance section, ensuring the strategy includes a robust verification protocol for disparate plant-level emissions data."
+    },
+    {
+      "name": "DocumentPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional executive document. Ensure the tone is authoritative and suitable for board-level review and investor relations."
+    }
+  ],
+  "explanation": "The pipeline starts with the GlobalStrategyArchitect creating the initial strategy. The ComplianceValidator acts as a quality gate; if it finds issues, it routes to the StrategyRefiner, which updates the plan. Once the validator approves, the DocumentPolisher formats the final output."
+}

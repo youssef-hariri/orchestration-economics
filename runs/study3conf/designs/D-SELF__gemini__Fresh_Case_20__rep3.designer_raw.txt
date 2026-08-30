@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GlobalStrategist",
+      "role": "builder",
+      "systemPrompt": "Draft a unified product-governance framework that balances regional regulatory compliance (loot-box bans, probability disclosure) with localized spending preferences (gifting, cosmetic-focused economies). Ensure the core game loop remains identical while monetization modules are swapped via regional configuration flags.",
+      "description": "Creates the initial high-level monetization and governance strategy."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy for specific adherence to Belgian/Dutch loot-box laws, Chinese/Korean disclosure mandates, and cultural sensitivity in the Gulf, Japan, Brazil, and the US. Identify gaps where the strategy might fail to prevent player-protection backlash.",
+      "description": "Critiques the strategy for legal and cultural viability."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate the feedback from the ComplianceExpert to adjust the monetization framework. Ensure the strategy explicitly defines how to maintain a unified global experience while applying regional 'skins' or 'rule-sets' to monetization mechanics.",
+      "description": "Adjusts the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy. Does it solve the fragmentation issue? Is it legally robust? Provide a detailed assessment. On the last line, output 'pass' if the strategy is complete, or 'revise' if it needs further adjustment. If 'revise', you will loop back to the StrategyRefiner.",
+      "description": "Validates the final strategy before polishing."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a clear, actionable executive summary for stakeholders, ensuring tone is professional and directives are unambiguous.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a unified product-governance framework that balances regional regulatory compliance (loot-box bans, probability disclosure) with localized spending preferences (gifting, cosmetic-focused economies). Ensure the core game loop remains identical while monetization modules are swapped via regional configuration flags."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy for specific adherence to Belgian/Dutch loot-box laws, Chinese/Korean disclosure mandates, and cultural sensitivity in the Gulf, Japan, Brazil, and the US. Identify gaps where the strategy might fail to prevent player-protection backlash."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate the feedback from the ComplianceExpert to adjust the monetization framework. Ensure the strategy explicitly defines how to maintain a unified global experience while applying regional 'skins' or 'rule-sets' to monetization mechanics."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy. Does it solve the fragmentation issue? Is it legally robust? Provide a detailed assessment. On the last line, output 'pass' if the strategy is complete, or 'revise' if it needs further adjustment. If 'revise', you will loop back to the StrategyRefiner.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a clear, actionable executive summary for stakeholders, ensuring tone is professional and directives are unambiguous."
+    }
+  ],
+  "explanation": "The pipeline begins with the GlobalStrategist drafting the framework. The ComplianceExpert audits the draft. The StrategyRefiner incorporates corrections. The QualityGate assesses the output; if it fails, it routes back to the StrategyRefiner (up to 3 times) to ensure robustness before the FinalPolisher formats the document."
+}

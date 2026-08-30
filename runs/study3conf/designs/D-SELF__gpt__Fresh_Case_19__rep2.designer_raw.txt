@@ -1,0 +1,95 @@
+{
+  "agents": [
+    {
+      "name": "Smallholder Market Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product strategy for a precision-agriculture company entering India, Kenya, and Vietnam with smallholder-focused sensor bundles. Address hardware simplification, affordability, offline and low-connectivity operation, farmer literacy, cooperative and input-dealer distribution, service models, country-specific differences, priority analytics, analytics to defer or drop, pricing logic, implementation phases, risks, and measurable success metrics. Ground recommendations in the realities of fragmented farms and avoid assuming that large-farm North American or European product designs transfer directly. Produce a structured decision-ready draft with explicit trade-offs.",
+      "description": "Creates the initial market-entry and product-adaptation strategy."
+    },
+    {
+      "name": "Smallholder Economics and Connectivity Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the draft strategy against the operating realities of smallholder agriculture in India, Kenya, and Vietnam. Identify implications of farm fragmentation, crop and climate variation, device affordability, battery and maintenance constraints, mobile-network reliability, smartphone access, digital literacy, language, data costs, cooperative structures, input dealers, and willingness to pay. Compare the three countries where relevant, flag unsupported assumptions, and recommend evidence-based adjustments. Provide concrete findings that a strategy refiner can apply.",
+      "description": "Tests the strategy against market, infrastructure, affordability, and adoption realities."
+    },
+    {
+      "name": "Precision Agriculture Domain Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed strategy as an expert in precision agriculture, IoT hardware, agronomic decision support, and smallholder deployment. Assess whether the recommended sensors, connectivity architecture, analytics, workflows, and partnerships can create usable farmer value at low total cost. Distinguish must-have capabilities from technically impressive but low-value features. Identify agronomic, operational, privacy, data-governance, and deployment risks, and propose practical alternatives tailored to India, Kenya, and Vietnam.",
+      "description": "Provides domain-specific validation of the product, agronomy, hardware, and deployment choices."
+    },
+    {
+      "name": "Product Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the prior strategy into a stronger, integrated recommendation using the analyst and expert feedback. Resolve contradictions and unsupported claims. Clearly specify: the minimum viable hardware bundle; optional and modular components; offline-first and low-literacy experience requirements; cooperative, input-dealer, and service-partner roles; monetization and affordability principles; country-specific adaptations; analytics to prioritize, defer, or eliminate; phased rollout; risks and mitigations; and success metrics. Make trade-offs explicit and ensure recommendations are actionable for company leadership. Produce a complete revised strategy, not commentary about the editing process.",
+      "description": "Integrates evidence and expert feedback into an actionable product strategy."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Review the refined strategy comprehensively for strategic usefulness, internal consistency, feasibility, country relevance, smallholder empathy, affordability, connectivity resilience, partnership realism, analytics prioritization, and clarity of trade-offs. Check that it addresses India, Kenya, and Vietnam distinctly where needed; does not overpromise sensor or AI value; explains what should be dropped; includes a practical rollout and measurable outcomes; and is suitable for executive decision-making. Provide a FULL assessment with detailed strengths, weaknesses, omissions, risks, and specific corrections. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the integrated strategy is complete and decision-ready.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved strategy into a clear, concise, decision-ready final deliverable. Preserve the substantive recommendations and trade-offs while improving structure, readability, precision, and executive usefulness. Use headings and tables where helpful, including sections for strategic thesis, target users and value proposition, hardware architecture, delivery partnerships, analytics priorities and exclusions, country adaptations, rollout roadmap, economics, risks, and KPIs. Avoid generic claims, unexplained jargon, and unnecessary technical detail. Do not mention the pipeline, agents, reviews, or drafting process.",
+      "description": "Formats and polishes the approved strategy into the final user-facing deliverable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Smallholder Market Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product strategy for adapting a precision-agriculture platform to smallholder markets in India, Kenya, and Vietnam, covering hardware simplification, affordability, offline operation, delivery partnerships, analytics priorities, analytics exclusions, rollout, risks, and success metrics."
+    },
+    {
+      "name": "Smallholder Economics and Connectivity Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the preceding strategy against smallholder economics, connectivity, literacy, infrastructure, farm fragmentation, country differences, cooperative structures, input dealers, and willingness to pay. Identify unsupported assumptions and give specific recommendations for improvement."
+    },
+    {
+      "name": "Precision Agriculture Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the preceding strategy as a precision-agriculture, IoT, agronomy, and smallholder-deployment expert. Validate hardware, connectivity, analytics, agronomic value, partnerships, privacy, and operational feasibility, and recommend practical corrections."
+    },
+    {
+      "name": "Product Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the preceding strategy using all available analysis and expert feedback. Produce a complete, actionable, country-aware strategy with explicit hardware, partnership, analytics, economics, rollout, risk, and KPI recommendations."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy comprehensively for completeness, feasibility, country relevance, affordability, connectivity resilience, partnership realism, analytics prioritization, explicit exclusions, and executive usefulness. Provide a FULL assessment with detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Polish the approved strategy into a concise, structured, executive-ready final deliverable. Preserve substantive recommendations and trade-offs, improve clarity, and do not mention the pipeline or review process."
+    }
+  ],
+  "explanation": "The flow starts with a substantive strategy draft, adds market and infrastructure analysis, applies precision-agriculture domain expertise, and then consolidates the findings into an actionable strategy. The quality gate follows the refiner, as required; if it outputs revise, execution returns to the Product Strategy Refiner, allowing the strategy to be corrected before reassessment. If it outputs pass, the result proceeds to the Executive Strategy Polisher for final presentation."
+}

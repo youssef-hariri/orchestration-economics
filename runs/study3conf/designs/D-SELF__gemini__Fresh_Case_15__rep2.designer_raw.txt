@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Global Strategy Architect",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in international franchise law and macroeconomics. Design a tiered royalty structure that shifts from fixed USD-denominated fees to a hybrid model using local currency floors, inflation-indexed caps, and performance-based rebates for markets like Turkey, Egypt, Nigeria, Indonesia, and Brazil.",
+      "description": "Develops the core financial and contractual restructuring strategy."
+    },
+    {
+      "name": "Macro-Economic Validator",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed strategy against 2026 economic projections for Turkey, Egypt, Nigeria, Indonesia, and Brazil. Assess if the model mitigates currency volatility while maintaining franchisor profitability. Provide a detailed critique of the financial sustainability.",
+      "description": "Evaluates the economic viability of the proposed strategy."
+    },
+    {
+      "name": "Contractual Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a legal and financial document specialist. Incorporate the feedback from the Macro-Economic Validator to adjust the royalty formulas, ensuring they are legally robust and economically balanced. Fix any identified gaps in the strategy.",
+      "description": "Adjusts the strategy based on economic feedback."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Review the strategy for internal consistency, risk mitigation, and clarity. Assess if the solution addresses the collective bargaining pressure from franchisees. Provide a full assessment. On the last line, output 'pass' or 'revise'.",
+      "description": "Final check for strategic alignment and risk."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final restructuring plan into a professional executive summary suitable for board-level review. Ensure tone is authoritative, clear, and actionable.",
+      "description": "Formats the final output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in international franchise law and macroeconomics. Design a tiered royalty structure that shifts from fixed USD-denominated fees to a hybrid model using local currency floors, inflation-indexed caps, and performance-based rebates for markets like Turkey, Egypt, Nigeria, Indonesia, and Brazil."
+    },
+    {
+      "name": "Macro-Economic Validator",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed strategy against 2026 economic projections for Turkey, Egypt, Nigeria, Indonesia, and Brazil. Assess if the model mitigates currency volatility while maintaining franchisor profitability. Provide a detailed critique of the financial sustainability."
+    },
+    {
+      "name": "Contractual Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a legal and financial document specialist. Incorporate the feedback from the Macro-Economic Validator to adjust the royalty formulas, ensuring they are legally robust and economically balanced. Fix any identified gaps in the strategy."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the strategy for internal consistency, risk mitigation, and clarity. Assess if the solution addresses the collective bargaining pressure from franchisees. Provide a full assessment. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final restructuring plan into a professional executive summary suitable for board-level review. Ensure tone is authoritative, clear, and actionable."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategy Architect creating the core restructuring plan. This is passed to the Macro-Economic Validator to stress-test the financial logic against specific regional economic data. The Contractual Refiner then adjusts the plan based on the validator's findings. The Quality Gate assesses the output; if it fails, it routes back to the Contractual Refiner to iterate until the strategy is robust. Once passed, the Final Polisher formats the document for executive presentation."
+}

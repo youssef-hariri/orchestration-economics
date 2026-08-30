@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in global educational technology expansion. Develop a comprehensive product strategy for localizing an adaptive-learning platform across Vietnam, Saudi Arabia, France, and Kenya. Address the balance between a shared core technology and local requirements, including curriculum alignment, screen-time cultural norms, and procurement models (B2G vs B2C).",
+      "description": "Develops the initial high-level localization strategy."
+    },
+    {
+      "name": "LocalExpert",
+      "role": "critic",
+      "systemPrompt": "You are an expert in regional educational policies and cultural pedagogical norms. Review the strategy for feasibility in Vietnam, Saudi Arabia, France, and Kenya. Identify gaps in curriculum compliance, procurement strategy, or cultural sensitivity regarding screen time. Provide a full assessment of the strategy's viability. On the last line, output 'pass' if the strategy is robust, or 'revise' if it needs further refinement.",
+      "description": "Critiques the strategy for regional accuracy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the LocalExpert to ensure the strategy is actionable and compliant with local mandates. Ensure the distinction between shared core and local adaptations is clear.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the finalized strategy into a professional, executive-ready document. Ensure clear headings, actionable steps, and a logical flow for stakeholders.",
+      "description": "Finalizes the output format."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in global educational technology expansion. Develop a comprehensive product strategy for localizing an adaptive-learning platform across Vietnam, Saudi Arabia, France, and Kenya. Address the balance between a shared core technology and local requirements, including curriculum alignment, screen-time cultural norms, and procurement models (B2G vs B2C)."
+    },
+    {
+      "name": "LocalExpert",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are an expert in regional educational policies and cultural pedagogical norms. Review the strategy for feasibility in Vietnam, Saudi Arabia, France, and Kenya. Identify gaps in curriculum compliance, procurement strategy, or cultural sensitivity regarding screen time. Provide a full assessment of the strategy's viability. On the last line, output 'pass' if the strategy is robust, or 'revise' if it needs further refinement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the LocalExpert to ensure the strategy is actionable and compliant with local mandates. Ensure the distinction between shared core and local adaptations is clear."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the finalized strategy into a professional, executive-ready document. Ensure clear headings, actionable steps, and a logical flow for stakeholders."
+    }
+  ],
+  "explanation": "MarketStrategist creates the initial strategy. LocalExpert evaluates it; if 'revise' is triggered, the pipeline routes to StrategyRefiner, which updates the content before returning to the LocalExpert for re-evaluation. Once 'pass' is triggered, the FinalPolisher formats the output."
+}

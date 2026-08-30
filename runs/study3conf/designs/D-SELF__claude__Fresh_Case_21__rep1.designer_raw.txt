@@ -1,0 +1,83 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Manufacturing Footprint Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive market-entry and manufacturing relocation strategy framework covering tariff exposure analysis, supplier ecosystem mapping, and organizational feasibility assessment across ASEAN candidates"
+    },
+    {
+      "name": "Integrated Strategy Analyst",
+      "role": "analyst",
+      "description": "Analyzes tariff realignments, rules-of-origin impacts, supplier ecosystem depth, logistics infrastructure, and organizational feasibility; produces integrated cost-benefit and risk assessment across all dimensions"
+    },
+    {
+      "name": "Manufacturing Strategy Architect",
+      "role": "strategist",
+      "description": "Develops phased capacity migration roadmap and organizational change strategy that addresses engineering team resistance while optimizing tariff exposure and supply chain feasibility"
+    },
+    {
+      "name": "Strategy Validator",
+      "role": "critic",
+      "description": "Validates integrated strategy for internal consistency, feasibility, and completeness; identifies conflicts between financial, operational, and organizational objectives"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Resolves identified gaps and conflicts in the strategy; harmonizes tariff optimization with supplier availability and organizational capacity; produces refined final recommendations"
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "description": "Formats validated manufacturing relocation strategy into executive-ready deliverable with clear recommendations, implementation timeline, risk mitigation, and decision frameworks"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Manufacturing Footprint Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Design a manufacturing relocation strategy for an industrial-equipment maker moving from a single East Asian hub to multi-country ASEAN footprint in 2026. Create comprehensive initial framework: (1) outline candidate evaluation criteria across tariff exposure, supplier ecosystems, logistics, incentives, political stability; (2) map engineering team resistance points and capacity constraints; (3) identify key decision nodes for phased capacity migration; (4) propose preliminary country candidates and strategic fit. Produce structured, detailed draft strategy framework."
+    },
+    {
+      "name": "Integrated Strategy Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the multi-dimensional relocation strategy. For each ASEAN candidate, quantify: (1) tariff exposure under new rules-of-origin, tariff savings vs. current hub, future tariff risks; (2) supplier ecosystem depth, component availability, quality, lead times, sourcing gaps; (3) logistics infrastructure quality, transportation costs, port accessibility; (4) political stability and incentive regimes; (5) organizational complexity costs and engineering team disruption risk. Produce integrated cost-benefit analysis and location rankings balancing all dimensions."
+    },
+    {
+      "name": "Manufacturing Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop phased implementation roadmap addressing all constraints. Propose: (1) optimal country selection ranked by integrated value (tariff + supply + feasibility); (2) phased capacity migration timeline minimizing engineering disruption; (3) organizational structure options (regional hubs, specialized lines, hybrid) resolving team resistance; (4) governance and knowledge transfer across multiple sites; (5) risk mitigation for operational complexity. Provide realistic 18-36 month implementation path balancing tariff/supply gains with organizational feasibility."
+    },
+    {
+      "name": "Strategy Validator",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "Validate the integrated manufacturing relocation strategy. Provide FULL assessment: (1) internal consistency—do tariff, supply, and organizational strategies align or conflict?; (2) feasibility—are timelines realistic given constraints?; (3) completeness—are decision gaps or unaddressed risks present?; (4) financial viability—are savings realistic relative to complexity costs?; (5) stakeholder alignment—does strategy satisfy engineering team while meeting business objectives? Identify specific gaps, conflicts, or weaknesses. On VERY LAST LINE output EXACTLY ONE keyword: pass or revise"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the manufacturing footprint strategy based on validation feedback. Resolve identified gaps: (1) reconcile tariff optimization with supplier constraints; (2) harmonize engineering feasibility with migration timelines; (3) clarify organizational structure and governance trade-offs; (4) validate financial assumptions with revised scenarios; (5) strengthen risk mitigation and contingencies. Produce cohesive, integrated final strategy balancing all competing objectives."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "reviewer",
+      "type": "if",
+      "systemPrompt": "Final quality assessment before executive polish. Review refined strategy: (1) Is strategy internally coherent across tariff, supply, organizational dimensions?; (2) Are recommendations clear, specific, actionable?; (3) Does it adequately address engineering resistance and organizational feasibility?; (4) Are financial and operational assumptions transparent and realistic?; (5) Is implementation risk appropriately mitigated? Identify remaining issues. On VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 5}
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format validated manufacturing relocation strategy into executive deliverable. Structure: (1) Executive Summary with key recommendations and business impact; (2) Market-Entry & Footprint Strategy with country rankings and phased roadmap; (3) Integrated Tariff, Supply Chain, and Organizational Feasibility Analysis; (4) 18-36 Month Implementation Timeline; (5) Risk Matrix and Mitigation Strategies; (6) Key Success Metrics and Decision Gates. Use professional formatting, tables, visual hierarchy. Produce polished document ready for executive decision-making."
+    }
+  ],
+  "explanation": "This 7-step pipeline orchestrates manufacturing relocation strategy by: (1) Builder establishes initial framework; (2) Analyst performs integrated analysis across tariff, supply, logistics, and organizational dimensions, identifying quantified trade-offs; (3) Strategist translates analysis into phased implementation roadmap addressing engineering resistance; (4) Validator checks cross-dimensional consistency and feasibility; (5) Refiner resolves conflicts and produces coherent final strategy; (6) Quality Gate performs final coherence check with single 'if' loop back to Refiner if issues remain (max 3 iterations); (7) Polisher formats into executive-ready deliverable. This structure directly addresses the core tension by integrating tariff optimization, supplier reality, and organizational feasibility into a single coherent strategy rather than siloing them."
+}
+```

@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GeopoliticalStrategist",
+      "role": "builder",
+      "systemPrompt": "You are a global corporate strategist. Develop a comprehensive framework for managing regional geopolitical polarization. The framework must address: 1. Principles of neutrality vs. value-alignment, 2. Decentralized communication protocols for regional franchisees, 3. Internal employee engagement strategies, and 4. Risk mitigation for brand equity.",
+      "description": "Drafts the core strategic framework for handling regional geopolitical conflict."
+    },
+    {
+      "name": "RegionalImpactAnalyst",
+      "role": "analyst",
+      "systemPrompt": "You are a risk analyst. Evaluate the drafted framework against the specific scenario of contradictory regional demands. Identify gaps where the strategy fails to protect the brand from localized backlash or internal employee dissent.",
+      "description": "Analyzes the draft for regional viability and risk exposure."
+    },
+    {
+      "name": "FrameworkRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Incorporate the analyst's feedback to strengthen the framework. Ensure the tone is professional, the guidelines are actionable, and the logic addresses the conflicting regional pressures identified.",
+      "description": "Refines the strategy based on analyst feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Assess if the framework provides clear, actionable, and balanced guidance for a global brand facing contradictory regional pressures. Provide a detailed assessment of the framework's robustness. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Validates the quality and completeness of the framework."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional editor. Format the final framework into a clear, executive-ready document with structured sections, bullet points, and high-level summaries suitable for C-suite distribution.",
+      "description": "Formats the final output for professional use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GeopoliticalStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global corporate strategist. Develop a comprehensive framework for managing regional geopolitical polarization. The framework must address: 1. Principles of neutrality vs. value-alignment, 2. Decentralized communication protocols for regional franchisees, 3. Internal employee engagement strategies, and 4. Risk mitigation for brand equity."
+    },
+    {
+      "name": "RegionalImpactAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a risk analyst. Evaluate the drafted framework against the specific scenario of contradictory regional demands. Identify gaps where the strategy fails to protect the brand from localized backlash or internal employee dissent."
+    },
+    {
+      "name": "FrameworkRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Incorporate the analyst's feedback to strengthen the framework. Ensure the tone is professional, the guidelines are actionable, and the logic addresses the conflicting regional pressures identified."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Assess if the framework provides clear, actionable, and balanced guidance for a global brand facing contradictory regional pressures. Provide a detailed assessment of the framework's robustness. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional editor. Format the final framework into a clear, executive-ready document with structured sections, bullet points, and high-level summaries suitable for C-suite distribution."
+    }
+  ],
+  "explanation": "The pipeline begins with the GeopoliticalStrategist creating the initial framework. The RegionalImpactAnalyst reviews this draft to identify specific regional risks. The FrameworkRefiner then updates the document based on those findings. The QualityGate evaluates the refined framework; if it passes, it proceeds to the FinalPolisher for formatting. If it requires revision, it loops back to the FrameworkRefiner to ensure the strategy is robust before final output."
+}

@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Regional Trust & Context Builder",
+      "role": "builder",
+      "description": "Creates initial framework mapping trust regimes, intermediation norms, claim expectations, and data quality by region"
+    },
+    {
+      "name": "Distribution & Business Model Strategist",
+      "role": "strategist",
+      "description": "Develops region-specific distribution models and business structures aligned with local trust patterns and intermediary legitimacy"
+    },
+    {
+      "name": "Actuarial & Risk Analyst",
+      "role": "analyst",
+      "description": "Analyzes data quality gaps, quantifies portfolio risk, and validates actuarial feasibility of each model variant"
+    },
+    {
+      "name": "Microinsurance Domain Expert",
+      "role": "expert",
+      "description": "Provides expert validation on climate-risk underwriting, claim credibility, and operational feasibility across regions"
+    },
+    {
+      "name": "Integrated Recommendation Refiner",
+      "role": "refiner",
+      "description": "Synthesizes strategy, actuarial, and expert insights into cohesive region-specific recommendations with trade-off analysis"
+    },
+    {
+      "name": "Model Coherence Reviewer",
+      "role": "critic",
+      "description": "Reviews integrated recommendations for consistency, actuarial soundness, and regional appropriateness"
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats final distribution and business-model options as actionable recommendations for pilot decision-making"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Trust & Context Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Design climate microinsurance distribution for East Africa, South Asia, and Central America by 2026. Create a detailed regional context map documenting: (1) Trust levels in formal insurance by region; (2) Expected claim-settlement speed norms; (3) Perceived legitimacy and reach of cooperatives, mobile-network agents, religious community groups, and fintech apps; (4) Actuarial data quality issues. Output a structured framework guiding subsequent strategy and business-model design."
+    },
+    {
+      "name": "Distribution & Business Model Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using regional context, design distribution and business models for each region. For each region recommend primary/secondary distribution channels from {cooperatives, mobile agents, religious groups, fintech}, justified by trust, reach, and regulatory fit. For every option specify: (1) Customer acquisition costs; (2) Claim-settlement speed guarantees and mechanisms; (3) Margin structure; (4) Portfolio composition and risk diversification; (5) Data quality mitigation strategies. Provide 3-5 model variants per region with distinct risk/cost trade-offs. Address trust-building measures needed for intermediary legitimacy."
+    },
+    {
+      "name": "Actuarial & Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze proposed distribution and business models for actuarial feasibility. Quantify: (1) Expected loss ratios and portfolio risk by region and channel; (2) Impact of data quality gaps on underwriting uncertainty and risk loadings; (3) Sensitivity of margins and breakeven volume to claim frequency assumptions; (4) Portfolio concentration risk from intermediary or geographic reliance. Identify sustainable models and critical data collection priorities. Assess whether claim-speed guarantees are achievable given regional infrastructure."
+    },
+    {
+      "name": "Microinsurance Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review distribution strategies, business models, and actuarial analyses from climate-microinsurance and emerging-market perspective. Assess: (1) Operational feasibility of claim-speed guarantees; (2) Adequacy of trust and legitimacy measures for each channel; (3) Regulatory alignment in East Africa, South Asia, Central America; (4) Realism of acquisition cost and risk assumptions for smallholder segments. Provide expert judgment on viable models and recommend enhancements to credibility, compliance, or risk management."
+    },
+    {
+      "name": "Integrated Recommendation Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize strategy, actuarial, and expert insights into final recommendations. For each region articulate: (1) Optimal distribution model(s) with justification; (2) Preferred business-model variant(s) balancing acquisition cost, claim speed, and sustainability; (3) Portfolio-risk management approach; (4) Critical success factors and execution risks; (5) Trade-offs accepted and rationale. Ensure internal consistency across distribution, business, and risk dimensions. Resolve any conflicts between expert judgment and actuarial analysis."
+    },
+    {
+      "name": "Model Coherence Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review integrated distribution and business-model recommendations for climate microinsurance across three regions. Assess: (1) **Internal Consistency**: Do distribution strategies align with business-model assumptions on claim speed, intermediary roles, and data quality? (2) **Actuarial Soundness**: Are loss ratios, margins, and risk loadings realistic? (3) **Regional Appropriateness**: Do recommendations reflect actual trust dynamics and regulatory context? (4) **Completeness**: Are all four distribution channels addressed with clear rationale? (5) **Operational Feasibility**: Are claim-speed and risk-management mechanisms achievable by 2026? Provide FULL analysis of strengths, gaps, and specific issues. On the VERY LAST LINE output exactly ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format final integrated recommendations into clear, structured output for insurer leadership. Organize by region with: (1) Recommended distribution model with trust rationale; (2) Preferred business-model option(s) with acquisition cost, claim-speed, and margin profile; (3) Portfolio-risk strategy and data collection needs; (4) Key success factors and top 3 execution risks; (5) 2026 pilot milestones. Use tables and bullet points. Ensure output is actionable and directly addresses balancing trust, cost, claim credibility, and risk."
+    }
+  ],
+  "explanation": "Pipeline produces comprehensive distribution and business-model options for climate microinsurance across three regions with distinct trust contexts. Execution flow: Builder establishes regional trust and intermediation dynamics → Strategist designs region-specific distribution and business models with acquisition costs, claim-speed mechanisms, and risk strategies → Analyst quantifies actuarial feasibility and portfolio risk by channel and region → Expert validates operational, regulatory, and claim-credibility feasibility → Refiner synthesizes all insights into cohesive, trade-off-aware recommendations aligned across distribution, business, and risk dimensions → Critic reviews integrated output for internal consistency, actuarial soundness, regional appropriateness, and completeness (if issues found, loops back to Refiner up to 3 iterations to resolve conflicts) → Polisher produces executive-ready summary. Single quality gate ensures recommendations are sound before delivery."
+}
+```

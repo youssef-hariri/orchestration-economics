@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GlobalPolicyBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft a comprehensive, modular global flexible-work policy for a 12-country software firm. The policy must balance 'right to disconnect' laws and compressed-week demands with cultural norms regarding visibility and performance. Create a 'Core Global Standard' and a 'Local Adaptation Framework' that allows for regional variance while maintaining corporate equity.",
+      "description": "Creates the initial draft of the global flexible-work policy."
+    },
+    {
+      "name": "LegalCulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Evaluate the draft policy against diverse labor laws and cultural expectations (e.g., high-context vs. low-context, power distance, and 'visible effort' norms). Identify gaps where the policy might fail to be legally compliant or culturally insensitive. Provide a detailed critique.",
+      "description": "Analyzes the policy for legal and cultural viability."
+    },
+    {
+      "name": "PolicyRefiner",
+      "role": "refiner",
+      "systemPrompt": "Revise the policy based on the expert's critique. Ensure the language is precise, legally defensible, and culturally nuanced. Strengthen the 'Local Adaptation Framework' to ensure it remains operationally workable across all 12 offices.",
+      "description": "Refines the policy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Review the refined policy. Assess if it successfully balances the competing needs of younger employees and traditionalist teams across all 12 countries. Provide a full assessment of the policy's fairness and operational feasibility. On the VERY LAST LINE, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Final validation of the policy before polishing."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final policy into a professional, clear, and actionable corporate document. Ensure consistent tone and structure.",
+      "description": "Finalizes the document for distribution."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalPolicyBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive, modular global flexible-work policy for a 12-country software firm. The policy must balance 'right to disconnect' laws and compressed-week demands with cultural norms regarding visibility and performance. Create a 'Core Global Standard' and a 'Local Adaptation Framework' that allows for regional variance while maintaining corporate equity."
+    },
+    {
+      "name": "LegalCulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Evaluate the draft policy against diverse labor laws and cultural expectations (e.g., high-context vs. low-context, power distance, and 'visible effort' norms). Identify gaps where the policy might fail to be legally compliant or culturally insensitive. Provide a detailed critique."
+    },
+    {
+      "name": "PolicyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Revise the policy based on the expert's critique. Ensure the language is precise, legally defensible, and culturally nuanced. Strengthen the 'Local Adaptation Framework' to ensure it remains operationally workable across all 12 offices."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined policy. Assess if it successfully balances the competing needs of younger employees and traditionalist teams across all 12 countries. Provide a full assessment of the policy's fairness and operational feasibility. On the VERY LAST LINE, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final policy into a professional, clear, and actionable corporate document. Ensure consistent tone and structure."
+    }
+  ],
+  "explanation": "The pipeline begins with the Builder creating the initial policy draft. This draft is then reviewed by the LegalCulturalExpert to identify regional conflicts. The PolicyRefiner incorporates these insights. The QualityGate then assesses the refined draft; if it fails to meet the criteria for fairness and legal compliance, it routes back to the PolicyRefiner (up to 3 iterations). Once the QualityGate passes, the FinalPolisher formats the document for the end user."
+}

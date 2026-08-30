@@ -1,0 +1,75 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Context Builder",
+      "role": "builder",
+      "description": "Creates initial product strategy framework addressing hardware simplification, delivery partnerships, and analytics prioritization for smallholder markets in India, Kenya, and Vietnam"
+    },
+    {
+      "name": "Smallholder Expert Analyst",
+      "role": "expert",
+      "description": "Provides domain-specific insights on smallholder farming constraints, cooperative structures, dealer networks, connectivity realities, affordability thresholds, and data literacy across target geographies"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates expert feedback into the strategy, refining hardware recommendations, partnership models, and feature prioritization with market-specific adaptations"
+    },
+    {
+      "name": "Feasibility & Completeness Critic",
+      "role": "critic",
+      "description": "Critically reviews the refined strategy for internal contradictions, missing risk factors, unaddressed delivery mechanisms, and incomplete coverage of all three market segments"
+    },
+    {
+      "name": "Strategic Coherence Validator",
+      "role": "strategist",
+      "description": "Validates strategic alignment between hardware simplification, partnership models, and feature prioritization; ensures recommendations are actionable and mutually reinforcing"
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final product strategy into structured, executive-ready deliverable with clear recommendations, trade-off rationale, and implementation priorities"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Context Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a product strategy for adapting a precision-agriculture platform from North American/European markets to smallholder farmers in India, Kenya, and Vietnam. Create an initial comprehensive strategy framework addressing: (1) Hardware simplification (cost reduction, durability for harsh conditions, reduced connectivity requirements), (2) Delivery partnerships (cooperative structures, input dealer networks, last-mile logistics), and (3) Analytics feature prioritization (which features to emphasize, which to eliminate or defer). Organize by market segment and acknowledge key constraints: fragmented small farms, limited connectivity, affordability pressures, varying literacy levels, and different data priorities. Output a structured draft strategy."
+    },
+    {
+      "name": "Smallholder Expert Analyst",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a domain expert in smallholder agriculture, cooperative economics, and agri-tech adoption in emerging markets. Review the initial strategy and provide expert analysis on: (1) realistic hardware cost targets and component trade-offs for each market, (2) cooperative vs. dealer vs. direct-to-farmer delivery viability in India, Kenya, Vietnam, (3) which data outputs smallholders actually value and use (soil moisture, pest alerts, yield prediction, input optimization), (4) literacy and device interaction constraints, (5) connectivity infrastructure realities (mobile vs. satellite vs. mesh networks), (6) competitive and regulatory context per market. Provide specific, actionable insights that challenge or validate assumptions in the initial strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining the product strategy based on expert feedback. Integrate the expert's insights into a revised strategy that: (1) specifies hardware simplification with realistic cost targets and justified component choices per market, (2) recommends concrete delivery partnership models (which cooperatives to target, dealer incentive structures, training requirements), (3) prioritizes analytics features with clear rationale (keep, defer, drop), (4) addresses connectivity constraints with specific technology choices, (5) accounts for literacy and usability constraints with interface/interaction design notes. Ensure all recommendations are grounded in the expert feedback and internally consistent. Output the refined strategy with clear sections for each market and each strategy pillar."
+    },
+    {
+      "name": "Feasibility & Completeness Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a critical reviewer assessing the refined strategy. Evaluate: (1) Internal consistency — do hardware choices enable the delivery model and analytics prioritization? (2) Market coverage — are India, Kenya, Vietnam all adequately addressed with differentiated strategies? (3) Risk identification — what could derail this strategy (regulatory, competitive, operational, adoption)? (4) Completeness — are all three pillars (hardware, partnerships, analytics) fully addressed? (5) Justification — is the rationale clear for what is kept vs. dropped? Provide detailed assessment of strengths and weaknesses. Then on the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "name": "Strategic Coherence Validator",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are validating the strategic coherence of the product strategy. Review the strategy and assess: (1) Does the hardware simplification directly enable the chosen delivery partnership model? (2) Are the prioritized analytics features aligned with what the partnership channels can realistically deliver and support? (3) Are trade-offs explicitly acknowledged (e.g., reduced features for cost, simpler hardware requiring different support)? (4) Is the strategy differentiated appropriately across the three markets, or would a one-size-fits-most approach be more implementable? (5) Are there actionable next steps and clear success metrics? Provide full strategic assessment identifying any misalignments or gaps. Then on the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are preparing the final product strategy for executive delivery. Format the validated strategy into a clear, structured document with: (1) Executive summary, (2) Differentiated strategies for India, Kenya, Vietnam (with sub-sections: hardware specifications + cost targets, delivery/partnership model, prioritized analytics features, key risks + mitigation), (3) Trade-off rationale (what is dropped and why), (4) Implementation roadmap and success metrics, (5) Critical assumptions and dependencies. Use tables where helpful. Ensure clarity, visual hierarchy, and actionability. This is the final user-facing output."
+    }
+  ],
+  "explanation": "This pipeline is optimized to produce a comprehensive, expert-informed, and strategically coherent product strategy. Execution flow: Builder creates an initial framework → Expert provides domain insights on market constraints and farmer needs → Refiner integrates expert feedback into a refined, detailed strategy → Feasibility Critic evaluates completeness, consistency, and risk coverage (if issues found, loops back to Refiner for targeted fixes; if pass, continues) → Strategist validates cross-pillar coherence and trade-off clarity (if issues found, loops back to Refiner; if pass, continues) → Polisher formats into executive-ready output. The two quality gates (Feasibility & Strategic Coherence) are placed AFTER the agents producing content (Refiner), and each gate includes a full assessment before routing. This ensures the strategy addresses all three markets, all three pillars (hardware, partnerships, analytics), is internally consistent, and is grounded in smallholder-market realities before final polish."
+}
+```

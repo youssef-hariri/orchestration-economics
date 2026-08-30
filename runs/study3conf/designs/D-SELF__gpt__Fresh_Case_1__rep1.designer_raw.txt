@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Global Integration Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial comprehensive strategy for integrating autonomous AI agents into human teams across the firm's North American, Western European, Gulf, and East Asian offices in 2026. Address regional differences in trust, perceived job threat, attitudes toward automation, expectations about human authority, communication norms, privacy, governance, training, employee participation, escalation, and measures of success. Distinguish global principles from locally adaptable practices. Produce a structured strategy intended for senior leaders and regional implementation teams, grounded in practical organizational and cross-cultural considerations.",
+      "description": "Creates the initial cross-regional strategy for responsible and effective human-AI team integration."
+    },
+    {
+      "name": "Cross-Cultural Workforce Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed strategy for cultural fit and implementation realism across North America, Western Europe, the Gulf, and East Asia. Identify likely differences in trust, job-security concerns, power distance, communication preferences, privacy expectations, labor relations, willingness to challenge AI outputs, and views of human-machine authority. Highlight risks of stereotyping and require within-region segmentation where appropriate. Recommend concrete adaptations, safeguards, employee-engagement methods, and measurable indicators for each regional context. Preserve globally consistent ethical and accountability principles while identifying what should be localized.",
+      "description": "Produces a culturally informed analysis of regional risks, adaptations, and success measures."
+    },
+    {
+      "name": "Human-AI Integration Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the initial strategy using the cross-cultural analysis. Produce a unified, actionable strategy that balances global consistency with regional adaptation. Clearly explain how to build trust, reduce perceived job threat, define human and AI authority, support respectful collaboration, protect privacy, handle errors and disputes, communicate change, train employees, and monitor outcomes. Include region-specific recommendations for North America, Western Europe, the Gulf, and East Asia without treating any region as culturally uniform. Include phased implementation guidance, responsibilities, risk mitigations, and quantitative and qualitative success metrics. Ensure the result is practical, ethically responsible, legally cautious, and suitable for executive and local operating use.",
+      "description": "Integrates analytical findings into a coherent, actionable, and culturally responsive strategy."
+    },
+    {
+      "name": "Strategy Completeness Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Review the refined strategy in full. Assess its strategic coherence, cultural sensitivity, regional specificity, treatment of trust and job threat, clarity of human-AI authority, practicality, ethical safeguards, privacy considerations, employee experience, implementation sequencing, measurement framework, and avoidance of cultural stereotypes or unsupported claims. Identify strengths, weaknesses, omissions, contradictions, and precise corrections needed. Confirm that the recommendations are actionable across all four regions while preserving appropriate global standards. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Evaluates whether the strategy is complete, culturally credible, actionable, and safe for final publication.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing strategy from the approved refined output. Preserve substantive recommendations while improving clarity, structure, concision, tone, and usability. Present an executive summary, global principles, regional adaptations for North America, Western Europe, the Gulf, and East Asia, implementation phases, communication and training guidance, governance and accountability practices, risk mitigations, and success metrics. Use respectful, non-stereotyping language and clearly distinguish evidence-informed considerations from assumptions requiring local validation. Ensure the final document is polished, internally consistent, practical, and suitable for multinational leadership and regional implementation teams.",
+      "description": "Turns the validated strategy into a clear, executive-ready final document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Integration Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial comprehensive strategy for integrating autonomous AI agents into human teams across the firm's North American, Western European, Gulf, and East Asian offices in 2026. Address regional differences in trust, perceived job threat, attitudes toward automation, expectations about human authority, communication norms, privacy, governance, training, employee participation, escalation, and measures of success. Distinguish global principles from locally adaptable practices. Produce a structured strategy intended for senior leaders and regional implementation teams, grounded in practical organizational and cross-cultural considerations."
+    },
+    {
+      "name": "Cross-Cultural Workforce Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed strategy for cultural fit and implementation realism across North America, Western Europe, the Gulf, and East Asia. Identify likely differences in trust, job-security concerns, power distance, communication preferences, privacy expectations, labor relations, willingness to challenge AI outputs, and views of human-machine authority. Highlight risks of stereotyping and require within-region segmentation where appropriate. Recommend concrete adaptations, safeguards, employee-engagement methods, and measurable indicators for each regional context. Preserve globally consistent ethical and accountability principles while identifying what should be localized."
+    },
+    {
+      "name": "Human-AI Integration Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the initial strategy using the cross-cultural analysis. Produce a unified, actionable strategy that balances global consistency with regional adaptation. Clearly explain how to build trust, reduce perceived job threat, define human and AI authority, support respectful collaboration, protect privacy, handle errors and disputes, communicate change, train employees, and monitor outcomes. Include region-specific recommendations for North America, Western Europe, the Gulf, and East Asia without treating any region as culturally uniform. Include phased implementation guidance, responsibilities, risk mitigations, and quantitative and qualitative success metrics. Ensure the result is practical, ethically responsible, legally cautious, and suitable for executive and local operating use."
+    },
+    {
+      "name": "Strategy Completeness Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy in full. Assess its strategic coherence, cultural sensitivity, regional specificity, treatment of trust and job threat, clarity of human-AI authority, practicality, ethical safeguards, privacy considerations, employee experience, implementation sequencing, measurement framework, and avoidance of cultural stereotypes or unsupported claims. Identify strengths, weaknesses, omissions, contradictions, and precise corrections needed. Confirm that the recommendations are actionable across all four regions while preserving appropriate global standards. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing strategy from the approved refined output. Preserve substantive recommendations while improving clarity, structure, concision, tone, and usability. Present an executive summary, global principles, regional adaptations for North America, Western Europe, the Gulf, and East Asia, implementation phases, communication and training guidance, governance and accountability practices, risk mitigations, and success metrics. Use respectful, non-stereotyping language and clearly distinguish evidence-informed considerations from assumptions requiring local validation. Ensure the final document is polished, internally consistent, practical, and suitable for multinational leadership and regional implementation teams."
+    }
+  ],
+  "explanation": "The pipeline first creates a complete global strategy, then analyzes its cultural and workforce implications, and then refines it into an actionable cross-regional plan. The quality gate follows the refiner and performs a full assessment; if it outputs revise, execution returns to the refiner at step 2 so identified issues can be corrected, while pass proceeds to the final polisher at step 4. The polisher produces the executive-ready user-facing strategy."
+}

@@ -1,0 +1,95 @@
+{
+  "agents": [
+    {
+      "name": "Global Health-Product Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product and regulatory-rollout strategy for a 2026 wearables company whose sleep-apnea screening feature is classified as a medical device in the EU and Japan, a wellness feature in several emerging markets, and is pending classification in the US. Address the five additional health capabilities in the feature pipeline. Propose market sequencing, regulatory pathways, clinical-validation investments, evidence-generation priorities, physician-engagement methods, consumer-trust initiatives, claims and labeling principles, launch dependencies, risk mitigation, and measurable success criteria. Make the strategy practical, regionally differentiated, ethically responsible, and explicit about assumptions and uncertainty. Produce a structured executive-ready draft.",
+      "description": "Creates the initial global product, evidence, regulatory, launch, and credibility strategy."
+    },
+    {
+      "name": "Regional Evidence and Market Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed strategy for regional differences in regulatory classification, clinical-validation expectations, physician-endorsement norms, consumer trust in health claims, reimbursement or care-pathway relevance, market readiness, and operational feasibility. Compare the EU, Japan, the US, and emerging markets. Identify where evidence can be reused, where local validation is necessary, which assumptions are uncertain, and how the five additional health capabilities affect sequencing and investment. Return concrete insights, prioritization logic, and recommendations that can improve the strategy.",
+      "description": "Evaluates regional evidence needs, market conditions, uncertainty, and investment trade-offs."
+    },
+    {
+      "name": "Medical Device and Digital Health Regulatory Expert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy and analysis as a global medical-device, digital-health, clinical-evidence, and health-communications expert. Explain implications of divergent classifications in the EU, Japan, emerging markets, and the pending US pathway without inventing unsupported legal certainty. Recommend defensible claims boundaries, clinical and analytical-performance evidence, quality and post-market considerations, physician collaboration, consumer disclosures, and approaches for handling classification changes. Flag regulatory, ethical, reputational, privacy, safety, and green-light risks, and provide precise corrective recommendations.",
+      "description": "Provides domain expertise on regulatory strategy, clinical evidence, claims, safety, and credibility."
+    },
+    {
+      "name": "Integrated Rollout Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the initial strategy into a coherent, decision-ready plan using the regional analysis and regulatory-expert recommendations. Include a phased market sequence, explicit launch prerequisites, validation and evidence investment tiers, treatment of the five additional capabilities, US classification contingencies, differentiated claims and communications, clinician-credibility programs, consumer-trust measures, safety and post-market monitoring, governance responsibilities, key risks, and measurable milestones. Resolve contradictions, distinguish confirmed facts from assumptions, avoid overclaiming, and make recommendations actionable for executives.",
+      "description": "Integrates the research and expert feedback into a rigorous, actionable rollout strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Conduct a full quality assessment of the refined strategy. Evaluate completeness, regional accuracy, regulatory caution, clinical-validation logic, sequencing rationale, treatment of all five additional capabilities, handling of US uncertainty, credibility-building, consumer protection, feasibility, clarity, and consistency. Identify specific omissions, unsupported assumptions, contradictions, or recommendations that could create regulatory, ethical, safety, or reputational risk. Explain exactly what must be improved if revision is needed. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer from the refined strategy and quality assessment. Preserve substantive recommendations while correcting any remaining weaknesses. Present a concise executive strategy with clear sections for principles, market sequencing, validation investment, capability portfolio treatment, regulatory scenarios, clinician credibility, consumer trust, risk controls, milestones, and success metrics. Clearly separate regulatory facts, assumptions, and contingencies. Use precise language that does not imply diagnosis or regulatory approval where unavailable. Format for senior product, medical, legal, and commercial decision-makers.",
+      "description": "Delivers the final polished, executive-ready product and regulatory-rollout strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Health-Product Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product and regulatory-rollout strategy for the stated multinational wearables scenario, covering market sequencing, evidence, claims, clinicians, consumers, all five additional capabilities, risks, and milestones."
+    },
+    {
+      "name": "Regional Evidence and Market Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the draft for regional regulatory, clinical, market, physician-trust, consumer-trust, evidence-reuse, and investment implications across the EU, Japan, the US, and emerging markets."
+    },
+    {
+      "name": "Medical Device and Digital Health Regulatory Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide expert recommendations on global medical-device and digital-health regulation, clinical evidence, claims, safety, privacy, post-market monitoring, physician engagement, and classification uncertainty."
+    },
+    {
+      "name": "Integrated Rollout Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate the draft, analysis, and expert recommendations into a coherent, actionable, regionally differentiated product and regulatory-rollout strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy in full for completeness, regulatory and clinical rigor, regional differentiation, feasibility, ethical safety, credibility, and clarity. Explain all findings, then on the VERY LAST LINE output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved strategy into a concise, polished, executive-ready answer with explicit sequencing, validation investments, regulatory contingencies, clinician and consumer credibility measures, risks, and milestones."
+    }
+  ],
+  "explanation": "The pipeline begins by creating a complete strategy, then adds quantitative and regional analysis and specialized regulatory expertise before integrating the findings into a refined plan. A quality assessment follows the refiner and can route revision back to that refiner when substantive issues remain; otherwise it proceeds to the final polisher. The flow is Builder → Analyst → Regulatory Expert → Refiner → Quality Assessment (pass to Polisher, revise back to Refiner) → Polisher."
+}

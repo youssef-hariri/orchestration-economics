@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial integration and consolidation strategy across Nigeria, Kenya, and Morocco acquisitions"
+    },
+    {
+      "name": "Regulatory & Compliance Expert",
+      "role": "expert",
+      "description": "Analyzes country-specific regulatory requirements, supervisor expectations, and compliance constraints for each market"
+    },
+    {
+      "name": "Technology & Systems Analyst",
+      "role": "analyst",
+      "description": "Evaluates core-banking system incompatibilities, migration sequencing, and technical integration feasibility"
+    },
+    {
+      "name": "Cultural & Organizational Strategist",
+      "role": "strategist",
+      "description": "Develops management alignment, change management, and organizational integration roadmap addressing local cultures"
+    },
+    {
+      "name": "Holistic Integration Refiner",
+      "role": "refiner",
+      "description": "Synthesizes regulatory, technology, and organizational inputs into a cohesive, sequenced integration strategy"
+    },
+    {
+      "name": "Cross-Domain Consistency Critic",
+      "role": "critic",
+      "description": "Validates that regulatory compliance, technology decisions, brand strategy, and management alignment are mutually supportive and conflict-free"
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into clear executive-ready deliverable with timelines, dependencies, and decision triggers"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a multi-country banking integration strategy for a pan-African group acquiring banks in Nigeria, Kenya, and Morocco. Create an initial draft strategy that addresses: (1) Technology migration sequencing for three incompatible core-banking systems, (2) Brand positioning—unified group identity vs. local market responsiveness, (3) Management alignment across entrenched local cultures and regulators, (4) Timeline and phasing assumptions. Identify key tensions (e.g., regulatory demands vs. group digital standardization) but do not yet resolve them. Output a structured draft covering all four dimensions."
+    },
+    {
+      "name": "Regulatory & Compliance Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a banking regulatory expert. Analyze the draft integration strategy for Nigeria (CBN oversight), Kenya (CBK oversight), and Morocco (BNRM oversight). For each country, identify: (1) Regulatory constraints on technology migration timelines, (2) Capital and liquidity requirements affecting consolidation speed, (3) Local ownership/control expectations, (4) Cross-border transaction and data residency rules, (5) Consumer protection and disclosure mandates. Provide detailed compliance assessment and flag any regulatory red flags or approval dependencies that must shape sequencing."
+    },
+    {
+      "name": "Technology & Systems Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a banking technology architect. Analyze the three core-banking systems (assume legacy monoliths in each country). For each: (1) Document system dependencies, customer account data structure, transaction processing, and API maturity, (2) Evaluate API-first bridge vs. full system replacement vs. parallel run, (3) Sequence technology moves to minimize customer disruption and operational risk, (4) Estimate effort, cost, and risk for each approach. Provide a phased technology roadmap with dependencies and go-live criteria. Highlight which technology decisions constrain regulatory and brand strategy."
+    },
+    {
+      "name": "Cultural & Organizational Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an organizational integration specialist. Analyze management and cultural integration for each country: (1) Document existing management structures, decision-making norms, and local accountability in Nigeria, Kenya, and Morocco, (2) Identify risks of talent loss and loss of local market knowledge if consolidation is too aggressive, (3) Design management hierarchy for group-level digital product ownership while preserving local P&L accountability and regulator relationships, (4) Sequence organizational changes to build trust and avoid disruption. Propose which decisions should be centralized vs. localized. Flag cultural tensions with technology-first or brand-unified approaches."
+    },
+    {
+      "name": "Holistic Integration Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are synthesizing a comprehensive integration strategy. Integrate the regulatory analysis, technology roadmap, and organizational design into one coherent, sequenced plan. (1) Create a master timeline that respects regulatory approval windows, technology migration lead times, and organizational change capacity, (2) Resolve conflicts: e.g., if regulators demand local core-banking retention but group wants unified digital products, propose hybrid solutions (e.g., local ledgers, unified API layer), (3) Define brand strategy—which products go global first, which remain local, which co-brand, (4) Specify management decision rights and escalation paths for each country, (5) Identify critical path dependencies and go/no-go milestones. Produce a detailed 3-year integration roadmap with quarters, dependencies, and decision gates."
+    },
+    {
+      "name": "Cross-Domain Consistency Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate validating strategy coherence. Review the integrated roadmap and assess: (1) Are regulatory requirements actually met by the technology and organizational plan? (2) Do management structures enable both local autonomy and group product standardization without contradictions? (3) Does brand strategy align with each regulator's local responsiveness expectations? (4) Are critical path dependencies clearly identified? (5) Are sequencing decisions justified and executable within the 3-year window? (6) Are there unresolved conflicts or unstated assumptions? Provide your FULL assessment: strengths, specific gaps, and areas of weakness. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass, revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 4}
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final integration strategy as an executive deliverable. Structure as: (1) Executive Summary—3-country integration vision, key trade-offs, success metrics, (2) Phased Roadmap—Quarter-by-quarter timeline for technology, organization, brand, regulatory approvals, (3) Country Chapters—Nigeria, Kenya, Morocco: local regulatory strategy, technology approach, management structure, (4) Critical Decisions & Go/No-Go Gates—12-18 month decision points that determine path forward, (5) Risk Register—top 5 risks per country with mitigation. Use clear formatting, tables for timelines, dependency diagrams. Ensure no jargon and direct, plain-language rationale for each major decision. Output publication-ready document."
+    }
+  ],
+  "explanation": "This pipeline sequences expertise to handle the multi-dimensional integration challenge. The Builder creates the initial strategic frame. Three expert inputs (Regulatory, Technology, Organizational) operate in parallel conceptually but feed sequentially into the Refiner, which synthesizes them into a coherent, sequenced roadmap that resolves conflicts (e.g., brand vs. local autonomy, unified tech vs. regulatory constraints) with explicit trade-off rationale. The Critic validates cross-domain consistency—ensuring regulatory decisions don't contradict technology sequencing, and management structures actually enable the brand strategy. If issues remain, the loop routes back to the Refiner to reconcile tensions. The Polisher then formats for executive consumption. This design ensures that all four dimensions (technology, regulatory, brand, management) are considered, conflicts are surfaced and resolved, and sequencing respects dependencies across countries and functions."
+}
+```

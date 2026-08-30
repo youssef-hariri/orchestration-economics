@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Gulf Joint-Venture Strategy Architect",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive market-entry strategy for a European grocery retailer entering Saudi Arabia, the UAE, and Qatar in 2026 through joint ventures with local family conglomerates. Cover country-specific partner-selection criteria, ownership and foreign-investment constraints, governance and control rights, capital and operating responsibilities, dispute resolution, exit mechanisms, store-format adaptation, merchandising, pricing, sourcing, Ramadan and Islamic-calendar seasonality, digital and omnichannel operations, and workforce-localization compliance. Distinguish clearly among the three markets and identify assumptions, uncertainties, and issues requiring local legal validation. Produce an actionable executive-level draft with implementation phases, risk mitigations, and measurable success indicators.",
+      "description": "Creates the initial country-specific Gulf market-entry strategy and operating blueprint."
+    },
+    {
+      "name": "Gulf Retail Legal and Localization Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed Gulf expansion strategy as a specialist in Saudi, UAE, and Qatar foreign investment, commercial agency and joint-venture practice, labor and workforce-localization requirements, retail regulation, franchising or operating structures, competition issues, data and e-commerce considerations, and Islamic-calendar operating norms. Strengthen the strategy with practical distinctions among jurisdictions, including ownership limits, licensing pathways, local-partner influence, board and reserved-matter design, employment quotas and reporting, national hiring and training obligations, visa and payroll risks, and compliance governance. Do not invent legal certainty: flag provisions that must be confirmed with current 2026 local counsel or regulators. Return a revised, decision-ready strategy rather than merely listing comments.",
+      "description": "Adds jurisdiction-specific legal, governance, labor, and compliance expertise."
+    },
+    {
+      "name": "Gulf Strategy Quality Reviewer",
+      "role": "critic",
+      "systemPrompt": "Assess the latest strategy in full for factual caution, country-specific differentiation, commercial practicality, completeness, internal consistency, and executive usefulness. Check specifically that it addresses partner due diligence and selection, ownership and localization constraints, governance and power balance, capital commitments, deadlock and exit provisions, format and assortment adaptation, Ramadan seasonality, supply chain and sourcing, workforce-localization compliance, implementation sequencing, risks, metrics, and the limits of unverified 2026 legal claims. Provide detailed reasoning, identify every material omission or weak recommendation, and state precise corrections needed. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Evaluates whether the strategy is sufficiently accurate, actionable, differentiated, and risk-aware."
+    },
+    {
+      "name": "Gulf Expansion Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy using all available expert and quality-review feedback. Correct omissions, unsupported legal assumptions, vague recommendations, and inconsistencies. Make Saudi Arabia, the UAE, and Qatar meaningfully distinct while preserving an integrated regional model. Include a partner scorecard, recommended governance architecture and reserved matters, control and escalation mechanisms, format and assortment choices, Ramadan operating calendar, localization compliance plan with ownership of responsibilities, implementation roadmap, risk register, and KPIs. Clearly label legal points requiring confirmation by current local counsel. Produce a complete, self-contained strategy suitable for senior decision-makers.",
+      "description": "Fixes identified weaknesses and produces a stronger, more actionable strategy."
+    },
+    {
+      "name": "Executive Gulf Retail Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing answer from the refined strategy. Preserve substantive recommendations and country-specific nuance while improving structure, clarity, concision, and readability. Use clear headings and comparison tables or bullets where useful. Ensure the answer directly covers partner selection, governance, format adaptation, and workforce-localization compliance for Saudi Arabia, the UAE, and Qatar, plus Ramadan seasonality, implementation sequencing, risks, and validation caveats. Remove repetition, unexplained jargon, and claims that imply legal certainty where current local confirmation is required. Do not mention the pipeline, agents, reviews, or drafting process.",
+      "description": "Formats and quality-checks the final strategy for executive consumption."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Gulf Joint-Venture Strategy Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive market-entry strategy for a European grocery retailer entering Saudi Arabia, the UAE, and Qatar in 2026 through joint ventures with local family conglomerates. Cover country-specific partner-selection criteria, ownership and foreign-investment constraints, governance and control rights, capital and operating responsibilities, dispute resolution, exit mechanisms, store-format adaptation, merchandising, pricing, sourcing, Ramadan and Islamic-calendar seasonality, digital and omnichannel operations, and workforce-localization compliance. Distinguish clearly among the three markets and identify assumptions, uncertainties, and issues requiring local legal validation. Produce an actionable executive-level draft with implementation phases, risk mitigations, and measurable success indicators."
+    },
+    {
+      "name": "Gulf Retail Legal and Localization Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed Gulf expansion strategy as a specialist in Saudi, UAE, and Qatar foreign investment, commercial agency and joint-venture practice, labor and workforce-localization requirements, retail regulation, franchising or operating structures, competition issues, data and e-commerce considerations, and Islamic-calendar operating norms. Strengthen the strategy with practical distinctions among jurisdictions, including ownership limits, licensing pathways, local-partner influence, board and reserved-matter design, employment quotas and reporting, national hiring and training obligations, visa and payroll risks, and compliance governance. Do not invent legal certainty: flag provisions that must be confirmed with current 2026 local counsel or regulators. Return a revised, decision-ready strategy rather than merely listing comments."
+    },
+    {
+      "name": "Gulf Strategy Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the latest strategy in full for factual caution, country-specific differentiation, commercial practicality, completeness, internal consistency, and executive usefulness. Check specifically that it addresses partner due diligence and selection, ownership and localization constraints, governance and power balance, capital commitments, deadlock and exit provisions, format and assortment adaptation, Ramadan seasonality, supply chain and sourcing, workforce-localization compliance, implementation sequencing, risks, metrics, and the limits of unverified 2026 legal claims. Provide detailed reasoning, identify every material omission or weak recommendation, and state precise corrections needed. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Gulf Expansion Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy using all available expert and quality-review feedback. Correct omissions, unsupported legal assumptions, vague recommendations, and inconsistencies. Make Saudi Arabia, the UAE, and Qatar meaningfully distinct while preserving an integrated regional model. Include a partner scorecard, recommended governance architecture and reserved matters, control and escalation mechanisms, format and assortment choices, Ramadan operating calendar, localization compliance plan with ownership of responsibilities, implementation roadmap, risk register, and KPIs. Clearly label legal points requiring confirmation by current local counsel. Produce a complete, self-contained strategy suitable for senior decision-makers."
+    },
+    {
+      "name": "Executive Gulf Retail Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing answer from the refined strategy. Preserve substantive recommendations and country-specific nuance while improving structure, clarity, concision, and readability. Use clear headings and comparison tables or bullets where useful. Ensure the answer directly covers partner selection, governance, format adaptation, and workforce-localization compliance for Saudi Arabia, the UAE, and Qatar, plus Ramadan seasonality, implementation sequencing, risks, and validation caveats. Remove repetition, unexplained jargon, and claims that imply legal certainty where current local confirmation is required. Do not mention the pipeline, agents, reviews, or drafting process."
+    }
+  ],
+  "explanation": "The flow is Builder → Legal and Localization Expert → Quality Review (if pass, continue to Polisher; if revise, return to the Refiner) → Refiner → Polisher. The builder establishes the integrated strategy, while the expert adds jurisdiction-specific Gulf legal, governance, labor, and operating considerations. The quality review occurs after those outputs exist and provides detailed feedback. If weaknesses are found, the refiner corrects them before the final polisher produces a clear executive-ready answer; otherwise, the existing strategy proceeds directly to final polishing."
+}

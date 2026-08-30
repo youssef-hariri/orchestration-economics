@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Partnership Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive partnership strategy framework addressing carbon compliance support, supplier segmentation, and relationship preservation across emerging-market suppliers."
+    },
+    {
+      "name": "Compliance & Fairness Expert",
+      "role": "expert",
+      "description": "Provides domain-specific analysis on CBAM mechanics, emissions reporting standards, and addresses supplier perceptions of protectionism with technical and trade-policy insights."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates expert feedback and compliance insights into the strategy, strengthening implementation roadmaps, addressing fairness concerns, and enhancing supplier buy-in mechanisms."
+    },
+    {
+      "name": "Stakeholder Impact Analyst",
+      "role": "analyst",
+      "description": "Analyzes financial, operational, and relational impacts across supplier segments (India, Turkey, North Africa) and assesses strategy viability across varying technical readiness levels."
+    },
+    {
+      "name": "Strategy Integrity Reviewer",
+      "role": "critic",
+      "description": "Conducts comprehensive quality assessment of the refined strategy: coherence across supplier segments, feasibility of compliance pathways, fairness perception mitigation, and commercial relationship sustainability."
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "description": "Formats and delivers final partnership strategy as actionable, stakeholder-ready document with clear governance, timelines, and success metrics."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Partnership Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a partnership strategy to support emerging-market steel and aluminum suppliers through EU CBAM compliance. Create a comprehensive initial framework that: (1) addresses carbon emissions reporting and pricing support; (2) segments suppliers by technical readiness and perception of CBAM fairness; (3) proposes concrete mechanisms for preserving long-standing commercial relationships; (4) identifies shared competitiveness opportunities. The strategy should acknowledge that suppliers view CBAM differently—some as legitimate environmental policy, others as protectionism. Output a detailed strategic framework covering governance, phased implementation, financial/technical support structures, and relationship management approaches."
+    },
+    {
+      "name": "Compliance & Fairness Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a carbon compliance and international trade expert. Analyze the partnership strategy draft and provide: (1) technical assessment of CBAM emissions reporting requirements, carbon accounting standards, and compliance pathways for steel/aluminum in India, Turkey, and North Africa; (2) evaluation of how the strategy addresses 'protectionism' perceptions—what legitimates CBAM and what are fair counterarguments; (3) identification of gaps in compliance support mechanisms; (4) recommendations for building supplier confidence that this partnership supports their competitiveness, not undermines it. Provide concrete technical and diplomatic insights."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a partnership strategy based on expert feedback. Integrate the compliance expert's insights by: (1) strengthening emissions reporting and carbon accounting support pathways; (2) explicitly addressing 'protectionism' concerns with transparent, fair partnership principles; (3) enhancing supplier segmentation to reflect both technical readiness AND perception management needs; (4) developing trust-building mechanisms (e.g., joint compliance audits, transparent cost-sharing, capability-building timelines); (5) clarifying how shared competitiveness will improve supplier margins despite CBAM costs. Produce a refined strategy that suppliers perceive as genuinely supportive, not coercive."
+    },
+    {
+      "name": "Stakeholder Impact Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are analyzing the refined partnership strategy's impact and viability. Assess: (1) financial implications for suppliers in India, Turkey, and North Africa—carbon pricing exposure, compliance costs, and how the partnership mitigates these; (2) operational feasibility across varying technical readiness levels—what support do low-capacity suppliers need; (3) commercial relationship sustainability—will the strategy preserve trust and long-term supply partnerships despite CBAM pressures; (4) regional and geopolitical considerations unique to each supplier location; (5) quantifiable success metrics and KPIs. Identify risks and viability gaps."
+    },
+    {
+      "name": "Strategy Integrity Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer assessing the refined partnership strategy's integrity and completeness. Evaluate: (1) Does the strategy coherently address all three supplier regions and their distinct perceptions of CBAM? (2) Are compliance pathways technically sound and achievable? (3) Does the strategy genuinely mitigate 'protectionism' perceptions or merely disguise them? (4) Will relationship preservation mechanisms actually maintain supplier trust and long-term partnerships? (5) Are financial and technical support commitments credible and sustainable? (6) Is the strategy internally consistent—do governance, timelines, and success metrics align? Provide detailed assessment of strengths, weaknesses, and specific gaps. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass (strategy is ready for polishing) or revise (strategy requires refinement).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing the partnership strategy for delivery to stakeholders. Format and structure it as a professional, actionable document including: (1) Executive Summary—core value proposition for suppliers and buyer; (2) Supplier Segmentation & Engagement Roadmap—tailored pathways by region and technical readiness; (3) Carbon Compliance Support Architecture—reporting standards, accounting tools, capability-building timelines; (4) Fairness & Trust Mechanisms—how the partnership addresses protectionism concerns and builds confidence; (5) Financial & Commercial Terms—cost-sharing, pricing protections, competitiveness improvements; (6) Governance & Dispute Resolution—decision-making, escalation, relationship management; (7) Success Metrics & Timeline—quarterly milestones through 2026 and beyond. Ensure clarity, coherence, and stakeholder readiness."
+    }
+  ],
+  "explanation": "This 6-step pipeline is designed to transform a complex, multi-stakeholder compliance and relationship challenge into a credible, actionable partnership strategy. The flow is: (1) Builder establishes initial comprehensive framework; (2) Expert injects critical domain knowledge on CBAM mechanics and fairness perceptions—essential for addressing supplier skepticism; (3) Refiner integrates expert insights to strengthen compliance pathways and trust-building mechanisms; (4) Analyst stress-tests viability across regions and supplier segments, identifying financial/operational risks; (5) Critic conducts rigorous quality gate assessing coherence, fairness authenticity, and relationship sustainability—if issues remain, loops back to Refiner up to 3 iterations; (6) Polisher delivers final stakeholder-ready document. The critical innovation is placing the Compliance Expert early (step 2) to address protectionism perceptions before refinement—this ensures the strategy is built on technical legitimacy and fairness reasoning, not just compliance mechanics. The quality gate (step 5) ensures the strategy genuinely preserves relationships and addresses perception gaps before finalization. No human approval is required; the pipeline runs fully automated to deadline."
+}
+```

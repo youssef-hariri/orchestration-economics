@@ -1,0 +1,94 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Regional Context & Trust Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive framework mapping regional trust profiles, intermediation norms, claim expectations, and actuarial data quality across East Africa, South Asia, and Central America."
+    },
+    {
+      "name": "Distribution & Business Model Strategist",
+      "role": "strategist",
+      "description": "Develops region-specific distribution channel strategies and business model options tailored to trust regimes, intermediaries, and local norms."
+    },
+    {
+      "name": "Risk & Economics Analyst",
+      "role": "analyst",
+      "description": "Analyzes acquisition costs, claim credibility mechanisms, portfolio risk exposure, and financial viability across proposed distribution and business model combinations by region."
+    },
+    {
+      "name": "Climate Microinsurance Domain Expert",
+      "role": "expert",
+      "description": "Provides domain-specific expert assessment of climate-linked product design, actuarial feasibility, claim verification methods, and best practices for smallholder farmer microinsurance."
+    },
+    {
+      "name": "Integrated Recommendations Refiner",
+      "role": "refiner",
+      "description": "Integrates expert feedback and analyst findings to reconcile conflicting recommendations, refine cost estimates, strengthen claim credibility pathways, and ensure regional differentiation is justified."
+    },
+    {
+      "name": "Feasibility & Coherence Validator",
+      "role": "critic",
+      "description": "Validates regional specificity, pillar alignment, 2026 feasibility, cost realism, and credibility mechanisms. Outputs pass or revise."
+    },
+    {
+      "name": "Strategic Options Polisher",
+      "role": "polisher",
+      "description": "Formats final output as decision-ready strategic options document with clear regional pathways, intermediary selections, business model rationales, cost projections, and risk mitigation tactics."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Context & Trust Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive regional context framework for climate microinsurance pilots across East Africa, South Asia, and Central America. Map: (1) Trust profiles in formal insurance and claim payout legitimacy by region; (2) Intermediation norms—which channels (cooperatives, mobile-network agents, religious community groups, fintech apps) carry credibility in each region; (3) Claim speed expectations; (4) Actuarial data quality gaps and climate-linked loss data availability. For each region, provide 2–3 key trust dynamics and intermediation realities. Output a structured matrix showing regional differences and similarities."
+    },
+    {
+      "name": "Distribution & Business Model Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Building on regional context, design 3–5 distribution and business model options for climate microinsurance pilots. For each region (East Africa, South Asia, Central America), propose: (1) Primary and secondary distribution channels matched to local trust and intermediation norms; (2) Business model choices (agent commission, cooperative revenue-share, fintech take-rate, subsidy blend); (3) Claim verification and payout mechanisms that build credibility; (4) Customer acquisition cost assumptions by channel; (5) How each model addresses regional trust barriers. Provide 2–3 differentiated pathways per region with trade-offs between reach, cost, and claim credibility."
+    },
+    {
+      "name": "Risk & Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze financial and risk dimensions of proposed distribution and business models. For each regional pathway: (1) Estimate customer acquisition costs by channel and intermediary type; (2) Model portfolio risk exposure given actuarial data quality constraints—flag regions/channels with highest actuarial uncertainty; (3) Project claim payout rates and timing, identifying which intermediaries can credibly verify claims fast; (4) Calculate unit economics (premium, cost-to-serve, projected loss ratios) and identify breakeven acquisition cost limits; (5) Assess concentration risk if relying heavily on one intermediary type per region. Provide sensitivity analyses. Highlight which regional pathways are most economically viable and which carry highest model risk."
+    },
+    {
+      "name": "Climate Microinsurance Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a climate microinsurance expert for smallholder farmers in emerging markets. Review the proposed distribution, business model, and risk analyses. Provide expert assessment on: (1) Climate perils relevant to each region and actuarial defensibility given data constraints; (2) Best practices for claim verification and fraud prevention in low-trust, low-data environments, and which intermediaries are best positioned; (3) How to build claim credibility and speed through technology (parametric triggers, mobile verification, blockchain) or community validation; (4) Regulatory and compliance considerations by region; (5) Lessons from existing smallholder microinsurance programs and what works/fails with different intermediaries. Identify product design or operational risks that could undermine pilot credibility."
+    },
+    {
+      "name": "Integrated Recommendations Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate expert and analyst feedback. Refine distribution and business model recommendations by: (1) Reconciling conflicts between feasibility and credibility; (2) Adjusting regional pathways to ensure trust and intermediation norms are genuinely reflected; (3) Revising cost estimates and risk assumptions based on expert critique; (4) Strengthening claim verification and payout speed mechanisms; (5) Ensuring regional differentiation is justified by real factors, not convenience. Produce a revised, integrated set of regional recommendations with clear rationale for each choice."
+    },
+    {
+      "name": "Feasibility & Coherence Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Conduct final gate review of refined regional pathways. Assess: (1) Regional Specificity—are East Africa, South Asia, Central America recommendations genuinely differentiated and grounded in real trust/intermediation differences? (2) Pillar Alignment—do distribution choices, business models, claim mechanisms, and risk management work together coherently? (3) 2026 Feasibility—can pilots launch in 3 years? (4) Cost Realism—are acquisition costs and unit economics realistic for smallholder microinsurance in each region? (5) Credibility Path—do proposed claim verification and payout mechanisms genuinely address regional trust barriers? Provide detailed reasoning. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Strategic Options Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format final climate microinsurance recommendations into a polished, decision-ready strategic options document. Structure as: (1) Executive Summary with three regional pathways and key trade-offs; (2) Regional Profiles for East Africa, South Asia, Central America—trust dynamics, intermediation norms, recommended channels, and business model rationale; (3) Comparative Economics Table—acquisition cost, claim verification, portfolio risk, and unit economics by region and channel; (4) Risk Mitigation Tactics addressing claim credibility, fraud, and actuarial uncertainty; (5) 2026 Pilot Roadmap with phased launch and intermediary development by region; (6) Decision Points and Contingencies. Ensure clarity, internal consistency, and actionability for pilot teams."
+    }
+  ],
+  "explanation": "This 7-step pipeline produces regionally differentiated distribution and business model options for climate microinsurance by progressively building regional context, proposing integrated strategies, validating feasibility, and refining recommendations. Builder establishes trust profiles and intermediation norms; Strategist proposes distribution and business models; Analyst quantifies costs and risks; Expert validates domain assumptions and best practices; Refiner reconciles expert and analyst feedback into coherent regional pathways; Feasibility Gate (if-revise loop) validates pillar alignment and 2026 viability—if revisions needed, loops back to Refiner; Polisher formats as decision-ready output. The gate ensures regional differentiation, cost realism, and claim credibility mechanisms address the core challenge before final delivery."
+}
+```

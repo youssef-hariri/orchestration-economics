@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketEntryStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in Gulf market entry and joint venture structures. Draft a comprehensive strategy covering partner selection criteria (family conglomerates), governance frameworks (balancing foreign control vs. local influence), store-format adaptation (hypermarket vs. convenience for KSA/UAE/Qatar), and Saudization/Emiratization workforce compliance strategies.",
+      "description": "Drafts the initial market entry strategy."
+    },
+    {
+      "name": "RegionalComplianceExpert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in GCC labor laws, retail regulations, and cultural seasonality (Ramadan/Eid). Review the strategy for legal feasibility regarding workforce localization mandates and operational alignment with local business customs.",
+      "description": "Reviews the strategy for regulatory and cultural accuracy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalComplianceExpert to ensure the strategy is legally compliant, culturally sensitive, and operationally robust.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Assess the strategy for completeness, clarity, and strategic depth. Ensure all four pillars (partner selection, governance, format, localization) are addressed. Provide a detailed assessment. On the last line, output 'pass' if complete or 'revise' if improvements are needed.",
+      "description": "Final quality check before polishing."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the strategy into a professional executive report. Ensure tone is appropriate for C-suite stakeholders and that all sections are clearly structured.",
+      "description": "Final formatting and professional tone adjustment."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketEntryStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in Gulf market entry and joint venture structures. Draft a comprehensive strategy covering partner selection criteria (family conglomerates), governance frameworks (balancing foreign control vs. local influence), store-format adaptation (hypermarket vs. convenience for KSA/UAE/Qatar), and Saudization/Emiratization workforce compliance strategies."
+    },
+    {
+      "name": "RegionalComplianceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in GCC labor laws, retail regulations, and cultural seasonality (Ramadan/Eid). Review the strategy for legal feasibility regarding workforce localization mandates and operational alignment with local business customs."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalComplianceExpert to ensure the strategy is legally compliant, culturally sensitive, and operationally robust."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the strategy for completeness, clarity, and strategic depth. Ensure all four pillars (partner selection, governance, format, localization) are addressed. Provide a detailed assessment. On the last line, output 'pass' if complete or 'revise' if improvements are needed.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the strategy into a professional executive report. Ensure tone is appropriate for C-suite stakeholders and that all sections are clearly structured."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketEntryStrategist drafting the core plan. The RegionalComplianceExpert then evaluates the draft for specific GCC regulatory and cultural nuances. The StrategyRefiner incorporates these expert insights. The QualityGate assesses the output; if it fails, it loops back to the StrategyRefiner to ensure all constraints are met. Once the QualityGate passes, the FinalPolisher formats the document for executive presentation."
+}

@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "Cold-Chain Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive 2026 cold-chain distribution strategy for temperature-sensitive vaccines across contrasting West and East African corridors. Deliver a practical, decision-ready plan covering corridor segmentation and sequencing, route selection, passive versus powered cooling equipment, temperature monitoring, customs and border considerations, electricity reliability, road quality, ministry-of-health last-mile arrangements, seasonal weather windows, inventory positioning, and contingency planning for delays, equipment failure, excursions, and spoilage. Make assumptions explicit, distinguish generally applicable guidance from corridor-specific recommendations, and avoid inventing unsupported operational facts. Include implementation priorities, decision criteria, and measurable risk controls.",
+      "description": "Creates the initial end-to-end vaccine distribution strategy tailored to differing African corridor conditions."
+    },
+    {
+      "name": "Corridor and Risk Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed vaccine cold-chain strategy in detail. Compare representative West and East African corridors using infrastructure, road, border and customs, power, climate, security, and institutional factors. Identify where passive cooling containers, powered refrigerated units, solar or generator-backed storage, cross-docking, buffer stock, or alternative routing are most appropriate. Assess seasonal delivery windows, lead-time variability, temperature-excursion exposure, and spoilage risk. Highlight unsupported assumptions, missing data, trade-offs, and quantitative or semi-quantitative decision criteria. Produce actionable findings for improving the strategy, while clearly labeling estimates and uncertainty.",
+      "description": "Tests corridor choices, equipment logic, seasonal constraints, and spoilage-risk assumptions."
+    },
+    {
+      "name": "Vaccine Logistics Domain Expert",
+      "role": "expert",
+      "systemPrompt": "Provide a domain-expert review of the draft strategy and analytical findings from the perspective of pharmaceutical cold-chain operations, immunization programs, quality assurance, and African public-sector distribution. Check alignment with temperature-control principles, vaccine handling practices, GDP/GSP-style logistics expectations, monitoring and excursion management, customs coordination, ministry-of-health handoffs, reverse logistics, security, and emergency response. Identify operational, regulatory, ethical, and feasibility issues and recommend precise corrections. Do not present uncertain country-specific claims as facts; state where validation with local authorities or current corridor data is required.",
+      "description": "Adds specialized vaccine, regulatory, public-health, and operational judgment."
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, decision-ready final draft using all analytical and expert feedback. Preserve useful detail while resolving contradictions and unsupported assumptions. Present a clear corridor typology and sequencing logic, equipment recommendations by operating condition, storage and transport handoffs, seasonal scheduling, customs and ministry coordination, temperature-monitoring procedures, inventory and buffer policies, and contingency playbooks for border delays, road disruption, power loss, refrigeration failure, security incidents, and temperature excursions. Include assumptions, decision thresholds, responsibilities, escalation actions, and implementation priorities. Make the recommendations practical for both West and East African contexts and clearly identify information that must be validated locally.",
+      "description": "Integrates findings into an actionable, risk-aware cold-chain distribution strategy."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Review the refined vaccine cold-chain strategy comprehensively. Assess whether it is operationally feasible, technically sound, sufficiently specific, internally consistent, appropriately cautious about uncertainty, and responsive to all requested areas: African corridor differences, equipment choices, corridor sequencing, customs and institutional constraints, seasonal weather windows, last-mile arrangements, monitoring, and spoilage contingencies. Identify omissions, unsafe recommendations, unsupported claims, unclear decision rules, and weaknesses in implementation or escalation planning. Provide a full assessment with concrete corrections needed. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the integrated strategy is complete and reliable enough for final presentation."
+    },
+    {
+      "name": "Executive Cold-Chain Plan Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the user-facing final answer from the refined strategy and quality assessment. Produce a concise but sufficiently detailed professional plan for distributing temperature-sensitive vaccines across West and East African corridors in 2026. Use clear headings, tables where useful, and practical sequencing. Cover corridor archetypes, equipment selection, operating assumptions, seasonal scheduling, customs and ministry coordination, monitoring, inventory buffers, contingency actions, spoilage-risk controls, and implementation priorities. Resolve any flagged issues before presenting the answer, distinguish recommendations from assumptions, and avoid unsupported precise claims. Do not mention agents, pipeline steps, internal reviews, or drafting processes.",
+      "description": "Formats and finalizes the validated strategy as a clear, decision-ready deliverable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cold-Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive 2026 cold-chain distribution strategy for temperature-sensitive vaccines across contrasting West and East African corridors. Deliver a practical, decision-ready plan covering corridor segmentation and sequencing, route selection, passive versus powered cooling equipment, temperature monitoring, customs and border considerations, electricity reliability, road quality, ministry-of-health last-mile arrangements, seasonal weather windows, inventory positioning, and contingency planning for delays, equipment failure, excursions, and spoilage. Make assumptions explicit, distinguish generally applicable guidance from corridor-specific recommendations, and avoid inventing unsupported operational facts. Include implementation priorities, decision criteria, and measurable risk controls."
+    },
+    {
+      "name": "Corridor and Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed vaccine cold-chain strategy in detail. Compare representative West and East African corridors using infrastructure, road, border and customs, power, climate, security, and institutional factors. Identify where passive cooling containers, powered refrigerated units, solar or generator-backed storage, cross-docking, buffer stock, or alternative routing are most appropriate. Assess seasonal delivery windows, lead-time variability, temperature-excursion exposure, and spoilage risk. Highlight unsupported assumptions, missing data, trade-offs, and quantitative or semi-quantitative decision criteria. Produce actionable findings for improving the strategy, while clearly labeling estimates and uncertainty."
+    },
+    {
+      "name": "Vaccine Logistics Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide a domain-expert review of the draft strategy and analytical findings from the perspective of pharmaceutical cold-chain operations, immunization programs, quality assurance, and African public-sector distribution. Check alignment with temperature-control principles, vaccine handling practices, GDP/GSP-style logistics expectations, monitoring and excursion management, customs coordination, ministry-of-health handoffs, reverse logistics, security, and emergency response. Identify operational, regulatory, ethical, and feasibility issues and recommend precise corrections. Do not present uncertain country-specific claims as facts; state where validation with local authorities or current corridor data is required."
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, decision-ready final draft using all analytical and expert feedback. Preserve useful detail while resolving contradictions and unsupported assumptions. Present a clear corridor typology and sequencing logic, equipment recommendations by operating condition, storage and transport handoffs, seasonal scheduling, customs and ministry coordination, temperature-monitoring procedures, inventory and buffer policies, and contingency playbooks for border delays, road disruption, power loss, refrigeration failure, security incidents, and temperature excursions. Include assumptions, decision thresholds, responsibilities, escalation actions, and implementation priorities. Make the recommendations practical for both West and East African contexts and clearly identify information that must be validated locally."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined vaccine cold-chain strategy comprehensively. Assess whether it is operationally feasible, technically sound, sufficiently specific, internally consistent, appropriately cautious about uncertainty, and responsive to all requested areas: African corridor differences, equipment choices, corridor sequencing, customs and institutional constraints, seasonal weather windows, last-mile arrangements, monitoring, and spoilage contingencies. Identify omissions, unsafe recommendations, unsupported claims, unclear decision rules, and weaknesses in implementation or escalation planning. Provide a full assessment with concrete corrections needed. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Cold-Chain Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the user-facing final answer from the refined strategy and quality assessment. Produce a concise but sufficiently detailed professional plan for distributing temperature-sensitive vaccines across West and East African corridors in 2026. Use clear headings, tables where useful, and practical sequencing. Cover corridor archetypes, equipment selection, operating assumptions, seasonal scheduling, customs and ministry coordination, monitoring, inventory buffers, contingency actions, spoilage-risk controls, and implementation priorities. Resolve any flagged issues before presenting the answer, distinguish recommendations from assumptions, and avoid unsupported precise claims. Do not mention agents, pipeline steps, internal reviews, or drafting processes."
+    }
+  ],
+  "explanation": "The flow is Builder → Analyst → Domain Expert → Refiner → Quality Gate → Polisher. The builder creates the initial strategy, while the analyst and domain expert independently deepen corridor, infrastructure, institutional, vaccine-handling, and risk considerations. The refiner integrates those findings. The quality gate then performs a complete assessment; if it outputs revise, execution returns to the Refiner, which incorporates the feedback, and the gate can reassess. If it outputs pass, the plan proceeds to the Polisher for a clear user-facing deliverable."
+}

@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive dual-sourcing strategy framework addressing qualification timelines, quality risk, and commitment economics for semiconductor materials"
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "description": "Validates strategy against semiconductor industry constraints, export-control realities, and material-specific qualification standards"
+    },
+    {
+      "name": "Economics & Risk Analyst",
+      "role": "analyst",
+      "description": "Quantifies financial trade-offs between long-term offtake commitments, qualification costs, supply concentration risk, and working capital implications"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates expert validation and economic analysis into coherent, actionable dual-sourcing roadmap with sequenced milestones"
+    },
+    {
+      "name": "Resilience Critic",
+      "role": "critic",
+      "description": "Assesses whether refined strategy adequately addresses export-control volatility, qualification lead-time compression, and reluctant-supplier capacity commitment challenges"
+    },
+    {
+      "name": "Implementation Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into executive-ready deliverable with clear timelines, risk mitigation tactics, and financing structures"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a dual-sourcing resilience strategy for a semiconductor manufacturer in 2026. The core challenge: specialty gases and photoresists face export-control volatility; alternative supplier qualification takes 12-24 months; quality standards are unforgiving; suppliers resist long-term capacity commitments without financing. Create an initial strategy framework addressing: (1) phased qualification roadmap for alternative suppliers by material type, (2) mechanisms to accelerate or parallelize qualification, (3) financial structures (offtake agreements, risk-sharing, capacity guarantees) that align reluctant suppliers' interests with the manufacturer's needs, (4) inventory/buffer strategies during qualification windows, (5) geopolitical diversification approach. Provide a comprehensive but rough first draft."
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a semiconductor supply-chain expert with deep knowledge of specialty gas and photoresist markets, qualification protocols, and export-control regimes. Review the strategy builder's output. Validate: (1) Are qualification timelines realistic given industry standards (e.g., SEMI, AEC-Q protocols)? (2) Do geopolitical diversification choices address actual export-control hotspots (Taiwan, China, Japan, S. Korea, EU)? (3) Are material-specific quality risks adequately characterized (e.g., purity specs for rare-earth dopants vs. photoresist viscosity tolerance)? (4) Are supplier reluctance drivers correctly identified (capacity stranding risk, price volatility, minimum volume requirements)? Provide detailed technical and market validation. Identify gaps, unrealistic assumptions, and material-specific nuances."
+    },
+    {
+      "name": "Economics & Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an economics and supply-chain finance analyst. Analyze the strategy's financial viability: (1) Quantify qualification cost per material (engineering, testing, regulatory, travel). (2) Model cash-flow impact of long-term offtake commitments vs. spot pricing volatility over 2026-2030. (3) Calculate working-capital requirements during dual-source ramp (inventory, pre-payments, capacity deposits). (4) Compare risk-weighted cost of dual-sourcing vs. single-source concentration risk (export shock scenarios). (5) Assess which financing structures (vendor financing, supplier equity stakes, take-or-pay clauses, volume discounts) most effectively overcome supplier reluctance while protecting the manufacturer. Produce quantitative analysis with sensitivity ranges."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are integrating expert domain validation and economic analysis into the dual-sourcing strategy. Take the builder's initial framework, incorporate: (1) expert's material-specific and geopolitical refinements, (2) analyst's financial structures and cost optimization, (3) realistic timelines, phased qualification sequences, and regulatory dependencies. Produce a cohesive, sequenced roadmap with: clear quarterly milestones for 2026-2027, assigned responsibility (procurement, engineering, finance), specific offtake agreement templates or guardrails, inventory policies during qualification, and contingency triggers (e.g., export ban escalation, supplier exit). Make it actionable and internally consistent."
+    },
+    {
+      "name": "Resilience Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical resilience assessor. Review the refined strategy thoroughly. Provide FULL assessment: (1) Does it credibly compress 12-24 month qualification timelines through parallelization, pre-qualification, or staged acceptance? (2) Does it adequately de-risk export-control volatility through geographic, supplier, and material diversification—with quantified concentration metrics? (3) Are the financial structures (offtake terms, capacity guarantees, risk-sharing) sufficiently compelling to overcome supplier reluctance while remaining economically justified? (4) Are quality standards maintained across all suppliers without unacceptable rework/scrap risk? (5) Is working-capital and cash-flow impact acceptable to finance teams? Identify any remaining gaps, conflicts, or unresolved trade-offs. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Implementation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are preparing the final dual-sourcing resilience strategy for executive delivery. Polish the approved strategy into a clear, compelling format: (1) Executive summary (1 page): strategic rationale, key milestones, financial trade-offs, and risk reduction targets. (2) Phased implementation roadmap: Year 1 (qualification acceleration), Year 2 (ramping dual-source), Year 3+ (sustained resilience). (3) Key financing & commercial templates: offtake agreement guardrails, capacity-guarantee structures, risk-sharing mechanisms. (4) Geopolitical diversification map: supplier locations, material types, concentration metrics. (5) Quality assurance & monitoring plan. (6) Contingency protocols for export-control escalation. Format for board or steering-committee review. Ensure clarity, visual impact, and decision-readiness."
+    }
+  ],
+  "explanation": "This pipeline orchestrates four specialized analytical perspectives in sequence to build a resilient dual-sourcing strategy: (1) Builder establishes comprehensive framework; (2) Expert validates against material and geopolitical realities; (3) Analyst quantifies financial trade-offs and supplier-incentive structures; (4) Refiner integrates all inputs into a cohesive, sequenced roadmap; (5) Critic assesses whether the strategy truly addresses export-control volatility, qualification lead times, and supplier reluctance—with authority to loop back to Refiner if gaps remain; (6) Polisher converts approved strategy into executive-ready format. The 'if' gate after Critic ensures the strategy meets resilience criteria before final packaging. Max 3 iterations if revision loops occur. Flow: Builder → Expert → Analyst → Refiner → Critic (if revise, loop to Refiner max 3x) → Polisher."
+}
+```

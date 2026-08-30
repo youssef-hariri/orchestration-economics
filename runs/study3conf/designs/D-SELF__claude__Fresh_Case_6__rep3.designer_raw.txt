@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategy Architect",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategy for sovereign-cloud transition, addressing customer segmentation, communication roadmap, and risk mitigation across regions"
+    },
+    {
+      "name": "Stakeholder Impact Analyst",
+      "role": "analyst",
+      "description": "Analyzes diverse customer personas and regional trust dynamics to surface critical gaps in strategy"
+    },
+    {
+      "name": "Trust & Communication Refiner",
+      "role": "refiner",
+      "description": "Incorporates stakeholder insights to strengthen messaging, tailor communication for different segments, and address cultural sensitivities"
+    },
+    {
+      "name": "Execution Completeness Critic",
+      "role": "critic",
+      "description": "Assesses whether strategy adequately addresses churn risk, migration sequencing, and all stakeholder objections"
+    },
+    {
+      "name": "Strategic Refinement Specialist",
+      "role": "refiner",
+      "description": "Resolves gaps identified by critic, strengthens execution roadmap, and ensures churn-mitigation tactics are concrete"
+    },
+    {
+      "name": "Regulatory & Business Expert",
+      "role": "expert",
+      "description": "Validates strategy against data-sovereignty laws, pricing sustainability, and feature-delivery feasibility"
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into clear, executive-ready document with timelines, messaging frameworks, and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive sovereign-cloud transition strategy addressing: (1) multi-region infrastructure roadmap by 2026, (2) customer segmentation by geography and buyer persona, (3) pricing strategy for localized costs, (4) feature parity and rollout sequencing, (5) executive messaging emphasizing control and continuity, (6) procurement team assurance on cost and support, (7) technical customer confidence, (8) churn-prevention tactics, (9) regional compliance integration. Produce detailed transition strategy outline."
+    },
+    {
+      "name": "Stakeholder Impact Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the strategy for blind spots across stakeholder personas: (1) Executive buyers—concerns about control, innovation delays, TCO. (2) Procurement teams—regional trust dynamics, vendor reputation, contractual flexibility. (3) Feature-driven users—fear of delayed releases, support quality. (4) Compliance officers—data residency proof, audit access. Identify gaps in messaging, assumptions about customer perceptions, and unaddressed cultural differences. Produce detailed impact assessment with specific risks and opportunities for each stakeholder group."
+    },
+    {
+      "name": "Trust & Communication Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Strengthen the strategy by incorporating stakeholder insights. Refine: (1) Messaging frameworks for each persona, (2) Regional communication tactics addressing local trust in government and foreign vendors, (3) Transparency commitments—data residency proof, audit rights, feature roadmaps, (4) Migration communication timeline and customer journey touchpoints, (5) Success stories for each region. Ensure all customer concerns are directly addressed in concrete, measurable commitments. Produce enhanced strategy with detailed communication playbooks."
+    },
+    {
+      "name": "Execution Completeness Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy for: (1) Churn prevention—are tactics concrete and sufficient? (2) Migration sequencing—is customer transition timeline clear and achievable? (3) Communication completeness—does messaging address all stakeholder anxieties? (4) Operational readiness—are teams aligned? (5) Risk contingency—what if adoption lags? (6) Success metrics—are KPIs defined? Provide detailed assessment of strengths and weaknesses. FINAL LINE output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Strategic Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Resolve all gaps identified by the critic. Strengthen: (1) Churn-mitigation tactics with specific retention incentives and regional pricing, (2) Migration sequencing with realistic timelines, (3) Communication cadence for each stakeholder, (4) Operational alignment including cross-functional responsibilities, (5) Risk contingency plans, (6) Success metrics with quarterly targets. Produce fully executable strategy with operational detail."
+    },
+    {
+      "name": "Regulatory & Business Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Validate the strategy for: (1) Regulatory compliance across GDPR, CCPA, China DLP, India data localization, and emerging regional laws. (2) Pricing sustainability—can regional pricing cover localized infrastructure? (3) Feature delivery—is technical roadmap realistic for simultaneous regional rollout? (4) Customer contracts—what flexibility do agreements allow? (5) Support capacity—are regional teams scalable? (6) Churn risk quantification—what are realistic retention targets? Identify misalignments, unrealistic assumptions, and regulatory exposure. Provide expert validation and confirm readiness or identify final refinements."
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the validated strategy into polished executive deliverable: (1) 1-page executive summary with timeline, churn-prevention highlights, and regional phases, (2) Customer communication playbook with messaging templates for each persona and region, (3) Migration roadmap with infrastructure, compliance, and onboarding milestones, (4) Pricing and packaging framework with regional cost justification, (5) Risk register with mitigation tactics, (6) Success metrics and quarterly KPIs. Ensure clarity, visual organization, and readiness for global customer communication and leadership alignment."
+    }
+  ],
+  "explanation": "This 7-step pipeline systematically builds and refines a sovereign-cloud transition strategy. Flow: (1) Strategy Architect creates initial framework. (2) Stakeholder Impact Analyst surfaces gaps by analyzing customer personas and regional trust dynamics. (3) Trust & Communication Refiner strengthens messaging and commitments. (4) Execution Completeness Critic assesses readiness with IF gate: if 'revise' loops to step 5, if 'pass' advances to step 6. (5) Strategic Refinement Specialist resolves gaps with operational detail and concrete tactics. (6) Regulatory & Business Expert validates feasibility, compliance, and final readiness. (7) Executive Presentation Polisher delivers actionable deliverables. The single IF gate ensures execution completeness before expert validation and finalization, preventing premature strategy rollout."
+}
+```

@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Entry Strategist",
+      "role": "strategist",
+      "description": "Develops comprehensive market-entry and product-adaptation strategy accounting for Islamic finance, local savings cultures, family decision-making, and regulatory landscapes"
+    },
+    {
+      "name": "Islamic Finance & Regulatory Expert",
+      "role": "expert",
+      "description": "Validates Islamic finance compliance, Sharia principles alignment, and regulatory certification requirements across Gulf, Malaysia, and Indonesia"
+    },
+    {
+      "name": "Cultural & Family Dynamics Analyst",
+      "role": "analyst",
+      "description": "Analyzes local savings cultures, family-based financial decision-making patterns, and trust dynamics in automated financial advice across target markets"
+    },
+    {
+      "name": "Strategy Integration Refiner",
+      "role": "refiner",
+      "description": "Integrates expert feedback and analytical insights into a cohesive, actionable product-adaptation and market-entry strategy"
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "description": "Reviews integrated strategy for internal consistency, regulatory feasibility, cultural appropriateness, and practical implementability"
+    },
+    {
+      "name": "Strategy Polish & Format Specialist",
+      "role": "polisher",
+      "description": "Formats final strategy into structured, executive-ready output with clear market entry phases, product adaptation roadmap, and compliance frameworks"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Entry Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a market-entry strategist for fintech expansion into values-sensitive emerging markets. Analyze the expansion task into Gulf states, Malaysia, and Indonesia. Develop a comprehensive strategy addressing: (1) Market-specific regulatory entry pathways and certification timelines; (2) Product adaptations for Islamic finance principles (Sharia compliance, profit-loss sharing models, halal investment criteria); (3) Local savings culture alignment (collectivist savings patterns, microfinance history, informal finance integration); (4) Family-based financial decision-making structures (joint account models, elder approval mechanisms, spousal consent frameworks); (5) Trust-building approaches for automated financial advice in each market. Produce a detailed strategic framework covering all three markets simultaneously, identifying overlaps and unique requirements. Output should include phase-by-phase entry plan with market priorities and product customization needs."
+    },
+    {
+      "name": "Islamic Finance & Regulatory Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an Islamic finance and fintech regulatory expert with deep knowledge of Gulf states (Saudi Arabia, UAE, Kuwait), Malaysia, and Indonesia regulatory environments. Review the market-entry strategy provided. Validate: (1) Alignment with Sharia principles for savings products (no riba, zakah integration, halal asset classes); (2) Regulatory compliance pathways (SAMA for Saudi, DFSA for UAE, BNM for Malaysia, OJK for Indonesia, MUI Sharia certification where required); (3) Specific certification requirements and timelines for each market; (4) Risk management for religious/cultural sensitivity; (5) Permissible technology governance models. Provide detailed corrections, additions, and regulatory-specific recommendations. Flag any strategy elements that violate Islamic finance principles or regulatory requirements. Output complete expert assessment with specific regulatory citations and compliance frameworks."
+    },
+    {
+      "name": "Cultural & Family Dynamics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a cultural analyst specializing in financial behavior in Gulf, Southeast Asian, and Indonesian markets. Analyze the strategy for alignment with: (1) Local savings cultures (Gulf: accumulation for family stability; Malaysia: community-based savings; Indonesia: informal group savings tradition); (2) Family financial decision-making (joint decision patterns, role of elders, spousal consultation norms); (3) Trust in automated financial advice (skepticism drivers, verification needs, personal relationship importance); (4) Barriers to technology adoption (digital literacy variations, preference for human advisors, concerns about data privacy in Islamic context). Produce quantitative and qualitative insights on market-specific behavioral patterns. Recommend product features, communication strategies, and advisor models for each market. Highlight misalignments between the strategy and local financial psychology."
+    },
+    {
+      "name": "Strategy Integration Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy integration specialist. You have received: (1) A comprehensive market-entry strategy; (2) Islamic finance and regulatory expert validation; (3) Cultural and family dynamics analysis. Integrate all three perspectives into ONE coherent, actionable strategy. Resolve conflicts between recommendations (e.g., if cultural norms and regulatory requirements diverge). Ensure: (1) Each market has specific, differentiated product-adaptation roadmap; (2) All Islamic finance constraints are embedded in product design; (3) Family decision-making structures are operationalized in app UX/features; (4) Trust-building mechanisms address local skepticism; (5) Regulatory compliance timelines and certification workflows are crystal clear. Output a refined, integrated strategy document with market-by-market playbooks, feature prioritization matrices, and implementation sequencing."
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strategy coherence and feasibility critic. Review the integrated strategy comprehensively. Assess: (1) Internal logical consistency (do all elements reinforce each other?); (2) Regulatory feasibility (can timelines be met? Are requirements realistic?); (3) Cultural appropriateness (will proposed solutions resonate with target users?); (4) Practical implementability (are recommendations actionable with typical startup resources?); (5) Market differentiation (does each market adaptation feel distinct and tailored, or generic?); (6) Risk awareness (are major obstacles acknowledged and mitigated?). Provide full detailed critique with specific strengths and critical gaps. If major inconsistencies, misalignments, or infeasible elements exist, output: revise. If strategy is coherent, realistic, culturally sound, and implementable, output: pass.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Strategy Polish & Format Specialist",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a strategy presentation specialist. Format the final, validated market-entry and product-adaptation strategy into an executive-ready output. Structure as: (1) Executive Summary (one-page overview of strategy, key differentiation per market); (2) Market-by-Market Playbooks (Gulf States, Malaysia, Indonesia: regulatory timeline, Sharia compliance roadmap, product features, family-decision workflows, trust-building tactics); (3) Integrated Product Adaptation Roadmap (Phase 1-3 with market sequencing, feature prioritization, Islamic finance integration); (4) Regulatory Certification Tracker (jurisdiction-specific requirements, timelines, dependencies); (5) Risk Mitigation & Contingencies (cultural sensitivities, regulatory changes, adoption barriers). Use clear headings, tables, and visual frameworks. Ensure tone is professional, data-informed, and actionable for a startup leadership team and regulatory affairs team."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, culturally-informed, and regulatory-compliant market-entry strategy for a fintech startup entering values-sensitive markets. Execution flow: (1) Market Entry Strategist develops initial holistic strategy framework; (2) Islamic Finance Expert validates Sharia and regulatory compliance, providing domain-specific corrections; (3) Cultural Analyst stress-tests strategy against local financial behavior and trust dynamics; (4) Integration Refiner synthesizes all three perspectives into one coherent, differentiated, market-specific playbook; (5) Coherence Critic performs final feasibility review (if revise, loops back to Integration Refiner up to 3x for refinement); (6) Polisher formats into executive-ready deliverable. The 'while' loop at the Coherence Critic gate ensures strategy robustness before final output. This design prioritizes expert validation (Islamic finance, regulatory) early, followed by cultural integration, then rigorous coherence testing—mirroring the complexity of multi-market, values-driven expansion."
+}
+```

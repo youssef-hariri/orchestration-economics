@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GlobalComplianceStrategist",
+      "role": "strategist",
+      "systemPrompt": "Analyze the 15 target jurisdictions and the EU AI Act. Develop a 'Global Core, Local Edge' framework that defines which product features, documentation clauses, and marketing messages are universal and which must be localized to meet specific legal requirements.",
+      "description": "Develops the high-level strategy for balancing global brand consistency with local regulatory compliance."
+    },
+    {
+      "name": "ContentBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft the product documentation, compliance disclosures, and marketing messaging based on the GlobalComplianceStrategist's framework. Ensure the tone is professional and consistent with a global brand identity while incorporating specific legal requirements for each jurisdiction.",
+      "description": "Creates the initial draft of localized content and compliance documentation."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "systemPrompt": "Review the content against the specific regulatory constraints of the 15 jurisdictions. Adjust language to ensure compliance with strict data-localization rules or EU AI Act transparency obligations without diluting the global brand voice.",
+      "description": "Refines the content to ensure legal accuracy and brand alignment."
+    },
+    {
+      "name": "RegulatoryCritic",
+      "role": "critic",
+      "systemPrompt": "Evaluate the documentation and marketing copy for regulatory risks and brand fragmentation. Check if the content accurately reflects the EU AI Act and other divergent rules. Provide a detailed assessment of any gaps. On the last line, output 'pass' if compliant and consistent, or 'revise' if changes are needed.",
+      "description": "Validates the content against regulatory requirements and brand standards."
+    },
+    {
+      "name": "BrandPolisher",
+      "role": "polisher",
+      "systemPrompt": "Perform a final quality check on the localized content. Ensure formatting is consistent, terminology is uniform across all 15 regions, and the brand voice remains coherent despite the localized legal disclosures.",
+      "description": "Finalizes the output for deployment."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalComplianceStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Analyze the 15 target jurisdictions and the EU AI Act. Develop a 'Global Core, Local Edge' framework that defines which product features, documentation clauses, and marketing messages are universal and which must be localized to meet specific legal requirements."
+    },
+    {
+      "name": "ContentBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft the product documentation, compliance disclosures, and marketing messaging based on the GlobalComplianceStrategist's framework. Ensure the tone is professional and consistent with a global brand identity while incorporating specific legal requirements for each jurisdiction."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Review the content against the specific regulatory constraints of the 15 jurisdictions. Adjust language to ensure compliance with strict data-localization rules or EU AI Act transparency obligations without diluting the global brand voice."
+    },
+    {
+      "name": "RegulatoryCritic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the documentation and marketing copy for regulatory risks and brand fragmentation. Check if the content accurately reflects the EU AI Act and other divergent rules. Provide a detailed assessment of any gaps. On the last line, output 'pass' if compliant and consistent, or 'revise' if changes are needed.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "BrandPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Perform a final quality check on the localized content. Ensure formatting is consistent, terminology is uniform across all 15 regions, and the brand voice remains coherent despite the localized legal disclosures."
+    }
+  ],
+  "explanation": "The pipeline begins with a strategist to establish the 'Global Core, Local Edge' framework. The builder generates the initial content, which is then passed to the refiner. The RegulatoryCritic acts as a quality gate; if it identifies compliance gaps or brand fragmentation, it routes the content back to the refiner to ensure legal precision. Once the critic approves, the polisher finalizes the output for a consistent global brand experience."
+}

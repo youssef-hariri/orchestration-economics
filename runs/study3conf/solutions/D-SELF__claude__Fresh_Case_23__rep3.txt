@@ -1,0 +1,247 @@
+# EXECUTIVE DELIVERABLE
+## PAN-AFRICAN BANKING GROUP INTEGRATION & MARKET CONSOLIDATION STRATEGY
+### Nigeria, Kenya, Morocco (2026–2029)
+
+**Prepared for:** Group Board of Directors  
+**Execution Period:** 36 Months (Q1 2026 – Q4 2028)  
+**Classification:** Strategic Integration Plan  
+
+---
+
+## PART 1: EXECUTIVE SUMMARY
+
+### 1.1 Strategic Vision & Core Challenge
+
+The pan-African banking group has acquired three operationally independent banks with **incompatible core systems, distinct regulatory supervisors, and entrenched local management cultures**. The integration mandate requires:
+
+- **Unified digital products** (single mobile app, integrated APIs, consolidated customer experience)
+- **Group operational coherence** (shared risk frameworks, standardized reporting, consolidated profitability)
+- **Local regulatory compliance** (CBN, CBK, BAM each require subsidiary-level decision authority and continuity of local relationships)
+- **Customer confidence preservation** (avoid brand-shock disruption; maintain local banking relationships)
+
+**Strategic Tension:** These objectives are **partially in conflict**. Aggressive centralization (forced brand unification, rapid technology cutover, immediate redundancies) generates organizational resistance and regulatory friction, triggering **estimated 25–35% voluntary departure of senior staff** in Months 3–9 and **6–12 month timeline delays** across regulatory approval cycles.
+
+**Recommended Path:** **"Respect Autonomy, Embed Accountability" model**—preserve local market autonomy in P&L, brand, and customer relationships while centralizing digital platform standards, risk frameworks, and regulatory submissions through matrix accountability (local CROs report to both Market MD and Group CRO; Group CDO sets technology roadmap with Market MD consensus, not override authority).
+
+---
+
+### 1.2 Three-Country Integration Vision (Phased, Not Simultaneous)
+
+**Phase 1: Kenya (Months 4–10 Go-Live; Months 10–16 Stabilization)**
+- **Rationale:** Smallest customer base (1.8M); least regulatory friction (CBK is most progressive); best technology foundation (Fiserv DNA already cloud-hybrid, APIs mature). Establishes playbook.
+- **Outcome:** Unified Temenos platform operational; digital app launched; customer migration achieved with <1% attrition.
+- **Regulatory Gate:** CBK Mpesa integration certification by Month 9; CBK formal approval by Month 8.
+
+**Phase 2: Morocco (Months 8–18 Go-Live; Months 18–27 Stabilization)**
+- **Rationale:** Mid-complexity customer base (0.9M); front-loaded Sharia re-certification (12–16 week critical path) manages BAM relationship. Validates playbook extensibility to relationship-driven regulators.
+- **Critical Dependency:** BAM Sharia Board re-certification must complete by Month 18 (non-negotiable gate). Requires elevated Sharia Officer (Dr. Abdel Aziz) to governance council; pre-engagement with BAM Islamic Finance Unit Months 8–10.
+- **Outcome:** Temenos platform with bespoke Islamic finance modules operational; customer migration achieved; BAM confidence in group's risk management established.
+- **Regulatory Gate:** BAM Sharia certification by Month 18; BAM formal approval by Month 17.
+
+**Phase 3: Nigeria (Months 15–30 Go-Live; Months 30–36 Stabilization)**
+- **Rationale:** Largest complexity (4.2M customers, $2.8B assets, highest regulatory scrutiny). Phases 1–2 learnings directly embedded. Extended parallel run (16 weeks vs. standard 12 weeks) for CBN RTGS certification (non-negotiable).
+- **Critical Dependency:** CBN RTGS certification must complete by Month 28 (Months 24–28 parallel run, not compressible). Requires proactive CBN engagement Months 1–3 to lock testing windows; cannot be regulator-constrained.
+- **Outcome:** Largest market successfully transitioned; CBN confidence in group's technology governance established; foundation for future pan-African digital platform.
+- **Regulatory Gate:** CBN RTGS certification by Month 28; CBN formal approval by Month 27; cybersecurity penetration testing clearance by Month 27.
+
+**Overall Group Timeline:** 36 months baseline; 9 months embedded contingency (2 months Kenya, 3 months Morocco, 4 months Nigeria); effective 45-month envelope.
+
+---
+
+### 1.3 Technology Architecture Recommendation
+
+**Platform:** Temenos SaaS (cloud-native, multi-tenant, API-first)
+
+**Deployment Model:**
+- **Data Residency:** **Cloud-hybrid approach (Option B recommended)**—Temenos primary deployment on AWS Africa region (Cape Town or Johannesburg); local on-premise backup/gateway in each market (Lagos for Nigeria, Nairobi for Kenya, Casablanca for Morocco) for regulatory comfort and settlement finality redundancy. Cost: $1–2M capex per country; timeline impact: +2–3 months facility setup.
+- **Fallback if Regulators Demand On-Premise:** Be prepared to pivot to **Option A (full on-premise)** for Nigeria/Morocco if CBN/BAM formally reject cloud. Cost: $3–5M capex Nigeria, $1.5–2M Morocco; timeline impact: +6 months Nigeria, +4 months Morocco. Decision gate at Month 2 (after formal regulatory meetings).
+
+**API Architecture:**
+- **Hybrid Connectivity Model:** Cannot achieve "pure API-first" globally due to regulatory constraints. Must support:
+  - **Kenya:** Modern REST APIs to Mpesa (CBK approved approach)
+  - **Nigeria:** Legacy SWIFT protocol to RTGS and NIBSS (CBN requirement; cannot use internet-based APIs for settlement)
+  - **Morocco:** Legacy SWIFT to CIE (Moroccan payment switch); API modernization dependent on external CIE evolution (not group-controlled)
+- **Impact:** Temenos architecture must embed protocol bridges and legacy connectors; increases system complexity +15–20% vs. pure cloud-native model; accepted as necessary for regulatory compliance.
+
+**Sharia Module (Morocco-Critical):**
+- **Requirement:** Temenos must support Islamic finance products (Murabaha, Ijara, Musharaka, Sukuk) with BAM Sharia Board certification. Sopra's proprietary Islamic finance codebase cannot be ported to Temenos; complete re-engineering required.
+- **Recommendation:** Hire **external Islamic Finance SME (Subject Matter Expert)** consultant to validate Temenos Islamic finance capability and design custom modules. Cost: $200–300K; timeline: Months 8–14 (parallel to Kenya go-live, enabling Morocco Phase 2 Sharia design). **Non-negotiable risk mitigation** (Sharia module is critical path; single point of failure if Temenos capability insufficient).
+- **BAM Engagement:** Pre-submit Sharia module design to BAM Sharia Advisory Board for informal feedback by Month 10 (Months 8–10 design; Month 11–12 pre-review; Months 13–15 formal submission; Months 16–18 certification). Reduces rework risk.
+
+---
+
+### 1.4 Brand Strategy Recommendation: Federated Model (Option B)
+
+**Decision:** Retain local bank names (First Trust Bank Nigeria, KCB Kenya, Banque du Devenir Morocco) with subtle group co-branding.
+
+**Rationale:**
+- **Customer Retention:** Local brand equity 20–30 years established (especially Nigeria); rebranding triggers 3–5% customer attrition risk (competitor poaching during transition).
+- **Regulatory Acceptability:** CBN/CBK/BAM expect "local continuity"; unified brand rebranding seen as operational risk during migration.
+- **Organizational Resistance Minimized:** Local management retains identity autonomy; reduces voluntary departure risk (~30% reduction in flight risk vs. unified brand approach).
+- **Timeline Impact:** Minimal (brand strategy does not drive technology schedule); versus unified brand adds 6–8 weeks (logo/UI redesign delays system go-live).
+
+**Implementation:**
+- **Backend Unification:** Single Temenos platform for all three markets (unified customer master, consolidated reporting, shared risk frameworks).
+- **Frontend Differentiation:** Three distinct mobile apps (per local brand) + three distinct web portals, but **unified API layer** reduces development overhead. Cost: +25–30% product development vs. single global app (acceptable tradeoff).
+- **Marketing Narrative:** "Local bank you trust, pan-African scale and digital capabilities" (combines local autonomy messaging with group credibility).
+
+**Go-to-Market Timeline:**
+- **Month 4 (Kenya):** Announce "KCB Digital Upgrade—faster banking, same trusted bank"
+- **Month 8 (Morocco):** Announce "Banque du Devenir modernization—same Islamic finance values, enhanced technology"
+- **Month 15 (Nigeria):** Announce "First Trust Nigeria digital transformation—deeper local service, group backing"
+
+---
+
+### 1.5 Management & Organizational Structure: Respect Autonomy + Embed Accountability
+
+**Core Principle:** Market MDs retain P&L ownership, customer relationship accountability, and regulatory liaison authority. Group embeds accountability through **matrix reporting** for risk/compliance functions and **milestone-based authority** for technology decisions (Group CDO has timeline authority, Market MD has veto only if regulator objects).
+
+**Governance Structure:**
+
+```
+GROUP BOARD
+    |
+GROUP CEO
+    |
+├─ Group CFO (Capex/Opex oversight)
+├─ Group CRO (Risk framework, capital adequacy)
+├─ Group CDO (Technology platform, digital products)
+├─ Group Head Regulatory Affairs (Regulatory coordination)
+└─ Group CMO (Brand strategy, communications)
+    |
+    ├─ NIGERIA MARKET MD (Kunle Okafor — RETAINED)
+    │   ├─ CFO Nigeria (reports to Kunle + Group CFO—dual reporting)
+    │   ├─ CRO Nigeria (reports to Kunle + Group CRO—matrix accountability)
+    │   ├─ Head of Regulatory Affairs—Nigeria (reports to Kunle + Group Head Regulatory)
+    │   └─ [Technology & Digital report to Group CDO for migration milestones]
+    │
+    ├─ KENYA MARKET MD (Jane Kipchoge — RETAINED)
+    │   ├─ CFO Kenya (reports to Jane + Group CFO)
+    │   ├─ CRO Kenya (reports to Jane + Group CRO)
+    │   ├─ Head of Regulatory Affairs—Kenya (reports to Jane + Group Head Regulatory)
+    │   └─ [CTO (Raj promoted to Group CDO; interim replacement for Kenya CTO)]
+    │
+    └─ MOROCCO MARKET MD (Hassan El Kadi — RETAINED)
+        ├─ CFO Morocco (reports to Hassan + Group CFO)
+        ├─ CRO Morocco (reports to Hassan + Group CRO)
+        ├─ Chief Sharia Officer (Dr. Abdel Aziz — elevated to group governance council)
+        ├─ Head of Regulatory Affairs—Morocco (reports to Hassan + Group Head Regulatory)
+        └─ [Technology & Digital report to Group CDO for migration milestones]
+```
+
+**Key Design Decisions:**
+1. **All three MDs retained** (signals stability; preserves regulatory relationships; reduces organizational resistance).
+2. **Dual reporting for CROs:** Local accountability to Market MD + Group CRO (ensures local risk ownership AND group risk standardization; conflict resolution via escalation, not override).
+3. **Group CDO (new role):** Recommend **internal promotion of Raj (Kenya CTO) to Group CDO** (preserves Kenya cultural fit; fast onboarding; technical credibility with local IT teams; avoids 8–12 week external hire delay). **Interim Kenya CTO** required (external hire or internal promotion from Kenya IT team).
+4. **Dr. Abdel Aziz elevated:** Morocco Chief Sharia Officer joins group governance council (seats on Risk Committee, Technology Committee); signals group respect for Islamic finance preservation; ensures Sharia expertise embedded in all technology decisions (not sidelined as "compliance function").
+5. **No redundancy announcements until Month 11+** (post-Kenya go-live success confirmed). Early redundancy announcements trigger departures of 25–35% of senior staff Months 3–6; organizational capacity reduced exactly when needed for Phase 1 execution.
+
+**Talent Retention Strategy:**
+- **MD Retention Agreements:** Kunle, Jane, Hassan sign 2–3 year employment contracts with 40–50% annual bonus tied to (a) phase go-live success, (b) regulatory incident avoidance, (c) customer satisfaction maintenance.
+- **High-Flight-Risk Talent:** Lock retention of Chisom (Nigeria digital), Raj (Kenya CTO → Group CDO), Sarah (Kenya head of digital), Dr. Abdel Aziz (Morocco Sharia officer) with **40–50% retention bonuses** + **"severance protection" clause** (if made redundant, severance ≥12 months salary). Budget: $5–8M over 2 years.
+- **Backfill Hiring Delayed:** HR does not hire replacements for departures until Month 6+ (absorb turnover via temporary cross-training; preserves integration budget for migration capex vs. recruitment costs).
+- **Knowledge Transfer Protocol:** Before any senior departure, 4-week formal knowledge transfer (successor shadowing + documentation) mandatory; enforced via severance clause (severance withheld if knowledge transfer incomplete).
+
+---
+
+### 1.6 Critical Success Metrics (12–36 Month Horizon)
+
+| Metric | Baseline (Pre-Integration) | Target (36-Month Gate) | Measurement Method |
+|--------|--------------------------|----------------------|-------------------|
+| **Technology Migration Completion** | 0% (3 legacy systems) | 100% (1 unified Temenos platform) | All three banks operationally live on Temenos; legacy systems decommissioned |
+| **Customer Adoption** | N/A (legacy systems) | ≥80% active on unified digital platform | Weekly active users per market; digital transaction % of total |
+| **Regulatory Incidents** | Baseline per market | Zero material regulatory incidents attributable to migration | CBN/CBK/BAM supervisory feedback; no enforcement actions |
+| **Capital Adequacy Maintained** | Nigeria 11.2%, Kenya 10.8%, Morocco 9.4% | All >regulatory minimums (Nigeria >10.5%, Kenya >10.5%, Morocco >11%) | Quarterly capital ratio reporting; no ratios fall below minimums Months 3–36 |
+| **Staff Retention (Senior/Middle Mgmt)** | Baseline (turnover rate ~5%/year) | Maintain 65%+ retention (accept 35% voluntary departures as normal for large integration) | Turnover tracking; flight-risk exit interviews |
+| **Regulatory Relationship Continuity** | Baseline (existing MD/CRO relationships strong) | Maintained/improved (regulators comfortable with group governance model; no increase in supervisory scrutiny) | Regulator feedback meetings; frequency/tone of regulatory correspondence |
+| **Cost Savings Realization** | N/A (baseline) | Year 1: $5M (legacy vendor cost avoidance); Year 2: $10M (operational efficiency); Year 3: $15M (run-rate savings) | Actual vs. budgeted technology opex; vendor consolidation savings tracking |
+| **Time-to-Market for New Digital Products** | Nigeria: 12–16 weeks; Kenya: 6–8 weeks; Morocco: 14–20 weeks | All markets: <8 weeks (unified platform velocity) | Product roadmap tracking; time-from-concept-to-customer measurement |
+
+---
+
+### 1.7 Risk Summary (Top Risks & Mitigation)
+
+| Risk | Severity | Probability | Mitigation |
+|------|----------|-------------|-----------|
+| **CBN Data Residency Rejection (Cloud Approach)** | High | Medium (40%) | Early engagement Month 1; propose Option B (Cape Town cloud + Lagos backup); if CBN insists on Option A (on-premise), escalate to Group Board Month 2 for strategy pivot. Contingency: +6 months, +$3–5M capex. |
+| **Sharia Module Re-Certification Delay (Morocco Critical Path)** | High | Medium (45%) | Hire external Islamic Finance SME Month 1; validate Temenos capability; pre-engage BAM Sharia Board Month 10; build 4-week remediation buffer into Morocco timeline. Contingency: +6–8 weeks if BAM requests rework. |
+| **CBN RTGS Certification Bottleneck (Regulator Resource Constraint)** | High | Medium (35%) | Proactive CBN engagement Months 1–3; lock RTGS testing windows; propose hybrid testing (lab + production observation) if CBN capacity constrained. Contingency: +6–8 weeks if regulator timeline misaligns. |
+| **Voluntary Departure of Key Staff (Kunle, Raj, Dr. Abdel Aziz)** | High | High (70% one person departs; 25% multiple departures) | Lock retention agreements Month 2 with 40–50% bonuses + severance protection; elevate Dr. Abdel Aziz to governance council (signals respect); promote Raj to Group CDO (internal opportunity). Contingency: If departures occur, 6–12 week knowledge transfer + backfill hiring. |
+| **Kenya Phase 1 Go-Live Failure (Settlement Processing Error)** | High | Low (15%) | Comprehensive UAT (Months 7–8); hire external cutover management firm; conduct 3 practice cutover runs; maintain fallback plan (48-hour rollback to legacy FIS system). Contingency: If go-live fails, 2–4 week delay; extend Kenya parallel run; restart integration schedule. |
+| **Capital Ratio Breaches (Nigeria Q4 2026–Q2 2027)** | Medium | High (80% if capital injection not executed) | Pre-migration capital injection ($30–50M into Nigeria/Kenya subsidiaries by May 2026) to preserve capital ratios. Decision gate Month 1; funding locked by Month 2. Contingency: If capital injection delayed, Nigeria capex must be spread (timeline extends). |
+| **Regulatory Approval Delays (Multi-Market Coordination)** | Medium | Medium (50%) | Early formal submissions Q0 Month 3; weekly regulatory liaison calls Months 4–12; escalate blocks to Group Head Regulatory Affairs weekly. Contingency: 4–8 week delays per regulator (built into phase contingency buffers). |
+| **Change Management Post-Migration (DevOps vs. CBN 48-Hour Approval)** | Medium | High (70% will occur) | Negotiate formal "Change Management Framework" with CBN by Month 3 (propose tiered approval: low-risk patches 1-week window; material changes 48-hour approval). Contingency: Nigeria team operates on slower release cycle indefinitely (accepts competitive disadvantage). |
+| **Data Quality Issues (Legacy System Migration)** | Medium | Medium (45%) | Hire external data quality firm Month 1; conduct 2–3 round validation; build 2–3 week cleansing buffer into timeline. Contingency: If major data gaps discovered post-go-live, 1–2 week stabilization extension. |
+| **Customer Attrition (Brand/Service Disruption)** | Medium | Medium (40% of customers experience disruption) | Federated brand strategy (no rebranding trauma); local relationship banking continuity emphasized; customer incentives for digital adoption (rate discounts, no-fee digital banking). Contingency: If attrition >3%, activate competitive response (rate cuts, new product launches). |
+
+---
+
+## PART 2: PHASED ROADMAP (QUARTER-BY-QUARTER)
+
+### QUARTER 0: PRE-INTEGRATION READINESS (Q1 2026: Jan–Mar)
+
+**Objective:** Establish governance, lock regulatory approval pathways, confirm technology vendor, secure capital, retain key talent, finalize brand strategy.
+
+---
+
+#### **Q0 Month 1 (January 2026): Governance Kickoff & Regulatory Engagement Initiation**
+
+| **Workstream** | **Key Activities** | **Owner** | **Deliverable** | **Decision Gate** | **Risk Flag** |
+|---|---|---|---|---|---|
+| **Governance** | Finalize group steering committee; establish IMO (Integration Management Office); assign Program Manager | Group CEO | Steering committee charter; IMO operating | Program Manager confirmed | **High:** PMO delay adds 4–6 weeks to planning cycle |
+| **Governance** | Confirm Market MD reporting lines; finalize decision authority matrix (signed by all MDs) | Group CEO + Kunle + Jane + Hassan | Decision authority charter (MD autonomy, Group oversight balance) | All MDs sign commitment | **High:** Any MD hesitation signals future resistance; requires 1:1 CEO resolution |
+| **Regulatory** | Issue formal notification letters to CBN, CBK, BAM; request feedback by Month 3 | Group Head Regulatory Affairs | Three regulatory letters (localized per regulator) | Regulator acknowledgment (target Week 2) | **High:** CBN/BAM may request urgent pre-meetings (adds weeks) |
+| **Regulatory** | Schedule formal regulatory meetings for Month 2 (one with each regulator) | Group Head Regulatory Affairs | Meeting invitations + prepared presentations | Meetings confirmed | **Medium:** Calendar constraints; assume 2-week lead time |
+| **Technology** | Issue Temenos RFP; begin cloud vendor selection (AWS vs. Azure); confirm data residency approach | Group CDO | Temenos RFP response; preliminary LOI; cloud region decision | Temenos LOI signed by Month 2 | **High:** Temenos resource constraints possible; lead time 4–6 weeks |
+| **Technology** | Baseline data audit (all three banks): extract schemas, customer records, transaction history | IT leads per market + Group CTO | Data audit report (data quality assessment; migration readiness score) | Audit complete | **High:** Sopra proprietary system may have undocumented schemas |
+| **Technology** | Identify CREST-certified penetration testing vendor; establish contract | Group CISO + Group CTO | Vendor identified; 3 quotes collected; contract drafted | Vendor confirmed | **Medium:** Limited CREST vendors in Africa; booking tight |
+| **Capital** | Financial modeling: project capital ratios through 36-month integration; identify if capital injection needed | Group CFO | Capital adequacy projection model (Q1 2026 baseline through Q4 2028) | Capital injection decision | **High:** If Nigeria/Kenya capital ratios breach regulat minimums Q4 2026–Q2 2027, capital raise required (adds 4–6 weeks) |
+| **Capital** | If capital injection needed: initiate fundraising (parent company capital preferred) | Group CFO + Group CEO | Capital raise mandate; funding timeline locked | Funding commitment | **High:** Capital raise 4–6 weeks if not pre-arranged |
+| **Brand Strategy** | Establish brand strategy task force; initiate customer perception research | Group CMO | Research RFP; task force charter | Research contract awarded | **Medium:** Research adds 4–6 weeks; recommend parallel work with governance |
+| **HR & Talent** | Announce Market MD retention in town halls (emphasize autonomy, local decision authority) | Group CEO (in-person per market) | Press release; organizational chart; internal comms | MDs publicly confirm retention | **High:** If any MD hesitates publicly, integration credibility damaged |
+| **HR & Talent** | Initiate retention discussions with high-flight-risk individuals (Chisom, Raj, Sarah, Dr. Abdel Aziz); propose group roles/bonuses | Group HR + Group CDO | Retention bonus structure drafted; proposed group roles | Retention discussions initiated | **High:** Talent may already have external offers; need to move fast |
+| **HR & Talent** | Announce Group CDO recruitment (or Raj internal promotion); confirm leadership transition | Group CEO + Group HR | CDO job description; recruitment timeline OR Raj promotion announcement | CDO identified | **High:** External CDO hire adds 8–12 weeks; recommend internal promotion Raj |
+| **Comms** | Develop employee communication plan (internal messaging calendar Months 1–12) | Group CMO + IMO | Comms calendar; key messages ("stability," "local autonomy," "digital opportunity") | Comms plan approved | **Medium:** Messaging cascades; delayed comms = staff anxiety increases |
+
+**Q0 Month 1 Critical Decisions:**
+- **"Governance & Regulatory Engagement Approved"** — All MDs confirm retention; steering committee operating; formal regulatory letters issued; Temenos RFP out; capital injection decision made.
+
+**Q0 Month 1 Go/No-Go Gate:**
+- **Go Criteria:** (1) All three MDs publicly confirm retention; (2) Regulatory acknowledgment received from CBN/CBK/BAM; (3) Capital injection funded (if needed); (4) Temenos LOI path clear (vendor engaged, no red flags).
+- **No-Go Scenario:** If CBN signals fundamental objections to technology approach OR any MD hesitates on retention, **escalate to Group Board Week 2 for strategy recalibration.**
+
+---
+
+#### **Q0 Month 2 (February 2026): Regulatory Deep Dive & Technology Commitment**
+
+| **Workstream** | **Key Activities** | **Owner** | **Deliverable** | **Decision Gate** | **Risk Flag** |
+|---|---|---|---|---|---|
+| **Regulatory** | **Formal CBN Meeting:** Group CEO + Kunle + Group CRO meet with CBN Deputy Governor. Agenda: data residency approach (probe Option A vs. B preference); RTGS certification timeline; capital projections; change management framework | Group Head Regulatory Affairs + Kunle | CBN meeting minutes; CBN feedback on data residency preference; RTGS schedule confirmation | CBN preliminary approval (conditional) | **High:** CBN may demand on-premise (Lagos) data center; adds 6 months if Option A required |
+| **Regulatory** | **Formal CBK Meeting:** Group CEO + Jane + Group CRO meet with CBK Deputy Governor. Agenda: Kenya migration timeline; Mpesa integration approach; capital ratios; market conduct requirements | Group Head Regulatory Affairs + Jane | CBK meeting minutes; CBK feedback on Mpesa testing calendar; provisional approval | CBK preliminary approval (likely) | **Medium:** CBK testing windows constrained (Q1, Q3 only); coordinate Kenya UAT schedule |
+| **Regulatory** | **Formal BAM Meeting:** Group CEO + Hassan + Dr. Abdel Aziz + Group CRO meet with BAM Governor and Islamic Finance Unit. Agenda: migration timeline; Sharia module approach; on-premise vs. cloud; Islamic finance re-certification process | Group Head Regulatory Affairs + Hassan + Dr. Abdel Aziz | BAM meeting minutes; BAM feedback on Sharia timeline; BAM comfort on cloud (probe for Option B acceptance) | BAM preliminary approval (conditional on Sharia design) | **High:** BAM may insist on on-premise system; adds 4 months if Option A required |
+| **Technology** | **Temenos Contract Finalization:** Sign SaaS license + cloud deployment + support agreement. Confirm cloud region (AWS Cape Town or Johannesburg); multi-tenancy; Mpesa/RTGS API bridges; data migration services; go-live support | Group CDO + Group Procurement | Signed Temenos agreement; statement of work; cloud deployment architecture; 3-year pricing locked | Contract executed | **High:** Temenos commercial terms (pricing escalation, SLA penalties) critical; negotiate priority scheduling for Kenya Phase 1 |
+| **Technology** | **Platform Architecture Finalized:** Temenos architect + Group CTO design multi-tenant deployment, API layer, data migration ETL approach, testing environments | Temenos + Group CTO | Architecture design document (20–30 pages); data migration approach diagram; testing environment plan | Architecture approved | **Medium:** Multi-tenancy vs. separate instances decision; recommend single instance with per-market customizations |
+| **Technology** | **Cloud Vendor Finalization:** Confirm AWS or Azure; negotiate data residency (Cape Town preferred); confirm redundancy/disaster recovery approach | Group CDO + Temenos | Cloud vendor contract; data residency certification; RTO/RPO targets; compliance documentation | Cloud vendor committed | **Medium:** Data region impacts regulatory approval; assume Cape Town acceptable; if forced to US/EU, add 6–8 weeks approval delay |
+| **Technology** | **Data Migration Playbook Finalized:** Define extraction approach per legacy system; data cleansing rules; customer segmentation for phased migration | Group CTO + Data Migration Lead (external specialist) | Data migration playbook (40–50 pages); extraction scripts; cleansing rules; estimated validation timeline (2–3 weeks) | Migration strategy approved | **High:** Data quality issues (inconsistent master, missing fields) common; hire external data quality firm; start audit Month 1 |
+| **Brand Strategy** | **Brand Strategy Decision Finalized (Front-Load to Month 2 Week 4, not Month 3):** Group Board approves Option A (Unified), Option B (Federated), or Option C (Hybrid). **Recommend Option B (Federated)** to minimize disruption. Decision by February 28 (not March 31) to unblock UI/app design Months 3–4 | Group CMO + Group CEO (Board decision) | Brand strategy Board approval minutes; brand positioning per market; visual identity guidelines; customer messaging framework | Brand strategy locked in | **High:** Brand indecision cascades to comms/UI design (critical path); MUST decide Month 2 Week 4 (February 28), not later |
+| **Brand Strategy** | **Customer Communication Plan (if brand changing):** If Option A (Unified) approved, draft phased transition plan; if Option B/C, simpler plan (announce backend modernization, minimal customer disruption) | Group CMO + Market MDs | Transition materials; timeline; FAQ; branch staff training; media plan | Transition plan approved | **Medium:** Option B recommended to minimize effort |
+| **HR & Talent** | **Retention Agreements Signed (80%+ target):** Lock retention of Kunle, Jane, Hassan, Chisom, Raj, Sarah, Dr. Abdel Aziz, key CROs/CFOs. 40–50% annual bonus + severance protection clause | Group HR | Signed retention agreements for 80%+ of target population | Retention locked in | **High:** Key talent may have external offers; need competitive comp. Accept 20% non-retention as normal churn |
+| **HR & Talent** | **Group CDO Confirmed (Internal Promotion Recommended):** Promote Kenya CTO Raj to Group CDO OR hire external CDO. Recommend **internal promotion (Raj)** for fast onboarding + Kenya continuity. Identify interim Kenya CTO (backfill) | Group CEO + Group HR | CDO hire complete OR Raj promotion announced; interim Kenya CTO identified; CDO reporting line to Group CEO confirmed | CDO started | **High:** CDO critical to program success; external hire adds 8–12 weeks; internal promotion (Raj) preferred |
+| **Governance** | **Integration Steering Committee Operating:** Weekly cadence begins; review Month 1 outputs; confirm Month 3–4 priorities; lock regulatory decision gates | Group CDO (or PMO director) | Committee meeting schedule; approved action items; decision log; risk register baseline | Steering committee operating | **Medium:** Committee effectiveness depends on CEO + Group CFO participation |
+| **Finance** | **Capital Injection Executed (if required):** Parent company injects $30–50M into subsidiaries by May 2026 (before Phase 1 starts) | Group CFO | Capital injection completed; capital ratios re-projected; regulatory notification to CBN/CBK | Injection complete | **High:** If not executed by May, capital ratios breach Q4 2026, triggering regulatory corrective action |
+
+**Q0 Month 2 Critical Decisions:**
+- **"Technology & Regulatory Approval"** — Temenos contract signed; CBN/CBK/BAM preliminary approval (conditional); cloud vendor confirmed; data migration strategy approved; brand strategy approved; retention locked in; capital injection committed.
+
+**Q0 Month 2 Go/No-Go Gate:**
+- **Go Criteria:** (1) Temenos contract signed; (2) CBN/CBK/BAM written preliminary approval (not final, but "no fundamental objections"); (3) Cloud vendor confirmed; (4) Brand strategy approved; (5) Retention 80%+ locked; (6) Capital injection funded.
+- **No-Go Scenario:** If CBN/BAM signal fundamental objections to cloud (demand on-premise Option A), **Group Board emergency session (Week 2 Month 2) to pivot strategy.** May extend timeline to 42–44 months (not 36).
+
+---
+
+#### **Q0 Month 3 (March 2026): Detailed Planning & Formal Regulatory Submission**
+
+| **Workstream** | **Key Activities** | **Owner** | **Deliverable** | **Decision Gate** | **Risk Flag** |
+|---|---|---|---|---|---|
+| **Regulatory** | **Formal Regulatory Submissions:** Submit "System Migration Risk Assessment" + detailed migration plan to CBN, CBK, BAM (tailored per regulator; French version for BAM) | Group Head Regulatory Affairs + Group CDO + Market CROs | Three formal submissions (20–40 pages each; CBN-specific format; French for BAM) | Submissions acknowledged; regulators confirm receipt | **High:** CBN/BAM may have follow-up questions (+2–4 weeks review) |
+| **Regulatory** | **RTGS Certification Pre-Planning (Nigeria-Specific):** Group CRO + Kunle + Temenos submit formal request to CBN for RTGS certification schedule; propose timeline (Months 24–28 for 16-week parallel run); ask CBN to lock testing windows | Kunle + Group CRO + Temenos | CBN confirmation letter on RTGS schedule availability; CBN liaison contact; proposed testing schedule | CBN confirms RTGS schedule | **High:** CBN capacity constraints possible; cannot compress 16-week timeline; if CBN testing unavailable Months 24

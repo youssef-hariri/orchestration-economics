@@ -1,0 +1,81 @@
+{
+  "agents": [
+    {
+      "name": "Market Adaptation Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product-adaptation strategy for a consumer-electronics maker launching a smart-home voice assistant in Japan, Korea, Thailand, and the Gulf in 2026. Address four required areas: interaction style, household roles, privacy signaling, and feature prioritization. Account for differences in honorific systems, direct-command comfort, multigenerational households, gender and age dynamics, religious and cultural contexts, language variation, code-switching, dialects, accessibility, and divergent expectations about always-listening devices. Distinguish regional commonalities from country-specific adaptations. Make concrete recommendations, explain the rationale and trade-offs, and identify implementation priorities, risks, and measurable success indicators. Produce an executive-ready draft rather than generic localization advice."
+    },
+    {
+      "name": "Cross-Cultural and Linguistic Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed smart-home voice-assistant adaptation strategy for Japan, Korea, Thailand, and the Gulf. Assess linguistic and cultural accuracy concerning honorifics, politeness levels, indirect requests, family hierarchy, multigenerational households, gender and age expectations, religious sensitivities, dialect diversity, and comfort with speaking commands aloud. Identify where recommendations should be country-specific rather than generalized across regions. Add practical insights on onboarding, error recovery, wake-word use, confirmation style, and code-switching. Return detailed findings and specific recommendations that a refiner can incorporate."
+    },
+    {
+      "name": "Privacy and Trust Specialist",
+      "role": "expert",
+      "systemPrompt": "Review the strategy from the perspective of privacy engineering, consumer trust, and responsible product design for Japan, Korea, Thailand, and Gulf markets. Evaluate always-listening assumptions, microphone and recording disclosures, physical indicators, mute controls, local processing, data retention, household consent, guest use, children, domestic workers, older adults, and shared-device administration. Consider relevant cultural expectations and broad regulatory or religious sensitivities without inventing precise legal claims. Recommend clear privacy signals, defaults, controls, language, and trust-building practices. Highlight any safety, inclusion, or ethical risks and how to mitigate them."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite and strengthen the initial strategy using the analyses from the cross-cultural and linguistic analyst and the privacy and trust specialist. Preserve useful substance while resolving inaccuracies, overgeneralizations, unsupported assumptions, and contradictions. Deliver a coherent product-adaptation strategy organized by interaction style, household roles, privacy signaling, and feature prioritization. Include a country comparison for Japan, Korea, Thailand, and the Gulf, clearly state where Gulf markets require intra-region validation, prioritize features by launch phase, and include implementation principles, risks, and success metrics. Ensure recommendations are specific, respectful, actionable, and suitable for executive decision-making."
+    },
+    {
+      "name": "Strategy Quality Review",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy comprehensively against the original objective. Check completeness across interaction style, household roles, privacy signaling, and feature prioritization; factual and cultural caution; useful differentiation among Japan, Korea, Thailand, and Gulf markets; treatment of honorifics and politeness; multigenerational and shared-household realities; privacy transparency and control; feasibility and prioritization; clarity; internal consistency; and avoidance of stereotypes or unsupported legal assertions. Provide a full assessment with strengths, weaknesses, omissions, concrete corrections, and any high-risk recommendations. On the very last line output exactly one keyword: pass or revise."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer from the refined strategy and quality-review feedback. Make it concise but substantive, executive-ready, and actionable. Use clear headings and tables or bullets where useful. Cover interaction style, household roles, privacy signaling, and feature prioritization; distinguish shared regional principles from country-specific adaptations; explain launch sequencing and validation needs; and include risks and success measures. Remove repetition, vague claims, cultural stereotyping, and unsupported legal certainty. Do not mention agents, pipeline steps, quality gates, or drafting feedback."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Adaptation Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product-adaptation strategy for a consumer-electronics maker launching a smart-home voice assistant in Japan, Korea, Thailand, and the Gulf in 2026. Address interaction style, household roles, privacy signaling, and feature prioritization. Account for honorific systems, direct-command comfort, multigenerational households, gender and age dynamics, religious and cultural contexts, language variation, code-switching, dialects, accessibility, and divergent expectations about always-listening devices. Distinguish regional commonalities from country-specific adaptations. Make concrete recommendations, explain rationale and trade-offs, and identify implementation priorities, risks, and measurable success indicators."
+    },
+    {
+      "name": "Cross-Cultural and Linguistic Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the preceding strategy for linguistic and cultural accuracy in Japan, Korea, Thailand, and the Gulf. Assess honorifics, politeness, indirect requests, family hierarchy, multigenerational households, gender and age expectations, religious sensitivities, dialect diversity, comfort speaking commands aloud, onboarding, error recovery, confirmation style, and code-switching. Identify country-specific needs, overgeneralizations, risks, and concrete recommendations for improvement."
+    },
+    {
+      "name": "Privacy and Trust Specialist",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the preceding strategy from a privacy, trust, safety, and responsible-product-design perspective. Evaluate always-listening assumptions, recording disclosures, physical indicators, mute controls, local processing, retention, household consent, guest use, children, domestic workers, older adults, shared-device administration, and culturally appropriate trust signals in Japan, Korea, Thailand, and Gulf markets. Recommend actionable defaults, controls, language, and safeguards, while avoiding unsupported precise legal claims."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite and strengthen the initial strategy using the preceding cultural, linguistic, privacy, and trust analyses. Resolve inaccuracies, overgeneralizations, contradictions, and omissions. Produce a coherent, actionable strategy organized by interaction style, household roles, privacy signaling, and feature prioritization, with country comparisons, launch sequencing, risks, and success metrics."
+    },
+    {
+      "name": "Strategy Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy in full. Assess completeness, cultural and linguistic care, country differentiation, treatment of honorifics and politeness, multigenerational household realities, privacy transparency and control, feasibility, prioritization, clarity, internal consistency, and avoidance of stereotypes or unsupported legal claims. Provide detailed strengths, weaknesses, omissions, and exact corrections. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Create the final user-facing answer using the refined strategy and quality-review findings. Present a concise, substantive, executive-ready product-adaptation strategy with clear headings and useful tables or bullets. Cover interaction style, household roles, privacy signaling, feature prioritization, country-specific adaptations, launch sequencing, validation needs, risks, and success measures. Remove repetition, vague claims, stereotyping, and unsupported legal certainty. Do not mention the pipeline or review process."
+    }
+  ],
+  "explanation": "The flow starts with a complete strategic draft, adds independent cultural-linguistic and privacy expertise, and then consolidates those findings into an actionable strategy. A post-refinement quality review checks the content after it exists; if it outputs revise, execution returns to the Strategy Refiner, while pass proceeds to the final polisher. The final step formats the approved strategy for executive use."
+}

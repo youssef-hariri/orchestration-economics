@@ -1,0 +1,83 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Campaign Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial communications framework outlining campaign themes, regional adaptations, approval workflows, and cross-border scrutiny management protocols for faith-based seasonal campaigns."
+    },
+    {
+      "name": "Cultural Authenticity Critic",
+      "role": "expert",
+      "description": "Domain expert in religious and cultural representation across Ramadan, Lunar New Year, and Diwali contexts. Identifies gaps, stereotypes, and inaccuracies in cultural messaging from regional and global perspectives."
+    },
+    {
+      "name": "Regional Compliance Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional regulatory, social-media sentiment, and agency coordination requirements. Produces data-driven insights on past campaign backlash patterns and approval safeguard effectiveness by market."
+    },
+    {
+      "name": "Framework Refinement Specialist",
+      "role": "refiner",
+      "description": "Integrates cultural authenticity feedback and compliance analytics into the framework. Enhances approval safeguards, regional agency workflows, and crisis-response protocols for real-time social-media scrutiny."
+    },
+    {
+      "name": "Integrated Quality Validator",
+      "role": "critic",
+      "description": "Validates the refined framework for internal consistency, cultural sensitivity, operational feasibility, and robustness of approval mechanisms. Assesses whether authenticity and scrutiny-management objectives are met."
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "description": "Formats final framework as a clear, actionable communications guide ready for stakeholder presentation. Ensures clarity, visual coherence, and executive readability."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Campaign Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a global communications framework for faith-based and cultural seasonal campaigns. Create an initial comprehensive framework that covers: (1) Campaign themes and regional messaging pillars for Ramadan (Gulf, North Africa), Lunar New Year (Southeast Asia), and Diwali (other regions); (2) Approval safeguards and governance structures by region and agency; (3) Authenticity guardrails to prevent shallow or inaccurate cultural representation; (4) Real-time social-media monitoring and cross-border backlash response protocols; (5) Escalation workflows for rapid decision-making. Produce a structured, detailed framework ready for expert review."
+    },
+    {
+      "name": "Cultural Authenticity Critic",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and religious representation expert with deep knowledge of Ramadan observance in the Gulf and North Africa, Lunar New Year traditions in Southeast Asia, and Diwali celebrations globally. Review the campaign framework critically. Identify: (1) Potential cultural stereotypes or oversimplifications; (2) Gaps in regional nuance and local sensitivities; (3) Opportunities to deepen authenticity in messaging and visuals; (4) Any language, imagery, or narrative choices that risk accusations of shallow representation; (5) Best practices from successful campaigns in each region. Provide comprehensive feedback on cultural accuracy and authenticity guardrails. End with actionable recommendations for strengthening cultural credibility."
+    },
+    {
+      "name": "Regional Compliance Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are analyzing regional compliance, social-media dynamics, and agency coordination for global seasonal campaigns. Using data on past campaign outcomes: (1) Map past backlash incidents by region, campaign, and trigger; (2) Identify social-media amplification patterns (speed, reach, sentiment); (3) Assess current agency capabilities and approval workflows by region; (4) Analyze regulatory and community sensitivities in each market; (5) Evaluate effectiveness of existing approval safeguards. Produce a detailed analytical report with data-driven insights, risk rankings, and recommendations for approval mechanisms that can catch cultural missteps before launch and respond rapidly to emerging scrutiny."
+    },
+    {
+      "name": "Framework Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a global campaign framework based on cultural authenticity feedback and regional compliance analytics. Integrate: (1) Cultural expert recommendations to strengthen authenticity guardrails, regional messaging depth, and representation quality; (2) Compliance analyst findings to enhance approval workflows, agency accountability, and crisis-response speed; (3) Strengthen governance: Add pre-launch cultural review checkpoints by regional experts; Define approval authorities and escalation paths; Create social-media monitoring triggers and rapid-response teams; (4) Build in feedback loops from local communities and regional agencies; (5) Develop communication protocols for managing positive and negative sentiment across borders. Produce a cohesive, operationally feasible framework that balances authenticity, approval rigor, and agile response to scrutiny."
+    },
+    {
+      "name": "Integrated Quality Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are validating a refined global campaign communications framework. Assess: (1) Does the framework ensure authentic cultural representation across all three seasonal campaigns and regions? (2) Are approval safeguards robust, timely, and regionally tailored—can they catch cultural misrepresentation before launch? (3) Do crisis-response and social-media monitoring protocols enable rapid, cross-border reaction to backlash? (4) Is the framework operationally feasible for coordinating multiple agencies across regions? (5) Does it clearly define roles, approval authorities, and escalation paths? (6) Are there internal contradictions, gaps, or ambiguities that could undermine execution? Provide a comprehensive quality assessment with strengths, specific weaknesses, and detailed reasoning. On the VERY LAST LINE, output exactly ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Communications Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing a global communications framework for executive and stakeholder presentation. Polish the validated framework into a clear, compelling, and actionable document: (1) Structure as an executive summary, followed by detailed sections on authenticity guardrails, approval workflows, regional agency roles, and social-media response protocols; (2) Use clear visuals (flowcharts for approval workflows, regional mapping, risk matrices); (3) Highlight key decision points, timelines, and accountability; (4) Ensure tone is professional, confident, and action-oriented; (5) Add appendices with regional specifics, past case studies, and sample approval checklists. Deliver a polished, ready-to-present communications framework that leadership and regional teams can immediately operationalize."
+    }
+  ],
+  "explanation": "The pipeline executes in sequence: (1) Builder creates the initial framework; (2) Cultural Authenticity Critic provides expert domain feedback on representation and messaging quality; (3) Regional Compliance Analyst delivers data-driven insights on past backlash, social-media dynamics, and agency coordination; (4) Refiner integrates both expert and analytical feedback into a cohesive, operationally feasible framework with enhanced approval safeguards and response protocols; (5) Integrated Quality Validator assesses the refined framework for authenticity, approval rigor, operational feasibility, and internal consistency—if revise is output, the pipeline loops back to Refiner (step 3) to address gaps; (6) once validated, Polisher formats the framework for executive presentation. The quality gate (step 5) may loop up to 3 iterations, ensuring the final framework robustly achieves both authenticity and scrutiny management objectives before reaching stakeholders. This design balances domain expertise (cultural accuracy), data analytics (risk management), and operational refinement to produce a communications framework that prevents shallow representation, defines clear approval processes, and enables rapid cross-border crisis response."
+}
+```

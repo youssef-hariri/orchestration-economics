@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in fintech market entry. Develop a comprehensive strategy for launching an AI-driven savings app in the Gulf, Malaysia, and Indonesia. Focus on Sharia-compliant product structures, family-centric financial features, and trust-building mechanisms for automated advice.",
+      "description": "Creates the initial market entry and product adaptation strategy."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in Islamic Finance and regional fintech regulations (OJK in Indonesia, SC in Malaysia, CMA in Saudi Arabia). Review the strategy for adherence to Sharia principles and local regulatory certification requirements. Identify gaps in compliance or cultural sensitivity.",
+      "description": "Reviews the strategy for domain-specific compliance and cultural alignment."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic refiner. Incorporate the feedback from the ComplianceExpert to ensure the strategy is fully compliant with Islamic finance principles and local regulatory frameworks while maintaining the app's core value proposition.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Assess the refined strategy for completeness, regulatory accuracy, and cultural nuance. Provide a detailed critique. If the strategy lacks specific actionable steps for any of the three target regions or fails to address Sharia compliance, output 'revise'. Otherwise, output 'pass'.",
+      "description": "Final validation gate for the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure tone is authoritative, clear, and structured for stakeholders.",
+      "description": "Final formatting and polish."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in fintech market entry. Develop a comprehensive strategy for launching an AI-driven savings app in the Gulf, Malaysia, and Indonesia. Focus on Sharia-compliant product structures, family-centric financial features, and trust-building mechanisms for automated advice."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in Islamic Finance and regional fintech regulations (OJK in Indonesia, SC in Malaysia, CMA in Saudi Arabia). Review the strategy for adherence to Sharia principles and local regulatory certification requirements. Identify gaps in compliance or cultural sensitivity."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic refiner. Incorporate the feedback from the ComplianceExpert to ensure the strategy is fully compliant with Islamic finance principles and local regulatory frameworks while maintaining the app's core value proposition."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy for completeness, regulatory accuracy, and cultural nuance. Provide a detailed critique. If the strategy lacks specific actionable steps for any of the three target regions or fails to address Sharia compliance, output 'revise'. Otherwise, output 'pass'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure tone is authoritative, clear, and structured for stakeholders."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist drafting the core entry plan. This is passed to the ComplianceExpert, who evaluates it against Islamic finance and regional regulatory standards. The StrategyRefiner then integrates these expert requirements. The QualityGate assesses the output; if it fails to meet the stringent requirements for Sharia compliance or regional regulatory alignment, it routes back to the StrategyRefiner. Once the strategy passes, the FinalPolisher formats it for executive delivery."
+}

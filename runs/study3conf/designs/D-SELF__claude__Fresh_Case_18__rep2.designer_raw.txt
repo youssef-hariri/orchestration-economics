@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Regulatory-Market Analyst",
+      "role": "analyst",
+      "description": "Analyzes regulatory classifications, clinical-validation requirements, physician-endorsement norms, and consumer-trust factors across EU, Japan, US, and emerging markets for sleep-apnea and five additional health features."
+    },
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "description": "Drafts a comprehensive product and regulatory-rollout strategy, sequencing launches across markets, allocating validation investments, and proposing credibility-building tactics with clinicians and consumers based on regional regulatory and trust dynamics."
+    },
+    {
+      "name": "Regulatory-Clinical Expert",
+      "role": "expert",
+      "description": "Provides domain-specific validation on regulatory pathways, clinical evidence standards, physician-engagement best practices, and consumer-trust mechanisms for health features across divergent market classifications."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Reviews the drafted strategy for regulatory feasibility, market sequencing logic, investment prioritization, risk mitigation, and alignment with regional clinical-validation and credibility-building requirements."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Revises the strategy based on expert and critic feedback, strengthening regulatory pathways, optimizing launch sequencing, aligning validation investments with market-specific requirements, and enhancing clinician and consumer credibility tactics."
+    },
+    {
+      "name": "Integrated Strategy Reviewer",
+      "role": "reviewer",
+      "description": "Conducts final quality review of the refined strategy, verifying regulatory soundness, market-launch feasibility, validation-investment alignment, and practical credibility-building implementation across all regions."
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats the final strategy into a structured, executive-ready deliverable with clear sections on regulatory sequencing, launch timeline, validation roadmap, and clinician-consumer engagement tactics by market."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regulatory-Market Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a regulatory and market analyst specializing in health technology and wearables. Analyze the sleep-apnea screening feature and five additional health capabilities across the following dimensions for each region (EU, Japan, US, emerging markets): (1) Regulatory classification status and requirements; (2) Clinical-validation expectations and evidence standards; (3) Physician-endorsement norms and engagement barriers; (4) Consumer-trust factors and health-claim acceptance; (5) Timeline and cost implications for each market. Produce a detailed comparative analysis highlighting divergences and synergies across markets."
+    },
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a product and regulatory strategy builder. Based on the provided market analysis, draft a comprehensive product and regulatory-rollout strategy for the sleep-apnea screening feature and five additional health capabilities. Include: (1) Market-sequencing recommendation (which markets first, which later) with rationale; (2) Launch timeline for each feature by region; (3) Validation investment allocation strategy (clinical trials, real-world evidence, physician advisory boards) mapped to market requirements and risk prioritization; (4) Credibility-building roadmap with specific tactics for engaging physicians (publications, CME, advisory panels) and consumers (education, testimonials, transparency) by market; (5) Risk mitigation for pending US classification and emerging-market regulatory evolution. Produce a clear, actionable strategy document."
+    },
+    {
+      "name": "Regulatory-Clinical Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regulatory affairs and clinical validation expert for medical devices and health wearables. Review the drafted strategy and provide expert commentary on: (1) Feasibility and best practices for regulatory pathways in EU (CE marking, MDR), Japan (PMDA), US (FDA 510k or De Novo), and emerging markets; (2) Clinical evidence standards and validation designs appropriate for each market and feature combination; (3) Physician-engagement strategies that build credibility with key opinion leaders and treatment communities in each region; (4) Consumer-trust mechanisms including transparency, labeling, education, and managed expectations for wellness vs. medical device claims. Provide specific, evidence-based recommendations that strengthen the strategy."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a critical reviewer of product and regulatory strategies. Assess the drafted strategy on: (1) Regulatory feasibility — are pathways realistic and timelines achievable given market requirements?; (2) Market sequencing logic — does the launch order maximize market entry speed while managing regulatory and clinical risks?; (3) Validation investment efficiency — is resource allocation proportionate to market size, regulatory burden, and risk?; (4) Clinician credibility — are engagement tactics evidence-based and aligned with physician trust-building best practices in each region?; (5) Consumer trust — do communication strategies appropriately manage expectations for medical vs. wellness claims?; (6) Risk coverage — are pending US classification, emerging-market regulatory shifts, and competitive dynamics adequately addressed? Provide a thorough assessment with specific issues, gaps, and improvement areas. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Based on the critic and expert feedback, revise and strengthen the strategy. Address all identified issues: strengthen regulatory pathway feasibility, optimize market sequencing, refine validation investment allocation, enhance clinician and consumer credibility tactics, and deepen risk mitigation. Ensure the revised strategy is internally consistent, evidence-based, and actionable across all markets and feature roadmap phases. Produce a polished, comprehensive revised strategy document."
+    },
+    {
+      "name": "Integrated Strategy Reviewer",
+      "role": "reviewer",
+      "type": "if",
+      "systemPrompt": "You are a final quality reviewer for the refined regulatory and product strategy. Conduct a comprehensive assessment covering: (1) Regulatory soundness — are all pathways compliant and realistic?; (2) Market-sequencing logic — does the approach balance speed-to-market with risk mitigation?; (3) Validation roadmap — is the investment strategy proportionate and aligned with market requirements?; (4) Clinician credibility — are engagement tactics practical, evidence-based, and regionally tailored?; (5) Consumer communication — do messaging strategies appropriately manage health claims and build trust?; (6) Implementation feasibility — can the strategy be executed with realistic timelines and resources?; (7) Competitive positioning — does the strategy anticipate competitive and regulatory evolution? Provide a detailed assessment of strengths, remaining gaps, and confidence level. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 5}
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final output polisher specializing in executive strategy documents. Format and refine the final strategy into a professional, well-structured deliverable with clear sections: (1) Executive Summary; (2) Market Analysis and Regulatory Classification Summary; (3) Product and Feature Roadmap; (4) Market Sequencing Rationale and Timeline; (5) Validation Investment Strategy by Market and Phase; (6) Clinician Engagement and Credibility-Building Roadmap; (7) Consumer Communication and Trust-Building Strategy; (8) Risk Mitigation and Contingency Planning; (9) Success Metrics and KPIs. Ensure clarity, visual hierarchy, and actionability for stakeholders. Produce publication-ready output."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, validated, and actionable product and regulatory-rollout strategy for health features with divergent global classifications. Execution flow: (1) Analyst provides detailed market and regulatory mapping across regions; (2) Builder drafts the initial strategy incorporating market dynamics; (3) Expert provides domain-specific validation on regulatory, clinical, and credibility-building best practices; (4) Critic rigorously assesses feasibility, logic, risk coverage, and alignment — loops back to Refiner if issues remain; (5) Refiner strengthens strategy based on feedback (may loop once if Critic finds remaining gaps); (6) Integrated Reviewer conducts final quality gate (if/revise routes back to Refiner up to 3 iterations; pass advances); (7) Polisher formats into executive-ready deliverable. The design prioritizes regulatory soundness, market-sequencing optimization, validated clinician and consumer credibility tactics, and clear implementation pathways. The quality gates after Critic and Integrated Reviewer ensure the strategy is both strategically sound and operationally feasible before final output."
+}
+```

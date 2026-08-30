@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GlobalComplianceStrategist",
+      "role": "strategist",
+      "systemPrompt": "Analyze the fifteen target jurisdictions and define a unified 'Global Compliance Framework' that balances core brand identity with modular, localized regulatory requirements for AI hiring platforms.",
+      "description": "Develops the high-level strategy for balancing global brand consistency with local regulatory compliance."
+    },
+    {
+      "name": "ProductAdaptationBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft the product documentation, marketing copy, and compliance disclosures for each of the fifteen jurisdictions based on the Global Compliance Framework. Ensure the core brand voice remains consistent while embedding specific legal requirements.",
+      "description": "Generates the initial localized content and compliance documentation."
+    },
+    {
+      "name": "RegulatoryReviewer",
+      "role": "critic",
+      "systemPrompt": "Review the generated content for regulatory accuracy and brand consistency. Check if the content meets the specific legal demands of the target jurisdiction while maintaining the global brand tone. Provide a detailed assessment of any contradictions or compliance gaps. On the last line, output 'pass' or 'revise'.",
+      "description": "Evaluates content against legal requirements and brand guidelines."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "systemPrompt": "Adjust the localized content based on the RegulatoryReviewer's feedback to ensure strict adherence to local laws without diluting the global brand identity.",
+      "description": "Fixes compliance gaps and brand inconsistencies."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Perform a final quality check on the localized content. Ensure formatting is consistent, professional, and ready for deployment across all fifteen jurisdictions.",
+      "description": "Finalizes the output for customer-facing deployment."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalComplianceStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Analyze the fifteen target jurisdictions and define a unified 'Global Compliance Framework' that balances core brand identity with modular, localized regulatory requirements for AI hiring platforms."
+    },
+    {
+      "name": "ProductAdaptationBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft the product documentation, marketing copy, and compliance disclosures for each of the fifteen jurisdictions based on the Global Compliance Framework. Ensure the core brand voice remains consistent while embedding specific legal requirements."
+    },
+    {
+      "name": "RegulatoryReviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the generated content for regulatory accuracy and brand consistency. Check if the content meets the specific legal demands of the target jurisdiction while maintaining the global brand tone. Provide a detailed assessment of any contradictions or compliance gaps. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Adjust the localized content based on the RegulatoryReviewer's feedback to ensure strict adherence to local laws without diluting the global brand identity."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Perform a final quality check on the localized content. Ensure formatting is consistent, professional, and ready for deployment across all fifteen jurisdictions."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategist to define the core framework, followed by the Builder to create localized content. The RegulatoryReviewer acts as a quality gate; if issues are found, the ComplianceRefiner iterates on the content until it passes. Finally, the Polisher ensures the output is ready for market deployment. The flow is: Strategist → Builder → RegulatoryReviewer (if revise, loops back to ComplianceRefiner) → FinalPolisher."
+}

@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategic Framework Builder",
+      "role": "builder",
+      "description": "Creates the initial comprehensive framework for geopolitically-sensitive brand communication, addressing stakeholder tensions, regional contradictions, and decision-making principles."
+    },
+    {
+      "name": "Geopolitical Context Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional geopolitical dynamics, boycott patterns, stakeholder incentives, and the structural contradictions the brand faces across markets."
+    },
+    {
+      "name": "Stakeholder Tension Resolver",
+      "role": "strategist",
+      "description": "Develops strategies for navigating conflicting demands from franchisees, employees, and regional markets while maintaining corporate coherence and brand integrity."
+    },
+    {
+      "name": "Communication Framework Refiner",
+      "role": "refiner",
+      "description": "Integrates geopolitical analysis and stakeholder strategies into the framework, resolving gaps and ensuring internal consistency across regional communication approaches."
+    },
+    {
+      "name": "Cross-Cultural Expert Reviewer",
+      "role": "expert",
+      "description": "Reviews the framework for cultural nuance, regional appropriateness, and potential unintended consequences in different geopolitical contexts."
+    },
+    {
+      "name": "Coherence Quality Gate",
+      "role": "critic",
+      "description": "Assesses whether the framework successfully balances corporate consistency with regional flexibility, identifies remaining contradictions, and evaluates practical implementability."
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "description": "Formats the final framework for executive-level presentation, ensuring clarity, actionability, and strategic readiness for implementation across the organization."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategic Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a strategic framework for a global consumer brand navigating geopolitically-driven boycotts and contradictory regional pressures. Create a comprehensive initial framework that addresses: (1) Core principles for when and how the brand takes positions vs. remains neutral; (2) Decision architecture for resolving regional contradictions; (3) Stakeholder communication strategies (franchisees, employees, consumers, investors); (4) Operational guardrails to prevent fragmentation. Produce a structured outline covering all dimensions of the problem."
+    },
+    {
+      "name": "Geopolitical Context Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the geopolitical dynamics driving consumer activism and boycotts in 2025-2026. Identify: (1) Root causes of regional contradictions (why the same action is praised/boycotted differently); (2) Stakeholder incentive structures (what franchisees, employees, and activist groups actually want); (3) Social media amplification patterns and their regional variations; (4) Long-term market risk vectors and short-term pressure points. Provide data-driven insights that will inform the strategic framework."
+    },
+    {
+      "name": "Stakeholder Tension Resolver",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop concrete strategies for managing stakeholder conflicts in the geopolitical boycott environment. Address: (1) How to handle contradictory demands from franchisees in different regions; (2) Employee engagement approaches when workforce sentiment is split regionally; (3) Public statement frameworks that allow regional variation without appearing hypocritical; (4) Escalation protocols and decision rights (who decides regional vs. global positioning); (5) Win-win scenarios where possible, trade-off frameworks where necessary. Produce actionable strategic approaches."
+    },
+    {
+      "name": "Communication Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate the builder's framework, analyst's geopolitical insights, and strategist's stakeholder solutions into a cohesive, implementable communication framework. Resolve any gaps or contradictions between elements. Ensure that: (1) Regional flexibility doesn't undermine global brand integrity; (2) Stakeholder strategies are operationally feasible; (3) Communication principles are consistently applied across regions despite different positions; (4) Decision logic is clear and can be delegated appropriately. Produce a refined, integrated framework."
+    },
+    {
+      "name": "Cross-Cultural Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the communication framework as a cross-cultural and geopolitical expert. Assess: (1) Cultural appropriateness of proposed messaging in different regions; (2) Unintended consequences or backfire risks in specific geopolitical contexts; (3) Sensitivity to local narratives and historical grievances; (4) Authenticity and credibility—will regional audiences find the framework credible or perceive it as opportunistic? Provide expert analysis of implementation risks and opportunities."
+    },
+    {
+      "name": "Coherence Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate assessing the strategic framework for geopolitically-sensitive brand communication. Evaluate: (1) Does the framework successfully balance corporate consistency with regional flexibility, or does it create new contradictions? (2) Are there gaps in how the framework addresses employee demands, franchisee concerns, and consumer activism simultaneously? (3) Is the decision architecture clear and implementable, or does it leave critical ambiguities? (4) Does the communication strategy adequately address the risk of being perceived as cynical or exploitative across regions? (5) Are there internal inconsistencies that undermine credibility? Provide a detailed assessment of strengths and weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: pass (framework is coherent and ready for polish) or revise (framework needs refinement to resolve contradictions or gaps).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the geopolitical communication framework for executive-level delivery and organizational implementation. Structure it as: (1) Executive Summary (1 page): Core principles and decision framework; (2) Stakeholder Navigation Guide: How to address franchisees, employees, and consumers with contradictory demands; (3) Regional Communication Protocols: Decision tree for when global consistency vs. regional positioning is appropriate; (4) Implementation Roadmap: Organizational changes, training, and governance needed to execute the framework; (5) Risk Mitigation: Anticipating and managing accusations of hypocrisy, opportunism, or regional favoritism. Ensure the output is clear, actionable, and ready for immediate organizational deployment."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a sophisticated framework for geopolitically-sensitive brand strategy. The execution flow is: Builder (creates initial framework) → Analyst (adds geopolitical context) → Strategist (develops stakeholder solutions) → Refiner (integrates all elements into coherent strategy) → Expert (stress-tests for cultural/geopolitical risks) → Quality Gate (if revise, loops back to Refiner to resolve contradictions; if pass, continues) → Polisher (formats for executive use). The quality gate is positioned after the expert review to catch unresolved tensions before final output. The refiner can loop once if coherence issues remain, but the framework is intentionally designed to evolve through multiple expert perspectives (analyst, strategist, expert) before refinement, reducing revision loops. This structure acknowledges that geopolitical strategy requires both analytical depth (context, stakeholder incentives) and iterative refinement to resolve inherent contradictions in the brief itself."
+}
+```

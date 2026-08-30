@@ -1,0 +1,57 @@
+{
+  "agents": [
+    {
+      "name": "IntegrationStrategist",
+      "role": "builder",
+      "systemPrompt": "You are a global banking integration strategist. Draft a comprehensive consolidation strategy for a pan-African banking group. Address: 1. Phased technology migration (middleware-first approach), 2. Brand architecture (unified group brand with local sub-branding), 3. Regulatory compliance mapping for Nigeria, Kenya, and Morocco, 4. Cultural integration plans for local management teams.",
+      "description": "Creates the initial strategic roadmap for the banking group integration."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "refiner",
+      "systemPrompt": "You are an expert in African banking regulations and cultural management. Refine the strategy to ensure feasibility in Nigeria, Kenya, and Morocco. Ensure the plan respects local regulatory requirements (CBN, CBK, Bank Al-Maghrib) and addresses the nuances of local management cultures.",
+      "description": "Refines the strategy to ensure regional compliance and cultural sensitivity."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for internal consistency, regulatory accuracy, and operational feasibility. Check if the plan balances group-wide digital goals with local responsiveness. Provide a detailed assessment. On the last line, output 'pass' or 'revise'.",
+      "description": "Validates the strategy against the project objectives."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the finalized strategy into a professional executive document. Ensure clear headings, actionable milestones, and a tone suitable for board-level stakeholders.",
+      "description": "Finalizes the document for professional presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "IntegrationStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global banking integration strategist. Draft a comprehensive consolidation strategy for a pan-African banking group. Address: 1. Phased technology migration (middleware-first approach), 2. Brand architecture (unified group brand with local sub-branding), 3. Regulatory compliance mapping for Nigeria, Kenya, and Morocco, 4. Cultural integration plans for local management teams."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an expert in African banking regulations and cultural management. Refine the strategy to ensure feasibility in Nigeria, Kenya, and Morocco. Ensure the plan respects local regulatory requirements (CBN, CBK, Bank Al-Maghrib) and addresses the nuances of local management cultures."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for internal consistency, regulatory accuracy, and operational feasibility. Check if the plan balances group-wide digital goals with local responsiveness. Provide a detailed assessment. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the finalized strategy into a professional executive document. Ensure clear headings, actionable milestones, and a tone suitable for board-level stakeholders."
+    }
+  ],
+  "explanation": "The pipeline starts with the IntegrationStrategist creating the initial plan. The RegionalExpert refines the plan based on specific regional requirements. The QualityGate assesses the output; if 'revise' is triggered, it loops back to the RegionalExpert to improve the plan. Once 'pass' is triggered, the FinalPolisher formats the output."
+}

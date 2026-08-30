@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "StrategyArchitect",
+      "role": "strategist",
+      "systemPrompt": "Develop a comprehensive global transition strategy for sovereign cloud migration. Address technical localization, customer communication, and trust-building measures for diverse geopolitical regions. Focus on mitigating churn by framing the transition as a value-add for data compliance and security.",
+      "description": "Creates the foundational strategy for the sovereign cloud transition."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Analyze the strategy for cultural sensitivity and regional trust factors. Identify potential friction points in how different global markets perceive government data access and vendor reliability. Provide specific adjustments to ensure the tone and messaging resonate across diverse legal and cultural landscapes.",
+      "description": "Reviews the strategy through the lens of global cultural and trust dynamics."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate the cultural and geopolitical feedback into the strategy. Adjust the messaging to address specific concerns about feature parity and pricing, ensuring the tone is transparent, empathetic, and professional.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy for clarity, strategic alignment, and cultural appropriateness. Ensure the plan effectively addresses the prompt's requirements for minimizing churn and communicating change. Provide a full assessment. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Validates the quality and completeness of the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure consistent terminology and clear structure for global stakeholders.",
+      "description": "Finalizes the document for output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyArchitect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive global transition strategy for sovereign cloud migration. Address technical localization, customer communication, and trust-building measures for diverse geopolitical regions. Focus on mitigating churn by framing the transition as a value-add for data compliance and security."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Analyze the strategy for cultural sensitivity and regional trust factors. Identify potential friction points in how different global markets perceive government data access and vendor reliability. Provide specific adjustments to ensure the tone and messaging resonate across diverse legal and cultural landscapes."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate the cultural and geopolitical feedback into the strategy. Adjust the messaging to address specific concerns about feature parity and pricing, ensuring the tone is transparent, empathetic, and professional."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy for clarity, strategic alignment, and cultural appropriateness. Ensure the plan effectively addresses the prompt's requirements for minimizing churn and communicating change. Provide a full assessment. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure consistent terminology and clear structure for global stakeholders."
+    }
+  ],
+  "explanation": "The pipeline begins with the StrategyArchitect drafting the core transition plan. This draft is reviewed by the CulturalExpert to ensure regional nuances are captured. The ContentRefiner then integrates these insights. The QualityGate assesses the output; if it fails, it routes back to the ContentRefiner to address specific gaps. Once passed, the FinalPolisher formats the document for executive distribution."
+}

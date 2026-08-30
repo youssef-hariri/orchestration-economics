@@ -1,0 +1,76 @@
+{
+  "agents": [
+    {
+      "name": "Market Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a global pricing strategist at a major streaming service. Draft a comprehensive, localized subscription pricing and business model strategy for 2026. The company is shifting from uniform USD pricing to localized models across African, South Asian, and Latin American growth markets. Your draft must include: (1) region-specific pricing tiers grounded in purchasing power parity, (2) preferred local payment rail integration (mobile money, QR codes, installments), (3) household and family-sharing policies tailored to local norms, (4) billing cadence and recurring payment adaptations to reduce churn, (5) a methodology for consolidating local-currency revenue into USD headquarters reporting, and (6) an investor-defensible unit economics framework showing LTV/CAC, net revenue retention, and FX risk mitigation. Produce a detailed, actionable initial strategy document.",
+      "description": "Creates the initial localized pricing and business model strategy draft covering all three regions, payment rails, sharing norms, and USD consolidation."
+    },
+    {
+      "name": "Regional Economics Expert",
+      "role": "expert",
+      "systemPrompt": "You are an emerging markets economist and payments infrastructure expert specializing in Africa, South Asia, and Latin America. Review the preceding strategy draft carefully. Evaluate: regional pricing realism relative to median incomes; accuracy of payment rail preferences and operational feasibility; cultural appropriateness of family-sharing proposals; billing friction and churn risk; and the soundness of USD consolidation and unit economics assumptions. Provide a structured critique with specific gaps, risks, and concrete recommendations. Do not rewrite the full strategy; focus on expert feedback.",
+      "description": "Provides domain-specific critique on regional accuracy, payment feasibility, cultural norms, and economic assumptions."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a senior strategy refiner. Using the expert critique provided in the previous step, reconstruct and improve the full localized pricing strategy. Incorporate all feedback to strengthen regional accuracy, payment integration, household-sharing mechanics, billing approaches, and consolidated USD unit economics. Output a complete, stand-alone strategy document that addresses every critique raised.",
+      "description": "Integrates expert feedback into a revised, complete strategy document with strengthened unit economics and regional detail."
+    },
+    {
+      "name": "Unit Economics Critic",
+      "role": "critic",
+      "systemPrompt": "You are a senior financial critic and venture capital advisor reviewing a localized subscription pricing strategy. Conduct a rigorous assessment of: (A) whether consolidated USD unit economics are clearly modeled, realistic, and defensible to investors; (B) whether pricing and packaging for Africa, South Asia, and Latin America are internally consistent and market-appropriate; (C) whether payment rail and installment strategies are operationally feasible and margin-accretive; (D) whether family-sharing and billing norms are handled without undermining ARPU; and (E) whether FX risk, revenue recognition, and reporting to HQ are properly addressed. Provide a FULL detailed assessment of strengths and weaknesses, citing specific issues. Then on the VERY LAST LINE output exactly ONE keyword: 'retry' if material improvements are needed, or 'pass' if the strategy is ready for final board presentation.",
+      "description": "Evaluates investor-defensibility and operational feasibility, routing back for revision if standards are not met."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications polisher. Format the finalized strategy into a polished, board-ready document. Include: an Executive Summary; Regional Playbooks (Africa, South Asia, Latin America) with pricing, payment rails, sharing policies, and billing cadence; a USD Consolidation & Reporting Framework; Investor-Defensible Unit Economics; Risk Mitigation; and Implementation Roadmap. Use professional business language, clear headings, bullet points, and a cohesive narrative suitable for C-suite and investor audiences.",
+      "description": "Produces the final, formatted, user-facing board-ready strategy document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global pricing strategist at a major streaming service. Draft a comprehensive, localized subscription pricing and business model strategy for 2026. The company is shifting from uniform USD pricing to localized models across African, South Asian, and Latin American growth markets. Your draft must include: (1) region-specific pricing tiers grounded in purchasing power parity, (2) preferred local payment rail integration (mobile money, QR codes, installments), (3) household and family-sharing policies tailored to local norms, (4) billing cadence and recurring payment adaptations to reduce churn, (5) a methodology for consolidating local-currency revenue into USD headquarters reporting, and (6) an investor-defensible unit economics framework showing LTV/CAC, net revenue retention, and FX risk mitigation. Produce a detailed, actionable initial strategy document."
+    },
+    {
+      "name": "Regional Economics Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an emerging markets economist and payments infrastructure expert specializing in Africa, South Asia, and Latin America. Review the preceding strategy draft carefully. Evaluate: regional pricing realism relative to median incomes; accuracy of payment rail preferences and operational feasibility; cultural appropriateness of family-sharing proposals; billing friction and churn risk; and the soundness of USD consolidation and unit economics assumptions. Provide a structured critique with specific gaps, risks, and concrete recommendations. Do not rewrite the full strategy; focus on expert feedback."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a senior strategy refiner. Using the expert critique provided in the previous step, reconstruct and improve the full localized pricing strategy. Incorporate all feedback to strengthen regional accuracy, payment integration, household-sharing mechanics, billing approaches, and consolidated USD unit economics. Output a complete, stand-alone strategy document that addresses every critique raised."
+    },
+    {
+      "name": "Unit Economics Critic",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a senior financial critic and venture capital advisor reviewing a localized subscription pricing strategy. Conduct a rigorous assessment of: (A) whether consolidated USD unit economics are clearly modeled, realistic, and defensible to investors; (B) whether pricing and packaging for Africa, South Asia, and Latin America are internally consistent and market-appropriate; (C) whether payment rail and installment strategies are operationally feasible and margin-accretive; (D) whether family-sharing and billing norms are handled without undermining ARPU; and (E) whether FX risk, revenue recognition, and reporting to HQ are properly addressed. Provide a FULL detailed assessment of strengths and weaknesses, citing specific issues. Then on the VERY LAST LINE output exactly ONE keyword: 'retry' if material improvements are needed, or 'pass' if the strategy is ready for final board presentation.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "whileMappings": {
+        "retry": 3,
+        "pass": 5
+      },
+      "iterationMax": 3
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications polisher. Format the finalized strategy into a polished, board-ready document. Include: an Executive Summary; Regional Playbooks (Africa, South Asia, Latin America) with pricing, payment rails, sharing policies, and billing cadence; a USD Consolidation & Reporting Framework; Investor-Defensible Unit Economics; Risk Mitigation; and Implementation Roadmap. Use professional business language, clear headings, bullet points, and a cohesive narrative suitable for C-suite and investor audiences."
+    }
+  ],
+  "explanation": "The pipeline starts with the Market Strategy Builder to generate a comprehensive initial draft. The Regional Economics Expert then reviews it for regional accuracy, payment feasibility, and cultural fit, providing structured critique. The Strategy Refiner incorporates this feedback into a revised, full-document draft. Next, the Unit Economics Critic evaluates the refined strategy in a while loop (maximum 3 iterations); if it outputs 'retry', the pipeline routes back to the Strategy Refiner for further improvements. Once the critic outputs 'pass', the Executive Polisher produces the final investor-ready board document."
+}

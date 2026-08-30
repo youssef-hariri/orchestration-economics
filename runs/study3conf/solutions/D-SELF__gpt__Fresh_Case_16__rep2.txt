@@ -1,0 +1,380 @@
+# Product-Adaptation Strategy: Japan, Korea, Thailand, and Gulf Markets
+
+## 1. Strategic position
+
+Launch the assistant as a **predictable, household-governed appliance**, not an autonomous social agent.
+
+The product should:
+
+- use locally validated polite registers without inferring status;
+- understand direct, indirect, elliptical, and code-switched speech;
+- support multiple administrators and delegated permissions;
+- make microphone, recording, camera, and access states visible and controllable;
+- provide app, text, and physical alternatives to voice;
+- protect guests, children, caregivers, domestic workers, and older adults;
+- launch by country and documented language coverage, not by broad regional assumptions.
+
+**Positioning:**  
+*A respectful assistant that helps when asked, shows when it is listening, retains personal content only with explicit user choice where feasible, and explains limited operational or security records.*
+
+---
+
+## 2. Interaction style
+
+### Language-specific defaults
+
+“Respectful” should not be a single global mode. Configure response register, formality, verbosity, address terms, voice presentation, and permissions separately.
+
+| Market | Initial interaction approach | Avoid |
+|---|---|---|
+| Japan | Natural standard polite Japanese; concise, restrained responses | Constant keigo, repetitive apologies, artificial deference |
+| Korea | Locally validated everyday polite register, with per-user speech-level settings | Inferring banmal, age, or hierarchy from voice |
+| Thailand | Locally validated Thai register; independently configurable wording, particles, pronouns, address terms, and voice | Automatic gendered particles or kinship terms |
+| Gulf markets | Country-specific Arabic input and validated output registers, plus English | Treating Gulf Arabic as one language or using formal MSA for every exchange |
+
+If a name, title, honorific, or gendered form is uncertain, use a neutral acknowledgment rather than guessing.
+
+### Natural requests and code-switching
+
+The assistant should recognize:
+
+- direct commands and polite requests;
+- indirect hints and household shorthand;
+- mixed Japanese-English, Korean-English, Thai-English, and Arabic-English speech;
+- local-language grammar containing English brand or device names;
+- custom names for rooms, appliances, family members, and media.
+
+Contextual phrases such as “It’s dark in here” should trigger an action only when an explicitly enabled household routine supports it. Otherwise, ask for confirmation.
+
+### Confirmation and error recovery
+
+Keep responses short and socially neutral:
+
+- “Living-room lights are on.”
+- “Bedroom or guest-room light?”
+- “I didn’t catch that. Please say the room and action.”
+- “This requires confirmation on your phone.”
+
+Do not blame users, use unconfigured familial titles, or switch languages merely because recognition confidence falls. In shared or multi-speaker settings, use the household default and do not disclose personal information.
+
+### Non-voice controls
+
+Treat non-voice operation as a core product mode:
+
+- push-to-talk;
+- physical action buttons;
+- app and text control;
+- display controls;
+- remote switches;
+- captions and transcripts;
+- private phone confirmations;
+- adjustable speech speed, volume, and verbosity.
+
+---
+
+## 3. Household roles and permissions
+
+### Role model
+
+Replace the single “owner” model with separate, scoped roles:
+
+- **Device administrator:** device configuration;
+- **Household privacy administrator:** shared privacy settings;
+- **Personal-data controller:** individual profile and personal content;
+- **Integration administrator:** connected appliances and services;
+- **Resident, guest, caregiver, worker, or child:** task-specific access;
+- **Installer/support role:** temporary technical access only.
+
+Do not infer authority from age, gender, voice, property ownership, or purchase history.
+
+### Permission model
+
+| Capability | Initial policy |
+|---|---|
+| Lights, weather, music, temporary playback volume | Residents and guests |
+| Persistent timers, routines, or account changes | Resident authorization |
+| Heating, cooling, fans, appliances | Residents, subject to household limits |
+| Family reminders and announcements | Authorized residents |
+| Personal calendars and messages | Matched user or personal device |
+| Cameras, intercom, and presence data | Explicitly authorized users |
+| Locks, garages, alarms, purchases | Verified user plus step-up authentication |
+| Medication reminders | Configured resident or caregiver |
+| Health-status disclosure | Affected person and explicitly authorized caregiver |
+| Emergency contact workflow | Separately configured and country-approved |
+
+Voice matching may personalize responses but must not authorize high-risk actions alone. Require a PIN, phone confirmation, or physical confirmation for locks, alarms, cameras, purchases, private messages, health information, and administrator changes.
+
+### Spaces and privacy
+
+Support shared and private zones, including bedrooms, guest rooms, children’s rooms, offices, prayer or meditation spaces, and staff areas. Configure recording, personalization, announcements, cameras, intercoms, presence monitoring, and quiet periods by zone.
+
+Permission precedence:
+
+1. Physical microphone and camera controls override software.
+2. Local privacy states cannot be overridden remotely.
+3. Individual private-data restrictions override household announcement defaults.
+4. The most restrictive applicable room rule applies.
+5. High-risk actions require the strongest applicable authorization.
+6. Conflicts fail closed, are minimally logged, and are explained to relevant users.
+
+Administrators may not recreate another person’s deleted voice profile or override personal privacy controls without that person’s explicit choice where feasible.
+
+### Secondary users
+
+- **Guests:** temporary low-risk control, no account or persistent voice profile.
+- **Workers and caregivers:** task-specific access, language-understood onboarding, non-voice alternatives, no automatic profiling.
+- **Children:** no voice-only purchases, locks, cameras, account changes, or private-message access.
+- **Older adults:** adjustable speed, captions, tactile controls, repetition, and adult-respectful wording.
+
+Care features must be opt-in, visible to the monitored person, pausable, and logged. Distinguish reminders, household alerts, personal emergency contacts, and external emergency-service contact; do not present one as another.
+
+---
+
+## 4. Privacy signaling and data controls
+
+### Hardware requirements
+
+Every newly designed voice-enabled device should include an independently tested, hardware-enforced microphone disconnect that prevents usable audio capture and resists software override. Devices without technically equivalent protection should not be marketed with equivalent privacy claims.
+
+Provide:
+
+- prominent microphone-off indication;
+- distinct device states for microphone power, active capture, calling/intercom, and camera activity;
+- audible or tactile confirmation;
+- physical camera shutter where applicable;
+- indicators visible from common viewing angles;
+- privacy controls that work offline.
+
+Device indicators should show only states the device can technically observe. Transmission, retention, and deletion status belong in the dashboard.
+
+### First-run trust flow
+
+Before enabling the microphone:
+
+1. Explain local processing, cloud processing, temporary capture, recording, transcripts, and retention.
+2. Demonstrate physical privacy controls.
+3. Configure administrators, users, and room permissions.
+4. Offer voice profiles and personalization as separate choices.
+5. Demonstrate deletion and privacy-status checks.
+6. Start with a low-risk task.
+7. Provide local-language visual and printed instructions.
+
+Setup must be completable without voice input. Preserve privacy state across reboot and network changes. Material changes to data handling, permissions, or voice behavior require local-language notices and rollback capability.
+
+### Data lifecycle
+
+| Data type | Default treatment |
+|---|---|
+| Wake-word and command audio | Process locally where feasible; no persistent audio retention by default |
+| Temporary buffers and diagnostics | Disclose purpose, maximum retention, access, and disablement options |
+| Transcripts | Create and retain only for an enabled feature |
+| Voice profiles or embeddings | Not created unless separately enrolled |
+| Action metadata | Minimized and retained only for operation, security, and user visibility |
+| Household, room, care, and religious settings | Sensitive; restricted and excluded from unnecessary analytics |
+| Presence and inferred preferences | Not created without an explicitly enabled feature |
+| Access logs | Purpose-limited, tamper-evident, and retained for a stated period |
+| Backups and support records | Retention, access, and deletion scope disclosed |
+
+Provide separate controls for recordings, transcripts, profiles, history, logs, and service-improvement sharing. Personal audio use for service improvement must be opt-in.
+
+When the microphone is off, deletion remains available through the app, display, or physical controls—not by voice.
+
+### Dashboard, export, and lifecycle
+
+Provide separate administrator, personal-data, security, and guest views. Protect personal content through authentication, redaction, and role-based visibility.
+
+Support:
+
+- household join, departure, and separation;
+- administrator succession;
+- recovery and forgotten credentials;
+- factory reset;
+- transfer, resale, and refurbishment;
+- cloud-data deletion;
+- scoped, human-readable data export.
+
+Exports must distinguish personal, shared, operational, and security data and redact third-party content where necessary.
+
+---
+
+## 5. Country-specific adaptation
+
+### Japan
+
+**Priorities**
+
+- standard polite Japanese with indirect-request recognition;
+- Japanese-English code-switching;
+- older-adult accessibility;
+- appliance and energy management;
+- quiet modes and discreet notifications;
+- reliable disaster information;
+- strong physical privacy controls.
+
+Disaster information should identify source, timestamp, geographic scope, and whether it is an official alert or general information.
+
+### Korea
+
+**Priorities**
+
+- everyday polite Korean with per-user speech-level settings;
+- accurate sentence endings and honorific morphology;
+- Korean-English code-switching;
+- apartment, heating, delivery, and intercom integrations;
+- fast, concise task completion;
+- strong personal-versus-shared data boundaries.
+
+Delivery and intercom information should not reveal household presence or visitor details by default.
+
+### Thailand
+
+**Priorities**
+
+- locally validated Thai register;
+- independent controls for particles, pronouns, address terms, and voice;
+- Thai-English and regional speech coverage;
+- climate control, fans, lighting, and appliances;
+- visual onboarding;
+- guest and worker privacy.
+
+Research household use of regional and minority languages. Where full-language voice support is unavailable, provide equivalent privacy explanations and non-voice controls.
+
+### Gulf markets
+
+Treat Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, and Oman as separate launches.
+
+For each country, publish:
+
+- Arabic input variants;
+- validated output registers;
+- English capabilities;
+- prioritized additional household languages;
+- code-switching combinations;
+- unsupported cases and fallback behavior.
+
+**Priorities**
+
+- climate and energy management;
+- secure home access;
+- guest and staff permissions;
+- multigenerational coordination;
+- private notifications;
+- RTL interfaces;
+- country-specific support and integrations.
+
+Do not infer religion, sect, nationality, gender, or household authority. Prayer, religious calendars, quiet periods, and related routines must be opt-in. Staff and expatriate users must receive materially equivalent privacy protections, support, and non-voice alternatives.
+
+---
+
+## 6. Feature prioritization
+
+### Platform foundation
+
+- hardware privacy control;
+- low-risk local operation;
+- app, text, and physical fallback;
+- multiple administrators;
+- guest mode;
+- data lifecycle, reset, transfer, and export;
+- local-language privacy onboarding;
+- staged updates and rollback.
+
+Basic profiles must work without voice enrollment.
+
+### Country launch minimum
+
+- documented language and dialect coverage;
+- code-switching for supported combinations;
+- local-language onboarding and support;
+- lighting, climate, appliance, timer, weather, and media control;
+- limited, tested integrations;
+- clear local, hybrid, and cloud behavior;
+- country readiness approval.
+
+### Sensitive-feature gate
+
+Before cameras, care monitoring, private messages, purchases, locks, alarms, room monitoring, or remote administration:
+
+- complete permission and privacy-zone model;
+- step-up authentication;
+- personal-device confirmation;
+- purpose-limited access logs;
+- camera shutters;
+- care consent and alert specifications;
+- emergency behavior and accessibility validation;
+- threat-model testing;
+- transfer, reset, and recovery validation;
+- trained local-language support.
+
+Defer emotion inference, continuous presence detection, proactive surveillance, autonomous security actions, automated purchasing, and sensitive health inference.
+
+---
+
+## 7. Launch sequencing and validation
+
+### Sequencing
+
+Use readiness scoring rather than a fixed cultural ranking. Each market must pass gates for:
+
+- documented language quality;
+- privacy and security;
+- hardware;
+- integrations;
+- support and installer capability;
+- processing architecture;
+- product certification and disclosures;
+- speech-data governance;
+- residual-risk acceptance.
+
+Begin with controlled pilots of low-risk features, then expand by country. Sensitive features should be enabled only after separate safety approval.
+
+### Validation program
+
+Test in homes with:
+
+- multigenerational and single-generation households;
+- older adults and children;
+- diverse speech and accessibility needs;
+- multilingual and expatriate users;
+- guests, caregivers, and domestic workers;
+- users who avoid speaking aloud;
+- private and shared rooms;
+- offline and degraded conditions;
+- administrator conflict and household-separation scenarios.
+
+Human linguistic reviewers must approve every supported register, address convention, and major error-recovery flow. Updates require regression testing and rollback capability.
+
+---
+
+## 8. Success measures and governance
+
+### Core metrics
+
+- task completion by language, dialect, age, voice subgroup, and household role;
+- false activation, missed wake detection, wrong attribution, and wrong-action rates;
+- error-recovery success;
+- microphone-state comprehension;
+- deletion, reset, export, and recovery success;
+- sensitive-disclosure and unauthorized-access incidents;
+- privacy-driven feature abandonment;
+- perceived dignity, control, and comfort;
+- secondary-user, older-adult, guest, caregiver, and worker adoption;
+- support resolution time.
+
+Measure aggregate performance and subgroup disparities with documented sample sizes, confidence methods, environmental coverage, and residual-risk ownership.
+
+### Governance
+
+| Decision | Accountable function |
+|---|---|
+| Registers, dialects, address terms | Local language and linguistic quality |
+| Privacy and retention | Privacy and product security |
+| High-risk and emergency behavior | Safety, security, and compliance |
+| Accessibility | Accessibility and user research |
+| Hardware privacy controls | Hardware and engineering |
+| Support and redress | Regional operations |
+| Market launch | Cross-functional readiness committee |
+
+Critical defects—including sensitive disclosure, silent microphone activation, unauthorized camera or lock access, or represented-but-unavailable deletion—block launch. Exceptions require independent privacy, safety, security, and compliance review, a fixed expiry, documented user impact, monitoring, and rollback.
+
+Applicable privacy, recording, child-safety, employment, consumer-protection, accessibility, data-processing, emergency-service, advertising, and product-certification obligations must be confirmed separately by qualified local counsel and compliance teams. This strategy defines product-risk and trust requirements, not legal conclusions.

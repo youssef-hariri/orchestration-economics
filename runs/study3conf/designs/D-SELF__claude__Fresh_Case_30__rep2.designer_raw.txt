@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cold-Chain Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive cold-chain distribution strategy covering equipment selection, corridor sequencing, and risk assessment across West and East African routes"
+    },
+    {
+      "name": "Infrastructure & Logistics Analyst",
+      "role": "analyst",
+      "description": "Analyzes corridor-specific data: road quality metrics, customs dwell times, electricity reliability, seasonal weather patterns, and last-mile ministry partnerships to quantify constraint severity"
+    },
+    {
+      "name": "Cold-Chain Expert",
+      "role": "expert",
+      "description": "Provides domain expertise on passive vs. powered cooling container specifications, temperature stability requirements, vaccine spoilage thresholds, and equipment cost-benefit trade-offs for each corridor type"
+    },
+    {
+      "name": "Contingency Strategist",
+      "role": "strategist",
+      "description": "Develops detailed contingency protocols for spoilage risk, including backup routing, emergency refrigeration access, corridor prioritization during supply constraints, and recovery procedures"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates analyst findings, expert recommendations, and contingency protocols into cohesive, implementable strategy with clear corridor sequencing and equipment assignments"
+    },
+    {
+      "name": "Feasibility Critic",
+      "role": "critic",
+      "description": "Conducts rigorous review of refined strategy: validates cost-benefit decisions, identifies infrastructure gaps, assesses institutional coordination realism, and flags implementation risks"
+    },
+    {
+      "name": "Implementation Polisher",
+      "role": "polisher",
+      "description": "Formats final deliverable with executive summary, corridor-by-corridor playbooks, equipment matrices, timeline, contingency decision trees, and stakeholder communication templates"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cold-Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a cold-chain vaccine distribution strategy for a pharmaceutical logistics firm operating across West and East African corridors in 2026. Create an initial comprehensive strategy that: (1) identifies major corridor clusters and their infrastructure profiles; (2) outlines preliminary equipment choices (passive vs. powered containers); (3) proposes a rough sequencing approach based on infrastructure readiness; (4) flags key spoilage risks and uncertainty areas. Your output should be structured, detailed, and ready for specialist analysis and refinement."
+    },
+    {
+      "name": "Infrastructure & Logistics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a logistics data analyst specializing in African pharmaceutical supply chains. Analyze the builder's strategy and produce a detailed quantitative assessment covering: (1) road quality scorecards by corridor (pavement condition, traffic patterns, seasonal impassability); (2) customs dwell time benchmarks (by border crossing, seasonal variation); (3) electricity grid reliability metrics (uptime %, backup infrastructure prevalence); (4) seasonal weather windows (rainfall, temperature extremes) affecting vaccine stability; (5) ministry of health partnership maturity (last-mile capability, cold storage at distribution points). Provide data-driven rankings and constraint severity ratings that will inform equipment and sequencing decisions."
+    },
+    {
+      "name": "Cold-Chain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cold-chain logistics expert with deep knowledge of vaccine distribution in resource-constrained settings. Review the builder's strategy and analyst's infrastructure assessment. Provide authoritative technical recommendations on: (1) passive cooling container suitability (ice-packs, insulation specs, duration) by corridor infrastructure profile; (2) powered unit justification (solar, battery-backed, generator-hybrid options) with cost-benefit analysis; (3) vaccine stability thresholds and spoilage timelines for each corridor's temperature/humidity profile; (4) equipment redundancy and maintenance support requirements. Identify which corridors justify powered units vs. passive solutions based on infrastructure data, and flag any technical gaps in the builder's initial approach."
+    },
+    {
+      "name": "Contingency Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain resilience strategist. Building on the builder's initial plan, analyst's infrastructure data, and expert's equipment recommendations, develop comprehensive contingency protocols for: (1) spoilage risk scenarios (power failure, customs delays, road damage, supply bottlenecks); (2) alternate routing options per corridor with cost/time trade-offs; (3) emergency access to refrigeration (partner facilities, mobile units, ministry depots); (4) corridor prioritization hierarchy during equipment or capacity constraints; (5) recovery and damage assessment procedures. Output should include decision matrices, trigger points for activation, and resource allocation rules for contingency scenarios."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy integration specialist. Synthesize the builder's framework, analyst's infrastructure findings, expert's technical recommendations, and strategist's contingency protocols into a single cohesive, implementable cold-chain distribution strategy. Your output must: (1) assign specific equipment types (passive/powered) to each corridor cluster with technical justification; (2) sequence corridor deployment based on infrastructure readiness and risk profile; (3) clarify ministry of health coordination requirements and last-mile arrangements; (4) embed contingency triggers and recovery procedures into the core strategy; (5) present timeline and resource allocation. Ensure internal consistency, eliminate contradictions, and produce a strategy ready for feasibility review."
+    },
+    {
+      "name": "Feasibility Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical feasibility reviewer. Examine the refined cold-chain distribution strategy across these dimensions: (1) Cost Realism — do equipment and logistics costs align with pharmaceutical logistics budgets? Are there hidden expense categories? (2) Infrastructure Alignment — does the strategy realistically account for actual road, customs, and electricity constraints, or does it overestimate capability? (3) Institutional Coordination — are ministry of health partnerships and last-mile arrangements feasible given real relationship maturity in target countries? (4) Contingency Viability — are backup routes, emergency cooling access, and spoilage protocols operationally realistic? (5) Risk Mitigation — does the strategy adequately protect vaccine integrity, or are residual spoilage risks unacceptably high? Provide a comprehensive assessment with specific strengths and weaknesses. On the VERY LAST LINE, output exactly one keyword: pass (strategy is feasible and ready for polishing) or revise (strategy requires substantial refinement before finalization).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Implementation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are preparing the final, deliverable cold-chain distribution strategy for executive and operational stakeholder review. Polish the approved strategy into a professional implementation document including: (1) Executive Summary (1-2 pages) — key corridors, equipment allocation, timeline, spoilage risk mitigation; (2) Corridor-by-Corridor Playbooks — for each major cluster, detail infrastructure constraints, equipment specs, customs procedures, ministry partnerships, seasonal adjustments; (3) Equipment Selection Matrix — passive vs. powered by corridor with cost, maintenance, and performance trade-offs; (4) Deployment Timeline — phased rollout with milestones and contingency activation triggers; (5) Contingency Decision Trees — visual guides for spoilage risk scenarios and response protocols; (6) Stakeholder Communication Templates — ministry of health briefings, supplier coordination, customs authority liaison language. Format for immediate operationalization by field teams and partner organizations."
+    }
+  ],
+  "explanation": "This 7-step pipeline delivers a comprehensive, defensible cold-chain distribution strategy optimized for African pharmaceutical logistics constraints. The design follows a structured specialist workflow: (1) Builder creates an initial strategic framework; (2) Analyst supplies quantitative infrastructure data to ground decisions in reality; (3) Expert provides technical cold-chain guidance aligned with corridor profiles; (4) Strategist develops contingency protocols for spoilage and supply risks; (5) Refiner synthesizes all inputs into a unified, implementable strategy; (6) Feasibility Critic applies rigorous review with a single-pass if-gate — if feasibility concerns are substantial, output routes back to Refiner for correction; if approved, proceeds to final delivery; (7) Polisher formats for stakeholder communication and field operations. The pipeline avoids premature quality gates (no gate before Builder or Analyst output), uses a single if-gate at the appropriate assessment point (post-Refiner), and terminates with user-facing deliverables. Execution flow: Builder → Analyst → Expert → Strategist → Refiner → Feasibility Critic (if revise, loops back to Refiner; if pass, continues) → Polisher."
+}
+```

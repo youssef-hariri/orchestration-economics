@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Regional Compliance & Operations Builder",
+      "role": "builder",
+      "description": "Drafts initial cross-border payment corridor strategy covering licensing regimes, KYC requirements, settlement currencies, capital controls, margin analysis, and partner integration across EU, Gulf, Southeast Asia, and Latin America"
+    },
+    {
+      "name": "Financial & Regulatory Expert",
+      "role": "expert",
+      "description": "Reviews draft strategy for regulatory gaps, licensing conflicts, settlement-currency arbitrage risks, and compliance cost accuracy across regional blocs"
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "description": "Incorporates expert feedback to strengthen corridor viability, optimize compliance pathways, improve partner economics, and resolve regional conflicts in the strategy"
+    },
+    {
+      "name": "Operational Feasibility Critic",
+      "role": "critic",
+      "description": "Conducts detailed assessment of refined strategy: validates technical maturity alignment with partners, stress-tests settlement-risk assumptions, confirms margin-profitability across corridors, identifies remaining operational gaps. Outputs pass/revise decision on last line."
+    },
+    {
+      "name": "Corridor Economics & Risk Analyst",
+      "role": "analyst",
+      "description": "Analyzes financial trade-offs: quantifies compliance costs per corridor, models capital-control impact on settlement timelines, benchmarks partner technical capability against corridor requirements, produces data-driven risk rankings"
+    },
+    {
+      "name": "Implementation Roadmap Strategist",
+      "role": "strategist",
+      "description": "Develops phased expansion plan: prioritizes corridors by margin-to-compliance-cost ratio, sequences partner upgrades, schedules licensing milestones, and outlines contingency measures for capital-control changes"
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "description": "Consolidates builder output, expert review, operational critique, financial analysis, and roadmap into cohesive, executive-ready financial-operations strategy document with clear decision frameworks"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Compliance & Operations Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a financial operations strategist. Draft a comprehensive cross-border payment corridor strategy for a mid-size payments firm operating in 2026. Address: (1) licensing and KYC requirements per regional bloc (EU, Gulf, Southeast Asia, Latin America), (2) settlement-currency options and capital-control constraints per corridor, (3) margin profiles and profitability drivers by corridor, (4) local banking partner technical maturity assessment, (5) compliance cost estimation per region, (6) settlement and liquidity risk factors. Produce a structured draft covering current-state assessment, corridor-by-corridor analysis, and initial strategic recommendations."
+    },
+    {
+      "name": "Financial & Regulatory Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a financial regulatory and settlement expert specializing in cross-border payments. Review the draft strategy and provide expert critique on: (1) licensing compliance gaps or conflicts across blocs, (2) KYC/AML cost-benefit trade-offs per corridor, (3) settlement-currency adequacy and FX-hedging implications, (4) capital-control impact on liquidity and working capital, (5) partner banking-relationship risks, (6) regulatory change scenarios for 2026. Identify critical vulnerabilities and provide corrections to strengthen compliance and operational resilience."
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Take the draft strategy and expert feedback. Revise the strategy to: (1) eliminate regulatory conflicts and licensing gaps, (2) integrate capital-control mitigation measures, (3) optimize KYC/compliance cost allocation per corridor, (4) strengthen partner technical capability alignment, (5) improve margin-to-cost ratios through corridor prioritization, (6) add contingency pathways for regulatory shifts. Produce a refined, operationally sound strategy ready for feasibility testing."
+    },
+    {
+      "name": "Operational Feasibility Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are an operational feasibility gate. Assess the refined strategy against: (1) realistic technical maturity of local banking partners per region, (2) settlement-risk assumptions (concentration, counterparty, liquidity), (3) compliance-cost estimates vs. industry benchmarks, (4) margin sustainability under capital controls, (5) scalability of KYC/monitoring systems, (6) partner onboarding timelines and dependencies. Provide FULL detailed assessment — identify any remaining operational blockers, unrealistic assumptions, or unresolved conflicts. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Corridor Economics & Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst. Analyze the operational strategy using quantitative frameworks: (1) Calculate compliance-cost-to-margin ratio per corridor and rank by attractiveness, (2) Model settlement-time and liquidity-impact under capital controls, (3) Benchmark partner technical capability maturity levels (1-5 scale) and match against corridor complexity, (4) Stress-test margin sustainability under FX volatility and regulatory cost escalation, (5) Rank corridors by risk-adjusted return and strategic priority. Produce numerical trade-off matrices, risk rankings, and data-driven recommendations for corridor sequencing and partner investment."
+    },
+    {
+      "name": "Implementation Roadmap Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an implementation strategist. Using the operational strategy and financial analysis, develop a phased expansion roadmap: (1) Sequence corridors by compliance-to-margin ratio and strategic importance (Phase 1: high-margin, lower-compliance corridors; Phase 2: high-compliance, growth-potential corridors), (2) Schedule KYC/licensing approvals per regional timeline, (3) Plan partner technical upgrades and capability-building milestones, (4) Define capital-control contingencies and trigger points, (5) Set settlement-liquidity management checkpoints, (6) Outline governance, monitoring, and quarterly review gates. Produce a 12-24 month roadmap with clear dependencies, resource allocation, and risk gates."
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final output polisher. Consolidate all prior analysis — strategy, expert review, operational feasibility, financial analysis, and roadmap — into a single, cohesive, executive-ready Financial Operations Strategy document. Structure as: (1) Executive Summary (key trade-offs and recommendations), (2) Regional Compliance & Licensing Framework, (3) Corridor Analysis (EU-Gulf, EU-SE Asia, EU-LatAm, Gulf-SE Asia, Gulf-LatAm, SE Asia-LatAm with margin, risk, compliance profiles), (4) Partner Economics & Technical Alignment, (5) Capital-Control & Settlement Risk Mitigation, (6) Phased Expansion Roadmap with milestones, (7) Decision Framework & Contingencies. Format with tables, decision trees, and clear risk/margin matrices. Ensure all recommendations are data-backed and operationally actionable."
+    }
+  ],
+  "explanation": "This pipeline is designed to transform a complex, multi-regional payments strategy challenge into an actionable financial-operations plan. The flow is: (1) Builder creates a comprehensive initial assessment across all regions and corridors. (2) Expert provides regulatory and settlement validation, catching compliance gaps early. (3) Refiner integrates expert feedback and strengthens the strategy operationally. (4) Operational Feasibility Critic applies a rigorous gate (if/revise loop, max 3 iterations) to stress-test assumptions against partner maturity, settlement risk, and margin realism—this loop ensures strategy soundness before financial analysis. (5) Analyst quantifies trade-offs, cost-to-margin ratios, and risk rankings to enable prioritization. (6) Strategist sequences the roadmap using data-driven corridor rankings and compliance timelines. (7) Polisher synthesizes all outputs into an executive document with decision frameworks and contingencies. The if/revise gate after step 3 ensures operational feasibility is validated before heavy financial modeling, preventing wasted analysis on unrealistic plans. The pipeline balances compliance rigor, economic optimization, and implementation pragmatism."
+}
+```

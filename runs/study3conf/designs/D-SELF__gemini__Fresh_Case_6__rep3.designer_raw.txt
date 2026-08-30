@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "StrategyArchitect",
+      "role": "strategist",
+      "systemPrompt": "Develop a comprehensive transition strategy for sovereign cloud migration. Address technical localization, customer communication, and trust-building measures tailored to diverse regional procurement lenses and cultural expectations regarding data privacy.",
+      "description": "Drafts the core migration and communication strategy."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy through the lens of specific regional data-sovereignty laws and cultural trust factors. Identify gaps in messaging or technical approach that might trigger churn in specific markets.",
+      "description": "Provides domain-specific critique on regional nuances."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate the expert's feedback to adjust the strategy. Ensure the tone is empathetic to concerns about feature delays and price increases while emphasizing the benefits of local control.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for clarity, cultural sensitivity, and risk mitigation effectiveness. Provide a full assessment of whether the plan effectively addresses the diverse customer concerns. On the last line, output 'pass' or 'revise'.",
+      "description": "Validates the strategy against the objective."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, actionable document ready for executive implementation, ensuring consistent tone and professional structure.",
+      "description": "Finalizes the output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive transition strategy for sovereign cloud migration. Address technical localization, customer communication, and trust-building measures tailored to diverse regional procurement lenses and cultural expectations regarding data privacy."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy through the lens of specific regional data-sovereignty laws and cultural trust factors. Identify gaps in messaging or technical approach that might trigger churn in specific markets."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate the expert's feedback to adjust the strategy. Ensure the tone is empathetic to concerns about feature delays and price increases while emphasizing the benefits of local control."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for clarity, cultural sensitivity, and risk mitigation effectiveness. Provide a full assessment of whether the plan effectively addresses the diverse customer concerns. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, actionable document ready for executive implementation, ensuring consistent tone and professional structure."
+    }
+  ],
+  "explanation": "StrategyArchitect → RegionalExpert → ContentRefiner → QualityGate (if revise, loops back to ContentRefiner) → FinalPolisher."
+}

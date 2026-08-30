@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze regional data for Southeast Asia, Middle East, Latin America, and Europe regarding Korean content consumption. Identify specific preferences for dubbing vs. subtitling, cultural sensitivity thresholds, and fandom engagement patterns.",
+      "description": "Gathers and interprets regional audience data."
+    },
+    {
+      "name": "StrategyArchitect",
+      "role": "builder",
+      "systemPrompt": "Develop a tiered localization and marketing strategy based on the analyst's data. Allocate the limited budget by prioritizing high-ROI regions and selecting appropriate localization methods (dubbing vs. subbing) per market.",
+      "description": "Creates the strategic framework for budget and localization."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy for cultural risks. Ensure historical and cultural references are handled appropriately for each target region to avoid backlash. Provide feedback on potential sensitivity issues.",
+      "description": "Validates cultural appropriateness."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "Adjust the strategy based on cultural expert feedback. Optimize budget allocation and localization tactics to ensure compliance with regional sensitivities while maintaining cost-efficiency.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the final strategy for feasibility, budget adherence, and cultural safety. Provide a detailed assessment of the plan. On the last line, output 'pass' if ready, or 'revise' to return to StrategyRefiner.",
+      "description": "Final validation gate."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the finalized strategy into a clear, actionable executive roadmap for the streaming platform's 2026 Korean content rollout.",
+      "description": "Formats the final output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze regional data for Southeast Asia, Middle East, Latin America, and Europe regarding Korean content consumption. Identify specific preferences for dubbing vs. subtitling, cultural sensitivity thresholds, and fandom engagement patterns."
+    },
+    {
+      "name": "StrategyArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a tiered localization and marketing strategy based on the analyst's data. Allocate the limited budget by prioritizing high-ROI regions and selecting appropriate localization methods (dubbing vs. subbing) per market."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy for cultural risks. Ensure historical and cultural references are handled appropriately for each target region to avoid backlash. Provide feedback on potential sensitivity issues."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Adjust the strategy based on cultural expert feedback. Optimize budget allocation and localization tactics to ensure compliance with regional sensitivities while maintaining cost-efficiency."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the final strategy for feasibility, budget adherence, and cultural safety. Provide a detailed assessment of the plan. On the last line, output 'pass' if ready, or 'revise' to return to StrategyRefiner.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the finalized strategy into a clear, actionable executive roadmap for the streaming platform's 2026 Korean content rollout."
+    }
+  ],
+  "explanation": "The pipeline begins with a MarketAnalyst to define regional preferences, followed by a StrategyArchitect to draft the plan. The CulturalExpert reviews the plan for sensitivity risks. The StrategyRefiner then adjusts the plan based on expert feedback. A QualityGate assesses the plan; if it fails, it routes back to the StrategyRefiner, and if it passes, it proceeds to the FinalPolisher to produce the final strategy document."
+}

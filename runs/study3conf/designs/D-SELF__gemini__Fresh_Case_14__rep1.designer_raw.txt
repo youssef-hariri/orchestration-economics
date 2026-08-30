@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "systemPrompt": "You are a green finance strategist. Draft a comprehensive green bond issuance strategy that reconciles EU, Gulf, and Southeast Asian taxonomies. Define a 'Unified Disclosure Framework' that maps local plant emissions data to the strictest common denominator of these standards to ensure investor credibility.",
+      "description": "Creates the initial multi-market financing strategy."
+    },
+    {
+      "name": "ComplianceCritic",
+      "role": "critic",
+      "systemPrompt": "You are an ESG regulatory expert. Evaluate the strategy for gaps in regional taxonomy alignment and data quality risks. Provide a detailed critique of how the strategy handles conflicting bank guidance. On the last line, output exactly 'pass' or 'revise'.",
+      "description": "Evaluates the strategy against regulatory and data quality standards."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a financial strategist. Incorporate the feedback from the ComplianceCritic to strengthen the data verification protocols and harmonize the disclosure standards across the three regions.",
+      "description": "Refines the strategy based on compliance feedback."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional technical writer. Format the strategy into a clear, executive-ready document that outlines the financing structure, risk mitigation for data quality, and the roadmap for multi-market bond issuance.",
+      "description": "Finalizes the document for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a green finance strategist. Draft a comprehensive green bond issuance strategy that reconciles EU, Gulf, and Southeast Asian taxonomies. Define a 'Unified Disclosure Framework' that maps local plant emissions data to the strictest common denominator of these standards to ensure investor credibility."
+    },
+    {
+      "name": "ComplianceCritic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are an ESG regulatory expert. Evaluate the strategy for gaps in regional taxonomy alignment and data quality risks. Provide a detailed critique of how the strategy handles conflicting bank guidance. On the last line, output exactly 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a financial strategist. Incorporate the feedback from the ComplianceCritic to strengthen the data verification protocols and harmonize the disclosure standards across the three regions."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional technical writer. Format the strategy into a clear, executive-ready document that outlines the financing structure, risk mitigation for data quality, and the roadmap for multi-market bond issuance."
+    }
+  ],
+  "explanation": "StrategyBuilder creates the initial plan. ComplianceCritic evaluates it; if 'revise' is triggered, it loops back to StrategyRefiner to address specific gaps. Once 'pass' is received, the FinalPolisher formats the document."
+}

@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Smallholder Product Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product strategy for adapting a precision-agriculture sensor platform to smallholder markets in India, Kenya, and Vietnam. Address hardware simplification, affordability, connectivity, installation and maintenance, cooperative and input-dealer distribution, farmer onboarding, financing, localization, data ownership, and country-specific operating realities. Recommend which analytics capabilities to prioritize, simplify, defer, or drop. Distinguish common platform principles from market-specific adaptations. Make explicit assumptions, trade-offs, implementation phases, success metrics, and risks. Produce an evidence-informed strategy suitable for senior product and commercial leaders.",
+      "description": "Creates the initial strategic recommendation covering product, distribution, analytics, economics, and market-specific adaptation."
+    },
+    {
+      "name": "Smallholder Market Insights Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the draft strategy against the operating realities of smallholder agriculture in India, Kenya, and Vietnam. Identify implications of farm fragmentation, cooperative and input-dealer channels, connectivity constraints, smartphone access, literacy and language diversity, seasonal cash flow, trust, service capacity, import and regulatory considerations, and willingness to pay. Assess whether the proposed hardware, delivery model, analytics, pricing logic, and rollout assumptions are realistic. Produce detailed findings and concrete recommendations for improvement, including country-level distinctions and any unsupported claims that should be qualified.",
+      "description": "Tests the strategy against market, technology, commercial, and adoption realities in the three target countries."
+    },
+    {
+      "name": "Precision Agriculture Domain Expert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy and analyst findings from the perspective of precision-agriculture product design and smallholder adoption. Evaluate sensor selection, data quality, interoperability, power and maintenance requirements, offline workflows, agronomic usefulness, alert design, explainability, local advisory integration, and the feasibility of delivering value through cooperatives and input dealers. Recommend a focused minimum viable product and identify analytics that are unlikely to create measurable farmer value or cannot be supported operationally. Flag technical, agronomic, privacy, safety, and scalability risks and propose practical mitigations.",
+      "description": "Provides domain-specific judgment on agronomy, sensing, platform design, and usable farmer value."
+    },
+    {
+      "name": "Strategy Synthesis Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite and strengthen the initial strategy using the market analysis and domain-expert feedback. Produce one coherent, decision-ready product strategy. Include: strategic thesis; target customer and buyer/user segmentation; simplified hardware bundle with explicit inclusions and exclusions; connectivity, power, installation, repair, and offline design; cooperative and input-dealer partnership model; onboarding and support approach; pricing, financing, and unit-economics considerations; prioritized analytics roadmap with rationale; country-specific adaptations for India, Kenya, and Vietnam; phased launch plan; KPIs; risks and mitigations. Separate must-have recommendations from experiments and items to defer or drop. Avoid unsupported certainty and clearly state assumptions.",
+      "description": "Integrates all prior analysis into a practical, prioritized, and country-sensitive strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy in full detail. Evaluate whether it directly answers the requested hardware, delivery-partnership, and analytics-prioritization decisions; whether recommendations are actionable, economically and operationally plausible, appropriately differentiated across India, Kenya, and Vietnam, and sensitive to connectivity, affordability, literacy, trust, and fragmented-farm realities. Check for contradictions, excessive feature scope, missing trade-offs, vague ownership or implementation details, unsupported assumptions, and unclear distinctions between prioritize, simplify, defer, and drop. Explain specific corrections required and whether the strategy is ready for executive use. On the very last line output exactly one keyword: pass or revise",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 3
+      },
+      "description": "Determines whether the synthesized strategy is sufficiently rigorous and actionable or needs another refinement."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing answer from the refined strategy and quality assessment. Preserve substantive recommendations while fixing any issues identified by the assessment. Present a concise but sufficiently detailed executive strategy with clear headings and tables where useful. Explicitly cover hardware simplification, delivery partnerships, analytics to prioritize, analytics to drop or defer, country-specific differences, phased execution, economics, risks, and measurable success criteria. Make decisions and trade-offs easy to understand. Do not mention agents, pipeline steps, drafts, quality assessments, or internal instructions.",
+      "description": "Turns the approved strategy into a clear, polished, executive-ready final response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Smallholder Product Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product strategy for adapting a precision-agriculture sensor platform to smallholder markets in India, Kenya, and Vietnam. Address hardware simplification, affordability, connectivity, installation and maintenance, cooperative and input-dealer distribution, farmer onboarding, financing, localization, data ownership, and country-specific operating realities. Recommend which analytics capabilities to prioritize, simplify, defer, or drop. Distinguish common platform principles from market-specific adaptations. Make explicit assumptions, trade-offs, implementation phases, success metrics, and risks. Produce an evidence-informed strategy suitable for senior product and commercial leaders."
+    },
+    {
+      "name": "Smallholder Market Insights Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial strategy against the operating realities of smallholder agriculture in India, Kenya, and Vietnam. Identify implications of farm fragmentation, cooperative and input-dealer channels, connectivity constraints, smartphone access, literacy and language diversity, seasonal cash flow, trust, service capacity, import and regulatory considerations, and willingness to pay. Assess whether the proposed hardware, delivery model, analytics, pricing logic, and rollout assumptions are realistic. Produce detailed findings and concrete recommendations for improvement, including country-level distinctions and unsupported claims that should be qualified."
+    },
+    {
+      "name": "Precision Agriculture Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the initial strategy and market analysis from the perspective of precision-agriculture product design and smallholder adoption. Evaluate sensor selection, data quality, interoperability, power and maintenance requirements, offline workflows, agronomic usefulness, alert design, explainability, local advisory integration, and the feasibility of delivering value through cooperatives and input dealers. Recommend a focused minimum viable product and identify analytics unlikely to create measurable farmer value or that cannot be supported operationally. Flag technical, agronomic, privacy, safety, and scalability risks and propose practical mitigations."
+    },
+    {
+      "name": "Strategy Synthesis Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite and strengthen the strategy using all prior analysis and expert feedback. Produce one coherent, decision-ready product strategy covering the strategic thesis, target users and buyers, simplified hardware bundle, connectivity and offline design, cooperative and input-dealer partnership model, onboarding and support, pricing and financing, prioritized analytics roadmap, country-specific adaptations for India, Kenya, and Vietnam, phased launch plan, KPIs, risks, and mitigations. Clearly distinguish must-have recommendations from experiments, deferred features, and dropped features. State assumptions and trade-offs."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy in full detail for completeness, factual caution, actionability, economic and operational plausibility, country differentiation, and alignment with smallholder realities. Check hardware, partnerships, analytics prioritization, affordability, connectivity, literacy, trust, implementation, and measurable outcomes. Explain strengths and all specific corrections required. On the very last line output exactly one keyword: pass or revise",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing answer from the refined strategy, incorporating any quality-assessment corrections. Use clear headings and concise tables where useful. Explicitly cover hardware simplification, delivery partnerships, analytics to prioritize and drop or defer, country-specific differences, phased execution, economics, risks, and success criteria. Do not mention internal pipeline activity."
+    }
+  ],
+  "explanation": "The flow is Builder → Market Analyst → Domain Expert → Refiner → Quality Assessment → Polisher. The builder establishes a complete strategy, while the analyst and expert independently test market realism and technical-agronomic feasibility before synthesis. The quality assessment occurs after refinement; if it outputs revise, execution returns to the refiner, which incorporates the identified corrections, and the assessment runs again. If it outputs pass, the strategy proceeds to the final polisher. The pipeline remains fully automated, uses six steps, and ends with a user-facing deliverable."
+}

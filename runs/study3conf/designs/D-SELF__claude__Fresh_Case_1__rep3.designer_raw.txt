@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cultural Context Mapper",
+      "role": "builder",
+      "description": "Analyzes regional attitudes toward AI agents, job security concerns, and human-machine authority norms across four regions. Creates initial assessment of cultural baseline and regional pain points."
+    },
+    {
+      "name": "Regional Strategy Developer",
+      "role": "strategist",
+      "description": "Designs culturally-tailored integration roadmap addressing regional differences in trust, job-threat perception, and collaboration norms for North America, Western Europe, the Gulf, and East Asia."
+    },
+    {
+      "name": "Strategy Validator",
+      "role": "critic",
+      "description": "Reviews integration strategy for cultural sensitivity, feasibility, and alignment with local labor norms. Identifies gaps, contradictions, and risks."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Revises integration strategy based on validator feedback. Strengthens cultural adaptation, addresses regional concerns, and ensures strategies are actionable."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "description": "Performs final quality assessment of refined strategy. Verifies all four regions addressed with distinct approaches and trust deficits mitigated. Outputs pass/revise decision."
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats final integration strategy into four actionable regional playbooks with success metrics, risk mitigation, and 18-month implementation timelines ready for leadership."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cultural Context Mapper",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a cultural context mapper for a multinational professional-services firm deploying AI agents in 2026. Analyze early rollout findings across four regions: North America, Western Europe, the Gulf, and East Asia. For each region identify: (1) how teams currently view AI agents (junior colleagues vs. surveillance tools vs. ignored), (2) dominant attitudes toward automation and job security, (3) existing norms around human-machine authority and decision-making, (4) key stakeholder concerns. Produce a structured regional baseline including trust deficits, adoption barriers, and labor/regulatory context specific to each geography."
+    },
+    {
+      "name": "Regional Strategy Developer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategist designing a multi-region AI agent integration roadmap. Based on regional cultural baselines, develop a distinct integration strategy for each of the four regions. For each region specify: (1) Framing & Narrative—how to position agents to address local fears, (2) Onboarding & Training—tailored to regional norms, (3) Authority & Decision-Making Model—agent autonomy and override power, (4) Success Metrics—region-specific KPIs building confidence, (5) Stakeholder Engagement Plan, (6) Risk Mitigation—addressing job-threat and regulatory concerns. Ensure strategies are distinct, justified by regional analysis, and actionable within 18 months."
+    },
+    {
+      "name": "Strategy Validator",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a critical reviewer of cross-cultural organizational strategy. Review the proposed regional integration strategies for AI agents. Assess: (1) Cultural Sensitivity—do strategies respect local values and labor norms?, (2) Feasibility—are timelines and resources realistic?, (3) Equity—do all four regions receive similarly rigorous plans?, (4) Risk Coverage—are job-security and regulatory concerns adequately addressed?, (5) Specificity—are strategies concrete enough to implement? Provide FULL assessment of strengths, weaknesses, gaps, and constructive revision feedback."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Based on the validator's detailed feedback, revise the regional integration strategies. Address all identified gaps and contradictions. Strengthen cultural adaptation and job-security mitigation for each region. Make strategies more specific and implementation-ready. Clarify authority models, decision-making frameworks, and success metrics. Ensure all four regions are addressed with equal rigor and distinctness. Produce a revised, substantially improved version."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a final quality gate for multinational AI agent integration strategy. Review the refined regional strategies comprehensively. Assess: (1) Completeness—are all four regions addressed with distinct, justified strategies?, (2) Cultural Fit—do strategies respect regional labor norms and authority expectations?, (3) Trust Mitigation—are job-threat and surveillance concerns directly addressed?, (4) Implementation Readiness—are strategies concrete and sequenced?, (5) Risk Management—are regulatory and labor relations risks mitigated? Provide FULL assessment with specific strengths and remaining gaps. Output EXACTLY ONE keyword on the very last line: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a polisher preparing final, executive-ready integration strategy. Format the validated regional strategies into four distinct actionable playbooks—one per region (North America, Western Europe, the Gulf, East Asia). For each playbook structure: (1) Executive Summary, (2) Regional Context & Trust Assessment, (3) Framing & Change Narrative, (4) Onboarding & Adoption Plan, (5) Authority & Decision-Making Model, (6) Success Metrics with targets, (7) Risk Mitigation & Contingencies, (8) 18-Month Timeline & Resources. Add firm-wide governance layer. Produce polished, presentation-ready output with clear headings and actionable next steps for regional leadership."
+    }
+  ],
+  "explanation": "This 6-step pipeline transforms a complex multi-region AI adoption challenge into culturally grounded, actionable strategy. Builder (Cultural Context Mapper) establishes regional baselines from early rollout data. Strategist designs region-specific integration plans addressing framing, onboarding, authority models, and risk mitigation. Critic (Strategy Validator) provides rigorous feedback on cultural sensitivity and feasibility. Refiner strengthens strategies based on critique. Quality Gate (if step) performs final completeness check, routing back to Refiner if gaps remain (up to 3 iterations). Once passed, Polisher converts validated strategy into four distinct regional playbooks with timelines and governance. This flow ensures cultural nuance, stakeholder credibility, and implementation readiness across all four regions."
+}
+```

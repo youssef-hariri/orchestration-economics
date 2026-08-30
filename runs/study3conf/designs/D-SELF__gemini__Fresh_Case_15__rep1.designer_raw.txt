@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Macro-Economist",
+      "role": "analyst",
+      "systemPrompt": "Analyze the impact of currency depreciation and inflation on franchisee cash flows in Turkey, Egypt, Nigeria, Indonesia, and Brazil. Identify the threshold where fixed USD royalties become untenable.",
+      "description": "Analyzes economic data to quantify the financial stress on franchisees."
+    },
+    {
+      "name": "Franchise Strategist",
+      "role": "builder",
+      "systemPrompt": "Draft a tiered royalty restructuring plan. Propose a hybrid model: base local-currency royalties with an inflation-linked escalator, and a 'currency-stabilization fund' for extreme volatility. Ensure the plan addresses collective bargaining concerns by proposing transparent, data-driven adjustment triggers.",
+      "description": "Creates the core restructuring strategy."
+    },
+    {
+      "name": "Legal Compliance Expert",
+      "role": "refiner",
+      "systemPrompt": "Review the proposed restructuring plan for legal feasibility across diverse jurisdictions. Adjust the language to ensure it is enforceable, protects brand standards, and mitigates risks of collective litigation.",
+      "description": "Refines the strategy to ensure legal and operational robustness."
+    },
+    {
+      "name": "Quality Auditor",
+      "role": "critic",
+      "systemPrompt": "Evaluate the plan for economic sustainability, legal enforceability, and franchisee relationship management. Assess if the plan effectively balances corporate profitability with franchisee survival. Provide a detailed assessment. Last line must be 'pass' or 'revise'.",
+      "description": "Validates the strategy against the project objectives."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final restructuring proposal into a professional executive document suitable for the franchisor's board of directors.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Macro-Economist",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the impact of currency depreciation and inflation on franchisee cash flows in Turkey, Egypt, Nigeria, Indonesia, and Brazil. Identify the threshold where fixed USD royalties become untenable."
+    },
+    {
+      "name": "Franchise Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a tiered royalty restructuring plan. Propose a hybrid model: base local-currency royalties with an inflation-linked escalator, and a 'currency-stabilization fund' for extreme volatility. Ensure the plan addresses collective bargaining concerns by proposing transparent, data-driven adjustment triggers."
+    },
+    {
+      "name": "Legal Compliance Expert",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Review the proposed restructuring plan for legal feasibility across diverse jurisdictions. Adjust the language to ensure it is enforceable, protects brand standards, and mitigates risks of collective litigation."
+    },
+    {
+      "name": "Quality Auditor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the plan for economic sustainability, legal enforceability, and franchisee relationship management. Assess if the plan effectively balances corporate profitability with franchisee survival. Provide a detailed assessment. Last line must be 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final restructuring proposal into a professional executive document suitable for the franchisor's board of directors."
+    }
+  ],
+  "explanation": "The pipeline begins with a Macro-Economist to establish the financial baseline. The Franchise Strategist then drafts the restructuring plan. The Legal Compliance Expert refines this draft. The Quality Auditor reviews the output; if it fails to meet the criteria for sustainability or legal robustness, it routes back to the Legal Compliance Expert (step 3) for revision. Once it passes, the Final Polisher formats the document for the board."
+}

@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the beauty market landscape in Mexico, Colombia, and Brazil, focusing on MLM dominance, shade-range expectations, and social-commerce habits.",
+      "description": "Gathers and synthesizes market intelligence."
+    },
+    {
+      "name": "StrategyArchitect",
+      "role": "strategist",
+      "systemPrompt": "Draft a comprehensive D2C launch strategy for Mexico, Colombia, and Brazil, addressing channel distribution, influencer ecosystems, and cultural localization.",
+      "description": "Creates the initial strategic framework."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy for cultural accuracy and feasibility against MLM incumbents. Provide detailed feedback. On the last line, output 'pass' or 'revise'.",
+      "description": "Critiques the strategy for regional nuance."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate feedback to adjust the launch plan, ensuring the strategy is robust, localized, and actionable for the specific requirements of the three target markets.",
+      "description": "Iteratively improves the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the finalized strategy into a clear, executive-ready document suitable for stakeholders.",
+      "description": "Finalizes the output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the beauty market landscape in Mexico, Colombia, and Brazil, focusing on MLM dominance, shade-range expectations, and social-commerce habits."
+    },
+    {
+      "name": "StrategyArchitect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive D2C launch strategy for Mexico, Colombia, and Brazil, addressing channel distribution, influencer ecosystems, and cultural localization."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "type": "if",
+      "systemPrompt": "Review the strategy for cultural accuracy and feasibility against MLM incumbents. Provide detailed feedback. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 3 }
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate feedback to adjust the launch plan, ensuring the strategy is robust, localized, and actionable for the specific requirements of the three target markets."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the finalized strategy into a clear, executive-ready document suitable for stakeholders."
+    }
+  ],
+  "explanation": "MarketAnalyst gathers data, StrategyArchitect drafts the plan, RegionalExpert evaluates it (looping back to StrategyRefiner if revision is needed), and FinalPolisher formats the output."
+}

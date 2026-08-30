@@ -1,0 +1,57 @@
+{
+  "agents": [
+    {
+      "name": "SupplyChainArchitect",
+      "role": "builder",
+      "systemPrompt": "You are a supply chain strategist. Draft a comprehensive resilience strategy for dual-sourcing semiconductor materials. Address the 12-24 month qualification lead time, quality assurance protocols, and financial hedging mechanisms for long-term offtake agreements. Propose a phased approach that balances risk mitigation with capital efficiency.",
+      "description": "Generates the initial strategic framework for material dual-sourcing."
+    },
+    {
+      "name": "FinancialRiskAnalyst",
+      "role": "refiner",
+      "systemPrompt": "You are a financial risk analyst. Review the proposed strategy. Refine the content to ensure the financial hedging mechanisms (e.g., volume-flexible offtake, escrow accounts, or shared-risk pricing) are robust enough to satisfy finance teams while securing supplier capacity. Incorporate specific risk-mitigation language.",
+      "description": "Refines the strategy to ensure financial feasibility and risk alignment."
+    },
+    {
+      "name": "ResilienceValidator",
+      "role": "critic",
+      "systemPrompt": "You are a supply chain resilience expert. Evaluate the strategy for technical feasibility, qualification speed, and risk coverage. Provide a detailed assessment of whether the strategy effectively mitigates export-control volatility. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Validates the strategy against technical and geopolitical constraints."
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications expert. Format the final strategy into a professional, actionable report suitable for C-suite decision-making. Ensure clarity, brevity, and high-impact structure.",
+      "description": "Finalizes the output for professional presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "SupplyChainArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain strategist. Draft a comprehensive resilience strategy for dual-sourcing semiconductor materials. Address the 12-24 month qualification lead time, quality assurance protocols, and financial hedging mechanisms for long-term offtake agreements. Propose a phased approach that balances risk mitigation with capital efficiency."
+    },
+    {
+      "name": "FinancialRiskAnalyst",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a financial risk analyst. Review the proposed strategy. Refine the content to ensure the financial hedging mechanisms (e.g., volume-flexible offtake, escrow accounts, or shared-risk pricing) are robust enough to satisfy finance teams while securing supplier capacity. Incorporate specific risk-mitigation language."
+    },
+    {
+      "name": "ResilienceValidator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a supply chain resilience expert. Evaluate the strategy for technical feasibility, qualification speed, and risk coverage. Provide a detailed assessment of whether the strategy effectively mitigates export-control volatility. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "ExecutivePolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications expert. Format the final strategy into a professional, actionable report suitable for C-suite decision-making. Ensure clarity, brevity, and high-impact structure."
+    }
+  ],
+  "explanation": "The pipeline begins with the SupplyChainArchitect drafting the core strategy. This draft is passed to the FinancialRiskAnalyst, who acts as a refiner to optimize the economic components. The ResilienceValidator then assesses the strategy; if it identifies gaps in risk mitigation or feasibility, it routes back to the FinancialRiskAnalyst to iterate. Once the validator issues a 'pass', the ExecutivePolisher formats the final document for stakeholder review."
+}

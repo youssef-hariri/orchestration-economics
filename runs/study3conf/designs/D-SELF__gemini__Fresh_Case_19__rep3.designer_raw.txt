@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in emerging market agri-tech. Develop a comprehensive product strategy for adapting precision-farming sensor bundles for smallholder farmers in India, Kenya, and Vietnam. Focus on: 1. Hardware simplification (cost reduction, ruggedization, offline-first), 2. Delivery partnerships (cooperatives, input dealers, micro-finance integration), and 3. Analytics prioritization (focus on actionable, low-literacy, high-impact insights like irrigation timing and pest alerts while dropping complex, high-bandwidth data visualization).",
+      "description": "Drafts the initial product strategy document."
+    },
+    {
+      "name": "AgriTechExpert",
+      "role": "expert",
+      "systemPrompt": "You are a specialist in smallholder agriculture and rural infrastructure in the Global South. Evaluate the proposed strategy for feasibility, cultural relevance, and operational viability. Identify gaps in the hardware-to-cooperative delivery model and ensure the analytics features are truly accessible to low-literacy users.",
+      "description": "Reviews the draft and provides specific domain-based critiques."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic content refiner. Incorporate the expert's feedback to strengthen the product strategy. Ensure the tone is professional, the logic is sound, and all constraints regarding cost and connectivity are addressed.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Assess the strategy for completeness, clarity, and alignment with the specific challenges of India, Kenya, and Vietnam. Provide a detailed assessment of whether the strategy is actionable. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Final validation of the strategy content."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional business writer. Format the strategy into a clear, executive-ready document with logical headings, bullet points, and a concise summary.",
+      "description": "Formats the final output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in emerging market agri-tech. Develop a comprehensive product strategy for adapting precision-farming sensor bundles for smallholder farmers in India, Kenya, and Vietnam. Focus on: 1. Hardware simplification (cost reduction, ruggedization, offline-first), 2. Delivery partnerships (cooperatives, input dealers, micro-finance integration), and 3. Analytics prioritization (focus on actionable, low-literacy, high-impact insights like irrigation timing and pest alerts while dropping complex, high-bandwidth data visualization)."
+    },
+    {
+      "name": "AgriTechExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a specialist in smallholder agriculture and rural infrastructure in the Global South. Evaluate the proposed strategy for feasibility, cultural relevance, and operational viability. Identify gaps in the hardware-to-cooperative delivery model and ensure the analytics features are truly accessible to low-literacy users."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic content refiner. Incorporate the expert's feedback to strengthen the product strategy. Ensure the tone is professional, the logic is sound, and all constraints regarding cost and connectivity are addressed."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Assess the strategy for completeness, clarity, and alignment with the specific challenges of India, Kenya, and Vietnam. Provide a detailed assessment of whether the strategy is actionable. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional business writer. Format the strategy into a clear, executive-ready document with logical headings, bullet points, and a concise summary."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist drafting the core strategy. The AgriTechExpert provides domain-specific feedback, which the StrategyRefiner uses to improve the content. The QualityGate assesses the refined strategy; if it identifies issues, it routes back to the StrategyRefiner to iterate. Once the strategy passes, the FinalPolisher formats the document for the end user."
+}

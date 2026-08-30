@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Context Builder",
+      "role": "builder",
+      "description": "Creates initial draft of flexible-work policy framework covering all twelve countries, synthesizing baseline requirements for legal compliance, operational viability, and fairness across markets."
+    },
+    {
+      "name": "Cultural & Legal Analyst",
+      "role": "analyst",
+      "description": "Analyzes divergent cultural attitudes, labor laws, client expectations, and visibility norms across the twelve country offices to identify conflicts, gaps, and country-specific constraints in the draft policy."
+    },
+    {
+      "name": "Policy Strategist",
+      "role": "strategist",
+      "description": "Develops tiered accommodation strategy and localization approach that honors cultural differences while maintaining global fairness, legal compliance, and operational coherence. Proposes concrete mechanisms for policy customization."
+    },
+    {
+      "name": "Domain Expert Reviewer",
+      "role": "expert",
+      "description": "Provides domain-specific expert opinion on labor law risks, precedent from real-world four-day-week pilots and right-to-disconnect implementations, and feasibility of proposed accommodations across different employment contexts."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "description": "Integrates feedback from analyst, strategist, and expert into coherent, detailed policy document. Resolves contradictions, adds specificity to localization mechanisms, and ensures legal and operational soundness."
+    },
+    {
+      "name": "Fairness & Compliance Gate",
+      "role": "critic",
+      "description": "Audits refined policy against three criteria: (1) legal compliance in each country, (2) fairness across employee populations and markets, (3) operational workability for management and teams. Flags unresolved tensions or risks."
+    },
+    {
+      "name": "Implementation Clarity Polisher",
+      "role": "polisher",
+      "description": "Formats final policy for end-user clarity: structures country-specific guidance, creates implementation roadmap, highlights key decision trees for managers, and ensures tone is inclusive and transparent about trade-offs."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Context Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a global flexible-work policy for a software company with twelve country offices facing uneven pressure for four-day weeks and right-to-disconnect laws. Create an initial draft policy framework that: (1) acknowledges the core tension between younger employees demanding compressed weeks and teams viewing reduced presence as career-damaging, (2) identifies the key variables that differ across countries (local labor laws, client expectations, cultural attitudes toward visible effort and commitment), (3) proposes a preliminary structure for a policy that could be both globally coherent and locally responsive, (4) highlights the hardest trade-offs to resolve. Output a comprehensive draft that serves as the foundation for refinement."
+    },
+    {
+      "name": "Cultural & Legal Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and legal analyst. Examine the draft flexible-work policy and perform a detailed analysis of: (1) how labor laws, right-to-disconnect obligations, and employment norms differ across twelve major markets (e.g., EU countries with legal right-to-disconnect vs. US-like at-will markets vs. Asian markets with different commitment norms), (2) generational and professional expectations within each region, (3) client relationship and delivery model expectations that may clash with compressed weeks, (4) specific conflicts or risks in the current draft when applied country-by-country, (5) evidence from real-world four-day-week pilots about what works and fails in different contexts. Provide structured analysis by country cluster or dimension. Identify gaps and contradictions in the draft."
+    },
+    {
+      "name": "Policy Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategic policy designer. Based on the cultural and legal analysis, develop a concrete strategy for accommodating divergent attitudes while maintaining global fairness and operational viability. Propose: (1) a tiered or modular policy structure (e.g., core global principles + country-specific annexes, or role-based flexibility with geographic variation), (2) specific localization mechanisms (how flexibility can vary by country without creating perceived unfairness), (3) visibility and commitment frameworks that honor different cultural values (e.g., output-based vs. presence-based performance measures), (4) decision trees or governance models for resolving conflicts between local expectations and global consistency, (5) concrete pilot or transition approach for contentious markets. Explain how each accommodation addresses both the younger employees' demands and older/traditional employees' concerns about loyalty and career visibility."
+    },
+    {
+      "name": "Domain Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a labor law and workplace culture expert. Review the proposed policy strategy and assess: (1) legal feasibility and compliance risks in each country cluster (e.g., are proposed flexible arrangements compatible with local labor codes, tax treatment, and right-to-disconnect mandates?), (2) precedent from real-world case studies of four-day-week pilots and right-to-disconnect implementations—what actually worked, what failed, and why, (3) hidden risks or unintended consequences (e.g., could country-specific carve-outs create legal liability or morale problems?), (4) feasibility for a software company's delivery and client-facing models in particular, (5) recommendations for strengthening or refining the strategy to reduce risk and increase adoption. Provide honest assessment of what is realistic vs. aspirational."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a policy refiner. Integrate all feedback from the analyst, strategist, and expert into a cohesive, detailed, ready-to-implement flexible-work policy document. Your output should: (1) synthesize the strategy and expert feedback into a single coherent policy narrative, (2) resolve contradictions or tensions flagged in previous steps, (3) add specific language, examples, and decision criteria that managers and employees can actually use, (4) create country-specific annexes or guidance that operationalize localization while explaining the fairness logic, (5) include governance and dispute-resolution mechanisms, (6) address the visibility and commitment concern head-on with concrete performance frameworks, (7) structure the policy for clarity and usability. Output a complete, implementation-ready policy document."
+    },
+    {
+      "name": "Fairness & Compliance Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate auditing the refined flexible-work policy against three rigorous criteria: (1) LEGAL COMPLIANCE: Does the policy comply with labor laws, right-to-disconnect mandates, tax, and employment regulations in each of the twelve countries or country clusters? Are there any legal risks or gaps? (2) FAIRNESS: Does the policy treat employee populations fairly across markets? Does it explain and justify localization in ways that younger and older/traditional employees can both understand? Does it avoid creating two-tiered systems that feel arbitrary or discriminatory? (3) OPERATIONAL WORKABILITY: Can managers and teams actually implement this policy? Are decision criteria clear? Can client expectations and delivery models be reconciled with flexibility? Provide a FULL detailed assessment of strengths and weaknesses on each dimension. Identify any unresolved conflicts, legal risks, or fairness concerns. Then output on the VERY LAST LINE exactly one keyword: pass (if the policy is ready for final formatting) or revise (if material issues remain and the policy needs reworking).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Implementation Clarity Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final-stage polisher preparing the flexible-work policy for delivery to employees and managers across twelve countries. Format and structure the policy for maximum clarity and usability: (1) create an executive summary that explains the core logic and trade-offs transparently, (2) organize country-specific guidance in clear annexes with decision trees for managers, (3) provide concrete examples of how different work arrangements work in practice for different roles and countries, (4) include an FAQ addressing the tensions between younger employees' demands for compressed weeks and traditional concerns about visibility and commitment, (5) clarify how performance will be measured and how career progression is unaffected by work arrangement choices, (6) ensure tone is inclusive, honest about what flexibility is and isn't possible, and respectful of diverse cultural values, (7) format for easy navigation by HR, managers, and employees. Produce a polished, implementation-ready policy document ready for global rollout."
+    }
+  ],
+  "explanation": "This pipeline addresses the complex task of designing a culturally adaptive yet globally coherent flexible-work policy by separating concerns and building in domain expertise. The Builder creates a baseline draft. The Analyst performs deep cultural and legal reconnaissance to expose country-specific conflicts and gaps. The Strategist develops concrete accommodation mechanisms that honor diversity while maintaining fairness. The Expert provides hard-nosed assessment of legal and practical feasibility. The Refiner synthesizes all inputs into a unified, implementable policy. The Fairness & Compliance Gate acts as a quality checkpoint, auditing the policy against legal compliance, fairness logic, and operational workability—if issues remain, the pipeline loops back to the Refiner for targeted improvements (up to 3 iterations). Finally, the Polisher structures the output for clarity, usability, and transparent communication of trade-offs across twelve countries. This design ensures domain depth, iterative refinement against objective criteria, and end-user accessibility without human approval bottlenecks."
+}
+```

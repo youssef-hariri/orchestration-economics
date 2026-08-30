@@ -1,0 +1,95 @@
+{
+  "agents": [
+    {
+      "name": "Global Localization Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product strategy for expanding an adaptive-learning platform from the United States into Vietnam, Saudi Arabia, France, and Kenya. Define the shared technology core and the country-specific adaptations required for curricula, language of instruction, content localization, cultural expectations about foreign educational material, accessibility, data practices, screen time, assessment, teacher workflows, parent engagement, pricing, partnerships, and procurement. Address both government and institutional procurement and direct-to-consumer channels. Include strategic priorities, sequencing, operating assumptions, risks, success metrics, and concrete recommendations while balancing scalability with local fit.",
+      "description": "Creates the initial multinational product localization and market-entry strategy."
+    },
+    {
+      "name": "Country Market and Procurement Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed expansion strategy across Vietnam, Saudi Arabia, France, and Kenya. Identify country-specific requirements and differences involving mandated curricula, language policies, public and private education systems, cultural attitudes toward foreign educational content, parental and teacher views on screen time and standardized testing, purchasing power, distribution, partnerships, and government procurement. Highlight missing evidence, assumptions, dependencies, and risks. Recommend which capabilities should be centralized and which should be configurable locally. Provide actionable findings that can be incorporated into the strategy.",
+      "description": "Produces comparative country, customer, policy, and procurement insights."
+    },
+    {
+      "name": "Education Policy and Cultural Localization Expert",
+      "role": "expert",
+      "systemPrompt": "Review the draft strategy and country analysis as an expert in international education policy, curriculum alignment, language localization, culturally responsive learning design, child safety, and education-market operations. Assess whether the recommendations are realistic and appropriately sensitive for Vietnam, Saudi Arabia, France, and Kenya. Identify likely regulatory, pedagogical, cultural, commercial, and implementation failures. Specify practical corrections for content governance, language and localization depth, teacher and parent trust, assessment design, screen-time positioning, data stewardship, partnerships, and procurement readiness. Do not invent laws or precise requirements without labeling uncertainty; distinguish verified requirements from assumptions.",
+      "description": "Evaluates policy, pedagogy, cultural fit, and operational feasibility."
+    },
+    {
+      "name": "Integrated Localization Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Using the initial strategy, comparative analysis, and expert feedback, produce a revised and decision-ready product strategy. Resolve contradictions, correct unsupported assumptions, and clearly separate the shared platform core from country-level modules and governance. Include a country-by-country adaptation matrix, curriculum and language approach, content and trust strategy, parent and teacher value propositions, screen-time and assessment positioning, procurement/channel strategy, rollout sequencing, localization operating model, measurable KPIs, investment priorities, major risks, and mitigations. Make recommendations specific enough for executive and product planning while preserving uncertainty where evidence is incomplete.",
+      "description": "Integrates all findings into a coherent, actionable multinational strategy."
+    },
+    {
+      "name": "Localization Strategy Quality Reviewer",
+      "role": "critic",
+      "systemPrompt": "Review the revised product strategy in full. Assess strategic coherence, country specificity, curriculum and language alignment, cultural appropriateness, treatment of parents and teachers, balance between shared technology and local fit, government versus direct-to-consumer channel realism, implementation sequencing, evidence quality, risk coverage, measurable outcomes, and clarity for executives. Provide detailed strengths, weaknesses, omissions, contradictions, unsupported claims, and precise corrections needed. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Determines whether the integrated strategy is complete, credible, and ready for final presentation.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved revised strategy into a clear, concise, executive-ready product strategy document. Preserve the substantive recommendations and country distinctions. Organize it with an executive summary, strategic principles, shared technology core, country-by-country localization plan, channel and procurement strategy, rollout roadmap, operating model, KPIs, risks and mitigations, and key decisions. Use precise language, useful tables where appropriate, explicit assumptions, and a balanced tone. Remove repetition and unsupported certainty. Deliver only the final user-facing strategy.",
+      "description": "Formats and clarifies the validated strategy for executive and cross-functional use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Localization Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product strategy for expanding an adaptive-learning platform from the United States into Vietnam, Saudi Arabia, France, and Kenya. Define the shared technology core and the country-specific adaptations required for curricula, language of instruction, content localization, cultural expectations about foreign educational material, accessibility, data practices, screen time, assessment, teacher workflows, parent engagement, pricing, partnerships, and procurement. Address both government and institutional procurement and direct-to-consumer channels. Include strategic priorities, sequencing, operating assumptions, risks, success metrics, and concrete recommendations while balancing scalability with local fit."
+    },
+    {
+      "name": "Country Market and Procurement Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed expansion strategy across Vietnam, Saudi Arabia, France, and Kenya. Identify country-specific requirements and differences involving mandated curricula, language policies, public and private education systems, cultural attitudes toward foreign educational content, parental and teacher views on screen time and standardized testing, purchasing power, distribution, partnerships, and government procurement. Highlight missing evidence, assumptions, dependencies, and risks. Recommend which capabilities should be centralized and which should be configurable locally. Provide actionable findings that can be incorporated into the strategy."
+    },
+    {
+      "name": "Education Policy and Cultural Localization Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the draft strategy and country analysis as an expert in international education policy, curriculum alignment, language localization, culturally responsive learning design, child safety, and education-market operations. Assess whether the recommendations are realistic and appropriately sensitive for Vietnam, Saudi Arabia, France, and Kenya. Identify likely regulatory, pedagogical, cultural, commercial, and implementation failures. Specify practical corrections for content governance, language and localization depth, teacher and parent trust, assessment design, screen-time positioning, data stewardship, partnerships, and procurement readiness. Do not invent laws or precise requirements without labeling uncertainty; distinguish verified requirements from assumptions."
+    },
+    {
+      "name": "Integrated Localization Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Using the initial strategy, comparative analysis, and expert feedback, produce a revised and decision-ready product strategy. Resolve contradictions, correct unsupported assumptions, and clearly separate the shared platform core from country-level modules and governance. Include a country-by-country adaptation matrix, curriculum and language approach, content and trust strategy, parent and teacher value propositions, screen-time and assessment positioning, procurement/channel strategy, rollout sequencing, localization operating model, measurable KPIs, investment priorities, major risks, and mitigations. Make recommendations specific enough for executive and product planning while preserving uncertainty where evidence is incomplete."
+    },
+    {
+      "name": "Localization Strategy Quality Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the revised product strategy in full. Assess strategic coherence, country specificity, curriculum and language alignment, cultural appropriateness, treatment of parents and teachers, balance between shared technology and local fit, government versus direct-to-consumer channel realism, implementation sequencing, evidence quality, risk coverage, measurable outcomes, and clarity for executives. Provide detailed strengths, weaknesses, omissions, contradictions, unsupported claims, and precise corrections needed. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved revised strategy into a clear, concise, executive-ready product strategy document. Preserve the substantive recommendations and country distinctions. Organize it with an executive summary, strategic principles, shared technology core, country-by-country localization plan, channel and procurement strategy, rollout roadmap, operating model, KPIs, risks and mitigations, and key decisions. Use precise language, useful tables where appropriate, explicit assumptions, and a balanced tone. Remove repetition and unsupported certainty. Deliver only the final user-facing strategy."
+    }
+  ],
+  "explanation": "The pipeline begins by creating a broad multinational strategy, then adds comparative country and procurement analysis and specialized education-policy expertise. A refiner integrates those findings into a coherent plan. The quality reviewer assesses the revised strategy and routes pass to the final polisher or revise back to the refiner for correction. The final polisher produces the executive-ready output."
+}

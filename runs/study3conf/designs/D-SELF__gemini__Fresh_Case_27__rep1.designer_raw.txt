@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze regional data for Southeast Asia, Middle East, Latin America, and Europe regarding Korean content consumption, dubbing preferences, and cultural sensitivities.",
+      "description": "Analyzes market data."
+    },
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft a comprehensive localization and marketing strategy based on the provided market analysis, prioritizing budget allocation for high-impact regions.",
+      "description": "Drafts the initial strategy."
+    },
+    {
+      "name": "ComplianceCritic",
+      "role": "critic",
+      "systemPrompt": "Review the strategy for cultural sensitivity, dubbing quality standards, and budget adherence. Provide detailed reasoning. On the last line, output 'pass' or 'revise'.",
+      "description": "Validates the strategy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "Update the strategy based on feedback from the ComplianceCritic to ensure all regional requirements are met.",
+      "description": "Refines the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, actionable document for the streaming platform.",
+      "description": "Finalizes the output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze regional data for Southeast Asia, Middle East, Latin America, and Europe regarding Korean content consumption, dubbing preferences, and cultural sensitivities."
+    },
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive localization and marketing strategy based on the provided market analysis, prioritizing budget allocation for high-impact regions."
+    },
+    {
+      "name": "ComplianceCritic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the strategy for cultural sensitivity, dubbing quality standards, and budget adherence. Provide detailed reasoning. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Update the strategy based on feedback from the ComplianceCritic to ensure all regional requirements are met."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, actionable document for the streaming platform."
+    }
+  ],
+  "explanation": "MarketAnalyst → StrategyBuilder → ComplianceCritic (if revise, loops back to StrategyRefiner) → FinalPolisher. This flow ensures data-driven strategy creation with iterative quality control."
+}

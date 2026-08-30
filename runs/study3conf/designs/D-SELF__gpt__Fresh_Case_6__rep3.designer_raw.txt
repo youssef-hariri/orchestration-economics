@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Global Sovereignty Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Create a comprehensive initial strategy for a global SaaS provider transitioning from a single-region architecture to national or regional sovereign clouds by 2026. Address regulatory compliance, data residency, migration sequencing, product and feature parity, pricing, service levels, security, support operations, customer segmentation, churn prevention, and transparent communications. Tailor the strategy to enterprise customers, procurement teams, legal stakeholders, technical decision-makers, and end users across culturally diverse markets. Account for differing levels of trust in governments and foreign vendors, and distinguish universal commitments from locally adaptable messaging. Produce an actionable, evidence-aware strategic draft with objectives, risks, mitigations, communication principles, sample messages, and measurable success indicators.",
+      "description": "Develops the first complete transition and communication strategy."
+    },
+    {
+      "name": "Cultural and Regulatory Insight Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed sovereign-cloud transition strategy for cultural, geopolitical, regulatory, procurement, and customer-trust implications. Identify where assumptions may differ across regions, including attitudes toward government oversight, foreign technology providers, local control, privacy, security, pricing, feature availability, and operational continuity. Recommend market-specific adaptations for communications, migration support, stakeholder engagement, escalation handling, and trust-building. Highlight unsupported claims, risks of cultural insensitivity, and areas requiring careful legal qualification. Provide concrete findings and recommendations for use in revising the strategy.",
+      "description": "Surfaces regional, cultural, procurement, and regulatory insights that strengthen the strategy."
+    },
+    {
+      "name": "Sovereign Cloud Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite and substantially improve the initial strategy using the analyst's findings. Deliver one coherent, practical, globally applicable strategy for executing and communicating the sovereign-cloud transition. Preserve global consistency while allowing culturally and commercially appropriate localization. Include governance, customer segmentation, migration paths, timelines, product parity commitments, pricing protections, support models, data-transfer explanations, security assurances, contract and procurement considerations, two-way feedback mechanisms, crisis communications, and measurable trust and churn indicators. Use respectful, plain language and avoid overpromising or presenting legal advice as fact. Make the recommendations specific enough for executive, customer-success, marketing, sales, legal, product, and engineering teams to act on.",
+      "description": "Integrates analytical feedback into a stronger, actionable transition strategy."
+    },
+    {
+      "name": "Sovereignty Transition Quality Review",
+      "role": "critic",
+      "systemPrompt": "Review the refined strategy as a rigorous quality assessor. Evaluate completeness, factual caution, feasibility, internal consistency, cultural sensitivity, regional adaptability, customer-trust preservation, churn mitigation, migration practicality, transparency about feature and pricing impacts, procurement usefulness, and clarity for executive implementation. Identify strengths, weaknesses, omissions, contradictions, vague recommendations, risky wording, and any implicit bias toward a particular government's or vendor's perspective. Provide detailed, actionable corrections that a refiner can apply. Then on the VERY LAST LINE output EXACTLY ONE keyword from this list: pass, revise.",
+      "description": "Determines whether the strategy is sufficiently complete, credible, culturally sensitive, and actionable."
+    },
+    {
+      "name": "Final Sovereignty Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer based on the refined strategy and quality review. If issues were identified, incorporate every necessary correction while preserving useful detail. Present a clear executive-ready outline covering strategic principles, customer segmentation, regional and cultural adaptations, migration execution, product and pricing commitments, trust and security communications, procurement engagement, support and escalation, timeline, metrics, and sample communication guidance. Separate universal commitments from locally tailored approaches. Use concise headings, practical bullets, empathetic language, and explicit cautions against unsupported legal or technical claims. Ensure the final answer directly explains how to preserve trust and minimize churn during the transition.",
+      "description": "Formats and finalizes the strategy into a clear, actionable answer for stakeholders."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Sovereignty Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create a comprehensive initial strategy for a global SaaS provider transitioning from a single-region architecture to national or regional sovereign clouds by 2026. Address regulatory compliance, data residency, migration sequencing, product and feature parity, pricing, service levels, security, support operations, customer segmentation, churn prevention, and transparent communications. Tailor the strategy to enterprise customers, procurement teams, legal stakeholders, technical decision-makers, and end users across culturally diverse markets. Account for differing levels of trust in governments and foreign vendors, and distinguish universal commitments from locally adaptable messaging. Produce an actionable, evidence-aware strategic draft with objectives, risks, mitigations, communication principles, sample messages, and measurable success indicators."
+    },
+    {
+      "name": "Cultural and Regulatory Insight Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed sovereign-cloud transition strategy for cultural, geopolitical, regulatory, procurement, and customer-trust implications. Identify where assumptions may differ across regions, including attitudes toward government oversight, foreign technology providers, local control, privacy, security, pricing, feature availability, and operational continuity. Recommend market-specific adaptations for communications, migration support, stakeholder engagement, escalation handling, and trust-building. Highlight unsupported claims, risks of cultural insensitivity, and areas requiring careful legal qualification. Provide concrete findings and recommendations for use in revising the strategy."
+    },
+    {
+      "name": "Sovereign Cloud Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite and substantially improve the initial strategy using the analyst's findings. Deliver one coherent, practical, globally applicable strategy for executing and communicating the sovereign-cloud transition. Preserve global consistency while allowing culturally and commercially appropriate localization. Include governance, customer segmentation, migration paths, timelines, product parity commitments, pricing protections, support models, data-transfer explanations, security assurances, contract and procurement considerations, two-way feedback mechanisms, crisis communications, and measurable trust and churn indicators. Use respectful, plain language and avoid overpromising or presenting legal advice as fact. Make the recommendations specific enough for executive, customer-success, marketing, sales, legal, product, and engineering teams to act on."
+    },
+    {
+      "name": "Sovereignty Transition Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy as a rigorous quality assessor. Evaluate completeness, factual caution, feasibility, internal consistency, cultural sensitivity, regional adaptability, customer-trust preservation, churn mitigation, migration practicality, transparency about feature and pricing impacts, procurement usefulness, and clarity for executive implementation. Identify strengths, weaknesses, omissions, contradictions, vague recommendations, risky wording, and any implicit bias toward a particular government's or vendor's perspective. Provide detailed, actionable corrections that a refiner can apply. Then on the VERY LAST LINE output EXACTLY ONE keyword from this list: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Sovereignty Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer based on the refined strategy and quality review. If issues were identified, incorporate every necessary correction while preserving useful detail. Present a clear executive-ready outline covering strategic principles, customer segmentation, regional and cultural adaptations, migration execution, product and pricing commitments, trust and security communications, procurement engagement, support and escalation, timeline, metrics, and sample communication guidance. Separate universal commitments from locally tailored approaches. Use concise headings, practical bullets, empathetic language, and explicit cautions against unsupported legal or technical claims. Ensure the final answer directly explains how to preserve trust and minimize churn during the transition."
+    }
+  ],
+  "explanation": "The flow is Builder → Cultural and Regulatory Analyst → Refiner → Quality Review. If the review outputs revise, execution returns to the Refiner with the review findings; if it outputs pass, execution continues to the Polisher. The Polisher then produces the final user-facing strategy. This sequence first creates a complete plan, adds region-specific insight, integrates that insight, checks strategic and cultural quality, and finally formats a practical executive-ready response."
+}

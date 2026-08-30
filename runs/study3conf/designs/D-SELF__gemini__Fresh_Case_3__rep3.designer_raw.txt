@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "StrategyArchitect",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive supplier onboarding framework for Mexico, Morocco, and Vietnam. Focus on cultural intelligence, localized quality management protocols, and communication synchronization. Create specific actionable guidelines for each region.",
+      "description": "Generates the initial strategic onboarding framework."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Review the onboarding framework. Assess if the advice for Mexico, Morocco, and Vietnam accurately reflects local business customs, communication styles, and quality management traditions. Identify gaps in cultural sensitivity.",
+      "description": "Provides domain-specific cultural and operational feedback."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate the cultural expert's feedback to adjust the onboarding framework. Ensure the tone is professional, the instructions are clear, and the regional nuances are accurately addressed.",
+      "description": "Refines the framework based on expert critique."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined framework for clarity, cultural accuracy, and operational feasibility. Provide a detailed assessment of whether the plan effectively mitigates misunderstandings in specifications and delivery. On the last line, output 'pass' or 'revise'.",
+      "description": "Validates the quality of the refined strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final onboarding framework into a professional, actionable document ready for distribution to supply chain managers.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive supplier onboarding framework for Mexico, Morocco, and Vietnam. Focus on cultural intelligence, localized quality management protocols, and communication synchronization. Create specific actionable guidelines for each region."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the onboarding framework. Assess if the advice for Mexico, Morocco, and Vietnam accurately reflects local business customs, communication styles, and quality management traditions. Identify gaps in cultural sensitivity."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate the cultural expert's feedback to adjust the onboarding framework. Ensure the tone is professional, the instructions are clear, and the regional nuances are accurately addressed."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined framework for clarity, cultural accuracy, and operational feasibility. Provide a detailed assessment of whether the plan effectively mitigates misunderstandings in specifications and delivery. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final onboarding framework into a professional, actionable document ready for distribution to supply chain managers."
+    }
+  ],
+  "explanation": "The pipeline begins with the StrategyArchitect creating the core onboarding plan. The CulturalExpert reviews this against regional specifics. The ContentRefiner updates the plan based on that expert feedback. The QualityGate then assesses the document; if it identifies issues, it routes back to the ContentRefiner. Once the QualityGate issues a 'pass', the FinalPolisher formats the document for the user."
+}

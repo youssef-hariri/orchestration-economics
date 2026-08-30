@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the 2026 remittance landscape across EU, Gulf, SE Asia, and LATAM. Identify specific capital-control constraints, settlement-currency volatility, and technical maturity gaps for local banking partners. Quantify the margin impact per corridor.",
+      "description": "Gathers and synthesizes data on regional financial regulations and corridor profitability."
+    },
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft a comprehensive financial-operations strategy that optimizes for compliance costs, minimizes settlement risk, and maximizes corridor margins. Propose a tiered approach for partner engagement based on technical maturity.",
+      "description": "Develops the core operational strategy based on market data."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "systemPrompt": "Review the strategy for regulatory alignment across divergent licensing regimes. Ensure the plan addresses KYC and AML requirements in the EU, Gulf, SE Asia, and LATAM. Incorporate necessary corrections to ensure the strategy is legally sound and operationally viable.",
+      "description": "Adjusts the strategy based on expert regulatory requirements."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Assess the strategy for completeness, regulatory robustness, and operational feasibility. Provide a detailed critique. If the strategy is insufficient, output 'revise'. If it meets all criteria, output 'pass'. On the last line, output ONLY 'pass' or 'revise'.",
+      "description": "Final validation gate for the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional executive document. Ensure clarity, actionable insights, and logical flow for stakeholders.",
+      "description": "Finalizes the document for presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the 2026 remittance landscape across EU, Gulf, SE Asia, and LATAM. Identify specific capital-control constraints, settlement-currency volatility, and technical maturity gaps for local banking partners. Quantify the margin impact per corridor."
+    },
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive financial-operations strategy that optimizes for compliance costs, minimizes settlement risk, and maximizes corridor margins. Propose a tiered approach for partner engagement based on technical maturity."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Review the strategy for regulatory alignment across divergent licensing regimes. Ensure the plan addresses KYC and AML requirements in the EU, Gulf, SE Asia, and LATAM. Incorporate necessary corrections to ensure the strategy is legally sound and operationally viable."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the strategy for completeness, regulatory robustness, and operational feasibility. Provide a detailed critique. If the strategy is insufficient, output 'revise'. If it meets all criteria, output 'pass'. On the last line, output ONLY 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional executive document. Ensure clarity, actionable insights, and logical flow for stakeholders."
+    }
+  ],
+  "explanation": "The pipeline starts with the MarketAnalyst to define the constraints, followed by the StrategyBuilder to create the initial plan. The ComplianceRefiner ensures regulatory alignment. The QualityGate evaluates the output; if 'revise' is triggered, it loops back to the ComplianceRefiner to fix issues. Once 'pass' is triggered, the FinalPolisher formats the output."
+}

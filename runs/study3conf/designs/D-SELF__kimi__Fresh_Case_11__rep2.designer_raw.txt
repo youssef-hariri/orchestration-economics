@@ -1,0 +1,73 @@
+{
+  "agents": [
+    {
+      "name": "Corridor Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a senior financial operations strategist at a global payments consultancy. Draft a comprehensive, actionable financial-operations strategy for a mid-size payments firm operating in 2026. The firm runs licensed remittance corridors between the EU, the Gulf, Southeast Asia, and Latin America. Each bloc enforces distinct licensing, KYC, and settlement-currency rules; several corridors face new capital-control measures. Margins differ sharply by corridor, and local banking partners have uneven technical maturity. Your strategy must address: (1) corridor prioritization and expansion roadmap, (2) compliance architecture and cost optimization under divergent licensing regimes, (3) settlement-risk management (currency, liquidity, counterparty), (4) partner selection and technical-enablement economics, (5) capital-control mitigation tactics, and (6) organizational capabilities required. Produce a structured, detailed strategy document with clear sections, prioritization logic, and concrete recommendations.",
+      "description": "Creates the initial comprehensive cross-border payments strategy covering all four regional blocs, licensing, KYC, settlement, and partner economics."
+    },
+    {
+      "name": "Cross-Border Payments Expert",
+      "role": "expert",
+      "systemPrompt": "You are a distinguished cross-border payments expert with deep expertise in EU PSD3, Gulf CBDC and licensing frameworks, Southeast Asian payment licensing (e.g., BSP, MAS, BI), Latin American FX and capital-control regimes, and correspondent banking. Review the strategy document from the previous step. Identify regulatory inaccuracies, operational blind spots, unrealistic assumptions about partner technical maturity, insufficient risk-mitigation measures, and gaps in corridor economics. Provide detailed, specific, actionable feedback organized by theme. Do not rewrite the document; deliver expert critique and prioritized recommendations for improvement.",
+      "description": "Provides domain-specific expert review of the drafted strategy for regulatory accuracy, risk coverage, and operational feasibility."
+    },
+    {
+      "name": "Strategic Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a senior strategy refiner. Take the original strategy document and the expert feedback from the previous step. Produce a comprehensive revised strategy document that fully incorporates the expert's corrections, closes identified gaps, sharpens risk-mitigation tactics, and improves the economics analysis. Ensure the document remains cohesive, logically structured, and actionable. Output the complete revised strategy, not just a summary of changes.",
+      "description": "Revises the strategy document by integrating expert feedback into a cohesive, actionable whole."
+    },
+    {
+      "name": "Strategy Quality Validator",
+      "role": "critic",
+      "systemPrompt": "You are a senior strategy quality validator specializing in payments and fintech go-to-market execution. Evaluate the refined strategy document against these criteria: (A) All four regional blocs (EU, Gulf, Southeast Asia, Latin America) are addressed with specific, distinct regulatory and operational tactics; (B) Compliance costs are explicitly balanced against expansion ROI; (C) Settlement risk (currency, liquidity, counterparty, capital controls) is quantified or tiered with clear mitigation playbooks; (D) Partner economics and technical-maturity gaps are modeled with concrete enablement plans; (E) Recommendations are feasible for a mid-size firm, not just theoretical; (F) The strategy includes an actionable roadmap with phases and decision gates. Provide a FULL quality assessment—highlight strengths and enumerate specific weaknesses or omissions. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass.",
+      "description": "Evaluates the refined strategy against multi-dimensional quality criteria and routes the pipeline to retry or proceed."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications polisher. Format the final strategy document for C-suite and board-level consumption. Add an executive summary, tighten prose, ensure consistent heading hierarchy, highlight key risk matrices and financial trade-offs in scannable formats (tables or bullet matrices), and ensure all recommendations are stated with clear owners and timelines. Produce only the polished final document.",
+      "description": "Performs final formatting, quality check, and executive-ready presentation of the strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Corridor Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a senior financial operations strategist at a global payments consultancy. Draft a comprehensive, actionable financial-operations strategy for a mid-size payments firm operating in 2026. The firm runs licensed remittance corridors between the EU, the Gulf, Southeast Asia, and Latin America. Each bloc enforces distinct licensing, KYC, and settlement-currency rules; several corridors face new capital-control measures. Margins differ sharply by corridor, and local banking partners have uneven technical maturity. Your strategy must address: (1) corridor prioritization and expansion roadmap, (2) compliance architecture and cost optimization under divergent licensing regimes, (3) settlement-risk management (currency, liquidity, counterparty), (4) partner selection and technical-enablement economics, (5) capital-control mitigation tactics, and (6) organizational capabilities required. Produce a structured, detailed strategy document with clear sections, prioritization logic, and concrete recommendations."
+    },
+    {
+      "name": "Cross-Border Payments Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a distinguished cross-border payments expert with deep expertise in EU PSD3, Gulf CBDC and licensing frameworks, Southeast Asian payment licensing (e.g., BSP, MAS, BI), Latin American FX and capital-control regimes, and correspondent banking. Review the strategy document from the previous step. Identify regulatory inaccuracies, operational blind spots, unrealistic assumptions about partner technical maturity, insufficient risk-mitigation measures, and gaps in corridor economics. Provide detailed, specific, actionable feedback organized by theme. Do not rewrite the document; deliver expert critique and prioritized recommendations for improvement."
+    },
+    {
+      "name": "Strategic Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a senior strategy refiner. Take the original strategy document and the expert feedback from the previous step. Produce a comprehensive revised strategy document that fully incorporates the expert's corrections, closes identified gaps, sharpens risk-mitigation tactics, and improves the economics analysis. Ensure the document remains cohesive, logically structured, and actionable. Output the complete revised strategy, not just a summary of changes."
+    },
+    {
+      "name": "Strategy Quality Validator",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a senior strategy quality validator specializing in payments and fintech go-to-market execution. Evaluate the refined strategy document against these criteria: (A) All four regional blocs (EU, Gulf, Southeast Asia, Latin America) are addressed with specific, distinct regulatory and operational tactics; (B) Compliance costs are explicitly balanced against expansion ROI; (C) Settlement risk (currency, liquidity, counterparty, capital controls) is quantified or tiered with clear mitigation playbooks; (D) Partner economics and technical-maturity gaps are modeled with concrete enablement plans; (E) Recommendations are feasible for a mid-size firm, not just theoretical; (F) The strategy includes an actionable roadmap with phases and decision gates. Provide a FULL quality assessment—highlight strengths and enumerate specific weaknesses or omissions. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass.",
+      "whileOptions": ["retry", "pass"],
+      "whileMappings": {
+        "retry": 2,
+        "pass": 4
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications polisher. Format the final strategy document for C-suite and board-level consumption. Add an executive summary, tighten prose, ensure consistent heading hierarchy, highlight key risk matrices and financial trade-offs in scannable formats (tables or bullet matrices), and ensure all recommendations are stated with clear owners and timelines. Produce only the polished final document."
+    }
+  ],
+  "explanation": "The pipeline opens with the Corridor Strategy Builder to produce a comprehensive initial draft covering all four regulatory blocs, licensing divergence, settlement risk, and partner economics. Next, the Cross-Border Payments Expert reviews the draft for regulatory accuracy and operational realism, providing detailed critique without rewriting. The Strategic Refiner then fuses that expert feedback into a cohesive revised strategy document. The Strategy Quality Validator (a while gate) rigorously assesses the refined output against the six core task dimensions; if it outputs 'retry', the pipeline loops back to the Strategic Refiner for another improvement pass, with a hard maximum of 3 iterations. Once the validator outputs 'pass', the Executive Polisher delivers a board-ready final document with executive summary, risk matrices, and phased roadmap. This sequence balances strategic creativity, deep domain validation, iterative quality assurance, and executive polish within a compact five-step architecture."
+}

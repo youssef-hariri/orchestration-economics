@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategy Architect",
+      "role": "builder",
+      "description": "Creates a comprehensive sovereign-cloud transition strategy addressing regulatory compliance, customer segmentation, phased migration roadmap, and communication frameworks for diverse global audiences."
+    },
+    {
+      "name": "Cultural & Stakeholder Analyst",
+      "role": "analyst",
+      "description": "Analyzes customer segments by geography, industry, and procurement decision-making patterns. Identifies trust drivers, regulatory interpretations, and risk concerns across regions to inform targeted messaging."
+    },
+    {
+      "name": "Communication Strategist",
+      "role": "strategist",
+      "description": "Develops localized communication strategies, key messages, FAQ responses, and stakeholder engagement plans tailored to regional concerns (feature delays, pricing, government trust, vendor credibility)."
+    },
+    {
+      "name": "Domain Expert Reviewer",
+      "role": "expert",
+      "description": "Reviews strategy and communications for technical feasibility, legal compliance accuracy, churn-risk factors, and alignment with data-sovereignty regulatory landscape across target regions."
+    },
+    {
+      "name": "Consistency & Coherence Critic",
+      "role": "critic",
+      "description": "Evaluates the complete strategy and communication plan for internal coherence, message consistency across regions, contradiction identification, and risk mitigation comprehensiveness. Flags gaps requiring revision."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Revises strategy and communication frameworks based on expert feedback and critic findings. Resolves contradictions, strengthens churn-prevention measures, and ensures regional message alignment."
+    },
+    {
+      "name": "Executive Readiness Polisher",
+      "role": "polisher",
+      "description": "Formats final deliverable into executive-ready strategy document with clear sections: regulatory timeline, customer segmentation matrix, phased migration plan, regional communication templates, and churn-mitigation roadmap."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategic business architect designing a sovereign-cloud transition for a global SaaS provider. Create a comprehensive strategy addressing: (1) Regulatory compliance timeline and regional requirements by 2026; (2) Customer segmentation by geography, industry, risk profile, and procurement decision-maker type; (3) Phased migration roadmap minimizing service disruption; (4) Trust-preservation tactics for each segment; (5) Feature-parity and pricing communication frameworks; (6) Churn-risk mitigation for each customer cohort. Provide concrete, actionable recommendations grounded in data-sovereignty trends and enterprise customer behavior. Output a complete draft strategy document."
+    },
+    {
+      "name": "Cultural & Stakeholder Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the sovereign-cloud transition strategy through a cultural and stakeholder lens. For each major region (EU, APAC, Americas, etc.): Identify customer segments and their distinct concerns regarding data residency, government oversight, vendor credibility, and feature continuity. Map procurement decision-makers by geography and their trust drivers (local control vs. innovation vs. cost). Document regional regulatory interpretations and how they differ. Assess churn risk by segment and identify which customer cohorts are most sensitive to communication missteps. Output a detailed stakeholder analysis with regional trust profiles and communication priorities."
+    },
+    {
+      "name": "Communication Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Based on the strategy and stakeholder analysis, develop region-specific communication and engagement plans. For each major customer segment and geography, create: (1) Core messaging emphasizing local data control, compliance certainty, and vendor trustworthiness; (2) Proactive FAQ and objection-handling frameworks addressing feature delays, price increases, and migration risks; (3) Multi-stakeholder engagement sequences targeting procurement, compliance, technical, and executive decision-makers; (4) Timing and channel recommendations (webinars, direct outreach, account management touchpoints); (5) Success metrics for trust preservation and churn prevention. Ensure messaging acknowledges regional concerns about government access, foreign vendor dependence, and service reliability. Output communication templates and engagement roadmaps tailored by region."
+    },
+    {
+      "name": "Domain Expert Reviewer",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy, stakeholder analysis, and communication plan as a domain expert in data sovereignty, enterprise SaaS compliance, and global customer management. Assess: (1) Technical feasibility of the migration roadmap and regional architecture; (2) Legal accuracy regarding data-residency regulations (GDPR, CCPA, India data rules, China localization, etc.); (3) Realistic churn-risk factors and adequacy of mitigation tactics; (4) Message credibility for each region—will procurement and compliance teams trust the vendor's commitments?; (5) Alignment between phased migration and customer communication cadence; (6) Pricing and feature-parity strategy realism. Identify any factual errors, oversights, or high-risk assumptions. Provide expert recommendations for strengthening trust and reducing churn. Output full expert assessment with flagged risks and improvement suggestions."
+    },
+    {
+      "name": "Consistency & Coherence Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality critic reviewing the complete sovereign-cloud transition strategy, stakeholder analysis, and regional communication plans for internal consistency, message alignment, and churn-risk coverage. Evaluate: (1) Does the strategy coherently address all customer segments' distinct concerns (feature delays, pricing, trust)?; (2) Are regional messages consistent with the global brand while respecting local regulatory and cultural contexts?; (3) Do communication timings align with the phased migration roadmap?; (4) Are there contradictions between messaging for different stakeholders (e.g., procurement vs. technical teams)?; (5) Does the plan adequately address both 'celebrating' and 'fearful' customer cohorts?; (6) Are churn-prevention tactics proportionate to risk levels by region and segment? Provide detailed assessment of strengths, gaps, and contradictions. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner improving the sovereign-cloud transition plan based on expert feedback and consistency review. Address all flagged issues: (1) Resolve contradictions between regional messages and global strategy; (2) Strengthen churn-prevention tactics based on domain expert recommendations; (3) Improve legal accuracy and regulatory compliance references; (4) Enhance messaging credibility for skeptical procurement teams; (5) Align communication cadence with phased migration milestones; (6) Clarify stakeholder engagement sequences to prevent decision-maker confusion. Preserve all sound elements while fixing identified weaknesses. Output a revised, cohesive strategy with integrated communication plan ready for executive review."
+    },
+    {
+      "name": "Executive Readiness Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the refined sovereign-cloud transition strategy into an executive-ready deliverable. Structure as: (1) Executive Summary (key timeline, customer impact, churn mitigation); (2) Regulatory Landscape & Compliance Timeline (by region, 2026 deadline); (3) Customer Segmentation Matrix (geography, industry, concern profile, communication approach); (4) Phased Migration Roadmap (timeline, regional sequencing, risk mitigation); (5) Regional Communication Templates (core messages, FAQ by concern, multi-stakeholder talking points); (6) Churn-Prevention Action Plan (by segment, early warning indicators, account management tactics); (7) Success Metrics (trust scores, feature-parity perception, migration adoption rates, churn rates). Ensure clarity, professional formatting, and immediate actionability for leadership and customer-facing teams. Output polished, ready-to-present strategy document."
+    }
+  ],
+  "explanation": "This pipeline executes a comprehensive sovereign-cloud transition strategy by first establishing the strategic foundation, then analyzing cultural and stakeholder nuances, then developing localized communications, then validating through domain expertise and internal consistency checks with a quality gate that may loop back to refinement if issues are found, and finally polishing into executive-ready deliverables. The flow is: Builder (initial strategy) → Analyst (stakeholder & cultural insights) → Strategist (communication frameworks) → Expert (domain validation) → Critic IF gate (consistency check: pass→Polisher, revise→Refiner) → Refiner (if needed, resolves issues) → Polisher (final formatting). This design ensures the strategy accounts for regional trust dynamics, procurement decision-making patterns, and churn-risk factors across diverse customer segments before delivery, with a quality loop to catch coherence issues that could undermine customer trust during the migration."
+}
+```

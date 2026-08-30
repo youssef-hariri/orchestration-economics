@@ -1,0 +1,619 @@
+# COMPREHENSIVE COMPLIANCE PLAYBOOK & CUSTOMER COMMUNICATIONS STRATEGY
+## Multi-Jurisdictional AI Hiring Platform | 15-Country Deployment
+
+---
+
+# EXECUTIVE SUMMARY: COMPLIANCE & BRAND STRATEGY
+
+## Strategic Imperative
+A mid-sized AI hiring platform must operate across 15 jurisdictions with fundamentally incompatible regulatory frameworks—ranging from EU's mandatory explainability and human review (high-trust model) to China's data localization and government access (security-first model) to US's light-touch, speed-optimized approach. This playbook provides an integrated strategy to achieve simultaneous compliance while maintaining unified global branding and preventing customer confusion.
+
+## Key Strategic Principle
+**"One AI Engine, Three Compliance Modes, One Brand Story"**
+- Single fairness-tested AI model deployed across all regions
+- Region-specific feature toggles enforce different compliance requirements without code duplication
+- Isolated infrastructure (EU-only, China-only, US-shared) prevents cross-border data conflicts
+- Unified brand narrative ("Fair AI, Built for Trust") emphasizes consistency; regional sub-messaging explains necessary differences
+- Clear liability allocation: EU = joint vendor-customer; China = sole vendor; US = customer-primary with vendor support
+
+## Critical Success Factors
+1. ✅ **Modular product architecture** prevents regulatory conflicts (feature flags per cluster)
+2. ✅ **Infrastructure isolation** ensures data never crosses incompatible jurisdictions (cryptographic enforcement)
+3. ✅ **Transparent messaging** explains why platform "looks different" by region (regulatory requirement, not product fragmentation)
+4. ✅ **Multinational customer guidance** bridges compliance gaps for companies operating across clusters
+5. ✅ **Proof-of-fairness protocol** ensures equivalent bias testing across all regions (same testing, different accessibility per law)
+
+---
+
+---
+
+# PART I: UNIFIED COMPLIANCE MATRIX & PRODUCT SPECIFICATION
+
+## 1.1 Three-Cluster Regulatory Taxonomy
+
+### **CLUSTER 1: EU-ALIGNED REGIMES** (High-Compliance Model)
+**Jurisdictions**: EU (27 states), UK, Canada, Brazil, Australia | **Enforcement Level**: HIGH
+
+#### Core Obligations
+```
+MANDATORY REQUIREMENTS (Regulatory Basis)
+═══════════════════════════════════════════════════════════════
+
+1. EXPLICIT CONSENT (GDPR Article 6(1)(a); AIDA Canada)
+   └─ Three-purpose consent required:
+      ├─ Purpose A: "Hiring AI processing"
+      ├─ Purpose B: "Bias testing & fairness auditing"
+      └─ Purpose C: "Model improvement (cross-border aggregation)"
+   └─ Timing: PROSPECTIVE (before processing)
+   └─ Withdrawal: Immediate + retroactive deletion option within 30 days
+   └─ UI Component: "ConsentBannerMultiPurpose" (3 checkboxes, one per purpose)
+
+2. BIAS TESTING & FAIRNESS (EU AI Act Article 10; AIDA; Privacy Act AU)
+   └─ Trigger: Pre-deployment + quarterly minimum
+   └─ Metrics: Disparate impact (4/5ths rule = 0.80 ratio minimum)
+   └─ Protected Classes: Gender, race, age, disability, national origin, religion, sexual orientation (jurisdiction-specific)
+   └─ Threshold Action: If disparate_impact_ratio < 0.80
+      ├─ EU: BLOCK deployment until remediated; mandatory audit
+      ├─ Canada/Brazil/Australia: FLAG but allow with documentation
+   └─ Report Retention: Immutable 3-year record (blockchain-timestamped)
+   └─ Accessibility: Employer + DPA on audit request (candidate summary on demand)
+
+3. EXPLAINABILITY & RIGHT-TO-EXPLANATION (GDPR Article 22; AI Act Articles 13-14)
+   └─ Detail Level: HIGH (comprehensive technical explanation)
+   └─ Must Disclose:
+      ├─ Top 3-5 model factors (with SHAP values or similar)
+      ├─ Training data description (size, source, recency, composition)
+      ├─ Fairness audit results (bias metrics, protected class ratios)
+      ├─ Alternative scenarios ("If education were Master's, score would be X")
+      └─ Right to human review (explicit link/button)
+   └─ Accessibility: Candidate + employer dashboard + downloadable PDF
+   └─ Format: Technical (PDF) + Plain language (HTML) + Audio (optional)
+
+4. MANDATORY HUMAN REVIEW (EU AI Act Article 6(3)(d); AIDA)
+   └─ Requirement: EVERY high-risk hiring decision requires human reviewer approval
+   └─ Trigger Rules:
+      ├─ Score in boundary zone [0.45-0.55]
+      ├─ Bias flag detected (disparate impact signal)
+      └─ High-stakes roles (C-suite, safety-critical, protected professions)
+   └─ SLA: 48 hours maximum (hiring delay acceptable for fairness)
+   └─ Reviewer Requirements: Trained, documented, with appeal mechanism
+   └─ UI Component: "HumanReviewQueue" (mandatory; cannot be disabled)
+
+5. DATA LOCALIZATION (GDPR Articles 44-49; No prohibition, but best practice)
+   └─ Requirement: EU data stored in EU data centers only
+   └─ Services Affected: Inference, training, storage (all in eu-west region)
+   └─ Enforcement: Code-level firewall rule
+      ```
+      if (inference_region != 'eu-west' || storage_region != 'eu-west'):
+          sys.exit("FATAL: Data must remain in EU. GDPR violation prevented.")
+      ```
+   └─ Backup: Ireland secondary (EU intra-zone only; no third-country transfer)
+   └─ Transfer: Cross-border EU transfers allowed (DPA intra-zone)
+
+6. RIGHT TO ERASURE (GDPR Article 17; AIDA)
+   └─ Mechanism: "Delete My Data" button in candidate dashboard
+   └─ Timeline: 30-day GDPR deadline; we deliver in 7 days (verification period)
+   └─ Scope: Cascading delete (candidate record → assessments → audit logs marked with GDPR erasure flag)
+   └─ Residual Data: Aggregate fairness metrics retained (anonymized; non-identifiable)
+   └─ Proof: Deletion certificate PDF provided to candidate
+
+7. AUDIT TRAIL & LOGGING (GDPR Article 32; AI Act Article 11)
+   └─ Completeness: Full immutable audit trail (who, what, when, why)
+   └─ Fields Logged: timestamp, user_id, candidate_id, decision, score, factors, bias_metrics, model_version, consent_status, review_status, reviewer_notes
+   └─ Retention: 3 years minimum (GDPR requirement)
+   └─ Immutability: Blockchain-validated; cannot be modified or deleted post-creation
+   └─ Access: Employer (own records), DPA (on formal audit request), Candidate (summary on demand)
+
+8. IMPACT ASSESSMENT (GDPR Article 35; EU AI Act)
+   └─ Frequency: Annual mandatory + before major model updates
+   └─ Content: Data flows, risk analysis (bias, discrimination, breach), mitigation measures
+   └─ Scope: Includes bias risks, discrimination risks, data protection risks
+   └─ Accessibility: Internal compliance file + summary available to candidate
+   └─ Certification: Can be validated by independent auditor (not required but recommended)
+
+9. TRANSPARENCY NOTICE (GDPR Article 14; AI Act Article 13)
+   └─ Content: Candidate must be informed:
+      ├─ "AI is used to score your application"
+      ├─ Top 5 decision factors (brief summary)
+      ├─ "You have the right to human review"
+      ├─ "Your data will be deleted [DATE]" (post-decision retention only)
+      └─ "For questions: support@platform.com"
+   └─ Timing: Provided before decision (prospective); repeated in notification
+   └─ Language: Plain language (no jargon); WCAG accessibility
+
+10. DATA PROCESSING AGREEMENT (GDPR Article 28)
+    └─ Required: Yes (mandatory for all controller-processor relationships)
+    └─ Content: Standard template with:
+       ├─ Data categories
+       ├─ Processing locations (EU only)
+       ├─ Retention periods
+       ├─ Sub-processor list
+       ├─ DPA audit rights
+       └─ Liability allocation (joint vendor-customer)
+    └─ Signing: Required before customer deployment in any EU region
+```
+
+#### Product Feature Implementation (EU-Aligned Cluster)
+
+```yaml
+FEATURE_FLAGS:
+  
+  CLUSTER_1_EU_ALIGNED:
+    
+    CONSENT_MANAGEMENT:
+      enabled: true
+      consent_type: "explicit_per_purpose"
+      purposes:
+        - hiring_ai_processing
+        - bias_testing_fairness_audit
+        - model_improvement_cross_border
+      consent_timing: "PROSPECTIVE"  # Before processing
+      withdrawal_mechanism: "immediate_stop_and_retroactive_deletion"
+      withdrawal_timeline_days: 30
+      refresh_frequency_months: 12
+      ui_component: "ConsentBannerMultiPurpose"
+    
+    BIAS_TESTING:
+      enabled: true
+      mandatory: true
+      pre_deployment: true
+      recurring_frequency: "QUARTERLY"
+      protected_classes: [gender, race, age, disability, national_origin, religion]
+      metrics:
+        - disparate_impact_ratio
+        - demographic_parity
+        - fairness_ratio
+      threshold:
+        metric: "disparate_impact_ratio"
+        minimum: 0.80  # 4/5ths rule
+        if_breached: "BLOCK_DEPLOYMENT_AND_ESCALATE_TO_AUDIT"
+      report_accessibility: [employer, dpa_on_request, candidate_summary]
+      immutability: "blockchain_timestamped"
+      retention_years: 3
+    
+    EXPLAINABILITY:
+      enabled: true
+      mandatory: true
+      detail_level: "HIGH"
+      components:
+        - model_factors: true  # SHAP values, top 3-5
+        - training_data_summary: true  # Source, size, composition, recency
+        - fairness_metrics: true  # Bias audit results
+        - alternative_scenarios: true  # Counterfactual: "If X, score would be Y"
+      accessibility: [candidate, employer, regulator]
+      format: [technical_pdf, plain_text_html, audio_optional]
+      update_frequency: "post_decision_only"  # No real-time changes to explanations
+    
+    HUMAN_REVIEW:
+      enabled: true
+      mandatory: true
+      trigger_rules:
+        - score_near_boundary: [0.45, 0.55]
+        - high_impact_role: true  # C-suite, safety-critical
+        - bias_flag_detected: true
+      review_ui_component: "HumanReviewQueue"
+      sla_hours: 48
+      appeals_mechanism: "candidate_can_request_secondary_review"
+      reviewer_training: "required"
+      decision_logging: "immutable"
+    
+    DATA_GOVERNANCE:
+      data_localization:
+        enabled: true
+        requirement: "eu_data_centers_only"
+        services: [inference, training, storage]
+        primary_region: "eu-west-1"  # Frankfurt
+        secondary_region: "eu-west-3"  # Ireland (failover only)
+        encryption:
+          at_rest: "AES-256-GCM"
+          in_transit: "TLS-1.3"
+        key_management: "HSM_stored_rotated_quarterly"
+      
+      data_retention:
+        candidate_data_days: 180  # 6 months post-decision
+        audit_logs_days: 1095  # 3 years
+        deletion_verification_days: 7  # Soft → hard delete
+        policy: "data_minimization"
+      
+      audit_logging:
+        completeness: "full_audit_trail"
+        immutability: "blockchain_validated"
+        fields: [timestamp, user_id, candidate_id, decision, score, factors, bias_metrics, model_version, consent_status, review_status]
+        access: [employer_own_records, dpa_on_audit_request, candidate_summary]
+      
+      cross_border_transfer:
+        within_eu: "allowed_with_dpa_consent"
+        outside_eu: "prohibited"
+        legal_basis: "GDPR_adequacy_mechanism_or_SCCs"
+    
+    IMPACT_ASSESSMENT:
+      enabled: true
+      mandatory: true
+      frequency: "annual_plus_before_model_updates"
+      scope: [data_quality, bias_testing, human_impact, mitigation_measures]
+      template: "eu_ai_act_mandatory_template"
+      certification: "independent_auditor_optional"
+      availability: "public_summary_plus_detailed_to_regulator"
+    
+    REGULATORY_REPORTING:
+      dpa_access: true
+      breach_notification_hours: 72
+      audit_rights: "unrestricted_access_to_logs_and_infrastructure"
+      incident_response_sla_hours: 24  # Customer notification
+      documentation_requirement: "mandatory"
+
+  PRODUCT_UI_CHANGES_EU_ALIGNED:
+    
+    CANDIDATE_DASHBOARD:
+      components:
+        - "Why You Scored This Way" (explainability, full detail)
+        - "Request Human Review" (button, triggers secondary reviewer)
+        - "Download Your Data" (GDPR export, machine-readable JSON)
+        - "Delete My Data" (immediate soft delete, 7-day hard delete, verification cert)
+        - "Appeal This Decision" (optional; initiates human review)
+        - "Contact Support" (for questions on scoring factors)
+    
+    EMPLOYER_DASHBOARD:
+      components:
+        - "Bias Audit Results" (quarterly reports, pass/fail status)
+        - "Human Review Queue" (mandatory; shows pending reviews with SLA countdown)
+        - "Data Processing Agreement" (acknowledgment required)
+        - "GDPR Deletion Requests" (log of all deletion requests, completion dates)
+        - "AI Impact Assessment" (annual report, downloadable PDF)
+        - "Candidate Transparency Reports" (aggregate: how many saw full explanation, requested review, appealed)
+        - "Model Version History" (with bias test results per version)
+    
+    COMPLIANCE_OFFICER_DASHBOARD (NEW):
+      components:
+        - Real-time Bias Monitoring (alerts if disparate_impact > 0.80)
+        - Audit Log Explorer (immutable, searchable, filterby date/user/decision)
+        - Model Version Registry (version history + bias test certification per version)
+        - DPA Communication Log (all regulator inquiries, responses, evidence)
+        - Annual Certification Status (DPA, impact assessment, technical file, bias audit)
+        - Incident Tracker (breach reports, response timeline, resolution)
+
+  COMPLIANCE_COST_MODEL_EU_ALIGNED:
+    annual_infrastructure: 80000  # EU data center, encryption, HA
+    annual_bias_testing: 40000    # Quarterly audits + validation
+    annual_documentation: 35000   # Impact assessments, technical files
+    annual_audit_support: 25000   # DPA communication, breach response
+    total_annual: 180000
+    per_customer_amortized: 150   # (Shared across ~1,200 EU customers)
+```
+
+---
+
+### **CLUSTER 2: DATA-SOVEREIGNTY-STRICT REGIMES** (Localization Model)
+**Jurisdictions**: China, UAE, India | **Enforcement Level**: CRITICAL | **Infrastructure**: COMPLETELY ISOLATED
+
+#### Core Obligations
+
+```
+MANDATORY REQUIREMENTS (Regulatory Basis)
+═══════════════════════════════════════════════════════════════
+
+1. ALGORITHM REGISTRATION & PRE-DEPLOYMENT APPROVAL (PIPL + CAC Rules China)
+   └─ Requirement: MANDATORY before any candidate data processing
+   └─ Authority: CAC (Cyberspace Administration of China)
+   └─ Submission Content:
+      ├─ Algorithm description (Mandarin; technical details)
+      ├─ Training data source and composition
+      ├─ Fairness testing methodology
+      ├─ Security measures (encryption, access controls)
+      └─ Open-source code (if applicable)
+   └─ Approval Timeline: 30 days typical (can extend to 60 days for review)
+   └─ Approval Certificate: Valid 12 months; renewal required before expiration
+   └─ Update Process: Any model changes require re-registration (not automatic)
+   └─ Compliance: Service halted if registration expired (automatic enforcement)
+
+2. DATA LOCALIZATION—ABSOLUTE PROHIBITION ON CROSS-BORDER TRANSFER (PIPL Article 38; DSL)
+   └─ Requirement: ALL recruitment data must remain in-country (China)
+   └─ Scope: Training data, inference data, audit logs, candidate records
+   └─ Prohibited: Export to any foreign jurisdiction for any purpose
+   └─ Enforcement: Criminal liability for executives if violated
+   └─ Code-Level Protection:
+      ```
+      if (is_china_candidate_data(record)) {
+          if (target_storage_location != 'china_region'):
+              raise ComplianceError("PIPL violation: Cannot export China data")
+          if (target_inference_location != 'china_servers'):
+              raise ComplianceError("PIPL violation: Cannot process outside China")
+      }
+      ```
+   └─ No Exceptions: Cannot be waived by customer consent or contract amendment
+
+3. MODEL ISOLATION (PIPL Principle: Local Training Only)
+   └─ Requirement: China model trained ONLY on Chinese candidate data
+   └─ Prohibition: No federation with other regions' models; no cross-border model sync
+   └─ Consequence: China fairness metrics may differ slightly from EU metrics (acceptable per PIPL)
+   └─ Infrastructure: Separate model pipeline (CN_Model_v1.0, CN_Model_v2.0, etc.)
+   └─ Verification: Audit trail confirms no non-China data in training
+
+4. GOVERNMENT AUDIT ACCESS (PIPL Article 38; CAC Enforcement Authority)
+   └─ Requirement: Unrestricted government access to all audit logs, data, algorithms
+   └─ Access Method: VPN connection to CAC; 24/7 availability
+   └─ Scope: Any model decision, any candidate record, any system log
+   └─ Response SLA: Immediate (no delays; real-time government monitoring)
+   └─ Transparency: ZERO (government does not disclose queries to customer)
+   └─ Liability: Vendor solely responsible; cannot be delegated to customer
+
+5. FAIRNESS CERTIFICATION (CAC-Approved Lab Requirement)
+   └─ Requirement: Pre-deployment + quarterly recertification
+   └─ Testing Authority: CAC-approved fairness testing lab (government-designated)
+   └─ Metrics: Government-specified fairness thresholds (typically: 50% ±5% gender parity, age-neutral scoring)
+   └─ Breach Action: Service immediately halted if fairness certification fails
+   └─ Certificate Validity: 12 months; renewal 60 days before expiration
+   └─ Accessibility: Certificate held by vendor; shared with government only (customer access optional)
+
+6. RESTRICTED OPERATIONS (PIPL Data Sovereignty Principle)
+   └─ Prohibited: Model training with non-China data
+   └─ Prohibited: Candidate data aggregation across borders
+   └─ Prohibited: API exposure to foreign systems
+   └─ Prohibited: Backup to non-local servers
+   └─ Prohibited: Cloud synchronization outside China
+   └─ Prohibited: Model sharing with other regions
+   └─ Enforcement: Network firewall + cryptographic key separation
+
+7. CONSENT MODEL (Simplified: Algorithm-Registration-Based)
+   └─ Requirement: Lighter than EU; authority-driven instead of individual consent
+   └─ Notice: Government-approved template (minimal)
+   └─ Content: "This hiring AI is registered with [CAC cert #]. By applying, you consent."
+   └─ Withdrawal: Limited (user can opt-out but platform may become unavailable)
+   └─ Data Minimization: Collect only necessary fields (name, resume, education, experience; no age/gender collection)
+
+8. GOVERNMENT BREACH NOTIFICATION (DSL Article 27; CAC Enforcement)
+   └─ Requirement: 24-hour notification to CAC (shorter than EU's 72 hours)
+   └─ Content: Detailed incident description, data affected, remediation steps
+   └─ Escalation: Immediate if fairness degradation detected (separate 48-hour report)
+   └─ No Candidate Notification: Government decides whether/how to inform candidates (vendor not involved)
+
+9. AUDIT TRAIL & REAL-TIME MONITORING (CAC Mandate)
+   └─ Logging: Complete audit trail of all decisions, model updates, system access
+   └─ Accessibility: Real-time to CAC (no delay; streaming logs)
+   └─ Retention: Indefinite (government indefinite retention policy)
+   └─ Encryption: China-approved algorithms only (SM4 or AES-256)
+   └─ Backup: Government-designated secure location (vendor cannot choose)
+
+10. DATA DELETION RIGHTS (NONE—Sovereignty Principle)
+    └─ Requirement: NO deletion rights for candidates (data locked to jurisdiction)
+    └─ Rationale: Data sovereignty + government audit requirements
+    └─ Consequence: Candidate cannot request data erasure (PIPL override of GDPR concepts)
+    └─ UI: No "Delete My Data" button (unavailable feature, not hidden/discouraged)
+```
+
+#### Product Feature Implementation (China-Specific)
+
+```yaml
+FEATURE_FLAGS:
+  
+  CLUSTER_2_CHINA_DATA_SOVEREIGN:
+    
+    ALGORITHM_REGISTRATION:
+      enabled: true
+      mandatory: true
+      authority: "CAC"
+      requirement: "pre_deployment_approval"
+      submission_process:
+        - algorithm_description_submission  # Mandarin, technical
+        - security_audit_by_cac_approved_firm
+        - bias_testing_per_cac_spec
+        - government_approval_certificate
+      update_process: "cac_approval_required_for_any_model_changes"
+      certificate_validity_months: 12
+      renewal_reminder_days_before_expiry: 60
+      breach_notification_hours: 24
+      breach_escalation: "cac_immediate_notification_plus_48h_fairness_report"
+    
+    DATA_LOCALIZATION:
+      enabled: true
+      requirement: "MANDATORY"
+      scope: "ALL_PERSONAL_DATA"
+      location_rules:
+        china: "mainland_china_servers_only"
+        export_prohibited: true
+        cross_border_transfer: "PROHIBITED"
+      enforcement:
+        code_level: true  # sys.exit() if export attempted
+        network_level: true  # Firewall blocks foreign API calls
+        cryptographic_level: true  # Keys stored in-country only
+      backup_location: "china_datacenter_only_no_replication"
+    
+    GOVERNMENT_ACCESS:
+      enabled: true
+      requirement: "unrestricted_backdoor"
+      access_authority: [cac, data_protection_authority, security_agency]
+      audit_frequency: "on_demand_24_7"
+      data_request_response_time: "immediate_real_time"
+      transparency_obligation: "ZERO"  # No disclosure to customer
+      vpn_availability: "24_7_with_no_downtime"
+    
+    FAIRNESS_CERTIFICATION:
+      enabled: true
+      mandatory: true
+      testing_lab: "cac_approved_only"
+      metrics: "government_specified_fairness_thresholds"
+      testing_frequency: "pre_deployment_plus_quarterly"
+      certification_validity_months: 12
+      breach_action: "immediate_service_halt"
+      breach_notification: "24_hours_to_cac_plus_48h_root_cause_analysis"
+    
+    RESTRICTED_OPERATIONS:
+      enabled: true
+      restrictions:
+        no_cross_border_model_training: true
+        no_model_sharing_with_other_regions: true
+        no_candidate_data_aggregation_across_borders: true
+        no_api_exposure_to_non_approved_consumers: true
+        no_backup_to_non_local_servers: true
+        no_cloud_synchronization: true
+      enforcement: "network_firewall_and_cryptographic_enforcement"
+    
+    CONSENT_REQUIREMENT:
+      enabled: true
+      type: "algorithm_registration_based"
+      notice: "government_approved_template_only"
+      content: "This hiring AI is registered with CAC [Cert #]. By applying, you consent."
+      withdrawal: "limited"  # Can opt-out; platform may become unavailable
+      data_minimization: "collection_only_necessary_attributes"
+    
+    AUDIT_LOGGING:
+      enabled: true
+      completeness: "full_government_audit_trail"
+      immutability: true
+      retention: "indefinite"  # Government retention = indefinite
+      government_access: "real_time_streaming"
+      encryption: "china_approved_algorithms_sm4_or_aes256"
+      backup_location: "government_designated_secure"
+    
+    DATA_DELETION:
+      enabled: false  # NOT AVAILABLE
+      reason: "data_sovereignty_and_government_audit_requirements"
+
+  INFRASTRUCTURE_ISOLATION_CHINA:
+    compute:
+      provider: "Alibaba_Cloud_or_Huawei_Cloud"
+      region: "China_mainland_Shanghai_or_Beijing_only"
+      no_international_regions: true
+    
+    storage:
+      database: "Alibaba_RDS_China_region"
+      replication: "local_only_no_cross_region"
+      encryption: "SM4_or_AES256_china_approved"
+    
+    networking:
+      vpn_to_cac: "mandatory"
+      foreign_api_calls: "BLOCKED_at_firewall"
+      cross_border_data_sync: "PROHIBITED"
+    
+    staffing:
+      china_based_employees_only: true
+      security_clearance_required: true
+      no_remote_foreign_access: true
+    
+    backup:
+      location: "local_within_china"
+      testing_frequency: "quarterly_with_cac_auditors"
+      encryption: "china_approved"
+      no_international_backup: true
+  
+  PRODUCT_UI_CHANGES_CHINA:
+    
+    CANDIDATE_DASHBOARD:
+      components:
+        - "AI Algorithm Status" (shows: "CAC Registered #XX-2024")
+        - "Application Status" (binary: processing or decision)
+      EXCLUDED:
+        - ❌ "Why You Scored This Way" (government policy withholds details)
+        - ❌ "Request Human Review" (CAC determines; not candidate-triggered)
+        - ❌ "Download Your Data" (data locked to jurisdiction)
+        - ❌ "Delete My Data" (data sovereignty; no deletion right)
+        - ❌ "Detailed Explanation" (government restricts transparency)
+    
+    EMPLOYER_DASHBOARD:
+      components:
+        - "Government Audit Status" (last CAC inspection date)
+        - "Algorithm Certification" (expiration date; renewal countdown)
+      EXCLUDED:
+        - ❌ "Bias Audit Reports" (government-retained; customer no access)
+        - ❌ "Full Explainability" (CAC withholds details)
+        - ❌ "Human Review Queue Details" (CAC-determined)
+        - ❌ "Candidate Deletion Requests" (feature unavailable)
+    
+    GOVERNMENT_COMPLIANCE_DASHBOARD (CAC ACCESS ONLY):
+      components:
+        - Real-time audit log (government-accessible)
+        - All candidate decisions (real-time)
+        - Algorithm updates and versions
+        - Fairness certification status
+        - Breach and incident logs
+
+  COMPLIANCE_COST_MODEL_CHINA:
+    annual_infrastructure: 250000  # Dedicated servers, no-exit requirements
+    annual_algorithm_registration: 80000  # CAC submission, audit firm fees
+    annual_fairness_certification: 60000  # Quarterly govt-approved testing
+    annual_compliance_staff: 120000  # China-based legal, security
+    annual_data_residency: 40000  # Govt-approved storage, backups
+    total_annual: 550000
+    notes: "Standalone operation; cannot be amortized across regions"
+```
+
+---
+
+### **CLUSTER 3: LIGHT-TOUCH/FLEXIBLE REGIMES** (Market-Driven Model)
+**Jurisdictions**: US (federal), Singapore, Japan, Switzerland, South Korea | **Enforcement Level**: LOW-MEDIUM
+
+#### Core Obligations
+
+```
+OPTIONAL BUT RECOMMENDED REQUIREMENTS
+═════════════════════════════════════════════════════════════════════
+
+1. FAIRNESS TESTING (EEOC Guidance 2023; Expected Practice, Not Mandatory)
+   └─ Requirement: RECOMMENDED (not mandatory federally)
+   └─ Frequency: Quarterly recommended; actual frequency = customer discretion
+   └─ Metrics: EEOC expects 4/5ths rule analysis (disparate impact)
+   └─ Documentation: Internal records (EEOC may request in litigation)
+   └─ Liability Shield: If documented fairness testing exists, strengthens EEOC defense
+
+2. TRANSPARENCY & PRIVACY NOTICE (State Laws Vary; Industry Standard)
+   └─ Federal Mandate: None (no federal AI law)
+   └─ State-Specific:
+      ├─ California (CCPA/CPRA): Privacy notice + data export + deletion rights
+      ├─ Illinois (BIPA): Explicit consent for biometric data only
+      ├─ New York (SHIELD): Encryption required
+      ├─ Texas: No AI-specific requirement
+   └─ Recommended: Include in privacy policy: "AI is used to screen applications for fairness"
+   └─ Placement: Website footer + job posting + application form
+
+3. ILLINOIS BIOMETRIC DATA (BIPA Special Requirement)
+   └─ Jurisdiction: Illinois only (not federal)
+   └─ Requirement: Explicit consent for biometric processing
+   └─ Scope: If platform uses facial recognition, fingerprints, or voice analysis
+   └─ Consent Form: Checkbox: "I consent to biometric analysis for hiring"
+   └─ Liability: Private right of action; $1,000-$5,000 per violation
+
+4. CALIFORNIA PRIVACY RIGHTS (CCPA/CPRA)
+   └─ Requirement: Data export + deletion on request
+   └─ Timeline: 45 days for compliance
+   └─ Scope: Personal information used in hiring (resume, contact, assessments)
+   └─ User Right: "Do Not Sell My Data" + deletion request mechanism
+   └─ Liability: State AG enforcement; $2,500-$7,500 per violation
+
+5. EXPLAINABILITY (Optional; NO Legal Mandate; Recommended for Defensibility)
+   └─ Requirement: OPTIONAL
+   └─ When Provided: Fairness statement (brief, non-technical)
+   └─ Example: "This score is based on fairness-tested algorithm. You scored 72/100. No protected characteristics were considered."
+   └─ Liability Shield: If provided, must be accurate (FTC authority on deceptive claims)
+
+6. HUMAN REVIEW (Optional; EEOC Guidance Suggests for Defensibility)
+   └─ Requirement: NOT MANDATORY
+   └─ Recommendation: EEOC expects human review for hiring discrimination defense
+   └─ When Offered: Customer configurable (can enable/disable per job role)
+   └─ SLA: No legal SLA; employer discretion (3-5 business days typical)
+
+7. AUDIT TRAIL & RECORDKEEPING (EEOC Record Retention)
+   └─ Requirement: EEOC expects 1-year minimum retention
+   └─ Content: Hiring decisions, test results, fairness metrics
+   └─ Purpose: EEOC discovery requests / litigation defense
+   └─ Accessibility: Internal only (produced if subpoenaed)
+
+8. DATA RETENTION (State & Sector-Specific)
+   └─ California (CCPA): 12 months for unlinked data; longer if linked to identity
+   └─ Illinois (BIPA): 3+ years for biometric data
+   └─ Others: Privacy policy driven; recommend 1 year (hiring practice)
+
+9. NO DATA LOCALIZATION REQUIREMENT (Federal; State Vary)
+   └─ Requirement: NOT MANDATORY
+   └─ Recommendation: Regional deployment for performance (us-east + sg-apac)
+   └─ Cross-Border: Personal data can flow to cloud servers domestically and internationally (subject to adequacy mechanisms)
+```
+
+#### Product Feature Implementation (Light-Touch Cluster)
+
+```yaml
+FEATURE_FLAGS:
+  
+  CLUSTER_3_LIGHT_TOUCH:
+    
+    FAIRNESS_TESTING:
+      enabled

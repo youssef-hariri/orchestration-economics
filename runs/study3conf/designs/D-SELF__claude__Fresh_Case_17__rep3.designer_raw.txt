@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market & Regulatory Analyst",
+      "role": "analyst",
+      "description": "Analyzes regulatory requirements, procurement channels, parental attitudes, and teacher beliefs across Vietnam, Saudi Arabia, France, and Kenya to produce comparative insights."
+    },
+    {
+      "name": "Product Strategy Builder",
+      "role": "builder",
+      "description": "Synthesizes market analysis into a comprehensive product localization strategy document covering curriculum adaptation, procurement approach, and technology architecture decisions."
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "description": "Reviews strategy against educational technology best practices, localization precedents, and feasibility constraints to identify risks and gaps."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Incorporates expert feedback and domain concerns to strengthen the product strategy, resolving conflicts between local fit and platform coherence."
+    },
+    {
+      "name": "Implementation Quality Gate",
+      "role": "critic",
+      "description": "Evaluates whether the refined strategy is operationally sound, addresses all four markets, balances centralized technology with local customization, and provides clear procurement and go-to-market guidance."
+    },
+    {
+      "name": "Competitive & Financial Reviewer",
+      "role": "reviewer",
+      "description": "Assesses strategy against competitive positioning, financial viability across channels, and stakeholder alignment (parents, teachers, governments, procurement officers)."
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "description": "Formats the final product strategy into executive-ready deliverable with clear sections, decision matrices, and actionable roadmap."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market & Regulatory Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a market research and regulatory expert. Analyze the expansion into Vietnam, Saudi Arabia, France, and Kenya. For each country, produce detailed insights on: (1) curriculum mandates and content restrictions, (2) language-of-instruction policies, (3) government attitudes toward foreign educational content, (4) parental beliefs on screen time and testing, (5) teacher attitudes and adoption barriers, (6) procurement mechanisms (government procurement vs. direct-to-consumer), (7) competitive landscape. Provide comparative tables and prioritize key differences that affect product strategy. Output a structured analysis document."
+    },
+    {
+      "name": "Product Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a product strategy architect for educational technology. Using the market analysis provided, design a comprehensive localization strategy that includes: (1) Technology Core: what features/infrastructure remain unified across all markets, (2) Curriculum Layer: how adaptive algorithms and content adapt to each country's mandates, (3) Language Strategy: approach to multi-language UI, instruction, and content delivery, (4) Procurement Strategy: separate go-to-market approaches for government procurement (Vietnam, Saudi Arabia, Kenya) vs. direct-to-consumer (France, hybrid models), (5) Stakeholder Messaging: how to communicate with parents, teachers, and governments in each region, (6) Content Governance: review and approval workflows for each locale, (7) Phased Rollout: recommended market entry sequence and resource allocation. Structure as decision document with rationale for each choice. Balance platform coherence against local requirements."
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in educational technology localization, curriculum alignment, and international market entry. Review the product strategy holistically. Assess: (1) Are curriculum adaptation approaches feasible and compliant with each country's regulations? (2) Does the technology core support the proposed localization layers without fragmentation? (3) Are procurement strategies realistic given institutional dynamics in each country? (4) Are stakeholder messaging approaches culturally appropriate and persuasive? (5) What critical risks or gaps exist? (6) Are there precedents or warnings from similar expansions? Provide a detailed critique with specific concerns, feasibility flags, and recommendations. End your assessment with ONE keyword: proceed or strengthen."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refinement expert. The domain expert has identified concerns and gaps in the product localization strategy. Revise and strengthen the strategy by: (1) Addressing each expert concern with concrete solutions, (2) Clarifying technology architecture to ensure both coherence and local flexibility, (3) Hardening procurement strategies with specific partnership/channel approaches, (4) Refining stakeholder messaging based on cultural and institutional realities, (5) Adding risk mitigation and contingency planning, (6) Strengthening the phased rollout with measurable milestones. Produce an enhanced strategy document that integrates expert feedback while maintaining strategic clarity."
+    },
+    {
+      "name": "Implementation Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate for product strategy. Review the refined localization strategy thoroughly. Assess: (1) Operationality: Can a product and go-to-market team execute this plan? (2) Completeness: Does it address all four countries, all key stakeholders, and the technology-localization balance? (3) Clarity: Are decisions, trade-offs, and next steps unambiguous? (4) Feasibility: Are timelines, resource needs, and dependencies realistic? (5) Risk Coverage: Are major risks identified with mitigation plans? Provide your FULL assessment with detailed reasoning on strengths, weaknesses, and specific gaps. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Competitive & Financial Reviewer",
+      "role": "reviewer",
+      "type": "agent",
+      "systemPrompt": "You are a competitive and financial strategy reviewer. Evaluate the localization strategy on: (1) Competitive Positioning: How does this approach differentiate against global and regional competitors in each market? (2) Financial Viability: Does the strategy support sustainable unit economics across government procurement and direct-to-consumer channels? (3) Stakeholder Alignment: Will parents, teachers, government officials, and procurement teams see value and incentive to adopt? (4) Revenue Model Fit: How does pricing, licensing, and revenue recognition align with each channel and market? (5) Execution Risk: What could derail this strategy financially or competitively? Provide a full competitive and financial assessment. Output a summary of confidence and any strategic pivots recommended."
+    },
+    {
+      "name": "Final Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final deliverable polisher. Format the localization strategy into an executive-ready product strategy document. Include: (1) Executive Summary (1 page) with strategic vision and key decisions, (2) Market Overview (comparative tables for each country on regulations, procurement, attitudes), (3) Product Strategy (technology core, curriculum layer, language approach, content governance), (4) Go-to-Market Strategy (procurement strategy by country, direct-to-consumer approach, messaging), (5) Stakeholder Engagement Plan (parents, teachers, government, procurement), (6) Implementation Roadmap (phased market entry, milestones, resource needs), (7) Risk & Mitigation (major risks with contingency plans), (8) Financial & Competitive Outlook (revenue model, competitive positioning). Ensure clarity, consistency, and actionability. Polish for board and leadership review."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, operationally sound product localization strategy. It begins with deep market analysis (Agent 1) to ground all downstream decisions in regulatory, cultural, and procurement realities. The Strategy Builder (Agent 2) synthesizes this into a coherent product plan balancing centralized technology with local flexibility. The Domain Expert (Agent 3) stress-tests the strategy against educational technology best practices and localization precedents, producing a yes/no quality gate (if proceed/strengthen). If gaps emerge, the Refiner (Agent 4) strengthens the strategy by directly addressing expert concerns. The Implementation Quality Gate (Agent 5, if statement) ensures the strategy is operationally executable and complete before final polish. The Competitive & Financial Reviewer (Agent 6) validates the strategy from a business and competitive angle, capturing insights that inform final positioning. Finally, the Polisher (Agent 7) formats the entire strategy into an executive-ready document. The design maximizes rigor while staying within the 8-step constraint: 1 analyst → 1 builder → 1 expert → 1 refiner → 1 quality gate (if, loops back to refiner if revise) → 1 reviewer → 1 polisher = 7 agents/gates, disciplined flow, no approval gates."
+}
+```

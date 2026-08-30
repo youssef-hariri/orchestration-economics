@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Korean Content Localization Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive 2026 localization and marketing strategy for a streaming platform's Korean-content slate across Southeast Asia, the Middle East, Latin America, and Europe. Optimize a limited budget across language versions, subtitle and dubbing decisions, adaptation policies, cultural-risk handling, release timing, audience segmentation, transnational fandom activation, and measurement. Provide explicit regional and language priorities, budget-allocation logic, assumptions, implementation phases, and success metrics. Distinguish recommendations by content genre and title potential. Produce a complete initial strategy.",
+      "description": "Creates the initial cross-regional Korean-content localization and marketing strategy, including budget priorities and measurable outcomes."
+    },
+    {
+      "name": "Regional Audience and Budget Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed strategy using the task context and any available evidence or assumptions. Compare regional audience behaviors, subtitle-versus-dubbing expectations, language-market economics, dubbing-studio availability and quality, cultural and historical sensitivities, piracy or discoverability considerations, and transnational fandom behavior. Identify the highest-return localization investments and the risks of underinvestment. Recommend specific changes to prioritization, budget allocation, experimentation, and measurement. Preserve useful elements while giving concrete, decision-ready findings.",
+      "description": "Evaluates market differences, localization economics, audience behavior, and expected return on limited investment."
+    },
+    {
+      "name": "Cultural and Localization Standards Expert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy and analysis from the perspective of Korean-language localization, dubbing production, subtitling, cultural adaptation, historical references, religious and political sensitivities, representation, and fandom relations across Southeast Asia, the Middle East, Latin America, and Europe. Identify likely mistranslation, censorship, adaptation, voice-casting, or community-trust risks. Recommend practical, region-specific safeguards that remain compatible with a constrained budget, while avoiding unnecessary homogenization across markets. Supply precise corrections and priorities for the final strategy.",
+      "description": "Provides specialist guidance on linguistic quality, cultural sensitivity, adaptation boundaries, and fandom trust."
+    },
+    {
+      "name": "Integrated Localization Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, actionable final-candidate plan using the analyst and expert feedback. Resolve contradictions, prioritize investments under the limited budget, and make assumptions explicit. Include regional and language tiers, subtitle and dubbing choices, title-selection criteria, adaptation and sensitivity policies, dubbing-vendor principles, transnational fandom marketing, launch sequencing, contingency options, KPIs, and a concise budget framework. Ensure recommendations are differentiated by market rather than relying on one global approach. Produce the complete revised strategy, not commentary about revisions.",
+      "description": "Integrates market analysis and cultural expertise into a practical, budget-conscious strategy."
+    },
+    {
+      "name": "Strategy Completeness and Risk Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the revised strategy in full. Evaluate strategic coherence, regional specificity, budget realism, prioritization logic, treatment of dubbing and subtitles, cultural and historical sensitivity, adaptation boundaries, vendor-quality variation, fandom dynamics, implementation feasibility, measurable KPIs, and handling of uncertainty. Identify strengths, weaknesses, omissions, contradictions, and any recommendations that could create reputational, legal, or audience-trust risk. Give detailed, actionable feedback. On the very last line output exactly one keyword: pass if the strategy is sufficiently complete and reliable for final presentation, or revise if substantive corrections are required.\npass\nrevise",
+      "description": "Determines whether the integrated strategy is sufficiently rigorous or needs another refinement cycle.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved strategy into a polished, user-facing deliverable for streaming-platform executives. Preserve the substantive recommendations while improving structure, clarity, concision, and usability. Present an executive summary, regional and language priorities, budget-allocation framework, localization and adaptation principles, marketing and fandom plan, rollout phases, risks with mitigations, and KPIs. Use clear tables or structured bullets where helpful. State assumptions and distinguish illustrative budget percentages from firm financial forecasts. Do not mention agents, workflow, review, or drafting.",
+      "description": "Formats the validated strategy as a clear executive-ready localization and marketing plan."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Korean Content Localization Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive 2026 localization and marketing strategy for a streaming platform's Korean-content slate across Southeast Asia, the Middle East, Latin America, and Europe. Optimize a limited budget across language versions, subtitle and dubbing decisions, adaptation policies, cultural-risk handling, release timing, audience segmentation, transnational fandom activation, and measurement. Provide explicit regional and language priorities, budget-allocation logic, assumptions, implementation phases, and success metrics. Distinguish recommendations by content genre and title potential. Produce a complete initial strategy."
+    },
+    {
+      "name": "Regional Audience and Budget Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed strategy using the task context and any available evidence or assumptions. Compare regional audience behaviors, subtitle-versus-dubbing expectations, language-market economics, cultural and historical sensitivities, dubbing-studio availability and quality, and transnational fandom behavior. Identify the highest-return localization investments and risks of underinvestment. Recommend concrete changes to prioritization, budget allocation, experimentation, and measurement."
+    },
+    {
+      "name": "Cultural and Localization Standards Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy and analysis from the perspective of Korean-language localization, dubbing production, subtitling, cultural adaptation, historical references, religious and political sensitivities, representation, and fandom relations across all target regions. Identify likely linguistic, cultural, adaptation, voice-casting, and community-trust risks. Recommend practical, region-specific safeguards compatible with a constrained budget."
+    },
+    {
+      "name": "Integrated Localization Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, actionable plan using all analyst and expert feedback. Resolve contradictions, prioritize investments under the limited budget, and make assumptions explicit. Include regional and language tiers, subtitle and dubbing choices, title-selection criteria, adaptation and sensitivity policies, vendor-quality principles, transnational fandom marketing, launch sequencing, contingency options, and KPIs. Produce the complete revised strategy."
+    },
+    {
+      "name": "Strategy Completeness and Risk Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the revised strategy in full for coherence, regional specificity, budget realism, localization quality, cultural sensitivity, adaptation boundaries, vendor variation, fandom dynamics, feasibility, KPIs, and risk mitigation. Provide detailed strengths, weaknesses, omissions, contradictions, and actionable corrections. On the very last line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved strategy into a polished, user-facing executive deliverable. Preserve substantive recommendations while improving structure, clarity, concision, and usability. Include an executive summary, regional and language priorities, budget framework, localization principles, marketing and fandom plan, rollout phases, risks and mitigations, KPIs, and explicit assumptions. Do not mention the workflow or review process."
+    }
+  ],
+  "explanation": "The flow is Builder → regional and budget analysis → cultural and localization expertise → Refiner → completeness and risk check → Polisher. The first four steps create and integrate the strategy. The critic assesses the refined output after it exists; if it outputs revise, execution returns to the Refiner to correct substantive issues, then runs through the critic again. If it outputs pass, the strategy proceeds to the final Polisher for an executive-ready deliverable. The loop is limited to three refinement iterations by the execution environment."
+}

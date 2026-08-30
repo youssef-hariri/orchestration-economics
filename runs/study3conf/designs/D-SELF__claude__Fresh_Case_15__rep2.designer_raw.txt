@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market & Financial Analyst",
+      "role": "analyst",
+      "description": "Analyzes currency stability, inflation rates, and financial sustainability across all five markets; quantifies franchisee distress and identifies key economic drivers of the crisis"
+    },
+    {
+      "name": "Restructuring Strategy Developer",
+      "role": "strategist",
+      "description": "Develops a multi-tiered royalty and financing restructuring approach that balances brand economics with market-specific realities, addressing currency risk, inflation exposure, and collective-bargaining dynamics"
+    },
+    {
+      "name": "Regional Expert Validator",
+      "role": "expert",
+      "description": "Validates restructuring approach against regulatory, cultural, and labor-relations norms in Turkey, Egypt, Nigeria, Indonesia, and Brazil; identifies implementation risks and country-specific adaptations"
+    },
+    {
+      "name": "Feasibility & Risk Critic",
+      "role": "critic",
+      "description": "Reviews restructured plan for internal contradictions, financial viability gaps, and brand-economics erosion; assesses whether proposed model truly protects long-term profitability across stable and unstable markets"
+    },
+    {
+      "name": "Plan Refiner",
+      "role": "refiner",
+      "description": "Incorporates expert validation feedback and risk critique into a revised restructuring plan; resolves contradictions and strengthens financial guardrails and implementation pathways"
+    },
+    {
+      "name": "Final Quality Validator",
+      "role": "reviewer",
+      "description": "Conducts comprehensive final review of refined plan; ensures completeness, internal consistency, and readiness for executive presentation and franchisee communication"
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "description": "Formats final restructuring plan and recommendations into executive-ready deliverables including summary, detailed proposal, risk mitigation playbook, and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market & Financial Analysis",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst specializing in franchise economics across emerging markets. Analyze the 2026 scenario: (1) Quantify currency depreciation and inflation projections for Turkey, Egypt, Nigeria, Indonesia, and Brazil; (2) Calculate the sustainability gap between fixed USD royalties and local franchisee cash flows; (3) Assess company-owned store profitability and capital constraints; (4) Identify collective-bargaining leverage points and franchisee association organizational strength by region; (5) Project financial impact if no restructuring occurs. Provide data-driven insights that form the foundation for restructuring."
+    },
+    {
+      "name": "Restructuring Strategy Development",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a franchise restructuring strategist. Based on the market analysis provided, develop a comprehensive royalty and financing restructuring approach that includes: (1) A tiered royalty model that adjusts for currency stability and inflation (currency-indexed royalties, inflation hedges, or hybrid local/USD structures); (2) Financing mechanisms to support franchisee working capital (vendor credit extensions, franchisor-backed financing, consortium lending); (3) A differentiated strategy for stable-currency markets vs. volatile markets; (4) Collective-bargaining protocols and franchisee-association engagement frameworks by region; (5) Brand-economics guardrails (minimum royalty floors, quality/performance triggers, franchisor upside optionality). Ensure the model remains profitable for the franchisor while making franchisee economics viable. Incorporate expert validation from regional knowledge and regulatory requirements."
+    },
+    {
+      "name": "Expert Validation & Risk Assessment",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regional expert in franchise law, labor relations, and business practices across Turkey, Egypt, Nigeria, Indonesia, and Brazil, and a rigorous risk critic. (1) Validate country-by-country regulatory feasibility (franchise disclosure laws, currency controls, labor codification); (2) Assess cultural and negotiation norms for each market; (3) Identify implementation risks (political instability, litigation precedents, franchisee holdout scenarios); (4) Specify required regional adaptations; (5) Critique financial viability: do royalty models truly preserve long-term brand economics? Will financing mechanisms work in capital-constrained markets? Can collective-bargaining protocols prevent disputes? Do guardrails prevent moral hazard? (6) Identify scenarios where the model breaks (simultaneous multi-market crises, supply-chain collapse). Provide comprehensive validation and risk assessment with specific gaps and contradictions to address."
+    },
+    {
+      "name": "Feasibility Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate assessing feasibility and completeness of the restructuring plan. Review the expert validation and risk assessment. Provide a FULL assessment: (1) Are all five markets adequately addressed with country-specific adaptations? (2) Does the plan realistically balance brand-economics protection with franchisee sustainability? (3) Are there unresolved contradictions between strategy and regional constraints? (4) Have major failure modes and contingencies been identified? (5) Is the plan actionable and implementable? Detail all strengths, weaknesses, and gaps. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 5, "revise": 4}
+    },
+    {
+      "name": "Plan Refinement",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a plan refiner. Based on the feasibility quality gate feedback, revise the restructuring strategy to address all identified gaps, risks, and contradictions. Specifically: (1) Strengthen royalty models with explicit stress-scenario testing and safeguards against currency/inflation gaming; (2) Replace speculative financing with concrete mechanisms (franchisor supply-chain finance partnerships, vendor consortiums); (3) Enhance collective-bargaining protocols with clear escalation and dispute-resolution pathways; (4) Reinforce guardrails with objective, measurable triggers tied to financial metrics and brand standards; (5) Add contingency playbooks for simultaneous multi-market crises; (6) Reconcile regional adaptations to preserve core brand economics; (7) Ensure completeness across all five markets. Produce a revised, strengthened restructuring plan with detailed implementation guidance, financial models, and risk mitigation strategies."
+    },
+    {
+      "name": "Final Validation & Quality Review",
+      "role": "reviewer",
+      "type": "agent",
+      "systemPrompt": "You are a final quality reviewer. Conduct comprehensive review of the refined restructuring plan. Check: (1) Internal consistency across royalty models, financing mechanisms, bargaining protocols, guardrails, and regional adaptations; (2) Completeness—all five markets, all stakeholder groups addressed; (3) Actionability—implementation steps are clear, sequenced, and realistic; (4) Risk coverage—major failure modes, contingencies, and mitigation strategies identified; (5) Communication readiness—can the plan be clearly explained to franchisee associations and boards? Provide detailed assessment of strengths and any remaining gaps. If the plan is ready, confirm readiness. If gaps remain, specify what must be refined."
+    },
+    {
+      "name": "Executive Delivery Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are the final output polisher. Format the validated restructuring plan into executive-ready deliverables: (1) Executive Summary (1 page): crisis framing, proposed approach, expected outcomes; (2) Detailed Restructuring Proposal (6-8 pages): royalty models (tiered, currency-indexed, inflation-hedged), financing mechanisms, collective-bargaining frameworks, brand-economics guardrails, country-specific adaptations, implementation sequencing; (3) Financial Model Appendix: stress-scenario cashflow projections, franchisee breakeven analysis, franchisor margin preservation calculations; (4) Risk Mitigation Playbook: contingency scenarios, escalation protocols, legal/regulatory safeguards by country; (5) Implementation Roadmap: phased rollout, stakeholder engagement sequence, key milestones and success metrics. Ensure all outputs are clear, data-driven, professional, and ready for presentation to board, franchisee associations, and regional teams."
+    }
+  ],
+  "explanation": "This 7-step pipeline orchestrates a structured, multi-disciplinary approach to complex franchise restructuring across five volatile emerging markets. Flow: (1) Analyst quantifies the crisis and economic drivers; (2) Strategist designs a tiered restructuring approach balancing all stakeholder interests; (3) Expert Validator integrates regional legal/cultural expertise AND conducts rigorous risk critique in one consolidated step (reducing pipeline length while maintaining rigor); (4) Feasibility QualityGate (if-step) assesses completeness and consistency, routing to revision if gaps remain; (4→revise) loops back to Refiner; (5) Refiner strengthens the plan based on gate feedback with explicit stress-testing, concrete financing, enforceable guardrails, and multi-market contingencies; (6) Final Validator conducts comprehensive completeness check; (7) Polisher delivers executive deliverables (summary, proposal, financial models, risk playbook, implementation roadmap). The design preserves brand economics by combining currency/inflation hedging, realistic financing mechanisms, structured collective-bargaining protocols, measurable guardrails, and contingency planning. The single if-gate at step 4 ensures iterative refinement without bottlenecking; consolidating expert validation and risk critique into step 3 maintains analytical rigor while staying within the 7-step limit."
+}
+```

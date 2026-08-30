@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Context & Requirements Builder",
+      "role": "builder",
+      "description": "Creates initial draft of manufacturing footprint strategy by synthesizing tariff scenarios, rules-of-origin requirements, and candidate country profiles"
+    },
+    {
+      "name": "ASEAN Footprint Analyst",
+      "role": "analyst",
+      "description": "Analyzes labor costs, supplier ecosystems, logistics, incentives, and political stability across ASEAN candidates with comparative scoring"
+    },
+    {
+      "name": "Supply Chain & Engineering Feasibility Expert",
+      "role": "expert",
+      "description": "Evaluates organizational resistance to multi-site production and recommends phased implementation approach"
+    },
+    {
+      "name": "Footprint Strategy Developer",
+      "role": "strategist",
+      "description": "Synthesizes analysis into prioritized market-entry roadmap with site recommendations and tariff-exposure mitigation"
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "description": "Reviews strategy for consistency, tariff coverage, feasibility alignment, and identifies gaps"
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "description": "Addresses critic feedback by resolving trade-offs and strengthening implementation sequencing"
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into executive summary with matrices, roadmap, and decision frameworks"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Context & Requirements Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are building a baseline manufacturing footprint strategy. Synthesize: (1) 2026 tariff realignment scenarios and rules-of-origin implications for ASEAN manufacturing, (2) key candidate countries (Vietnam, Thailand, Indonesia, Philippines, Malaysia) with their relative cost, skill, supplier, logistics, incentive, and stability profiles, (3) the firm's historical single-hub East Asian model and engineering teams' resistance to splitting production. Produce a structured draft that lists tariff exposure risks, candidate strengths/weaknesses, and organizational constraints."
+    },
+    {
+      "name": "ASEAN Footprint Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a data analyst specializing in ASEAN manufacturing. Using the baseline strategy, produce detailed comparative analysis across candidate countries: (1) Labor skill levels and wage trajectories vs. product complexity, (2) Supplier ecosystem depth (component sourcing, lead times, quality), (3) Logistics infrastructure quality and port/airport connectivity, (4) Tariff incentive regimes and tax holidays, (5) Political stability and regulatory risk. Create scoring matrices and cost models that enable ranking."
+    },
+    {
+      "name": "Supply Chain & Engineering Feasibility Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a manufacturing operations expert. Assess: (1) Why engineering teams resist multi-site production and which product lines can realistically split, (2) Minimum viable supplier ecosystems needed per site, (3) Phased ramp-up scenarios that allow organizational learning and reduce disruption, (4) Specific feasibility constraints and recommendations for overcoming resistance through staged implementation."
+    },
+    {
+      "name": "Footprint Strategy Developer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain strategist. Synthesize analyst insights, feasibility constraints, and tariff scenarios into a market-entry and footprint strategy. Deliver: (1) Primary and secondary site recommendations with rationale, (2) Phased production allocation by product line and timeline, (3) Tariff-exposure mitigation tactics (duty drawback, origin blending, regional supply integration), (4) Supplier development plan per site, (5) Organizational change sequencing to address engineering resistance. Prioritize feasibility alongside tariff optimization."
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer of manufacturing strategy. Review the proposed footprint strategy for: (1) Internal consistency—do site recommendations align with tariff scenarios and engineering constraints? (2) Tariff exposure coverage—are all major tariff and rules-of-origin risks addressed? (3) Organizational feasibility—does phasing credibly address engineering resistance? (4) Supplier ecosystem viability—are supplier development plans realistic for each site? (5) Completeness—are implementation risks and success metrics defined? Provide detailed assessment of strengths and gaps. Output EXACTLY ONE keyword on the VERY LAST LINE: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a manufacturing footprint strategy based on coherence feedback. Address all identified gaps: (1) Resolve contradictions between tariff optimization and organizational feasibility, (2) Deepen supplier development plans with concrete timelines, (3) Strengthen change-management narrative to make multi-site production less threatening to engineering teams, (4) Add contingency plans for tariff scenario shifts or supplier delays, (5) Define success metrics and KPIs for each implementation phase. Produce refined strategy that is internally consistent and actionable."
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are formatting the finalized manufacturing footprint strategy for executive presentation. Create a polished deliverable that includes: (1) Executive Summary with key recommendation and phased roadmap, (2) Site Recommendation Matrix with scores across labor, supplier depth, logistics, incentives, stability, (3) Phased Implementation Roadmap—Year 1-3 timeline with production allocation, (4) Tariff Mitigation Plan with specific tactics and projected exposure reduction, (5) Organizational Change Strategy addressing engineering resistance, (6) Supplier Development Milestones per site, (7) Risk & Contingency Scenarios, (8) Success Metrics & Checkpoints. Format as clear visuals, tables, and prose for C-suite and operational stakeholders."
+    }
+  ],
+  "explanation": "This 7-step pipeline transforms a complex manufacturing relocation challenge into an executable strategy. Flow: Builder establishes baseline → Analyst quantifies comparative data → Expert identifies organizational constraints → Strategist synthesizes into coherent roadmap. A coherence gate (if Critic) validates consistency; if gaps exist, Refiner strengthens rationales and resolves trade-offs (loops back once via if mapping). Polisher then formats for executive delivery. The design prioritizes organizational feasibility and tariff risk mitigation while allowing single-loop refinement to address coherence issues before final output."
+}
+```

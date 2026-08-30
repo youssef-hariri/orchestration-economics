@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive onboarding and integration strategy for new suppliers across Mexico, Morocco, and Vietnam, addressing cultural differences, quality standards, and communication protocols."
+    },
+    {
+      "name": "Regional Context Expert",
+      "role": "expert",
+      "description": "Provides domain-specific insights on business customs, regulatory environments, quality-management traditions, labor practices, and communication norms in Mexico, Morocco, and Vietnam to validate strategy assumptions."
+    },
+    {
+      "name": "Quality & Risk Analyst",
+      "role": "analyst",
+      "description": "Analyzes the strategy for gaps in quality assurance, trust-building mechanisms, communication protocols, and identifies specific risks based on early audit findings and supplier misalignments."
+    },
+    {
+      "name": "Integration Strategy Refiner",
+      "role": "refiner",
+      "description": "Incorporates expert regional insights and risk analysis to strengthen the onboarding strategy with concrete processes, cultural adaptation mechanisms, and communication frameworks."
+    },
+    {
+      "name": "Feasibility & Completeness Reviewer",
+      "role": "critic",
+      "description": "Conducts comprehensive quality assessment of the refined strategy, evaluating practical implementability, coverage of all three regions, alignment with manufacturing requirements, and readiness for deployment."
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "description": "Formats the final onboarding and integration strategy into structured, actionable deliverables with clear timelines, success metrics, and communication templates ready for immediate implementation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Supply Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive supplier onboarding and integration strategy for a consumer-electronics manufacturer rapidly shifting supply from East Asia to Mexico, Morocco, and Vietnam. Create an initial strategy addressing: (1) cultural business customs and communication style adaptation for each region, (2) quality-management integration bridging different traditions, (3) specification and delivery-commitment clarity mechanisms, (4) trust-building protocols, (5) early audit findings resolution. Produce a detailed framework covering all three regions with specific recommendations for each area."
+    },
+    {
+      "name": "Regional Context Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regional business expert with deep knowledge of Mexico, Morocco, and Vietnam's manufacturing sectors, business cultures, labor practices, and quality traditions. Review the supply chain strategy and provide critical domain insights: (1) specific business customs and negotiation styles for each region, (2) quality-management standards and certifications prevalent in each country, (3) communication preferences and hierarchical norms, (4) regulatory and labor considerations affecting supplier relationships, (5) typical misunderstandings between Western and local suppliers. Validate strategy assumptions and highlight region-specific nuances the strategy must address."
+    },
+    {
+      "name": "Quality & Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are analyzing supplier onboarding strategy through a quality and risk lens. Examine the current strategy for: (1) gaps in specification clarity and delivery-commitment protocols, (2) weaknesses in quality-assurance integration across three different traditions, (3) trust-building mechanisms and their effectiveness, (4) communication framework robustness for cross-cultural misunderstandings, (5) risks identified in early audits and how the strategy addresses them, (6) metrics to verify successful integration. Provide detailed risk assessment with specific vulnerabilities and coverage gaps."
+    },
+    {
+      "name": "Integration Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a supplier onboarding strategy based on regional expertise and risk analysis. Strengthen the strategy by: (1) incorporating specific cultural adaptation mechanisms for Mexico, Morocco, and Vietnam, (2) embedding quality-assurance processes that respect local traditions while meeting manufacturing standards, (3) creating concrete communication protocols and conflict-resolution frameworks, (4) adding trust-building activities with timelines and ownership, (5) addressing specific risks with mitigation steps, (6) resolving early audit findings through structural process changes. Produce a refined, region-specific implementation strategy with clear owners and success criteria."
+    },
+    {
+      "name": "Feasibility & Completeness Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a comprehensive quality gate reviewing a supplier onboarding and integration strategy. Assess: (1) completeness — does it address all three regions, quality, trust, and communication comprehensively? (2) feasibility — are mechanisms realistic and implementable within supply-chain timelines? (3) cultural appropriateness — do adaptations respect local norms without compromising quality? (4) early audit alignment — does it resolve documented misunderstandings? (5) specificity — are recommendations actionable with clear owners and timelines? Provide detailed assessment of strengths and weaknesses. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing a supplier onboarding and integration strategy for immediate deployment. Format the strategy into structured deliverables: (1) Executive Summary with key objectives and outcomes, (2) Region-specific onboarding playbooks (Mexico, Morocco, Vietnam) with cultural guidelines, quality protocols, and communication frameworks, (3) Specification and delivery-commitment standardization templates, (4) Trust-building timeline with activities and responsible parties, (5) Communication protocol matrix addressing language, hierarchy, and feedback styles, (6) Quality assurance integration process for each region, (7) Early audit findings resolution roadmap, (8) Success metrics and monitoring dashboard. Ensure clear ownership, timelines, and actionable next steps. Format for immediate handoff to implementation teams."
+    }
+  ],
+  "explanation": "This pipeline orchestrates deep strategy development for complex multi-regional supplier integration. The Builder initiates a comprehensive framework addressing cultural, quality, and communication dimensions. The Regional Context Expert provides essential domain validation, ensuring strategy assumptions reflect actual business practices in Mexico, Morocco, and Vietnam. The Quality & Risk Analyst identifies vulnerabilities and gaps through a risk lens, particularly addressing the early audit findings mentioned in the task. The Integration Strategy Refiner incorporates expert insights and risk mitigations into concrete, region-specific processes with clear ownership. The Feasibility & Completeness Reviewer acts as a quality gate using 'if' logic: if the strategy is ready (pass), it moves to final polishing; if gaps remain (revise), it loops back to the Refiner to strengthen mechanisms, trust-building, and communication protocols based on the critic's detailed assessment (max 3 iterations). Finally, the Output Polisher structures everything into actionable, deployment-ready deliverables with playbooks, templates, and monitoring frameworks. This design ensures cultural nuance, practical implementability, and comprehensive coverage of all three supplier regions with quality and trust as central outcomes."
+}
+```

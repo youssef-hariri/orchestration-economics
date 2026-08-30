@@ -1,0 +1,57 @@
+{
+  "agents": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft a comprehensive partnership strategy for European industrial buyers to support suppliers in India, Turkey, and North Africa with CBAM compliance. Focus on technical capacity building, joint investment in decarbonization, and diplomatic communication strategies to address perceptions of protectionism.",
+      "description": "Creates the initial strategic framework for supplier engagement."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "systemPrompt": "Review the strategy for technical accuracy regarding CBAM regulations and cultural sensitivity. Improve the tone to ensure it fosters collaboration rather than top-down enforcement. Fix any gaps in the proposed support mechanisms.",
+      "description": "Refines the strategy based on feedback to ensure it is actionable and diplomatic."
+    },
+    {
+      "name": "StrategyCritic",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for feasibility, alignment with EU/non-EU trade dynamics, and clarity. Assess if the plan effectively addresses the 'protectionism' narrative. Provide a detailed critique. On the last line, output either 'pass' or 'revise'.",
+      "description": "Validates the strategy against real-world geopolitical and regulatory constraints."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional executive document. Ensure clear headings, actionable bullet points, and a tone suitable for high-level corporate decision-makers.",
+      "description": "Finalizes the document for presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive partnership strategy for European industrial buyers to support suppliers in India, Turkey, and North Africa with CBAM compliance. Focus on technical capacity building, joint investment in decarbonization, and diplomatic communication strategies to address perceptions of protectionism."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Review the strategy for technical accuracy regarding CBAM regulations and cultural sensitivity. Improve the tone to ensure it fosters collaboration rather than top-down enforcement. Fix any gaps in the proposed support mechanisms."
+    },
+    {
+      "name": "StrategyCritic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for feasibility, alignment with EU/non-EU trade dynamics, and clarity. Assess if the plan effectively addresses the 'protectionism' narrative. Provide a detailed critique. On the last line, output either 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional executive document. Ensure clear headings, actionable bullet points, and a tone suitable for high-level corporate decision-makers."
+    }
+  ],
+  "explanation": "The pipeline begins with the StrategyBuilder drafting the core partnership framework. The ComplianceRefiner then iterates on this draft to ensure regulatory and diplomatic precision. The StrategyCritic evaluates the output; if the strategy is deemed insufficient or tone-deaf regarding the protectionism narrative, it routes back to the ComplianceRefiner to ensure high-quality output before the FinalPolisher formats the document for executive use."
+}

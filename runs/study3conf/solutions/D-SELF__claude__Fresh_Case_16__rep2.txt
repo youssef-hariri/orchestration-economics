@@ -1,0 +1,550 @@
+# SMART-HOME VOICE ASSISTANT ADAPTATION STRATEGY
+## Executive Summary & Market-by-Market Implementation Guide
+### For Japan, Korea, Thailand, and the Gulf (2026 Deployment)
+
+---
+
+## EXECUTIVE SUMMARY
+
+This document provides a complete, stakeholder-ready product-adaptation strategy for deploying a smart-home voice assistant across four honorific-language markets with distinct cultural, regulatory, and household contexts.
+
+**Core Strategic Insight**: Voice assistants in these markets function as **relational agents encoding household power structures, family values, and trust in data stewardship**—not merely functional tools. Successful localization requires simultaneous optimization across four interdependent dimensions:
+
+1. **Interaction Style**: Asymmetric politeness (device respects users; users need not be formal)
+2. **Household Roles**: Hierarchical permissions reflecting multigenerational authority and gender dynamics
+3. **Privacy Signaling**: Hardware-backed, culturally specific privacy defaults exceeding legal minimums
+4. **Feature Prioritization**: Market demand ranked and sequenced to match regulatory fit and household use cases
+
+**Strategic Divergence from Western Model**: Default to **privacy-first, local-only processing** with opt-in cloud features per category. Trust is earned through visible data protection, not offered as convenience tradeoff.
+
+**Timeline**: 18–24 months to market (Phase 1: 2026-Q1 | Phase 2: 2026-Q3 | Phase 3: 2026-Q4)
+
+**Market Opportunity**: 180M+ households; addressable market ~$8.2B by 2027
+
+**Regulatory Risk**: HIGH (Japan/Korea: APPI/PIPA actively enforced) | MEDIUM (Thailand/Gulf: cultural expectations exceed legal minimums)
+
+---
+
+---
+
+# PART 1: MARKET-BY-MARKET PROFILES
+
+## JAPAN: Respectful Service Paradigm with Historical Privacy Consciousness
+
+### A. Interaction Style Framework
+
+#### Linguistic Registers (Four-Layer Keigo System)
+
+| Register | Linguistic Markers | Example | When Used | Device Default |
+|----------|---|---|---|---|
+| **Casual (友達言葉)** | Dropped particles, plain verbs | "ライト、つけて" | Children 4–7 | Rarely; only if child requests |
+| **Standard Polite (丁寧語)** | -ます particles, standard pronouns | "リビングの照明をつけます" | Adults, neutral contexts | **DEFAULT (85% of interactions)** |
+| **Formal/Humble (敬語)** | Subject displacement, passive forms | "かしこまりました。つけさせていただきます" | Elders (70+), guests, formal settings | Automatically activated for 70+ speakers or guests |
+| **Ultra-Formal (接客敬語)** | Corporate/retail register, ceremonial | "お付けさせていただきました。ご利用ありがとう" | Onboarding, first-time users | First 3 interactions only; downgrades to standard |
+
+#### Core Principle: Asymmetric Politeness
+
+**Device speaks formally; user need not.**
+
+The device gracefully accepts casual input while maintaining formal register, signaling:
+- Device respects user authority (user can be relaxed)
+- Relationship is asymmetric (device defers; user does not)
+- Confidence-building: User feels accepted, not judged
+
+**Example**:
+```
+User (casual): "ライト、つけて"
+Device (formal): "かしこまりました。リビングの照明をつけさせていただきます。"
+[Effect: User comfortable; device handles register asymmetry invisibly]
+```
+
+#### Register Activation Algorithm
+
+```
+IF speaker_age >= 75 AND speaker_role == "grandparent":
+  register ← FORMAL (敬語) + slow speech (80 wpm)
+  behavior ← confirm_before_action()
+
+ELIF speaker_age >= 40 AND speaker_role == "adult":
+  register ← STANDARD_POLITE (丁寧語)
+  accept_casual_input ← TRUE
+
+ELIF speaker_age < 8:
+  register ← CASUAL (友達言葉)
+  tone ← warm, protective
+
+ELIF guest_mode == TRUE:
+  register ← ULTRA_FORMAL (接客敬語)
+  duration ← first_3_interactions_only
+
+ELSE:
+  register ← STANDARD_POLITE (default)
+```
+
+#### Speech Synthesis Parameters
+
+| Register | Speech Rate | Pitch Shift | Particle Emphasis | Rhythm |
+|----------|---|---|---|---|
+| Casual | 120 wpm | +50Hz | Minimal | Clipped |
+| Standard Polite | 100 wpm | Baseline | Normal | Measured |
+| Formal | 85 wpm | -50Hz | HIGH | Deliberate pauses |
+| Ultra-Formal | 70 wpm | -100Hz | Very High | Ceremonial |
+
+#### Pre-Recorded Response Templates (High-Quality Audio)
+
+| Action | Casual | Standard Polite | Formal | Ultra-Formal |
+|--------|--------|---|---|---|
+| Confirm completion | "つけた" | "つけました" | "つけさせていただきました" | "お付けさせていただきました。ご利用ありがとうございます" |
+| Request clarification | "どこ?" | "どちらですか" | "どちらでございますか" | "恐れ入りますが、どちらをお望みでしょうか" |
+| Apologize for error | "わかんない" | "申し訳ございません" | "申し訳ございません。確認させていただきます" | "大変申し訳ございません。早急に対応させていただきます" |
+
+### B. Household Roles & Access Control
+
+#### Role Hierarchy
+
+| Role | Primary Authority | Permissions | Register Default |
+|------|---|---|---|
+| **Head of Household** | Decision-making for major purchases, guest access, device config | Approves purchases >$20, configures policies | Standard Polite |
+| **Co-Administrator** | Shared authority with head | Approves purchases with head, manages children | Standard Polite |
+| **Adult Member** | Personal controls, routine decisions | Full control in personal spaces; requests require approval for purchases >$20 | Standard Polite |
+| **Child (Age-Segmented)** | Limited; parental oversight | Age 6–11: Limited features; Age 12–15: Expanded features w/ spend limits ($5/day); Age 16+: Near-adult | Standard Polite |
+| **Grandparent (70+)** | Elder authority; priority in conflicts | Same permissions as adult + conflict priority + caregiver access | Formal (敬語) |
+| **Caregiver** | Monitor elder safety | View activity, receive alerts; no access to other family data | Standard Polite |
+| **Guest** | Temporary access | Basic commands (music, info); no family data access | Ultra-Formal (接客敬語) |
+
+#### Permission Matrix
+
+| Permission | Head | Co-Admin | Adult | Child 12+ | Elder | Guest |
+|---|---|---|---|---|---|---|
+| Lighting/Temperature | ✓ | ✓ | ✓ | ✓ | ✓ | — |
+| Door Lock | ✓ | ✓ | ✓ | — | ✓ | — |
+| Purchase (<$20) | ✓ | ✓ | ✓ | Limited | ✓ | — |
+| Purchase (>$20) | ✓ | Head approval | Requires head approval | Requires head approval | ✓ | — |
+| Guest Access Setup | ✓ | — | — | — | — | — |
+| Device Config | ✓ | — | — | — | — | — |
+| Viewing Activity Log | ✓ | — | — | — | — | — |
+
+#### Example Household: Father (52, Head) | Mother (50, Co-Admin) | Daughter (16) | Grandmother (79) | Maid (35)
+
+| Speaker | Register | Register Rationale | Override Option |
+|---------|----------|---|---|
+| Father | Standard Polite | Primary authority; mutual respect | Can set to casual if prefers |
+| Mother | Standard Polite | Shared authority; respectful | Can set to formal for more deference |
+| Daughter | Standard Polite | Teen; accepts casual input gracefully | Can request casual (parental approval) |
+| Grandmother | Formal (敬語) | Age-based deference; device is subordinate | Can request standard (elder's choice respected) |
+| Maid | Standard Polite | Respectful but clear service relationship | N/A |
+
+### C. Privacy Framework
+
+#### Privacy Concern Profile (Cultural Roots)
+
+- **Sacred Home Space ("Ie")**: Home is private family domain; recording inside feels like violation of household sovereignty
+- **Historical Surveillance Trauma**: Post-WWII occupation, 1960s–70s security crackdowns, 1980s–2000s religious surveillance scandals; Japanese cultural memory deeply skeptical of centralized data collection
+- **Employment Discrimination Risk**: Fear that employer access to voice data could enable termination
+- **Government Data Sweep Anxiety**: Police have broad investigative powers; fear of compelled data access during investigations
+
+#### Privacy-First Default Architecture
+
+**Core Model**: Local-only processing by default; opt-in cloud per feature
+
+| Privacy Mode | Features | Voice Retention | Cloud | Best For |
+|---|---|---|---|---|
+| **Local-Only (Privacy-Max)** | Lighting, temperature, timers, alarms, local music library | 24h auto-delete | None | Privacy-absolutists, elderly users |
+| **Balanced (DEFAULT)** | Local commands + selective cloud (weather, news headlines, local integrations) | 7 days encrypted in-country backup | Japan-only servers | Most households |
+| **Full-Featured (Cloud)** | All services (music, video, shopping, personalized recommendations) | 30 days; opt-out profiling | Japan + regional partners | <10% of users (convenience-seekers) |
+
+#### Hardware Privacy Signals (Non-Bypassable)
+
+1. **Recording LED** (Hardware-Controlled)
+   - Red: Actively recording
+   - Amber: Processing wake word
+   - Green: Idle, not listening
+   - User can verify with multimeter that power is cut to microphone when LED is off
+
+2. **Physical Microphone Mute Switch**
+   - Disconnects power to mic (not software-mutable)
+   - Mute LED confirms mic is off
+   - User can verify with oscilloscope
+
+3. **Data Upload Indicator**
+   - Separate LED pulses when device uploads to cloud
+   - Users see in real-time which data is leaving device
+
+#### Software: Privacy Center Dashboard (In-App)
+
+**User can see:**
+1. **Data Flow Diagram** (Visual): Microphone → Device Processor → [Optional Cloud] → Response
+   - "Is data leaving device? Where? For how long?"
+   - Example: "Weather query uploaded to Japan weather service, deleted after 60 seconds"
+
+2. **Data Retention Audit**
+   - "Voice recordings stored: 12, Last 7 days"
+   - One-tap deletion of all voice history
+   - Automatic purge: Default 7 days; user can change
+
+3. **Third-Party Integrations** (Explicit Consent)
+   - "Spotify has access to your music preferences" — user can revoke instantly
+   - No data sharing without explicit per-instance approval
+
+4. **Ad & Personalization Controls**
+   - Toggle: "Allow device to use my data for ads" (DEFAULT: OFF)
+   - Show built profiles: "Amazon thinks you're interested in: cooking, gardening"
+   - User can edit/delete profiles
+
+#### Market-Specific Privacy Defaults (vs. Western Norms)
+
+| Setting | Western Default | Japan Default | Rationale |
+|---------|---|---|---|
+| Cloud data upload | ON (user opts-out) | OFF (user opts-in) | Trust-building: data stays local unless user chooses otherwise |
+| Voice retention | 30 days | 1–7 days (user sets) | Cultural expectation: data deletion is default, not exception |
+| Third-party sharing | User-requested | Requires explicit approval per service | Cultural expectation: company does NOT assume consent |
+| Ads personalization | ON (opt-out available) | OFF by default (opt-in) | Cultural value: privacy as dignity, not convenience tradeoff |
+| Overseas transfer | Permissible if legal | Prohibited by default | APPI regulatory: data cannot leave Japan without justification |
+
+#### Privacy Communication Strategy
+
+**Onboarding Voice (Ultra-Formal, warm):**
+
+> "いらっしゃいませ。スマートホームアシスタントへようこそ。
+>
+> ご家族のみなさまのお役に立てるよう、毎日お待ちしております。ご安心ください。ご家族との会話は大切に保護いたします。
+>
+> 本デバイスが収集する音声データは、ご家族の同意なしに外部と共有されることはございません。
+>
+> ご家族の構成をお聞かせいただき、各ご家族に合わせた敬語レベルを設定させていただきたく存じます。"
+
+*Translation: "Welcome to your smart home assistant. This device is here to serve your family with respect. Rest assured: your conversations are protected. Voice data is never shared with anyone outside your family without permission. Let me learn your family structure to set appropriate politeness levels for each member."*
+
+**Monthly Privacy Digest (Optional, Delivered via App):**
+- "This month: 45 voice commands processed. 40 stayed local; 5 sent to weather service (deleted after 1 minute). No third-party access. No government requests."
+- Builds trust through transparency
+
+**Annual Transparency Report (Published):**
+- "Japanese government made 0 data requests; we refused 0 (N/A). No data breaches. 100% user consent compliance."
+
+### D. Feature Prioritization & Sequencing
+
+#### Demand Analysis: Top 10 Features (Japan)
+
+| Rank | Feature | Business Context | Regulatory Fit | Implementation Priority |
+|------|---------|---|---|---|
+| 1 | **Lighting control** | Existing smart home ecosystem dominant | Privacy-friendly (local processing OK) | Phase 1 (Core) |
+| 2 | **Door lock** | High security culture; smart locks already common | Privacy-sensitive; requires approval workflows | Phase 1 |
+| 3 | **AC/Heating** | Climate control; four seasons | Local processing OK | Phase 1 |
+| 4 | **Appliance scheduling** | Rice cooker, bath heater pre-warm (daily ritual) | Local processing OK | Phase 1 |
+| 5 | **News/Weather briefing** | Morning routine essential | Cloud optional (can show cached locally) | Phase 2 (Integration) |
+| 6 | **Security camera access** | Home invasion prevention culturally important | Privacy-critical; encrypted, household-only | Phase 2 |
+| 7 | **Shopping list** | Grocery planning; integration with retailers | Cloud required; high privacy sensitivity | Phase 2 |
+| 8 | **Appointment reminders** | Doctor, school events (family coordination) | Local processing OK | Phase 1 |
+| 9 | **Music/Audio** | Secondary use; prefer phones for media | Streaming service integration (cloud) | Phase 2 |
+| 10 | **Energy usage tracking** | Environmental consciousness; cost-saving | Cloud analytics optional | Phase 3 |
+
+#### Interoperability Requirement (Critical for Japan)
+
+Japanese smart home market is already saturated with Panasonic, Daikin, Sony, Toshiba devices. **Interoperability is feature #1.**
+
+**Requirement**: Device must integrate with 15+ existing smart home brands via APIs, not replace them.
+
+**Integration Roadmap**:
+- Phase 1: Panasonic, Daikin, Sony (major players)
+- Phase 2: Toshiba, Mitsubishi, Sharp
+- Phase 3: Smaller brands (10+)
+
+#### Phased Feature Rollout
+
+**Phase 1 (Months 1–6, Launch 2026-Q1): Core Features**
+- Lighting & temperature control (local)
+- Door lock management (local, with approval workflows)
+- Appliance scheduling (local)
+- Alarms & reminders (local)
+- Music library (local device storage)
+- News & weather (cached, local fallback)
+- Interoperability with Panasonic/Daikin/Sony
+
+**Phase 2 (Months 7–12, Launch 2026-Q3): Integration & Convenience**
+- Deep retailer integration (shopping lists, grocery delivery)
+- Security camera access (encrypted, household-only)
+- Advanced news/content (personalized, but privacy-respecting)
+- Healthcare integration (doctor appointment reminders)
+- Energy usage tracking & optimization
+
+**Phase 3 (Months 13–18, Launch 2026-Q4): Advanced Features**
+- Elder care integration (medication reminders, fall detection via voice pitch analysis)
+- Homework help (partnership with Benesse education)
+- Utility company integration (bill payment coordination)
+- Multi-home management (vacation property control)
+
+---
+
+## KOREA: Efficiency + Respect Hybrid with Multi-Approval Workflows
+
+### A. Interaction Style Framework
+
+#### Linguistic Registers (Korean Politeness Levels)
+
+Korean culture prioritizes **efficiency differently than Japanese**. Respect can coexist with crisps, efficient speech. Over-elaborate politeness can feel inefficient or even condescending.
+
+| Register | Linguistic Markers | Example | When Used | Device Default |
+|----------|---|---|---|---|
+| **Informal (반말)** | Plain endings, casual pronouns | "불 꺼줘" | Children, intimate family | Rarely |
+| **Standard Polite (존댓말)** | -ㅂ니다/-ㅂ니까 endings, standard pronouns | "거실 불을 끕니다" | Adults, formal contexts | **DEFAULT (90% of interactions)** |
+| **Formal (높임말)** | Honorific particles (-시-), formal pronouns | "거실의 불을 끄시겠습니까" | Elders (70+), guests, formal ceremonies | Automatically for 70+ speakers |
+
+#### Core Principle: Efficiency + Respect (Not Over-Elaboration)
+
+**Device responds quickly without over-apology; sounds capable and authoritative.**
+
+**Example (Contrast with Japanese approach):**
+```
+User (casual): "거실 불 꺼줘"
+Device (efficient, respectful): "거실 불을 끕니다." [Light turns off]
+Device: "완료했습니다." (Done.)
+[Effect: Korean user feels: competent, efficient, still respectful]
+
+WRONG approach (too Japanese):
+Device: "죄송합니다만, 거실의 불을 끄시겠습니까? 정말 확신하시겠습니까?"
+[Korean reaction: "Why all the apologies? Just do it. This is inefficient."]
+```
+
+#### Register Activation Algorithm
+
+```
+IF speaker_age >= 75:
+  register ← FORMAL (높임말)
+  speech_rate ← 120 wpm (slower)
+  behavior ← explicit_confirmation_before_action()
+
+ELIF speaker_age >= 20:
+  register ← STANDARD_POLITE (존댓말)
+  speech_rate ← 150 wpm (fast, efficient)
+  accept_casual_input ← TRUE
+
+ELIF speaker_age >= 8:
+  register ← STANDARD_POLITE
+  speech_rate ← 140 wpm
+
+ELIF guest_mode == TRUE:
+  register ← FORMAL (높임말)
+  duration ← first_3_interactions
+
+ELSE:
+  register ← STANDARD_POLITE (default)
+
+EFFICIENCY_OPTIMIZATION:
+  minimize_hedging_language()
+  pro_emptive_confirmation() # "I will do X" → then do it
+  no_unnecessary_apologies()
+  sound_confident()
+```
+
+#### Speech Synthesis Parameters
+
+| Register | Speech Rate | Tone | Confidence Signal |
+|----------|---|---|---|
+| Casual | 160 wpm | Relaxed | Friendly |
+| Standard Polite | 150 wpm | Professional | Competent, efficient |
+| Formal | 120 wpm | Respectful | Deferential |
+
+#### Pre-Recorded Response Templates
+
+| Action | Casual | Standard Polite | Formal |
+|--------|--------|---|---|
+| Confirm completion | "껐어" | "껐습니다" | "끄셨습니다" |
+| Pro-active confirmation | "끌게" | "거실 불을 끕니다" | "거실의 불을 끄겠습니다" |
+| Request clarification | "어디?" | "어디를 말씀하나요?" | "어느 방을 말씀하시나요?" |
+| Offer option | "어떤 거?" | "어느 것을 원하십니까?" | "어느 것을 선호하시겠습니까?" |
+
+### B. Household Roles & Access Control
+
+#### Role Hierarchy (Multi-Approval Focus)
+
+| Role | Authority | Multi-Approval Capability | Register Default |
+|------|-----------|---|---|
+| **Head of Household** | Primary decision authority | Can be overridden by spouse for reversible decisions | Standard Polite |
+| **Co-Administrator (Spouse)** | Joint authority for major decisions | Dual-approval required for purchases >$100, automation changes | Standard Polite |
+| **Adult Member** | Personal controls, routine decisions | Can make requests; Head/Co-Admin approve high-stakes decisions | Standard Polite |
+| **Child (Age-Segmented)** | Limited; parental oversight | Age 12–15: Spend limits $5/day; Age 16+: $20/day | Standard Polite |
+| **Elder (70+)** | Prioritized in conflicts; authority figure | Automatic priority; simplified access option | Formal (높임말) |
+| **Guest** | Temporary access | Time-limited; basic features only | Formal |
+
+#### Dual-Approval Workflow (Korea-Specific)
+
+Korean household decision-making often requires **spousal collaboration**. Device enables this explicitly:
+
+**Scenario: Wife requests automatic AC temperature setting (household policy requires spouse approval for automations)**
+
+```
+STEP 1: Wife's Request
+Wife: "에어컨 온도 자동 설정해줄 수 있어?"
+[Translation: "Can you automatically set the AC temperature?"]
+
+STEP 2: Device Recognition
+Device processes:
+  - Decision type: Automation change
+  - Household policy: Spouse approval required
+  - Both adults present/registered: Yes
+
+STEP 3: Device Notification
+Device (to wife, Standard Polite): "알겠습니다. 자동 설정은 배우자 승인이 필요합니다. 배우자분에게 알림을 보내겠습니다."
+[Translation: "Understood. Automation requires spouse approval. I'll notify your spouse."]
+
+STEP 4: Husband Receives Notification
+Device (app/voice to husband): "아내분이 에어컨 자동 설정을 요청했습니다. 승인하시겠습니까?"
+[Translation: "Your wife requested AC automation. Approve?"]
+
+STEP 5: Husband Responds
+Option A - Approval: "좋아" ("OK")
+Device (to wife): "배우자 승인 완료. 에어컨이 자동 설정되었습니다."
+[Translation: "Spouse approved. AC is now automated."]
+
+Option B - Rejection: "안 돼" ("No")
+Device (to wife): "배우자가 승인하지 않으셨습니다. 다른 온도로 시도하시겠습니까?"
+[Translation: "Spouse declined. Try another temperature?"]
+
+STEP 6: Timeout Resolution (If no response in 24 hours)
+Device: "24시간이 지났습니다. 요청을 승인된 것으로 처리합니다."
+[Translation: "24 hours passed. Treating request as approved."]
+```
+
+**Why This Matters**:
+- Reflects Korean household dynamics (joint decision-making)
+- Respects both spouses equally (neither can unilaterally override)
+- Transparent process (each knows what's happening)
+- Default resolution (no approval limbo)
+
+#### Permission Matrix
+
+| Permission | Head | Co-Admin | Adult | Child 16+ | Elder | Guest |
+|---|---|---|---|---|---|---|
+| Lighting/Temperature | ✓ | ✓ | ✓ | ✓ | ✓ | — |
+| Purchase (<$20) | ✓ | ✓ | ✓ | Limited | ✓ | — |
+| Purchase ($20–$100) | ✓ | Dual approval | Head approval | Head approval | ✓ | — |
+| Purchase (>$100) | ✓ | Dual approval | Head approval | Head approval | ✓ | — |
+| Automation changes | ✓ | Dual approval | Head approval | Head approval | ✓ | — |
+| Device config | ✓ | — | — | — | — | — |
+
+### C. Privacy Framework
+
+#### Privacy Concern Profile (Cultural Roots)
+
+- **Chaebol Data Monopoly Fear**: Samsung, LG, Hyundai concentrate massive power; distrust of data concentration
+- **Authoritarian Surveillance Trauma**: 1970s–80s KCIA surveillance; historical phone tapping still in cultural memory
+- **Employment Blacklisting Risk**: Korean labor market is hierarchical; data could enable hiring discrimination
+- **Generational Political Division**: Fear that voice data reveals political opinions; could be weaponized in future regime change
+- **Privacy Generation Gap**: Older users (60+) extremely privacy-conscious; younger users more accepting (risk of normalizing surveillance)
+
+#### Privacy-First Default with Regulatory Compliance
+
+**PIPA Requirement**: Korean data MUST stay in Korea; cannot transfer internationally without explicit consent.
+
+**PIMM Certification Expected**: Companies should undergo annual independent audit demonstrating data practices.
+
+| Privacy Mode | Features | Voice Retention | Cloud Location | For Whom |
+|---|---|---|---|---|
+| **Local-Only** | Lighting, temperature, timers, alarms, local music library | 1 day auto-delete | None | Privacy-absolutists (15%) |
+| **Balanced (DEFAULT)** | Local + selective cloud (weather, news, Korean-only integrations) | 7 days encrypted in Korean server | Korean data center (Seoul) | Most households (75%) |
+| **Full-Featured (Cloud)** | All services with personalization | 30 days with opt-out profiling | Korean data center (Seoul) + Samsung/Korean partner backup | Convenience-seekers (10%) |
+
+#### Hardware Privacy Signals
+
+1. **Recording LED** (Hardware-controlled, user-verifiable)
+2. **Physical Mute Switch** (Disconnects mic power)
+3. **Data Upload Indicator** (Pulses when data leaves device)
+
+#### Software: Privacy Controls + PIMM Audit Trail
+
+**Privacy Center Dashboard**:
+- Data flow visualization (local vs. cloud)
+- Retention audit (how many voice recordings stored, how long)
+- Third-party access list (which services have accessed data)
+- Encryption status (data in transit uses TLS 1.2+; at-rest uses AES-256)
+- Profiling controls (toggle off AI learning from voice data)
+
+**PIMM Compliance Features**:
+- Annual audit log (device maintains cryptographic record of all data access)
+- User consent log (when/what user approved)
+- Encryption key management (user holds keys; company cannot decrypt)
+
+#### Market-Specific Privacy Defaults
+
+| Setting | Western Default | Korea Default | Rationale |
+|---------|---|---|---|
+| Cloud data upload | ON | OFF (user opts-in per service) | Trust-building: data locality = control |
+| Data localization | Optional | **MANDATORY (Korea only)** | PIPA regulatory; data never leaves Korea |
+| Encryption | Not mandated | **Mandated (AES-256, TLS 1.2+)** | PIPA regulatory + cultural expectation |
+| Overseas transfer | Permissible | Prohibited without explicit consent | PIPA regulatory: overseas = suspect |
+| Ads personalization | ON (opt-out) | OFF (opt-in) | Cultural value: ads as privacy violation |
+| Third-party sharing | Pre-approved bundles | Requires explicit per-service approval | PIPA regulatory + cultural expectation |
+
+#### Privacy Communication Strategy
+
+**Onboarding (Emphasis on Data Localization & Trustworthiness):**
+
+> "스마트홈 어시스턴트입니다.
+>
+> 중요한 것: 당신의 음성 데이터는 한국 내 서버에만 저장됩니다. 절대 해외로 나가지 않습니다. 당신이 제어합니다.
+>
+> 이 어시스턴트는 당신의 명령을 존중하며, 항상 정중하게 응답합니다. 당신의 가족과 데이터는 안전합니다."
+
+*Translation: "Smart home assistant here. Important: Your voice data stays in Korea only. Never leaves the country. You control it. I respect your commands and respond politely. Your family's data is safe."*
+
+**Monthly Privacy Report** (Emphasizes Korea-only storage):
+- "This month: 50 voice commands. 45 stayed local. 5 sent to Korean weather service (deleted after 60 seconds). Data remains in Seoul data center. Zero overseas transfers."
+- **PIMM Audit Trail**: "Annual certification completed: Data encryption verified, consent logs audited, no compliance violations."
+
+**Annual Transparency Report** (Published):
+- "Korean government made 8 data requests; we complied with 2 (legal requirement under national security laws); users were notified in 6 cases. Zero data breaches. 100% Korean data localization maintained."
+
+### D. Feature Prioritization & Sequencing
+
+#### Demand Analysis: Top 10 Features (Korea)
+
+| Rank | Feature | Context | Implementation Priority |
+|------|---------|---------|---|
+| 1 | **Music streaming** | High entertainment consumption; Melon, Spotify dominant | Phase 2 (Integration) |
+| 2 | **Video/Content** | YouTube, Netflix access; home theater control common | Phase 2 |
+| 3 | **Shopping/Delivery** | Coupang, food delivery; high online commerce adoption | Phase 2 |
+| 4 | **Lighting & Temperature** | Standard smart home | Phase 1 (Core) |
+| 5 | **Door Lock & Security** | High concern but lower priority than Japan | Phase 1 |
+| 6 | **Cleaning Robot Control** | Robot vacuums ubiquitous in Seoul | Phase 2 |
+| 7 | **Gaming Integration** | PC, console control; PC gaming is cultural phenomenon | Phase 3 |
+| 8 | **Health/Fitness Tracking** | Wearable integration (Samsung Galaxy Watch, Fitbit) | Phase 3 |
+| 9 | **Language Learning** | English, Chinese lessons via voice | Phase 3 |
+| 10 | **Smart Appliances** | Refrigerator, washer integration | Phase 3 |
+
+#### Phased Feature Rollout
+
+**Phase 1 (Months 1–6, Launch 2026-Q1): Core Features**
+- Lighting & temperature (local processing)
+- Door lock management (local, with approval workflows)
+- Alarms & reminders (local)
+- Music library (local device storage)
+- News & weather (cached local, cloud optional)
+- Dual-approval workflow for major decisions
+
+**Phase 2 (Months 7–12, Launch 2026-Q3): Entertainment & Convenience**
+- Music streaming integration (Melon, Spotify, local Korean servers)
+- Video content (YouTube, Netflix voice control)
+- Shopping & delivery coordination (Coupang, Naver)
+- Cleaning robot control (integration with Roomba, LG, Samsung)
+- Advanced news (personalized, Korean-only processing)
+
+**Phase 3 (Months 13–18, Launch 2026-Q4): Advanced**
+- Gaming integration (PlayStation, Steam, Nexon)
+- Health tracking (Samsung wearables, fitness apps)
+- Language learning (English, Chinese courses)
+- Multi-family home management (vacation property control)
+
+---
+
+## THAILAND: Hierarchical Politeness with Flexibility & Practical Daily Life Focus
+
+### A. Interaction Style Framework
+
+#### Linguistic Registers (Thai Politeness Particles & Pronouns)
+
+Thai politeness is encoded primarily through **particles at the end of sentences** (ค่ะ, ครับ, ค่อ, นะ), not verb conjugation like Japanese/Korean.
+
+| Register | Particles & Pronouns | Example | When Used | Device Default |
+|----------|---|---|---|---|
+| **Very Informal** | Casual particles (นะ, เอย), informal pronouns (ชั้น, เ

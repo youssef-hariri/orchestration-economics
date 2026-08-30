@@ -1,0 +1,86 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Monetization Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial monetization and product-governance strategy addressing loot-box regulations, probability disclosure mandates, and cultural spending norms across all regions"
+    },
+    {
+      "name": "Regulatory & Cultural Compliance Analyst",
+      "role": "analyst",
+      "description": "Analyzes regulatory constraints (Belgium/Netherlands loot-box bans, Korea/China probability disclosure), player-protection advocacy group concerns, and regional cultural attitudes toward pay-to-win, gift-giving, and cosmetics"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates compliance analysis and cultural insights into the monetization strategy, ensuring coherence between global profitability and regional regulatory/cultural requirements"
+    },
+    {
+      "name": "Regulatory & Player-Experience Critic",
+      "role": "critic",
+      "description": "Reviews strategy for legal soundness, player-protection advocacy alignment, cultural authenticity, and player-experience fragmentation risks. Identifies conflicts and gaps"
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assurance gate for monetization strategy. Examine the refined strategy comprehensively. Assess: (1) Does it comply with all regional regulations (Belgium/Netherlands loot-box restrictions, Korea/China probability disclosure)? (2) Does it respect cultural attitudes in Japan, Gulf, Brazil, US without alienating any region? (3) Does it maintain one global game without irreparable player-experience fragmentation? (4) Is it profitable and sustainable? (5) Does it address player-protection advocacy concerns? Provide detailed reasoning for each criterion. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Implementation & Communication Polisher",
+      "role": "polisher",
+      "description": "Formats the final monetization strategy with clear governance frameworks, regional implementation guidelines, player communication templates, and stakeholder-alignment roadmap for publication"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Monetization Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a mobile-game monetization strategist. Create a comprehensive monetization and product-governance strategy for a global 2026 title operating under: Belgium/Netherlands loot-box bans, Korea/China mandatory probability disclosure, and regional cultural differences (Japan cosmetics preference, Gulf gift-giving sensitivity, Brazil pay-to-win skepticism, US engagement-focused design). The strategy must maintain one global game without irreparable player fragmentation while remaining profitable. Output a clear, structured draft strategy addressing: (1) Core monetization pillars compliant across all regions, (2) Regional variants and their implementation, (3) Governance framework for consistency, (4) Player-protection advocacy alignment, (5) Profitability model. Be comprehensive but concise."
+    },
+    {
+      "name": "Regulatory & Cultural Compliance Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a regulatory and cultural compliance analyst. Analyze the monetization strategy against: (1) Belgium/Netherlands loot-box prohibition specifics and enforcement, (2) Korea/China probability-disclosure legal requirements and enforcement history, (3) Player-protection advocacy group cross-border coordination patterns and messaging, (4) Regional cultural attitudes: Japan's cosmetics-first preference, Gulf region gift-giving and gifting ethics, Brazil's skepticism toward pay-to-win mechanics, US engagement and FOMO tolerance. Identify all regulatory gaps, cultural misalignments, and advocacy vulnerabilities. Provide actionable compliance and cultural-adaptation recommendations. Output structured findings with specific regional considerations."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Integrate the compliance analyst's findings into the monetization strategy. Revise the strategy to: (1) Eliminate all regulatory violations, (2) Respect regional cultural norms authentically, (3) Maintain one cohesive global game experience with minimal fragmentation, (4) Strengthen player-protection advocacy alignment, (5) Preserve profitability. Rewrite the strategy with clear, implementable regional variants that feel natural to players, not restrictive. Ensure all changes are explicitly justified."
+    },
+    {
+      "name": "Regulatory & Player-Experience Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a regulatory and player-experience critic. Review the refined strategy comprehensively. Assess: (1) Legal compliance—does it satisfy Belgium/Netherlands loot-box bans, Korea/China probability disclosure mandates, and cross-border advocacy concerns? (2) Cultural authenticity—does each region feel respected or patronized? (3) Player experience—is fragmentation minimal or does the game feel fractured across regions? (4) Profitability—are revenue levers preserved despite constraints? (5) Governance—is consistency enforced without bureaucratic overhead? Identify any remaining conflicts, loopholes, or cultural missteps. Output detailed reasoning for each dimension."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assurance gate for monetization strategy. Examine the refined strategy comprehensively. Assess: (1) Does it comply with all regional regulations (Belgium/Netherlands loot-box restrictions, Korea/China probability disclosure)? (2) Does it respect cultural attitudes in Japan, Gulf, Brazil, US without alienating any region? (3) Does it maintain one global game without irreparable player-experience fragmentation? (4) Is it profitable and sustainable? (5) Does it address player-protection advocacy concerns credibly? Provide detailed reasoning for each criterion, citing specific strategy elements. On the VERY LAST LINE, output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Implementation & Communication Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final-stage polisher. Format the approved monetization strategy into a polished, publication-ready document. Include: (1) Executive summary (profitability + compliance + cultural respect), (2) Regional governance framework with specific compliance checkpoints, (3) Monetization architecture (core pillars + regional variants with player-facing rationale), (4) Player-protection advocacy communication strategy, (5) Implementation roadmap with timelines, (6) Stakeholder alignment briefing (finance, legal, game design, regional teams). Ensure clarity, professionalism, and actionability. Output must be ready for C-suite and cross-functional team review."
+    }
+  ],
+  "explanation": "This pipeline addresses a complex, multi-dimensional problem requiring regulatory compliance analysis, cultural sensitivity, and strategic synthesis. The flow: (1) Builder creates an initial strategy draft; (2) Analyst performs deep regulatory and cultural due diligence to identify gaps; (3) Refiner integrates those findings, closing gaps while maintaining game cohesion; (4) Critic stress-tests the refined strategy across five key dimensions; (5) Quality Gate (if-type) assesses whether the strategy meets all hard requirements—legal, cultural, experiential, financial; (6) If 'revise' is output, the pipeline loops back to Refiner (step 3) to incorporate critic feedback, enabling up to 3 refinement cycles; (7) Once 'pass' is achieved, Polisher formats for stakeholder communication. The if-gate at step 5 is positioned AFTER Refiner (step 3) produces output, ensuring the gate has substantive content to assess. The design avoids human approval (fully automated) while preserving rigor through multi-stage review and looping refinement."
+}
+```

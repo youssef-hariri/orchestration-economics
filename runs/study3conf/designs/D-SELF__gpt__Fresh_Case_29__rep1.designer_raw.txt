@@ -1,0 +1,87 @@
+{
+  "agents": [
+    {
+      "name": "Resilience Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop an initial, decision-ready supply-chain resilience strategy for a semiconductor manufacturer facing export-control volatility in specialty gases and photoresists. Address dual-sourcing priorities, regional diversification, qualification timelines of 12–24 months, unforgiving quality requirements, supplier capacity concerns, long-term offtake economics, inventory and contingency options, governance, metrics, and implementation sequencing. Balance resilience, quality, cost, working capital, and financial flexibility. Make explicit assumptions and distinguish near-term actions from medium- and long-term actions. Produce a structured draft for executive and operations audiences.",
+      "description": "Creates the initial comprehensive resilience strategy."
+    },
+    {
+      "name": "Supply-Chain Economics Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the previous strategy draft for commercial and operational logic. Evaluate material criticality, geographic and geopolitical concentration, qualification lead times, capacity reservation economics, offtake commitments, inventory carrying costs, switching costs, failure scenarios, and risk-adjusted total cost. Identify useful segmentation, decision criteria, financial mechanisms, and measurable KPIs. Provide specific quantitative frameworks or illustrative ranges where exact data is unavailable, clearly labeling assumptions. Recommend improvements without losing practical implementability.",
+      "description": "Tests the strategy's economics, risk assumptions, and quantitative decision logic."
+    },
+    {
+      "name": "Semiconductor Materials Quality Expert",
+      "role": "expert",
+      "systemPrompt": "Review the draft and analysis from the perspective of semiconductor materials qualification, process integration, supplier quality, and manufacturing continuity. Ensure the strategy reflects realistic qualification and change-control requirements for specialty gases and photoresists, including lot-to-lot consistency, contamination risks, process-window sensitivity, validation, auditability, traceability, emergency substitution, and coordination among procurement, fabs, process engineering, quality, EHS, legal, and finance. Identify technically unsafe, unrealistic, or insufficiently specific recommendations and propose precise corrections.",
+      "description": "Validates technical feasibility, quality protection, and semiconductor manufacturing applicability."
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the initial draft, economic analysis, and technical expert review into a single rigorous strategy. Fix all identified weaknesses and reconcile conflicts. Provide a material segmentation model, sourcing and qualification roadmap, supplier engagement and offtake structures, financial risk-sharing options, inventory and contingency policies, quality and governance requirements, trigger-based escalation actions, implementation timeline, responsibilities, and KPIs. Explain trade-offs and decision rules clearly. Ensure recommendations are practical for a semiconductor manufacturer in 2026 and avoid unsupported certainty. Produce a complete revised answer, not commentary about the revision.",
+      "description": "Integrates commercial, operational, and technical input into an actionable strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "systemPrompt": "Assess the integrated strategy in full. Evaluate whether it directly answers the resilience objective; balances qualification lead time, quality risk, continuity, working capital, and long-term commitment economics; covers specialty gases and photoresists appropriately; addresses export-control volatility and geographic concentration; includes executable sequencing, governance, contingencies, supplier incentives, financial safeguards, and measurable KPIs; and clearly states assumptions and trade-offs. Identify omissions, contradictions, impractical recommendations, and ambiguities, with detailed corrective guidance. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Performs the final substantive quality assessment and routes the strategy for acceptance or revision."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing response using the refined strategy and quality assessment. Preserve substantive accuracy while improving structure, clarity, concision, and executive usability. Present a prioritized resilience strategy with clear actions, timelines, decision criteria, economic mechanisms, quality safeguards, contingencies, governance, and KPIs. Use headings, tables, or bullets where useful. State assumptions and trade-offs explicitly, distinguish recommendations from illustrative examples, and avoid mentioning the multi-agent process or internal review.",
+      "description": "Formats and sharpens the approved strategy into a clear executive-ready deliverable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Resilience Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial, decision-ready supply-chain resilience strategy for a semiconductor manufacturer facing export-control volatility in specialty gases and photoresists. Address dual-sourcing priorities, regional diversification, qualification timelines of 12–24 months, unforgiving quality requirements, supplier capacity concerns, long-term offtake economics, inventory and contingency options, governance, metrics, and implementation sequencing. Balance resilience, quality, cost, working capital, and financial flexibility. Make explicit assumptions and distinguish near-term actions from medium- and long-term actions."
+    },
+    {
+      "name": "Supply-Chain Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the previous strategy draft for commercial and operational logic. Evaluate material criticality, geographic and geopolitical concentration, qualification lead times, capacity reservation economics, offtake commitments, inventory carrying costs, switching costs, failure scenarios, and risk-adjusted total cost. Identify segmentation, decision criteria, financial mechanisms, and measurable KPIs. Provide specific quantitative frameworks or illustrative ranges where exact data is unavailable, clearly labeling assumptions."
+    },
+    {
+      "name": "Semiconductor Materials Quality Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the draft and analysis from the perspective of semiconductor materials qualification, process integration, supplier quality, and manufacturing continuity. Ensure realistic qualification and change-control requirements for specialty gases and photoresists, including lot consistency, contamination risks, process-window sensitivity, validation, auditability, traceability, emergency substitution, and cross-functional coordination. Identify technically unsafe or unrealistic recommendations and propose precise corrections."
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize all prior outputs into a single rigorous strategy. Fix identified weaknesses and reconcile conflicts. Include material segmentation, sourcing and qualification roadmap, supplier engagement and offtake structures, financial risk-sharing, inventory and contingency policies, quality and governance requirements, trigger-based escalation actions, implementation timeline, responsibilities, and KPIs. Explain trade-offs clearly and produce a complete revised answer."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the integrated strategy in full. Evaluate direct relevance, balance among qualification lead time, quality risk, continuity, working capital, and commitment economics, coverage of specialty gases and photoresists, treatment of export-control volatility and geographic concentration, execution sequencing, supplier incentives, financial safeguards, contingencies, governance, KPIs, assumptions, and trade-offs. Provide detailed reasoning and corrective guidance. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing response from the refined strategy and assessment. Improve clarity, organization, concision, and executive usability while preserving substantive accuracy. Present prioritized actions, timelines, decision criteria, economic mechanisms, quality safeguards, contingencies, governance, KPIs, assumptions, and trade-offs. Do not mention the internal pipeline or review process."
+    }
+  ],
+  "explanation": "The flow is Builder → Economics Analyst → Materials Quality Expert → Refiner → Quality Assessment (if revise, loops back to the Refiner; if pass, continues) → Polisher. The builder establishes a complete strategy, while the analyst and domain expert stress-test its economics and technical feasibility. The refiner integrates their findings. The quality assessment provides a substantive final check and can return the work to the refiner for correction before the polisher produces the executive-ready result."
+}

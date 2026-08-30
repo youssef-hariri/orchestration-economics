@@ -1,0 +1,665 @@
+# Smallholder Precision-Agriculture Product Strategy — 2026
+
+## 1. Strategic recommendation
+
+Do not export the existing large-farm sensor bundle into India, Kenya, and Vietnam. Launch a **managed, cluster-based advisory service** that combines limited local sensing, external weather and satellite data, farmer observations, and local field support.
+
+The initial product should deliver **one validated, actionable decision per country**, rather than a broad precision-agriculture suite.
+
+| Market | Initial beachhead | Primary payer | Primary farmer decision | Primary outcome |
+|---|---|---|---|---|
+| **India** | One irrigated, high-value horticulture crop in one state | FPO, aggregator, processor, or irrigation organization | Irrigate now, wait, or adjust only after validation | Pumping cost, water productivity, or quality |
+| **Kenya** | Organized irrigated horticulture | Exporter, aggregator, cooperative, or service provider | Irrigate now/wait | Water productivity, quality, or avoided loss |
+| **Vietnam** | One defined Mekong Delta water, flood, or salinity use case | Cooperative, processor, or exporter | Irrigation, flood, or salinity response | Yield stability, quality, or avoided risk |
+
+A separate, lower-hardware weather-risk experiment may be tested in Kenya’s rainfed systems.
+
+The exact state, crop, partner, payer, and price must be finalized before deployment. No country should begin with a national or multi-crop rollout.
+
+---
+
+# 2. Product proposition and target users
+
+## Core proposition
+
+> Convert sparse measurements and local context into one clear, explainable action delivered through trusted organizations and field agents.
+
+Smallholders are unlikely to pay for sensors, dashboards, or raw data. The value proposition must instead be tied to:
+
+- Lower irrigation or pumping costs
+- Reduced weather, disease, flood, or salinity risk
+- Better quality and fewer rejected deliveries
+- More reliable supply planning
+- Buyer compliance or traceability
+- Timely agronomic support
+
+## Users
+
+### Farmers
+
+Need:
+
+- A specific action for a specific plot
+- Local language and units
+- Advice compatible with available equipment
+- SMS, voice, WhatsApp, agent, or simple Android delivery
+- A brief reason and confidence level
+- Ability to accept, reject, or override advice
+
+### Field agents and agronomists
+
+Need:
+
+- Offline plot and farmer registration
+- Installation and calibration tools
+- Sensor-health diagnostics
+- Manual observation capture
+- Recommendation explanation and escalation workflows
+
+### Cooperatives and buyers
+
+Need:
+
+- Cluster and plot management
+- Device and alert monitoring
+- Farmer communication
+- Crop-progress, quality, or irrigation reports
+- Data exports and integrations
+
+---
+
+# 3. Focused MVP
+
+Each pilot should include:
+
+1. **One primary agronomic recommendation**
+2. **One supporting weather or risk alert**
+3. Sensor and service-health monitoring
+4. Human technical or agronomic escalation
+5. One primary and one fallback communication channel
+
+Examples:
+
+- “Irrigate Plot 2 today or wait” plus a heavy-rain alert
+- “Spraying conditions are suitable or unsuitable” plus a wind/rain warning
+- “Plant now or wait” plus a dry-spell alert
+
+Traceability, quality monitoring, and supply forecasting should be separate buyer-facing modules, with separate pricing and data permissions.
+
+---
+
+# 4. Hardware simplification
+
+## MVP hardware
+
+### Cluster weather station
+
+Deploy only where local data materially improves the recommendation:
+
+- Air temperature
+- Relative humidity
+- Rainfall, where external data is inadequate
+- Solar and battery monitoring
+- Connectivity status
+- Local storage for several weeks
+- Weatherproof enclosure
+- Remote diagnostics and configuration
+
+### Representative soil-moisture station
+
+Deploy only in irrigated blocks where farmers can change irrigation:
+
+- One or two probes at crop-relevant root-zone depths
+- Soil type, probe depth, crop, planting date, irrigation method, and GPS
+- Installation photographs and calibration records
+- Manual-reading fallback
+- Replaceable modules
+
+The cooperative, aggregator, or service provider should generally own or lease equipment during early pilots. This reduces farmer capital burden and simplifies maintenance and redeployment.
+
+## Exclude from the MVP
+
+- Generic real-time NPK sensors
+- Dense multi-depth arrays
+- Continuous imaging or cameras
+- Autonomous pesticide recommendations
+- Broad AI disease diagnosis
+- Generic fertilizer-reduction recommendations
+- Variable-rate prescriptions
+- Machinery integration
+- Unsupported high-resolution maps
+- Complex farmer optimization dashboards
+- Generic salinity or EC modules outside a validated Vietnamese pilot
+
+## Required hardware specifications
+
+Before procurement, define:
+
+- Environmental protection rating
+- Operating temperature and humidity
+- Soil-moisture accuracy by soil class
+- Calibration procedure and frequency
+- Sampling and transmission intervals
+- Battery reserve and solar sizing
+- Offline storage capacity
+- Expected operating life and failure-rate target
+- Maximum replacement time
+- Replacement-part cost
+- Communications technology by geography
+- Theft and tamper assumptions
+- Firmware update and rollback process
+- End-of-season recovery and redeployment
+
+Compare three designs:
+
+1. External weather data only  
+2. Local weather station plus representative soil probes  
+3. Higher-density sensing for premium blocks  
+
+Choose according to incremental agronomic value versus installation and service cost.
+
+---
+
+# 5. Connectivity and user experience
+
+Connectivity should be treated as intermittent rather than continuously available.
+
+## Must-have capabilities
+
+- Store-and-forward synchronization
+- Local data logging for several weeks
+- Low-power communication modes
+- Bluetooth or short-range field synchronization
+- Offline installation and diagnostics
+- Manual observations
+- Battery and signal-health alerts
+- Data-freshness indicators
+- Recommendation expiry
+- Firmware updates that tolerate poor connectivity
+
+A delayed “spray now” message must expire or be marked stale rather than delivered as current.
+
+## Communication channels
+
+Select one primary channel per pilot:
+
+1. Lightweight Android app or WhatsApp  
+2. SMS  
+3. IVR or voice  
+4. Cooperative, lead-farmer, or agent relay  
+
+Budget for delivery failures, inactive phone numbers, SIM changes, shared devices, translations, voice support, and data costs. WhatsApp should not be assumed to be universally available.
+
+## Alert design
+
+Every alert should state:
+
+- Affected plot and crop
+- Recommended action
+- Timing
+- Brief reason
+- Confidence or reliability
+- What to do if action is not possible
+- Expiry, where relevant
+
+Avoid raw readings, unexplained color codes, repeated alerts, and advice requiring unavailable equipment.
+
+Test comprehension by gender, age, literacy, phone access, and language. Users should be able to identify the plot, action, timing, reason, confidence, and fallback.
+
+---
+
+# 6. Agronomic and data-quality design
+
+## Station representativeness
+
+Define empirically:
+
+- Maximum station-to-plot distance
+- Acceptable soil-type similarity
+- Acceptable crop and planting-date similarity
+- Acceptable irrigation-method similarity
+- Maximum plots or hectares per station
+- Conditions requiring another sensor
+- Conditions requiring advice to be withheld
+
+A shared station must not be presented as precise for every plot in a cluster.
+
+## Data-quality states
+
+Use:
+
+- **Good:** recent, complete, locally relevant data
+- **Usable with caution:** partial, modeled, or cluster-level data
+- **Insufficient:** withhold prescriptive advice or request review
+
+Confidence should consider:
+
+- Data freshness
+- Sensor uptime
+- Missing-data duration
+- Implausible readings
+- Calibration status
+- Probe depth
+- Sensor-to-plot distance
+- Crop and growth stage
+- Soil water-holding characteristics
+- Recent rainfall and irrigation
+- Forecast uncertainty
+- Irrigation method
+
+The system must distinguish measured data, modeled estimates, external weather, satellite data, farmer observations, and defaults.
+
+## Initial analytics model
+
+Use rule-based or hybrid models initially. For irrigation, combine:
+
+- Soil moisture
+- Root-zone depth
+- Crop and growth stage
+- Soil characteristics
+- Recent irrigation
+- Rainfall and forecast rain
+- Heat and evapotranspiration conditions
+- Irrigation method
+- Data quality
+
+Do not recommend specific irrigation volumes or durations until validated against local practice and crop outcomes.
+
+## Safety classes
+
+| Class | Examples | Control |
+|---|---|---|
+| **Low risk** | Weather observation, device-health alert | Automate when data is fresh |
+| **Moderate risk** | Irrigate now/wait, spray-window advice | Require confidence, freshness, and applicability thresholds |
+| **High risk** | Pesticide choice, fertilizer reduction, major irrigation cuts, consequential disease diagnosis | Require trained agronomist review |
+
+Automatically downgrade or suspend recommendations after repeated sensor anomalies, excessive missing data, multiple error-indicating overrides, agronomist-reported conflicts, or a harmful incident.
+
+---
+
+# 7. Analytics priorities
+
+## Must have now
+
+- One primary crop-management recommendation
+- One supporting weather or risk alert
+- Sensor and service-health monitoring
+- Confidence and data-quality indicators
+- Delivery and expiry tracking
+- Human technical or agronomic escalation
+
+## Experiments
+
+Only test where a customer funds the work or has a clear operational reason:
+
+- Narrow disease-risk models
+- Leaf-wetness sensing
+- EC/salinity monitoring in defined zones
+- Satellite crop-stage estimation
+- Buyer crop-progress reporting
+- Traceability
+- Quality-risk prediction
+- Supply-volume forecasting
+- Voice-first advisory
+- Shared irrigation coordination
+- Higher-density sensing in premium blocks
+
+## Defer or drop
+
+- Generic real-time NPK
+- Broad autonomous disease diagnosis
+- Generic fertilizer-reduction advice
+- High-resolution maps unsupported by measurements
+- Continuous imaging
+- Variable-rate prescriptions without compatible equipment
+- Complex farmer dashboards
+- Unvalidated yield or harvest forecasts
+- Cross-farm benchmarking
+- Carbon, credit, or insurance scoring
+- Autonomous pesticide recommendations
+
+---
+
+# 8. Delivery partnerships
+
+## B2B2F operating model
+
+| Party | Responsibility |
+|---|---|
+| **Company** | Platform, analytics, hardware standards, model governance, security, training, second-line support |
+| **Institutional buyer** | Farmer aggregation, payment or harvest deduction, crop-program coordination, farmer communication |
+| **Local service partner** | Installation, calibration, field checks, first-line support, observations, replacement, escalation |
+| **Farmer** | Provides plot and crop information, receives advice, gives feedback, accepts or overrides recommendations |
+
+## Cooperatives and FPOs
+
+Use where they have:
+
+- Active members
+- Geographic concentration
+- Field staff
+- Payment capability
+- A clear member, water, buyer, or compliance benefit
+- Basic governance and data discipline
+
+## Input dealers
+
+They can provide frequent contact, installation, referrals, and payment facilitation, but their input-sales incentives create risk.
+
+Controls:
+
+- No commission based on fertilizer or pesticide volume
+- Pay for installation accuracy, data completeness, comprehension, service resolution, adoption, and renewal
+- Independent agronomic escalation
+- Audits of dealer communications
+- No autonomous chemical advice
+- Contractual remedies for poor installation or misrepresentation
+
+## Required partner SLAs
+
+Contracts must define:
+
+- Hardware ownership
+- Installation and calibration standards
+- Replacement and theft liability
+- Technician certification
+- Critical-device response time
+- Agronomic escalation response time
+- Spare-parts requirements
+- Complaint handling
+- Data and consent duties
+- Recommendation override procedures
+- Renewal ownership
+- Data access after termination
+
+Also set maximum service radius, clusters per technician, farmer-to-agronomist ratios, and unresolved-alert limits.
+
+---
+
+# 9. Pricing and economics
+
+## Commercial packages
+
+### Managed cluster service
+
+For cooperatives, aggregators, irrigation organizations, processors, and buyers:
+
+- Shared hardware
+- Installation and maintenance
+- Connectivity
+- Organization dashboard
+- Farmer alerts
+- Field-agent support
+- Seasonal reporting
+
+### Farmer advisory add-on
+
+- Localized weather and crop alerts
+- Basic irrigation or crop-calendar advice
+- Optional soil-moisture recommendations
+
+Charge per season or crop cycle, not monthly.
+
+### Buyer value-chain module
+
+- Traceability
+- Quality-risk monitoring
+- Crop progress
+- Supply forecasting
+- Compliance reporting
+
+Price separately and obtain separate data permissions.
+
+## Payment options
+
+Test:
+
+- Seasonal billing
+- Per-hectare or crop-cycle pricing
+- Harvest deductions
+- Cooperative collection
+- Mobile money in Kenya
+- Buyer-funded service
+- Farmer co-pay
+- Hardware lease
+- Bundling with agronomy, inputs, credit, or contracts
+
+Free pilots, surveys, verbal interest, and app downloads do not establish demand. Require deposits, paid pilots, signed commitments, seasonal prepayments, or renewals.
+
+## Required economic gates
+
+Model by country and deployment configuration:
+
+- Landed hardware cost
+- Installation and calibration
+- Connectivity
+- Field-agent travel and compensation
+- Agronomist support
+- Partner commissions
+- Spare parts
+- Theft and replacement
+- Payment collection
+- Customer acquisition
+- Revenue per cluster and hectare
+- Gross margin after service
+- Payback period
+- Customer ROI
+- Minimum cluster density
+- Maximum service radius
+- Company capital exposure
+
+Set explicit thresholds for:
+
+- Maximum installation cost per active hectare
+- Maximum support cost per plot
+- Minimum customer ROI
+- Minimum paid renewal rate
+- Maximum replacement rate
+- Minimum hectares per cluster
+- Maximum company capital exposure
+
+---
+
+# 10. Country-specific execution
+
+## India
+
+Begin with one state, one irrigated high-value crop, and one active FPO, aggregator, processor, or irrigation organization.
+
+- Primary decision: irrigation scheduling
+- Supporting alert: heavy rain or spray window
+- Delivery: SMS and agent-mediated communication initially
+- Payment: seasonal or harvest-linked
+- Localization: state-specific language, units, crop calendar, and terminology
+
+Do not assume national cooperative coverage or government procurement. Verify wireless, import, battery, e-waste, data, measurement, and agricultural-advice requirements before deployment.
+
+## Kenya
+
+### Irrigated horticulture
+
+- Primary decision: irrigation scheduling
+- Supporting alert: spray window or disease-favorable weather
+- Payer: exporter, aggregator, cooperative, or service provider
+- Channels: SMS, voice, or WhatsApp based on evidence
+- Payment: mobile money or seasonal deduction
+
+### Rainfed experiment
+
+- Primary decision: planting-window or dry-spell alert
+- Supporting alert: heavy-rain warning
+- Start with external weather data
+- Avoid soil sensors unless farmers can act on the information
+
+Validate network coverage, technician travel, theft, replacement, and partner capacity by county. Mobile money improves collection but does not prove affordability.
+
+## Vietnam
+
+Choose one initial path:
+
+### Mekong Delta
+
+- Flood, irrigation, or salinity response
+- Supporting rainfall or water-level alert
+- Payer: cooperative, processor, or exporter
+
+### Central Highlands
+
+- Water management for one perennial crop
+- Supporting narrow disease-risk or spray-window experiment
+
+Do not launch both as one product. Use Vietnamese terminology, regional crop calendars, and local units. Deploy EC/salinity sensing only where it changes a validated decision. Treat traceability as a separately funded buyer module.
+
+---
+
+# 11. Phased execution
+
+## Phase 0: Qualification — months 0–3
+
+- Select crop, geography, payer, decision, and partner.
+- Capture baseline irrigation, inputs, yields, prices, labor, and practices.
+- Test connectivity, power, language, comprehension, and payment.
+- Confirm farmers can act on the advice.
+- Complete regulatory, privacy, and liability reviews.
+- Agree renewal pricing before deployment.
+- Set staffing, inventory, service-radius, and spare-parts budgets.
+
+**Go/no-go:** concentrated farmer base, qualified partner, clear ROI hypothesis, feasible service radius, paid commitment or deposit, farmer ability to act, and acceptable regulatory pathway.
+
+## Phase 1: Technical validation — months 3–6
+
+- Deploy a small number of clusters.
+- Compare weather-only and representative-sensor configurations.
+- Validate station representativeness.
+- Audit installation and calibration.
+- Test offline synchronization and alert latency.
+- Review recommendations with local agronomists.
+- Test comprehension and fallback channels.
+- Establish failure, replacement, and support-cost baselines.
+
+## Phase 2: Full-season paid pilot — months 6–15
+
+Use a predefined evaluation design covering:
+
+- Sample size and statistical power
+- Randomized, matched-cluster, or phased rollout methodology
+- Treatment and comparison groups
+- Baseline and endline measurement
+- Spillover and weather-shock handling
+- Missing-data rules
+- Primary and secondary outcomes
+- Independent analysis responsibility
+- Safety thresholds and stopping rules
+
+## Phase 3: Controlled replication — months 15–24
+
+Expand only within validated crop-and-channel combinations. Add one major experiment at a time.
+
+## Phase 4: Selective scale — month 24 onward
+
+Scale only after paid renewal, reliable decision-period data, timely delivery, acceptable hardware and service economics, farmer comprehension, measurable value, partner execution, and compliance are demonstrated.
+
+---
+
+# 12. Success criteria
+
+## Commercial
+
+- Paid conversion
+- Renewal rate
+- Revenue per active hectare
+- Gross margin after support
+- Support cost per active plot
+- Customer ROI
+- Partner profitability
+- Company capital exposure
+
+## Reliability
+
+- Usable data availability during decision periods
+- Installation accuracy
+- Device uptime
+- Recommendation delivery latency
+- Sensor failure and replacement rate
+- Mean time to resolution
+- Stale-message rate
+- Offline synchronization success
+
+“Usable data” means fresh, valid, decision-relevant data—not merely a connected device.
+
+## Adoption and inclusion
+
+- Recommendation comprehension
+- Adoption rate
+- Override rate and reasons
+- Agent active use
+- Repeat use
+- Complaint rate and resolution time
+- Farmer trust
+- Intended decision-makers reached
+- Comprehension by gender, age, literacy, and phone access
+- Shared-device privacy incidents
+
+## Outcomes
+
+- Water use
+- Pumping cost
+- Yield-adjusted water productivity
+- Yield
+- Spray timing
+- Disease incidence
+- Quality grade
+- Rejection rate
+- Harvest timing
+- Supply-forecast error
+- Net farmer income
+- Buyer operating savings
+
+## Guardrails
+
+- Harmful or false recommendations
+- Crop-loss incidents plausibly linked to advice
+- Unsafe pesticide-related events
+- Stale advice delivered as current
+- Privacy or consent violations
+- Unauthorized data access
+- Partner incentive violations
+- Unresolved high-risk alerts
+
+---
+
+# 13. Principal risks
+
+| Risk | Mitigation |
+|---|---|
+| Sparse sensors create false precision | Empirical representativeness rules, management zones, coverage display, confidence gating, advice withholding |
+| Sensor drift or poor installation | Soil-specific calibration, installation photos, audits, plausibility checks, field replacement |
+| Connectivity delays advice | Local storage, store-and-forward, SMS/voice fallback, expiry timestamps |
+| Hardware failure, theft, or damage | Modular replacement, telemetry, partner asset ownership, spares, tamper controls |
+| Advice reduces yield | Conservative thresholds, crop-stage rules, agronomist review, comparison plots, stopping rules |
+| Disease advice drives unnecessary spraying | Narrow validation, spray-window guidance, no autonomous chemical advice |
+| Input-dealer conflicts | Outcome-based commissions, independent review, communication audits |
+| Cooperative cannot execute | Partner scorecards, certification, SLAs, phased rollout |
+| Free pilots overstate demand | Paid pilots, deposits, signed commitments, pre-agreed renewal |
+| Service costs exceed revenue | Cluster-density thresholds, service-radius limits, local technicians, cost tracking |
+| Farmer data is misused | Local-language consent, minimization, role-based access, audit logs, secondary-use restrictions |
+| Shared phones or gender exclusion | Multi-channel delivery, household workflows, gender testing, agent relay |
+| Country variation overwhelms platform | Common hardware and data model; localized rules, language, units, and workflows |
+| Regulatory delays | Complete telecom, import, environmental, data, cybersecurity, and advisory reviews before deployment |
+| Harmful advice creates liability | Risk classes, escalation, incident response, logs, insurance review, contractual boundaries |
+| Buyer interests conflict with farmers | Separate buyer and farmer permissions, transparent data use, farmer override, aggregated reporting |
+
+---
+
+# Final recommendation
+
+Approve partner qualification, hardware prototyping, regulatory review, and preparation of narrow paid pilots.
+
+Do not approve broad commercial launch until each country independently demonstrates that the company can:
+
+1. Deliver usable data during critical decision periods.  
+2. Provide timely, understandable, and safe recommendations.  
+3. Maintain and replace hardware at acceptable cost.  
+4. Operate through partners with enforceable service standards.  
+5. Produce measurable farmer or buyer value.  
+6. Convert that value into repeat payment.

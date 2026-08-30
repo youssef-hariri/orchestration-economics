@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial partnership strategy framework addressing supplier support, compliance pathways, and relationship preservation across three supplier regions"
+    },
+    {
+      "name": "Compliance & Economics Analyst",
+      "role": "analyst",
+      "description": "Analyzes CBAM financial impacts, emissions reporting requirements, and cost-benefit scenarios for each supplier region to ground strategy in quantitative realities"
+    },
+    {
+      "name": "Stakeholder Perception Expert",
+      "role": "expert",
+      "description": "Provides domain expertise on how suppliers in India, Turkey, and North Africa perceive CBAM fairness, protectionism concerns, and cultural/political sensitivities affecting strategy acceptance"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates analyst insights and expert perspectives into the initial strategy, strengthening compliance pathways, addressing fairness perceptions, and detailing concrete support mechanisms"
+    },
+    {
+      "name": "Coherence & Viability Critic",
+      "role": "critic",
+      "description": "Evaluates whether the refined strategy is internally consistent, operationally viable, addresses all supplier concerns, and balances buyer-supplier interests fairly"
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "description": "Formats the final partnership strategy for executive communication, ensuring clarity, actionability, and professional presentation for stakeholder engagement"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategic partnership architect. Create an initial partnership strategy framework that addresses: (1) how the European buyer will support suppliers in India, Turkey, and North Africa through CBAM compliance (2026 financial phase entry), (2) specific mechanisms to reduce compliance burden and emissions reporting costs, (3) how to preserve long-standing commercial relationships despite differing perceptions of CBAM fairness, (4) pathways to maintain competitiveness for suppliers under carbon pricing. Outline the core pillars and preliminary actions without deep analysis yet."
+    },
+    {
+      "name": "Compliance & Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the financial and technical dimensions of CBAM compliance for steel and aluminum suppliers. Calculate: (1) estimated emissions reporting costs and carbon pricing exposure for each region (India, Turkey, North Africa), (2) technical readiness gaps and modernization investment needs, (3) cost-benefit scenarios for different support models (shared auditing, technology transfer, financing). Provide quantitative grounding for the strategy with specific numbers, timelines, and region-specific cost breakdowns."
+    },
+    {
+      "name": "Stakeholder Perception Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "As a regional trade and policy expert, analyze how suppliers in India, Turkey, and North Africa perceive CBAM. Address: (1) which perceptions align with protectionism concerns vs. legitimate sustainability goals, (2) cultural and political sensitivities affecting supplier buy-in, (3) trust-building mechanisms needed to overcome skepticism, (4) how fairness narratives differ across regions, (5) which incentive structures would resonate with each supplier base. Provide deep stakeholder insight to inform messaging and relationship strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate the compliance analysis and stakeholder perception insights into the initial strategy. Strengthen and expand: (1) specific support mechanisms (e.g., joint emissions audits, technology partnership terms, financing structures), (2) region-customized compliance pathways addressing technical readiness variation, (3) narrative and communication strategies that acknowledge fairness concerns while demonstrating buyer commitment to shared competitiveness, (4) governance and monitoring frameworks for partnership success, (5) timeline and phasing for rollout. Produce a comprehensive, integrated partnership strategy document."
+    },
+    {
+      "name": "Coherence & Viability Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined partnership strategy comprehensively. Assess: (1) Does it coherently address all three supplier regions despite their differences? (2) Are support mechanisms operationally feasible and cost-realistic for the buyer? (3) Does it adequately counter fairness-as-protectionism perceptions without being defensive? (4) Does it preserve relationship integrity and shared value? (5) Are compliance timelines realistic given 2026 CBAM entry? (6) Are incentives aligned across buyer-supplier interests? Provide FULL detailed reasoning on each dimension. On the VERY LAST LINE output exactly ONE keyword: pass (strategy is coherent and viable) or revise (needs significant strengthening).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 5, "revise": 3}
+    },
+    {
+      "name": "Final Polish & Presentation",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the partnership strategy for executive and stakeholder communication. Structure as: Executive Summary, Regional Tailoring, Support Mechanisms, Fairness & Trust Narrative, Governance & Monitoring, Timeline & Milestones, Risk Mitigation. Ensure clarity, actionability, and professional presentation. Highlight shared competitiveness benefits and relationship preservation outcomes. Ready for presentation to European buyer leadership and supplier engagement discussions."
+    }
+  ],
+  "explanation": "This pipeline delivers a comprehensive CBAM partnership strategy by sequencing deep analysis before refinement. Strategy Builder establishes initial framework; Compliance Analyst and Stakeholder Expert provide quantitative and qualitative grounding in parallel; Strategy Refiner integrates both into a unified, region-sensitive partnership plan; Coherence Critic validates operational viability and fairness-narrative strength with routing back to Refiner if needed (up to 3 revision cycles); Final Polish prepares executive-ready output. The design ensures supplier concerns about protectionism are directly addressed through expert insight, economic analysis grounds support mechanisms in reality, and iterative refinement strengthens the strategy before presentation. No human approval gates required—fully automated quality assurance."
+}
+```

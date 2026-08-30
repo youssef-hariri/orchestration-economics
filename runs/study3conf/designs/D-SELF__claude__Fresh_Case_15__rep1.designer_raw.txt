@@ -1,0 +1,94 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market & Financial Analyst",
+      "role": "analyst",
+      "description": "Analyzes currency stability, inflation rates, and financial sustainability across all five markets; quantifies franchisee pain points and company economics"
+    },
+    {
+      "name": "Restructuring Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial royalty restructuring framework including tiered royalty models, currency hedging options, local financing mechanisms, and collective-bargaining response strategies"
+    },
+    {
+      "name": "Regional Adaptation Refiner",
+      "role": "refiner",
+      "description": "Refines restructuring plan by tailoring solutions to each market's specific currency dynamics, inflation profile, labor-relations culture, and regulatory environment"
+    },
+    {
+      "name": "Economic Feasibility Reviewer",
+      "role": "critic",
+      "description": "Reviews refined plan against brand economics, franchisee sustainability thresholds, and company-owned store profitability benchmarks; identifies gaps and contradictions"
+    },
+    {
+      "name": "Franchise Expert Validator",
+      "role": "expert",
+      "description": "Provides domain-specific expertise on franchise law, royalty best practices, currency-adjustment mechanisms in multi-market systems, and collective-bargaining precedents"
+    },
+    {
+      "name": "Implementation Coherence Reviewer",
+      "role": "reviewer",
+      "description": "Validates that all components (royalty models, financing, governance, dispute resolution) work together as an integrated system across markets"
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "description": "Formats final restructuring plan into clear executive summary with market-specific annexes, implementation roadmap, and stakeholder communication strategy"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market & Financial Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst specializing in multi-market franchise systems. Analyze the five markets (Turkey, Egypt, Nigeria, Indonesia, Brazil) across these dimensions: (1) Historical and projected currency depreciation rates vs. USD; (2) Annual inflation rates and trend trajectory; (3) Franchisee profitability margins under current fixed-USD royalty structure; (4) Company-owned store performance and margin profiles; (5) Collective-bargaining cultures and franchisee-association strength by country; (6) Regulatory constraints on royalty structures and currency conversions. Produce quantitative data summaries, heat maps of financial distress by market, and clear identification of which markets face existential franchisee viability issues vs. moderate pressure. Output structured financial benchmarks and risk rankings that will guide restructuring strategy."
+    },
+    {
+      "name": "Restructuring Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive royalty and financing restructuring for a multi-market QSR franchisor. Using the financial analysis provided, create an initial restructuring framework that addresses: (1) Tiered royalty models (e.g., base % + currency-adjustment triggers; volume-based sliding scales; inflation-indexed components); (2) Currency risk-sharing mechanisms (e.g., local-currency royalty options, hedging pass-throughs, USD-conversion caps); (3) Local financing solutions (e.g., franchisor-backed credit facilities, local-lender partnerships, royalty-holiday bridges); (4) Governance and dispute-resolution structures for collective franchisee negotiations; (5) Incentive alignment between franchisor and franchisees in high-inflation markets. Ensure the framework preserves company-owned store economics while making franchisee units economically viable. Output a detailed restructuring proposal organized by market and mechanism type."
+    },
+    {
+      "name": "Regional Adaptation Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a royalty restructuring plan to fit each market's specific context. For each market (Turkey, Egypt, Nigeria, Indonesia, Brazil), adapt the restructuring framework based on: (1) Currency stability profile (e.g., Turkey and Egypt = high depreciation risk; Brazil = moderate; Nigeria and Indonesia = volatile); (2) Local inflation dynamics and wage-cost pressures; (3) Collective-bargaining precedents and franchisee-association negotiating power; (4) Regulatory constraints (e.g., caps on royalty percentages, restrictions on currency conversion, labor-law implications); (5) Competitive franchise landscape and franchisee exit risks. Produce market-specific royalty structures, financing mechanisms, and governance protocols that are tailored yet aligned with global brand strategy. Output region-by-region implementation details with clear trade-offs noted."
+    },
+    {
+      "name": "Economic Feasibility Reviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer assessing the economic viability and coherence of the refined restructuring plan. Evaluate: (1) Does each market-specific royalty model restore franchisee unit economics to sustainable levels (target: EBITDA margin ≥ 12-15%)? (2) Do cumulative adjustments across all markets preserve company revenue and profitability targets (model impact on franchisor cash flow)? (3) Are there internal contradictions (e.g., royalty reductions in one market underfunded by assumptions elsewhere)? (4) Do financing mechanisms adequately de-risk currency and inflation shocks? (5) Is the governance structure fair enough to satisfy collective-bargaining demands while protecting franchisor control? Provide detailed financial modeling insights, identify any franchisee viability gaps remaining, and flag any revenue shortfalls to the franchisor. Output FULL assessment with quantified strengths and specific weaknesses. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Franchise Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in franchise law, international royalty structures, and collective-bargaining precedents. Validate the restructuring plan against: (1) Best practices in multi-market franchise royalty design (e.g., precedents for currency-adjustment clauses, local-currency options, sliding-scale models); (2) Legal and regulatory compliance in each market (e.g., are royalty caps, currency conversion restrictions, or mandatory profit-sharing laws being violated?); (3) Franchise relationship health (e.g., does the plan mitigate collective-bargaining conflict or invite legal challenges?); (4) Long-term brand economics sustainability (e.g., will franchisee loyalty and system stability improve?). Identify any legal risks, regulatory gaps, or franchise-health vulnerabilities. Recommend refinements to ensure legal soundness and stakeholder buy-in. Output expert assessment with specific precedent citations and actionable recommendations."
+    },
+    {
+      "name": "Implementation Coherence Reviewer",
+      "role": "reviewer",
+      "type": "while",
+      "systemPrompt": "You are assessing whether all components of the restructuring plan form an integrated, internally consistent system. Check: (1) Do the tiered royalty models, financing mechanisms, and governance protocols work together smoothly or create friction? (2) Is the currency-adjustment mechanism clearly defined and operationally feasible (e.g., monthly recalculation, audit trails, dispute resolution)? (3) Do incentive structures align franchisor and franchisees (e.g., does volume-based sliding scale reward growth for both parties)? (4) Is communication/transparency built in (e.g., clear dashboards showing currency movements, royalty recalculations, financing availability)? (5) Are transition protocols clear (e.g., how do existing franchise agreements migrate to new structures; grandfather clauses; renegotiation timelines)? Provide FULL coherence assessment. If any integration gaps or operational ambiguities exist, output retry; if the plan is operationally sound and integrated, output pass.",
+      "whileOptions": ["retry", "pass"],
+      "whileTargetStep": 3,
+      "whileMaxIterations": 3
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are formatting the final restructuring plan for executive stakeholder consumption. Create a comprehensive, well-organized output that includes: (1) Executive Summary (1 page): key restructuring innovations, expected outcomes (franchisee viability restoration, conflict mitigation, brand stability); (2) Market Overview Table: side-by-side comparison of current pain points, proposed solutions, and expected outcomes by market; (3) Detailed Market Annexes (one per market): royalty structure, financing mechanism, governance protocol, transition timeline, legal considerations; (4) Implementation Roadmap: phased rollout plan, stakeholder engagement strategy (franchisor leadership, franchisees, lenders, regulators), communication cadence; (5) Financial Impact Summary: projected franchisor revenue, franchisee margin recovery, system-wide cash flow implications. Ensure clarity, visual coherence, and strategic alignment. Produce a polished, boardroom-ready document ready for franchisor leadership and franchisee stakeholder review."
+    }
+  ],
+  "explanation": "This pipeline is designed to deliver a comprehensive, multi-market royalty restructuring that balances franchisee financial survival with long-term brand economics. The flow: (1) Analyst grounds the strategy in hard financial and market data; (2) Builder creates an initial restructuring framework; (3) Refiner tailors solutions to each market's unique currency, inflation, and labor-relations context; (4) Economic Feasibility Reviewer (if gate) validates that the plan actually restores franchisee viability and franchisor economics — if gaps remain, loops back to Refiner for refinement up to revision; (5) Franchise Expert Validator adds legal and best-practice rigor; (6) Implementation Coherence Reviewer (while gate) ensures all components integrate into a coherent, operationally feasible system — if integration gaps exist, loops back to Refiner for up to 3 iterations; (7) Polisher formats the final plan into executive-ready deliverables. This structure ensures rigorous financial grounding, market-specific adaptation, legal compliance, and operational soundness while keeping the pipeline lean and focused on the core outcome: a defensible, implementable restructuring that solves franchisee distress and collective-bargaining pressure without sacrificing franchisor economics or brand stability."
+}
+```

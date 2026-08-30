@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "description": "Develops initial partnership strategy framework addressing supplier compliance, relationship preservation, and competitive positioning under CBAM"
+    },
+    {
+      "name": "Stakeholder Analyst",
+      "role": "analyst",
+      "description": "Analyzes supplier heterogeneity across India, Turkey, and North Africa; maps technical readiness levels, perception gaps, and commercial relationship vulnerabilities"
+    },
+    {
+      "name": "CBAM Compliance Expert",
+      "role": "expert",
+      "description": "Provides domain-specific guidance on EU CBAM mechanics, reporting requirements, carbon pricing phases, and emerging-market supplier obligations through 2026"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates stakeholder insights and compliance requirements into coherent partnership strategy with tailored support pathways and fairness narratives"
+    },
+    {
+      "name": "Fairness & Perception Critic",
+      "role": "critic",
+      "description": "Evaluates whether strategy adequately addresses supplier concerns about protectionism, validates equitable support mechanisms, and identifies perception risks"
+    },
+    {
+      "name": "Commercial Relationship Reviewer",
+      "role": "reviewer",
+      "description": "Assesses strategy for preservation of existing commercial ties, mutual competitiveness gains, and long-term partnership viability across regions"
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into actionable partnership proposal with implementation roadmap, communication frameworks, and governance structure"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a partnership strategy to support emerging-market steel and aluminum suppliers (India, Turkey, North Africa) through EU CBAM compliance. Create an initial framework addressing: (1) supplier technical readiness assessment model, (2) differentiated support pathways for high/medium/low-readiness tiers, (3) mechanisms to preserve existing commercial relationships, (4) approaches to address protectionism concerns while maintaining competitive positioning, (5) shared value propositions. Produce a comprehensive initial strategy draft."
+    },
+    {
+      "name": "Stakeholder Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the supplier landscape across India, Turkey, and North Africa. Map: (1) technical readiness variations (emissions reporting infrastructure, carbon accounting systems, process optimization capability), (2) perception differences regarding CBAM fairness and protectionism, (3) existing relationship strength and vulnerability points with the European buyer, (4) regional regulatory/incentive environments, (5) competitive dynamics within each region. Produce detailed stakeholder profile matrix with segmentation by readiness and perception risk."
+    },
+    {
+      "name": "CBAM Compliance Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide expert analysis of EU Carbon Border Adjustment Mechanism: (1) timeline and financial phase implications for 2026 entry, (2) reporting and documentation requirements for non-EU suppliers, (3) carbon pricing mechanics and cost structures, (4) free allowance transition rules, (5) how emerging-market suppliers are differentially impacted versus EU competitors, (6) legitimate fairness concerns and where they exist. Explain complexities clearly to inform strategy design."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate the stakeholder analysis and compliance expertise into the initial strategy framework. Refine to produce: (1) tiered support model matching supplier technical readiness with appropriate compliance assistance, (2) region-specific engagement narratives addressing protectionism perceptions with evidence-based fairness arguments, (3) joint competitiveness initiatives that create mutual value despite CBAM costs, (4) relationship preservation mechanisms that rebuild trust where strained, (5) governance structure for ongoing partnership management. Produce a cohesive, implementable strategy."
+    },
+    {
+      "name": "Fairness & Perception Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate evaluating strategy fairness and perception credibility. Assess: (1) Do support mechanisms genuinely address supplier cost burdens or merely shift them? (2) Are protectionism concerns adequately countered with transparent, evidence-based arguments? (3) Does the strategy treat regional/tiered suppliers equitably? (4) Could suppliers credibly view this as partnership vs. exploitation? (5) Are shared value gains realistic and clearly communicated? Provide FULL analysis of strengths and weaknesses. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Commercial Relationship Reviewer",
+      "role": "reviewer",
+      "type": "agent",
+      "systemPrompt": "Review the refined strategy for commercial viability and relationship preservation. Evaluate: (1) Will strategy actions restore confidence in long-standing relationships? (2) Are mutual competitiveness gains credible (cost sharing, technology transfer, market access)? (3) Does strategy reduce supplier churn risk and defection to non-EU buyers? (4) Are contractual/commercial mechanisms clearly defined? (5) What are residual relationship risks and mitigation approaches? Produce detailed assessment with relationship sustainability forecast."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Transform the strategy into a polished, actionable partnership proposal. Structure as: (1) Executive Summary (2-3 paragraphs), (2) Supplier Tiering & Support Framework (with concrete activities), (3) Fairness & Protectionism Narrative (communication strategy), (4) Shared Value Initiatives (joint wins), (5) Implementation Roadmap (12-24 month timeline), (6) Governance & Escalation (roles, decisions, touchpoints), (7) Success Metrics. Format for European buyer to present to suppliers. Ensure clarity, credibility, and actionability."
+    }
+  ],
+  "explanation": "This pipeline orchestrates multi-perspective strategy development for a complex, relationship-dependent compliance challenge. The Builder initiates a framework. The Analyst and Expert agents work in parallel conceptually (though sequenced here) to inject stakeholder insights and regulatory clarity into the Strategy Refiner, which synthesizes them into coherent strategy. A critical fairness & perception gate (if/revise loop) ensures the strategy adequately addresses the psychological and equity concerns that suppliers hold—this is the highest-risk failure mode. If perception logic is insufficient, the strategy loops back to the Refiner to strengthen fairness narratives and support mechanisms. The Commercial Relationship Reviewer then validates that the refined strategy actually preserves and strengthens ties (not just addresses compliance). Finally, the Polisher formats for real-world presentation. The if-gate with max 1 revision prevents over-iteration while ensuring credibility on the fairness dimension—critical for supplier buy-in despite skepticism about CBAM motives."
+}
+```

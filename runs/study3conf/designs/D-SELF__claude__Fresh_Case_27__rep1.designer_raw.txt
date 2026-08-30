@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategic Localization Planner",
+      "role": "builder",
+      "description": "Develops initial localization and marketing strategy framework across four regions, mapping regional preferences, budget allocation priorities, and fandom engagement approaches"
+    },
+    {
+      "name": "Regional Preference Analyst",
+      "role": "analyst",
+      "description": "Analyzes subtitle-versus-dubbing preferences, cultural sensitivity patterns, adaptation tolerance levels, and fandom community dynamics by region"
+    },
+    {
+      "name": "Budget Optimization Specialist",
+      "role": "expert",
+      "description": "Evaluates dubbing studio quality and cost variation by language, identifies cost-benefit trade-offs, and recommends optimal budget allocation across dubbing, subtitling, and marketing"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates regional insights and budget constraints into a cohesive strategy with specific recommendations for each region, studio partnerships, and fandom activation tactics"
+    },
+    {
+      "name": "Localization Quality Validator",
+      "role": "critic",
+      "description": "Validates strategy feasibility, checks for regional contradictions, assesses cultural sensitivity protocols, and confirms budget realism and ROI potential"
+    },
+    {
+      "name": "Implementation Detailer",
+      "role": "refiner",
+      "description": "Transforms validated strategy into actionable implementation roadmap with timelines, contingencies for fandom coordination, and clear success metrics by region"
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy document for stakeholder presentation with executive summary, regional breakdowns, budget tables, and risk mitigation plans"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategic Localization Planner",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a Korean-content localization and marketing strategy for a streaming platform. Your task is to create an initial comprehensive framework addressing: (1) Regional breakdown (Southeast Asia, Middle East, Latin America, Europe) with distinct audience preferences for subtitles vs. dubbing, cultural sensitivity profiles, and fandom ecosystem characteristics; (2) Budget allocation approach across regions; (3) High-level approach to dubbing studio partnerships, subtitle localization, and fandom community engagement; (4) Preliminary risk factors (dubbing quality variance, cultural adaptation sensitivities, transnational fandom coordination). Output a detailed strategic framework that serves as the foundation for subsequent analysis and refinement."
+    },
+    {
+      "name": "Regional Preference Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a regional market analyst. Analyze the localization framework provided and produce detailed insights on: (1) Subtitle vs. dubbing preferences by region with audience demographic reasoning; (2) Cultural sensitivity hotspots (historical references, gender dynamics, religious themes, political content) and regional tolerance levels; (3) Adaptation edit requirements and content modification thresholds by market; (4) Fandom community structure, transnational organizing patterns, and social-media activation opportunities; (5) Market-specific language dubbing quality benchmarks and cost ranges. Support each insight with specific recommendations for localization approach."
+    },
+    {
+      "name": "Budget Optimization Specialist",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a localization budget and operations expert. Given the regional preferences analysis and strategic framework, produce: (1) Detailed cost-benefit analysis for dubbing vs. subtitling by region; (2) Language-specific dubbing studio quality tiers and pricing; (3) Optimal budget allocation percentages across regions (Southeast Asia, Middle East, Latin America, Europe) accounting for audience size, growth potential, and cost efficiency; (4) Alternative funding strategies (community-driven subtitling, selective dubbing for high-ROI languages); (5) ROI projections and budget contingencies; (6) Supplier diversification strategy to manage cost and quality variance. Provide specific currency figures and percentage allocations."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy integrator. Synthesize the regional preference analysis and budget optimization recommendations into a unified, actionable localization strategy. Output: (1) Region-specific localization roadmaps (e.g., 'Southeast Asia: High-quality dubbing in Thai, Vietnamese; selective subtitling'; 'Middle East: Culturally-adapted subtitles with minimal dubbing'; etc.); (2) Specific dubbing studio partnerships and language priorities by region; (3) Content adaptation protocols addressing cultural sensitivities with clear decision frameworks; (4) Fandom engagement tactics tailored to each region's community structure; (5) Integrated budget allocation table with line items; (6) Timeline and phase rollout strategy. Ensure all recommendations are cost-justified and mutually consistent."
+    },
+    {
+      "name": "Localization Quality Validator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strategy validation expert. Review the integrated localization strategy carefully and assess: (1) Regional internal consistency — do recommendations align with stated audience preferences and sensitivities? (2) Budget feasibility — are allocations realistic given stated studio costs and language priorities? (3) Cultural risk mitigation — are adaptation and content protocols specific and actionable enough to prevent market missteps? (4) Fandom strategy viability — can transnational fandom coordination tactics realistically be executed? (5) ROI logic — do resource allocations match projected market growth and revenue potential? (6) Operational feasibility — are studio partnerships, timelines, and supplier diversification realistic? Provide FULL detailed assessment of strengths and weaknesses. If strategy is viable and accounts for key constraints, output 'pass' on the LAST LINE. If strategy requires refinement in budget allocation, regional focus, fandom tactics, or cultural protocols, output 'revise' on the LAST LINE.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 4}
+    },
+    {
+      "name": "Implementation Detailer",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an implementation specialist. Transform the validated strategy into a detailed operational roadmap. Provide: (1) Phase-by-phase rollout plan with 6-month milestones; (2) Language and region priority sequencing with justification; (3) Studio partnership scorecards and vendor evaluation criteria; (4) Content adaptation decision trees by cultural sensitivity category; (5) Fandom activation playbook with community engagement tactics for each region (Discord/Reddit engagement, fan-translated subtitle coordination, localized fan events, transnational collaboration protocols); (6) Weekly/monthly KPI monitoring framework with success metrics by region; (7) Contingency plans for dubbing quality failures, budget overruns, or fandom backlash; (8) Stakeholder communication templates. Ensure actionability and specificity throughout."
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are preparing a final executive-facing strategy document. Format the implementation roadmap as a polished deliverable containing: (1) Executive Summary (1 page: strategy overview, key recommendations, budget totals, projected impact); (2) Regional Strategy Summaries (1 page per region: localization approach, budget allocation, key risks and mitigations); (3) Detailed Budget Allocation Table with line items, cost ranges, and regional breakdowns in currency; (4) Fandom Engagement Strategy by Region; (5) Studio Partnership Requirements and Vendor Selection Criteria; (6) Phase Rollout Timeline with milestones; (7) Risk Register with contingency responses; (8) Success Metrics Dashboard template. Ensure professional formatting, clear data visualization potential (tables, charts), and executive accessibility. Remove jargon and ensure every recommendation is justified and actionable."
+    }
+  ],
+  "explanation": "This pipeline executes a four-step analytical funnel followed by two-step refinement and delivery. Step 1 (Builder) establishes the strategic framework. Steps 2–3 (Analyst, Expert) conduct parallel deep-dives into regional preferences and budget optimization, feeding integrated insights into Step 4 (Refiner), which synthesizes recommendations into a unified strategy. Step 5 (Critic, if-gate) validates feasibility and consistency; if the strategy has flaws in regional logic, budget realism, or operational viability, it routes back to Step 4 (Strategy Refiner) for revision and re-validation (single loop, no iteration limit needed because validation occurs once). If validation passes, the pipeline moves to Step 6 (Implementation Detailer), which translates strategy into actionable playbooks and timelines. Step 7 (Polisher) finalizes presentation for executive stakeholders. This structure ensures that regional insights, cost trade-offs, and fandom dynamics are thoroughly analyzed before strategy synthesis, that strategy feasibility is validated before operational detail is added, and that the final output is ready for stakeholder decision-making and execution."
+}
+```

@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "CulturalStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in cross-cultural organizational behavior. Draft a comprehensive integration strategy for AI agents that accounts for regional variances in power distance, uncertainty avoidance, and collectivism across North America, Western Europe, the Gulf, and East Asia.",
+      "description": "Creates the initial strategic framework for regional AI integration."
+    },
+    {
+      "name": "RegionalContextRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are an expert in regional workplace dynamics. Review the strategy and adjust the tone, communication style, and implementation protocols to ensure they resonate with the specific cultural norms of the target regions.",
+      "description": "Refines the strategy to ensure cultural sensitivity and local relevance."
+    },
+    {
+      "name": "RiskAssessor",
+      "role": "critic",
+      "systemPrompt": "You are an expert in organizational risk and change management. Evaluate the strategy for potential friction points regarding job security, surveillance concerns, and trust. Provide a full analysis of the strategy's effectiveness in mitigating these risks. On the very last line, output 'pass' if the strategy is robust, or 'revise' if it needs adjustment.",
+      "description": "Evaluates the strategy for cultural friction and implementation risks."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional communications expert. Format the final strategy into a clear, actionable, and professional document suitable for executive leadership at a multinational firm.",
+      "description": "Finalizes the document for professional distribution."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "CulturalStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in cross-cultural organizational behavior. Draft a comprehensive integration strategy for AI agents that accounts for regional variances in power distance, uncertainty avoidance, and collectivism across North America, Western Europe, the Gulf, and East Asia."
+    },
+    {
+      "name": "RegionalContextRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an expert in regional workplace dynamics. Review the strategy and adjust the tone, communication style, and implementation protocols to ensure they resonate with the specific cultural norms of the target regions."
+    },
+    {
+      "name": "RiskAssessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are an expert in organizational risk and change management. Evaluate the strategy for potential friction points regarding job security, surveillance concerns, and trust. Provide a full analysis of the strategy's effectiveness in mitigating these risks. On the very last line, output 'pass' if the strategy is robust, or 'revise' if it needs adjustment.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional communications expert. Format the final strategy into a clear, actionable, and professional document suitable for executive leadership at a multinational firm."
+    }
+  ],
+  "explanation": "The pipeline begins with the CulturalStrategist to establish the core framework. The RegionalContextRefiner then adapts this content for specific cultural nuances. The RiskAssessor acts as a quality gate, evaluating the strategy against potential cultural friction; if issues are found, it routes back to the RegionalContextRefiner to iterate (up to 3 times). Once the strategy passes the assessment, the FinalPolisher formats the output for executive consumption."
+}

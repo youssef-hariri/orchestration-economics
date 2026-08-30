@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cultural Research Builder",
+      "role": "builder",
+      "description": "Creates initial draft of culturally differentiated launch strategy by synthesizing research on emotional openness, mental-health stigma, family dynamics, and privacy expectations across East Asia, Middle East, Latin America, and Northern Europe"
+    },
+    {
+      "name": "Regional Expert Validator",
+      "role": "expert",
+      "description": "Provides domain-specific cultural and regional expertise to identify gaps, misconceptions, or insensitivities in the initial strategy draft across all four markets"
+    },
+    {
+      "name": "Trust & Compliance Analyst",
+      "role": "analyst",
+      "description": "Analyzes privacy safeguards, regulatory requirements, data governance, and trust-building mechanisms needed for each region; identifies compliance gaps and cultural-specific security concerns"
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "description": "Integrates expert feedback and compliance analysis into the draft; refines positioning, feature adaptations, and trust safeguards with region-specific nuance and actionable detail"
+    },
+    {
+      "name": "Coherence & Quality Critic",
+      "role": "critic",
+      "description": "Reviews refined strategy for internal consistency, cultural sensitivity, competitive viability, implementation feasibility, and completeness across all four regions and three pillars (positioning, features, safeguards)"
+    },
+    {
+      "name": "Launch Strategy Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into clear, executive-ready output with structured regional playbooks, implementation timelines, risk mitigation, and success metrics"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cultural Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a strategic pipeline builder designing a culturally differentiated global launch strategy. Create a comprehensive draft launch strategy for an AI emotional-wellbeing companion across four regions: East Asia, Middle East, Latin America, and Northern Europe. For each region, address: (1) POSITIONING—how to frame the AI companion given local attitudes toward emotion-sharing with machines, mental-health stigma, and AI trust; (2) FEATURE ADAPTATION—which emotional check-in formats, communication styles, family involvement options, and support modalities fit each culture; (3) TRUST SAFEGUARDS—specific privacy guarantees, data governance, consent models, and transparency practices needed to build confidence. Use available cultural research, market data, and analogous product launches. Structure output clearly by region."
+    },
+    {
+      "name": "Regional Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and regional expert with deep knowledge of East Asia, Middle East, Latin America, and Northern Europe. Review the draft launch strategy and provide expert-level critique on: cultural authenticity, emotional-health context accuracy, family dynamics representation, privacy norms understanding, regulatory climate, and competitive positioning. Identify any misconceptions, gaps, or insensitive framings. Highlight what is done well and what requires rethinking. Provide specific, actionable insights for each region that will strengthen strategy credibility and market fit."
+    },
+    {
+      "name": "Trust & Compliance Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a data privacy and regulatory compliance analyst specializing in health tech across multiple jurisdictions. Analyze the draft strategy and provide: (1) region-by-region privacy regulatory requirements (GDPR for Northern Europe, PDPA/PIPL for East Asia, local data residency for Middle East, LGPD for Latin America, etc.); (2) mental-health data classification and protection standards; (3) cultural privacy expectations and trust-building mechanisms for each market; (4) specific safeguard gaps that must be addressed; (5) recommended data governance, consent, encryption, and transparency practices for each region. Produce a compliance and trust-building roadmap that is feasible and credible."
+    },
+    {
+      "name": "Strategy Refinement Agent",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Integrate the expert cultural insights and compliance/trust analysis into the draft launch strategy. Refine each region's positioning, feature adaptations, and trust safeguards with nuance, specificity, and cultural sensitivity. Ensure every claim is grounded in the expert feedback and compliance requirements. Strengthen weak areas. Add implementation-ready detail for each pillar (positioning, features, safeguards). Maintain strategic coherence across all four regions while respecting local differences. Produce a comprehensive, refined strategy document."
+    },
+    {
+      "name": "Coherence & Quality Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate critic. Review the refined launch strategy against these criteria: (1) CULTURAL SENSITIVITY—Are positioning, features, and safeguards respectful, nuanced, and grounded in genuine cultural understanding? (2) COMPLETENESS—Does each region cover all three pillars (positioning, features, safeguards) with sufficient specificity? (3) COMPLIANCE & TRUST—Are privacy safeguards, regulatory requirements, and trust mechanisms adequate and region-appropriate? (4) COHERENCE—Is the overall strategy internally consistent and competitively viable? (5) FEASIBILITY—Are recommendations realistic and implementable within a 2026 timeline? Provide FULL detailed assessment of strengths and weaknesses for each region and each pillar. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass, revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Launch Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final polisher preparing executive-level output. Format the strategy into a clear, professional launch playbook with: (1) EXECUTIVE SUMMARY highlighting regional positioning, key feature adaptations, and differentiating trust safeguards; (2) REGIONAL PLAYBOOKS (one per region) with concrete positioning statements, adapted features, privacy/compliance architecture, go-to-market timeline, and risk mitigation; (3) CROSS-REGIONAL INSIGHTS on common themes and unique opportunities; (4) IMPLEMENTATION ROADMAP with phased rollout, success metrics, and monitoring. Ensure all output is clear, actionable, professionally formatted, and ready for leadership review and market execution."
+    }
+  ],
+  "explanation": "This pipeline is optimized for complex, culturally nuanced strategy design requiring iterative integration of multiple expertise domains. The flow: (1) Builder creates a comprehensive initial draft synthesizing research across all four regions and three strategic pillars; (2) Regional Expert Validator provides deep cultural and market-specific critique to catch misconceptions and strengthen authenticity; (3) Trust & Compliance Analyst surfaces regulatory, privacy, and compliance requirements that vary significantly by region, ensuring trust mechanisms are credible and legally sound; (4) Strategy Refiner integrates both expert and compliance feedback into a coherent, nuanced, implementation-ready strategy; (5) Coherence & Quality Critic performs a final quality gate assessing cultural sensitivity, completeness, compliance adequacy, internal consistency, and feasibility—if quality is insufficient, the pipeline loops back to the Refiner (up to 3 iterations) to address specific gaps; (6) Launch Strategy Polisher formats the final output into executive-ready regional playbooks and implementation roadmaps. This design ensures cultural authenticity, compliance rigor, and strategic coherence while keeping the pipeline under 8 steps and fully automated."
+}
+```

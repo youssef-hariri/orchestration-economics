@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cultural Research Builder",
+      "role": "builder",
+      "description": "Creates initial culturally differentiated launch strategy framework covering East Asia, Middle East, Latin America, and Northern Europe"
+    },
+    {
+      "name": "Regional Expert Analyst",
+      "role": "expert",
+      "description": "Provides deep domain expertise on cultural attitudes toward emotion disclosure, mental health stigma, family dynamics, and privacy expectations in each region"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates expert insights into the initial strategy, refining positioning, feature adaptation, and trust safeguards for each region"
+    },
+    {
+      "name": "Cultural Coherence Critic",
+      "role": "critic",
+      "description": "Assesses whether the differentiated strategy is culturally authentic, avoids stereotypes, addresses genuine local concerns, and maintains brand consistency"
+    },
+    {
+      "name": "Risk & Compliance Analyst",
+      "role": "analyst",
+      "description": "Analyzes privacy safeguards, data handling, regulatory compliance, and trust-building mechanisms across all four regions"
+    },
+    {
+      "name": "Launch Plan Polisher",
+      "role": "polisher",
+      "description": "Formats final output as comprehensive, actionable launch strategy document with clear regional playbooks, feature matrices, and implementation timelines"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cultural Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a culturally differentiated launch strategy for an AI emotional-wellbeing companion across four distinct markets: East Asia, Middle East, Latin America, and Northern Europe. Create an initial comprehensive framework addressing: (1) Market positioning and messaging for each region; (2) Feature adaptations (e.g., family involvement options, privacy controls, emotion vocabulary, interaction frequency); (3) Trust-building and safety safeguards tailored to each region's concerns about AI, privacy, and mental health. Structure your output to clearly separate insights by region and provide specific, actionable recommendations for each market segment."
+    },
+    {
+      "name": "Regional Expert Analyst",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and behavioral expert specializing in mental health, technology adoption, and family dynamics across East Asia, Middle East, Latin America, and Northern Europe. Review the initial launch strategy and provide deep expert analysis on: (1) Attitudes toward discussing emotions with machines vs. humans in each region; (2) How mental health stigma manifests differently and affects disclosure willingness; (3) Family involvement norms and expectations around personal wellbeing data; (4) Privacy expectations, data sovereignty concerns, and regulatory sensitivities; (5) Communication styles, metaphors, and emotional vocabulary preferences; (6) Trust barriers specific to each region and how AI companionship challenges cultural values. Provide region-specific insights that either validate or challenge the initial framework."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Synthesize the expert cultural analysis into the initial launch strategy. Strengthen each region's approach by: (1) Reframing positioning to align with actual cultural attitudes toward emotion and AI; (2) Designing specific feature adaptations that respect family involvement norms while protecting privacy; (3) Detailing trust-building mechanisms that address region-specific concerns (e.g., data localization for Middle East, family transparency for East Asia, regulatory clarity for Northern Europe, community-centered messaging for Latin America); (4) Adjusting onboarding flows, consent language, and support channels to be culturally appropriate; (5) Ensuring mental health framing avoids stigmatizing language in each market. Produce a refined, integrated strategy that is both culturally authentic and operationally clear."
+    },
+    {
+      "name": "Cultural Coherence Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a cultural coherence quality gate. Review the refined launch strategy for: (1) Cultural authenticity—does each region's approach reflect genuine insights or rely on stereotypes? (2) Avoidance of harm—do adaptations risk trivializing mental health or exploiting cultural differences? (3) Brand consistency—do regional approaches maintain core brand values while adapting to local context? (4) Feature fairness—are any regions receiving significantly fewer capabilities or trust safeguards than others? (5) Regulatory and ethical alignment—do all regional approaches comply with mental health standards and data protection laws? (6) Stakeholder consideration—are healthcare providers, family members, privacy advocates, and users each adequately represented? Provide your FULL assessment of strengths and specific weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 5, "revise": 3}
+    },
+    {
+      "name": "Risk & Compliance Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a risk and compliance analyst. Examine the refined launch strategy for: (1) Privacy safeguards—data minimization, encryption, storage, and consent mechanisms for each region; (2) Regulatory compliance—GDPR (Northern Europe), PDPA (East Asia), local mental health regulations, and data localization requirements; (3) Trust barriers and mitigation—identify remaining concerns in each region and propose specific safeguards (e.g., third-party audits, transparency reports, partnerships with local mental health organizations); (4) Incident response and user support—regional pathways for mental health crises, escalation protocols, and local language support; (5) Transparency and user control—feature-level controls, data access, deletion rights, and algorithmic explainability for each market. Produce a detailed risk assessment and safeguard matrix showing how trust is built and maintained in each region."
+    },
+    {
+      "name": "Launch Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing a culturally differentiated launch strategy into a comprehensive, executive-ready document. Structure the output as: (1) Executive Summary (1 page)—key differentiators and launch timeline; (2) Regional Playbooks (1 page per region)—positioning, key adaptations, feature matrix, and trust safeguards; (3) Feature Adaptation Matrix (1 page)—clear comparison of features, privacy controls, and family involvement options across all four regions; (4) Risk & Compliance Framework (1 page)—privacy safeguards, regulatory alignment, and trust-building mechanisms; (5) Implementation Timeline (6 months to launch in 2026)—phased rollout strategy with key milestones and success metrics; (6) Success Metrics & Learning Plan—how the company will measure cultural fit, user trust, and mental health impact in each region. Ensure all language is clear, culturally respectful, and operationally actionable. Format for immediate executive review and regional team deployment."
+    }
+  ],
+  "explanation": "This pipeline achieves culturally differentiated strategy development through a two-stage analysis cycle: (1) Builder creates an initial framework; (2) Regional Expert Analyst infuses deep cultural and behavioral insights; (3) Strategy Refiner synthesizes expert analysis into a refined, region-specific approach; (4) Cultural Coherence Critic applies a quality gate to assess authenticity, fairness, and ethical rigor—if issues are found, it routes back to Strategy Refiner for targeted improvements; (5) Risk & Compliance Analyst examines privacy, regulatory, and trust safeguards across all regions in parallel; (6) Launch Plan Polisher formats the final strategy into an actionable, executive-ready document. The if-gate after the Critic (step 4) ensures cultural authenticity before proceeding; the gate only permits revision to the Strategy Refiner (step 3), which has the capability to fix coherence issues. This design prioritizes cultural depth over speed, ensuring the AI companion launch respects genuine regional differences in emotion disclosure norms, mental health stigma, family involvement expectations, and privacy values."
+}
+```

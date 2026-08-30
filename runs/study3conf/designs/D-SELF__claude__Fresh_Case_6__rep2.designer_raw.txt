@@ -1,0 +1,94 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive strategy framework for sovereign-cloud transition covering execution phases, communication approaches, and stakeholder segmentation"
+    },
+    {
+      "name": "Cultural & Regional Analyst",
+      "role": "analyst",
+      "description": "Analyzes regional differences in data sovereignty concerns, government trust levels, vendor perception, and procurement decision-making patterns across key markets"
+    },
+    {
+      "name": "Stakeholder Communication Refiner",
+      "role": "refiner",
+      "description": "Refines the strategy to address identified regional sensitivities, tailors messaging for different customer personas, and ensures cultural relevance in communication approach"
+    },
+    {
+      "name": "Trust & Churn Risk Critic",
+      "role": "critic",
+      "description": "Reviews refined strategy for gaps in trust preservation, identifies churn risks by segment, validates that communication mitigates fears about delays/pricing, and assesses feasibility"
+    },
+    {
+      "name": "Domain Expert - Compliance & Localization",
+      "role": "expert",
+      "description": "Provides expert assessment on legal compliance requirements, technical localization constraints, pricing/feature parity considerations, and regulatory nuance across regions"
+    },
+    {
+      "name": "Executive Strategy Validator",
+      "role": "strategist",
+      "description": "Validates overall strategy coherence, ensures all stakeholder concerns are addressed, confirms execution timeline feasibility, and integrates expert input into final strategy"
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy deliverable with clear sections, actionable recommendations, communication templates, risk mitigation roadmap, and executive summary"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive strategy for executing a sovereign-cloud migration for a global SaaS provider by 2026. Create an initial framework addressing: (1) Phased execution approach by region, (2) Segmentation of customer types and their concerns, (3) Communication strategy for different audiences (enterprise, procurement, security/compliance teams), (4) Trust-preservation mechanisms, (5) Churn mitigation tactics, (6) Pricing and feature parity approaches. Output a complete draft strategy with all major components."
+    },
+    {
+      "name": "Cultural & Regional Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the sovereign-cloud strategy draft for regional and cultural dimensions. Research and document: (1) Regional variations in data sovereignty sentiment by major markets (EU, APAC, Americas, etc.), (2) Government trust levels and regulatory interpretation differences, (3) Vendor trust dynamics (foreign vs. local providers) by region, (4) How procurement teams in different countries prioritize cost vs. control vs. data locality, (5) Specific cultural communication preferences and decision-making styles. Produce a detailed analysis that identifies key regional personas and their core concerns."
+    },
+    {
+      "name": "Stakeholder Communication Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the strategy based on the regional and cultural analysis provided. Specifically: (1) Tailor communication messaging for at least 4 distinct customer personas (e.g., compliance-driven, cost-sensitive, trust-skeptical, feature-focused), (2) Adapt the execution timeline and rollout sequence to respect regional readiness and regulatory urgency, (3) Develop region-specific FAQ and messaging templates addressing sovereignty, trust in government, feature delays, and pricing changes, (4) Recommend localized touchpoints and decision-makers to engage in each region. Produce an enhanced strategy that feels culturally responsive."
+    },
+    {
+      "name": "Trust & Churn Risk Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy critically for trust preservation and churn risk. Assess: (1) Are all identified customer concerns explicitly addressed in the communication plan? (2) Is the narrative around feature parity and pricing credible and transparent? (3) Do the trust-building mechanisms (e.g., data residency guarantees, transparency reports, local partnerships) feel genuine and sufficient for skeptical customers? (4) Are churn risks adequately mitigated for each persona? (5) Could any element of the plan backfire or erode trust if poorly executed? (6) Are procurement teams given sufficient buying justification? Provide full detailed assessment of strengths and gaps. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Domain Expert - Compliance & Localization",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide expert domain input on the current strategy regarding: (1) Data residency and localization compliance requirements by major regulatory frameworks (GDPR, CCPA, data localization laws in China, India, Brazil, etc.), (2) Technical feasibility of feature parity across regional clouds given infrastructure/latency constraints, (3) Pricing models and how to communicate cost impacts fairly and transparently, (4) Legal and contractual language needed to assure customers of data sovereignty and control, (5) Timeline realism for compliance certification in each region, (6) Potential regulatory or legal pitfalls in the migration messaging. Provide expert recommendations to strengthen the strategy's credibility and feasibility."
+    },
+    {
+      "name": "Executive Strategy Validator",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Synthesize the refined strategy and expert input into a final validated strategy. Ensure: (1) All regional and cultural insights are integrated into a coherent global narrative with local variations, (2) Expert compliance and technical constraints are reflected in realistic timelines and feature commitments, (3) Communication messaging is consistent in core values but adapted for regional audiences, (4) Churn mitigation is proactive for high-risk segments, (5) The business case for the transition is clear and defensible to customers, (6) The execution roadmap is phased, measurable, and achievable by 2026. Produce a complete, integrated, executive-ready strategy document that balances global consistency with regional relevance."
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, actionable deliverable. Structure with: (1) Executive Summary (1 page), (2) Regional Segmentation & Customer Personas, (3) Phased Execution Roadmap by Region & Timeline, (4) Communication Strategy with templates for different audiences, (5) Trust Preservation & Transparency Mechanisms, (6) Churn Risk Mitigation by Segment, (7) Pricing & Feature Parity Framework, (8) Legal/Compliance Assurances, (9) Success Metrics & KPIs, (10) Contingency & Risk Management. Use clear headers, bullets, tables where appropriate. Ensure tone is confident, transparent, and customer-centric. This is ready for C-level review and customer communication rollout."
+    }
+  ],
+  "explanation": "This pipeline is designed to transform a complex, politically and culturally sensitive organizational challenge into a credible, regionally-tailored execution and communication strategy. The flow is: (1) Builder creates the foundational strategy framework, (2) Analyst injects deep regional and cultural intelligence to surface nuances the initial draft may miss, (3) Refiner uses that intelligence to tailor messaging and approach for diverse personas and regions, (4) Critic validates that the refined strategy genuinely addresses trust concerns and churn risks, with an IF gate that loops back to Refiner if gaps are found, (5) Expert injects domain-specific compliance, technical, and legal realism, (6) Strategist synthesizes all inputs into a coherent, integrated final strategy, (7) Polisher formats for executive and customer-facing use. The IF gate after the Critic ensures the strategy passes trust and churn assessment before moving to expert validation. The pipeline respects the multi-layered nature of the problem: it is not purely technical, not purely about messaging, and not one-size-fits-all globally—it requires analysis, refinement loops, expert grounding, and strategic integration before being ready for real-world deployment."
+}
+```

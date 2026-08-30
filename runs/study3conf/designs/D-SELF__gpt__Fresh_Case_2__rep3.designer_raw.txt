@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "Global AI Compliance Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive strategy for a mid-sized company selling an AI-powered hiring platform in fifteen countries by 2026. Address EU AI Act high-risk obligations and divergent foreign regimes, including light-touch systems and strict data-localization requirements. Produce an actionable plan covering product configuration, governance, risk management, technical controls, documentation, conformity and assurance activities, data handling, market-entry decisions, customer contracts, sales enablement, support processes, and marketing communications. Explain how to use a coherent global compliance baseline with jurisdiction-specific overlays without fragmenting the brand. Include a practical jurisdiction-comparison framework, ownership model, implementation priorities, customer-facing messaging principles, and measurable success criteria. Clearly distinguish legal requirements, recommended controls, assumptions, and areas requiring local counsel. Do not invent country-specific laws where jurisdictions are unspecified.",
+      "description": "Creates the initial cross-jurisdiction product compliance and customer communication strategy."
+    },
+    {
+      "name": "AI Regulation and Hiring-Technology Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed strategy as an expert in AI regulation, employment technology, privacy, cybersecurity, data governance, and international product compliance. Identify omissions, inaccurate assumptions, enforcement risks, conflicts among regulatory regimes, and operational difficulties. Assess treatment of EU AI Act high-risk employment use cases, provider and deployer responsibilities, transparency, human oversight, data governance, technical documentation, monitoring, incident handling, fundamental-rights considerations, privacy obligations, localization, cross-border transfers, procurement expectations, and marketing claims. Recommend precise improvements while preserving a coherent global brand and avoiding unsupported claims about unnamed jurisdictions. Provide detailed feedback and concrete replacement language or policy recommendations where useful.",
+      "description": "Supplies domain-specific regulatory and operational analysis to improve accuracy and practicality."
+    },
+    {
+      "name": "Integrated Compliance Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy into a cohesive, decision-ready plan using the expert analysis and any other available feedback. Resolve contradictions and unsupported claims. Make the distinction between a global baseline and local overlays explicit, and explain how product, documentation, contracts, sales materials, support, and marketing should remain aligned. Include a usable jurisdiction classification method rather than pretending that all fifteen countries have identical rules. Cover governance, regulatory monitoring, localization and transfer controls, configurable product restrictions, audit evidence, customer disclosures, claims substantiation, employee training, rollout sequencing, escalation, and metrics. Make recommendations proportionate to a mid-sized company, identify dependencies and residual risks, and flag issues requiring jurisdiction-specific legal advice. Produce only the improved strategy, with clear headings and concise but sufficiently detailed implementation guidance.",
+      "description": "Integrates regulatory feedback into a practical, globally coherent strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy in full for regulatory accuracy, completeness, practical implementability, clarity, internal consistency, treatment of conflicting jurisdictions, protection against overclaiming, customer usefulness, brand coherence, and suitability for a mid-sized company. Check that it addresses product adaptation, documentation, marketing, customer communication, governance, localization, cross-border data issues, EU high-risk obligations, uncertainty management, and a repeatable process for future legal changes. Identify strengths, weaknesses, omissions, ambiguities, unsupported assertions, and specific corrections in detail. If substantial issues remain, route back for revision; otherwise approve it for final presentation. This review may route to the refiner for up to three revision cycles. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      },
+      "description": "Determines whether the integrated strategy is sufficiently accurate, complete, and actionable."
+    },
+    {
+      "name": "Executive Strategy and Communications Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved strategy into a polished, executive-ready deliverable for company leadership and commercial, product, legal, compliance, and customer-success teams. Preserve all substantive safeguards and caveats. Organize it with an executive summary, strategic principles, global baseline and local-overlay model, product and documentation actions, jurisdiction-management method, customer and marketing communication framework, operating model, implementation roadmap, metrics, and key risks. Use confident, clear language that supports one coherent global brand without implying that compliance is identical everywhere. Separate confirmed obligations from recommendations and legal questions requiring local counsel. Include concise examples of customer-facing positioning and internal messaging that are accurate, transparent, and non-alarmist. Avoid fabricated jurisdiction-specific facts and avoid presenting the deliverable as legal advice.",
+      "description": "Produces the final user-facing strategy with clear structure, consistent messaging, and executive-level polish."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global AI Compliance Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive strategy for a mid-sized company selling an AI-powered hiring platform in fifteen countries by 2026. Address EU AI Act high-risk obligations and divergent foreign regimes, including light-touch systems and strict data-localization requirements. Produce an actionable plan covering product configuration, governance, risk management, technical controls, documentation, customer contracts, sales enablement, support processes, and marketing communications. Explain how to use a coherent global compliance baseline with jurisdiction-specific overlays without fragmenting the brand. Include a jurisdiction-comparison framework, implementation priorities, customer-facing messaging principles, and measurable success criteria. Distinguish legal requirements, recommended controls, assumptions, and issues requiring local counsel. Do not invent country-specific laws where jurisdictions are unspecified."
+    },
+    {
+      "name": "AI Regulation and Hiring-Technology Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed strategy as an expert in AI regulation, employment technology, privacy, cybersecurity, data governance, and international product compliance. Identify omissions, inaccurate assumptions, enforcement risks, conflicts among regulatory regimes, and operational difficulties. Assess EU AI Act high-risk employment use cases, provider and deployer responsibilities, transparency, human oversight, data governance, technical documentation, monitoring, incident handling, fundamental-rights considerations, privacy, localization, cross-border transfers, procurement, and marketing claims. Recommend precise improvements without making unsupported claims about unnamed jurisdictions. Provide detailed feedback and concrete recommendations."
+    },
+    {
+      "name": "Integrated Compliance Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy into a cohesive, decision-ready plan using the expert analysis and available feedback. Resolve contradictions and unsupported claims. Make the global baseline and local overlays explicit, and align product, documentation, contracts, sales materials, support, and marketing. Include governance, monitoring, localization and transfer controls, configurable restrictions, audit evidence, customer disclosures, claims substantiation, training, rollout sequencing, escalation, and metrics. Make recommendations proportionate to a mid-sized company, identify residual risks, and flag matters requiring jurisdiction-specific legal advice. Produce only the improved strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined strategy in full for regulatory accuracy, completeness, practical implementability, clarity, internal consistency, treatment of conflicting jurisdictions, protection against overclaiming, customer usefulness, brand coherence, and suitability for a mid-sized company. Check product adaptation, documentation, marketing, customer communication, governance, localization, cross-border data issues, EU high-risk obligations, uncertainty management, and future-law monitoring. Explain strengths, weaknesses, omissions, ambiguities, unsupported assertions, and specific corrections in detail. If substantial issues remain, route to the refiner; otherwise approve for final presentation. Allow up to three revision cycles. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Strategy and Communications Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved strategy into a polished, executive-ready deliverable for leadership and commercial, product, legal, compliance, and customer-success teams. Preserve substantive safeguards and caveats. Include an executive summary, strategic principles, global baseline and local-overlay model, product and documentation actions, jurisdiction-management method, customer and marketing communication framework, operating model, implementation roadmap, metrics, and risks. Use confident language supporting one coherent global brand without implying identical compliance everywhere. Separate confirmed obligations from recommendations and questions requiring local counsel. Include concise, accurate, non-alarmist examples of customer-facing and internal messaging. Avoid fabricated jurisdiction-specific facts and do not present the deliverable as legal advice."
+    }
+  ],
+  "explanation": "The flow is Builder → Regulatory Expert → Refiner → Quality Assessment → Polisher. The builder creates the initial strategy, the expert supplies specialized regulatory and hiring-technology analysis, and the refiner integrates that analysis into a practical plan. The quality assessment occurs after the refined output; if it outputs revise, execution returns to the refiner for up to three cycles, while pass proceeds to the polisher. The polisher creates the final executive-ready strategy and customer communication guidance."
+}

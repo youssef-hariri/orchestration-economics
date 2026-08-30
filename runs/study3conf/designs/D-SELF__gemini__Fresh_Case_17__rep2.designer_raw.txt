@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in global educational technology expansion. Develop a comprehensive product strategy for Vietnam, Saudi Arabia, France, and Kenya. Address curriculum alignment, screen-time cultural norms, and procurement models (B2G vs B2C).",
+      "description": "Develops the core localization strategy and product adaptation framework."
+    },
+    {
+      "name": "LocalComplianceExpert",
+      "role": "critic",
+      "systemPrompt": "You are a legal and pedagogical expert. Review the strategy for compliance with local curricula, language mandates, and procurement regulations in the target countries. Provide a detailed assessment of the strategy's robustness. On the final line, output 'pass' if the strategy is sound, or 'revise' if it requires further refinement.",
+      "description": "Validates the strategy against local educational and legal standards."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate feedback from the LocalComplianceExpert to adjust the product roadmap, ensuring it balances the shared technology core with necessary local customizations.",
+      "description": "Adjusts the strategy based on expert feedback."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the finalized strategy into a professional, actionable document ready for executive implementation.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in global educational technology expansion. Develop a comprehensive product strategy for Vietnam, Saudi Arabia, France, and Kenya. Address curriculum alignment, screen-time cultural norms, and procurement models (B2G vs B2C)."
+    },
+    {
+      "name": "LocalComplianceExpert",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a legal and pedagogical expert. Review the strategy for compliance with local curricula, language mandates, and procurement regulations in the target countries. Provide a detailed assessment of the strategy's robustness. On the final line, output 'pass' if the strategy is sound, or 'revise' if it requires further refinement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate feedback from the LocalComplianceExpert to adjust the product roadmap, ensuring it balances the shared technology core with necessary local customizations."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the finalized strategy into a professional, actionable document ready for executive implementation."
+    }
+  ],
+  "explanation": "The pipeline starts with the MarketStrategist drafting the strategy. The LocalComplianceExpert acts as a quality gate; if it identifies issues, it routes to the StrategyRefiner to fix the content. Once the LocalComplianceExpert issues a 'pass', the pipeline proceeds to the FinalPolisher to output the final document."
+}

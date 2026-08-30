@@ -1,0 +1,94 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Integration Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive integration and consolidation strategy covering technology, brand, regulatory, and management dimensions across Nigeria, Kenya, and Morocco markets"
+    },
+    {
+      "name": "Multi-Dimensional Strategy Analyst",
+      "role": "analyst",
+      "description": "Analyzes regulatory constraints, technology complexity, brand trade-offs, and management alignment requirements to identify sequencing dependencies and risk points"
+    },
+    {
+      "name": "Implementation Roadmap Refiner",
+      "role": "refiner",
+      "description": "Refines initial strategy into actionable, sequenced roadmap incorporating regulatory constraints, local management alignment, and customer continuity requirements"
+    },
+    {
+      "name": "Consolidation Strategy Critic",
+      "role": "critic",
+      "description": "Critically reviews roadmap for internal contradictions, regulatory feasibility, stakeholder alignment risks, and implementation specificity gaps"
+    },
+    {
+      "name": "Risk & Alignment Refinement Agent",
+      "role": "refiner",
+      "description": "Addresses critic feedback by strengthening stakeholder engagement, regulatory coordination mechanisms, and risk mitigation within the consolidation roadmap"
+    },
+    {
+      "name": "Final Strategy Validator",
+      "role": "reviewer",
+      "description": "Validates that strategy is internally consistent, regulatory compliant, operationally sequenced, and ready for executive presentation"
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into executive-ready deliverable with phased timelines, decision triggers, and stakeholder communication frameworks"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Integration Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Design a comprehensive integration strategy for pan-African banking group acquiring banks in Nigeria, Kenya, and Morocco. Address: (1) Technology migration sequencing across different core-banking systems, (2) Brand consolidation decisions (unified vs. local), (3) Regulatory coordination with CBN, CMA, and BANK AL-MAGHRIB, (4) Management alignment and cultural integration, (5) Customer continuity and local market responsiveness. Provide holistic framework with preliminary sequencing logic across all dimensions."
+    },
+    {
+      "name": "Multi-Dimensional Strategy Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the strategy for: (1) Regulatory environment across CBN (Nigeria), CMA (Kenya), BANK AL-MAGHRIB (Morocco)—approvals, timelines, constraints, (2) Technology migration complexity and sequencing realism, (3) Brand consolidation trade-offs and market implications, (4) Management alignment challenges given entrenched local leadership, (5) Customer continuity risks in each market, (6) Interdependencies between regulatory, tech, brand, and management workstreams. Identify sequencing dependencies and critical path items."
+    },
+    {
+      "name": "Implementation Roadmap Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate builder strategy and analyst constraints into detailed, sequenced implementation roadmap. Produce: (1) Phase 1-3 timeline (0-24 months) with decision triggers and go/no-go gates, (2) Technology migration sequence (which system first, dependencies, parallel workstreams), (3) Brand positioning decisions for each market with rollout sequence, (4) Management alignment plan addressing local culture and entrenched leadership, (5) Regulatory coordination cadence and communication protocols, (6) Customer communication and continuity safeguards. Ensure phases are realistic and sequencing respects regulatory and operational constraints."
+    },
+    {
+      "name": "Consolidation Strategy Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Critically assess the implementation roadmap. Evaluate: (1) Internal logic coherence across phases, (2) Regulatory feasibility for all three jurisdictions, (3) Stakeholder alignment adequacy (management, customers, regulators), (4) Technology migration realism, (5) Brand strategy justification, (6) Risk mitigation coverage. Provide FULL detailed assessment with strengths and weaknesses. Then on VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Risk & Alignment Refinement Agent",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Address all gaps raised by critic. Strengthen: (1) Stakeholder engagement mechanisms for local management alignment, (2) Regulatory coordination protocols with formal engagement timelines for each regulator, (3) Technology de-risking with fallback options and parallel testing, (4) Brand decision justification for each market, (5) Customer continuity safeguards with communication plans, (6) Contingency planning for regulatory delays or management resistance. Revise roadmap to be more resilient and stakeholder-aware."
+    },
+    {
+      "name": "Final Strategy Validator",
+      "role": "reviewer",
+      "type": "while",
+      "systemPrompt": "Validate refined roadmap against: (1) Internal consistency across tech, brand, regulatory, management dimensions, (2) Clear phase outcomes with decision gates and go/no-go criteria, (3) Explicit regulatory requirements for all three countries, (4) Realistic technology migration sequence, (5) Brand strategy reflecting market realities and group objectives, (6) Concrete stakeholder engagement and change management plans, (7) Timeline realism for 2026 acquisition with full consolidation target. Provide FULL validation assessment. Then on VERY LAST LINE output EXACTLY ONE keyword: pass or retry. Max 3 iterations.",
+      "whileOptions": ["pass", "retry"],
+      "whileMapping": 4,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format validated integration strategy into executive-ready deliverable. Produce: (1) Executive summary with objectives, key decisions, success measures, (2) Phased roadmap (0-24 months) with technology migration, brand rollout, regulatory milestones, management alignment activities, (3) Decision framework with go/no-go criteria for each phase, (4) Stakeholder communication plan for group, local management, regulators, customers, (5) Risk summary with mitigation strategies, (6) Success metrics per phase and market. Format for board-level presentation with clarity and actionability."
+    }
+  ],
+  "explanation": "Pipeline delivers feasible multi-dimensional integration strategy. Builder creates initial holistic strategy; Analyst maps regulatory, technology, brand, and management constraints; Refiner integrates inputs into detailed sequenced roadmap; Critic identifies contradictions and gaps with if-gate routing to Refiner for one revision cycle; Validator performs final quality check with while-loop (max 3 iterations) routing back to Refiner if needed; Polisher formats for executive delivery. Structure ensures regulatory compliance, operational sequencing, stakeholder alignment, and technology feasibility before board presentation."
+}
+```

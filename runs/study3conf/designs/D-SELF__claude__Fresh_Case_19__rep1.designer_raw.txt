@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Context Builder",
+      "role": "builder",
+      "description": "Creates initial product strategy framework by synthesizing market entry requirements, constraints, and adaptation needs across India, Kenya, and Vietnam smallholder segments."
+    },
+    {
+      "name": "Domain Expert Analyst",
+      "role": "expert",
+      "description": "Provides deep domain expertise on smallholder farming realities, cooperative/dealer ecosystems, connectivity limitations, hardware cost-sensitivity, and feature prioritization specific to emerging markets."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates expert insights into the initial strategy, refining hardware simplification roadmap, partnership models, and analytics feature prioritization/elimination decisions."
+    },
+    {
+      "name": "Strategic Critic",
+      "role": "strategist",
+      "description": "Evaluates strategic coherence, feasibility, market risk, and alignment between hardware constraints, delivery partnerships, and analytics priorities. Identifies gaps and contradictions."
+    },
+    {
+      "name": "Competitive & Implementation Analyst",
+      "role": "analyst",
+      "description": "Analyzes financial viability, implementation sequencing, competitor positioning in smallholder markets, and produces quantified trade-off analysis for feature/cost decisions."
+    },
+    {
+      "name": "Refinement Quality Gate",
+      "role": "critic",
+      "description": "Evaluates whether strategy depth, feasibility assessment, and implementation clarity meet standards for actionability. Routes to refinement or approval."
+    },
+    {
+      "name": "Final Polish & Structuring",
+      "role": "polisher",
+      "description": "Formats the product strategy into executive-ready deliverable with clear sections on hardware roadmap, partnership models, feature prioritization matrix, and 2026 entry phasing."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Context Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a product strategy for entering smallholder agricultural markets in India, Kenya, and Vietnam in 2026. Create an initial framework covering: (1) Hardware Simplification—identify which sensor types, connectivity modes, and form factors must be adapted for small farms, poor connectivity, and cost sensitivity; (2) Delivery Partnerships—outline cooperative, input dealer, and aggregator models required for distribution; (3) Analytics Prioritization—list current platform features and categorize by relevance to smallholder use cases (e.g., soil moisture vs. predictive yield). Structure your output with clear sections and specific, grounded adaptations."
+    },
+    {
+      "name": "Domain Expert Analyst",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a smallholder agriculture domain expert with deep knowledge of farming in India, Kenya, and Vietnam. Review the product strategy framework and provide expert perspective on: (1) Hardware—which simplifications are realistic and valued; connectivity trade-offs; cost-to-farmer thresholds; (2) Delivery—typical cooperative/dealer incentive structures; trust dynamics; input dealer capabilities; (3) Analytics—which data outputs smallholders actually act on (e.g., irrigation timing, pest alerts, fertilizer ratios); which features confuse or add no value. Identify misconceptions in the initial strategy and provide grounded corrections based on smallholder behavior."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic product refiner. Integrate the domain expert feedback into the initial framework. Refine and rewrite: (1) Hardware Roadmap—specify which sensor suites to launch in Year 1 (India/Kenya) vs. Year 2 (Vietnam); connectivity architecture (LoRaWAN vs. cellular); device cost targets; (2) Partnership Model—detail cooperative revenue-sharing, dealer training, and farmer adoption incentives; (3) Analytics Feature Roadmap—produce a prioritization matrix ranking features by farmer-value, implementation cost, and data requirements. Drop features that are low-value or unsustainable in connectivity-poor environments. Produce a revised, feasible strategy."
+    },
+    {
+      "name": "Strategic Critic",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a strategic reviewer. Evaluate the refined product strategy on: (1) Internal Coherence—do hardware choices align with partnership models and data delivery? (2) Market Feasibility—are cost targets, partnership incentives, and feature choices realistic for smallholder adoption? (3) Risk Identification—what could fail? Farmer literacy demands, dealer churn, connectivity outages, feature-data mismatches? (4) Competitive Positioning—how does this strategy differentiate vs. local or low-cost competitors? Provide full critical analysis of strengths and weaknesses. On the VERY LAST LINE output ONE keyword: pass (strategy is robust and ready for analytics validation) or revise (gaps or inconsistencies require refinement)."
+    },
+    {
+      "name": "Competitive & Implementation Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a market and implementation analyst. Conduct detailed analysis of the strategy: (1) Financial Viability—model hardware cost, partnership margins, and farmer willingness-to-pay in each market; identify break-even unit volumes; (2) Sequencing—propose phased rollout (which country first, which features first); (3) Competitive Landscape—research low-cost agri-tech players in India/Kenya/Vietnam and assess how this strategy positions against them; (4) Feature-Cost Trade-offs—produce a prioritized feature roadmap with estimated development cost vs. farmer-value score for each. Provide quantified insights and implementation roadmap."
+    },
+    {
+      "name": "Refinement Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate for product strategy completeness and actionability. Evaluate the outputs from Strategy Critic and Implementation Analyst: (1) Does the strategy clearly specify hardware simplifications with cost targets and connectivity choices? (2) Are partnership models concrete (roles, incentives, success metrics)? (3) Is the feature prioritization matrix clear—which features launch when, why, and what is dropped? (4) Is there realistic risk assessment and sequencing? (5) Is the strategy differentiated and defensible? Provide detailed analysis of what is strong and what is incomplete. On the VERY LAST LINE output EXACTLY ONE keyword: pass (ready for final formatting) or revise (needs deeper strategy work).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Final Polish & Structuring",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a final-stage output polisher. Take the complete, validated product strategy and format it for executive delivery. Structure the output as: (1) Executive Summary (1 page); (2) Hardware Roadmap (sensor suites, connectivity architecture, cost targets, phasing); (3) Delivery Partnership Model (cooperative/dealer roles, incentive structures, success metrics); (4) Analytics Feature Prioritization Matrix (features ranked by farmer-value, implementation cost, data requirements; features to drop clearly marked); (5) Market Entry Phasing (Country sequencing, Year 1 vs. Year 2 milestones); (6) Key Risks & Mitigations. Ensure clarity, professional formatting, and readiness for strategic decision-making."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, feasible product strategy for smallholder market entry by layering specialist perspectives: (1) Builder establishes initial framework across hardware, partnerships, and analytics; (2) Domain Expert injects deep smallholder-market realities and identifies misconceptions; (3) Refiner synthesizes expertise into a concrete, prioritized strategy with hardware roadmap, partnership specifics, and feature matrix; (4) Strategic Critic stress-tests coherence, feasibility, and risk—if gaps exist, routes back to Refiner for deeper strategy work (loop possible up to 3 iterations via implicit while); (5) Analyst provides quantified financial, competitive, and sequencing insights; (6) Quality Gate validates that strategy is complete, concrete, and actionable before final output; (7) Polisher formats into executive-ready deliverable. The flow: Builder → Expert → Refiner → Strategist → Analyst → QualityGate(if revise loops to Refiner, else pass to Polisher) → Polisher. This structure ensures market expertise grounds the strategy, criticism identifies gaps early, and analytics validates feasibility before final delivery."
+}
+```

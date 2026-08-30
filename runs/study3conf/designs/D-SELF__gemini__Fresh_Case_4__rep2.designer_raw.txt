@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "GlobalPolicyArchitect",
+      "role": "builder",
+      "systemPrompt": "Draft a comprehensive, modular global flexible-work policy framework. The policy must balance the 'right to disconnect' and four-day-week demands with local cultural expectations of visibility and career progression. Create a tiered system that allows for local customization while maintaining core company values.",
+      "description": "Creates the initial draft of the global flexible-work policy."
+    },
+    {
+      "name": "ComplianceAndCultureAnalyst",
+      "role": "expert",
+      "systemPrompt": "Evaluate the policy draft against 12 diverse labor markets. Assess if the policy effectively mitigates legal risks (e.g., right to disconnect laws) and addresses cultural friction regarding 'visible effort' vs. 'output-based performance'. Identify gaps where the policy is too rigid or too vague.",
+      "description": "Analyzes the policy for legal compliance and cultural sensitivity across 12 countries."
+    },
+    {
+      "name": "PolicyRefiner",
+      "role": "refiner",
+      "systemPrompt": "Revise the policy based on the analyst's feedback. Ensure the language is neutral, inclusive, and operationally sound. Address specific conflicts between younger employee demands and traditional office-based expectations by introducing 'Core Collaboration Hours' vs. 'Flexible Output Windows'.",
+      "description": "Refines the policy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Review the refined policy. Check for internal consistency, clarity, and fairness across all 12 regions. Provide a detailed assessment of whether the policy is ready for global implementation. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Final quality check for the policy."
+    },
+    {
+      "name": "GlobalPolicyPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final policy document for internal distribution. Ensure professional tone, clear headings, and actionable guidelines for local HR managers.",
+      "description": "Finalizes the document formatting."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "GlobalPolicyArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive, modular global flexible-work policy framework. The policy must balance the 'right to disconnect' and four-day-week demands with local cultural expectations of visibility and career progression. Create a tiered system that allows for local customization while maintaining core company values."
+    },
+    {
+      "name": "ComplianceAndCultureAnalyst",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Evaluate the policy draft against 12 diverse labor markets. Assess if the policy effectively mitigates legal risks (e.g., right to disconnect laws) and addresses cultural friction regarding 'visible effort' vs. 'output-based performance'. Identify gaps where the policy is too rigid or too vague."
+    },
+    {
+      "name": "PolicyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Revise the policy based on the analyst's feedback. Ensure the language is neutral, inclusive, and operationally sound. Address specific conflicts between younger employee demands and traditional office-based expectations by introducing 'Core Collaboration Hours' vs. 'Flexible Output Windows'."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined policy. Check for internal consistency, clarity, and fairness across all 12 regions. Provide a detailed assessment of whether the policy is ready for global implementation. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "GlobalPolicyPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final policy document for internal distribution. Ensure professional tone, clear headings, and actionable guidelines for local HR managers."
+    }
+  ],
+  "explanation": "The pipeline begins with the Builder creating the policy framework. The Analyst then evaluates this draft against the 12-country legal and cultural requirements. The Refiner incorporates these insights to resolve conflicts. The Quality Gate assesses the output; if it fails, it routes back to the Refiner (up to 3 iterations) to ensure the policy is robust. Once passed, the Polisher formats the final document for global release."
+}

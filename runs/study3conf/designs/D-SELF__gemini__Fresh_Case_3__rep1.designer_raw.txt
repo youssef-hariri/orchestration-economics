@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "StrategyArchitect",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive onboarding framework for new suppliers in Mexico, Morocco, and Vietnam. Focus on cross-cultural communication protocols, localized quality-management training modules, and standardized digital delivery-tracking templates that bridge the gap between historical East Asian standards and new regional practices.",
+      "description": "Creates the foundational onboarding and integration strategy."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy for cultural nuances. Ensure the communication styles and business customs for Mexico (high-context, relationship-based), Morocco (hierarchical, formal), and Vietnam (consensus-driven, indirect) are addressed. Identify gaps where the strategy might fail due to cultural friction.",
+      "description": "Provides domain expertise on regional business customs."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "systemPrompt": "Incorporate the CulturalExpert's feedback to adjust the onboarding strategy. Ensure that the tone, terminology, and procedural requirements are culturally sensitive and technically accurate for each specific region.",
+      "description": "Iteratively improves the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for clarity, cultural alignment, and operational feasibility. Provide a detailed assessment of whether the plan effectively mitigates misunderstandings regarding specifications and delivery. On the last line, output 'pass' or 'revise'.",
+      "description": "Validates the strategy against the task requirements."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, actionable playbook. Ensure clear headings, consistent terminology, and a professional tone suitable for executive leadership and supplier onboarding teams.",
+      "description": "Finalizes the output for user delivery."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "StrategyArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive onboarding framework for new suppliers in Mexico, Morocco, and Vietnam. Focus on cross-cultural communication protocols, localized quality-management training modules, and standardized digital delivery-tracking templates that bridge the gap between historical East Asian standards and new regional practices."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the strategy for cultural nuances. Ensure the communication styles and business customs for Mexico (high-context, relationship-based), Morocco (hierarchical, formal), and Vietnam (consensus-driven, indirect) are addressed. Identify gaps where the strategy might fail due to cultural friction."
+    },
+    {
+      "name": "ContentRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Incorporate the CulturalExpert's feedback to adjust the onboarding strategy. Ensure that the tone, terminology, and procedural requirements are culturally sensitive and technically accurate for each specific region."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for clarity, cultural alignment, and operational feasibility. Provide a detailed assessment of whether the plan effectively mitigates misunderstandings regarding specifications and delivery. On the last line, output 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, actionable playbook. Ensure clear headings, consistent terminology, and a professional tone suitable for executive leadership and supplier onboarding teams."
+    }
+  ],
+  "explanation": "The pipeline begins with the StrategyArchitect to draft the core onboarding plan. The CulturalExpert reviews this draft to ensure regional nuances are addressed. The ContentRefiner updates the plan based on this expert input. The QualityGate assesses the refined plan; if it identifies gaps, it routes back to the ContentRefiner. Once the plan passes, the FinalPolisher formats it for professional use."
+}

@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in emerging market agri-tech. Develop a comprehensive product strategy for adapting precision-farming hardware and software for smallholder farmers in India, Kenya, and Vietnam. Focus on: 1) Hardware simplification (e.g., low-power, rugged, shared-use models), 2) Distribution partnerships (cooperatives/dealers), and 3) Analytics prioritization (focusing on actionable, low-literacy, high-impact insights like weather-based planting or pest alerts while dropping complex data-heavy dashboards).",
+      "description": "Drafts the initial product strategy for smallholder market entry."
+    },
+    {
+      "name": "AgriTechExpert",
+      "role": "refiner",
+      "systemPrompt": "You are a specialist in smallholder agricultural economics and rural digital infrastructure. Improve the strategy by addressing feasibility regarding local connectivity constraints, cultural adoption, and the economic reality of smallholder cooperatives. Ensure the strategy is grounded in the specific socio-economic contexts of India, Kenya, and Vietnam.",
+      "description": "Refines the strategy based on domain-specific constraints."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for logical consistency, market feasibility, and alignment with the prompt's requirements. Assess if the hardware, partnership, and analytics sections are sufficiently adapted for smallholder contexts. Provide a detailed assessment of gaps. On the last line, output 'pass' if the strategy is robust, or 'revise' if it needs improvement.",
+      "description": "Validates the strategy against market entry requirements."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure clear headings, actionable bullet points, and a tone suitable for an agri-tech leadership team.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in emerging market agri-tech. Develop a comprehensive product strategy for adapting precision-farming hardware and software for smallholder farmers in India, Kenya, and Vietnam. Focus on: 1) Hardware simplification (e.g., low-power, rugged, shared-use models), 2) Distribution partnerships (cooperatives/dealers), and 3) Analytics prioritization (focusing on actionable, low-literacy, high-impact insights like weather-based planting or pest alerts while dropping complex data-heavy dashboards)."
+    },
+    {
+      "name": "AgriTechExpert",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a specialist in smallholder agricultural economics and rural digital infrastructure. Improve the strategy by addressing feasibility regarding local connectivity constraints, cultural adoption, and the economic reality of smallholder cooperatives. Ensure the strategy is grounded in the specific socio-economic contexts of India, Kenya, and Vietnam."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for logical consistency, market feasibility, and alignment with the prompt's requirements. Assess if the hardware, partnership, and analytics sections are sufficiently adapted for smallholder contexts. Provide a detailed assessment of gaps. On the last line, output 'pass' if the strategy is robust, or 'revise' if it needs improvement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure clear headings, actionable bullet points, and a tone suitable for an agri-tech leadership team."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist drafting the core strategy. The AgriTechExpert then refines this draft to ensure it meets the specific socio-economic nuances of the target regions. The QualityGate acts as a decision point: if the strategy is deemed insufficient, it loops back to the AgriTechExpert for further refinement. Once the strategy passes the quality check, the FinalPolisher formats it into a professional document."
+}

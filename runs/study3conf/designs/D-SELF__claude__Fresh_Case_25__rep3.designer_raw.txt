@@ -1,0 +1,96 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Synthesizes data on beauty norms, shade ranges, influencer ecosystems, channel preferences, and MLM incumbency across Mexico, Colombia, and Brazil."
+    },
+    {
+      "name": "Go-to-Market Strategist",
+      "role": "strategist",
+      "description": "Develops country-specific D2C launch strategies, channel mix, influencer frameworks, and competitive positioning against legacy MLM players."
+    },
+    {
+      "name": "Communications & Localization Expert",
+      "role": "expert",
+      "description": "Creates market-specific messaging, product positioning, influencer briefs, and social-commerce creative frameworks for each market."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Evaluates integrated strategy for consistency, market-fit, competitive viability, channel feasibility, and execution clarity."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Revises strategy based on critic feedback, reconciles gaps, strengthens competitive positioning, and validates execution feasibility."
+    },
+    {
+      "name": "Execution Roadmap Builder",
+      "role": "builder",
+      "description": "Translates refined strategy into phased launch roadmap with milestones, resource allocation, KPIs, and risk mitigation."
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy, roadmap, and communications framework into executive-ready deliverable package."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a market research builder for a D2C Asian beauty brand entering Mexico, Colombia, and Brazil in 2026. Analyze and synthesize: (1) Beauty aesthetic norms and preferences in each market; (2) Foundation/concealer shade-range expectations and inclusivity gaps; (3) Influencer ecosystem structure (mega vs. micro, platform preferences, trust levels); (4) Channel dominance (e-commerce platforms like Mercado Libre vs. owned DTC sites); (5) Social commerce adoption rates (Instagram Shop, TikTok Shop, WhatsApp); (6) MLM beauty incumbents (Natura, Yanbal, Herbalife Beauty) and their distribution depth, consumer loyalty, and trust factors. Produce a country-by-country data summary with key insights and strategic implications."
+    },
+    {
+      "name": "Integrated Strategy Developer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a go-to-market and communications strategist. Using the market research, develop country-specific launch strategies for Mexico, Colombia, and Brazil including: (1) Optimal channel mix (owned D2C, marketplace, social commerce, influencer partnerships) weighted by market readiness and incumbent threat; (2) Positioning against legacy MLM (brand trust, accessibility, exclusivity); (3) Influencer partnership strategy (tier, exclusivity, long-term vs. campaign); (4) Shade-range and beauty-norm localization; (5) Country-specific brand messaging addressing local beauty standards, inclusivity, and anti-MLM positioning; (6) Product narratives tailored to each market; (7) Influencer briefing templates and partnership value propositions; (8) Social-commerce creative briefs optimized for each platform and market. Ensure strategies are differentiated by market, not uniform."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical strategy reviewer. Evaluate the integrated strategy (market research and GTM approach) for: (1) Internal consistency — do channel priorities, influencer tiers, and messaging align across all three markets? (2) Market-fit — do localization strategies authentically address beauty norms, shade-range expectations, and consumer trust gaps? (3) Competitive viability — does the strategy credibly challenge MLM incumbents without underestimating their distribution depth or consumer loyalty? (4) Channel feasibility — are owned D2C, marketplace, and social commerce recommendations realistic? (5) Timeline risk — can the strategy be operationalized by 2026 launch? (6) Execution clarity — are KPIs and success metrics defined? Provide detailed assessment of strengths, gaps, and specific revision needs. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Based on the critic's feedback, revise and strengthen the integrated strategy. Address all identified gaps: reconcile channel conflicts, deepen localization specificity, fortify competitive positioning against MLM, validate feasibility timelines, and clarify execution KPIs. Maintain country-by-country differentiation. Output a revised, polished strategy document ready for roadmap conversion."
+    },
+    {
+      "name": "Execution Roadmap Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an execution roadmap builder. Convert the refined strategy into a detailed phased launch roadmap covering: (1) Pre-launch phase (Q1-Q2 2026): team hiring, platform setup, compliance, influencer negotiations, content production; (2) Soft launch (Q3 2026): Mexico pilot, performance validation, messaging refinement; (3) Full launch (Q4 2026 - Q1 2027): Colombia and Brazil rollout with learnings integrated; (4) Resource allocation by market and function; (5) Key performance indicators and success metrics (CAC, LTV, repeat rate, market share vs. incumbents); (6) Risk mitigation strategies (MLM competitive response, marketplace policy changes, influencer churn); (7) Go/no-go decision gates at key milestones. Output an executive-friendly roadmap with clear timelines and accountability."
+    },
+    {
+      "name": "Final Quality Validator",
+      "role": "reviewer",
+      "type": "if",
+      "systemPrompt": "You are a final quality validator. Review the complete strategy-to-execution package (market research, GTM strategy, communications framework, and launch roadmap) for: (1) End-to-end coherence — do all components align and reinforce each other? (2) Market differentiation — are Mexico, Colombia, and Brazil strategies meaningfully distinct and locally grounded? (3) Risk coverage — are incumbent threats, channel risks, and execution gaps identified and mitigated? (4) Stakeholder clarity — would an executive team, marketing team, and country leads understand and execute this plan? (5) Completeness — are all critical decisions (channels, influencers, messaging, timeline, metrics) addressed? Provide comprehensive validation feedback. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are the output polisher. Transform the validated strategy, roadmap, and communications framework into an executive-ready deliverable package: (1) Executive Summary (1 page) — strategy overview, key differentiators by market, launch timeline, expected outcomes; (2) Market Strategy Briefs (1 per country) — market insights, positioning, channel mix, KPIs; (3) Communications Playbook — localized messaging, influencer briefs, creative guidelines, social templates; (4) Launch Roadmap — phased timeline, milestones, resource plan, decision gates; (5) Competitive Positioning Matrix — vs. MLM incumbents; (6) Risk Register and Mitigation Plan. Use clear formatting, visuals, decision matrices, and actionable next steps. Output should be presentation-ready for C-suite and market teams."
+    }
+  ],
+  "explanation": "This 7-step pipeline produces a comprehensive, market-specific D2C launch and communications strategy. Execution flow: Market Research Builder gathers foundational insights → Integrated Strategy Developer synthesizes GTM approach and communications frameworks in one step → Strategy Critic evaluates end-to-end consistency (if revise, loops back to Strategy Refiner; if pass, proceeds) → Strategy Refiner strengthens strategy based on feedback → Execution Roadmap Builder converts strategy into phased, actionable launch plan → Final Quality Validator confirms coherence across strategy and execution (if revise, loops back to Strategy Refiner to fix gaps; if pass, proceeds to polish) → Output Polisher delivers executive-ready deliverables. Two conditional gates ensure strategy integrity and execution readiness before final output. The pipeline balances strategic depth with execution rigor while treating each market as a distinct priority."
+}
+```

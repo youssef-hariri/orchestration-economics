@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "RegulatoryStrategist",
+      "role": "strategist",
+      "systemPrompt": "Analyze the 15 target jurisdictions and the EU AI Act. Develop a 'Global Core, Local Edge' framework that defines which product features, documentation clauses, and marketing messages are universal and which must be localized to comply with specific data-localization or high-risk AI requirements.",
+      "description": "Maps global compliance requirements to specific regional product and communication strategies."
+    },
+    {
+      "name": "ContentBuilder",
+      "role": "builder",
+      "systemPrompt": "Draft the product documentation, feature descriptions, and marketing copy based on the RegulatoryStrategist's framework. Ensure the tone remains consistent with the global brand while embedding the mandatory legal disclosures and technical adaptations required for each specific jurisdiction.",
+      "description": "Generates the initial draft of localized content."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "systemPrompt": "Review the drafted content against the specific regulatory constraints provided by the strategist. Adjust language to ensure legal accuracy without losing brand voice. If feedback is provided, iterate to resolve conflicts.",
+      "description": "Refines content to ensure legal compliance and brand consistency."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the content for regulatory accuracy, brand coherence, and risk of customer confusion. Provide a detailed assessment of whether the content meets the 'Global Core, Local Edge' requirement. On the last line, output 'pass' if compliant, or 'revise' if changes are needed.",
+      "description": "Validates the output against regulatory and brand standards."
+    },
+    {
+      "name": "BrandPolisher",
+      "role": "polisher",
+      "systemPrompt": "Perform a final review for linguistic quality, formatting, and tone consistency across all 15 versions. Ensure the output is ready for publication.",
+      "description": "Finalizes the content for deployment."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "RegulatoryStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Analyze the 15 target jurisdictions and the EU AI Act. Develop a 'Global Core, Local Edge' framework that defines which product features, documentation clauses, and marketing messages are universal and which must be localized to comply with specific data-localization or high-risk AI requirements."
+    },
+    {
+      "name": "ContentBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft the product documentation, feature descriptions, and marketing copy based on the RegulatoryStrategist's framework. Ensure the tone remains consistent with the global brand while embedding the mandatory legal disclosures and technical adaptations required for each specific jurisdiction."
+    },
+    {
+      "name": "ComplianceRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Review the drafted content against the specific regulatory constraints provided by the strategist. Adjust language to ensure legal accuracy without losing brand voice. If feedback is provided, iterate to resolve conflicts."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the content for regulatory accuracy, brand coherence, and risk of customer confusion. Provide a detailed assessment of whether the content meets the 'Global Core, Local Edge' requirement. On the last line, output 'pass' if compliant, or 'revise' if changes are needed.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "BrandPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Perform a final review for linguistic quality, formatting, and tone consistency across all 15 versions. Ensure the output is ready for publication."
+    }
+  ],
+  "explanation": "The pipeline begins with the RegulatoryStrategist to establish the compliance framework. The ContentBuilder creates the initial localized assets. The ComplianceRefiner adjusts these based on the framework. The QualityGate assesses the output; if it fails, it routes back to the ContentBuilder (step 2) for revision. Once it passes, the BrandPolisher finalizes the assets for global distribution."
+}

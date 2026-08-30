@@ -1,0 +1,98 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Regulatory Landscape Analyzer",
+      "role": "analyst",
+      "description": "Maps compliance obligations across 15 jurisdictions and clusters regulatory regimes by similarity"
+    },
+    {
+      "name": "Compliance Strategy Developer",
+      "role": "strategist",
+      "description": "Designs tiered compliance architecture maintaining brand coherence across divergent regimes"
+    },
+    {
+      "name": "Product & Communication Adapter",
+      "role": "builder",
+      "description": "Creates jurisdiction-specific product configurations, documentation, and customer communications aligned with regulatory tiers"
+    },
+    {
+      "name": "Conflict Resolution Expert",
+      "role": "expert",
+      "description": "Identifies regulatory conflicts, data-localization incompatibilities, and brand fragmentation risks"
+    },
+    {
+      "name": "Coherence Refiner",
+      "role": "refiner",
+      "description": "Resolves conflicts while preserving unified brand messaging and customer clarity across borders"
+    },
+    {
+      "name": "Compliance & Brand Validator",
+      "role": "critic",
+      "description": "Validates brand consistency, compliance adequacy, and customer clarity across all adaptations"
+    },
+    {
+      "name": "Final Playbook Polisher",
+      "role": "polisher",
+      "description": "Formats all outputs into unified, branded compliance playbook ready for implementation"
+    }
+  ],
+  "pipeline": [
+    {
+      "step": 1,
+      "name": "Regulatory Landscape Analyzer",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze AI regulatory landscape across 15 jurisdictions: EU (high-risk AI Act), UK, US, Canada, Singapore, Japan, Australia, Brazil, India, UAE, South Korea, China (data-localization), Switzerland, and two light-touch regimes. For each, identify hiring AI obligations, data residency requirements, consent/bias-testing mandates, and conflicts with other regimes. Produce regulatory compliance matrix showing obligation overlaps, conflicts, and gaps. Output structured taxonomy clustering jurisdictions by regulatory type: EU-aligned, light-touch, data-sovereignty-strict."
+    },
+    {
+      "step": 2,
+      "name": "Compliance Strategy Developer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Using regulatory taxonomy, design tiered global compliance strategy for AI hiring platform. Specify: (1) Unified core product with modular feature toggles per regulatory cluster; (2) Documentation templates (privacy, model cards, impact assessments) localizable without brand voice alteration; (3) Customer communication framework explaining compliance differences as 'global brand, local compliance' narrative. Output strategic blueprint showing how to serve 15 countries from single codebase while satisfying conflicting rules. Include risk mitigation for cross-border customers."
+    },
+    {
+      "step": 3,
+      "name": "Product & Communication Adapter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Create detailed specifications for each regulatory cluster: (1) Feature set per cluster (enabled/disabled hiring AI features); (2) Data handling (storage, retention, anonymization rules); (3) Documentation requirements (model cards, bias reports, audit logs); (4) Customer-facing labels and consent flows; (5) Marketing and ToS communications explaining compliance differences. Produce configuration matrix, annotation guide, and draft customer communications. Maintain brand aesthetic and core value proposition across all variants."
+    },
+    {
+      "step": 4,
+      "name": "Conflict Resolution Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Audit product and communication specifications from Step 3. Identify: (1) Regulatory conflicts (data-localization vs. GDPR transfers, feature parity gaps); (2) Customer confusion risks (unclear compliance explanations); (3) Operational inefficiencies (unsustainable feature branches); (4) Brand coherence threats (appearance of separate products). Provide detailed audit listing each conflict with severity, affected jurisdictions, and customer impact. Assess feasibility of resolution via architecture or messaging changes. On VERY LAST LINE output EXACTLY ONE keyword: revise or pass."
+    },
+    {
+      "step": 5,
+      "name": "Coherence Refiner",
+      "role": "refiner",
+      "type": "if",
+      "systemPrompt": "Review expert audit from Step 4. If conflicts identified: resolve product specifications by redesigning feature modularity, rewriting documentation to reduce confusion while respecting local rules, specifying data architecture (regional CDNs, federation) satisfying localization without fragmentation, creating unified compliance narrative. If no conflicts or all resolvable: confirm specifications ready. Revise all Step 3 outputs to eliminate conflicts while preserving brand unity and customer clarity. On VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "revise": 3,
+        "pass": 6
+      }
+    },
+    {
+      "step": 6,
+      "name": "Compliance & Brand Validator",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "Validate refined specifications from Step 5. Assess: (1) Does product modularity satisfy all high-risk obligations without impossible compliance combinations? (2) Are documentation and customer communications clear, consistent in brand voice, and adequate for each jurisdiction? (3) Can customers operating across borders understand and navigate compliance differences? (4) Is brand coherence maintained across all regional variants? Provide full assessment of compliance adequacy, brand consistency, and customer clarity. On VERY LAST LINE output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "step": 7,
+      "name": "Final Playbook Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Compile all validated outputs into unified, branded compliance playbook: (1) Executive Summary (strategy, key risks, brand protection); (2) Product Compliance Matrix (features, data handling, documentation per jurisdiction); (3) Customer Communications Package (global brand statement, localized ToS, FAQs, marketing); (4) Implementation Roadmap (engineering, legal, go-to-market phases); (5) Brand Style Guide for Localization. Use professional formatting and cohesive branding. Output must be immediately actionable for stakeholder approval and team execution."
+    }
+  ],
+  "explanation": "This 7-step pipeline delivers a unified compliance and communication strategy. Flow: Analyst maps regulatory landscape and creates jurisdiction taxonomy (Step 1) → Strategist designs tiered architecture preserving brand coherence (Step 2) → Builder creates detailed product/documentation/communication specs (Step 3) → Expert audits for regulatory conflicts and brand fragmentation risks, outputs pass/revise (Step 4) → Refiner evaluates audit and revises Step 3 outputs if conflicts exist, otherwise confirms readiness, outputs pass/revise (Step 5, if-gate) → If revise at Step 5, loops back to Step 3 for redesign; if pass, continues → Validator final-checks refined specs for compliance adequacy and brand consistency (Step 6) → Polisher assembles all outputs into implementation-ready playbook (Step 7). The if-gate at Step 5 ensures conflicts are resolved iteratively before finalization. This prevents brand fragmentation while fully satisfying divergent rules across 15 jurisdictions and enabling cross-border customers to understand localized compliance without confusion."
+}
+```

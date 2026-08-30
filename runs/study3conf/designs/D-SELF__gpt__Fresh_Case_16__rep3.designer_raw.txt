@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Product Adaptation Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product-adaptation strategy for a consumer-electronics maker localizing a smart-home voice assistant for Japan, Korea, Thailand, and the Gulf in 2026. Address interaction style, honorifics and politeness, user comfort with speaking commands aloud, household roles and multigenerational use, privacy expectations and always-listening concerns, localization principles, trust-building, rollout risks, and feature prioritization. Distinguish meaningful regional differences without stereotyping. Make practical recommendations, explain trade-offs, and identify assumptions. Produce a structured draft for expert review.",
+      "description": "Creates the initial cross-market product strategy."
+    },
+    {
+      "name": "Regional and Cultural Insights Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed smart-home voice-assistant adaptation strategy for Japan, Korea, Thailand, and the Gulf. Identify culturally relevant differences in honorific language, indirectness, command etiquette, code-switching, household authority, multigenerational usage, gender and age dynamics, public versus private device use, and privacy expectations. Assess which claims require qualification, flag overgeneralizations, and recommend concrete product, UX, onboarding, and research implications. Preserve useful cross-market principles while identifying where market-specific adaptation is necessary. Return detailed findings and actionable revisions.",
+      "description": "Provides comparative cultural, linguistic, household, and privacy analysis."
+    },
+    {
+      "name": "Localization, Trust, and Privacy Expert",
+      "role": "expert",
+      "systemPrompt": "Provide expert guidance on adapting a voice assistant to honorific-language markets and privacy-sensitive households. Review the strategy and analyst findings, focusing on respectful speech levels, names and titles, ambiguity handling, consent and access controls, visible and audible listening indicators, local data controls, guest and child modes, offline functionality, household enrollment, and culturally appropriate explanations of system behavior. Recommend feature priorities and validation research for Japan, Korea, Thailand, and the Gulf. Note uncertainty and avoid treating any market as culturally uniform. Produce specific corrections and high-value additions.",
+      "description": "Supplies domain expertise on localization, human-computer interaction, household governance, and privacy trust."
+    },
+    {
+      "name": "Strategy Synthesis Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, decision-ready product-adaptation plan using the regional analysis and expert guidance. Include an executive recommendation, cross-market design principles, a market-by-market comparison for Japan, Korea, Thailand, and the Gulf, interaction and honorific guidance, household-role and permission models, privacy signaling and controls, prioritized features by launch phase, research and testing needs, risks, and measurable success criteria. Correct unsupported generalizations, distinguish shared needs from local variation, and make recommendations concrete for product, UX, engineering, and go-to-market teams. Produce a complete revised strategy rather than commentary about the revision.",
+      "description": "Integrates research and expert input into the complete strategy."
+    },
+    {
+      "name": "Strategy Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy in full. Assess whether it directly answers the requested product-adaptation objective and whether it is culturally respectful, nuanced, actionable, internally consistent, and suitable for 2026 planning. Examine coverage of interaction style, honorific systems, user comfort speaking aloud, household roles, multigenerational use, privacy signaling, always-listening concerns, feature prioritization, market differences, evidence limitations, implementation feasibility, and success measures. Identify any stereotyping, missing safeguards, vague recommendations, contradictory priorities, or claims that need qualification. Provide detailed strengths, weaknesses, and exact corrections. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "description": "Determines whether the synthesized strategy is complete and decision-ready.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Turn the approved strategy into a concise, polished, user-facing recommendation for senior product and localization leaders. Preserve important nuance and market distinctions while improving structure, clarity, readability, and decision usefulness. Present an executive summary, guiding principles, a comparison across Japan, Korea, Thailand, and the Gulf, recommendations for interaction style and honorifics, household roles and permissions, privacy signaling and controls, prioritized features by phase, validation research, risks, and success metrics. Do not mention the pipeline, reviewers, drafts, or internal feedback. Avoid unsupported certainty and culturally broad claims.",
+      "description": "Produces the final executive-ready product-adaptation strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Product Adaptation Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product-adaptation strategy for a consumer-electronics maker localizing a smart-home voice assistant for Japan, Korea, Thailand, and the Gulf in 2026. Address interaction style, honorifics and politeness, user comfort with speaking commands aloud, household roles and multigenerational use, privacy expectations and always-listening concerns, localization principles, trust-building, rollout risks, and feature prioritization. Distinguish meaningful regional differences without stereotyping. Make practical recommendations, explain trade-offs, and identify assumptions. Produce a structured draft for expert review."
+    },
+    {
+      "name": "Regional and Cultural Insights Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed smart-home voice-assistant adaptation strategy for Japan, Korea, Thailand, and the Gulf. Identify culturally relevant differences in honorific language, indirectness, command etiquette, code-switching, household authority, multigenerational usage, gender and age dynamics, public versus private device use, and privacy expectations. Assess which claims require qualification, flag overgeneralizations, and recommend concrete product, UX, onboarding, and research implications. Preserve useful cross-market principles while identifying where market-specific adaptation is necessary. Return detailed findings and actionable revisions."
+    },
+    {
+      "name": "Localization, Trust, and Privacy Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Provide expert guidance on adapting a voice assistant to honorific-language markets and privacy-sensitive households. Review the strategy and analyst findings, focusing on respectful speech levels, names and titles, ambiguity handling, consent and access controls, visible and audible listening indicators, local data controls, guest and child modes, offline functionality, household enrollment, and culturally appropriate explanations of system behavior. Recommend feature priorities and validation research for Japan, Korea, Thailand, and the Gulf. Note uncertainty and avoid treating any market as culturally uniform. Produce specific corrections and high-value additions."
+    },
+    {
+      "name": "Strategy Synthesis Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, decision-ready product-adaptation plan using the regional analysis and expert guidance. Include an executive recommendation, cross-market design principles, a market-by-market comparison for Japan, Korea, Thailand, and the Gulf, interaction and honorific guidance, household-role and permission models, privacy signaling and controls, prioritized features by launch phase, research and testing needs, risks, and measurable success criteria. Correct unsupported generalizations, distinguish shared needs from local variation, and make recommendations concrete for product, UX, engineering, and go-to-market teams. Produce a complete revised strategy rather than commentary about the revision."
+    },
+    {
+      "name": "Strategy Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy in full. Assess whether it directly answers the requested product-adaptation objective and whether it is culturally respectful, nuanced, actionable, internally consistent, and suitable for 2026 planning. Examine coverage of interaction style, honorific systems, user comfort speaking aloud, household roles, multigenerational use, privacy signaling, always-listening concerns, feature prioritization, market differences, evidence limitations, implementation feasibility, and success measures. Identify any stereotyping, missing safeguards, vague recommendations, contradictory priorities, or claims that need qualification. Provide detailed strengths, weaknesses, and exact corrections. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved strategy into a concise, polished, user-facing recommendation for senior product and localization leaders. Preserve important nuance and market distinctions while improving structure, clarity, readability, and decision usefulness. Present an executive summary, guiding principles, a comparison across Japan, Korea, Thailand, and the Gulf, recommendations for interaction style and honorifics, household roles and permissions, privacy signaling and controls, prioritized features by phase, validation research, risks, and success metrics. Do not mention the pipeline, reviewers, drafts, or internal feedback. Avoid unsupported certainty and culturally broad claims."
+    }
+  ],
+  "explanation": "The flow is Product Adaptation Strategist → Regional and Cultural Insights Analyst → Localization, Trust, and Privacy Expert → Strategy Synthesis Refiner → Strategy Quality Review → Executive Strategy Polisher. The builder establishes a complete strategic draft, while the analyst and expert add comparative cultural, linguistic, household, and privacy depth. The refiner integrates those findings into a decision-ready plan. The quality review then assesses completeness, nuance, and feasibility; if it outputs revise, execution returns to the refiner, and if it outputs pass, execution continues to the polisher. The final polisher produces the executive-ready deliverable."
+}

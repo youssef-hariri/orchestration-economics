@@ -1,0 +1,94 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Labor Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive labor-relations strategy framework addressing EU worker councils, Latin American reclassification, and Southeast Asian self-regulatory codes"
+    },
+    {
+      "name": "Regional Compliance Analyst",
+      "role": "analyst",
+      "description": "Analyzes regulatory divergence across regions, maps legal obligations, identifies conflicts, and produces structured compliance matrix with jurisdiction-specific requirements"
+    },
+    {
+      "name": "Labor Relations Strategist",
+      "role": "strategist",
+      "description": "Develops coherent multi-region engagement strategy, defines bargaining scope boundaries, and proposes organizational structures balancing local compliance with global consistency"
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Evaluates strategy for completeness, coherence, feasibility gaps, and alignment with platform business continuity across all three regulatory regimes"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Resolves identified gaps and contradictions in the labor strategy, strengthens bargaining boundaries, and enhances consistency mechanisms"
+    },
+    {
+      "name": "Final Quality Reviewer",
+      "role": "reviewer",
+      "description": "Performs final comprehensive assessment of refined strategy validating legal coverage, operational coherence, and completeness before polishing"
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final labor-relations strategy into executive-ready deliverable with structured sections, decision matrices, and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Labor Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive labor-relations strategy for a global gig delivery platform facing divergent worker representation regimes by 2026. Create an initial strategy framework that addresses: (1) EU worker councils with mandatory representation requirements, (2) Latin American reclassification pressures and employment status changes, (3) Southeast Asian self-regulatory codes, (4) informal rider collectives organizing in multiple cities, (5) transition from single-market engagement norms to multi-regime approach. Outline engagement structures (how platform interacts with workers), bargaining boundaries (negotiable vs. platform-controlled topics), and consistency mechanisms across regions. Include stakeholder mapping and implementation phases."
+    },
+    {
+      "name": "Regional Compliance Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial strategy against specific regional regulatory requirements. For each region (EU, Latin America, Southeast Asia), produce: (1) detailed regulatory obligations mapping, (2) conflict analysis between regional requirements and global platform consistency, (3) structured compliance matrix showing mandatory vs. discretionary engagement elements, (4) jurisdictional variance in bargaining scope, (5) risks associated with informal collective organizing. Identify where platform policies must diverge and where they can remain unified. Provide clear findings on regulatory coverage gaps and consistency vulnerabilities."
+    },
+    {
+      "name": "Labor Relations Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Synthesize regional compliance requirements into a coherent multi-region labor-relations strategy. Develop: (1) differentiated engagement structures for each regime type, (2) clear bargaining boundaries defining negotiable (compensation, safety, appeals) vs. non-negotiable (algorithm, classification) elements, (3) consistency mechanisms maintaining platform integrity while respecting local requirements, (4) strategies for channeling informal rider collectives into formal structures, (5) escalation and conflict-resolution pathways for each region. Ensure strategy addresses reclassification risk without triggering unintended employment status changes."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical quality gate reviewing the proposed labor-relations strategy. Assess: (1) Do engagement structures adequately cover all three regulatory regimes? (2) Are bargaining boundaries clearly defined and operationally feasible? (3) Do consistency mechanisms prevent regulatory arbitrage while respecting local requirements? (4) Does the strategy address informal rider collectives and organizing patterns? (5) Are there internal contradictions between regions? (6) Does reclassification response strategy avoid unintended employment triggers? (7) Is the strategy operationally coherent and implementable? Provide FULL detailed assessment with specific weaknesses and gaps. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a labor-relations strategy based on identified gaps and contradictions. Address all issues raised by the critic: (1) strengthen engagement structure definitions for under-specified regimes, (2) clarify and operationalize bargaining boundaries with specific examples, (3) enhance consistency mechanisms to prevent regulatory arbitrage, (4) develop concrete pathways for channeling informal collectives into formal structures, (5) resolve internal contradictions or conflicting regional guidance, (6) reinforce reclassification response strategy, (7) validate operational feasibility. Produce a revised strategy addressing all critiques while maintaining strategic coherence."
+    },
+    {
+      "name": "Final Quality Reviewer",
+      "role": "reviewer",
+      "type": "while",
+      "systemPrompt": "You are the final quality reviewer for a multi-region labor-relations strategy. Assess: (1) Does the strategy provide complete actionable guidance for each regulatory regime? (2) Are engagement structures, bargaining boundaries, and consistency mechanisms clearly articulated and internally coherent? (3) Is the strategy operationally feasible for platform management to execute? (4) Does it adequately mitigate reclassification and organizing risks? (5) Are there remaining ambiguities or gaps? (6) Is the strategy evidence-based and grounded in regulatory requirements? Provide FULL detailed assessment. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or retry. If retry, loop back to refiner for up to 3 iterations maximum.",
+      "whileOptions": ["pass", "retry"],
+      "whileTarget": 5,
+      "maxIterations": 3
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the finalized labor-relations strategy into a clear executive deliverable. Structure as: (1) Executive Summary, (2) Regulatory Landscape by region, (3) Engagement Structures (council protocols, reclassification response, self-regulatory participation), (4) Bargaining Boundaries (negotiable vs. non-negotiable with rationale), (5) Consistency Mechanisms across regions, (6) Informal Collective Management strategies, (7) Implementation Roadmap with timeline, (8) Risk Mitigation for reclassification and organizing pressures, (9) Governance and Escalation procedures. Ensure clarity, professional formatting, and actionable specificity throughout. This is the final executive output."
+    }
+  ],
+  "explanation": "This 7-step pipeline transforms divergent regulatory requirements into a coherent, operationally feasible labor-relations strategy. Builder establishes the initial framework addressing all three regime types. Analyst structures regulatory requirements and identifies conflicts—critical input for coherent strategy. Strategist synthesizes compliance and engagement logic into integrated approach. Critic (if gate) rigorously assesses completeness, coherence, and feasibility. If gaps identified, Refiner addresses them. Final Reviewer (while loop, max 3 iterations) validates quality until strategy meets all criteria. Polisher formats final deliverable. The if/while gates ensure strategy is complete and coherent before final output. The pipeline delivers a regional labor-relations strategy balancing local compliance with global consistency while addressing informal organizing and reclassification risk."
+}
+```

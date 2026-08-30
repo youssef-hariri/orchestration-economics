@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Strategic Green Bond Architect",
+      "role": "builder",
+      "systemPrompt": "Develop an initial, decision-ready financing strategy for an industrial group operating plants in Europe, North Africa, and Southeast Asia that wants to fund decarbonization retrofits through green bonds in the EU, Gulf, and Asian capital markets. Address issuance structure, market sequencing, currency and refinancing considerations, use-of-proceeds design, eligible retrofit categories, proceeds allocation, reporting, external review, investor positioning, bank and rating-agency engagement, and credibility protections. Explicitly account for divergent taxonomies, disclosure standards, ESG expectations, and inconsistent plant emissions data. Distinguish confirmed facts, assumptions, recommendations, and unresolved questions. Produce a detailed draft suitable for review by treasury, sustainability, legal, and investor-relations teams.",
+      "description": "Creates the initial cross-market financing strategy and identifies the principal regulatory, data, execution, and credibility challenges."
+    },
+    {
+      "name": "Cross-Market Taxonomy and Disclosure Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the preceding strategy against the relevant 2026-style requirements and market expectations across the EU, Gulf, and major Asian capital markets, without inventing laws or claiming certainty where requirements may vary. Compare taxonomy alignment, green-bond standards, issuer and allocation reporting, impact reporting, external-review expectations, materiality rules, transition-finance treatment, investor ESG diligence, and likely rating-agency and regional-bank concerns. Recommend a practical equivalence and mapping approach for projects that qualify differently across markets. Identify legal or regulatory items requiring jurisdiction-specific counsel and explain how uncertainty should be disclosed. Return concrete corrections and recommendations that can be incorporated into the financing strategy.",
+      "description": "Maps the proposed financing approach to divergent regional taxonomies, disclosure regimes, and investor expectations."
+    },
+    {
+      "name": "Emissions Measurement and Credibility Expert",
+      "role": "expert",
+      "systemPrompt": "Review the strategy and market analysis with specialist attention to emissions measurement quality, plant-level data controls, Scope 1 and Scope 2 accounting, relevant Scope 3 boundaries, baseline construction, retrofit additionality, energy and emissions savings claims, assurance levels, estimates, exclusions, and verification. Design a credible risk-based data improvement and assurance approach that allows issuance without overstating data quality. Specify how to classify projects and claims by evidence quality, how to handle missing or inconsistent measurements, how to communicate limitations to investors, and how to prevent greenwashing or reputational damage. Also assess implications for covenants, reporting commitments, second-party opinions, assurance providers, rating agencies, and banks. Provide precise amendments to the proposed financing strategy.",
+      "description": "Tests the strategy's emissions evidence, measurement controls, assurance model, and investor-credibility safeguards."
+    },
+    {
+      "name": "Integrated Financing Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Synthesize the initial strategy, cross-market analysis, and emissions-quality assessment into one coherent and actionable financing strategy. Resolve contradictions and distinguish mandatory requirements, market practice, and optional enhancements. Recommend whether to use one global framework, jurisdiction-specific frameworks, multiple tranches, private placements, or a staged issuance program, explaining trade-offs and sequencing. Include eligibility and exclusion criteria, project-screening and data-quality classifications, proceeds allocation, ring-fencing, temporary investment, reporting and assurance commitments, external-review specifications, governance, escalation triggers, investor communications, contingency plans for taxonomy or data changes, and engagement plans for rating agencies and regional banks. Include an implementation roadmap, responsibility allocation, key risks, mitigations, and a concise executive recommendation. Do not fabricate jurisdictional requirements; flag items requiring local counsel or current provider confirmation.",
+      "description": "Integrates all specialist findings into a defensible, executable, and transparent multi-market financing strategy."
+    },
+    {
+      "name": "Strategy Integrity Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined financing strategy in full. Assess strategic coherence, cross-market applicability, taxonomy and disclosure accuracy, treatment of regulatory uncertainty, feasibility of issuance sequencing, emissions-data risk management, assurance and verification strength, greenwashing and reputational safeguards, investor usability, consistency with rating-agency and bank concerns, implementation practicality, and clarity of assumptions. Identify every material weakness, unsupported claim, omission, contradiction, or recommendation that could undermine execution or credibility, and provide specific corrections for the refiner. Provide a comprehensive written assessment. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      },
+      "description": "Performs a final substantive assessment and routes deficient strategy content back for correction."
+    },
+    {
+      "name": "Investor-Ready Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer from the approved strategy and quality assessment. Preserve substantive accuracy while improving structure, concision, readability, and executive usefulness. Present a clear recommended financing model, market-by-market approach, issuance sequence, taxonomy and disclosure treatment, emissions-data quality framework, assurance plan, governance, investor credibility protections, implementation roadmap, risks, and decisions required. Use tables where they materially improve comparison. Clearly label assumptions, items requiring local counsel or current market confirmation, and limits on emissions data. Do not imply certification, taxonomy eligibility, legal compliance, or assurance that has not been established. Ensure the final output directly answers how the group can finance retrofits across divergent markets while protecting credibility.",
+      "description": "Formats the validated strategy into a clear, transparent, executive- and investor-ready deliverable."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategic Green Bond Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop an initial, decision-ready financing strategy for an industrial group operating plants in Europe, North Africa, and Southeast Asia that wants to fund decarbonization retrofits through green bonds in the EU, Gulf, and Asian capital markets. Address issuance structure, market sequencing, currency and refinancing considerations, use-of-proceeds design, eligible retrofit categories, reporting, external review, investor positioning, bank and rating-agency engagement, and credibility protections. Explicitly account for divergent taxonomies, disclosure standards, ESG expectations, and inconsistent plant emissions data. Distinguish confirmed facts, assumptions, recommendations, and unresolved questions."
+    },
+    {
+      "name": "Cross-Market Taxonomy and Disclosure Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the preceding strategy against relevant 2026-style requirements and market expectations across the EU, Gulf, and major Asian capital markets. Compare taxonomy alignment, green-bond standards, allocation and impact reporting, external-review expectations, transition-finance treatment, investor ESG diligence, and likely rating-agency and bank concerns. Identify unsupported assumptions and recommend practical corrections, while flagging matters requiring current local-counsel confirmation."
+    },
+    {
+      "name": "Emissions Measurement and Credibility Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the preceding strategy and analysis with specialist attention to emissions measurement quality, baselines, retrofit additionality, Scope 1 and Scope 2 accounting, relevant Scope 3 boundaries, estimates, assurance, verification, and greenwashing risk. Recommend a credible risk-based approach for classifying data quality, handling gaps, improving controls, communicating limitations, and aligning claims with evidence. Provide concrete amendments affecting reporting, external review, investor communications, rating agencies, and banks."
+    },
+    {
+      "name": "Integrated Financing Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Synthesize all preceding outputs into one actionable, transparent financing strategy. Resolve contradictions, distinguish mandatory requirements from market practice, recommend issuance structure and sequencing, and include taxonomy mapping, eligibility criteria, data-quality treatment, proceeds controls, reporting, assurance, governance, investor communications, contingencies, implementation steps, and risks. Do not fabricate legal requirements; clearly identify items requiring local counsel or current provider confirmation."
+    },
+    {
+      "name": "Strategy Integrity Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy comprehensively for accuracy, coherence, feasibility, cross-market applicability, emissions-data risk management, assurance strength, greenwashing protection, investor usefulness, and implementation practicality. Explain all strengths, weaknesses, omissions, contradictions, and required corrections in detail. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Investor-Ready Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Turn the approved strategy into the final user-facing deliverable. Make it concise, structured, decision-ready, and transparent. Clearly present the recommended financing model, market sequencing, taxonomy and disclosure approach, emissions-data quality framework, assurance plan, governance, investor credibility protections, implementation roadmap, risks, assumptions, and items requiring local counsel or current market confirmation. Do not overstate eligibility, compliance, certification, assurance, or emissions certainty."
+    }
+  ],
+  "explanation": "The flow is Strategic Green Bond Architect → Cross-Market Taxonomy and Disclosure Analyst → Emissions Measurement and Credibility Expert → Integrated Financing Strategy Refiner → Strategy Integrity Quality Gate → Investor-Ready Strategy Polisher. The first three stages build the strategy and test it against market rules and emissions-evidence risk. The refiner integrates those findings. The quality gate assesses the complete refined strategy; if it outputs revise, execution returns to the refiner, and if it outputs pass, execution proceeds to the polisher. The final output is therefore both strategically integrated and explicitly conditioned on transparency, measurement quality, regulatory uncertainty, and investor credibility."
+}

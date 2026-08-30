@@ -1,0 +1,98 @@
+{
+  "agents": [
+    {
+      "name": "Resilience Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, decision-ready supply-chain resilience strategy for a semiconductor manufacturer that depends on specialty gases and photoresists exposed to export-control volatility. Address dual-sourcing objectives, material segmentation, qualification timelines of 12–24 months, quality and yield risk, supplier capacity constraints, geographic diversification, inventory and continuity measures, contractual commitments, financing concerns, governance, milestones, and measurable success criteria. Balance operational resilience with financial discipline. Clearly distinguish immediate actions, medium-term actions, and long-term actions. Produce an evidence-based initial strategy with explicit assumptions and trade-offs.",
+      "description": "Creates the initial end-to-end resilience strategy and frames the key trade-offs."
+    },
+    {
+      "name": "Semiconductor Materials Domain Expert",
+      "role": "expert",
+      "systemPrompt": "Review the proposed strategy from the perspective of semiconductor specialty gases, photoresists, fab qualification, process integration, contamination control, change management, yield protection, supplier quality, and export-control exposure. Identify technically unrealistic recommendations, overlooked qualification dependencies, material-specific differences, and risks to production quality. Provide concrete corrections and domain-specific recommendations while preserving commercial practicality.",
+      "description": "Adds specialized technical and manufacturing expertise concerning critical semiconductor materials and qualification risk."
+    },
+    {
+      "name": "Supply Chain Economics and Risk Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the strategy for supply, geopolitical, regulatory, operational, quality, financial, and execution risks. Evaluate the economics of long-term offtake commitments, capacity reservations, minimum purchase obligations, inventory carrying costs, qualification investments, dual-sourcing benefits, and downside exposure. Recommend flexible commercial mechanisms that address supplier financing needs without creating excessive buyer lock-in. Identify useful decision metrics, scenario triggers, and sensitivity considerations. Provide actionable analytical feedback.",
+      "description": "Tests the strategy against risk scenarios and commitment economics, adding quantitative decision criteria."
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, practical, executive-ready recommendation using all available domain and analytical feedback. Resolve contradictions, make assumptions explicit, and balance qualification lead times, quality risk, continuity protection, geographic diversification, and long-term commitment economics. Include material prioritization criteria, a phased implementation roadmap, commercial options for securing capacity, risk mitigations, governance, decision triggers, and measurable KPIs. Do not make unsupported claims or assume that all materials can be qualified at the same speed. Produce a complete revised strategy, not merely a list of edits.",
+      "description": "Integrates expert and analytical feedback into a complete, actionable resilience strategy."
+    },
+    {
+      "name": "Strategy Quality Review",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Conduct a full quality assessment of the revised strategy. Evaluate whether it is technically credible for semiconductor materials, responsive to export-control volatility, realistic about 12–24 month qualification lead times, protective of quality and yield, financially balanced, specific about supplier commitments, actionable in phases, and clear about assumptions, risks, triggers, and KPIs. Identify any material omissions, contradictions, vague recommendations, infeasible economics, or unsupported assertions, and explain precisely how they should be corrected. Then on the VERY LAST LINE output exactly one keyword: retry or pass.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "whileMapping": {
+        "retry": 3,
+        "pass": 5
+      },
+      "maxIterations": 3,
+      "description": "Assesses the integrated strategy and sends it back for improvement when substantive weaknesses remain, for no more than three iterations."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Prepare the final user-facing answer from the approved strategy. Preserve the substantive recommendations and trade-offs while improving clarity, structure, precision, and executive usefulness. Present a concise but sufficiently detailed resilience strategy covering priorities, phased actions, qualification and quality protection, capacity and contract economics, risk triggers, governance, and KPIs. Separate recommendations from assumptions and note where decisions depend on company-specific data. Use clear headings, tables where useful, and professional business language. Do not mention the internal review process or invent facts.",
+      "description": "Produces the final clear, polished, and decision-ready response."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Resilience Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, decision-ready supply-chain resilience strategy for a semiconductor manufacturer that depends on specialty gases and photoresists exposed to export-control volatility. Address dual-sourcing objectives, material segmentation, qualification timelines of 12–24 months, quality and yield risk, supplier capacity constraints, geographic diversification, inventory and continuity measures, contractual commitments, financing concerns, governance, milestones, and measurable success criteria. Balance operational resilience with financial discipline. Clearly distinguish immediate actions, medium-term actions, and long-term actions. Produce an evidence-based initial strategy with explicit assumptions and trade-offs."
+    },
+    {
+      "name": "Semiconductor Materials Domain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the proposed strategy from the perspective of semiconductor specialty gases, photoresists, fab qualification, process integration, contamination control, change management, yield protection, supplier quality, and export-control exposure. Identify technically unrealistic recommendations, overlooked qualification dependencies, material-specific differences, and risks to production quality. Provide concrete corrections and domain-specific recommendations while preserving commercial practicality."
+    },
+    {
+      "name": "Supply Chain Economics and Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the strategy for supply, geopolitical, regulatory, operational, quality, financial, and execution risks. Evaluate the economics of long-term offtake commitments, capacity reservations, minimum purchase obligations, inventory carrying costs, qualification investments, dual-sourcing benefits, and downside exposure. Recommend flexible commercial mechanisms that address supplier financing needs without creating excessive buyer lock-in. Identify useful decision metrics, scenario triggers, and sensitivity considerations. Provide actionable analytical feedback."
+    },
+    {
+      "name": "Integrated Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous strategy into a coherent, practical, executive-ready recommendation using all available domain and analytical feedback. Resolve contradictions, make assumptions explicit, and balance qualification lead times, quality risk, continuity protection, geographic diversification, and long-term commitment economics. Include material prioritization criteria, a phased implementation roadmap, commercial options for securing capacity, risk mitigations, governance, decision triggers, and measurable KPIs. Do not make unsupported claims or assume that all materials can be qualified at the same speed. Produce a complete revised strategy, not merely a list of edits."
+    },
+    {
+      "name": "Strategy Quality Review",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "Conduct a full quality assessment of the revised strategy. Evaluate whether it is technically credible for semiconductor materials, responsive to export-control volatility, realistic about 12–24 month qualification lead times, protective of quality and yield, financially balanced, specific about supplier commitments, actionable in phases, and clear about assumptions, risks, triggers, and KPIs. Identify any material omissions, contradictions, vague recommendations, infeasible economics, or unsupported assertions, and explain precisely how they should be corrected. Then on the VERY LAST LINE output exactly one keyword: retry or pass.",
+      "whileOptions": [
+        "retry",
+        "pass"
+      ],
+      "whileMapping": {
+        "retry": 3,
+        "pass": 5
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Prepare the final user-facing answer from the approved strategy. Preserve the substantive recommendations and trade-offs while improving clarity, structure, precision, and executive usefulness. Present a concise but sufficiently detailed resilience strategy covering priorities, phased actions, qualification and quality protection, capacity and contract economics, risk triggers, governance, and KPIs. Separate recommendations from assumptions and note where decisions depend on company-specific data. Use clear headings, tables where useful, and professional business language. Do not mention the internal review process or invent facts."
+    }
+  ],
+  "explanation": "The flow is Resilience Strategy Builder → Semiconductor Materials Domain Expert → Supply Chain Economics and Risk Analyst → Integrated Strategy Refiner → Strategy Quality Review (while retry, loops back to the Refiner for up to 3 iterations; pass continues) → Executive Strategy Polisher. The builder establishes a complete recommendation first. The domain expert and analyst independently challenge technical feasibility and commercial economics before refinement. The iterative review ensures unresolved quality, risk, or practicality issues are corrected, while the final polisher converts the approved substance into a clear executive deliverable."
+}

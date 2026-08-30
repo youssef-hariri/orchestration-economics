@@ -1,0 +1,88 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cultural Context Mapper",
+      "role": "builder",
+      "description": "Analyzes regional attitudes, trust levels, job security concerns, and human-AI collaboration norms across North America, Western Europe, the Gulf, and East Asia to create a foundational cultural profile."
+    },
+    {
+      "name": "Regional Risk & Strategy Analyst",
+      "role": "analyst",
+      "description": "Examines early rollout data and synthesizes cultural insights into region-specific integration strategies with differentiated trust-building, role framing, and governance approaches."
+    },
+    {
+      "name": "Cultural Fit Reviewer",
+      "role": "critic",
+      "description": "Critically assesses proposed strategy against cultural dimensions, labor law compliance, employee sentiment risks, and feasibility within each region's context."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Revises the integration strategy based on cultural fit feedback, adjusting regional approaches, trust-building mechanisms, role clarity, and implementation timelines."
+    },
+    {
+      "name": "Cross-Cultural Expert Validator",
+      "role": "expert",
+      "description": "Provides domain expertise on multinational organizational change and AI adoption in diverse environments to validate and strengthen strategy robustness."
+    },
+    {
+      "name": "Deployment Quality Assessor",
+      "role": "critic",
+      "description": "Conducts final quality assessment checking for internal consistency, regional coherence, risk mitigation adequacy, and implementation readiness."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "description": "Formats the integration strategy into actionable deployment framework with regional playbooks, success metrics, and implementation roadmap."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cultural Context Mapper",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a cultural analyst building foundational understanding for multinational AI deployment. Analyze regional attitudes toward automation, job security, and human-machine authority across: North America (innovation-driven, labor-protection-conscious), Western Europe (regulation-heavy, worker-rights-focused), the Gulf (hierarchical, authority-respecting, rapid modernization), and East Asia (efficiency-focused, variable trust in foreign automation). Create detailed cultural profiles for each region including: trust baseline, job threat perception, preferred agent role framing, decision-making norms, and governance expectations. Output a comprehensive regional cultural map."
+    },
+    {
+      "name": "Regional Risk & Strategy Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an analyst and strategist. Analyze early rollout data across regions (adoption patterns, employee sentiment, productivity impacts, resistance hotspots). Quantify readiness scores and friction indicators. Then synthesize cultural insights into region-specific integration strategies addressing: (1) trust-building mechanisms tailored to each cultural context; (2) job security narratives and retraining pathways; (3) human-AI role definition varying by region; (4) governance structures reflecting regional decision-making norms; (5) phased rollout timelines and success metrics. Produce both a regional readiness matrix and a comprehensive differentiated integration strategy."
+    },
+    {
+      "name": "Cultural Fit Reviewer",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a cultural fit critic. Review the proposed integration strategy rigorously against: (1) cultural appropriateness in each region; (2) labor law and regulatory compliance; (3) employee sentiment risk; (4) feasibility within existing organizational structures; (5) consistency of core values across regions. Provide detailed assessment of each region's alignment and specific vulnerabilities. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Take the cultural fit feedback and systematically strengthen the integration strategy. Address all identified cultural misalignments, regulatory gaps, and feasibility concerns. Adjust trust-building mechanisms, job security narratives, role definitions, governance models, and rollout timelines for each region. Ensure internal consistency while respecting cultural differences. Produce a revised, more robust differentiated integration strategy."
+    },
+    {
+      "name": "Cultural Fit Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined strategy against cultural appropriateness, regulatory compliance, feasibility, and risk adequacy. Provide full assessment of strengths and remaining weaknesses. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 5, "revise": 4}
+    },
+    {
+      "name": "Cross-Cultural Expert Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cross-cultural organizational change expert. Validate the integration strategy against best practices in multinational AI adoption. Assess: (1) appropriateness of regional differentiation; (2) strength of trust-building mechanisms; (3) adequacy of job security messaging; (4) clarity of human-AI role boundaries; (5) likelihood of successful adoption by region; (6) risks of cultural backlash. Provide expert validation with specific recommendations. Output comprehensive validation report with regional assessments and enhancement suggestions."
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communication specialist. Polish the expert-validated integration strategy into a compelling deployment framework. Organize into: Executive Summary; Regional Playbooks (North America, Western Europe, Gulf, East Asia—each with trust-building approach, role framings, job security narrative, governance model, timeline); Cross-Cutting Governance; Success Metrics by Region; Implementation Roadmap. Ensure clarity, professional formatting, and actionability. Produce final executive-ready deployment strategy."
+    }
+  ],
+  "explanation": "This 7-step pipeline produces a differentiated, culturally-responsive AI integration strategy. Flow: (1) Cultural Context Mapper creates regional profiles. (2) Regional Risk & Strategy Analyst examines rollout data and synthesizes differentiated regional strategies. (3) Cultural Fit Reviewer assesses alignment with local norms and regulations. (4) Strategy Refinement Specialist strengthens strategy based on critique. (5) Cultural Fit Quality Gate conducts second validation—if issues found (revise), loops back to Refiner; if passed, continues. (6) Cross-Cultural Expert Validator provides authoritative domain expertise and enhancement recommendations. (7) Executive Strategy Polisher formats into actionable deployment framework. The critical quality gate at step 5 ensures cultural appropriateness before expert validation, allowing iterative improvement without approval bottlenecks."
+}
+```

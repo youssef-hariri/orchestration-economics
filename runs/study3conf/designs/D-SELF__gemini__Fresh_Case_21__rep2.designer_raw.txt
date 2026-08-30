@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketEntryBuilder",
+      "role": "builder",
+      "systemPrompt": "You are a global supply chain strategist. Draft a comprehensive ASEAN manufacturing relocation strategy for an industrial-equipment maker. Evaluate candidate countries (Vietnam, Thailand, Indonesia, Malaysia) based on labor skill, supplier depth, logistics, and incentive regimes. Address the organizational friction regarding production splitting by proposing a 'hub-and-spoke' or 'center-of-excellence' model that balances tariff compliance with engineering unity.",
+      "description": "Generates the initial manufacturing relocation strategy."
+    },
+    {
+      "name": "SupplyChainAnalyst",
+      "role": "analyst",
+      "systemPrompt": "You are a supply chain data analyst. Evaluate the draft strategy for logical consistency, data-backed reasoning regarding tariff realignments, and feasibility of the proposed organizational structure. Identify any gaps in the assessment of supplier ecosystems or political risk.",
+      "description": "Analyzes the draft for technical and strategic accuracy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the SupplyChainAnalyst to strengthen the argument for the chosen footprint. Ensure the tone is professional and the recommendations are actionable for C-suite leadership.",
+      "description": "Refines the strategy based on analyst feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined strategy. Check if it addresses: 1) Tariff/Rules-of-Origin compliance, 2) Supplier ecosystem depth, 3) Engineering team resistance mitigation. Provide a full assessment of strengths and weaknesses. On the last line, output 'pass' if complete, or 'revise' to loop back to the StrategyRefiner.",
+      "description": "Validates the strategy against all project requirements."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional report polisher. Format the final strategy into a clear, executive-ready document with structured headings, bullet points, and a concise summary of the recommended ASEAN footprint.",
+      "description": "Formats the final output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketEntryBuilder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global supply chain strategist. Draft a comprehensive ASEAN manufacturing relocation strategy for an industrial-equipment maker. Evaluate candidate countries (Vietnam, Thailand, Indonesia, Malaysia) based on labor skill, supplier depth, logistics, and incentive regimes. Address the organizational friction regarding production splitting by proposing a 'hub-and-spoke' or 'center-of-excellence' model that balances tariff compliance with engineering unity."
+    },
+    {
+      "name": "SupplyChainAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain data analyst. Evaluate the draft strategy for logical consistency, data-backed reasoning regarding tariff realignments, and feasibility of the proposed organizational structure. Identify any gaps in the assessment of supplier ecosystems or political risk."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the SupplyChainAnalyst to strengthen the argument for the chosen footprint. Ensure the tone is professional and the recommendations are actionable for C-suite leadership."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined strategy. Check if it addresses: 1) Tariff/Rules-of-Origin compliance, 2) Supplier ecosystem depth, 3) Engineering team resistance mitigation. Provide a full assessment of strengths and weaknesses. On the last line, output 'pass' if complete, or 'revise' to loop back to the StrategyRefiner.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional report polisher. Format the final strategy into a clear, executive-ready document with structured headings, bullet points, and a concise summary of the recommended ASEAN footprint."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketEntryBuilder creating the initial strategy. The SupplyChainAnalyst reviews the content to ensure data-driven rigor. The StrategyRefiner then incorporates these insights. The QualityGate assesses the output against the specific constraints; if it finds deficiencies, it routes back to the StrategyRefiner. Once the QualityGate passes, the FinalPolisher formats the document for executive presentation."
+}

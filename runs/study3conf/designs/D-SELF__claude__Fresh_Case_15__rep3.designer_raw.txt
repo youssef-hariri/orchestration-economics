@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market & Financial Analyst",
+      "role": "analyst",
+      "description": "Analyzes currency volatility, inflation rates, franchisee financial stress, and collective-bargaining patterns across Turkey, Egypt, Nigeria, Indonesia, and Brazil to establish baseline economic conditions and risk profiles"
+    },
+    {
+      "name": "Restructuring Strategy Designer",
+      "role": "strategist",
+      "description": "Develops a multi-tiered royalty and financing restructuring approach incorporating currency-hedging mechanisms, local-currency options, graduated royalty scales, and market-specific negotiation frameworks"
+    },
+    {
+      "name": "Financial & Legal Expert",
+      "role": "expert",
+      "description": "Provides domain-specific guidance on currency indexing clauses, local labor/franchise law compliance, debt restructuring instruments, and brand-economics preservation across jurisdictions"
+    },
+    {
+      "name": "Restructuring Plan Refiner",
+      "role": "refiner",
+      "description": "Incorporates analyst insights, strategic framework, and expert guidance into a coherent, implementable restructuring plan with specific mechanisms, timelines, and contingencies for each market"
+    },
+    {
+      "name": "Viability & Stakeholder Impact Critic",
+      "role": "critic",
+      "description": "Evaluates the refined plan for financial viability, franchisee sustainability, brand equity preservation, franchisor profitability, and collective-bargaining response probability across all five markets"
+    },
+    {
+      "name": "Plan Polisher",
+      "role": "polisher",
+      "description": "Formats the final restructuring plan into executive-ready deliverables with clear recommendations, implementation roadmaps, risk mitigation strategies, and stakeholder communication frameworks"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market & Financial Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial analyst specializing in emerging-market currency and inflation dynamics. Analyze the following for each of Turkey, Egypt, Nigeria, Indonesia, and Brazil: (1) Historical and projected currency depreciation rates against USD; (2) Current and forecast inflation rates; (3) Franchisee profitability stress signals (margin compression, payment delays, default rates); (4) Collective-bargaining strength and history in each market's franchise sector; (5) Company-owned store performance differentials. Provide quantitative baseline data, risk severity ratings (high/medium/low), and market-specific friction points. Output structured data for each market with clear metrics."
+    },
+    {
+      "name": "Restructuring Strategy Designer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a franchise restructuring strategist. Using the analyst's baseline data, design a multi-tiered approach addressing: (1) Currency mechanisms (local-currency royalties, USD hedging options, inflation-indexed clauses); (2) Royalty restructuring (graduated scales by franchisee tenure/size, performance-based adjustments, country-risk adjustments); (3) Financing solutions (franchisor-backed term loans, supplier financing, escrow structures); (4) Collective-bargaining strategy (country-specific negotiation postures, communication messaging); (5) Company-owned store leverage and investment signaling. Develop distinct playbooks for high-risk, medium-risk, and stable markets. Include trade-off analysis (short-term franchisor revenue impact vs. long-term retention and brand equity)."
+    },
+    {
+      "name": "Financial & Legal Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a franchise and emerging-market financial law expert. Review the strategic framework and provide: (1) Currency-indexing clause language compliant with each jurisdiction (Turkey, Egypt, Nigeria, Indonesia, Brazil); (2) Local franchise-law implications (e.g., Egypt's mandatory profit-sharing, Brazil's franchisee-friendly regulations, Nigeria's informal dispute practices); (3) Debt restructuring instruments available in each market (convertible royalty deferrals, royalty-for-equity swaps, supplier-credit chains); (4) Tax and transfer-pricing implications of local-currency royalty conversion; (5) Brand-economics preservation mechanisms (performance gates, termination clauses, quality-assurance bonds). Flag legal and regulatory risks specific to each market. Recommend jurisdictional phasing and compliance sequencing."
+    },
+    {
+      "name": "Restructuring Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a restructuring implementation specialist. Synthesize the analyst's data, the strategist's framework, and the expert's legal/financial guidance into a single, coherent restructuring plan. For each market, produce: (1) Specific royalty restructuring mechanics (new rate schedules, currency options, indexing formulas); (2) Financing mechanisms (loan terms, supplier credit structures, escrow deposits); (3) Collective-bargaining talking points and concession sequencing; (4) Implementation timeline (phasing across markets, pilot store approach, rollout windows); (5) Contingency triggers (reversion clauses if conditions worsen, escalation protocols if collective action intensifies); (6) Performance monitoring KPIs. Integrate trade-offs explicitly (e.g., temporary royalty deferral in exchange for 3-year commitment). Ensure internal consistency across markets while respecting local nuances."
+    },
+    {
+      "name": "Viability & Stakeholder Impact Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer of franchise restructuring plans. Evaluate the refined plan on: (1) FRANCHISOR VIABILITY: Will the restructuring preserve adequate cash flow and brand economics? Will profitability in stable-currency markets (company-owned stores) offset concessional terms elsewhere? (2) FRANCHISEE SUSTAINABILITY: Will the restructured royalties and financing enable franchisees to remain profitable post-restructuring in each market? (3) BRAND EQUITY: Will graduated royalties or financing interventions create adverse selection or moral hazard? Will quality assurance mechanisms prevent brand dilution? (4) COLLECTIVE-BARGAINING RESILIENCE: Are negotiation postures credible? Will the offer preempt or inflame collective action? (5) LEGAL/REGULATORY COMPLIANCE: Are jurisdiction-specific mechanisms legally sound? (6) EXECUTION RISK: Are timelines realistic? Are pilot gates sufficient? Provide FULL assessment of each dimension with specific concerns, trade-offs, and confidence levels. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Plan Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications specialist. Polish the restructuring plan into a final, board-ready deliverable. Produce: (1) EXECUTIVE SUMMARY: 1-page overview of the problem, solution, financial impact (franchisor/franchisee), and phased rollout; (2) MARKET-SPECIFIC PLAYBOOKS: One 2-page playbook per country (Turkey, Egypt, Nigeria, Indonesia, Brazil) detailing royalty changes, financing terms, negotiation strategy, and risk mitigation; (3) FINANCIAL MODEL: 3-year pro forma showing franchisor and franchisee cash-flow scenarios (base case, stress case); (4) IMPLEMENTATION ROADMAP: 18-month Gantt chart with pilots, collective-bargaining windows, communication milestones; (5) STAKEHOLDER MESSAGING: Draft talking points for franchisees, collective bodies, investors, and employees; (6) CONTINGENCY PLAYBOOK: Decision trees for escalation scenarios. Format for clarity, add visuals (currency trend charts, margin-impact matrices), and ensure tone is collaborative yet firm on brand economics."
+    }
+  ],
+  "explanation": "This pipeline is designed to solve a complex, multi-jurisdictional franchise restructuring problem requiring integrated financial, legal, and strategic analysis. The flow is: (1) Analyst establishes baseline data on currency, inflation, and franchisee stress across five distinct markets; (2) Strategist designs a modular restructuring framework with market-specific options; (3) Expert provides localized legal and financial guardrails; (4) Refiner synthesizes all inputs into a cohesive, implementable plan; (5) Critic applies a rigorous viability gate assessing franchisor sustainability, franchisee impact, brand equity, and collective-bargaining risk; if issues are found, the gate routes back to Refiner to address specific gaps without losing analytical foundation; (6) Polisher transforms the validated plan into executive-ready, market-specific communication and implementation materials. The if-gate at step 5 ensures the plan passes a high bar for stakeholder resilience before finalization. No loops beyond the critic gate are used because the analyst, strategist, and expert operate in parallel analytical domains; the refiner integrates once, and the critic validates. This avoids excessive iteration while preserving rigor."
+}
+```

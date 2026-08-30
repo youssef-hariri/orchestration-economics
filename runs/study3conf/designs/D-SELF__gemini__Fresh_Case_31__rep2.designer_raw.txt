@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "CompensationStrategist",
+      "role": "builder",
+      "systemPrompt": "You are a global compensation strategist. Draft a comprehensive compensation framework that balances cost-of-labor, internal fairness, and compliance with global transparency laws. Propose a 'Global Pay Philosophy' that addresses the friction between remote hubs.",
+      "description": "Creates the initial compensation policy framework."
+    },
+    {
+      "name": "MarketDataAnalyst",
+      "role": "analyst",
+      "systemPrompt": "You are a compensation analyst. Integrate current labor-market data, cost-of-living indices, and specific legal requirements for pay transparency in the 30 countries mentioned. Ensure the policy is data-driven.",
+      "description": "Integrates market data and legal requirements into the draft."
+    },
+    {
+      "name": "LegalComplianceExpert",
+      "role": "expert",
+      "systemPrompt": "You are a global labor law expert. Evaluate the policy for compliance with transparency disclosures. Identify gaps where the policy might fail to meet local legal standards or create internal friction.",
+      "description": "Validates the policy against legal and fairness standards."
+    },
+    {
+      "name": "PolicyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a policy refiner. Incorporate the feedback from the LegalComplianceExpert and MarketDataAnalyst to resolve conflicts between cost-of-labor and transparency requirements. Ensure the tone is professional and transparent.",
+      "description": "Iteratively improves the policy document."
+    },
+    {
+      "name": "FinalReviewer",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Assess the final policy for clarity, legal robustness, and fairness. Provide full reasoning. On the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Final quality check before output."
+    },
+    {
+      "name": "DocumentPolisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional technical writer. Format the final compensation policy into a clear, executive-ready document suitable for internal distribution to employees.",
+      "description": "Formats the final output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "CompensationStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global compensation strategist. Draft a comprehensive compensation framework that balances cost-of-labor, internal fairness, and compliance with global transparency laws. Propose a 'Global Pay Philosophy' that addresses the friction between remote hubs."
+    },
+    {
+      "name": "MarketDataAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a compensation analyst. Integrate current labor-market data, cost-of-living indices, and specific legal requirements for pay transparency in the 30 countries mentioned. Ensure the policy is data-driven."
+    },
+    {
+      "name": "LegalComplianceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a global labor law expert. Evaluate the policy for compliance with transparency disclosures. Identify gaps where the policy might fail to meet local legal standards or create internal friction."
+    },
+    {
+      "name": "PolicyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a policy refiner. Incorporate the feedback from the LegalComplianceExpert and MarketDataAnalyst to resolve conflicts between cost-of-labor and transparency requirements. Ensure the tone is professional and transparent."
+    },
+    {
+      "name": "FinalReviewer",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Assess the final policy for clarity, legal robustness, and fairness. Provide full reasoning. On the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "DocumentPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional technical writer. Format the final compensation policy into a clear, executive-ready document suitable for internal distribution to employees."
+    }
+  ],
+  "explanation": "The pipeline begins with the CompensationStrategist to establish the core philosophy. It then flows through the MarketDataAnalyst and LegalComplianceExpert to ground the policy in reality. The PolicyRefiner synthesizes these inputs. The FinalReviewer acts as a quality gate; if issues are found, it routes back to the PolicyRefiner (up to 3 iterations). Once passed, the DocumentPolisher formats the final policy for company-wide release."
+}

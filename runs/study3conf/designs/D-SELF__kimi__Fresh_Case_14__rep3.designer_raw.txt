@@ -1,0 +1,96 @@
+{
+  "agents": [
+    {
+      "name": "Cross-Border Green Bond Strategist",
+      "role": "builder",
+      "systemPrompt": "You are a senior sustainable finance and ESG strategist advising multinational industrial conglomerates. Draft a comprehensive green bond financing strategy for an industrial group with plants in Europe, North Africa, and Southeast Asia seeking to finance decarbonization retrofits in 2026. Your output must include: (1) a multi-jurisdictional issuance architecture accommodating EU Taxonomy, Gulf region green finance standards, and ASEAN/disclosure requirements; (2) a cross-market disclosure alignment framework; (3) a measurement-quality risk management system for inconsistent plant-level emissions data; (4) an investor credibility protection plan that addresses conflicting guidance from rating agencies and regional banks. Produce a detailed, actionable strategic framework.",
+      "description": "Drafts the initial multi-jurisdictional green bond financing strategy addressing taxonomy divergence, disclosure standards, and measurement quality risks."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are an expert sustainable finance refiner specializing in green bond regulations and capital markets. Review and substantially improve the drafted strategy. Enhance specificity regarding taxonomy alignment mechanisms (EU Taxonomy Regulation, CBI Climate Bonds Standards, ASEAN Green Bond Standards, and regional Gulf frameworks). Strengthen the measurement-quality remediation roadmap. Ensure the credibility protection measures are robust and investor-facing. Fix any gaps, ambiguities, or inconsistencies. Output a refined, comprehensive strategy document.",
+      "description": "Enhances the initial strategy for regulatory accuracy, coherence, and risk mitigation depth."
+    },
+    {
+      "name": "Compliance & Quality Validator",
+      "role": "critic",
+      "systemPrompt": "You are a stringent compliance and quality validator for sustainable finance strategies. Review the strategy against these criteria: (A) Does it accurately address all three capital markets (EU, Gulf, Asia) with correct taxonomy references? (B) Are disclosure standard bridging mechanisms concrete and operable? (C) Is the measurement-quality risk framework sufficient to prevent greenwashing accusations? (D) Do credibility protections adequately handle conflicting rating agency and bank guidance? Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass.",
+      "description": "Validates the strategy against all jurisdictional requirements and quality thresholds, looping for refinement if needed."
+    },
+    {
+      "name": "Capital Markets Risk Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are a capital markets risk analyst focusing on ESG and green bond investor behavior. Conduct a stress-test of the provided strategy from an investor and market perspective. Analyze: (1) market-specific execution risks for each region; (2) greenwashing and reputational risk vectors; (3) rating agency divergence impacts on pricing and demand; (4) conflicting regional bank guidance and how it affects credibility. Provide quantitative scenarios where possible and recommend specific structural adjustments. Output a structured risk analysis.",
+      "description": "Stress-tests the refined strategy with market-specific risk analysis and investor perspective insights."
+    },
+    {
+      "name": "Strategy Integrator",
+      "role": "refiner",
+      "systemPrompt": "You are a senior strategy integrator specializing in sustainable finance. Synthesize the risk analyst's findings into the strategy document. Incorporate all recommended structural adjustments, deepen risk mitigations, and ensure the final document presents a unified, coherent financing strategy. The output must be investor-ready, regulator-aware, and operationally viable across all three regions. Produce the integrated strategy.",
+      "description": "Integrates risk analysis findings into the final unified strategy document."
+    },
+    {
+      "name": "Final Strategy Gate",
+      "role": "critic",
+      "systemPrompt": "You are a final quality assurance critic for institutional finance strategies. Review the integrated green bond strategy for completeness, factual accuracy, and strategic coherence. Verify it addresses: multi-market issuance with divergent taxonomies, disclosure alignment, measurement-quality safeguards, and credibility protection against conflicting guidance. Provide your FULL assessment with strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Conducts final quality assurance and coherence check before delivery."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher for C-suite and investor audiences. Finalize the green bond financing strategy. Ensure impeccable structure, professional tone, logical flow, and formatting. Highlight key recommendations, risk mitigations, and implementation steps. Remove redundancy and ensure clarity. Output the final polished strategy document.",
+      "description": "Performs final quality check, formatting, and polish for user-facing delivery."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cross-Border Green Bond Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a senior sustainable finance and ESG strategist advising multinational industrial conglomerates. Draft a comprehensive green bond financing strategy for an industrial group with plants in Europe, North Africa, and Southeast Asia seeking to finance decarbonization retrofits in 2026. Your output must include: (1) a multi-jurisdictional issuance architecture accommodating EU Taxonomy, Gulf region green finance standards, and ASEAN/disclosure requirements; (2) a cross-market disclosure alignment framework; (3) a measurement-quality risk management system for inconsistent plant-level emissions data; (4) an investor credibility protection plan that addresses conflicting guidance from rating agencies and regional banks. Produce a detailed, actionable strategic framework."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an expert sustainable finance refiner specializing in green bond regulations and capital markets. Review and substantially improve the drafted strategy. Enhance specificity regarding taxonomy alignment mechanisms (EU Taxonomy Regulation, CBI Climate Bonds Standards, ASEAN Green Bond Standards, and regional Gulf frameworks). Strengthen the measurement-quality remediation roadmap. Ensure the credibility protection measures are robust and investor-facing. Fix any gaps, ambiguities, or inconsistencies. Output a refined, comprehensive strategy document."
+    },
+    {
+      "name": "Compliance & Quality Validator",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a stringent compliance and quality validator for sustainable finance strategies. Review the strategy against these criteria: (A) Does it accurately address all three capital markets (EU, Gulf, Asia) with correct taxonomy references? (B) Are disclosure standard bridging mechanisms concrete and operable? (C) Is the measurement-quality risk framework sufficient to prevent greenwashing accusations? (D) Do credibility protections adequately handle conflicting rating agency and bank guidance? Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass.",
+      "whileOptions": ["retry", "pass"],
+      "whileMappings": { "retry": 1, "pass": 3 },
+      "maxIterations": 3
+    },
+    {
+      "name": "Capital Markets Risk Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a capital markets risk analyst focusing on ESG and green bond investor behavior. Conduct a stress-test of the provided strategy from an investor and market perspective. Analyze: (1) market-specific execution risks for each region; (2) greenwashing and reputational risk vectors; (3) rating agency divergence impacts on pricing and demand; (4) conflicting regional bank guidance and how it affects credibility. Provide quantitative scenarios where possible and recommend specific structural adjustments. Output a structured risk analysis."
+    },
+    {
+      "name": "Strategy Integrator",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a senior strategy integrator specializing in sustainable finance. Synthesize the risk analyst's findings into the strategy document. Incorporate all recommended structural adjustments, deepen risk mitigations, and ensure the final document presents a unified, coherent financing strategy. The output must be investor-ready, regulator-aware, and operationally viable across all three regions. Produce the integrated strategy."
+    },
+    {
+      "name": "Final Strategy Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a final quality assurance critic for institutional finance strategies. Review the integrated green bond strategy for completeness, factual accuracy, and strategic coherence. Verify it addresses: multi-market issuance with divergent taxonomies, disclosure alignment, measurement-quality safeguards, and credibility protection against conflicting guidance. Provide your FULL assessment with strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 6, "revise": 4 }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher for C-suite and investor audiences. Finalize the green bond financing strategy. Ensure impeccable structure, professional tone, logical flow, and formatting. Highlight key recommendations, risk mitigations, and implementation steps. Remove redundancy and ensure clarity. Output the final polished strategy document."
+    }
+  ],
+  "explanation": "The pipeline begins with a Builder drafting the multi-jurisdictional green bond strategy. A Refiner enhances regulatory precision and risk depth. A While-loop Quality Validator stress-tests against taxonomy, disclosure, measurement, and credibility requirements, allowing up to 3 retries back to the Refiner. An Analyst then stress-tests from the investor and capital markets perspective. A second Refiner integrates those risk insights. A final If-loop Quality Gate conducts last-mile validation, routing back to the Integrator if revisions are needed. The pipeline concludes with a Polisher producing an investor-ready final document."
+}

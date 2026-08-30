@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in GCC retail market entry. Draft a comprehensive strategy covering: 1) Partner selection criteria for family conglomerates, 2) Governance frameworks for joint ventures, 3) Store format adaptation for local preferences, 4) Saudization/Emiratization compliance strategies, and 5) Ramadan-driven operational planning.",
+      "description": "Develops the initial market entry strategy."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "systemPrompt": "You are a specialist in GCC legal and cultural business environments. Review the strategy for feasibility regarding local ownership laws, workforce localization mandates, and cultural nuances in Saudi Arabia, UAE, and Qatar. Identify gaps or risks.",
+      "description": "Provides domain-specific critique of the strategy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalExpert to ensure the strategy is legally compliant, culturally sensitive, and operationally sound for the GCC market.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy for completeness, clarity, and strategic alignment with the specific requirements of the GCC market. Provide a detailed assessment of strengths and weaknesses. On the final line, output 'pass' if the strategy is robust, or 'revise' if it requires further refinement.",
+      "description": "Validates the strategy quality."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure tone is authoritative and structured for high-level stakeholders.",
+      "description": "Finalizes the document for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are an expert in GCC retail market entry. Draft a comprehensive strategy covering: 1) Partner selection criteria for family conglomerates, 2) Governance frameworks for joint ventures, 3) Store format adaptation for local preferences, 4) Saudization/Emiratization compliance strategies, and 5) Ramadan-driven operational planning."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a specialist in GCC legal and cultural business environments. Review the strategy for feasibility regarding local ownership laws, workforce localization mandates, and cultural nuances in Saudi Arabia, UAE, and Qatar. Identify gaps or risks."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalExpert to ensure the strategy is legally compliant, culturally sensitive, and operationally sound for the GCC market."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy for completeness, clarity, and strategic alignment with the specific requirements of the GCC market. Provide a detailed assessment of strengths and weaknesses. On the final line, output 'pass' if the strategy is robust, or 'revise' if it requires further refinement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure tone is authoritative and structured for high-level stakeholders."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist drafting the core strategy. The RegionalExpert then evaluates this draft against specific GCC legal and cultural constraints. The StrategyRefiner incorporates these insights. The QualityGate assesses the output; if it identifies issues, it routes back to the StrategyRefiner. Once the quality is verified, the FinalPolisher formats the output for the user."
+}

@@ -1,0 +1,94 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Cold-Chain Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive cold-chain distribution strategy covering equipment selection, corridor sequencing, and risk assessment across West and East African routes"
+    },
+    {
+      "name": "Infrastructure & Logistics Analyst",
+      "role": "analyst",
+      "description": "Analyzes corridor-specific data: road quality metrics, customs dwell times, electricity reliability, seasonal weather patterns, and last-mile ministry partnerships to quantify constraints and spoilage risks"
+    },
+    {
+      "name": "Pharmaceutical Cold-Chain Expert",
+      "role": "expert",
+      "description": "Provides domain expertise on vaccine temperature stability, passive vs. powered cooling container selection, regulatory compliance, and pharmaceutical logistics best practices for African contexts"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Integrates analyst insights and expert recommendations into the initial strategy, resolving conflicts between equipment choices, corridor priorities, and contingency measures"
+    },
+    {
+      "name": "Feasibility & Risk Critic",
+      "role": "critic",
+      "description": "Conducts quality gate assessment of refined strategy: validates equipment decisions against corridor constraints, checks contingency completeness, identifies unaddressed spoilage scenarios, and confirms institutional feasibility"
+    },
+    {
+      "name": "Contingency Planner",
+      "role": "strategist",
+      "description": "Develops detailed contingency protocols, backup routing options, equipment failure procedures, and ministry coordination mechanisms to mitigate residual risks identified in quality assessment"
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats final cold-chain strategy into executive-ready deliverable with visual corridor maps, equipment matrices, timeline charts, contingency decision trees, and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cold-Chain Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a pharmaceutical cold-chain distribution strategy for 2026. Create a comprehensive initial strategy that addresses: (1) Equipment selection (passive vs. powered cooling containers) for each corridor; (2) Route sequencing and delivery windows based on seasonal constraints; (3) Customs and last-mile coordination points; (4) Preliminary spoilage risk identification. Organize by West Africa and East Africa corridors. Produce a detailed draft covering all four dimensions."
+    },
+    {
+      "name": "Infrastructure & Logistics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the initial cold-chain strategy against specific corridor constraints. For each corridor (West Africa: Dakar-Lagos-Accra corridor, Sahel routes; East Africa: Nairobi-Dar es Salaam, Rwanda-Burundi routes, Somalia corridor alternatives): (1) Quantify road quality impact (paved %, surface degradation risk); (2) Research customs dwell times (days, variability); (3) Assess electricity reliability (grid availability %, backup options); (4) Map seasonal weather windows (rainfall impact, temperature extremes); (5) Identify ministry of health partnership maturity and last-mile capacity. Produce a data-driven corridor assessment matrix highlighting bottlenecks and constraints for strategy refinement."
+    },
+    {
+      "name": "Pharmaceutical Cold-Chain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the initial strategy and analyst findings. Provide pharmaceutical expertise on: (1) Vaccine temperature stability margins and spoilage thresholds; (2) Passive cooling container performance in high-ambient environments vs. powered unit justification (ROI, power requirements, maintenance); (3) Regulatory compliance for each African country (WHO prequalification, national standards); (4) Best practices for last-mile storage with limited electricity (passive cold rooms, ice-pack logistics); (5) Real-world spoilage scenarios in similar African operations and prevention strategies. Produce expert recommendations addressing equipment selection, regulatory gaps, and realistic risk mitigation."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate analyst data and expert recommendations into the cold-chain strategy. Specifically: (1) Revise equipment decisions (passive vs. powered) per corridor based on electricity reliability and spoilage risk quantification; (2) Resequence corridor priorities reflecting customs delays and seasonal windows; (3) Refine last-mile arrangements with ministry coordination protocols; (4) Strengthen contingency measures addressing top spoilage scenarios identified by expert. Resolve any conflicts between cost, feasibility, and risk. Produce a refined, integrated strategy incorporating all three prior inputs."
+    },
+    {
+      "name": "Feasibility & Risk Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate assessing the refined cold-chain strategy. Conduct a thorough review: (1) EQUIPMENT VALIDATION: Are passive/powered choices justified for each corridor given electricity, road quality, and temperature stability? Are container specs realistic? (2) CORRIDOR SEQUENCING: Do delivery windows align with seasonal constraints? Are customs bottlenecks adequately mitigated? (3) CONTINGENCY COMPLETENESS: Are spoilage scenarios covered? Are backup routes viable? Are ministry coordination failsafes documented? (4) FEASIBILITY: Are last-mile arrangements achievable with actual ministry capacity? Are regulatory compliance steps included? (5) RISK RESIDUALS: What spoilage or logistical failures remain unaddressed? Provide FULL detailed assessment addressing each dimension. Then on the VERY LAST LINE output exactly ONE keyword: pass OR revise",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Contingency Planner",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Develop comprehensive contingency protocols based on quality assessment findings. For each identified risk or gap: (1) Create backup routing options for each corridor (alternative routes, crossing points); (2) Detail equipment failure procedures (backup container sourcing, ice-pack logistics, powered unit breakdown protocols); (3) Design ministry coordination failsafes (redundant contact chains, alternative last-mile partners); (4) Specify spoilage response triggers (temperature thresholds for diversion, destruction, or salvage decisions); (5) Document decision trees for time-critical choices in-transit. Produce actionable contingency playbooks keyed to specific failure scenarios."
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final cold-chain distribution strategy into a professional, executive-ready deliverable. Structure as: (1) EXECUTIVE SUMMARY: Strategy overview, key decisions, expected spoilage reduction %; (2) CORRIDOR STRATEGY MATRIX: Equipment selection, sequencing, costs, and KPIs per route; (3) EQUIPMENT SPECIFICATIONS: Passive/powered container details, maintenance, spare parts; (4) SEASONAL TIMELINE: Delivery windows, pre-positioning schedules, weather risk windows; (5) CUSTOMS & COORDINATION PROTOCOLS: Ministry contacts, documentation, last-mile handoff procedures; (6) CONTINGENCY DECISION TREES: Visual flowcharts for equipment failure, spoilage detection, re-routing; (7) IMPLEMENTATION ROADMAP: 6-month pre-launch preparation, pilot corridor, phased rollout. Include visual aids: corridor maps with quality ratings, equipment comparison tables, risk heat maps, decision trees. Ensure clarity for logistics operators and ministry partners."
+    }
+  ],
+  "explanation": "This pipeline is designed to produce a comprehensive, implementable cold-chain strategy grounded in both infrastructure realities and pharmaceutical best practices. The flow: (1) BUILDER creates initial multi-dimensional strategy; (2) ANALYST quantifies corridor constraints with data; (3) EXPERT provides pharmaceutical domain knowledge on equipment and risk; (4) REFINER integrates all inputs into a coherent strategy resolving conflicts; (5) CRITIC quality gate validates feasibility, completeness, and identifies residual gaps—if issues found, loops back to REFINER to strengthen contingencies and revise decisions; (6) STRATEGIST develops detailed contingency playbooks addressing the critic's findings; (7) POLISHER formats into actionable executive deliverable. The single if-loop (Critic→Refiner) ensures strategy robustness before contingency planning, keeping total steps to 7. The analyst-expert-refiner sequence mirrors real pharmaceutical logistics: data analysis, regulatory/technical expertise, then integrated planning. The output is a corridor-by-corridor strategy with equipment matrices, seasonal timelines, ministry protocols, and visual decision trees ready for 2026 operations."
+}
+```

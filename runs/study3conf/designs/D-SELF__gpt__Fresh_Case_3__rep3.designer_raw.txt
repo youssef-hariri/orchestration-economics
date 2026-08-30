@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Supplier Integration Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive, practical approach for onboarding and integrating suppliers in Mexico, Morocco, and Vietnam after a rapid supply-chain shift from East Asia. Address quality assurance, specification alignment, delivery reliability, trust building, communication norms, workforce differences, escalation practices, training, governance, metrics, and implementation phases. Distinguish universal requirements from regionally adapted practices. Account for consumer-electronics manufacturing, unfamiliar business customs, different quality-management traditions, and early misunderstandings about specifications and delivery commitments. Produce an actionable draft for executive and operations stakeholders.",
+      "description": "Creates the initial supplier-integration strategy and operating approach."
+    },
+    {
+      "name": "Cross-Cultural Supply-Chain Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the proposed supplier-integration approach for Mexico, Morocco, and Vietnam. Identify culturally sensitive communication risks, likely sources of ambiguity in specifications and commitments, differences in business etiquette and relationship building, quality-system maturity considerations, language and documentation needs, and risks of applying assumptions from the historical East Asian supplier base. Recommend concrete adaptations that preserve consistent manufacturing standards while respecting regional differences. Provide specific, evidence-informed improvements and flag any unsupported stereotypes or overgeneralizations.",
+      "description": "Provides regional, communication, quality-management, and implementation insights."
+    },
+    {
+      "name": "Supplier Integration Plan Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the previous supplier-integration strategy into a cohesive, actionable final draft using the available analysis and feedback. Ensure it directly addresses onboarding, technical specification control, quality assurance, delivery commitments, trust, communication, training, escalation, governance, measurable performance indicators, and phased implementation for Mexico, Morocco, and Vietnam. Make expectations explicit, culturally adaptable, operationally realistic, and suitable for a consumer-electronics manufacturer. Correct ambiguity, unsupported claims, omissions, contradictions, and impractical recommendations. Produce only the improved strategy, not commentary about the editing process.",
+      "description": "Integrates analysis and improves the strategy into an operationally usable plan."
+    },
+    {
+      "name": "Supplier Integration Quality Review",
+      "role": "critic",
+      "systemPrompt": "Review the refined supplier-integration strategy in depth. Assess whether it is actionable, culturally respectful, technically credible, internally consistent, appropriately tailored to Mexico, Morocco, and Vietnam, and sufficient to improve quality, trust, specification clarity, and delivery reliability after a rapid nearshoring shift. Identify concrete omissions, risks, vague language, unsupported assumptions, feasibility problems, and weaknesses in metrics or implementation sequencing. Provide a full assessment with specific revision instructions. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Evaluates completeness, practicality, cultural appropriateness, and readiness for publication."
+    },
+    {
+      "name": "Executive Supplier-Integration Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing response based on the refined strategy and quality review. Present a clear, concise, actionable approach for onboarding and integrating suppliers in Mexico, Morocco, and Vietnam. Use structured headings, practical recommendations, phased actions, responsibilities, communication practices, quality and delivery controls, trust-building measures, regional adaptations, and success metrics. Preserve important nuance and avoid stereotypes. Resolve any remaining inconsistencies, remove process commentary, and ensure the final response directly answers the user's objective.",
+      "description": "Formats and finalizes the strategy for clear executive and operational use."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Supplier Integration Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive, practical approach for onboarding and integrating suppliers in Mexico, Morocco, and Vietnam after a rapid supply-chain shift from East Asia. Address quality assurance, specification alignment, delivery reliability, trust building, communication norms, workforce differences, escalation practices, training, governance, metrics, and implementation phases. Distinguish universal requirements from regionally adapted practices. Account for consumer-electronics manufacturing, unfamiliar business customs, different quality-management traditions, and early misunderstandings about specifications and delivery commitments. Produce an actionable draft for executive and operations stakeholders."
+    },
+    {
+      "name": "Cross-Cultural Supply-Chain Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the proposed supplier-integration approach for Mexico, Morocco, and Vietnam. Identify culturally sensitive communication risks, likely sources of ambiguity in specifications and commitments, differences in business etiquette and relationship building, quality-system maturity considerations, language and documentation needs, and risks of applying assumptions from the historical East Asian supplier base. Recommend concrete adaptations that preserve consistent manufacturing standards while respecting regional differences. Provide specific, evidence-informed improvements and flag any unsupported stereotypes or overgeneralizations."
+    },
+    {
+      "name": "Supplier Integration Plan Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the previous supplier-integration strategy into a cohesive, actionable final draft using the available analysis and feedback. Ensure it directly addresses onboarding, technical specification control, quality assurance, delivery commitments, trust, communication, training, escalation, governance, measurable performance indicators, and phased implementation for Mexico, Morocco, and Vietnam. Make expectations explicit, culturally adaptable, operationally realistic, and suitable for a consumer-electronics manufacturer. Correct ambiguity, unsupported claims, omissions, contradictions, and impractical recommendations. Produce only the improved strategy, not commentary about the editing process."
+    },
+    {
+      "name": "Supplier Integration Quality Review",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined supplier-integration strategy in depth. Assess whether it is actionable, culturally respectful, technically credible, internally consistent, appropriately tailored to Mexico, Morocco, and Vietnam, and sufficient to improve quality, trust, specification clarity, and delivery reliability after a rapid nearshoring shift. Identify concrete omissions, risks, vague language, unsupported assumptions, feasibility problems, and weaknesses in metrics or implementation sequencing. Provide a full assessment with specific revision instructions. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Supplier-Integration Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing response based on the refined strategy and quality review. Present a clear, concise, actionable approach for onboarding and integrating suppliers in Mexico, Morocco, and Vietnam. Use structured headings, practical recommendations, phased actions, responsibilities, communication practices, quality and delivery controls, trust-building measures, regional adaptations, and success metrics. Preserve important nuance and avoid stereotypes. Resolve any remaining inconsistencies, remove process commentary, and ensure the final response directly answers the user's objective."
+    }
+  ],
+  "explanation": "The flow is Builder → Cross-Cultural Analyst → Refiner → Quality Review (if revise, return to the Refiner; if pass, continue) → Polisher. The builder establishes a complete operating approach, the analyst tests it against regional and supply-chain realities, and the refiner incorporates those insights. The quality review provides a decision point after a substantive draft exists; revisions loop back to the refiner, while approval proceeds to final presentation. The polisher ensures the delivered strategy is clear, actionable, culturally respectful, and suitable for executive and operational stakeholders."
+}

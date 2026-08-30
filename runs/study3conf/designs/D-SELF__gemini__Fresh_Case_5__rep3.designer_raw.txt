@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert in fintech market entry. Develop a comprehensive strategy for entering Gulf states, Malaysia, and Indonesia. Focus on Sharia-compliant product architecture, family-centric financial features, and trust-building mechanisms for automated advice.",
+      "description": "Drafts the initial market-entry and product-adaptation strategy."
+    },
+    {
+      "name": "IslamicFinanceExpert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in Islamic finance and regional regulatory compliance. Review the strategy for adherence to Sharia principles and local regulatory requirements. Identify gaps in cultural sensitivity or legal compliance.",
+      "description": "Reviews the strategy for domain-specific compliance and cultural alignment."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the Islamic Finance Expert to adjust the product features, marketing approach, and regulatory roadmap. Ensure the strategy is actionable and fully compliant.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy for completeness, regulatory accuracy, and cultural alignment. Provide a detailed assessment. On the last line, output 'pass' if the strategy is ready, or 'revise' to loop back to the StrategyRefiner.",
+      "description": "Validates the strategy against success criteria."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure tone is authoritative and clear for stakeholders.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in fintech market entry. Develop a comprehensive strategy for entering Gulf states, Malaysia, and Indonesia. Focus on Sharia-compliant product architecture, family-centric financial features, and trust-building mechanisms for automated advice."
+    },
+    {
+      "name": "IslamicFinanceExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in Islamic finance and regional regulatory compliance. Review the strategy for adherence to Sharia principles and local regulatory requirements. Identify gaps in cultural sensitivity or legal compliance."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the Islamic Finance Expert to adjust the product features, marketing approach, and regulatory roadmap. Ensure the strategy is actionable and fully compliant."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy for completeness, regulatory accuracy, and cultural alignment. Provide a detailed assessment. On the last line, output 'pass' if the strategy is ready, or 'revise' to loop back to the StrategyRefiner.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 5, "revise": 3 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, executive-ready document. Ensure tone is authoritative and clear for stakeholders."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist creating the initial entry plan. The IslamicFinanceExpert evaluates this plan for religious and regulatory compliance. The StrategyRefiner incorporates these expert insights. The QualityGate assesses the refined strategy; if it fails to meet the strict requirements, it routes back to the StrategyRefiner. Once the QualityGate issues a 'pass', the FinalPolisher formats the document for executive presentation."
+}

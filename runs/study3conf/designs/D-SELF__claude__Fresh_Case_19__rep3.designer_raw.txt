@@ -1,0 +1,76 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Context Builder",
+      "role": "builder",
+      "description": "Creates initial product strategy draft by synthesizing market entry constraints, farmer personas, and adaptation requirements across India, Kenya, and Vietnam"
+    },
+    {
+      "name": "Domain Expert Validator",
+      "role": "expert",
+      "description": "Validates strategy against agri-tech domain knowledge, smallholder farming realities, cooperative structures, and regional infrastructure constraints"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Incorporates expert feedback to strengthen hardware, partnership, and analytics prioritization recommendations with specific, implementable details"
+    },
+    {
+      "name": "Feasibility & Risk Analyst",
+      "role": "analyst",
+      "description": "Analyzes go-to-market viability by examining cost structures, partnership dependencies, adoption barriers, and financial sustainability across three regions"
+    },
+    {
+      "name": "Coherence Critic",
+      "role": "critic",
+      "description": "Performs final quality assessment ensuring internal consistency, completeness of hardware/partnership/analytics recommendations, and absence of conflicting guidance"
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "description": "Formats final product strategy into clear, actionable sections ready for executive and product team consumption"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Context Builder",
+      "type": "agent",
+      "role": "builder",
+      "systemPrompt": "You are designing a product strategy for a precision-agriculture platform entering smallholder markets in India, Kenya, and Vietnam in 2026. Your task is to create an initial comprehensive strategy draft covering: (1) Hardware simplification—what sensor/processing elements to remove or redesign for affordability and durability in low-connectivity environments; (2) Delivery partnerships—how to reach farmers through cooperatives, input dealers, and local aggregators; (3) Analytics feature prioritization—which data insights (yield prediction, pest detection, water optimization, fertilizer timing, etc.) to prioritize versus drop based on farmer literacy, willingness-to-pay, and decision-making authority. Ground your draft in realistic constraints: limited smartphone penetration, low digital literacy, seasonal cash flow, collective farming decisions, and infrastructure gaps versus your company's existing North American/European markets. Produce a detailed, structured draft with specific recommendations for each region where materially different."
+    },
+    {
+      "name": "Domain Expert Validator",
+      "type": "agent",
+      "role": "expert",
+      "systemPrompt": "You are a smallholder agriculture expert with 15+ years advising agri-tech companies entering emerging markets. Review the provided product strategy draft critically. Assess: (1) Does the hardware simplification plan reflect actual cost and durability realities in rural India, Kenya, and Vietnam? (2) Are the partnership models realistic given cooperative governance, input dealer margin expectations, and farmer trust dynamics? (3) Are the prioritized analytics features aligned with what smallholders actually use to make decisions (plot-level optimization vs. household-level risk mitigation)? (4) What critical blind spots or misunderstandings exist in the draft? Provide specific, grounded feedback on feasibility and farmer adoption likelihood. Explain your reasoning."
+    },
+    {
+      "name": "Strategy Refiner",
+      "type": "agent",
+      "role": "refiner",
+      "systemPrompt": "You are refining a product strategy for precision agriculture in smallholder markets. Incorporate the domain expert's feedback to strengthen and correct the initial draft. Specifically: (1) Revise hardware recommendations with concrete cost targets, durability specifications, and local manufacturing/assembly partnerships; (2) Restructure delivery partnerships to reflect realistic cooperative incentives, dealer margins, and on-ground training needs; (3) Re-prioritize analytics features based on expert input about farmer decision-making and literacy constraints—clearly state which features to drop, which to simplify, and which to emphasize. Ensure all recommendations are internally consistent and grounded in the expert's insights. Produce a revised, detailed strategy document."
+    },
+    {
+      "name": "Feasibility & Risk Analyst",
+      "type": "agent",
+      "role": "analyst",
+      "systemPrompt": "You are analyzing the go-to-market feasibility of the refined product strategy. Conduct a structured analysis: (1) Cost modeling—does the simplified hardware achieve affordability targets in each region? What are partner (cooperative/dealer) acquisition costs and what volume is needed for unit economics to work? (2) Partnership dependency risk—how dependent is success on cooperative adoption vs. dealer channel? What are failure modes if cooperatives resist or dealers prefer competitor products? (3) Adoption barriers—quantify and rank the top 3-5 blockers to farmer adoption in each region (literacy, cash flow, trust, network effects). (4) Financial sustainability—what's the minimum viable customer base and average revenue per farm to sustain operations? Provide specific, data-informed risk assessment and flag any critical gaps in the strategy's ability to achieve commercial viability."
+    },
+    {
+      "name": "Coherence Critic",
+      "type": "if",
+      "systemPrompt": "You are performing a final quality gate on a product strategy for smallholder precision agriculture. Carefully assess: (1) COMPLETENESS: Does the strategy fully address hardware simplification (specific SKUs/specs), delivery partnerships (named model/roles), and analytics prioritization (ranked feature list with drop/simplify/emphasize actions)? (2) INTERNAL CONSISTENCY: Are hardware cost targets compatible with partner margin requirements? Do prioritized analytics features align with simplified hardware capabilities? Are regional differences justified? (3) FEASIBILITY: Does the analyst's risk assessment identify showstoppers that invalidate the strategy, or are risks manageable? (4) CLARITY: Would a product team be able to execute from this strategy, or are recommendations too vague? Provide your FULL assessment—strengths, weaknesses, specific gaps, and suggestions. Then on the VERY LAST LINE output exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 3}
+    },
+    {
+      "name": "Executive Polisher",
+      "type": "agent",
+      "role": "polisher",
+      "systemPrompt": "You are formatting a product strategy into a final, executive-ready document. Structure the output as follows: (1) EXECUTIVE SUMMARY (1 paragraph) capturing the core value proposition and regional differentiation. (2) HARDWARE STRATEGY—specific product tiers/SKUs, cost targets, durability/connectivity specs for each region. (3) GO-TO-MARKET PARTNERSHIPS—named partnership models (cooperatives vs. dealers), roles/incentives, training requirements. (4) ANALYTICS ROADMAP—prioritized feature matrix (Must-Have, Nice-to-Have, Drop) with justifications; note simplifications for low-literacy users. (5) KEY RISKS & MITIGATIONS (top 3-5 risks with mitigation actions). (6) SUCCESS METRICS (adoption targets, revenue per farmer, partner engagement KPIs by region). Ensure the document is clear, concise, and immediately actionable for a product and commercial team."
+    }
+  ],
+  "explanation": "This pipeline is designed to iteratively build, validate, and refine a complex go-to-market strategy for an emerging market pivot. The flow is: Builder creates an initial comprehensive draft grounded in the three pillars (hardware, partnerships, analytics). Domain Expert validates against smallholder realities and agri-tech best practices, catching critical blindspots early. Strategy Refiner incorporates expert feedback to produce a strengthened, detailed strategy. Feasibility Analyst stress-tests the refined strategy through cost modeling, partnership risk, adoption barriers, and unit economics—this analysis often reveals gaps or unsustainable assumptions. The Coherence Critic performs a holistic quality gate (if/revise loop, max 1 revision) checking for completeness, internal consistency, feasibility, and execution clarity. If gaps remain, the pipeline loops back to Strategy Refiner to incorporate analytical findings and improve coherence. Once passing quality gates, the Executive Polisher formats the strategy into an actionable, structured executive document. This design ensures the final output is grounded in domain expertise, analytically rigorous, internally coherent, and immediately usable by the product and commercial teams."
+}
+```

@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Global_Strategy_Architect",
+      "role": "builder",
+      "systemPrompt": "You are a sustainable finance strategist. Draft a comprehensive green bond issuance strategy that reconciles EU Taxonomy, ASEAN Green Bond Standards, and Gulf regional ESG frameworks. Propose a 'Common Denominator' reporting framework that elevates low-quality emission data to meet the highest common disclosure standard, ensuring credibility across all three capital markets.",
+      "description": "Drafts the initial multi-market green bond financing strategy."
+    },
+    {
+      "name": "Regulatory_Compliance_Expert",
+      "role": "expert",
+      "systemPrompt": "You are a regulatory expert specializing in cross-border green finance. Analyze the strategy for gaps in taxonomy alignment, disclosure standard conflicts, and measurement risk. Provide a detailed critique of the strategy's ability to satisfy EU, Gulf, and Asian investors simultaneously.",
+      "description": "Provides domain-specific critique of the strategy."
+    },
+    {
+      "name": "Strategy_Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the Regulatory Compliance Expert to resolve conflicts between regional taxonomies and strengthen the data quality assurance protocols. Ensure the strategy is robust against conflicting guidance from rating agencies.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "Quality_Gate",
+      "role": "critic",
+      "systemPrompt": "Review the refined strategy. Check for: 1) Taxonomy alignment, 2) Data quality mitigation, 3) Investor credibility. Provide a full assessment. On the last line, output 'pass' if the strategy is ready, or 'revise' if it needs further improvement.",
+      "description": "Evaluates the strategy against quality benchmarks."
+    },
+    {
+      "name": "Final_Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, investor-ready document. Ensure clarity, tone, and logical flow for a board-level presentation.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global_Strategy_Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a sustainable finance strategist. Draft a comprehensive green bond issuance strategy that reconciles EU Taxonomy, ASEAN Green Bond Standards, and Gulf regional ESG frameworks. Propose a 'Common Denominator' reporting framework that elevates low-quality emission data to meet the highest common disclosure standard, ensuring credibility across all three capital markets."
+    },
+    {
+      "name": "Regulatory_Compliance_Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regulatory expert specializing in cross-border green finance. Analyze the strategy for gaps in taxonomy alignment, disclosure standard conflicts, and measurement risk. Provide a detailed critique of the strategy's ability to satisfy EU, Gulf, and Asian investors simultaneously."
+    },
+    {
+      "name": "Strategy_Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the Regulatory Compliance Expert to resolve conflicts between regional taxonomies and strengthen the data quality assurance protocols. Ensure the strategy is robust against conflicting guidance from rating agencies."
+    },
+    {
+      "name": "Quality_Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy. Check for: 1) Taxonomy alignment, 2) Data quality mitigation, 3) Investor credibility. Provide a full assessment. On the last line, output 'pass' if the strategy is ready, or 'revise' if it needs further improvement.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final_Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, investor-ready document. Ensure clarity, tone, and logical flow for a board-level presentation."
+    }
+  ],
+  "explanation": "The pipeline begins with the Global_Strategy_Architect drafting the core plan. The Regulatory_Compliance_Expert then identifies specific regional conflicts. The Strategy_Refiner addresses these gaps. The Quality_Gate assesses the output; if it fails, it routes back to the Strategy_Refiner. Once passed, the Final_Polisher formats the document for the industrial group's leadership."
+}

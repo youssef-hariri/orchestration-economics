@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Global Labor Relations Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive labor-relations strategy for a global delivery platform operating in 2026 under divergent gig-worker representation regimes. Address worker councils in parts of the EU, reclassification pressures in selected Latin American countries, self-regulatory codes in Southeast Asia, and informal rider collectives in multiple cities. Define objectives, governance, engagement structures, bargaining boundaries, escalation channels, management responsibilities, worker voice mechanisms, implementation priorities, and metrics. Distinguish global principles from locally adaptable practices. Produce a substantive strategy draft grounded in lawful, ethical, practical, and culturally aware labor-relations principles. Do not assume that one home-market engagement model can be exported unchanged.",
+      "description": "Creates the initial global labor-relations strategy and operating model."
+    },
+    {
+      "name": "Comparative Gig-Work Regulation Expert",
+      "role": "expert",
+      "systemPrompt": "Review the preceding strategy draft as an expert in international labor law, platform work, worker representation, and collective engagement. Analyze whether it appropriately distinguishes EU worker-council requirements, Latin American employment-status and reclassification risks, Southeast Asian self-regulatory frameworks, and informal rider collectives. Identify legal uncertainty, jurisdictional overgeneralization, antitrust or labor-law risks, consultation and bargaining errors, worker-rights concerns, and implementation gaps. Recommend precise corrections while preserving a coherent global approach. Provide detailed findings for a refiner to use.",
+      "description": "Provides cross-regional legal and labor-relations expertise to improve the strategy."
+    },
+    {
+      "name": "Labor Strategy Integrator",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the preceding strategy using the expert analysis and all available context. Produce a clear, actionable, and legally cautious labor-relations strategy for a global delivery platform. Explicitly define: global non-negotiable principles; regional and country-level adaptation; engagement structures for formal councils, recognized representatives, informal collectives, and individual workers; subjects reserved for consultation versus negotiation or collective bargaining; limits on management discretion; recognition and representation protocols; data, transparency, and dispute-resolution practices; safeguards against retaliation; escalation and crisis procedures; accountability ownership; rollout sequencing; and success metrics. Avoid giving jurisdiction-specific legal advice without caveats, and state that local counsel and worker representatives must validate implementation. Ensure consistency across regions without imposing identical structures where laws or worker expectations differ.",
+      "description": "Integrates expert findings into a coherent, operational, and regionally adaptable strategy."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined labor-relations strategy in full. Evaluate strategic coherence, cross-regional consistency, legal and ethical caution, treatment of formal and informal worker representation, clarity of engagement structures, bargaining boundaries, protection against retaliation, feasibility, governance, implementation sequencing, metrics, and usefulness to senior management. Identify specific omissions, contradictions, unsupported assumptions, or wording that could create legal, operational, or trust risks. Explain exactly what must be corrected if the draft is inadequate. After providing the full assessment, output exactly one keyword on the final line: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Labor Relations Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Create the final user-facing deliverable from the approved strategy and quality assessment. Preserve substantive accuracy while improving structure, readability, precision, and executive usefulness. Present a concise executive summary followed by global principles, regional operating models for the EU, Latin America, and Southeast Asia, treatment of informal rider collectives, engagement and representation protocols, bargaining boundaries, governance and accountability, implementation roadmap, risk controls, and measurable outcomes. Clearly distinguish mandatory global standards from locally adaptable practices. Use careful language about legal variation and recommend validation by qualified local counsel and worker representatives. Do not mention the pipeline, agents, drafting process, or quality assessment.",
+      "description": "Produces the final polished strategy for leadership and regional implementation teams."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Labor Relations Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive labor-relations strategy for a global delivery platform operating in 2026 under divergent gig-worker representation regimes. Address worker councils in parts of the EU, reclassification pressures in selected Latin American countries, self-regulatory codes in Southeast Asia, and informal rider collectives in multiple cities. Define objectives, governance, engagement structures, bargaining boundaries, escalation channels, management responsibilities, worker voice mechanisms, implementation priorities, and metrics. Distinguish global principles from locally adaptable practices. Produce a substantive strategy draft grounded in lawful, ethical, practical, and culturally aware labor-relations principles."
+    },
+    {
+      "name": "Comparative Gig-Work Regulation Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Review the preceding strategy draft as an expert in international labor law, platform work, worker representation, and collective engagement. Analyze EU worker-council requirements, Latin American employment-status and reclassification risks, Southeast Asian self-regulatory frameworks, and informal rider collectives. Identify legal uncertainty, jurisdictional overgeneralization, antitrust or labor-law risks, consultation and bargaining errors, worker-rights concerns, and implementation gaps. Recommend precise corrections for the refiner."
+    },
+    {
+      "name": "Labor Strategy Integrator",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the preceding strategy using the expert analysis. Produce a clear, actionable, and legally cautious global labor-relations strategy. Define global principles, regional adaptation, engagement structures, representation protocols, consultation versus bargaining subjects, management boundaries, worker safeguards, dispute resolution, governance, rollout sequencing, and metrics. Ensure consistency without imposing identical structures across jurisdictions. Include appropriate caveats regarding local law and validation by local counsel and worker representatives."
+    },
+    {
+      "name": "Strategy Quality Assessment",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Assess the refined labor-relations strategy in full for strategic coherence, cross-regional consistency, legal and ethical caution, treatment of formal and informal representation, clarity of engagement structures, bargaining boundaries, feasibility, governance, implementation, metrics, and executive usefulness. Explain strengths and all specific weaknesses or required corrections. On the final line output exactly one keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Labor Relations Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Create the final user-facing strategy from the approved refined output. Improve organization, clarity, precision, and executive usefulness. Include an executive summary, global principles, regional operating models, informal collective engagement, representation protocols, bargaining boundaries, governance, implementation roadmap, risks, and metrics. Distinguish global standards from locally adaptable practices and retain careful legal caveats. Do not mention the pipeline or drafting process."
+    }
+  ],
+  "explanation": "The strategy is first drafted, then tested against comparative labor-law and worker-representation considerations before being rewritten into an actionable operating model. A quality assessment follows the refiner; if it outputs revise, execution returns to the refiner, and if it outputs pass, the result proceeds to the final polisher. The flow is Builder → Expert → Refiner → Quality Assessment (revise loops to Refiner; pass continues) → Polisher."
+}

@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Regional Labor Context Builder",
+      "role": "builder",
+      "description": "Creates initial labor-relations strategy framework by analyzing divergent gig-worker representation regimes across EU, Latin America, and Southeast Asia"
+    },
+    {
+      "name": "Legal & Regulatory Expert",
+      "role": "expert",
+      "description": "Reviews strategy against specific legal requirements in worker councils (EU), reclassification risks (LATAM), self-regulatory codes (SE Asia), and identifies compliance gaps"
+    },
+    {
+      "name": "Engagement Structure Refiner",
+      "role": "refiner",
+      "description": "Restructures engagement boundaries, bargaining protocols, and consistency mechanisms based on expert legal feedback and regional constraints"
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "description": "Evaluates strategy coherence, contradictions between regional approaches, feasibility, and worker-side credibility"
+    },
+    {
+      "name": "Impact-Enhanced Refiner",
+      "role": "refiner",
+      "description": "Incorporates critic feedback and analyzes stakeholder impacts to strengthen strategy coherence, resolve regional tensions, and clarify implementation priorities"
+    },
+    {
+      "name": "Strategy Validation Gate",
+      "role": "reviewer",
+      "description": "Validates final strategy against all three regional frameworks and confirms completeness of engagement structures, bargaining boundaries, and consistency principles"
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "description": "Formats strategy into executive-ready document with clear engagement structures, bargaining boundaries matrix, and cross-regional consistency frameworks"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Regional Labor Context Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a labor-relations strategy for a global delivery platform facing divergent gig-worker representation regimes in 2026. Analyze three regional contexts: (1) EU worker councils requiring formal representation structures; (2) Latin American reclassification pressures creating employment status uncertainty; (3) Southeast Asian self-regulatory codes with informal rider collectives. The platform's current engagement norms are single-market focused. Create an initial strategy framework that proposes: engagement structures tailored to each region, bargaining boundaries that protect platform operations while recognizing worker voice, and principles for maintaining organizational consistency. Address informal organizing already occurring in several cities. Output a comprehensive initial strategy covering all three dimensions."
+    },
+    {
+      "name": "Legal & Regulatory Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a labor law expert specializing in gig-worker regulations across EU, Latin America, and Southeast Asia. Review the proposed strategy against: EU Directive requirements for worker council representation and consultation rights; Latin American employment law trends toward reclassification (especially Brazil, Mexico, Colombia); Southeast Asian self-regulatory frameworks and informal collective organizing patterns. Identify specific legal risks, compliance gaps, and regulatory misalignments in the proposed strategy. Flag any contradictions between regional requirements. Provide detailed expert assessment of legal defensibility for each region."
+    },
+    {
+      "name": "Engagement Structure Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining the labor-relations strategy based on legal expertise and regulatory requirements. Restructure the strategy to: (1) Define clear engagement structures for each region (worker councils in EU, formal/informal dialogue mechanisms in LATAM, self-regulatory participation in SE Asia); (2) Specify bargaining boundaries—what topics are negotiable vs. platform-determined in each region; (3) Establish consistency principles that allow regional adaptation without undermining organizational coherence. Ensure the refined strategy addresses all legal and regulatory feedback. Produce a clearer, more legally defensible strategy with specific structural proposals for each engagement type."
+    },
+    {
+      "name": "Strategy Coherence Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a critical reviewer of the refined labor-relations strategy. Evaluate: (1) Internal coherence—do the three regional approaches logically fit together or create contradictions?; (2) Feasibility—can platform management realistically implement and sustain this across regions?; (3) Worker-side credibility—will informal collectives and worker councils view this as genuine engagement or performative?; (4) Stakeholder impacts on management flexibility, implementation costs, and conflict escalation risks; (5) Consistency—are the cross-regional principles truly applied or merely aspirational? Provide full assessment of strategy strengths and critical weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "name": "Impact-Enhanced Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are the strategic refiner incorporating coherence critic feedback. Strengthen the strategy by: (1) Resolving identified contradictions between regional approaches; (2) Clarifying engagement structures to improve feasibility and credibility; (3) Defining bargaining boundaries with greater precision to reduce conflict; (4) Reinforcing cross-regional consistency principles with concrete mechanisms; (5) Addressing implementation cost, resource allocation, and unintended consequence risks. Produce the final, defensible strategy that balances platform operational needs with genuine worker representation across all three regions."
+    },
+    {
+      "name": "Strategy Validation Gate",
+      "role": "reviewer",
+      "type": "if",
+      "systemPrompt": "You are validating the final labor-relations strategy. Review: (1) Does the strategy address all three regional contexts (EU councils, LATAM reclassification, SE Asia self-regulation)?; (2) Are engagement structures clearly defined and region-specific?; (3) Are bargaining boundaries explicit and operationalized?; (4) Are consistency principles specified with concrete mechanisms for cross-regional alignment?; (5) Does the strategy acknowledge informal organizing?; (6) Is the strategy legally defensible and implementable? Provide FULL assessment of completeness, coherence, and readiness. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are formatting the validated labor-relations strategy for executive delivery. Structure the output as: (1) Executive Summary—strategy overview and key principles; (2) Regional Engagement Structures—detailed framework for EU worker councils, LATAM dialogue mechanisms, SE Asia self-regulatory participation; (3) Bargaining Boundaries Matrix—clear table showing negotiable vs. platform-determined topics by region; (4) Cross-Regional Consistency Framework—specific mechanisms ensuring organizational coherence; (5) Implementation Roadmap—phasing, resource allocation, risk mitigation; (6) Appendices—relevant legal references, informal organizing context. Ensure professional formatting, clarity, and ready-for-board presentation quality."
+    }
+  ],
+  "explanation": "This 7-step pipeline transforms a complex multi-jurisdictional labor-relations challenge into a coherent, legally sound strategy. Flow: (1) Builder creates initial framework analyzing three regional contexts; (2) Expert provides legal validation identifying compliance gaps; (3) Refiner integrates legal requirements into structured engagement models; (4) Critic evaluates coherence, feasibility, and credibility (if revise loops back to Impact-Enhanced Refiner); (5) Impact-Enhanced Refiner incorporates feedback and stakeholder analysis; (6) Validation gate ensures completeness before formatting (if revise loops back to Impact-Enhanced Refiner); (7) Polisher delivers executive-ready output. The two quality gates (critic and validator) allow iterative refinement without exceeding step limit by routing back to the same refiner that can incorporate feedback."
+}
+```

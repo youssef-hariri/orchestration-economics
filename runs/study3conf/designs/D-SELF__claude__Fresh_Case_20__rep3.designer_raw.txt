@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Monetization Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial monetization and product-governance strategy draft addressing loot-box regulations, probability disclosure mandates, and cultural spending norms across all target regions."
+    },
+    {
+      "name": "Regulatory & Compliance Expert",
+      "role": "expert",
+      "description": "Analyzes draft strategy against Belgium, Netherlands, Korea, China regulatory frameworks and identifies compliance gaps, legal risks, and enforcement blind spots."
+    },
+    {
+      "name": "Cultural Economics Analyst",
+      "role": "analyst",
+      "description": "Evaluates monetization mechanics against player behavior and spending norms in Japan, Gulf, Brazil, US; quantifies revenue impact of strategy variations and player-retention risk."
+    },
+    {
+      "name": "Advocacy & Player-Protection Critic",
+      "role": "critic",
+      "description": "Assesses strategy robustness against coordinated cross-border player-protection advocacy; identifies reputational, regulatory escalation, and community-trust vulnerabilities."
+    },
+    {
+      "name": "Integration & Feasibility Strategist",
+      "role": "strategist",
+      "description": "Develops technical, operational, and business implementation roadmap; identifies player-experience fragmentation risks and proposes unified mechanics that satisfy divergent constraints."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "description": "Conducts comprehensive assessment of final strategy; evaluates legal defensibility, cultural appropriateness, profitability, player-experience coherence, and advocacy resilience. Routes to refinement or polishing."
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy as executive-ready deliverable with regulatory summary, regional mechanics, revenue model, risk mitigation, and implementation timeline."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Monetization Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a global mobile-game monetization strategy for 2026. Create a comprehensive initial draft addressing: (1) loot-box restrictions in Belgium/Netherlands with compliant alternatives; (2) mandatory probability disclosure in Korea/China; (3) culturally-aligned spending mechanics for Japan (gift-giving, cosmetics), Gulf (cosmetics, battle pass), Brazil (social gifting, cosmetics), US (pay-to-win acceptance, seasonal cosmetics); (4) unified core gameplay ensuring no irreparable player-experience fragmentation across regions. Include revenue model, regional variant mechanics, and governance framework. Output a detailed strategy draft."
+    },
+    {
+      "name": "Regulatory & Compliance Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a gaming-industry regulatory expert. Analyze the monetization strategy draft for compliance with: Belgium loot-box ban, Netherlands loot-box restrictions, Korea mandatory probability disclosure, China gacha probability rules, and US FTC emerging scrutiny. Identify every legal risk, gap, and enforcement vulnerability. Assess whether proposed alternatives (battle passes, cosmetic tiers, cosmetic-only loot) meet jurisdictional standards. Output a detailed compliance assessment with specific recommendations for each region."
+    },
+    {
+      "name": "Cultural Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a behavioral economist analyzing cross-cultural spending norms. Evaluate the strategy's monetization mechanics against: Japan's cosmetic + gift-giving preference, Gulf cosmetic + cosmetics spending culture, Brazil's social-gifting and cosmetic adoption, US pay-to-win tolerance and seasonal cosmetics. Quantify revenue risk/opportunity for each regional variant. Assess player lifetime value (LTV), churn risk from cultural misalignment, and spending-velocity differences. Output detailed regional economics with revenue projections and retention impact."
+    },
+    {
+      "name": "Advocacy & Player-Protection Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a player-advocacy expert. Assess whether the strategy is defensible against coordinated cross-border player-protection groups (e.g., Common Sense Media, PEGI, local advocacy coalitions). Identify: (1) Perceived predatory mechanics despite compliance (e.g., FOMO, cosmetic pay-to-win, battle-pass pressure); (2) Messaging vulnerability (does strategy appear region-gated for regulatory evasion?); (3) Reputational risk from mechanistic inconsistency across regions; (4) Escalation triggers (regulatory appeals, media coverage, platform delistings). Output a comprehensive advocacy-resilience assessment with specific vulnerabilities and mitigation strategies."
+    },
+    {
+      "name": "Integration & Feasibility Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a game-publishing operations strategist. Develop a unified implementation roadmap addressing: (1) Technical feasibility of regional monetization variants without code/art fragmentation (e.g., server-side config, feature flags, cosmetic-only divergence); (2) Player-experience coherence strategy (core gameplay, progression, cosmetics unified globally; only monetization UX and loot mechanics region-specific); (3) Operational governance (approval workflows, advocacy monitoring, regulatory escalation response); (4) Revenue safeguards (regional pricing harmonization, cross-region player fairness, cosmetic parity). Output a detailed operational strategy with technical architecture, governance model, and phased rollout plan."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are the final quality gate. Conduct comprehensive assessment of the complete monetization strategy across all prior analyses. Evaluate: (1) LEGAL: Does strategy achieve compliance in Belgium, Netherlands, Korea, China without regulatory arbitrage perception? (2) CULTURAL: Are regional mechanics authentically aligned with Japan, Gulf, Brazil, US spending norms, or do they appear tokenistic? (3) PROFITABILITY: Does unified strategy achieve global revenue targets without region-based fragmentation cannibalizing core monetization? (4) PLAYER EXPERIENCE: Is core gameplay and progression unified and fair across regions, with only cosmetics/loot diverging? (5) ADVOCACY RESILIENCE: Can strategy withstand coordinated player-protection campaigns and regulatory escalation? (6) OPERATIONAL: Is implementation feasible without code fragmentation and governance overhead? Provide full assessment of strengths and specific gaps. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Output Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are preparing the final executive deliverable. Format the strategy into a structured document with: (1) Executive Summary (1 page: strategy objective, key outcomes, risk mitigation); (2) Regulatory Compliance Framework (Belgium, Netherlands, Korea, China: specific mechanics, disclosure formats, audit trails); (3) Regional Monetization Variants (Japan, Gulf, Brazil, US: mechanics, pricing, cosmetic strategy, gifting rules); (4) Unified Player Experience (core gameplay, progression parity, cross-region fairness model); (5) Revenue Model (regional pricing, LTV projections, monetization mix); (6) Advocacy & Reputational Risk Mitigation (messaging, monitoring, escalation response); (7) Implementation Roadmap (phased rollout, tech dependencies, governance gates); (8) Appendix: Comparative legal analysis, cultural research summary. Produce polished, executive-ready output."
+    }
+  ],
+  "explanation": "Pipeline flow: Builder creates initial strategy → Regulatory Expert validates compliance gaps → Cultural Analyst quantifies regional economics → Advocacy Critic stress-tests reputational/advocacy resilience → Integration Strategist develops unified implementation roadmap → Quality Gate assesses legal, cultural, profitability, UX, advocacy, and operational coherence; if revise, loops back to Integration Strategist to fix feasibility/governance issues → Polisher formats executive deliverable. This sequence ensures compliance is verified before cultural alignment is tested, advocacy resilience is evaluated after regional mechanics are developed, and implementation feasibility gates strategy before final output. The single if-gate (revise loops to Strategist, not Builder) allows operational/governance refinement without restarting core strategy, keeping iteration tight while ensuring final strategy balances all five competing constraints: legal compliance, cultural authenticity, profitability, player-experience unity, and advocacy durability."
+}
+```

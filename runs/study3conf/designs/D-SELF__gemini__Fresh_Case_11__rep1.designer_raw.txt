@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "CorridorStrategist",
+      "role": "builder",
+      "systemPrompt": "You are a global fintech strategist. Draft a comprehensive financial-operations strategy for 2026 that balances regulatory compliance, settlement risk, and margin optimization across EU, Gulf, SE Asia, and LATAM corridors. Address capital-control mitigation and tiered banking partner integration.",
+      "description": "Drafts the initial multi-regional financial operations strategy."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "critic",
+      "systemPrompt": "You are a cross-border regulatory expert. Review the strategy for gaps in regional licensing compliance, KYC requirements, and capital-control adherence. Identify specific weaknesses in the proposed settlement models.",
+      "description": "Critiques the strategy from a regulatory and risk perspective."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the ComplianceExpert to strengthen the operational strategy. Ensure all regulatory risks are addressed while maintaining profitability.",
+      "description": "Updates the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for coherence, regulatory viability, and operational feasibility. Provide a detailed assessment. If the strategy fails to address specific regional capital controls or margin risks, output 'revise'. If it is robust, output 'pass'. LAST LINE MUST BE: pass OR revise.",
+      "description": "Validates the strategy against the task requirements."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional executive report. Ensure clear headings, actionable insights, and a structured approach to managing the four distinct regional corridors.",
+      "description": "Finalizes the output for the user."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "CorridorStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a global fintech strategist. Draft a comprehensive financial-operations strategy for 2026 that balances regulatory compliance, settlement risk, and margin optimization across EU, Gulf, SE Asia, and LATAM corridors. Address capital-control mitigation and tiered banking partner integration."
+    },
+    {
+      "name": "ComplianceExpert",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a cross-border regulatory expert. Review the strategy for gaps in regional licensing compliance, KYC requirements, and capital-control adherence. Identify specific weaknesses in the proposed settlement models."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the ComplianceExpert to strengthen the operational strategy. Ensure all regulatory risks are addressed while maintaining profitability."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for coherence, regulatory viability, and operational feasibility. Provide a detailed assessment. If the strategy fails to address specific regional capital controls or margin risks, output 'revise'. If it is robust, output 'pass'. LAST LINE MUST BE: pass OR revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional executive report. Ensure clear headings, actionable insights, and a structured approach to managing the four distinct regional corridors."
+    }
+  ],
+  "explanation": "The pipeline starts with the CorridorStrategist creating the initial strategy. The ComplianceExpert reviews it for regulatory risks. The StrategyRefiner updates the content based on that review. The QualityGate assesses the output; if it fails, it routes back to the StrategyRefiner to fix issues. Once passed, the FinalPolisher formats the output for the user."
+}

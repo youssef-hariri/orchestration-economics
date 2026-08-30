@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Strategic Framework Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive framework addressing how global brands navigate geopolitically-driven boycotts across contradictory regional demands"
+    },
+    {
+      "name": "Integrated Analysis & Strategy Developer",
+      "role": "strategist",
+      "description": "Analyzes geopolitical context, stakeholder contradictions, and develops cross-regional communication and operational strategies"
+    },
+    {
+      "name": "Global Brand Communications Expert",
+      "role": "expert",
+      "description": "Provides domain expertise on multinational brand precedents, messaging authenticity, and regional autonomy models"
+    },
+    {
+      "name": "Framework Integration Refiner",
+      "role": "refiner",
+      "description": "Integrates strategic recommendations and expert perspectives into cohesive, actionable framework with decision trees"
+    },
+    {
+      "name": "Coherence and Practicality Critic",
+      "role": "critic",
+      "description": "Reviews framework for internal contradictions, stakeholder conflict resolution, and implementation feasibility"
+    },
+    {
+      "name": "Executive-Ready Polisher",
+      "role": "polisher",
+      "description": "Formats framework for executive presentation with clear structure, decision matrices, communication templates, and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategic Framework Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a strategic framework for global consumer brands facing geopolitically-driven boycotts that pull different regions in opposing directions. Create an initial comprehensive framework that addresses: (1) Core brand positioning that accommodates regional differences without appearing hypocritical, (2) Decision-making architecture for when/how to respond to boycotts, (3) Franchisee communication protocols addressing contradictory demands, (4) Employee engagement strategies, (5) Regional autonomy vs. global coherence balance, (6) Risk scenarios and escalation protocols. Provide a structured, detailed framework draft that maps the problem space and identifies key stakeholder tensions."
+    },
+    {
+      "name": "Integrated Analysis & Strategy Developer",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Analyze the geopolitical boycott dynamics and develop integrated strategies. (1) Map how consumer activism differs by region and why same actions trigger opposite responses, (2) Identify stakeholder contradictions: franchisee demands vs. employee concerns vs. consumer sentiment across regions, (3) Develop operational protocols addressing franchisee guidance that acknowledges local political reality, (4) Create employee engagement frameworks that don't force contradiction of consumer sentiment in their markets, (5) Develop tiered response protocols for boycott escalation, (6) Provide communication strategy templates for each region that appear locally authentic while maintaining global brand integrity. Synthesize analysis and strategy into actionable recommendations."
+    },
+    {
+      "name": "Global Brand Communications Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "As an expert in multinational brand crisis management and geopolitical positioning, enhance the framework with: (1) Real-world precedents where global brands successfully managed polarized regional positioning, (2) Communication authenticity principles allowing regional variance without reputational damage, (3) How to structure public statements for different audiences simultaneously (franchisees, employees, consumers, media), (4) Risk mitigation for accusations of hypocrisy or inconsistency, (5) Brand values articulation that transcends geopolitical divides, (6) When silence vs. statement vs. action is optimal for different boycott scenarios. Provide expert synthesis that validates and strengthens the strategy."
+    },
+    {
+      "name": "Framework Integration Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate all previous insights into a unified, coherent framework. Create: (1) Clear decision trees for brand response to boycotts in different regional contexts, (2) Specific communication templates showing how same brand values translate differently by region without contradiction, (3) Franchisee guidance protocols, (4) Employee communication strategies validating concerns, (5) Metrics for success and escalation triggers, (6) Implementation roadmap. Produce a comprehensive, integrated framework with decision matrices and concrete examples ready for critical review."
+    },
+    {
+      "name": "Coherence and Practicality Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical reviewer of the integrated framework. Assess: (1) Does the framework actually resolve the core contradiction—can it accommodate opposing regional demands without appearing hypocritical? Provide specific examples. (2) Are stakeholder concerns adequately addressed—would franchisees accept it, would employees feel supported, would regional consumers find it authentic? (3) Are decision trees clear enough for real-time execution during boycott crises? (4) Does the framework maintain global brand coherence while permitting regional autonomy? (5) Are there residual contradictions or risk gaps? (6) Is the framework implementable? Provide complete assessment of strengths, weaknesses, and specific improvements needed. Output on VERY LAST LINE exactly one: pass, revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive-Ready Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the framework for executive presentation and implementation. Structure as: (1) Executive Summary—core principle and why it works, (2) Strategic Framework—decision architecture with flowcharts addressing geopolitically-driven boycotts, contradictory regional demands, franchisee guidance, employee positioning, (3) Communication Templates by Region—examples showing localization without hypocrisy, (4) Stakeholder Playbooks—franchisee, employee, consumer engagement protocols, (5) Implementation Roadmap—30/60/90 day actions, (6) Risk Mitigation Matrix. Use clear formatting, headers, examples, and visual structure suitable for C-suite review and regional execution."
+    }
+  ],
+  "explanation": "Pipeline reduces to 6 steps by integrating Analysis and Strategy into single agent (step 2), eliminating separate final reviewer by embedding task-alignment validation into Polisher's formatting requirements. Flow: Builder creates initial framework → Strategist analyzes contradictions and develops integrated strategy → Expert provides domain precedent and best practices → Refiner synthesizes all inputs into cohesive framework → Critic validates coherence with if-gate routing back to Refiner for revisions (up to 3 iterations if needed) → Polisher formats for executive use. The if-gate ensures framework resolves contradictions before polishing. Structure respects that strategy demands multiple expert perspectives integrated before refinement, preventing strategically flawed output."
+}
+```

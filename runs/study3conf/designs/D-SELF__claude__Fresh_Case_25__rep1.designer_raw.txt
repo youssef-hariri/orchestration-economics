@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Analyst",
+      "role": "analyst",
+      "description": "Analyzes beauty norms, shade-range expectations, influencer ecosystems, marketplace structures, and incumbent competitive landscapes across Mexico, Colombia, and Brazil"
+    },
+    {
+      "name": "D2C Launch Strategist",
+      "role": "strategist",
+      "description": "Develops comprehensive go-to-market strategy, channel prioritization, product positioning, and communications roadmap for each market"
+    },
+    {
+      "name": "Regional Beauty Expert",
+      "role": "expert",
+      "description": "Provides domain-specific validation on beauty category dynamics, MLM competitive threats, and culturally-appropriate positioning"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Incorporates expert feedback and research insights to strengthen strategy recommendations and resolve contradictions"
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Evaluates strategy completeness, feasibility, competitive positioning, and alignment with D2C objectives"
+    },
+    {
+      "name": "Communications Builder",
+      "role": "builder",
+      "description": "Creates detailed launch communications plan, messaging frameworks, influencer partnership strategy, and channel-specific content"
+    },
+    {
+      "name": "Final Polish Agent",
+      "role": "polisher",
+      "description": "Formats final deliverable as integrated launch strategy document with market playbooks, timeline, and success metrics"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a market research analyst specializing in Latin American beauty markets. Analyze and produce detailed findings on: (1) Beauty norms and skin-tone diversity expectations in Mexico, Colombia, and Brazil; (2) Influencer ecosystem structure by platform; (3) E-commerce channel dominance (Mercado Libre, Amazon, DTC, social commerce); (4) MLM competitor presence and consumer trust levels; (5) Social commerce adoption rates; (6) Shade-range expectations and undertone preferences. Provide specific data and competitive examples for each market."
+    },
+    {
+      "name": "D2C Launch Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a D2C go-to-market strategist. Using market research, develop a 12-month launch strategy including: (1) Market-by-market prioritization and phased rollout; (2) Product shade-range strategy adapted to each market; (3) Channel architecture (owned DTC vs. marketplace vs. social commerce mix); (4) Influencer partnership tiers and recruitment strategy; (5) Competitive positioning against MLM incumbents; (6) Pricing strategy by market; (7) Brand messaging pillars for each market; (8) Integrated communications plan (influencer outreach, content calendar, platform strategy, testimonial collection, PR approach). Organize findings by market with clear tactical recommendations."
+    },
+    {
+      "name": "Regional Beauty Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a regional beauty expert validating the launch strategy. Review and provide expert assessment on: (1) Realism of influencer partnership assumptions and engagement rates; (2) Competitive threat from MLM brands and positioning tactics; (3) Cultural appropriateness of messaging and beauty standards positioning; (4) Feasibility of shade-range timelines; (5) Social commerce channel selection fit for each market; (6) Supply chain and fulfillment considerations; (7) Regulatory and labeling requirements. Identify assumptions needing adjustment and provide specific improvements based on market dynamics. Provide FULL analysis, then on VERY LAST LINE output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate expert feedback into the launch strategy. Strengthen weak areas, resolve contradictions, and enhance tactical detail. Revise channel mix, influencer strategy, product positioning, and competitive positioning based on expert concerns. Produce an improved strategy that addresses all feedback and integrates research more deeply, including refined communications plan elements."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strategic quality critic. Evaluate the refined launch strategy comprehensively: (1) Is the market-by-market analysis sufficiently differentiated? (2) Are channel strategies realistic given marketplace vs. owned dynamics? (3) Is influencer strategy actionable with specific tier definitions? (4) Does competitive positioning against MLMs have substance? (5) Are shade-range plans specific enough to guide product development? (6) Are financial assumptions grounded in regional benchmarks? (7) Are communications elements (messaging, content calendar, platform strategy) detailed and actionable? (8) Are success metrics defined by market?\n\nProvide comprehensive assessment with strengths and weaknesses. On VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Communications Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a communications strategist. Using the approved launch strategy, expand and detail the communications plan including: (1) Refined brand positioning and messaging pillars by market; (2) Launch campaign creative concepts; (3) Influencer partnership tiers with recruitment criteria and package types; (4) Social commerce content calendar (pre-launch through month 3) with platform-specific strategies; (5) Owned channel strategy (website, email, SMS); (6) Marketplace optimization (Mercado Libre, Amazon); (7) UGC and testimonial collection strategy; (8) PR and media outreach; (9) Crisis communication protocols. Organize by market with specific asset descriptions, messaging tone, and timeline."
+    },
+    {
+      "name": "Final Polish Agent",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are the final polish agent. Synthesize the approved strategy and communications plan into an executive-ready launch strategy document. Structure as: (1) Executive Summary; (2) Market Overview & Competitive Analysis (one per market); (3) Go-to-Market Strategy by Market; (4) Communications & Marketing Plan (messaging, influencer strategy, content calendar); (5) 12-Month Timeline; (6) Budget Framework; (7) Success Metrics & KPIs; (8) Risks & Mitigation. Format professionally with headers, tables, and actionable next steps. Ensure consistency across all sections."
+    }
+  ],
+  "explanation": "This 7-step pipeline delivers a market-specific, operationally-detailed D2C launch strategy. Market research grounds strategy in real dynamics (step 1). Strategist develops comprehensive go-to-market approach including communications elements (step 2). Expert validates strategy assumptions, cultural fit, and competitive positioning (step 3). Refiner incorporates feedback to strengthen the strategy (step 4). Quality gate assesses differentiation, feasibility, and specificity—loops back to refiner if strategy is too generic or under-detailed (step 5). Communications builder expands communications tactics based on approved strategy (step 6). Final polisher synthesizes into a delivery-ready document (step 7). The single loop at the strategy validation stage ensures market-specific, differentiated strategy before detailed communications execution, avoiding rework and ensuring strategy foundation is sound."
+}
+```

@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Compensation Architect",
+      "role": "builder",
+      "description": "Creates initial compensation-policy framework addressing location-adjusted pay, transparency requirements, and fairness across 30-country distributed workforce"
+    },
+    {
+      "name": "Labor-Law & Transparency Compliance Validator",
+      "role": "expert",
+      "description": "Reviews policy against pay-transparency laws, wage-disclosure regulations, and compliance risks across key jurisdictions"
+    },
+    {
+      "name": "Internal Equity & Perception Analyst",
+      "role": "analyst",
+      "description": "Analyzes salary data patterns, identifies compression risks, peer-comparison friction points, and internal fairness perception gaps"
+    },
+    {
+      "name": "Policy Coherence Refiner",
+      "role": "refiner",
+      "description": "Synthesizes legal requirements, equity concerns, and cost-of-labor logic into unified, defensible compensation policy"
+    },
+    {
+      "name": "Implementation Readiness Critic",
+      "role": "critic",
+      "description": "Evaluates policy for practical implementation, stakeholder communication, and identifies remaining tensions or gaps"
+    },
+    {
+      "name": "Executive Communication Polisher",
+      "role": "polisher",
+      "description": "Formats final compensation policy with executive summary, implementation roadmap, and transparent communication framework for global workforce"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Compensation Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a compensation policy for a 30-country fully remote software company. Create a comprehensive initial framework that addresses: (1) location-adjusted pay bands with clear rationale, (2) methods to manage internal salary-comparison friction (e.g., Warsaw vs. Berlin benchmarking), (3) mechanisms for pay transparency and disclosure compliance, (4) balance between cost-of-labor efficiency and fairness perception. Structure the policy to address transparency laws without creating unsustainable wage pressure. Output a detailed draft policy framework."
+    },
+    {
+      "name": "Labor-Law & Transparency Compliance Validator",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a compensation and labor-law expert. Analyze the proposed compensation policy for compliance with pay-transparency and wage-disclosure laws across 30 countries, with special attention to EU regulations (Germany, Poland, Portugal), North America, and other high-risk jurisdictions. Identify: (1) legal gaps or violations, (2) disclosure requirements that force policy changes, (3) jurisdictions with conflicting requirements, (4) risk mitigation strategies. Provide detailed compliance assessment and flag legal constraints on the policy."
+    },
+    {
+      "name": "Internal Equity & Perception Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a data analyst examining compensation equity. Analyze the policy for: (1) salary compression between locations (e.g., Warsaw engineer vs. Toronto engineer doing same work), (2) transparent vs. hidden pay gaps that will emerge under disclosure laws, (3) how public salary forums and peer comparisons expose policy unfairness, (4) regions where location-adjustment multipliers create morale risk. Quantify equity concerns and identify where policy design will generate friction. Output data-driven analysis of fairness perception risks."
+    },
+    {
+      "name": "Policy Coherence Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a compensation policy by integrating three competing demands: (1) compliance with pay-transparency laws (from legal expert), (2) internal equity and fair perception (from equity analyst), (3) cost-of-labor efficiency and business sustainability. Revise the initial policy framework to: (1) incorporate legal requirements without unnecessary overpayment, (2) reduce salary-comparison friction through transparent rationale and market benchmarking, (3) propose hybrid band structures (e.g., market-based + role-based components) that balance all three demands, (4) outline how to communicate policy to workforce. Produce a refined, integrated policy document."
+    },
+    {
+      "name": "Implementation Readiness Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are assessing the refined compensation policy for implementation feasibility and stakeholder viability. Review: (1) Does the policy actually resolve the Warsaw-Toronto-Berlin salary comparison friction or just explain it? (2) Are legal compliance mechanisms workable and non-contradictory across 30 jurisdictions? (3) Will transparent disclosure of pay logic reduce or amplify internal tension? (4) Are there remaining unresolved tensions between cost-efficiency and fairness? (5) Can HR operationalize this policy across distributed teams? Provide thorough assessment addressing strengths, weaknesses, and implementation gaps. On the VERY LAST LINE, output EXACTLY ONE keyword: pass (policy is implementation-ready) or revise (policy needs refinement).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Communication Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing a compensation policy for a global distributed software company. Transform the refined policy into executive-ready output including: (1) One-page policy summary explaining location-adjusted pay logic with transparency rationale, (2) Compliance checklist by jurisdiction (30 countries), (3) Salary-band structure with worked examples (Warsaw, Lisbon, Berlin, Toronto roles), (4) Employee communication framework explaining why salaries differ and how pay transparency works, (5) Implementation roadmap (90-day rollout). Format as polished, stakeholder-ready document ready for company leadership and workforce communication. Ensure transparency language is clear, defensible, and reduces rather than amplifies perceived unfairness."
+    }
+  ],
+  "explanation": "This pipeline addresses a nuanced policy-design challenge requiring simultaneous expertise in law, data analysis, and organizational fairness. The flow: (1) Builder establishes initial framework; (2) Expert validates legal compliance across 30 jurisdictions; (3) Analyst quantifies internal equity/fairness risks from transparency laws and public salary forums; (4) Refiner integrates all three constraints (legal, equity, cost) into coherent policy; (5) Critic gates implementation readiness—if policy doesn't actually resolve stated frictions, it loops back to Refiner for synthesis improvement (up to 3 iterations, max); (6) Polisher formats final output with communication strategy. The single 'if' gate after Critic ensures the refined policy is truly implementable before communication phase. This prevents releasing a technically compliant but operationally failed policy to the global workforce."
+}
+```

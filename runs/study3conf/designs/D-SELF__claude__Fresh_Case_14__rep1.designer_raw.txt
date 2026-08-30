@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Green Bond Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial multi-market green bond financing strategy covering taxonomy alignment, disclosure harmonization, emissions measurement standardization, and investor credibility protection across EU, Gulf, and Asian markets."
+    },
+    {
+      "name": "Taxonomy & Disclosure Alignment Analyst",
+      "role": "analyst",
+      "description": "Analyzes divergences between EU Taxonomy, Gulf ESG standards, and Asian disclosure requirements; maps plant locations to applicable frameworks; identifies gaps and overlaps; produces comparative matrix of requirements by market."
+    },
+    {
+      "name": "Emissions Measurement Quality Expert",
+      "role": "expert",
+      "description": "Evaluates internal plant emissions reporting inconsistencies; assesses measurement quality risks; recommends standardization protocols (GHG Protocol alignment, third-party verification thresholds); identifies plants requiring remediation before disclosure."
+    },
+    {
+      "name": "Market & Rating Guidance Reconciler",
+      "role": "strategist",
+      "description": "Resolves conflicts between rating agency guidance and regional bank advice; prioritizes guidance by market influence and investor appetite; develops unified messaging strategy that satisfies multiple stakeholder perspectives without compromising credibility."
+    },
+    {
+      "name": "Financing Structure Refiner",
+      "role": "refiner",
+      "description": "Integrates analyst findings, expert recommendations, and reconciled guidance into cohesive financing strategy; structures bond tranches by market; defines taxonomy classification approach per region; specifies measurement validation requirements; resolves internal inconsistencies."
+    },
+    {
+      "name": "Credibility & Consistency Critic",
+      "role": "critic",
+      "description": "Validates that refined strategy maintains investor credibility across all markets; checks for contradictions between regional approaches; assesses measurement quality assurances; confirms alignment with industry best practices; identifies remaining risks."
+    },
+    {
+      "name": "Strategy Implementation Polisher",
+      "role": "polisher",
+      "description": "Formats final financing strategy into executive-ready deliverable; ensures clarity for board and investor communication; highlights key differentiators and risk mitigations; produces summary of regional deployment approach and credibility safeguards."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Green Bond Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a comprehensive multi-market green bond financing strategy for a 2026 industrial decarbonization retrofit program. The group operates plants across Europe, North Africa, and Southeast Asia. Create an initial strategy framework that addresses: (1) financing structure and bond issuance approach across three distinct capital markets, (2) taxonomy definitions and disclosure standards mapping, (3) emissions measurement and reporting quality, (4) investor ESG expectations management, and (5) credibility protection amid divergent standards and conflicting guidance. Produce a structured outline covering objectives, key challenges, and preliminary strategic pillars for each area. Be comprehensive but recognize that specific details will be refined through expert analysis."
+    },
+    {
+      "name": "Taxonomy & Disclosure Alignment Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the divergences between EU Taxonomy Regulation, Gulf Cooperation Council ESG frameworks, and Asian disclosure standards (including China, India, Southeast Asia). Based on the group's plant locations in Europe, North Africa, and Southeast Asia, produce a detailed comparative matrix showing: (1) which plants fall under which taxonomies, (2) decarbonization retrofit classification differences by region, (3) disclosure requirements and reporting timelines, (4) investor ESG expectations by market, (5) areas of contradiction or incompatibility, (6) opportunities for single-filing harmonization. Identify the most stringent requirements and recommend which standards should anchor the group's approach. Provide actionable mapping of retrofit activities to taxonomy categories across all three markets."
+    },
+    {
+      "name": "Emissions Measurement Quality Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "Assess the internal emissions measurement quality risk. The group reports emissions with inconsistent measurement quality across plants. Provide expert analysis of: (1) likely sources of inconsistency (methodologies, scope definitions, data collection processes), (2) materiality of measurement gaps to green bond investors, (3) verification gaps that could undermine credibility, (4) GHG Protocol alignment and third-party verification requirements by market, (5) remediation timeline and cost to achieve auditable measurement standards, (6) interim assurance mechanisms for plants with current quality gaps, (7) recommended standardization protocol. Identify which plants pose highest credibility risk and which can immediately support green bond claims. Produce a measurement quality roadmap."
+    },
+    {
+      "name": "Market & Rating Guidance Reconciler",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Rating agencies and regional banks give conflicting guidance on green bond structuring, taxonomy classification, and disclosure. Your task is to reconcile these conflicts without compromising investor credibility. Analyze: (1) what specific guidance conflicts exist (e.g., taxonomy classification disagreements, disclosure thresholds, measurement standards), (2) which institutions carry highest weight in each market (EU, Gulf, Asia), (3) whether conflicts reflect genuine incompatibility or different risk appetite, (4) which guidance to prioritize by market without appearing inconsistent, (5) how to communicate the approach to investors transparently (e.g., 'meeting highest applicable standard' vs. 'market-appropriate approach'). Develop unified messaging that satisfies rating agencies and banks across all three markets while protecting credibility. Produce a reconciliation matrix and communication strategy."
+    },
+    {
+      "name": "Financing Structure Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Integrate all prior analysis—taxonomy alignment, disclosure requirements, measurement quality assessment, and reconciled market guidance—into a comprehensive, internally consistent financing strategy. Produce: (1) bond issuance structure by market (tranche sizing, timing, currency), (2) unified taxonomy classification approach with regional variations clearly justified, (3) emissions measurement standards and verification requirements for all plants, (4) disclosure template and reporting cadence for each market, (5) credibility safeguards (verification partners, audit protocols, restatement provisions), (6) investor communication roadmap addressing ESG expectations. Resolve any contradictions between prior analyses. Ensure that all plants can support their retrofit classifications and measurement claims. Specify exactly which plants qualify for green bond proceeds in 2026 and under what conditions."
+    },
+    {
+      "name": "Credibility & Consistency Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are the final quality gate for this financing strategy. Review the refined strategy comprehensively and provide FULL analysis across these dimensions: (1) Does the strategy maintain consistent investor credibility across EU, Gulf, and Asian capital markets despite taxonomic differences? (2) Are measurement quality assurances credible and sufficient to support green bond claims? (3) Does the reconciled guidance approach avoid appearing opportunistic or arbitrary to any stakeholder group? (4) Are there remaining contradictions between regional approaches that could create reputational risk? (5) Does the strategy align with evolving ESG best practices and rating agency expectations? (6) Are there specific plants whose emissions claims remain insufficiently verified? (7) Is the disclosure approach transparent about trade-offs between markets? Provide detailed strengths and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Strategy Implementation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format and finalize the green bond financing strategy for board presentation and investor communication. Produce an executive summary and detailed strategy document that includes: (1) financing roadmap with timeline and market sequencing, (2) taxonomy approach summary with market-by-market rationale, (3) emissions measurement framework and verification plan, (4) disclosure commitments and investor reporting schedule, (5) credibility safeguards and reputational risk mitigation, (6) answers to anticipated investor questions (why different approaches per market? how is measurement quality assured?), (7) implementation governance and accountability. Ensure clarity for both technical and non-technical audiences. Highlight key differentiators (measurement rigor, transparency, regional expertise) that reinforce investor confidence. Produce deliverables ready for board approval and investor roadshow."
+    }
+  ],
+  "explanation": "This pipeline is structured to resolve a complex, multi-stakeholder financing challenge where technical rigor, market heterogeneity, and credibility are equally critical. Execution flow: Builder creates initial strategy framework → Taxonomy Analyst maps region-specific requirements → Emissions Expert assesses measurement quality risks → Strategist reconciles conflicting guidance → Refiner integrates all inputs into unified strategy → Critic validates credibility and consistency (if revise, loops back to Refiner to resolve identified gaps) → Polisher delivers executive-ready output. The critic acts as a quality gate because integration errors (e.g., contradictory regional approaches, insufficient measurement assurance) could fatally undermine investor confidence; the feedback loop to Refiner allows targeted corrections without rebuilding the entire strategy. Measurement quality and market reconciliation are elevated to expert/strategist level because these are the highest credibility risks—conflicting guidance or weak emissions claims could trigger rating downgrades or investor litigation. The pipeline avoids premature approval, keeping human discretion out of the automated refinement loop while ensuring the final output is rigorously validated."
+}
+```

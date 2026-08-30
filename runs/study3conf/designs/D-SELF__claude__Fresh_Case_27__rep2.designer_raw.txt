@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Localization Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive localization and marketing strategy framework for Korean content across all regions"
+    },
+    {
+      "name": "Regional Data Analyst",
+      "role": "analyst",
+      "description": "Analyzes audience preferences, dubbing costs, cultural sensitivities, and fandom dynamics by region to inform budget allocation"
+    },
+    {
+      "name": "Budget & Cultural Strategist",
+      "role": "strategist",
+      "description": "Develops budget allocation and cultural sensitivity protocols across regions, integrating cost-efficiency with regional appropriateness"
+    },
+    {
+      "name": "Strategy Integrity Reviewer",
+      "role": "critic",
+      "description": "Assesses complete strategy for internal consistency, feasibility, regional coverage, and budget realism"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Incorporates feedback to strengthen strategy across cultural sensitivity, budget realism, and regional differentiation"
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "reviewer",
+      "description": "Performs final comprehensive evaluation ensuring strategy is actionable, regionally differentiated, and budget-optimized"
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "description": "Formats final localization and marketing strategy into clear, actionable output with regional breakdowns and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Localization Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a localization and marketing strategy for Korean content across Southeast Asia, Middle East, Latin America, and Europe. Create an initial comprehensive strategy that addresses: (1) regional subtitle vs. dubbing preferences, (2) cultural adaptation requirements, (3) fandom community dynamics, (4) dubbing studio quality variations by language, and (5) marketing approaches tailored to regional audiences. Produce a structured framework covering all regions with initial strategic recommendations."
+    },
+    {
+      "name": "Regional Data Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the streaming platform's Korean-content strategy across Southeast Asia, Middle East, Latin America, and Europe. Provide detailed data-driven insights on: (1) subtitle vs. dubbing adoption rates by region, (2) dubbing costs and quality variations by language, (3) cultural sensitivity priorities and historical reference concerns per region, (4) transnational fandom communities and their localization demands, (5) content adaptation tolerance levels. Generate specific metrics and comparative analysis to inform budget decisions."
+    },
+    {
+      "name": "Budget & Cultural Strategist",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "Based on regional analysis, design an optimal limited-budget allocation strategy and cultural sensitivity framework for Korean content localization. Specify: (1) budget split across regions weighted by growth potential, (2) dubbing language priorities and studio selection strategy, (3) subtitle vs. dubbing investment per region, (4) marketing budget distribution aligned with fandom community strength, (5) cultural adaptation protocols for historical/cultural references per region, (6) content sensitivity guidelines and risk mitigation. Provide concrete budget percentages and cultural recommendations for each region."
+    },
+    {
+      "name": "Strategy Integrity Reviewer",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "Review the complete localization and marketing strategy for internal coherence and feasibility. Assess: (1) consistency between regional targeting and budget allocation, (2) coverage of all four regions with differentiated approaches, (3) realistic dubbing studio selection given cost/quality constraints, (4) alignment of fandom engagement strategies with actual community structures, (5) gaps between strategy promises and budget capacity, (6) practical implementation feasibility, (7) cultural sensitivity integration appropriateness. Provide full analysis of strengths and weaknesses. Output EXACTLY ONE keyword on the final line: pass OR revise"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the localization and marketing strategy based on integrity review feedback. Address all identified gaps and inconsistencies. Strengthen: (1) regional differentiation in dubbing and subtitle approaches, (2) cultural adaptation protocols specific to each region, (3) budget allocation realism and cost-efficiency measures, (4) fandom community engagement tactics aligned with actual transnational dynamics, (5) marketing messaging calibrated to regional sensitivities. Produce an improved, coherent, actionable strategy."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "reviewer",
+      "type": "if",
+      "systemPrompt": "Perform final comprehensive evaluation of the refined localization and marketing strategy. Assess: (1) regional differentiation and appropriateness of approaches, (2) budget allocation logic and realistic cost management, (3) dubbing/subtitle strategy clarity and feasibility, (4) cultural sensitivity integration, (5) fandom engagement viability, (6) overall actionability and strategic coherence. Provide detailed strengths and weaknesses analysis. Output EXACTLY ONE keyword on the final line: pass OR revise",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Executive Summary Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a clear, actionable executive output. Produce: (1) Regional breakdown table (Southeast Asia, Middle East, Latin America, Europe) with specific dubbing/subtitle recommendations, (2) Budget allocation summary with percentages and rationale, (3) Cultural sensitivity guidelines per region with adaptation protocols, (4) Fandom engagement tactics by region and community type, (5) Dubbing studio strategy with cost-quality optimization, (6) Implementation roadmap and success metrics. Ensure all sections are specific, measurable, and ready for platform execution."
+    }
+  ],
+  "explanation": "Pipeline: Builder → Analyst → Budget & Cultural Strategist → Integrity Reviewer → IF gate (revise loops to Refiner, pass continues) → Refiner (if needed) → Final Quality Gate → IF gate (revise loops back to Refiner, pass continues) → Polisher. The design integrates data analysis, strategic budget allocation, and cultural sensitivity into one comprehensive phase, reducing redundancy while maintaining quality gates that ensure coherence and feasibility before final formatting."
+}
+```

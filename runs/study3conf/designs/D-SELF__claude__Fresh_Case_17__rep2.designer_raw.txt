@@ -1,0 +1,82 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market & Regulatory Analyst",
+      "role": "analyst",
+      "description": "Analyzes country-specific regulatory requirements, curriculum mandates, procurement channels, and stakeholder attitudes across Vietnam, Saudi Arabia, France, and Kenya"
+    },
+    {
+      "name": "Localization Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial product localization strategy document covering curriculum alignment, language rules, parental/teacher attitudes, procurement models, and technology core preservation"
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Reviews strategy for gaps in stakeholder alignment, compliance, procurement feasibility, and identifies conflicting country requirements"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Revises strategy to resolve stakeholder concerns, reconcile conflicting requirements, and strengthen core-platform preservation while maximizing local fit"
+    },
+    {
+      "name": "Localization Expert",
+      "role": "expert",
+      "description": "Validates technical feasibility and best practices for balancing shared core with country-specific customizations"
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "description": "Final comprehensive quality assessment across all four markets, stakeholder groups, and procurement channels"
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into executive-ready product strategy document with country playbooks and implementation roadmap"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market & Regulatory Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a market analyst specializing in edtech localization. Analyze for each target country (Vietnam, Saudi Arabia, France, Kenya): 1) Mandatory curriculum requirements and content restrictions, 2) Language-of-instruction policies, 3) Government attitudes toward foreign educational content, 4) Parental and teacher beliefs about screen time and standardized testing, 5) Procurement mechanisms (government vs. direct-to-consumer), 6) Competitive landscape. Produce detailed comparative country-by-country findings highlighting constraints, opportunities, and conflicts between markets."
+    },
+    {
+      "name": "Localization Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a product strategist building localization strategy for an adaptive-learning platform. Using market analysis, create a comprehensive product strategy covering: 1) Shared technology core definition, 2) Country-specific customization roadmap (curriculum mapping, language support, content localization), 3) Stakeholder engagement strategy (addressing screen-time concerns, teacher autonomy, government procurement), 4) Procurement channel strategy (hybrid direct-to-consumer + government partnerships), 5) Implementation sequencing. Balance global efficiency against local market requirements. Produce structured, actionable strategy document."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are a critical reviewer assessing localization strategy. Review for: 1) Gaps in addressing parent/teacher attitudes, 2) Feasibility of procurement approaches in each country, 3) Compliance with mandatory curricula, 4) Language-of-instruction alignment, 5) Conflicts between country requirements and tradeoff handling, 6) Technology core preservation clarity. Provide detailed findings with specific weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic refiner. Based on critical feedback, revise the localization strategy to: 1) Strengthen stakeholder engagement approaches with specific tactics, 2) Resolve conflicting country requirements with explicit tradeoff documentation, 3) Enhance compliance pathways for each mandatory curriculum, 4) Clarify multilingual support architecture, 5) Validate procurement strategies with realistic timelines, 6) Reinforce shared technology core definition. Produce revised strategy addressing all feedback with concrete, implementation-ready solutions."
+    },
+    {
+      "name": "Quality & Expert Gate",
+      "role": "critic",
+      "type": "while",
+      "maxIterations": 3,
+      "targetStep": 3,
+      "systemPrompt": "You are a quality assurance gate combining expert validation and feasibility review. Assess: 1) Does strategy comprehensively address all four markets with tailored playbooks? 2) Are all stakeholder groups (parents, teachers, governments, consumers) adequately addressed? 3) Does procurement strategy handle government and direct-to-consumer channels realistically? 4) Is shared technology core clearly defined with realistic customization boundaries? 5) Are implementation pathways clear, sequenced, and risk-mitigated? 6) Is the shared core architecture realistic for supporting four diverse regulatory environments? 7) Are stakeholder engagement tactics culturally informed and evidence-based? Provide full assessment of strengths and remaining weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: pass or retry."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive-level document polisher. Format the finalized localization strategy into a professional product strategy document. Structure as: 1) Executive Summary (market opportunity, localization approach, competitive advantage), 2) Country-by-Country Playbook (Vietnam, Saudi Arabia, France, Kenya — each with curriculum strategy, stakeholder engagement, procurement model, phasing), 3) Shared Technology Core Architecture (what stays consistent, customization boundaries), 4) Implementation Roadmap (12-24 month phasing with milestones), 5) Risk Mitigation Plan (regulatory, competitive, execution risks), 6) Success Metrics (country-level KPIs, core-platform integrity). Ensure clarity, strategic coherence, and executive readability."
+    }
+  ],
+  "explanation": "Execution flow: (1) Analyst establishes market context and regulatory landscape for all four countries, (2) Builder creates initial strategy document integrating market findings, (3) Critic identifies gaps in stakeholder alignment, compliance, and procurement feasibility, (4) Refiner resolves conflicts and strengthens all strategy components based on critical feedback, (5) Quality & Expert Gate (while loop, max 3 iterations) performs comprehensive assessment across all four markets, stakeholder groups, procurement channels, and platform architecture — if gaps remain, loops back to Refiner for improvements; when quality criteria met, routes to Polisher, (6) Polisher formats final strategy into executive-ready deliverable. This design ensures comprehensive multi-stakeholder strategy development with iterative refinement and expert validation without exceeding the 7-step limit."
+}
+```

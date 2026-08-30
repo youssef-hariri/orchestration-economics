@@ -1,0 +1,77 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Campaign Strategy Builder",
+      "role": "builder",
+      "description": "Drafts initial communications framework for faith-based and cultural seasonal campaigns, including core principles, regional adaptations, and approval safeguards."
+    },
+    {
+      "name": "Cultural Authenticity Expert",
+      "role": "expert",
+      "description": "Evaluates campaign framework for cultural and faith accuracy, identifies representation risks, and assesses alignment with regional sensitivities specific to Ramadan, Lunar New Year, and Diwali contexts."
+    },
+    {
+      "name": "Cross-Border Scrutiny Analyst",
+      "role": "analyst",
+      "description": "Analyzes social-media sentiment patterns, identifies potential backlash triggers, maps regional agency alignment issues, and produces intelligence on historical praise/criticism patterns to inform framework safeguards."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "description": "Integrates cultural authenticity feedback and cross-border scrutiny insights into the framework, strengthens approval workflows, and addresses representation gaps and social-media response protocols."
+    },
+    {
+      "name": "Integrated Assurance Critic",
+      "role": "critic",
+      "description": "Conducts holistic quality review of refined framework: verifies authenticity safeguards are actionable, approval processes are clear and scalable, social-media response protocols are defined, and regional agency coordination mechanisms are robust. Provides full assessment with routing decision."
+    },
+    {
+      "name": "Implementation Polisher",
+      "role": "polisher",
+      "description": "Formats final communications framework for stakeholder delivery: clarifies governance roles, structures approval timelines, packages regional guidance documents, and ensures framework is operationally ready for 2026 campaigns."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Campaign Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a communications framework for a global food brand's faith-based and cultural seasonal campaigns across multiple regions and faiths (Ramadan in Gulf/North Africa/Southeast Asia, Lunar New Year, Diwali). Your task is to draft an initial framework that: (1) establishes core principles for authentic cultural representation, (2) defines regional governance structures and approval workflows, (3) maps stakeholder roles (brand, regional agencies, cultural consultants), (4) outlines social-media monitoring and rapid-response protocols, (5) specifies how past backlash will be prevented through deeper consultation and fact-checking. Produce a comprehensive strategic framework document that serves as the foundation for subsequent expert review."
+    },
+    {
+      "name": "Cultural Authenticity Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural and faith expert with deep knowledge of Ramadan observance, Islamic practices in the Gulf and North Africa, Lunar New Year traditions in Southeast Asia, and Diwali celebrations in South Asia. Review the campaign framework critically: (1) Identify specific risks of shallow or inaccurate representation in each faith/cultural context, (2) Assess whether consultation mechanisms with local faith leaders and cultural advisors are sufficiently robust, (3) Flag language, imagery, or messaging patterns that have historically triggered backlash in these regions, (4) Evaluate whether approval safeguards give adequate voice to regional communities, (5) Recommend specific authentication practices (e.g., community review boards, scholar consultations, sensitivity testing). Provide detailed analysis with specific cultural vulnerabilities and recommended reinforcements."
+    },
+    {
+      "name": "Cross-Border Scrutiny Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a social-media and cross-cultural communication analyst. Analyze the framework for its ability to manage global scrutiny: (1) Map historical patterns of praise and backlash from past campaigns across the three regions (what triggered positive vs. negative sentiment), (2) Assess how the framework addresses the speed of social-media amplification (hours to viral), (3) Evaluate whether response protocols are fast and regionally differentiated enough, (4) Identify agency coordination gaps that might cause inconsistent messaging across regions, (5) Analyze whether the framework includes early warning mechanisms for emerging criticism, (6) Assess crisis-escalation procedures and regional social-media specialist involvement. Provide data-driven insights on risk vectors and necessary protocol enhancements."
+    },
+    {
+      "name": "Framework Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining a global campaign communications framework. Integrate the cultural authenticity expert's recommendations and cross-border scrutiny analyst's insights into the original framework: (1) Strengthen approval safeguards by embedding regional cultural review boards with veto authority, (2) Add specific consultation protocols with faith leaders, scholars, and community representatives for each faith/region, (3) Enhance social-media monitoring with early-warning triggers and real-time sentiment analysis thresholds, (4) Define rapid-response playbooks for each region, differentiated by cultural context, (5) Clarify agency accountability and escalation procedures to prevent coordination failures, (6) Add pre-campaign testing mechanisms (community panels, sensitivity reviews) that catch representation issues before launch, (7) Specify fact-checking processes for cultural and historical claims in messaging. Produce a refined, operationally detailed framework ready for final assurance review."
+    },
+    {
+      "name": "Integrated Assurance Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are conducting final quality assurance on a global faith-based campaign communications framework. Review the refined framework comprehensively: (1) Verify that approval safeguards are truly binding and that regional cultural review boards have meaningful authority to halt campaigns, (2) Confirm that consultation protocols with faith leaders and community representatives are detailed, scalable, and include clear timelines, (3) Assess whether social-media response protocols are fast enough (define expected response times per region), (4) Evaluate whether the framework prevents the specific types of representation failures that triggered past backlash, (5) Check that agency coordination mechanisms are explicit (e.g., decision rights, escalation paths, communication channels), (6) Confirm that crisis procedures address both rapid-response needs and careful cultural sensitivity (not just speed), (7) Verify that the framework is actionable and doesn't rely on undefined external approvals. Provide FULL written assessment addressing each criterion, then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {"pass": 6, "revise": 4}
+    },
+    {
+      "name": "Implementation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are preparing the final communications framework for stakeholder delivery and operational deployment. Format and structure the framework for immediate use: (1) Organize into clear sections: Strategic Principles, Regional Governance, Approval Workflows, Consultation Protocols, Social-Media Monitoring & Response, Agency Accountability, Crisis Procedures, (2) Create decision trees for approval authority and escalation, (3) Develop region-specific guidance documents (one each for Ramadan/Gulf-North Africa, Lunar New Year/Southeast Asia, Diwali markets), (4) Specify timelines for each approval and consultation stage, (5) Create templates for community review, fact-checking, and sensitivity testing, (6) Produce a social-media response playbook with regional differentiation, (7) Format as operationally ready documents (e.g., workflow charts, responsibility matrices, timing guides). Ensure the output is immediately usable by the brand, regional agencies, and cultural consultants for 2026 campaign execution."
+    }
+  ],
+  "explanation": "This pipeline achieves authentic, scrutiny-resilient faith-based campaign communications through a structured sequence: (1) The Builder establishes the initial strategic framework; (2) The Cultural Authenticity Expert reviews for representation risks and consultation gaps specific to each faith/region; (3) The Cross-Border Scrutiny Analyst maps social-media vulnerability patterns and agency coordination issues; (4) The Framework Refiner integrates both expert inputs, strengthening approval safeguards, consultation protocols, and rapid-response procedures; (5) The Integrated Assurance Critic (if gate) conducts holistic quality review, verifying that safeguards are binding, protocols are actionable, and the framework prevents historically problematic representation patterns—if deficiencies remain, the pipeline loops back to the Refiner for targeted improvements (up to 3 iterations); (6) The Implementation Polisher formats the final framework into operationally ready, region-specific guidance for the brand and agencies. The design ensures authenticity by embedding cultural expertise early, manages cross-border scrutiny through analyst-driven social-media protocols, and achieves approval robustness through iterative refinement before final delivery. The if gate prevents advancement of incomplete frameworks while avoiding human-in-loop bottlenecks by using automated quality criteria."
+}
+```

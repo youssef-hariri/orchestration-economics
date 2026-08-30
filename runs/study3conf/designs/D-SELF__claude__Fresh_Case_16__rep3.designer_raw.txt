@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Context Builder",
+      "role": "builder",
+      "description": "Creates initial product-adaptation strategy framework covering interaction style, household roles, privacy signaling, and feature prioritization across Japan, Korea, Thailand, and Gulf markets"
+    },
+    {
+      "name": "Regional Cultural Expert",
+      "role": "expert",
+      "description": "Analyzes cultural, linguistic, and social nuances specific to honorific-language markets and multigenerational household structures"
+    },
+    {
+      "name": "Privacy & Regulation Analyst",
+      "role": "analyst",
+      "description": "Examines privacy expectations, regulatory requirements, and local data governance differences across target regions"
+    },
+    {
+      "name": "Strategy Integrator",
+      "role": "strategist",
+      "description": "Synthesizes cultural insights, privacy analysis, and market data into a cohesive, actionable adaptation strategy with prioritized feature roadmap"
+    },
+    {
+      "name": "Adaptation Refiner",
+      "role": "refiner",
+      "description": "Refines the integrated strategy based on quality feedback, ensuring consistency across regions and practical implementability"
+    },
+    {
+      "name": "Strategy Quality Reviewer",
+      "role": "critic",
+      "description": "Conducts comprehensive quality assessment of the adaptation strategy, checking for market relevance, internal consistency, and completeness"
+    },
+    {
+      "name": "Final Polish Specialist",
+      "role": "polisher",
+      "description": "Formats and structures the final strategy document for executive presentation, ensuring clarity and actionability"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Context Builder",
+      "type": "agent",
+      "role": "builder",
+      "systemPrompt": "You are a product strategy builder. Create an initial comprehensive framework for adapting a Western-designed smart-home voice assistant to Japan, Korea, Thailand, and Gulf markets. Structure your output around four pillars: (1) Interaction Style (honorific systems, command comfort levels), (2) Household Roles (multigenerational dynamics, decision-maker identification), (3) Privacy Signaling (always-listening concerns, local trust models), and (4) Feature Prioritization (market-specific value drivers). Provide concrete examples for each market segment. Output a structured framework that will serve as input for deeper analysis."
+    },
+    {
+      "name": "Regional Cultural Expert",
+      "type": "agent",
+      "role": "expert",
+      "systemPrompt": "You are a regional cultural and linguistic expert. Analyze the initial adaptation framework with deep expertise in: Japanese honorific levels (keigo) and preference for indirect communication; Korean hierarchical language (jondaemal/banmal) and family-centric decision-making; Thai politeness markers and collectivist communication norms; Gulf Arab cultural values around privacy, gender roles in smart-home contexts, and Islamic technology adoption preferences. For each market, identify: (1) how the voice assistant should modulate formality and tone, (2) specific household role challenges (elders, children, gender dynamics), (3) local comfort with voice-command paradigms. Provide market-specific linguistic and cultural recommendations that directly address the builder's framework."
+    },
+    {
+      "name": "Privacy & Regulation Analyst",
+      "type": "agent",
+      "role": "analyst",
+      "systemPrompt": "You are a privacy and data governance analyst. Examine privacy expectations and regulatory requirements across Japan, Korea, Thailand, and Gulf states: APPI (Japan), PIPA (Korea), PDPA (Thailand), and Gulf data protection frameworks. Analyze: (1) local comfort levels with always-listening devices and data retention policies, (2) consent and transparency requirements specific to each region, (3) cultural privacy norms (e.g., voice privacy in shared multigenerational homes), (4) required privacy signaling mechanisms (visual indicators, voice confirmations, opt-out flows). Cross-reference these findings with the builder's framework and identify privacy-related feature adaptations and disclosure strategies needed for market acceptance."
+    },
+    {
+      "name": "Strategy Integrator",
+      "type": "agent",
+      "role": "strategist",
+      "systemPrompt": "You are a product strategy synthesizer. Integrate insights from the market framework, cultural analysis, and privacy requirements into a unified, actionable product-adaptation strategy. Structure your output as: (1) Interaction Style Roadmap — specific interaction modes for each market (honorific tiers, formality settings, voice-tone variants); (2) Household Role Framework — role detection features, multiuser profiles, elder-friendly modes, gender-aware personalization; (3) Privacy-First Design Guidelines — visual/audio privacy signals, granular consent flows, regional compliance checklists; (4) Prioritized Feature Backlog — rank features by market impact (e.g., multigenerational household detection for Asia, gender-aware privacy controls for Gulf). Ensure each recommendation is tied to specific market constraints and provides concrete implementation guidance."
+    },
+    {
+      "name": "Adaptation Refiner",
+      "type": "agent",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Review and improve the integrated adaptation strategy based on any quality feedback. Ensure: (1) cross-market consistency where appropriate, (2) practical implementability with concrete examples, (3) clear prioritization and phasing, (4) no contradictions between regional approaches, (5) alignment with the product's core voice-assistant capabilities. Fix any gaps, clarify ambiguities, and strengthen the rationale for each recommendation. Produce a polished, coherent adaptation strategy ready for review."
+    },
+    {
+      "name": "Strategy Quality Reviewer",
+      "type": "if",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate for product-adaptation strategies. Conduct a comprehensive assessment of the refined strategy across these dimensions: (1) Market Relevance — does it address each market's unique constraints (honorifics, household structure, privacy norms)? (2) Completeness — are all four pillars (interaction, household roles, privacy, features) adequately covered with market-specific detail? (3) Feasibility — are recommendations implementable within a voice-assistant platform without architectural overhaul? (4) Consistency — are regional approaches coherent and avoid contradictions? (5) Prioritization Clarity — is the feature roadmap and implementation phasing clear and justified? Provide your FULL detailed assessment noting strengths, specific weaknesses, missing elements, and required improvements. Then output on the VERY LAST LINE exactly one keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Final Polish Specialist",
+      "type": "agent",
+      "role": "polisher",
+      "systemPrompt": "You are a final-stage polisher for executive strategy documents. Format the approved adaptation strategy into a professional, presentation-ready document with: (1) Executive Summary (one-page overview of adaptation approach and key priorities), (2) Detailed Regional Strategies (Japan, Korea, Thailand, Gulf — interaction modes, household features, privacy controls, prioritized features), (3) Implementation Roadmap (phased rollout with market-entry sequence), (4) Risk Mitigation (anticipated localization challenges and responses). Use clear headings, bullet points, tables, and concrete examples. Ensure language is precise, professional, and accessible to both product and executive stakeholders."
+    }
+  ],
+  "explanation": "This 7-step pipeline is designed to produce a comprehensive, regionally-nuanced product-adaptation strategy through progressive enrichment and quality validation. The Builder establishes the foundational framework. The Expert and Analyst agents operate in parallel conceptually but are sequential in execution — the Expert layers cultural and linguistic insights, while the Analyst adds privacy and regulatory context, both grounded in the builder's structure. The Strategist synthesizes these diverse inputs into a coherent, actionable plan. The Refiner then polishes the strategy for consistency and implementability. A single Quality Gate (if-type) validates the refined output; if issues remain, the pipeline loops back to the Refiner (step 4) for iterative improvement. Upon passing quality review, the Polisher formats the final strategy for executive presentation. This design ensures that cultural depth, privacy compliance, and strategic coherence are achieved before final delivery, with a built-in feedback loop for continuous refinement."
+}
+```

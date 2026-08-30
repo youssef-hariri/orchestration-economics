@@ -1,0 +1,91 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Entry Strategy Builder",
+      "role": "builder",
+      "description": "Creates initial comprehensive market-entry strategy covering partner selection criteria, JV governance frameworks, store-format adaptations, and workforce-localization compliance pathways for Saudi Arabia, UAE, and Qatar"
+    },
+    {
+      "name": "Gulf Retail Expert Advisor",
+      "role": "expert",
+      "description": "Provides domain-specific insights on GCC ownership regulations, family conglomerate dynamics, Ramadan seasonality patterns, local labor-nationalization mandates, and cultural retail preferences"
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "description": "Incorporates expert insights and regulatory nuances into the strategy, balancing foreign-operator interests with local-partner power dynamics, ensuring compliance and cultural fit"
+    },
+    {
+      "name": "Multi-Market Risk & Governance Analyst",
+      "role": "analyst",
+      "description": "Analyzes country-specific variations in ownership caps, Kafala regulations, Saudization/Emiratization quotas, and JV governance complexity across three markets; identifies conflicts and mitigation gaps"
+    },
+    {
+      "name": "Strategy Validation Critic",
+      "role": "critic",
+      "description": "Reviews refined strategy for internal consistency, feasibility, regulatory compliance, and alignment with local-partner expectations; identifies unresolved tensions and coverage gaps"
+    },
+    {
+      "name": "Format & Compliance Adapter",
+      "role": "refiner",
+      "description": "Addresses validation feedback by refining store-format recommendations, workforce-localization implementation timelines, Ramadan operational adjustments, and governance conflict-resolution mechanisms"
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "description": "Finalizes strategy into clear, actionable market-entry roadmap with country-specific playbooks, partner-selection matrices, JV governance templates, and compliance checklists ready for stakeholder presentation"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Entry Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are designing a Gulf Cooperation Council market-entry strategy for a European grocery retailer entering Saudi Arabia, UAE, and Qatar via joint ventures. Create a comprehensive initial strategy addressing: (1) Partner selection criteria and conglomerate identification framework; (2) JV governance structures balancing foreign-operator expertise with local-partner control expectations; (3) Store-format adaptations for GCC consumer preferences and urban/suburban density variations; (4) Workforce-localization compliance pathways for Saudization, Emiratization, and Qatarization mandates. Output should map macro-level strategic pillars with foundational recommendations for each market and cross-cutting themes."
+    },
+    {
+      "name": "Gulf Retail Expert Advisor",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a Middle East retail and regulatory expert with deep knowledge of GCC business practices. Review the initial market-entry strategy and provide expert domain insights on: (1) Ownership-cap variations and effective-control regulations in Saudi Arabia (GFEZ vs. non-GFEZ), UAE (mainland vs. free zones), and Qatar; (2) Family conglomerate dynamics, decision-making hierarchies, and typical JV expectations; (3) Ramadan-driven seasonality patterns, prayer-time operational constraints, and category-specific demand shifts; (4) Kafala and sponsorship implications, nationalization quotas and timelines, skill-gap challenges in each market; (5) Store-format preferences (hypermarkets vs. convenience, online integration, luxury vs. value positioning). Provide specific, market-by-market guidance and flag assumptions in the builder's output that require validation."
+    },
+    {
+      "name": "Strategy Refinement Specialist",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are refining the market-entry strategy by integrating expert domain insights. Revise and enhance: (1) Partner-selection criteria to reflect family-conglomerate decision-making, reputation checks, and complementary capabilities; (2) JV governance frameworks to address local-partner board control, profit-distribution norms, and dispute-resolution mechanisms aligned with Sharia principles where relevant; (3) Store-format recommendations tailored to each market's urban topology, consumer demographics, Ramadan adaptations (prayer halls, Iftar catering, extended hours), and competitive positioning; (4) Workforce-localization roadmaps with realistic timelines for Saudization/Emiratization quotas, training pathways, and retention strategies. Ensure the refined strategy balances global operational standards with local-market expectations and regulatory constraints."
+    },
+    {
+      "name": "Multi-Market Risk & Governance Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are analyzing the refined strategy for country-specific regulatory variations and JV governance complexity. Conduct detailed analysis of: (1) Ownership and control requirements—Saudi Arabia (PIF preferences, GFEZ exceptions), UAE (mainland 51% local rule, free-zone flexibility), Qatar (local-partner mandatory roles); (2) Labor-localization mandates and timelines—Saudization targets, Emiratization phase-ins, Qatar Nafis requirements; (3) Ramadan operational and commercial impacts—store-hour regulations, staffing challenges, inventory/logistics shifts, profit-margin compression; (4) JV governance risks—conflicting strategic priorities between local and foreign partners, decision-making bottlenecks, exit/buyout scenarios. Produce a comparative matrix showing country-specific risks, compliance complexity, and recommended governance safeguards. Identify strategy gaps and internal inconsistencies."
+    },
+    {
+      "name": "Strategy Validation Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are validating the refined market-entry strategy against feasibility, compliance, and stakeholder-alignment criteria. Conduct a full assessment covering: (1) Regulatory Compliance—Do partner-selection and JV-governance recommendations meet ownership caps, localization quotas, and sector restrictions in each market? (2) Feasibility—Are store-format adaptations realistic given supply-chain, real-estate, and labor constraints? Are Ramadan operational plans operationally sound? (3) Partner Alignment—Do governance structures and profit models align with typical family-conglomerate expectations and reduce exit-conflict risk? (4) Completeness—Are workforce-localization timelines explicit? Are governance conflict-resolution mechanisms detailed? (5) Consistency—Do recommendations avoid contradictions across markets or unintended regulatory exposure? Provide full reasoning for each criterion, then output EXACTLY ONE keyword: pass (strategy is sound and ready for adaptation) or revise (critical gaps require refinement).",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 5
+      }
+    },
+    {
+      "name": "Format & Compliance Adapter",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are addressing validation feedback to refine the market-entry strategy. Based on critic's assessment, strengthen: (1) Store-Format Recommendations—Add specific format mixes (hypermarket %, convenience %, online), Ramadan operational playbooks (prayer-room specs, Iftar logistics, staffing rotation), and category-mix adjustments for each market; (2) Workforce-Localization Implementation—Define month-by-month or year-by-year quotas for Saudization/Emiratization, training curricula, retention incentives, and contingency staffing models; (3) JV Governance Safeguards—Elaborate conflict-resolution mechanisms (arbitration clauses, deadlock-breaking protocols), board-composition guidelines, and exit-scenario procedures; (4) Compliance Checklists—Produce market-specific regulatory audit lists for ownership verification, labor inspections, and Ramadan operational compliance. Ensure all recommendations are actionable and reduce ambiguity for field execution."
+    },
+    {
+      "name": "Executive Presentation Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are finalizing the market-entry strategy into a polished, executive-ready strategic roadmap. Organize and format the output as: (1) Executive Summary—2-3 page overview of market-entry approach, key success factors, and country-specific entry sequencing; (2) Market-by-Market Playbooks—Separate sections for Saudi Arabia, UAE, and Qatar detailing partner-selection matrix, JV governance template, store-format mix, Ramadan operational plan, and workforce-localization roadmap; (3) Comparative Governance Framework—Table showing ownership rules, labor-quota timelines, dispute-resolution protocols, and exit scenarios across three markets; (4) Compliance & Risk Checklist—Country-specific audit templates for regulatory verification, operational readiness, and stakeholder sign-off. Ensure clarity, visual hierarchy, and actionable detail. Output a cohesive strategic document suitable for board-level and operating-partner review."
+    }
+  ],
+  "explanation": "This 7-step pipeline is designed to produce a comprehensive, context-aware Gulf retail market-entry strategy through structured domain-expert integration and iterative refinement. The flow is: (1) Builder establishes foundational strategy across partner selection, governance, format adaptation, and compliance; (2) Expert Advisor injects GCC-specific regulatory and cultural knowledge; (3) Refiner integrates expert insights into refined strategy; (4) Analyst stress-tests country-by-country variations and governance complexity; (5) Critic performs a full validation gate ('if' step)—if 'pass', proceeds to polishing; if 'revise', loops back to Adapter to address gaps; (6) Adapter refines based on critic's feedback, strengthening format details, compliance, and governance safeguards; (7) Polisher formats into executive-ready playbooks and checklists. The single 'if' gate after Critic ensures the strategy meets compliance, feasibility, and stakeholder-alignment standards before finalization. No human approval is required; all steps execute autonomously with clear quality criteria."
+}
+```

@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "LogisticsArchitect",
+      "role": "builder",
+      "systemPrompt": "You are a pharmaceutical logistics expert. Draft a comprehensive cold-chain distribution strategy for West and East Africa. Include equipment selection (passive vs. powered), corridor sequencing based on infrastructure, and a risk-mitigation framework for spoilage.",
+      "description": "Creates the initial cold-chain distribution strategy."
+    },
+    {
+      "name": "RegionalConstraintAnalyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the draft strategy against specific 2026 constraints: road quality, customs dwell times, electricity reliability, and seasonal weather. Identify gaps in equipment suitability or contingency planning.",
+      "description": "Evaluates the strategy against regional constraints."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a logistics refiner. Incorporate the feedback from the RegionalConstraintAnalyst to optimize the distribution plan, ensuring all regional nuances are addressed.",
+      "description": "Refines the strategy based on analytical feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Review the refined strategy. Check for logical consistency, feasibility of equipment choices, and robustness of contingency plans. Provide a full assessment. On the last line, output 'pass' if the plan is robust, or 'revise' if it needs further improvement. If 'revise', you will loop back to the StrategyRefiner.",
+      "description": "Validates the strategy quality."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, actionable report suitable for stakeholders, ensuring clarity and precision in the logistics recommendations.",
+      "description": "Finalizes the output format."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "LogisticsArchitect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a pharmaceutical logistics expert. Draft a comprehensive cold-chain distribution strategy for West and East Africa. Include equipment selection (passive vs. powered), corridor sequencing based on infrastructure, and a risk-mitigation framework for spoilage."
+    },
+    {
+      "name": "RegionalConstraintAnalyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the draft strategy against specific 2026 constraints: road quality, customs dwell times, electricity reliability, and seasonal weather. Identify gaps in equipment suitability or contingency planning."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a logistics refiner. Incorporate the feedback from the RegionalConstraintAnalyst to optimize the distribution plan, ensuring all regional nuances are addressed."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy. Check for logical consistency, feasibility of equipment choices, and robustness of contingency plans. Provide a full assessment. On the last line, output 'pass' if the plan is robust, or 'revise' if it needs further improvement. If 'revise', you will loop back to the StrategyRefiner.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, actionable report suitable for stakeholders, ensuring clarity and precision in the logistics recommendations."
+    }
+  ],
+  "explanation": "The pipeline begins with the LogisticsArchitect drafting the core strategy. The RegionalConstraintAnalyst then evaluates this draft against the specific African corridor constraints. The StrategyRefiner incorporates these insights. The QualityGate assesses the output; if it identifies gaps, it routes back to the StrategyRefiner to ensure the plan is robust. Once the QualityGate passes, the FinalPolisher formats the document for the end user."
+}
