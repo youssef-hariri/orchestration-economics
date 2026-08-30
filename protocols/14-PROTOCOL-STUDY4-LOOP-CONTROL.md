@@ -1,3 +1,5 @@
+> **STATUS 2026-08-30: SUPERSEDED BY STUDY 3 (D59, author ruling). Not executed. See DESIGN-DECISIONS.md D59 and MANIFEST Entry 79. Retained unmodified below for the audit trail.**
+
 # Protocol 14 — Study 4: Loop Control (Who Drives the OODA Cycle)
 
 **Status: DRAFT — NOT REGISTERED. No generation, judging, or analysis call may be made under

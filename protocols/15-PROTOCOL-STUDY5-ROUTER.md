@@ -1,3 +1,5 @@
+> **STATUS 2026-08-30: SUPERSEDED BY STUDY 3 (D59, author ruling). Not executed. See DESIGN-DECISIONS.md D59 and MANIFEST Entry 79. Retained unmodified below for the audit trail.**
+
 # Protocol 15 — Study 5: The Router (Predictive Contingency Model)
 
 **Status: DRAFT — NOT REGISTERED. Phase 1 uses ONLY frozen, already-collected data and needs
