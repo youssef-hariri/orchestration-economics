@@ -1,0 +1,105 @@
+**OPERATIONS IMPROVEMENT PLAN: DEAL-TO-DELIVERY COMPRESSION**  
+*Lead-Time Reduction Without Quality Compromise*
+
+---
+
+### EXECUTIVE SUMMARY
+
+- **Current State:** 14-week quoted lead time masking an actual ~16-week operational flow; sales loses one in three deals to a competitor quoting six weeks.  
+- **Target State:** 7-week quoted lead time by Month 16; 6-week operational capability by Month 20.  
+- **Guardrails:** Zero reduction in certified inspection rigor. Warranty claim rate must not exceed the 24-month trailing baseline. No certified hold point may be truncated, overlapped, or bypassed without written Authorized Inspector and customer approval.  
+- **Thesis:** We will not ask people to work faster or inspectors to see less. We will eliminate the **80% of elapsed time that is pure queue, wait, and policy delay**—compressing around the quality gates, never through them.
+
+---
+
+### THE TIME-LOSS DIAGNOSIS
+
+Value-stream mapping and queue-morphology analysis reveal that only **~25% of the 16-week operational flow is value-add touch time**. The rest is inter-functional white space and policy delay.
+
+| Segment | Current Days | Touch Time | Queue / Wait | Primary Waste Source |
+|---|---|---|---|---|
+| **Order Processing** | 10 | 1 | 9 | Configuration reviews, credit holds, engineering handoff |
+| **Engineering Release** | 14 | 3 | 11 | Custom drawings, BOM validation, ECN loops, approval-board latency |
+| **Procurement** | 42 | 4 | 38 | Long-lead castings/motors, PO approval queues, supplier gaps |
+| **Production** | 28 | 9 | 19 | Batch-and-queue layout, move starvation, expedite chaos |
+| **Quality Inspection** | 14 | 4 | 10 | Inspector bottlenecks, witness scheduling, rework, not-ready rejections |
+| **Shipping / Docs** | 5 | 2 | 3 | Export documentation, crating lead time |
+| **TOTAL** | **113 (~16 wks)** | **23 days** | **90 days** | **Time is lost between functions, not in the work itself** |
+
+Beneath the blocks, a decision-matrix overlay exposes **policy waste**: ECN boards, capital PO signatures, and delegation bottlenecks that add days without adding value. In Production, the 19-day queue must be decomposed—via spaghetti diagrams and batch-size analysis—into **transfer-batch, process-batch, and starvation waste** before prescribing layout changes. The diagnosis is clear: we do not have a speed problem; we have a waiting problem.
+
+---
+
+### RECOMMENDED CHANGES
+
+#### Process
+- **CPQ + Rules-Based Engineering:** Sales configures 80% of orders through a validated product configurator; engineering release auto-generates drawings and BOMs. ECNs required only for non-standard configurations. A delegation-of-authority matrix pushes release approval to product-line engineers. *Impact: Order + Engineering collapses from 24 days to 4.*
+- **Engineering Pre-Release:** Freeze designs, supplier lists, and quality plans for the top 20 SKUs (80% of volume). *Impact: Eliminates 85% of Engineering queue.*
+- **Cellular Flow Layout:** Shift high-volume lines from functional departments to two product-family cells. Sequence: Month 1, 3P simulation event; Months 2–4, SMED blitzes; Month 4, shadow-line/offline pilot; Months 5–7, dual-track operation before switching >20% volume. *Caveat: Confirm via spaghetti diagrams that layout—not crane scheduling or batch policy—is the binding constraint.*
+- **SMED Changeover:** CNC changeovers from 4.5 hours to <45 minutes; weld-booth swaps from 2 hours to 20 minutes. Enables smaller transfer batches without capacity loss.
+- **Pre-Staging Protocol:** Certified witness tests remain strictly sequential. Post-sign-off transit to load drops to <2 hours by pre-staging crates, export docs, and shipping lanes adjacent to final test. No overlap with pack-out without written AI/customer approval.
+- **Inspection-Ready Standard:** Mandatory 15-minute pre-flight checklist performed by a **Quality-reporting** technician. Units arriving incomplete are rejected back to Production immediately; the Production supervisor owns the delay.
+- **Postponement:** Excluded from the 18-month operational roadmap. Platform modularity is a parallel R&D initiative; it cannot drive operations scheduling until certified.
+
+#### Inventory
+- **Strategic Decoupling Buffers:** Hold a 3-week raw/WIP buffer of longest-lead items—cast housings, large motors, proprietary drives—targeted at the 20% of part numbers driving 80% of demand variance. These are not finished goods.
+- **Pre-Kitted Hardware Cribs:** Vendor-managed inventory for fasteners, fittings, and consumables eliminates daily stock-out hunts.
+
+#### Scheduling
+- **Heijunka Visual Scheduling (Months 1–6):** Replace infinite-capacity MRP with a manual visual sequencing board that releases work only when labor, machine, and inspection capacity are simultaneously available.
+- **Finite-Capacity Scheduling (Months 8–11):** Deploy FCS only after routings are stabilized, run standards calibrated, and load validated in the pilot cell.
+- **DBR Pull:** The true bottleneck workcenter (e.g., long-lead casting machining) is the drum. Final certified inspection is protected by a time buffer; it is never used as the pacemaker.
+- **Locked Burn-In:** Burn-in and run-test durations are non-negotiable schedule buffers. Override requires co-signed approval from the Quality Director and Engineering.
+- **Daily Load-Leveling Huddle:** 15-minute stand-up with Production, Quality, and Supply Chain. Governed by standard work: neutral facilitator, fixed agenda (yesterday’s blocks, today’s queue depth, tomorrow’s inspection-ready units). Problem-solving is banned in the room; items move to the Weekly War Room.
+
+#### Supplier Base
+- **Pre-Certified Supplier Program:** Formalized per ISO 9001:2015 Clause 8.4. Start with one pilot supplier and six months of performance history. Transition to ISO 2859-1 reduced sampling; earn dock-to-stock status only after proven PPM performance.
+- **Pay-for-Capacity:** Share 90-day rolling forecasts and place 6-month blanket POs on long-lead items in exchange for guaranteed 3-week vs. 8-week lead times.
+- **Resident SQEs:** Rotate Supplier Quality Engineers on a scheduled cadence to perform source inspection and process audits at supplier facilities, eliminating incoming queue without displacing the bottleneck to travel logistics.
+
+---
+
+### QUALITY-GATE PROTECTION STRATEGY
+
+**Principle:** Compress the envelope, never the gate. Certified inspections are non-negotiable. We protect them through capacity expansion, upstream migration, metrology validation, and queue elimination—not reduced rigor.
+
+- **Expand Inspection Capacity:** Takt-time analysis distinguishes in-process hours from witness hours. Add **2.0–2.5 FTE on an evening shift** dedicated to in-process checks and pre-witness readiness. Relieve the day-shift witness bottleneck through flexible early-start and Saturday witness windows, not by truncating tests.
+- **Migrate Quality Upstream:** In-cell poka-yoke (go/no-go gauges, torque-limiting tools, vision systems) prevents defects at origin. Supplier source certification via resident SQEs eliminates incoming inspection queues.
+- **Firewall Independence:** In-cell Quality Techs report organizationally to **Quality, not Production**. They are explicitly prohibited from self-release and are subject to unannounced Quality audits.
+- **Metrology Validation:** Gage R&R studies (target %Study Var <30%) and correlation run-offs between old and new digital CMM routines must be completed in Phase 0. No metrology change enters production without customer/regulatory acceptance.
+- **Process Capability Gate:** All critical-to-quality characteristics must demonstrate **Cpk ≥1.33** (Ppk ≥1.67 short-term) before any Phase 1 scale-up. This hard gate prevents the marginal-capability failures that drove the prior warranty spike.
+- **Sequential Gate Integrity:** Final witness tests require full mechanical completion, torque verification, safety interlock confirmation, and signed closure before release. Pre-stage shipping materials adjacent to the bay; do not parallelize pack-out.
+- **Quality Covenant:** Any proposal reducing a certified hold time by even one hour must be matched by documented upstream error-proofing, completed MSA/Cpk validation, or Quality leadership sign-off. Production and Sales have zero unilateral authority to alter gate criteria.
+
+**Anti-Fragile Safeguards**
+- **Pilot-to-Scale Discipline:** 5-unit pilot → 3 consecutive months of stability (FPY ≥ baseline, zero escaped defects, on-time delivery, Cpk ≥1.33) → staged ramps at 20%, 50%, and 80% volume, each requiring 30 days of demonstrated stability.
+- **Leading Quality Indicators (Weekly):** FPY at Final Gate (Red <90%); Supplier PPM (Red >2,000); In-Process Defect Rate (Red >6.0/unit); Test Failure/Rework Loop (Red >12%); Escaped Defects (Red >1.0%/mo); Cpk Critical Characteristics (Red <1.00).
+- **Unilateral Kill Switch:** The Quality Director has immediate authority to stop the line and freeze quoted lead times at the current proven level if any Red Flag triggers for two consecutive weeks. Escalation to the COO occurs within 24 hours, but Production and Sales cannot override.
+- **Error-Proofing Budget:** **$150K–$250K** capital reserve for poka-yoke and automated inspection devices, ensuring Quality can fund speed-paced risk mitigation.
+- **Traceability:** Serial-number-level traceability on all long-lead components introduced during compression enables rapid field containment.
+
+---
+
+### PHASED ROADMAP: 14 → 6 WEEKS
+
+**Rule:** Quote what you can prove; improve what you quote. Quoted lead times lag operational capability by one phase.
+
+| Phase | Timeline | Operational Target | Quoted Lead Time | Key Deliverables & Exit Criteria |
+|---|---|---|---|---|
+| **Phase 0: Diagnose & Pilot** | Months 1–3 | 14–16 weeks | **Hold at 14** | VSM, decision matrix, spaghetti diagrams; heijunka board; SMED #1; Gage R&R and Cpk baselines; one supplier pilot. *Exit: FPY stable, Cpk ≥1.33.* |
+| **Phase 1: Quick Wins & Flow** | Months 4–7 | 11 weeks | **Quote 12** | CPQ live; strategic buffers; first cell in shadow-line/dual-track; one supplier direct-to-floor; delegation-of-authority matrix. |
+| **Phase 2: FCS & Inspection Scale** | Months 8–11 | 9 weeks | **Quote 10** | FCS deployed; 2.0–2.5 FTE evening inspection shift; flexible witness windows; SMED top 5 complete; second cell post dual-track; Cpk validated. |
+| **Phase 3: Pull & Stabilize** | Months 12–16 | 7 weeks | **Quote 7** | DBR pull mature; 50% volume in cells; Tier-1 suppliers on reduced sampling; staged ramps complete; warranty validates no spike. |
+| **Phase 4: Competitive Push** | Months 17–22 | 6 weeks | **Quote 6** | Secondary sources qualified; postponement only if R&D platform certified; win-rate recovery tracked. |
+
+**Milestone Checkpoints**
+- **Month 3:** If pilot FPY is unstable or Cpk <1.33, delay Phase 1.
+- **Month 6:** If supplier OTD to the new program is <85% or dual-track cell data is unstable, pause quoting reduction.
+- **Month 12:** If warranty claims per $1M revenue exceed baseline by >15%, revert quoted lead time to the last proven level.
+
+---
+
+### CROSS-FUNCTIONAL ALIGNMENT PLAN
+
+**Single Accountable Owner**  
+**VP, Chief of Operations Excellence** — Direct-line authority over Master Scheduling, Sales Operations, and Supplier Quality; reports to the COO. Owns flow sequencing and promise-date integrity. Can

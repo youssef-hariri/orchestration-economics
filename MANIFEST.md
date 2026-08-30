@@ -1003,3 +1003,14 @@ Recompiled: 32 pages, zero errors, zero undefined references.
 ## Entry 72 — 2026-08-29 — Pilot v2 complete: 37/40 valid solutions, G2 PASS, G1 amendment filed (639eq); kimi attrition escalated
 
 **Pilot v2 (protocol13-v2, platform-verbatim designer):** gpt 8/8, gemini 8/8, claude 8/8, qwen 8/8 (window-gated, ran at 14:00 UTC), kimi 5/8. Attrition (disclosed): BP6 design_failed (empty designer output ×2), BP8 Moonshot moderation block ×3, BP9 empty polisher output → retry design_failed. **G2 PASS:** D-FRONT Novelty 4.076 (d = +0.42 vs frozen C-T-N 3.92), D-SELF 3.975 (d = +0.14); judging 333/333 (frozen panel, DeepSeek weekend off-peak). **G1 amendment 639eq** filed pre-full-run (D57): moderation blocks/design failures = disclosed attrition. kimi strictly misses even the amended 80% threshold (5/7) — author decision pending; runner proceeds with kimi included. **Fixes shipped during pilot:** anthropic omit_temperature (opus-5 deprecates temperature), kimi k3 fixed-temperature (only 1 allowed), empty-assistant repair guard, empty final-agent output → retriable failure, terminal statuses in planner (design_failed + ≥3 failures stop retrying). Family Novelty means (pilot, small n): kimi 4.62, gemini 4.14, qwen 4.11, claude 3.81, gpt 3.68.
+
+## Entry 73 — 2026-08-30 — STUDY 3 COMPLETE: 544/570 + 26 disclosed attrition; judged 4,896; pre-registered analysis run
+
+**Execution:** full run finished 2026-08-29 23:25 UTC (self-driving driver, 64 workers). Participant flow: gpt 114/114, gemini 114/114, qwen 114/114, claude 113/114 (1 design_failed), kimi 89/114 (21 design_failed — k2.6/k3 empty-or-truncated designer JSON on the platform prompt; 4 failed incl. BP8 moderation block ×3). Moonshot balance suspended the kimi lane twice; resolved by top-ups + D58 reroute of k3 designer to Together.ai. Judging: frozen 3-judge panel ×3 variants, 4,896 judgments, DeepSeek weekend off-peak.
+
+**Pre-registered results (`results/study3_results.json`, `analysis/results/study3_*.csv`, D54):**
+- **Contrast A (D-FRONT vs D-SELF, Novelty, paired, Holm):** significant ONLY for claude (Δ=+0.136, t=2.997, p_holm=0.0136, d=0.78). gemini (p=1), gpt (p_holm=0.31), kimi (p=1), qwen (ns) — no general authorship effect.
+- **Contrast B (vs frozen human-designed C-T-N):** BOTH arms beat the human baseline in ALL 5 families (D-SELF d=0.15–0.67; D-FRONT d=0.24–1.33). Model-authored pipelines ≥ human default everywhere.
+- **Cost/structure:** D-SELF 34.8M tokens vs D-FRONT 24.3M (cheap designers loop more); ~5.3 designed steps, ~6 executed (gate loops); 98.9%/100% of designs include if/while gates.
+- **Pooled:** D-FRONT vs D-SELF nearly identical across all 5 dimensions (Novelty 4.03 vs 3.99).
+- **Headline:** design authorship is NOT the bottleneck — cheap models designing for themselves match frontier-designed pipelines; both beat the frozen human design. kimi's designer-stage fragility (22% attrition) is the one big cheap-tier disadvantage found.

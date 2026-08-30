@@ -1,0 +1,193 @@
+# Global Inclusive Product Design Framework  
+## A Production-Ready Standard for Cultural Accessibility
+
+---
+
+### Executive Summary
+
+Building for a global user base requires more than translation. This framework establishes a baseline for **contextual engineering**—designing products that adapt to diverse cultural, religious, linguistic, and infrastructural contexts without treating any single locale as the default. It covers the technical architecture, interaction design, content practices, and governance models necessary to respect user agency, avoid harm, and sustain inclusive standards through continuous accountability.
+
+---
+
+### Guiding Principles
+
+1. **Pluralism by Default** — No single locale, language, or cultural norm is the global baseline.  
+2. **User Agency & Sovereignty** — Individuals and communities control their visibility, data, and cultural preferences.  
+3. **Do No Harm** — Proactive review prevents exclusion, stereotyping, and geopolitical entanglement.  
+4. **Geopolitical Humility** — The product never “picks sides” in territorial, sectarian, or ethnonational disputes. Global defaults must be neutral; legally compelled local renderings are explicit fallbacks only.  
+5. **Co-Design & Relational Accountability** — Marginalized and Indigenous communities participate in design, not just post-hoc review. Features affecting a community are validated by that community before shipping.  
+6. **Progressive Disclosure of Complexity** — Cultural options are available without overwhelming default experiences. Auto-configure via locale signals; offer manual refinement, not mandatory setup labor.
+
+---
+
+## 1. Inclusive Features
+
+### Technical Foundation
+- **Unicode & ICU/CLDR Stack**: Use ICU for all formatting and CLDR for calendar and territory data. Build on platforms that support runtime layout-direction switching (Android RTL; iOS leading/trailing constraints).
+- **Locale-Aware Resource Bundles**: Serve content at the **locale** level (e.g., `es-MX`, `es-AR`, `pt-BR`, `pt-AO`), not merely the language level. Include locale-specific legal disclaimers, imagery pointers, and formatting rules.
+- **Runtime Direction Switching**: Mirror navigation drawers, pagination, and back arrows for RTL languages. **Do not mirror** media controls (▶ ⏸), numerical sliders, circular clocks, brand logos, or chart timelines.
+- **Bidirectional Isolation**: Use strong Unicode directional isolates (FSI/PDI) to prevent parentheses, punctuation, and emojis from leaking directionality in Arabic, Hebrew, Persian, Dhivehi, and Urdu.
+- **Auto-Configuration First**: Detect device locale and CLDR signals to auto-set calendars, number formats, week start, address formats, and density modes. Manual toggles are available for refinement; they are never a mandatory onboarding gate.
+
+### Identity, Name & Kinship Architecture
+- **Default to a single “Full Name” field.** Never hard-code “First/Last.” If legal parsing is required, use localized labels (e.g., “Given Name / Family Name” with draggable order).
+- **Mononyms**: Support single-name entry for users from Indonesia (Javanese), Myanmar, Iceland, and parts of South India.
+- **Patronymics & Matronymics**: Add patronymic fields for Russian, Icelandic, Mongolian, and Arabic naming conventions. Never truncate Spanish/Portuguese dual surnames (e.g., *García Márquez*, *Silva Santos*) or Arabic multi-part names.
+- **Honorifics & Speech Registers**: Replace Mr./Ms./Mrs. with an extensible list (Dr., Prof., Hajj/Hajjah, Sayyid, Rabbi, Pandit, *-san*, *-sii*, *Khun*, etc.). Support Javanese *krama/ngoko*, Japanese keigo levels, Korean *haeyo/hapsyo-che*, and Spanish *tú/usted/vos*.
+- **Non-Latin Scripts**: Allow registration in native script and Romanized form; let users specify which is displayed publicly. Never auto-Westernize names (e.g., *Muhammad* → *Mo*).
+- **Grammatical Gender vs. Identity**: Separate “Grammatical Address” (for languages that gender verbs/adjectives) from “Gender Identity.” Identity options may include culturally specific genders **only after documented co-design sign-off** from representative organizations of that community (e.g., Hijra, Two-Spirit, Fa’afafine, Kathoey, X-gender, Māhū). Where community consensus is absent, provide a free-text custom field.
+
+### Geographic & Contact Data
+- **No Western Format Enforcement**: Support free-form addresses. Never require street/city/ZIP. Examples:
+  - *Philippines*: Barangay + Sitio/Purok  
+  - *Ethiopia*: Kebele + Woreda  
+  - *Japan*: Chōme blocks; delivery to *konbini*  
+  - *India*: PIN code (6-digit), state/UT, locality landmarks (“Near temple”)  
+  - *UAE*: PO Box–heavy; no ZIP in many emirates  
+  - *Refugee/Nomadic contexts*: “No fixed address” or camp/community center acceptance
+- **Phone Numbers**: Use country-code auto-detection, variable length (7–15 digits), and localized formatting. Do not assume `(XXX) XXX-XXXX`.
+- **Cartographic Neutrality**: **Global default** is neutral cartography—dashed boundaries, internationally recognized disputed-territory labels (e.g., “Disputed Region”), and omission of partisan naming. Geofenced rendering that complies with local jurisdictional requirements is implemented **only as a legally compelled fallback**, never as a global default. Do not forcibly assign geopolitical views via IP detection; where permissible, offer explicit map-view choices.
+
+### Calendar, Time & Number Systems
+- **Absolute Storage**: Store all dates as ISO/Gregorian timestamps; display and accept input in user-preferred systems.
+- **Supported Calendars**: Gregorian, Hijri (Islamic lunar), Solar Hijri (Persian/Shamsi), Lunar/Chinese, Indian National (Saka), Buddhist (Thai: +543 years), Ethiopian (Ge’ez), Coptic, and Jewish (Hebrew).
+- **Weekend Flexibility**: Support Friday–Saturday (e.g., Saudi Arabia, UAE), Thursday–Friday (e.g., Afghanistan), and staggered weekend models.
+- **Time Formats**: Support 12h/24h. For Ethiopian users, accommodate the dawn-starting cycle (06:00 Western = 00:00 Ethiopian) in scheduling tools.
+- **Number Systems**: Support Eastern Arabic numerals (٠١٢٣٤٥٦٧٨٩), Devanagari digits (०१२३४५६७८९), and lakh/crore grouping (₹1,00,000) for South Asian locales.
+
+### Accessibility with Cultural Competence
+- **Baseline**: WCAG 2.1 AA minimum, with AAA for critical paths (payments, safety, medical).
+- **Cognitive Load**: Plain-language modes must account for second-language speakers. Avoid phrasal verbs (“sign up” → “create account”; “log in” → “enter”). Provide layered information: summary first, detail expandable.
+- **Cultural Models of Disability**: In many African, Indigenous, and Asian contexts, disability is understood through spiritual or relational lenses. Frame accessibility features as supportive, never as “fixing” the user.
+- **Sign Language Diversity**: Deaf users may not read the local spoken language fluently. Do not assume text is sufficient; support video and visual communication where possible (recognizing ASL, BSL, LSF, ISL, and others as distinct languages).
+- **Input Diversity**: Support switch navigation, voice control, Bluetooth mice, and OTG keyboards for low-cost devices with degraded touchscreens.
+
+### Safety, Sovereignty & Lifecycle
+- **Content Moderation**:
+  - Implement robust reporting mechanisms while protecting users from mob-driven mass-reporting campaigns.
+  - Allow “private” or “locked” religious expression visible only to approved networks.
+  - Adapt policies geographically for historical trauma and denialism (e.g., Holocaust, Rwandan Genocide, Armenian Genocide).
+  - In contexts where social standing and family reputation are tightly interwoven with digital identity, use **private, dignified moderation messaging** rather than public shaming.
+  - Provide regional toggle-off switches for alcohol, drug, and gambling content rather than global promotion or suppression.
+- **LGBTQ+ Safety & Agency**: The product defaults to global visibility of identity markers (pronouns, relationship status, partner references). Any suppression must be **strictly opt-in at the individual user level**. Never employ geo-IP detection, regional prompts, or default-on hiding.
+- **Religious Calendar Awareness**:
+  - **Ramadan**: Reduce push notifications during fasting hours; offer “Quiet Hours” presets. Do not schedule mandatory deadlines on Eid al-Fitr or Eid al-Adha.
+  - **Lunar New Year**: Avoid major service outages or launches during peak travel periods.
+  - **Diwali**: Avoid deploying critical updates during India’s peak festival.
+  - **Sabbath**: Offer “Shabbat Mode” (no notifications Fri sunset–Sat sunset) for Orthodox Jewish users.
+  - **Good Friday/Easter, Lent**: Significant in Latin America, the Philippines, and Orthodox Christian regions (e.g., Ethiopia, Russia).
+- **Account Memorialization**: Provide legacy contacts and “remembering” badges. Adapt death and mourning UI color schemes to cultural norms rather than defaulting to Western black.
+- **Audio, Haptics & Sensory Semiotics**:
+  - Avoid alert tones that mimic the Islamic call to prayer (*adhan*), Christian church bells, or Buddhist wooden fish blocks unless the app is explicitly religious.
+  - Test intense vibration patterns across contexts to avoid mimicking emergency alerts or distress signals.
+  - Automatic Speech Recognition must support accents (Nigerian English, Indian English, Singaporean English) and tonal languages (Mandarin, Thai, Vietnamese, Yoruba).
+
+### Economic & Infrastructural Inclusion
+- **Offline-First Architecture**: Assume intermittent connectivity. Cache critical actions. Support “data lite” modes (no autoplay video, compressed images).
+- **Shared Devices**: Build robust profile switching with privacy walls between family members.
+- **Payment Diversity**: Support mobile money (M-Pesa, GCash, bKash), UPI (India), cash-on-delivery, bank transfers (e.g., Germany, Netherlands), and localized buy-now-pay-later norms.
+
+---
+
+## 2. Design Considerations
+
+### Color Symbolism — Decision Rules
+*Never use color as the sole carrier of critical information. Always pair with iconography, text labels, haptics, or patterns.*
+
+| Color | Contextual Meanings | Design Rule |
+|---|---|---|
+| **Red** | Luck (Chinese contexts); mourning (Akan, Zulu, specific South Asian communities); danger/urgency (much of Europe and North America); revolutionary symbolism (specific Latin American and post-Soviet contexts) | Never default to “red = error” globally. |
+| **White** | Purity (many European and North American wedding contexts); mourning (Korea, historical East Asia, many Hindu communities) | Avoid white-heavy celebration themes globally. |
+| **Green** | Sacredness (Islam); environmentalism (much of Europe and North America); independence (Mexico) | Avoid green religious-themed UI near alcohol/gambling in Muslim markets. |
+| **Yellow/Gold** | Imperial/royal (China, Malaysia); caution (industrial signage in Europe/North America); Monday auspiciousness (Thailand) | Context-check against monarchy symbolism where royal color is legally protected. |
+| **Purple** | Mourning (Thailand Lent; some Catholic traditions in Latin America); royalty (Western Europe) | Use cautiously in lifecycle/ritual features. |
+| **Blue** | Corporate/safe (much of Europe and North America); mourning (some East Asian contexts); charged political symbolism (specific MENA contexts) | Avoid as a “neutral” global default in political or memorial contexts. |
+
+**Actionable Requirement**: Provide a **Color-Neutral + Colorblind mode** using patterns and symbols. Test with deuteranopia simulators *and* cultural insiders.
+
+### Imagery Standards
+Apply the **Inclusive Imagery Brief** to every asset:
+1. **Skin Tones**: Depict Fitzpatrick 1–6 within *every* ethnic group. Actively counter colorism by ensuring South Asian, East Asian, MENA, and Latin American representation includes deep and medium skin tones.
+2. **Settings**: Include outdoor markets, shared community screens, public transit, and low-bandwidth contexts—not only affluent home offices.
+3. **Dress Code**: Default to neck-up portraits with professional attire or abstracted illustrations. When market-specific campaigns require cultural dress, commission local stylists to avoid costume-like misrepresentation.
+4. **Ability Diversity**: Show assistive devices (prosthetics, hearing aids, white canes) as normalized infrastructure, not inspiration tropes.
+5. **Family Structure**: Depict multigenerational households (South Asia, Africa, Latin America, Southern Europe), not only nuclear families.
+6. **Sacred & Symbolic Sensitivity**: Do not use religious symbols (Allah’s name in Arabic calligraphy, Buddhist mandalas, Hindu deities, Torah scrolls, Sikh Khanda, Indigenous sacred patterns) as decorative textures. Do not use *bindis* or *henna* as generic fashion elements.
+
+### Iconography & Gesture Neutrality
+- **Hand Gestures**: Avoid thumbs-up in West Africa, parts of the Middle East, and Iran; the “OK” sign in Brazil, Turkey, and parts of Southern Europe; and pointing with the index finger. In many South Asian, MENA, and West African contexts, the left hand is considered unclean—do not depict left-hand-only interactions. Avoid showing the sole of the foot or shoe in icons directed at MENA and Southeast Asian markets.
+- **Animals**: Avoid pigs as mascots in MENA and Jewish contexts; beef/leather iconography in Hindu-majority Indian contexts; dogs in conservative MENA markets; and owls in East Asian and rural Latin American contexts. Safe defaults include geometric shapes, abstract bots, or local flora (where non-sacred).
+- **Metaphors**: The floppy disk “save,” rolodex “contacts,” and envelope “email” are meaningless to many users globally. Use cloud-with-arrow, person-icon, or at-symbol (@). Supplement the “hamburger menu” with a “More” label in onboarding.
+- **Faces**: Default avatars should be faceless, gender-ambiguous silhouettes or initials. Do not default to a male silhouette.
+
+### Layout Direction & Spatial Design
+- **BiDi Mirroring**: Mirror navigation drawers, back arrows, and pagination for RTL. **Do not mirror** media controls, circular clock faces, temporal charts, or numerical scales (e.g., “1 to 10” satisfaction scales should still flow left-to-right logically in Arabic).
+- **Complex Scripts**: Ensure Devanagari and Tamil hanging baselines align correctly with Latin text. Do not crop descenders of Burmese or Javanese script.
+- **Text Expansion & Contraction**: German and Finnish expand 30–40%; Arabic expands with diacritics; Chinese contracts. Design fluid containers, not fixed-width buttons.
+- **Density Preferences**: Avoid the stereotype that “East Asians love clutter.” Offer **Compact**, **Comfortable**, and **Minimal** density modes, defaulting to platform conventions rather than regional assumptions.
+
+### Date, Time & Number Surface Formats
+- **Calendars**: Display and accept input in user-preferred systems (e.g., a user entering Solar Hijri 1403/01/01 must not be forced to calculate the Gregorian equivalent manually).
+- **Time**: Support 12h/24h and locale-specific cycles (e.g., Ethiopian dawn-starting time).
+- **Numbers**: Respect locale for decimal separators, currency placement, and grouping (e.g., lakh/crore).
+- **Addresses & Phones**: Never enforce Western formats. Use region-specific fields and free-form text where formal addressing is inconsistent.
+
+---
+
+## 3. Content Guidelines
+
+### Tone, Register & Directness
+- **Formality Sliders**: Support formal and informal address modes:
+  - Spanish: *Tú* vs. *Usted* vs. *Vos* (Rioplatense)
+  - Japanese: Keigo (*sonkeigo*, *kenjōgo*, *teineigo*)
+  - Korean: *Haeyo-che* vs. *Hapsyo-che*
+  - Javanese: *Ngoko* vs. *Krama*
+  - Default to formal in B2B/regulated contexts; allow informal opt-in for social/consumer apps.
+- **Directness Spectrum**: Many North American and German-speaking audiences tolerate direct error messages (“Password incorrect”). Japanese, Korean, Thai, and many Southeast Asian audiences often require buffer language (“We were unable to confirm your password. Please kindly check and try again”). Arabic-speaking audiences often value relationship-oriented openings (“We hope you are well”) even in transactional emails.
+- **Humor, Idioms & References**: Ban sports metaphors (“hit a home run”), military metaphors (“killer feature,” “deadline”), and religious idioms (“blessing in disguise”). Avoid calendar references like “Monday blues” in cultures where the workweek begins Saturday or Sunday.
+
+### Terminology & Naming Guardrails
+- **Phonotactics**: Avoid English consonant clusters (*strengths*, *worlds*, *texts*) and dental fricatives (*this*, *think*) that are difficult for speakers of Mandarin, Japanese, Spanish, and many Bantu languages.
+- **Sacred/Culturally Weighted Terms**: Do not use Indigenous tribe names (e.g., “Navajo,” “Māori”) as feature code names. Avoid “tribe,” “spirit animal,” “totem,” “exotic,” “oriental,” “gypsy,” or “expedition” (colonial connotations). Replace “master/slave” with “primary/replica” or “leader/follower.”
+- **Product Names**: Vet across major languages for accidental vulgarity or sacred overlap (e.g., Nokia “Lumia” in Spanish; Mazda “LaPuta”; “No va”).
+
+### Representation & Anti-Stereotypes
+- **Avoid Monoliths**: Never say “the African market” or “Asian users.” Nigeria differs from Kenya differs from Egypt; Japan differs from Indonesia differs from India differs from Korea.
+- **Intersectionality**: Show disabled people in non-Western settings. Show elderly users as primary account holders. Depict multigenerational households rather than nuclear-family defaults.
+- **Local Voices**: Hire regional **content designers** and **cultural strategists**, not just translators. A Brazilian *redator* will understand local racial terminology and Carnaval scheduling; a Japanese *copywriter* will navigate keigo and seasonal greetings.
+
+---
+
+## 4. Governance & Accountability
+
+### Co-Design Validation Gates
+No feature with culturally specific impact may ship without documented validation. Specifically:
+- **Culturally specific gender options** require sign-off from representative community organizations.
+- **Religious quiet-mode defaults** must be reviewed by practicing members of the relevant communities.
+- **Cartographic and territorial representations** must be reviewed by geopolitical risk counsel and local legal experts.
+
+### Global Advisory Board & Cultural QA
+Establish a board comprising linguists, disability advocates, religious scholars (plural), geopolitical risk analysts, and diaspora community leaders. Maintain a **Cultural QA Rubric** auditing every feature for color, icon, gesture, map, sacred symbol, name architecture, and tonal register risks. Include a **Crisis Test**: evaluate how the feature performs during natural disaster or political upheaval in a specific region.
+
+### Pilot Cohorts
+Test with:
+- RTL users (Arabic, Hebrew, Persian)
+- Complex-script users (Tamil, Thai, Burmese)
+- Low-bandwidth users (2G networks in rural India/Sub-Saharan Africa)
+- Non-Latin name bearers and mononym users
+- Users with disabilities in non-Western assistive-technology ecosystems
+- Diaspora users (e.g., a Turkish-German bilingual user expecting German UI with Hijri calendar)
+
+### Incident Response
+Maintain a protocol for cultural harm escalation: a flagged incident (e.g., a sacred symbol used as decoration, a geopolitical map error, or an offensive auto-translation) triggers a **24-hour triage** and a **72-hour remediation commitment** with public accountability reporting.
+
+---
+
+## Appendix: Implementation Roadmap
+
+| Phase | Timeline | Focus | Key Deliverables |
+|---|---|---|---|
+| **P0: Foundation** | Weeks 0–8 | Technical baseline; legal compliance; accessibility | Unicode/ICU architecture; RTL/BiDi mirroring rules; WCAG 2.1 AA audit; CLDR integration |
+| **P1: Market-Ready Inclusion** | Weeks 8–16 | Core locale support; risk mitigation; imagery/voice | Transcreation workflow; banned terminology list; color/icon QA; avatar/name architecture |
+| **P2: Deep Cultural Integration** | Weeks 16–24 | Kinship models; religious observance; diaspora flows | Delegated access; quiet-mode features; diaspora language splitting; payment diversity |
+| **P3: Continuous Evolution** | Ongoing | Governance; measurement
