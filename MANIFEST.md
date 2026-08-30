@@ -1014,3 +1014,7 @@ Recompiled: 32 pages, zero errors, zero undefined references.
 - **Cost/structure:** D-SELF 34.8M tokens vs D-FRONT 24.3M (cheap designers loop more); ~5.3 designed steps, ~6 executed (gate loops); 98.9%/100% of designs include if/while gates.
 - **Pooled:** D-FRONT vs D-SELF nearly identical across all 5 dimensions (Novelty 4.03 vs 3.99).
 - **Headline:** design authorship is NOT the bottleneck — cheap models designing for themselves match frontier-designed pipelines; both beat the frozen human design. kimi's designer-stage fragility (22% attrition) is the one big cheap-tier disadvantage found.
+
+## Entry 74 — 2026-08-30 — Study 3 contrast vs frontier-solo (F-S-N): orchestration helps weak families, not strong ones
+
+Author-requested comparison (pre-registered F-S-N comparator). Designed cheap-executed pipelines vs frozen frontier-solo (Novelty): POOLED D-SELF d = −0.22, D-FRONT d = −0.05 — parity overall. Heterogeneity is the story: kimi +0.85/+0.74, qwen +0.55/+0.61, gemini +0.46/+0.51 (cheap pipelines BEAT frontier solo), gpt parity (−0.07/+0.13), claude −3.14/−2.84 (opus-5 solo far above any haiku-executed pipeline). Interpretation: pipeline design closes the gap where the frontier-solo ceiling is low; where the frontier model is strongest (claude), solo remains untouchable by cheap orchestration. Saved: results/study3_vs_frontier_solo.json.
