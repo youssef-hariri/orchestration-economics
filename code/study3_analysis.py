@@ -157,9 +157,14 @@ def main():
                 pool[a][d].append(v)
     pooled = {a: {d: round(st.mean(v), 3) for d, v in dims.items()} for a, dims in pool.items()}
 
+    uniq = set()
+    for line in open(ROOT / "runs/study3/study3_judgments_v2.jsonl"):
+        j = json.loads(line)
+        uniq.add((j["runId"], j["judge_family"], j["variant"]))
     out = {"study": "study3_v2", "date_utc": "2026-08-30",
            "registrations": ["osf.io/9ukjz", "osf.io/bwc93", "osf.io/639eq"],
-           "solutions_judged": len(sol), "judgments": sum(1 for _ in open(ROOT / "runs/study3/study3_judgments_v2.jsonl")),
+           "solutions_judged": len(sol), "judgments": len(uniq),
+           "judgments_note": "unique (solution, judge, variant) judgments; 19 raw duplicate lines from judging retries are overwritten on read (last-wins dict) and excluded",
            "participant_flow": {f: dict(c) for f, c in flow.items()},
            "primary_contrast_A_DFRONT_vs_DSELF_novelty": rows_a,
            "contrast_B_vs_frozen_CTN_novelty": rows_b,

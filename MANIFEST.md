@@ -1035,3 +1035,9 @@ Corrected table (cost per completed solution; d = Novelty vs F-S-N):
 - **claude:** F-S-N $0.266 · D-SELF $0.438 (1.65×, d=−3.15) · D-FRONT $0.668 (2.51×, d=−2.84) — more expensive AND much worse → sell solo
 
 Decision rule: T-EGR winner is family-specific — orchestrate gemini (strictly dominant), qwen/kimi (pay ~2–3× for +0.5–0.9 SD novelty), never claude (solo); gpt indifferent → solo on cost.
+
+## Entry 77 — 2026-08-30 — Paper v12: Study 3 section drafted + data-quality audit (judgment dedupe)
+
+**Audit before drafting (author directive):** found 19 duplicate judgment lines in `runs/study3/study3_judgments_v2.jsonl` (judging-retry duplicates on 4 claude solutions; (meta,var2) re-judged up to 7×). Verified the analysis loader keys on (runId, judge, variant) with last-wins overwrite, so all reported statistics were already computed on the deduplicated 4,896 = 544×9 unique judgments; only the `judgments` headline count in `results/study3_results.json` was inflated (4,915) — fixed in `code/study3_analysis.py`, re-run, all contrast/CSV outputs bit-identical.
+
+**v12 (`paper/FULL-PAPER-DRAFT-BUSINESS-v12_with_figures/`, compiles clean, 35 pp):** new Results subsection "Study 3: Who Should Design the Pipeline?" (\cref{sec:study3}) — design + OSF chain (9ukjz→bwc93→639eq), Contrast A authorship table (tab:study3-authorship), Contrast B (beats human design 5/5), vs-F-S-N family contrast + economics decision table (tab:study3-econ), decision rule, key takeaway; abstract gains the Study 3 paragraph; Research Design updated (three studies; A7 disclosure now points to executed Study 3); Summary of Key Findings +2 rows; Discussion decision-framework gains the family-conditional override; Limitations gains an eighth item (kimi designer attrition, single auto-designer instrument, no-HITL scope); Future Directions renumbered (Protocol 13 marked complete; five remaining experiments).
