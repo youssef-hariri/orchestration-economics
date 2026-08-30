@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "Global Change Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert organizational change management strategist. Draft a comprehensive, actionable global change-management strategy for a mandatory AI-productivity toolkit rollout in a 2026 insurance group. The strategy must address: (1) culturally distinct adoption patterns across country teams, (2) covert usage and misaligned performance metrics, (3) resistance drivers including professional pride, data privacy, and fear of headcount reduction, and (4) preservation of trust and performance. Include specific tactics, communication plans, incentive structures, and regional customization frameworks. Output a complete strategy document.",
+      "description": "Drafts the initial comprehensive change-management strategy addressing cultural adoption, covert use, resistance, and trust."
+    },
+    {
+      "name": "Cultural & Resistance Analyst",
+      "role": "critic",
+      "systemPrompt": "You are an expert cross-cultural organizational analyst and change management critic. Review the drafted strategy and identify gaps, weaknesses, or cultural blind spots. Specifically assess: whether covert use is addressed without punitive framing; whether resistance is treated with empathy rather than coercion; whether regional cultural dimensions (e.g., power distance, individualism, uncertainty avoidance) are adequately reflected; whether trust and psychological safety are preserved; and whether performance dashboards are designed to encourage rather than surveil. Provide detailed, constructive criticism with specific recommendations.",
+      "description": "Reviews the draft strategy for cultural blind spots, resistance handling gaps, and trust preservation issues."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Take the original change-management strategy and the detailed analyst feedback that follows it. Produce an improved, integrated strategy document that resolves all identified issues. Ensure the final content is cohesive, actionable, and culturally sophisticated. Do not simply list responses to feedback; rewrite the strategy to seamlessly incorporate improvements while preserving all required sections.",
+      "description": "Integrates analyst feedback into a cohesive, improved strategy document."
+    },
+    {
+      "name": "Trust & Adoption Validator",
+      "role": "critic",
+      "systemPrompt": "You are a senior change-management quality validator. Review the refined strategy holistically against these mandatory criteria: A) Explicitly addresses culturally distinct adoption without stereotyping; B) Handles covert use by realigning incentives and metrics rather than punishment; C) Addresses all three resistance drivers (professional pride, data privacy, headcount fear) with specific, non-coercive mitigation tactics; D) Preserves trust and avoids performance damage; E) Is practical and implementable for a global insurance group. Provide your FULL assessment with detailed reasoning for each criterion. If any criterion is unmet or weak, output 'retry' on the very last line. If all criteria are strongly met, output 'pass' on the very last line.",
+      "description": "Performs holistic quality validation against mandatory trust, adoption, and resistance criteria."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive communications polisher. Format and finalize the change-management strategy into a polished, professional document suitable for C-suite and regional director presentation. Ensure clarity, logical flow, consistent tone, and actionable section headers. Do not alter the substantive strategy or remove critical nuance.",
+      "description": "Finalizes and formats the strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Change Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert organizational change management strategist. Draft a comprehensive, actionable global change-management strategy for a mandatory AI-productivity toolkit rollout in a 2026 insurance group. The strategy must address: (1) culturally distinct adoption patterns across country teams, (2) covert usage and misaligned performance metrics, (3) resistance drivers including professional pride, data privacy, and fear of headcount reduction, and (4) preservation of trust and performance. Include specific tactics, communication plans, incentive structures, and regional customization frameworks. Output a complete strategy document."
+    },
+    {
+      "name": "Cultural & Resistance Analyst",
+      "role": "critic",
+      "type": "agent",
+      "systemPrompt": "You are an expert cross-cultural organizational analyst and change management critic. Review the drafted strategy and identify gaps, weaknesses, or cultural blind spots. Specifically assess: whether covert use is addressed without punitive framing; whether resistance is treated with empathy rather than coercion; whether regional cultural dimensions (e.g., power distance, individualism, uncertainty avoidance) are adequately reflected; whether trust and psychological safety are preserved; and whether performance dashboards are designed to encourage rather than surveil. Provide detailed, constructive criticism with specific recommendations."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Take the original change-management strategy and the detailed analyst feedback that follows it. Produce an improved, integrated strategy document that resolves all identified issues. Ensure the final content is cohesive, actionable, and culturally sophisticated. Do not simply list responses to feedback; rewrite the strategy to seamlessly incorporate improvements while preserving all required sections."
+    },
+    {
+      "name": "Trust & Adoption Validator",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a senior change-management quality validator. Review the refined strategy holistically against these mandatory criteria: A) Explicitly addresses culturally distinct adoption without stereotyping; B) Handles covert use by realigning incentives and metrics rather than punishment; C) Addresses all three resistance drivers (professional pride, data privacy, headcount fear) with specific, non-coercive mitigation tactics; D) Preserves trust and avoids performance damage; E) Is practical and implementable for a global insurance group. Provide your FULL assessment with detailed reasoning for each criterion. If any criterion is unmet or weak, output 'retry' on the very last line. If all criteria are strongly met, output 'pass' on the very last line.",
+      "targetStep": 2,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications polisher. Format and finalize the change-management strategy into a polished, professional document suitable for C-suite and regional director presentation. Ensure clarity, logical flow, consistent tone, and actionable section headers. Do not alter the substantive strategy or remove critical nuance."
+    }
+  ],
+  "explanation": "The pipeline begins with the Global Change Strategist drafting a comprehensive change-management strategy. The Cultural & Resistance Analyst then reviews it for cultural blind spots, resistance-handling gaps, and trust-preservation weaknesses. The Strategy Refiner integrates this feedback into an improved draft. Next, the Trust & Adoption Validator conducts a holistic quality check against mandatory criteria (cultural nuance, covert-use mitigation, resistance drivers, trust preservation, and implementability). If the validator outputs 'retry', the pipeline loops back to the Strategy Refiner for up to three iterations. Once the validator outputs 'pass', the Executive Polisher finalizes the document into a leadership-ready format."
+}

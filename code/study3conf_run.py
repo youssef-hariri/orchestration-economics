@@ -29,7 +29,11 @@ import study3_design_run as s3  # noqa: E402
 s3.LEDGER = ROOT / "runs" / "logs" / "study3conf_ledger.jsonl"
 s3.EXHAUSTION = ROOT / "runs" / "logs" / "study3conf_credit_exhaustion.jsonl"
 s3.STORE = ROOT / "runs" / "study3conf" / "study3conf_store.json"
+s3.DESIGNS_DIR = ROOT / "runs" / "study3conf" / "designs"
+s3.SOLUTIONS_DIR = ROOT / "runs" / "study3conf" / "solutions"
+s3.CKPT_DIR = ROOT / "runs" / "study3conf" / "checkpoints"
 s3.PROMPT_TAG = "protocol16"
+s3.PROTOCOL_ID = "16"
 DEFAULT_FAMILIES = ["kimi", "gpt", "claude", "gemini"]  # qwen deferred (window)
 # deterministic pilot draw: random.Random(20260830).sample(sorted(30 wave
 # problems), 4) = the 4 below, verified 4 distinct domains

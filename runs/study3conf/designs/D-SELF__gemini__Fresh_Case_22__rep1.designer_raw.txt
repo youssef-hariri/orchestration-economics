@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in GCC retail market entry. Draft a comprehensive strategy for a European retailer entering Saudi Arabia, UAE, and Qatar via joint ventures. Address partner selection criteria, governance frameworks, store-format adaptation, and workforce-localization compliance.",
+      "description": "Develops the initial market entry strategy."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "systemPrompt": "You are a specialist in Middle Eastern regulatory and cultural retail environments. Review the strategy for gaps in local labor laws, Ramadan seasonality planning, and the nuances of joint venture power dynamics.",
+      "description": "Reviews the strategy for regional accuracy."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalExpert to strengthen the governance and localization sections. Ensure the strategy is actionable and logically structured.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the strategy for completeness and feasibility. Provide a detailed assessment. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "description": "Final quality assessment of the strategy."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional executive report. Ensure clear headings, bullet points, and a concise summary suitable for board-level review.",
+      "description": "Formats the final output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in GCC retail market entry. Draft a comprehensive strategy for a European retailer entering Saudi Arabia, UAE, and Qatar via joint ventures. Address partner selection criteria, governance frameworks, store-format adaptation, and workforce-localization compliance."
+    },
+    {
+      "name": "RegionalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a specialist in Middle Eastern regulatory and cultural retail environments. Review the strategy for gaps in local labor laws, Ramadan seasonality planning, and the nuances of joint venture power dynamics."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the RegionalExpert to strengthen the governance and localization sections. Ensure the strategy is actionable and logically structured."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the strategy for completeness and feasibility. Provide a detailed assessment. On the very last line, output exactly one keyword: 'pass' or 'revise'.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": { "pass": 4, "revise": 2 }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional executive report. Ensure clear headings, bullet points, and a concise summary suitable for board-level review."
+    }
+  ],
+  "explanation": "The pipeline starts with the MarketStrategist creating the initial plan. The RegionalExpert reviews it, followed by the StrategyRefiner who incorporates improvements. The QualityGate assesses the output; if 'revise' is triggered, it loops back to the StrategyRefiner. Once 'pass' is triggered, the FinalPolisher formats the output."
+}

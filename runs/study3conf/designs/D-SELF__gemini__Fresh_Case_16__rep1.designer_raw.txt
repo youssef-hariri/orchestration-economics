@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "MarketStrategist",
+      "role": "strategist",
+      "systemPrompt": "You are an expert in cross-cultural product localization for smart-home technology. Develop a comprehensive adaptation strategy for Japan, Korea, Thailand, and the Gulf, focusing on honorific-aware NLP, multigenerational household privacy, and interaction styles that respect local social hierarchies and privacy norms.",
+      "description": "Drafts the initial product adaptation strategy."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "systemPrompt": "You are a cultural anthropologist specializing in Asian and Middle Eastern household dynamics. Review the strategy for linguistic accuracy regarding honorifics, appropriateness of privacy signaling, and alignment with local social etiquette. Provide specific corrections for any cultural missteps.",
+      "description": "Critiques the strategy for cultural and linguistic nuances."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the CulturalExpert to adjust the interaction models, privacy protocols, and feature prioritization to ensure they are culturally resonant and technically viable.",
+      "description": "Refines the strategy based on expert feedback."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined strategy for completeness, cultural sensitivity, and operational clarity. Ensure all four target regions (Japan, Korea, Thailand, Gulf) are addressed. Provide a detailed assessment. On the final line, output 'pass' if the strategy is robust, or 'revise' if it needs more work. If 'revise', you will loop back to the StrategyRefiner.",
+      "description": "Validates the strategy against cultural and business requirements."
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "systemPrompt": "Format the final strategy into a professional, actionable document suitable for executive stakeholders, ensuring clear headings, bulleted priorities, and coherent regional sections.",
+      "description": "Formats the final output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "MarketStrategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert in cross-cultural product localization for smart-home technology. Develop a comprehensive adaptation strategy for Japan, Korea, Thailand, and the Gulf, focusing on honorific-aware NLP, multigenerational household privacy, and interaction styles that respect local social hierarchies and privacy norms."
+    },
+    {
+      "name": "CulturalExpert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a cultural anthropologist specializing in Asian and Middle Eastern household dynamics. Review the strategy for linguistic accuracy regarding honorifics, appropriateness of privacy signaling, and alignment with local social etiquette. Provide specific corrections for any cultural missteps."
+    },
+    {
+      "name": "StrategyRefiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Incorporate the feedback from the CulturalExpert to adjust the interaction models, privacy protocols, and feature prioritization to ensure they are culturally resonant and technically viable."
+    },
+    {
+      "name": "QualityGate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined strategy for completeness, cultural sensitivity, and operational clarity. Ensure all four target regions (Japan, Korea, Thailand, Gulf) are addressed. Provide a detailed assessment. On the final line, output 'pass' if the strategy is robust, or 'revise' if it needs more work. If 'revise', you will loop back to the StrategyRefiner.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "FinalPolisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format the final strategy into a professional, actionable document suitable for executive stakeholders, ensuring clear headings, bulleted priorities, and coherent regional sections."
+    }
+  ],
+  "explanation": "The pipeline begins with the MarketStrategist drafting the core strategy. The CulturalExpert then reviews this draft to ensure regional nuances are captured. The StrategyRefiner incorporates these expert insights. The QualityGate assesses the output; if it identifies gaps or cultural inaccuracies, it routes back to the StrategyRefiner (up to 3 iterations). Once the quality gate passes, the FinalPolisher formats the document for executive delivery."
+}

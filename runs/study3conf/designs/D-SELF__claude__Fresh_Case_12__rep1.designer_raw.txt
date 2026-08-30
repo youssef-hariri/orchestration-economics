@@ -1,0 +1,80 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Synthesizes data on income distribution, payment infrastructure, household structures, and billing attitudes across African, South Asian, and Latin American markets."
+    },
+    {
+      "name": "Localization Strategy Architect",
+      "role": "strategist",
+      "description": "Develops integrated pricing tiers, payment methods, family-sharing policies, and business model features tailored to each region while mapping to consolidated USD unit economics."
+    },
+    {
+      "name": "Financial Coherence Analyst",
+      "role": "analyst",
+      "description": "Maps localized pricing and business model decisions to consolidated USD unit economics, identifying risks and investor communication strategy."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "description": "Reviews integrated strategy for internal consistency, market viability, investor defensibility, and implementation feasibility."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Addresses gaps and contradictions identified by critic; reconciles regional customization with consolidated financial requirements."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "description": "Formats final strategy into investor-ready document with executive summary, regional playbooks, financial bridges, and implementation roadmap."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a market research synthesizer. Compile factual data on: (1) Income distribution and purchasing power parity across African, South Asian, and Latin American markets; (2) Available payment infrastructure (mobile money penetration, QR adoption, installment lending, card prevalence); (3) Household structure norms and family-sharing attitudes; (4) Recurring billing and subscription adoption barriers. Present findings by region with specific data points. Focus on differences that will drive pricing and business model decisions."
+    },
+    {
+      "name": "Localization Strategy Architect",
+      "role": "strategist",
+      "type": "agent",
+      "systemPrompt": "You are a localization strategy architect. Based on market research, design: (1) Regional subscription tiers with price points in local currencies reflecting purchasing power; (2) Payment rail options for each region (mobile money, QR, installments, card) with processing costs; (3) Family-sharing policies (simultaneous streams, profile limits) aligned with household norms; (4) Recurring billing strategies (monthly, annual, prepaid, pause options) minimizing churn; (5) Currency adjustment mechanisms for inflation and FX volatility. Output integrated regional playbooks with explicit trade-offs between localization and consolidated reporting requirements. Map each region's model to blended corporate ARPU, CAC, and LTV targets."
+    },
+    {
+      "name": "Financial Coherence Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a financial coherence analyst. Analyze: (1) Revenue impact of localized pricing — estimate ARPU per region in USD accounting for FX, processing costs, churn; (2) Consolidated unit economics — map regional models to blended corporate targets; (3) Financial risks — currency arbitrage, payment fraud, revenue recognition timing; (4) Investor communication — specify how consolidated metrics reflect regional diversity without masking performance. Produce a financial model showing path to defensible consolidated unit economics. Flag conflicts between localization and consolidation goals explicitly."
+    },
+    {
+      "name": "Strategy Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strategic coherence reviewer. Evaluate the integrated strategy. Assess: (1) Internal consistency — do pricing, payment, family-sharing, billing strategies logically support each other within and across regions?; (2) Market viability — are features realistic for target customers in each region?; (3) Investor defensibility — does strategy demonstrate path to consolidated unit economics? Are trade-offs justified and transparent?; (4) Implementation feasibility — can strategy be operationalized with reasonable complexity?; (5) Risk mitigation — are currency, fraud, regulatory, churn risks adequately addressed? Provide detailed reasoning with specific examples. On the VERY LAST LINE output exactly one word: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Address all gaps from critic review: (1) Resolve internal contradictions between regional models and consolidated requirements; (2) Strengthen weak rationale with deeper market insight and financial justification; (3) Simplify implementation complexity without sacrificing localization; (4) Reinforce investor defensibility with scenario analysis and KPI bridges; (5) Enhance risk mitigation with specific operational guardrails. Produce revised integrated strategy addressing all gaps. Ensure regional customization and consolidated reporting coexist logically."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive communications specialist. Format the final strategy into investor-ready document: (1) Executive Summary — key insight, regional overview, consolidated impact; (2) Regional Playbooks (Africa, South Asia, Latin America) — market backdrop, pricing tiers, payment options, family-sharing model, projected ARPU, success metrics; (3) Consolidated Economics Bridge — how regional diversity aggregates to corporate targets with sensitivity analysis; (4) Risk & Mitigation Plan — currency, fraud, regulatory, churn with specific safeguards; (5) Implementation Roadmap — phasing, platform requirements, compliance checkpoints. Ensure clarity, consistency, and narrative flow."
+    }
+  ],
+  "explanation": "This 6-step pipeline builds a defensible localized subscription strategy. Flow: (1) Market Research Builder establishes regional facts on income, payments, households, and billing; (2) Localization Strategy Architect designs integrated pricing, payment methods, family-sharing, and billing strategies for each region while mapping to consolidated targets; (3) Financial Coherence Analyst bridges regional models to USD unit economics and identifies risks; (4) Strategy Critic reviews internal consistency, market viability, investor defensibility, and feasibility — if gaps exist, routes to refiner; (5) Strategy Refiner resolves contradictions and strengthens weak areas; (6) Executive Polisher formats into investor narrative. The if-gate after critic prevents passage of incoherent strategy. All agents run sequentially except the conditional branch at step 4. This structure ensures strategy coherence before polishing and avoids iteration loops within 7-step limit."
+}
+```

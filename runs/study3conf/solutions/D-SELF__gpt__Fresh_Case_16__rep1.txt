@@ -1,0 +1,459 @@
+# Executive summary
+
+Launch a **configurable household assistant**, not a translated Western personal assistant. Keep one global interaction model:
+
+> **Detect → understand → check context and permissions → confirm if risky → act → show what happened.**
+
+Localize five independent layers:
+
+1. **Language:** honorifics, politeness, dialects, code-switching, names, scripts, and pronunciation.
+2. **Identity:** optional profiles, preferred names, accessibility, language, and response preferences.
+3. **Permissions:** who may control, hear, change, or purchase.
+4. **Household policy:** rooms, guests, children, elders, caregivers, workers, announcements, and retention.
+5. **Compliance:** consent, biometrics, retention, data residency, transfers, and payments.
+
+The product should compete on **predictability, household usefulness, and visible privacy control**, not on sounding maximally human.
+
+---
+
+# 1. Interaction style
+
+## Global default
+
+Use a **neutral, respectful service register**:
+
+- Concise and competent
+- Polite without excessive deference
+- Neither childish nor overly familiar
+- Not gender-coded by default
+- No unsolicited humor, teasing, or imitation
+- Not framed as a servant, elder, religious authority, or human companion
+
+The assistant should understand direct commands, polite requests, questions, indirect hints, elliptical household speech, and mixed-language commands.
+
+It should not execute every indirect comment. For example:
+
+> “It’s getting warm in here.”
+
+should produce:
+
+> “Would you like me to lower the temperature?”
+
+rather than changing the thermostat automatically.
+
+Users should be able to select:
+
+- Concise polite, warm polite, formal, or locally appropriate casual style
+- Name, title, or no form of address
+- Language and code-switching behavior
+- Voice, response length, and volume
+- Spoken, visual, or silent responses
+- Whether personal information may be spoken in shared rooms
+
+Do not infer authority, age, gender, nationality, religion, or relationship from voice, accent, language, or politeness.
+
+## Risk-based confirmation
+
+**Normally no confirmation:** lights, timers, music, weather, and routine appliance adjustments.
+
+**Multimodal confirmation required:** door unlocking, security changes, payments, external messages, location sharing, cameras, recordings, health or financial information, and household-wide privacy changes.
+
+Voice recognition may personalize the experience but must not be the sole authentication factor for high-risk actions.
+
+---
+
+# 2. Household roles and permissions
+
+Treat the household as the shared operating context while preserving individual privacy.
+
+## Supported roles
+
+Provide configurable, non-stigmatizing roles for:
+
+- Multiple adult administrators
+- Household members
+- Children
+- Elders
+- Guests
+- Caregivers
+- Domestic workers
+- Drivers or other service providers
+- Temporary users
+
+No person should become the default administrator because they purchased the device, completed setup, are older, male, or have a recognized voice.
+
+## Granular permissions
+
+Permissions should be limited by **person, room, device, function, and time**.
+
+| Area | Example controls |
+|---|---|
+| Appliances | Rooms and devices a person may control |
+| Security | Locks, alarms, cameras, intercom |
+| Information | Calendars, reminders, health, finance, account data |
+| Commerce | Shopping, delivery, payments |
+| Management | Profiles, routines, privacy settings |
+| Communication | Announcements, calls, external messages |
+| Data | Voice profile, history, recordings, personalization |
+
+A caregiver or worker might control appliances and deliveries without accessing cameras, recordings, purchases, or private calendars.
+
+Required controls:
+
+- Multiple administrators
+- Temporary access with expiry
+- One-step profile suspension
+- Voice-profile and personal-history deletion
+- Permission-change audit history
+- Private responses for personal information
+- Shared lists, calendars, routines, and announcements
+- A notice when a request affects another person’s data or settings
+
+If identity is uncertain:
+
+> “I’m not sure who is speaking. Please use the app or confirm on the device.”
+
+The assistant must not silently grant access to the nearest or highest-privilege user.
+
+## Conflict handling
+
+For conflicting household settings, use this order:
+
+1. Physical safety and legal requirements
+2. Device security
+3. Individual privacy
+4. Household preferences
+5. Convenience and personalization
+
+Privacy-protective restrictions should prevail for recordings, cameras, personal data, locks, payments, and external messages. The app should show who changed a rule, when, and what it affects.
+
+---
+
+# 3. Privacy signaling
+
+Privacy must be visible on the device, in the app, and during setup.
+
+## Distinguish six states
+
+Clearly communicate whether:
+
+1. The microphone is enabled for local wake-word detection
+2. A wake-word candidate was detected
+3. Command audio is actively captured
+4. Audio is transmitted off-device
+5. Audio or transcripts are retained
+6. Data is accessed for human review or model improvement
+
+A single ambiguous light is insufficient. Provide:
+
+- Hardware-backed microphone mute with an obvious physical state
+- Activation tone or clear visual feedback
+- Local wake-word detection by default
+- Local processing of basic device commands where feasible
+- No raw-audio retention by default unless affirmatively enabled
+- Camera-free hardware or a physical camera shutter
+- Quiet and “no-audio-response” modes
+- Room privacy zones and schedules
+- Private notifications through a phone, display, or earbuds
+
+## Consent and data controls
+
+Obtain separate, understandable consent for:
+
+- Voice-profile creation or update
+- Recording retention
+- Personalization
+- Human review
+- Advertising
+- Model training
+- Camera activation
+- Sharing information with other household members
+
+Ordinary conversation must never automatically enroll someone in voice recognition. Store protected voice templates rather than reusable raw recordings, and provide pause, deletion, re-enrollment, and non-biometric fallback.
+
+Provide practical shared-home modes:
+
+- No-profile guest mode
+- No-retention mode
+- Household recording-off mode
+- Private-response mode
+- Temporary worker/caregiver mode
+- Room- and time-based privacy suspension
+
+Document retention and deletion for raw audio, transcripts, voice templates, personalization data, diagnostics, backups, third-party copies, and training data. State clearly what is deleted immediately, what is removed on a backup schedule, and any legal exceptions.
+
+Essential privacy controls—including mute, deletion, and private responses—must not be paywalled.
+
+---
+
+# 4. Feature prioritization
+
+## Tier 1: Launch-critical trust and utility
+
+Prioritize:
+
+- Hardware mute and clear microphone-state indicators
+- Local wake-word processing
+- Basic local device control where feasible
+- Privacy dashboard and deletion
+- Household roles, guest and child modes
+- Room-, time-, and device-level permissions
+- Silent app and physical controls
+- Risk-based multimodal confirmation
+- High-quality local speech recognition
+- Climate, appliance, timer, reminder, list, calendar, and weather functions
+- Offline or degraded-mode support for basic routines
+- Accessibility for elders, people with disabilities, and second-language users
+
+## Tier 2: Local differentiation
+
+Add after trust is established:
+
+- Honorific and speech-register handling
+- Code-switching
+- Speaker-specific preferences
+- Family coordination
+- Quiet-room and private-notification features
+- Energy and climate optimization
+- Local media, traffic, weather, and public-service integrations
+- Caregiver and worker permissions
+- Intercom and announcements with privacy-aware routing
+- Optional, source-labeled religious-calendar features in relevant Gulf markets
+
+## Tier 3: Defer until independently audited
+
+Delay:
+
+- Voice-assisted payments and commerce
+- Advanced locks, cameras, and access control
+- Sensitive health inference
+- Broad advertising personalization
+- Open-ended companionship
+- Unbounded religious advice
+- Hidden monitoring of workers, children, or guests
+
+---
+
+# 5. Country adaptations
+
+These are product hypotheses to validate through local research, not assumptions about every resident.
+
+## Japan
+
+### Interaction
+
+- Default to natural *desu/masu* service speech.
+- Offer formal speech but avoid excessive *keigo*, which can sound comic or servile.
+- Understand polite requests and indirect comments.
+- Support user-selected surnames, given names, family titles, or no address.
+- Test sentence-final particles, regional variation, generations, and disability-related speech needs.
+- Provide Japanese name, address, homophone, and script disambiguation.
+
+### Household and privacy
+
+- Prioritize quiet operation for apartments and shared rooms.
+- Offer elder-friendly volume, display, and controls without assuming elders are passive users.
+- Support single-person and multigenerational homes.
+- Provide bedroom, bathroom, and guest-room privacy schedules.
+- Keep personal reminders and information off shared-room announcements by default.
+- Use authoritative, source-labeled disaster information; do not claim delivery unless verified.
+
+### Launch focus
+
+Japanese appliance, climate, reminder, calendar, accessibility, and privacy functions. Gate intercom and disaster features separately.
+
+## South Korea
+
+### Interaction
+
+- Support everyday polite *haeyo-che*, formal *hapsho-che*, and neutral display forms.
+- Permit casual *banmal* only when explicitly selected.
+- Handle Korean-English switching, fast colloquial speech, technology terms, and regional accents.
+- Do not infer speech level from age, gender, or voice.
+- Avoid automatic relationship terms such as *oppa*, *unni*, *hyung*, or *halmeoni*.
+
+### Household and privacy
+
+- Prioritize apartment-friendly volume, nighttime quiet mode, and false-wake-word handling.
+- Support family and school coordination and elder assistance.
+- Separate child safety alerts from routine searches, conversations, location, or inferred emotions.
+- Treat building intercom and access control as separate security programs.
+
+### Launch focus
+
+Korean appliance control, timers, schedules, quiet operation, family coordination, and private responses.
+
+## Thailand
+
+### Interaction
+
+- Support Standard Thai with clearly stated coverage limits.
+- Handle Thai-English switching, tonal variation, names, nicknames, and visual correction for homophones.
+- Use *ครับ*, *ค่ะ*, and *คะ* contextually rather than as a mandatory gender setting.
+- Permit neutral speech without requiring users to declare gender.
+- Test regional varieties, including Isan, Northern, and Southern speech where demand supports them.
+- Do not treat English as a more advanced mode.
+
+### Household and privacy
+
+- Support multigenerational, single-person, renter, migrant, and multilingual households.
+- Prioritize cooking timers, climate and appliance control, elder and child modes.
+- Provide room- and time-limited caregiver and worker permissions.
+- Give workers notices in their chosen language and delete profiles when employment ends.
+- Provide clear state recovery after power or connectivity interruptions.
+
+### Launch focus
+
+Standard Thai and Thai-English support where quality thresholds are met, core appliance and climate control, timers, lists, guest mode, and privacy controls.
+
+## Gulf markets
+
+The Gulf should be managed as separate country programs at minimum:
+
+- Saudi Arabia
+- United Arab Emirates
+- Qatar
+- Kuwait
+- Bahrain
+- Oman
+
+### Required country decisions
+
+Before launch in each country, specify:
+
+- Supported Arabic dialects and Modern Standard Arabic
+- English and evidence-based expatriate-language support
+- Arabic-English switching scope
+- Recognition and generation thresholds
+- Data-hosting and cross-border-transfer rules
+- Emergency, weather, media, delivery, and public-service sources
+- Prayer-time calculation methods and local conventions
+- Payment and identity requirements
+- Customer-support languages
+- Features excluded from launch
+
+Do not market “Arabic” as one performance category or select expatriate languages solely based on worker demographics.
+
+### Interaction and household use
+
+- Support relevant local dialects, Modern Standard Arabic, English, and validated additional languages.
+- Provide right-to-left interfaces, Arabic name handling, and local pronunciation.
+- Do not infer religion, nationality, kinship, gender, or authority from language or accent.
+- Prioritize climate control, energy management, air quality, room privacy, silent phone/earbud interaction, guest mode, and private notifications.
+- Provide functional permissions for families, caregivers, workers, and drivers without hidden monitoring.
+- Include citizen, expatriate, mixed-nationality, single-person, apartment, and non-domestic-worker households in research.
+
+### Religious features
+
+Offer prayer-time reminders, Hijri/Gregorian calendars, and Ramadan schedules only as optional, source-labeled features. Expose calculation methods and location sources. Distinguish calendar calculation from religious interpretation, and do not present the assistant as a religious authority.
+
+---
+
+# 6. Rollout sequencing
+
+## Phase 1: Foundations and feasibility — Q1–Q2 2026
+
+Complete:
+
+- Hardware mute and indicator design
+- Privacy and deletion architecture
+- Shared permission model
+- Country-specific legal and data-flow reviews
+- Language and dialect benchmarks
+- Evidence register for cultural and demand assumptions
+- Minimum viable launch definition
+- Support, repair, connectivity, and pricing plan
+
+**Gate:** no country proceeds without passing privacy comprehension, permission enforcement, language quality, and compliance reviews.
+
+## Phase 2: Controlled pilots — Q3 2026
+
+Pilot representative homes, including:
+
+- Single-person and multigenerational households
+- Apartments and villas
+- Multilingual homes
+- Elders, children, guests, workers, and caregivers
+- Noisy environments and connectivity interruptions
+
+Use independently recruited workers and caregivers, separate consent, appropriate compensation, and protection from employer or household retaliation.
+
+## Phase 3: Staged country launches — late 2026 onward
+
+Do not launch all markets simultaneously. Launch only the country packages that pass their gates. A practical approach is:
+
+1. Launch the strongest validated language and privacy package first.
+2. Add further countries after independent audit of the shared platform.
+3. Release basic utility before intercom, building, emergency, religious, caregiving, and commerce integrations.
+4. Expand dialects and expatriate languages based on observed demand and measured performance.
+
+## Phase 4: Advanced capabilities — 2027 onward
+
+Introduce payments, commerce, advanced security, cameras, and third-party automation only after high-risk authentication, deletion, incident response, and independent privacy audits are demonstrated.
+
+---
+
+# 7. Key risks and mitigations
+
+| Risk | Mitigation |
+|---|---|
+| Uneven recognition across accents, ages, or disabilities | Publish segmented performance; provide safe fallback and multimodal control |
+| Incorrect honorifics or speech levels | Native-speaker review of successes, refusals, and errors |
+| Voice spoofing or misidentification | Never use voice as sole high-risk authentication |
+| Household power imbalances | Independent worker research, transparent permissions, profile deletion |
+| Guest or visitor privacy exposure | No-profile guest and no-retention modes |
+| Conflicts between household administrators | Privacy-protective conflict hierarchy and audit history |
+| Overpromised deletion | Data inventory, backup schedule, technical verification, clear exceptions |
+| False emergency or religious information | Authoritative sources, uncertainty language, content governance, delivery verification |
+| Gulf overgeneralization | Six-country launch matrix and separate language/compliance decisions |
+| Privacy features delayed by hardware or cost | Make mute, deletion, and private response core requirements on every device tier |
+| Connectivity or power outages | Offline basic routines and clear failure feedback |
+| Product perceived as surveillance | Opt-in personalization, visible processing status, no hidden monitoring |
+| Overly broad cultural defaults | Evidence register, segment-based research, reversible settings |
+
+---
+
+# 8. Success metrics
+
+Metrics must define the denominator, sample, segments, confidence interval, baseline, and severity. Use stop-ship rules for critical incidents.
+
+## Trust and privacy
+
+- At least 90% of representative pilot users correctly identify microphone, capture, transmission, and retention states.
+- At least 90% complete recent-activity deletion without assistance.
+- Zero critical unauthorized lock, payment, camera, recording, or privacy-setting actions in controlled pilots.
+- Track false activations per household-day and per wake-word opportunity.
+- No material disparity in privacy comprehension across tested groups.
+
+## Interaction quality
+
+- Less than 5% unintended execution of ambiguous indirect requests in scenario testing.
+- At least 85% correct human-rated handling of local speech registers and honorific scenarios.
+- 20% reduction in repeated corrections for local names and mixed-language commands.
+- Recognition and safe-failure results reported separately by language, dialect, age, disability, and second-language status.
+
+## Household adoption
+
+- At least 70% of active households configure a permission or privacy rule.
+- At least 60% use two or more localized utilities.
+- Six-month household retention meets or exceeds the company’s comparable-device benchmark.
+- At least 80% of worker and caregiver pilot participants understand their permissions and data treatment.
+
+## High-risk expansion
+
+Before payments, cameras, or access-control expansion:
+
+- Zero critical incidents in monitored pilots.
+- At least 95% successful step-up authentication for high-risk actions.
+- Unauthorized-action rate below a defined threshold with a documented denominator and severity model.
+- Independent privacy, security, accessibility, linguistic, and cultural audits completed.
+
+---
+
+# Recommended positioning
+
+> **A respectful, private household assistant that works the way each family speaks and lives.**
+
+Avoid positioning the product as an obedient servant, a replacement for family or caregivers, a surveillance device, a religious authority, or a system requiring one “correct” way to speak.
+
+The strategic advantage is **predictable assistance, explicit household authority, culturally competent interaction, and privacy users can see and control**.

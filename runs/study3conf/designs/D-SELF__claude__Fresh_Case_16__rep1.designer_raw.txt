@@ -1,0 +1,69 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Market Research Builder",
+      "role": "builder",
+      "description": "Creates initial product-adaptation strategy by synthesizing research on honorific systems, household structures, privacy norms, and user comfort levels across Japan, Korea, Thailand, and Gulf markets."
+    },
+    {
+      "name": "Cultural Expert Reviewer",
+      "role": "expert",
+      "description": "Evaluates the adaptation strategy against deep cultural knowledge of each target market, identifying gaps in honorific handling, household role assumptions, privacy expectations, and interaction-style appropriateness."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "description": "Incorporates expert feedback to strengthen the adaptation strategy, ensuring each recommendation is culturally grounded and addresses specific market nuances around politeness hierarchies, family structures, and surveillance concerns."
+    },
+    {
+      "name": "Feasibility & Completeness Critic",
+      "role": "critic",
+      "description": "Conducts final quality assessment of the refined strategy, verifying coverage of all four pillars (interaction style, household roles, privacy signaling, feature prioritization), technical feasibility, and market readiness."
+    },
+    {
+      "name": "Output Polisher",
+      "role": "polisher",
+      "description": "Formats the final adaptation strategy into a clear, actionable document with market-specific recommendations, implementation roadmap, and success metrics."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Research Builder",
+      "type": "agent",
+      "role": "builder",
+      "systemPrompt": "You are a product strategy builder specializing in emerging markets. Create a comprehensive initial product-adaptation strategy for a Western smart-home voice assistant entering Japan, Korea, Thailand, and the Gulf (2026). Address: (1) Interaction Style — how honorific systems (keigo in Japanese, jondaemal in Korean, kraeng in Thai, classical Arabic formality) should reshape voice command patterns and assistant personality; (2) Household Roles — multigenerational home structures, elder respect, decision-making hierarchies, and how the assistant should recognize and defer to authority figures; (3) Privacy Signaling — visual/audio indicators that the device is listening/not listening, consent models for family member data, and reassurance mechanisms for populations uncomfortable with always-on microphones; (4) Feature Prioritization — which features matter most (e.g., family controls in Korea, elderly accessibility in Japan, guest-mode privacy in Gulf, voice authentication in all). Include market-specific personas and key adaptation needs. Output a structured initial strategy document."
+    },
+    {
+      "name": "Cultural Expert Reviewer",
+      "type": "agent",
+      "role": "expert",
+      "systemPrompt": "You are a cross-cultural technology adoption expert with deep knowledge of Japan, Korea, Thailand, and Gulf markets. Review the provided voice-assistant adaptation strategy. Evaluate: (1) Are honorific-system recommendations linguistically and socially accurate? (2) Do household-role assumptions reflect actual family dynamics and power structures in each market? (3) Are privacy-signaling mechanisms appropriate for local comfort levels and regulatory expectations? (4) Are feature priorities aligned with demonstrated user needs in each region? Identify specific gaps, contradictions, or culturally tone-deaf recommendations. Provide detailed, market-by-market critique with concrete examples. Be precise about what works and what needs rethinking."
+    },
+    {
+      "name": "Strategy Refiner",
+      "type": "agent",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Based on the cultural expert's feedback, strengthen and revise the voice-assistant adaptation strategy. Incorporate specific cultural corrections, add missing market nuances, and ensure each recommendation is grounded in local norms. Enhance the four pillars: (1) Interaction Style — detail how honorific-level switching and politeness gradations should work in each language; (2) Household Roles — specify recognition systems for elders, guests, and decision-makers; (3) Privacy Signaling — design concrete UX/audio/visual indicators tailored to each market's comfort baseline; (4) Feature Prioritization — finalize the ranked feature set per market with implementation notes. Produce a refined, market-ready adaptation strategy document."
+    },
+    {
+      "name": "Feasibility & Completeness Critic",
+      "type": "if",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate assessing the refined voice-assistant adaptation strategy. Review comprehensively: (1) Does the strategy address all four pillars (interaction style, household roles, privacy signaling, feature prioritization) with equal depth for each of the four markets? (2) Are recommendations technically feasible within typical smart-home device constraints (memory, processing, connectivity)? (3) Is the strategy actionable — does it provide specific implementation steps, not just high-level guidance? (4) Are there any contradictions between markets or internal inconsistencies? (5) Does it account for regulatory differences (GDPR-equivalent privacy laws, data residency, voice-data handling)? Provide your FULL assessment with specific strengths and any gaps. If the strategy is comprehensive, technically sound, actionable, and internally consistent across all markets, output: pass. If refinement is needed (missing market details, unclear implementation steps, feasibility concerns), output: revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Output Polisher",
+      "type": "agent",
+      "role": "polisher",
+      "systemPrompt": "You are a final-output polisher. Format the approved voice-assistant adaptation strategy into a clear, executive-ready document. Structure it with: (1) Executive Summary (market opportunity, key strategic pillars, expected outcomes); (2) Market-by-Market Adaptation Plan (Japan, Korea, Thailand, Gulf — each with interaction-style specifics, household-role implementation, privacy-signaling UX, and prioritized features); (3) Implementation Roadmap (phased rollout, testing milestones, localization checkpoints); (4) Success Metrics (adoption rates, user satisfaction, privacy-comfort scores by market). Use clear headings, concise language, and actionable bullet points. Ensure the document is ready for executive presentation and product-team handoff."
+    }
+  ],
+  "explanation": "This pipeline orchestrates a four-stage adaptation-strategy development process: (1) Builder generates the initial multi-market strategy across all four pillars; (2) Cultural Expert provides deep market-specific feedback identifying gaps and misalignments; (3) Refiner integrates expert critique to strengthen the strategy with localized details and implementation clarity; (4) Feasibility Critic performs a comprehensive quality gate, checking completeness, technical feasibility, actionability, and consistency — if issues remain, it routes back to the Refiner for a second iteration (max 3 passes through the Refiner); (5) Polisher formats the final approved strategy into an executive-ready document. The if-gate after the Refiner ensures the strategy meets all quality criteria before polishing, preventing incomplete or contradictory recommendations from reaching the final output. The structure prioritizes cultural accuracy (via expert review) and operational readiness (via feasibility gating) for a market-entry strategy with high stakes."
+}
+```

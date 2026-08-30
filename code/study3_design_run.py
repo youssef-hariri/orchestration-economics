@@ -56,11 +56,14 @@ LEDGER = ROOT / "runs" / "logs" / "study3_ledger_v2.jsonl"
 EXHAUSTION = ROOT / "runs" / "logs" / "study3_credit_exhaustion.jsonl"
 STORE = ROOT / "runs" / "study3" / "study3_store_v2.json"
 DESIGNS_DIR = ROOT / "runs" / "study3" / "designs"
+SOLUTIONS_DIR = ROOT / "runs" / "study3" / "solutions"
+CKPT_DIR = ROOT / "runs" / "study3" / "checkpoints"
 MAX_TOKENS = 8192
 WORKERS = 64  # 2026-08-29 author directive: target ~100 calls/min/provider with
               # dynamic adaptation (D34 calibration lineage); Google account
               # upgraded to paid tier. 429 backoff handles throttle; watch and adapt.
 PROMPT_TAG = "protocol13-v2"
+PROTOCOL_ID = "13"
 # Study-3 pilot draw (D55 amendment, 2026-08-28): deterministic seeded draw —
 # random.Random(20260828).sample of the 19 confirmatory problems (numeric-sorted),
 # rejection-resampled until 4 distinct domains per domain_map.json. Result:
@@ -399,7 +402,7 @@ def run_task(task, problems, keys, ignore_window):
     ptext = problems[pid]
     try:
         # 1) design (step-level checkpointing: killed chunks resume mid-task)
-        ckpt_file = ROOT / "runs" / "study3" / "checkpoints" / f"{key}.json"
+        ckpt_file = CKPT_DIR / f"{key}.json"
         ck = {}
         if ckpt_file.exists():
             try:
@@ -519,7 +522,7 @@ def run_task(task, problems, keys, ignore_window):
                    finished_at=datetime.now(timezone.utc).isoformat())
         append_ledger(rec)
         # solution text for the judging store: output of the final AGENT step
-        sol_file = ROOT / "runs" / "study3" / "solutions" / f"{key}.txt"
+        sol_file = SOLUTIONS_DIR / f"{key}.txt"
         sol_file.parent.mkdir(parents=True, exist_ok=True)
         sol_file.write_text(prior.split(f"--- {final_agent_name} ---\n")[-1])
         return "completed"
@@ -542,7 +545,7 @@ def run_task(task, problems, keys, ignore_window):
 def build_store():
     """Rebuild the judge_v2-compatible store from solutions + ledger (idempotent)."""
     entries = []
-    sol_dir = ROOT / "runs" / "study3" / "solutions"
+    sol_dir = SOLUTIONS_DIR
     if sol_dir.exists():
         for f in sorted(sol_dir.glob("*.txt")):
             key = f.stem
@@ -551,7 +554,7 @@ def build_store():
                             "fulltext": f.read_text(), "status": "completed",
                             "family": family, "arm": arm, "rep": rep})
     STORE.parent.mkdir(parents=True, exist_ok=True)
-    STORE.write_text(json.dumps({"protocol": "13", "prompt_tag": PROMPT_TAG,
+    STORE.write_text(json.dumps({"protocol": PROTOCOL_ID, "prompt_tag": PROMPT_TAG,
                                  "runs": entries}, indent=1))
     print(f"store: {STORE} ({len(entries)} solutions)")
 

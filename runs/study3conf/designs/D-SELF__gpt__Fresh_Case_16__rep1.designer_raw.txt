@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "Cross-Market Adaptation Strategist",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product-adaptation strategy for a consumer-electronics maker launching a smart-home voice assistant in Japan, South Korea, Thailand, and the Gulf in 2026. Address four required dimensions: interaction style, household roles, privacy signaling, and feature prioritization. Account for differences in honorific systems, indirectness and politeness, comfort with speaking commands aloud, multilingual and multigenerational households, gender and age dynamics, religious and cultural context where relevant, and divergent expectations about always-listening devices. Distinguish shared regional patterns from country-specific recommendations, avoid stereotypes, identify assumptions and risks, and provide actionable product, UX, localization, onboarding, and rollout recommendations. Include a prioritized roadmap and explain trade-offs. Produce a well-structured initial strategy.",
+      "description": "Creates the initial cross-market product-adaptation strategy."
+    },
+    {
+      "name": "Cultural and Privacy Localization Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the preceding strategy for cultural, linguistic, household, and privacy-localization accuracy across Japan, South Korea, Thailand, and the Gulf. Identify where recommendations need country-specific nuance, including honorifics and speech registers, indirect versus direct commands, code-switching, dialect and accent variation, public versus private device use, multigenerational authority structures, guest access, children's use, domestic workers where relevant, religious or household sensitivities, consent norms, recording indicators, data retention, local processing, and voice-profile governance. Recommend precise corrections and missing considerations. Do not rewrite the entire strategy; provide detailed evidence-based improvement guidance for the refiner.",
+      "description": "Finds cultural, household, linguistic, and privacy gaps in the initial strategy."
+    },
+    {
+      "name": "Market Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Rewrite the preceding product-adaptation strategy using the analyst's findings. Deliver a coherent, decision-ready strategy for Japan, South Korea, Thailand, and the Gulf. Cover interaction style, honorific and politeness handling, household roles and permissions, privacy signaling and controls, and feature prioritization. Separate universal platform capabilities from market-specific adaptations, explicitly address uncertainty and avoid overgeneralization, and include prioritized near-term, mid-term, and later features with rationale, dependencies, risks, and measurable success indicators. Ensure recommendations are practical for product, engineering, design, localization, trust, and go-to-market teams.",
+      "description": "Integrates localization analysis into an actionable and nuanced strategy."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy in full. Assess whether it is actionable, culturally nuanced, appropriately differentiated across Japan, South Korea, Thailand, and the Gulf, and complete on interaction style, household roles, privacy signaling, and feature prioritization. Check for unsupported claims, stereotypes, Western-default assumptions, missing multilingual or multigenerational considerations, weak privacy guidance, unclear sequencing, feasibility problems, and contradictions. Provide a detailed assessment with specific corrections required, if any. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "Produce the final user-facing answer based on the refined strategy and quality assessment. Preserve substantive recommendations while improving clarity, concision, structure, and decision usefulness. Present an executive summary followed by sections for interaction style, household roles, privacy signaling, feature prioritization, country-specific adaptations, rollout sequencing, risks, and success metrics. Clearly distinguish recommendations for Japan, South Korea, Thailand, and the Gulf, while noting meaningful variation within the Gulf rather than treating it as uniform. Use respectful, non-stereotyping language and make the result suitable for product leadership and localization teams."
+      ,
+      "description": "Delivers the final polished product-adaptation strategy."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Cross-Market Adaptation Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product-adaptation strategy for a consumer-electronics maker launching a smart-home voice assistant in Japan, South Korea, Thailand, and the Gulf in 2026. Address interaction style, household roles, privacy signaling, and feature prioritization. Account for honorific systems, indirectness and politeness, comfort with speaking commands aloud, multilingual and multigenerational households, gender and age dynamics, religious and cultural context where relevant, and divergent expectations about always-listening devices. Distinguish shared regional patterns from country-specific recommendations, avoid stereotypes, identify assumptions and risks, and provide an actionable prioritized roadmap."
+    },
+    {
+      "name": "Cultural and Privacy Localization Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the preceding strategy for cultural, linguistic, household, and privacy-localization accuracy across Japan, South Korea, Thailand, and the Gulf. Identify country-specific gaps involving honorifics, speech registers, indirect commands, code-switching, accents, public versus private use, multigenerational authority, guests, children, domestic workers where relevant, religious or household sensitivities, consent, recording indicators, data retention, local processing, and voice-profile governance. Provide detailed correction guidance for the refiner."
+    },
+    {
+      "name": "Market Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Rewrite the preceding strategy using the analyst's findings. Deliver a coherent, decision-ready strategy covering interaction style, honorific and politeness handling, household roles and permissions, privacy signaling and controls, and feature prioritization. Separate universal capabilities from market-specific adaptations, avoid overgeneralization, and include near-term, mid-term, and later features with rationale, dependencies, risks, and measurable success indicators."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined strategy in full for actionability, cultural nuance, country differentiation, completeness, evidence discipline, privacy quality, feasibility, sequencing, and freedom from stereotypes or Western-default assumptions. Provide detailed strengths, weaknesses, and required corrections. On the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Produce the final user-facing answer from the refined strategy and quality assessment. Make it clear, concise, actionable, and suitable for product leadership and localization teams. Include an executive summary, interaction style, household roles, privacy signaling, feature prioritization, country-specific adaptations, rollout sequencing, risks, and success metrics. Distinguish meaningful variation within the Gulf and use respectful, non-stereotyping language."
+    }
+  ],
+  "explanation": "The pipeline begins with a broad strategy draft, adds dedicated cultural and privacy analysis, and then has a refiner integrate those findings into a practical market plan. The quality gate assesses the refined strategy; if it outputs revise, execution loops back to the refiner, while pass proceeds to the final polisher. The polisher ensures the result is organized and decision-ready."
+}
