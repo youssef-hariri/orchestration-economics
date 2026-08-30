@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Analyze the scenario regarding the 2026 data-sovereignty laws and draft a comprehensive sovereign-cloud transition strategy and execution plan. Detail the phased migration approach, localized communication strategies for diverse cultural and regulatory regions, specific messaging to address feature delay and price increase fears, and procurement engagement tactics to build trust. Ensure the tone is empathetic, transparent, and strategically sound to minimize churn.",
+      "description": "Drafts the initial sovereign-cloud transition strategy and communication plan based on the complex global scenario."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Improve the previous strategy draft based on any quality feedback provided. Address all identified weaknesses, enhance cultural nuances, strengthen procurement trust-building tactics, and ensure all customer fears are adequately mitigated. Produce a fully revised, comprehensive, and improved version of the transition strategy.",
+      "description": "Refines and improves the transition strategy based on critical feedback to ensure all cultural and strategic gaps are addressed."
+    },
+    {
+      "name": "Transition Critic",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate evaluating the refined sovereign-cloud transition strategy. Review the strategy for completeness, cultural sensitivity, strategic viability, and alignment with data-sovereignty constraints. Assess whether it adequately addresses diverse customer reactions and procurement lenses. Provide a FULL assessment detailing strengths, weaknesses, and specific areas for improvement. Then, on the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy for quality, cultural alignment, and strategic completeness, routing to refine or pass."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive polisher. Take the finalized sovereign-cloud transition strategy and format it for a global executive audience. Ensure the document is highly readable, professionally formatted with clear headings, bullet points, and executive summaries. Fix any grammatical issues, ensure a consistent and authoritative tone, and make the strategic recommendations actionable and impactful.",
+      "description": "Applies final formatting, tone adjustments, and executive-level polish to the approved strategy document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Analyze the scenario regarding the 2026 data-sovereignty laws and draft a comprehensive sovereign-cloud transition strategy and execution plan. Detail the phased migration approach, localized communication strategies for diverse cultural and regulatory regions, specific messaging to address feature delay and price increase fears, and procurement engagement tactics to build trust. Ensure the tone is empathetic, transparent, and strategically sound to minimize churn."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Improve the previous strategy draft based on any quality feedback provided. Address all identified weaknesses, enhance cultural nuances, strengthen procurement trust-building tactics, and ensure all customer fears are adequately mitigated. Produce a fully revised, comprehensive, and improved version of the transition strategy."
+    },
+    {
+      "name": "Transition Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate evaluating the refined sovereign-cloud transition strategy. Review the strategy for completeness, cultural sensitivity, strategic viability, and alignment with data-sovereignty constraints. Assess whether it adequately addresses diverse customer reactions and procurement lenses. Provide a FULL assessment detailing strengths, weaknesses, and specific areas for improvement. Then, on the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive polisher. Take the finalized sovereign-cloud transition strategy and format it for a global executive audience. Ensure the document is highly readable, professionally formatted with clear headings, bullet points, and executive summaries. Fix any grammatical issues, ensure a consistent and authoritative tone, and make the strategic recommendations actionable and impactful."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategy Builder, which analyzes the complex data-sovereignty scenario and drafts a comprehensive transition and communication plan. The output is then passed to the Strategy Refiner to improve the initial draft. The Transition Critic acts as a quality gate, assessing the refined strategy for cultural sensitivity, strategic viability, and completeness. If the strategy requires improvements, the Critic outputs 'revise' and routes it back to the Strategy Refiner to fix the issues, creating an iterative loop until the quality is sufficient. Once the Critic outputs 'pass', the strategy moves to the Executive Polisher for final formatting and executive-level presentation. This structure ensures the final output is deeply analyzed, iteratively refined for quality, and professionally polished without requiring human intervention."
+}

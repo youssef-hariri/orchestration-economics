@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Draft a comprehensive pricing and business-model strategy for a global streaming service localizing subscriptions across African, South Asian, and Latin American markets in 2026. The strategy must address localized pricing based on purchasing power, preferred payment rails (mobile money, QR systems, installments), family-sharing norms, and attitudes toward recurring billing. It must also explain how to maintain defensible consolidated USD unit economics for investors. Produce a detailed, structured strategic proposal.",
+      "description": "Creates the initial draft of the localized pricing and business-model strategy."
+    },
+    {
+      "name": "Market & Economics Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the provided streaming service localization strategy. Evaluate its effectiveness across African, South Asian, and Latin American markets. Identify any gaps in addressing local purchasing power, payment rails, family-sharing norms, and recurring billing attitudes. Crucially, assess the defensibility of the consolidated USD unit economics for investors. Provide a detailed critique highlighting strengths, weaknesses, and specific areas for improvement.",
+      "description": "Analyzes the initial strategy for regional accuracy and unit economics defensibility."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Refine the streaming service localization strategy based on the provided analytical feedback. Address all identified weaknesses, fill in gaps regarding regional payment habits, sharing norms, and pricing. Ensure the consolidated USD unit economics are robust and clearly defensible to investors. Produce a fully revised and improved strategic proposal.",
+      "description": "Refines and improves the strategy based on analytical feedback."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate evaluating a localized streaming subscription strategy. Review the refined strategy carefully. Assess whether it comprehensively covers localized pricing, payment rails, family-sharing norms, and recurring billing for African, South Asian, and Latin American markets. Verify that the consolidated USD unit economics are defensible and investor-ready. Provide your FULL assessment detailing strengths, weaknesses, and any remaining issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy to ensure all regional and economic criteria are met."
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "systemPrompt": "Perform a final quality check and formatting pass on the approved streaming service localization strategy. Ensure the document is highly professional, clearly structured with appropriate headings, and free of any grammatical or stylistic errors. The final output should be a polished, executive-ready strategic report.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Draft a comprehensive pricing and business-model strategy for a global streaming service localizing subscriptions across African, South Asian, and Latin American markets in 2026. The strategy must address localized pricing based on purchasing power, preferred payment rails (mobile money, QR systems, installments), family-sharing norms, and attitudes toward recurring billing. It must also explain how to maintain defensible consolidated USD unit economics for investors. Produce a detailed, structured strategic proposal."
+    },
+    {
+      "name": "Market & Economics Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the provided streaming service localization strategy. Evaluate its effectiveness across African, South Asian, and Latin American markets. Identify any gaps in addressing local purchasing power, payment rails, family-sharing norms, and recurring billing attitudes. Crucially, assess the defensibility of the consolidated USD unit economics for investors. Provide a detailed critique highlighting strengths, weaknesses, and specific areas for improvement."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the streaming service localization strategy based on the provided analytical feedback. Address all identified weaknesses, fill in gaps regarding regional payment habits, sharing norms, and pricing. Ensure the consolidated USD unit economics are robust and clearly defensible to investors. Produce a fully revised and improved strategic proposal."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate evaluating a localized streaming subscription strategy. Review the refined strategy carefully. Assess whether it comprehensively covers localized pricing, payment rails, family-sharing norms, and recurring billing for African, South Asian, and Latin American markets. Verify that the consolidated USD unit economics are defensible and investor-ready. Provide your FULL assessment detailing strengths, weaknesses, and any remaining issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Perform a final quality check and formatting pass on the approved streaming service localization strategy. Ensure the document is highly professional, clearly structured with appropriate headings, and free of any grammatical or stylistic errors. The final output should be a polished, executive-ready strategic report."
+    }
+  ],
+  "explanation": "The pipeline begins with the Initial Strategy Builder to draft the comprehensive localization strategy. The Market & Economics Analyst then evaluates the draft for regional accuracy and unit economics defensibility. The Strategy Refiner incorporates this feedback to improve the proposal. The Strategic Quality Gate acts as an 'if' condition to assess the refined output; if it passes, it moves to the Executive Report Polisher, but if it requires revision, it loops back to the Strategy Refiner. Finally, the Executive Report Polisher formats the approved strategy into a professional, executive-ready document. This ensures a robust, iterative refinement process while maintaining a concise 5-step flow."
+}

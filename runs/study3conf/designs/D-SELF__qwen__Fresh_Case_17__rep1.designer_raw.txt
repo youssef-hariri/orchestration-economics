@@ -1,0 +1,84 @@
+{
+  "agents": [
+    {
+      "name": "Global Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert product strategist. Your objective is to design a comprehensive product strategy for localizing an adaptive-learning platform expanding from the US into Vietnam, Saudi Arabia, France, and Kenya in 2026. The strategy must explicitly address: 1) Mandated curricula and language-of-instruction rules in each country, 2) Cultural attitudes toward foreign educational content, screen time, and standardized testing among parents and teachers, 3) Mixed procurement channels (government procurement vs. direct-to-consumer), and 4) The strategic balance between maintaining a shared technology core and ensuring deep local fit. Produce a detailed, structured, and actionable strategic document.",
+      "description": "Drafts the initial comprehensive product strategy addressing all four target countries and the core-vs-localization balance."
+    },
+    {
+      "name": "Localization Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are an expert educational market analyst. Review the provided product strategy draft. Analyze it for completeness, strategic soundness, and specific adherence to the constraints of Vietnam, Saudi Arabia, France, and Kenya. Identify any missing elements regarding local curricula, cultural beliefs (screen time/testing), procurement nuances, or the core-vs-localization balance. Provide a detailed critique of what is strong, what is weak, and what needs deeper analysis or correction.",
+      "description": "Analyzes the initial draft to identify gaps, weaknesses, and missing market-specific details."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality assurance critic. Review the product strategy and the analyst's feedback. Determine if the strategy fully and accurately addresses all country-specific mandates, cultural attitudes, procurement channels, and the core-vs-local fit balance. Provide a FULL assessment detailing strengths, weaknesses, and specific issues that must be resolved. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "description": "Evaluates the strategy and analyst feedback, routing back for refinement if quality standards are not met.",
+      "type": "while",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 5,
+        "retry": 4
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic content refiner. Improve the previous product strategy based on the quality feedback and analyst insights provided. Fix all identified issues, deepen the analysis of the local markets, ensure all procurement and cultural nuances are accurately captured, and ensure the balance between the shared tech core and local fit is perfectly articulated. Produce a fully revised and improved version of the strategy.",
+      "description": "Refines and improves the strategy document based on the quality gate's feedback and analyst insights."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the refined product strategy and format it for a C-suite audience. Ensure a highly professional tone, clear and logical headings, excellent flow, and impeccable grammar. The final output should be a polished, ready-to-present strategic document that clearly communicates the localization strategy across the four target markets.",
+      "description": "Formats and polishes the final strategy document for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert product strategist. Your objective is to design a comprehensive product strategy for localizing an adaptive-learning platform expanding from the US into Vietnam, Saudi Arabia, France, and Kenya in 2026. The strategy must explicitly address: 1) Mandated curricula and language-of-instruction rules in each country, 2) Cultural attitudes toward foreign educational content, screen time, and standardized testing among parents and teachers, 3) Mixed procurement channels (government procurement vs. direct-to-consumer), and 4) The strategic balance between maintaining a shared technology core and ensuring deep local fit. Produce a detailed, structured, and actionable strategic document."
+    },
+    {
+      "name": "Localization Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an expert educational market analyst. Review the provided product strategy draft. Analyze it for completeness, strategic soundness, and specific adherence to the constraints of Vietnam, Saudi Arabia, France, and Kenya. Identify any missing elements regarding local curricula, cultural beliefs (screen time/testing), procurement nuances, or the core-vs-localization balance. Provide a detailed critique of what is strong, what is weak, and what needs deeper analysis or correction."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a strict quality assurance critic. Review the product strategy and the analyst's feedback. Determine if the strategy fully and accurately addresses all country-specific mandates, cultural attitudes, procurement channels, and the core-vs-local fit balance. Provide a FULL assessment detailing strengths, weaknesses, and specific issues that must be resolved. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry. The keyword determines pipeline routing.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 5,
+        "retry": 4
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic content refiner. Improve the previous product strategy based on the quality feedback and analyst insights provided. Fix all identified issues, deepen the analysis of the local markets, ensure all procurement and cultural nuances are accurately captured, and ensure the balance between the shared tech core and local fit is perfectly articulated. Produce a fully revised and improved version of the strategy."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the refined product strategy and format it for a C-suite audience. Ensure a highly professional tone, clear and logical headings, excellent flow, and impeccable grammar. The final output should be a polished, ready-to-present strategic document that clearly communicates the localization strategy across the four target markets."
+    }
+  ],
+  "explanation": "The pipeline begins with the Global Strategy Builder, which drafts the initial comprehensive product strategy addressing all four target countries and the core-vs-localization balance. Next, the Localization Analyst reviews the draft to identify any gaps or weaknesses in market-specific details. The Strategy Quality Gate then evaluates the draft and the analyst's feedback using a 'while' loop; if the strategy is insufficient, it outputs 'retry' and routes back to the Strategy Refiner to fix the issues (looping up to 3 times until quality is met). Once the strategy passes the quality gate with a 'pass', it moves to the Executive Polisher for final formatting and presentation. Execution flow: Global Strategy Builder → Localization Analyst → Strategy Quality Gate (if retry, loops back to Strategy Refiner up to 3x) → Executive Polisher."
+}

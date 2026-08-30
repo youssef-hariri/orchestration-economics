@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Global Policy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert global HR strategist and policy architect. Your objective is to design a comprehensive, global flexible-work policy for a multinational software company operating in 12 diverse countries. The policy must successfully accommodate divergent cultural attitudes toward working time, visibility, and commitment, while remaining fair, legally compliant, and operationally workable. Address the uneven spread of four-day-week pilots and 'right to disconnect' laws. Structure the output to include core global principles, regional adaptation frameworks, manager guidelines for handling cultural friction, and clear metrics for success and fairness.",
+      "description": "Drafts the initial comprehensive global flexible-work policy addressing legal, cultural, and operational requirements."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are an expert policy refiner. Your objective is to improve and revise the global flexible-work policy based on detailed quality feedback. You must address all identified weaknesses, ensure strict legal compliance across all 12 jurisdictions, resolve cultural friction points regarding visibility and commitment, and enhance operational workability. Produce a fully revised, comprehensive, and polished policy document that seamlessly integrates the feedback.",
+      "description": "Revises and improves the policy draft based on critical feedback regarding legal and cultural compliance."
+    },
+    {
+      "name": "Legal & Cultural Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate assessing a global flexible-work policy. Evaluate the provided policy draft for: 1) Legal compliance across diverse international jurisdictions (especially regarding 'right to disconnect' and local labor laws), 2) Cultural sensitivity and fairness regarding visibility, presence, and commitment, 3) Operational workability for managers dealing with cross-cultural teams, and 4) Overall clarity and comprehensiveness. Provide a FULL assessment detailing strengths, weaknesses, and specific areas needing improvement. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined policy for legal compliance, cultural sensitivity, and operational feasibility, routing to pass or revise."
+    },
+    {
+      "name": "Final Document Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an expert executive document polisher. Your objective is to take the finalized global flexible-work policy and format it for immediate distribution to global leadership and employees. Ensure the tone is professional, empathetic, and authoritative. Check for consistent formatting, clear headings, logical flow, and flawless grammar. The final output must be a pristine, ready-to-publish corporate policy document.",
+      "description": "Formats and polishes the final approved policy for professional, user-facing distribution."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Policy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert global HR strategist and policy architect. Your objective is to design a comprehensive, global flexible-work policy for a multinational software company operating in 12 diverse countries. The policy must successfully accommodate divergent cultural attitudes toward working time, visibility, and commitment, while remaining fair, legally compliant, and operationally workable. Address the uneven spread of four-day-week pilots and 'right to disconnect' laws. Structure the output to include core global principles, regional adaptation frameworks, manager guidelines for handling cultural friction, and clear metrics for success and fairness."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an expert policy refiner. Your objective is to improve and revise the global flexible-work policy based on detailed quality feedback. You must address all identified weaknesses, ensure strict legal compliance across all 12 jurisdictions, resolve cultural friction points regarding visibility and commitment, and enhance operational workability. Produce a fully revised, comprehensive, and polished policy document that seamlessly integrates the feedback."
+    },
+    {
+      "name": "Legal & Cultural Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate assessing a global flexible-work policy. Evaluate the provided policy draft for: 1) Legal compliance across diverse international jurisdictions (especially regarding 'right to disconnect' and local labor laws), 2) Cultural sensitivity and fairness regarding visibility, presence, and commitment, 3) Operational workability for managers dealing with cross-cultural teams, and 4) Overall clarity and comprehensiveness. Provide a FULL assessment detailing strengths, weaknesses, and specific areas needing improvement. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Document Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an expert executive document polisher. Your objective is to take the finalized global flexible-work policy and format it for immediate distribution to global leadership and employees. Ensure the tone is professional, empathetic, and authoritative. Check for consistent formatting, clear headings, logical flow, and flawless grammar. The final output must be a pristine, ready-to-publish corporate policy document."
+    }
+  ],
+  "explanation": "The pipeline begins with a Builder agent to draft the initial global flexible-work policy, addressing the complex intersection of international labor laws, cultural attitudes, and operational needs. This draft is then passed to a Refiner agent, which is equipped to handle comprehensive revisions. A Quality Gate (critic) then assesses the refined policy for legal compliance, cultural sensitivity, and operational feasibility. If the policy meets all criteria, the gate outputs 'pass' and routes to the Polisher for final formatting and tone adjustment. If issues are found, it outputs 'revise', routing back to the Refiner to fix the identified flaws. This ensures a robust, legally sound, and culturally adaptable final policy."
+}

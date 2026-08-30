@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Policy Drafter",
+      "role": "builder",
+      "systemPrompt": "Design a comprehensive compensation-policy approach for a globally distributed remote workforce across 30 countries. The policy must address location-adjusted pay band friction, integrate new labor-market data, and ensure compliance with emerging pay-transparency laws. Balance cost-of-labor logic, internal fairness perceptions, and legal requirements. Provide a structured, actionable policy framework.",
+      "description": "Creates the initial draft of the global compensation policy."
+    },
+    {
+      "name": "Compensation & Legal Expert",
+      "role": "expert",
+      "systemPrompt": "You are an expert in global compensation strategy and international employment law. Review the drafted compensation policy. Identify any gaps in addressing pay-transparency laws, flaws in the cost-of-labor vs. fairness balance, or weaknesses in handling location-adjusted pay friction. Provide detailed, actionable feedback on how to improve the policy to ensure it is legally compliant, internally equitable, and practically implementable.",
+      "description": "Provides domain-specific expert review of the compensation policy."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous compensation policy output based on the expert feedback provided. Fix all identified issues, strengthen the legal compliance aspects, refine the fairness logic, and produce a highly polished, improved version of the policy framework.",
+      "description": "Refines the compensation policy based on expert feedback."
+    },
+    {
+      "name": "Quality Assurance Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality assurance gate for global HR policies. Review the refined compensation policy. Assess whether it successfully balances cost-of-labor logic, internal fairness, and pay-transparency laws across 30 jurisdictions. Check for clarity, completeness, and actionability. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined policy and routes the pipeline based on quality.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional document polisher. Take the approved compensation policy and format it for executive presentation. Ensure professional tone, clear headings, logical flow, and flawless grammar. Make it ready for distribution to company leadership and global HR teams.",
+      "description": "Formats and polishes the final approved policy for user-facing output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Policy Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Design a comprehensive compensation-policy approach for a globally distributed remote workforce across 30 countries. The policy must address location-adjusted pay band friction, integrate new labor-market data, and ensure compliance with emerging pay-transparency laws. Balance cost-of-labor logic, internal fairness perceptions, and legal requirements. Provide a structured, actionable policy framework."
+    },
+    {
+      "name": "Compensation & Legal Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an expert in global compensation strategy and international employment law. Review the drafted compensation policy. Identify any gaps in addressing pay-transparency laws, flaws in the cost-of-labor vs. fairness balance, or weaknesses in handling location-adjusted pay friction. Provide detailed, actionable feedback on how to improve the policy to ensure it is legally compliant, internally equitable, and practically implementable."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous compensation policy output based on the expert feedback provided. Fix all identified issues, strengthen the legal compliance aspects, refine the fairness logic, and produce a highly polished, improved version of the policy framework."
+    },
+    {
+      "name": "Quality Assurance Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality assurance gate for global HR policies. Review the refined compensation policy. Assess whether it successfully balances cost-of-labor logic, internal fairness, and pay-transparency laws across 30 jurisdictions. Check for clarity, completeness, and actionability. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document polisher. Take the approved compensation policy and format it for executive presentation. Ensure professional tone, clear headings, logical flow, and flawless grammar. Make it ready for distribution to company leadership and global HR teams."
+    }
+  ],
+  "explanation": "Execution flow: Policy Drafter creates the initial compensation framework -> Compensation & Legal Expert reviews it for strategic and legal gaps -> Policy Refiner updates the draft based on the expert's feedback -> Quality Assurance Gate evaluates the refined policy (if 'revise', loops back to Policy Refiner; if 'pass', proceeds to Final Polisher) -> Final Polisher formats the approved policy for executive presentation. This structure ensures the complex legal and strategic requirements of global pay transparency are rigorously vetted and refined before final delivery."
+}

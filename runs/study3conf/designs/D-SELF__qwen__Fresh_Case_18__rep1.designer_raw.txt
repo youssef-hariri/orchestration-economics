@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert product and regulatory strategist. Draft a comprehensive product and regulatory-rollout strategy for a wearables company launching sleep-apnea screening and five other health features. The strategy must address divergent classifications (medical device in EU/Japan, wellness in emerging markets, pending in US). Detail the launch sequencing, validation investments, and credibility-building approaches with clinicians and consumers across these varied regions.",
+      "description": "Drafts the initial comprehensive product and regulatory rollout strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Review the initial strategy draft and any feedback provided. Enhance it by ensuring all specific constraints are met: explicitly address the five additional health capabilities, detail the exact sequencing of launches based on regulatory ease and market readiness, specify validation investments for medical versus wellness pathways, and outline concrete credibility-building tactics for both clinicians and consumers. Improve clarity, depth, and strategic coherence.",
+      "description": "Refines the initial draft to ensure all constraints and strategic elements are deeply addressed."
+    },
+    {
+      "name": "Regulatory Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate evaluating a global regulatory and product rollout strategy. Assess the provided strategy against the following criteria: 1) Accurate handling of divergent classifications (EU/Japan medical, emerging markets wellness, US pending). 2) Logical launch sequencing. 3) Appropriate validation investments for each regulatory pathway. 4) Effective credibility-building for both clinicians and consumers. 5) Inclusion of the five additional health capabilities. Provide a FULL assessment detailing strengths, weaknesses, and specific gaps. Then, on the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "description": "Evaluates the refined strategy against regulatory and business criteria to ensure completeness and accuracy."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved regulatory and product rollout strategy and format it into a highly professional, clear, and persuasive executive brief. Use clear headings, bullet points for key strategic pillars (Launch Sequencing, Validation Investments, Credibility-Building), and ensure the tone is appropriate for C-suite and regulatory stakeholders. Fix any grammatical or stylistic issues.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert product and regulatory strategist. Draft a comprehensive product and regulatory-rollout strategy for a wearables company launching sleep-apnea screening and five other health features. The strategy must address divergent classifications (medical device in EU/Japan, wellness in emerging markets, pending in US). Detail the launch sequencing, validation investments, and credibility-building approaches with clinicians and consumers across these varied regions."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Review the initial strategy draft and any feedback provided. Enhance it by ensuring all specific constraints are met: explicitly address the five additional health capabilities, detail the exact sequencing of launches based on regulatory ease and market readiness, specify validation investments for medical versus wellness pathways, and outline concrete credibility-building tactics for both clinicians and consumers. Improve clarity, depth, and strategic coherence."
+    },
+    {
+      "name": "Regulatory Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate evaluating a global regulatory and product rollout strategy. Assess the provided strategy against the following criteria: 1) Accurate handling of divergent classifications (EU/Japan medical, emerging markets wellness, US pending). 2) Logical launch sequencing. 3) Appropriate validation investments for each regulatory pathway. 4) Effective credibility-building for both clinicians and consumers. 5) Inclusion of the five additional health capabilities. Provide a FULL assessment detailing strengths, weaknesses, and specific gaps. Then, on the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved regulatory and product rollout strategy and format it into a highly professional, clear, and persuasive executive brief. Use clear headings, bullet points for key strategic pillars (Launch Sequencing, Validation Investments, Credibility-Building), and ensure the tone is appropriate for C-suite and regulatory stakeholders. Fix any grammatical or stylistic issues."
+    }
+  ],
+  "explanation": "The pipeline begins with an Initial Strategy Builder to draft the core regulatory and product rollout strategy. This draft is passed to a Strategy Refiner to ensure all specific constraints—such as the five additional health features, divergent market classifications, and specific credibility-building tactics—are thoroughly integrated. The Regulatory Quality Gate then assesses the refined output. If the strategy lacks depth or misses critical regulatory nuances, it routes back to the Strategy Refiner for revision. Once the gate passes the strategy, it moves to the Executive Polisher for final formatting and professional presentation. This ensures a highly accurate, comprehensive, and polished final deliverable."
+}

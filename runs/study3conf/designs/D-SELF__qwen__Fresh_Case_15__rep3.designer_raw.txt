@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Franchise Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert franchise strategist and financial restructuring specialist. Your task is to design a comprehensive royalty and franchise-financing restructuring approach for a quick-service restaurant franchisor. The franchisor operates in Turkey, Egypt, Nigeria, Indonesia, and Brazil, where franchisees face severe currency depreciation and local inflation, making fixed USD-denominated royalties unsustainable. Additionally, franchisee associations are organizing collectively in these regions. Meanwhile, company-owned stores in stable-currency markets remain highly profitable. Design a strategy that preserves long-term brand economics, addresses currency stability, mitigates inflation impacts, and navigates collective-bargaining cultures across these diverse markets. Provide specific, actionable mechanisms for royalty adjustments (e.g., local currency indexing, tiered royalties), financing options for franchisees, and negotiation strategies for dealing with franchisee associations.",
+      "description": "Creates the initial draft of the franchise restructuring strategy addressing currency, inflation, and collective bargaining challenges."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner specializing in corporate strategy and franchise economics. Improve the previous output based on the quality feedback provided. Fix all identified issues, strengthen the economic and legal arguments, ensure the proposed mechanisms are practical and legally viable for emerging markets, and produce a polished, improved version of the restructuring approach.",
+      "description": "Refines the strategy draft based on critical feedback to improve economic viability and practical application."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a critical quality gate evaluating a franchise restructuring strategy. Review the refined output carefully. Assess its economic viability, legal feasibility, adaptability to local inflation and currency issues, and effectiveness against collective bargaining pressures. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for quality, viability, and completeness, routing to revision if necessary.",
+      "type": "if",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved franchise restructuring strategy and format it into a highly professional, clear, and compelling executive brief. Use appropriate headings, bullet points for key mechanisms, and ensure the tone is suitable for presentation to the franchisor's board of directors. Fix any minor grammatical, structural, or stylistic issues to ensure a flawless final document.",
+      "description": "Formats and polishes the final approved strategy into a professional executive brief."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Franchise Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert franchise strategist and financial restructuring specialist. Your task is to design a comprehensive royalty and franchise-financing restructuring approach for a quick-service restaurant franchisor. The franchisor operates in Turkey, Egypt, Nigeria, Indonesia, and Brazil, where franchisees face severe currency depreciation and local inflation, making fixed USD-denominated royalties unsustainable. Additionally, franchisee associations are organizing collectively in these regions. Meanwhile, company-owned stores in stable-currency markets remain highly profitable. Design a strategy that preserves long-term brand economics, addresses currency stability, mitigates inflation impacts, and navigates collective-bargaining cultures across these diverse markets. Provide specific, actionable mechanisms for royalty adjustments (e.g., local currency indexing, tiered royalties), financing options for franchisees, and negotiation strategies for dealing with franchisee associations."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner specializing in corporate strategy and franchise economics. Improve the previous output based on the quality feedback provided. Fix all identified issues, strengthen the economic and legal arguments, ensure the proposed mechanisms are practical and legally viable for emerging markets, and produce a polished, improved version of the restructuring approach."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical quality gate evaluating a franchise restructuring strategy. Review the refined output carefully. Assess its economic viability, legal feasibility, adaptability to local inflation and currency issues, and effectiveness against collective bargaining pressures. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved franchise restructuring strategy and format it into a highly professional, clear, and compelling executive brief. Use appropriate headings, bullet points for key mechanisms, and ensure the tone is suitable for presentation to the franchisor's board of directors. Fix any minor grammatical, structural, or stylistic issues to ensure a flawless final document."
+    }
+  ],
+  "explanation": "The pipeline begins with the Franchise Strategy Builder, which drafts a comprehensive restructuring approach addressing currency depreciation, inflation, and collective bargaining in emerging markets. The draft is then passed to the Strategy Refiner to incorporate initial structural improvements. The Strategic Quality Gate acts as an 'if' decision point, critically assessing the refined output for economic viability and legal feasibility. If the strategy requires improvement, the gate outputs 'revise' and loops back to the Strategy Refiner to fix the identified issues. Once the strategy meets all quality criteria, the gate outputs 'pass', routing the content to the Executive Polisher. The Polisher formats the final strategy into a professional, board-ready executive brief, ensuring the output is clear, compelling, and perfectly structured."
+}

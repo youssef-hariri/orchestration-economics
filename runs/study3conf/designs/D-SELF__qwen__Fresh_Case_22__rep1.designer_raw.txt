@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert retail strategist. Draft a comprehensive market-entry strategy for a European grocery retailer expanding into Saudi Arabia, the UAE, and Qatar in 2026 via joint ventures with local family conglomerates. Your strategy must explicitly cover: 1) Partner selection criteria, 2) JV governance and balance of power, 3) Store-format adaptation to local preferences, and 4) Workforce-localization compliance (Saudization, Emiratization, Qatarization) and Ramadan-driven seasonality. Produce a detailed, structured strategic document.",
+      "description": "Drafts the initial market-entry strategy covering all required Gulf expansion topics."
+    },
+    {
+      "name": "Gulf Market Expert",
+      "role": "critic",
+      "systemPrompt": "You are a domain expert in Gulf Cooperation Council (GCC) retail markets, joint ventures, and local regulations. Review the drafted market-entry strategy. Evaluate its accuracy regarding 2026 ownership rules, localization mandates, Ramadan seasonality impacts, and the nuances of partnering with local family conglomerates. Identify any strategic gaps, cultural blind spots, or regulatory inaccuracies. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the initial draft for regional accuracy and strategic viability, acting as a quality gate."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategic content refiner. Improve the previous market-entry strategy based on the expert feedback provided. Fix all identified issues, correct regulatory inaccuracies, enhance the governance and localization strategies, and ensure all Gulf-specific nuances are accurately addressed. Produce a fully revised and improved version of the strategy.",
+      "description": "Refines and corrects the strategy based on expert feedback."
+    },
+    {
+      "name": "Quality Assurance",
+      "role": "critic",
+      "systemPrompt": "You are a quality assurance critic. Review the refined market-entry strategy. Ensure it comprehensively covers partner selection, governance, format adaptation, and workforce localization for KSA, UAE, and Qatar. Check for logical consistency, strategic viability, and adherence to the prompt's constraints. Provide a FULL quality assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Iteratively assesses the refined strategy to ensure it meets all quality and compliance standards."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the final approved market-entry strategy and format it for a C-suite audience. Ensure professional tone, clear headings, bullet points for readability, and flawless grammar. Do not alter the core strategic content, only enhance the presentation and formatting.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert retail strategist. Draft a comprehensive market-entry strategy for a European grocery retailer expanding into Saudi Arabia, the UAE, and Qatar in 2026 via joint ventures with local family conglomerates. Your strategy must explicitly cover: 1) Partner selection criteria, 2) JV governance and balance of power, 3) Store-format adaptation to local preferences, and 4) Workforce-localization compliance (Saudization, Emiratization, Qatarization) and Ramadan-driven seasonality. Produce a detailed, structured strategic document."
+    },
+    {
+      "name": "Gulf Market Expert",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a domain expert in Gulf Cooperation Council (GCC) retail markets, joint ventures, and local regulations. Review the drafted market-entry strategy. Evaluate its accuracy regarding 2026 ownership rules, localization mandates, Ramadan seasonality impacts, and the nuances of partnering with local family conglomerates. Identify any strategic gaps, cultural blind spots, or regulatory inaccuracies. Provide a FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategic content refiner. Improve the previous market-entry strategy based on the expert feedback provided. Fix all identified issues, correct regulatory inaccuracies, enhance the governance and localization strategies, and ensure all Gulf-specific nuances are accurately addressed. Produce a fully revised and improved version of the strategy."
+    },
+    {
+      "name": "Quality Assurance",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a quality assurance critic. Review the refined market-entry strategy. Ensure it comprehensively covers partner selection, governance, format adaptation, and workforce localization for KSA, UAE, and Qatar. Check for logical consistency, strategic viability, and adherence to the prompt's constraints. Provide a FULL quality assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 5,
+        "retry": 3
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the final approved market-entry strategy and format it for a C-suite audience. Ensure professional tone, clear headings, bullet points for readability, and flawless grammar. Do not alter the core strategic content, only enhance the presentation and formatting."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategy Builder drafting the initial market-entry plan. The Gulf Market Expert then evaluates the draft (if gate). If it passes, it moves to the Quality Assurance agent; if it needs revision, it routes to the Strategy Refiner. The Strategy Refiner improves the content, which is then assessed by the Quality Assurance agent (while gate). If the quality is insufficient, it loops back to the Strategy Refiner (up to 3 iterations). Once the Quality Assurance agent passes the output, it goes to the Executive Polisher for final C-suite formatting."
+}

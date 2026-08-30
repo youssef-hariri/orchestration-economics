@@ -1,0 +1,60 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert AI compliance strategist. Your task is to create a comprehensive strategy document for managing product compliance and customer communication for an AI-powered hiring platform sold across 15 jurisdictions with conflicting AI regulations (including the EU AI Act's high-risk obligations, light-touch regimes, and strict data-localization requirements). Your strategy must address: (1) Product adaptation approach for each regulatory tier, (2) Documentation and compliance framework that satisfies all jurisdictions, (3) Marketing adaptation strategy that maintains brand coherence, (4) Customer communication framework for cross-border operations, (5) Governance structure for ongoing compliance management. Provide specific, actionable recommendations with clear implementation steps. Structure your response with clear sections and practical guidance.",
+      "description": "Creates the initial comprehensive compliance and communication strategy document"
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refinement specialist. Review the previous strategy output and any quality feedback provided. Identify gaps, inconsistencies, or areas lacking specificity. Improve the strategy by: ensuring all regulatory scenarios are addressed, strengthening the brand coherence approach, clarifying cross-border customer communication protocols, and making recommendations more actionable. Maintain the overall structure while enhancing depth and practicality. Produce a refined, improved version of the strategy.",
+      "description": "Refines the strategy based on quality feedback and identified issues"
+    },
+    {
+      "name": "Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "You are a quality assessment expert for AI compliance strategies. Evaluate the strategy document against these criteria: (1) Comprehensiveness - Does it address EU AI Act, light-touch regimes, and data-localization requirements? (2) Actionability - Are recommendations specific and implementable? (3) Brand coherence - Does the strategy maintain consistent brand identity across jurisdictions? (4) Cross-border operations - Does it address customers operating in multiple regions? (5) Clarity - Is the strategy well-structured and easy to follow? (6) Completeness - Are product, documentation, marketing, and communication all covered? Provide your FULL assessment with detailed reasoning covering strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Assesses strategy quality and determines if revision is needed"
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a document polishing specialist. Take the approved strategy and prepare it for final delivery. Ensure professional formatting, consistent structure, clear section headings, and polished language. Verify that all recommendations are clearly articulated and the document flows logically. Remove any redundancies and ensure the final output is ready for executive presentation.",
+      "description": "Polishes and formats the final strategy document for delivery"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert AI compliance strategist. Your task is to create a comprehensive strategy document for managing product compliance and customer communication for an AI-powered hiring platform sold across 15 jurisdictions with conflicting AI regulations (including the EU AI Act's high-risk obligations, light-touch regimes, and strict data-localization requirements). Your strategy must address: (1) Product adaptation approach for each regulatory tier, (2) Documentation and compliance framework that satisfies all jurisdictions, (3) Marketing adaptation strategy that maintains brand coherence, (4) Customer communication framework for cross-border operations, (5) Governance structure for ongoing compliance management. Provide specific, actionable recommendations with clear implementation steps. Structure your response with clear sections and practical guidance."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refinement specialist. Review the previous strategy output and any quality feedback provided. Identify gaps, inconsistencies, or areas lacking specificity. Improve the strategy by: ensuring all regulatory scenarios are addressed, strengthening the brand coherence approach, clarifying cross-border customer communication protocols, and making recommendations more actionable. Maintain the overall structure while enhancing depth and practicality. Produce a refined, improved version of the strategy."
+    },
+    {
+      "name": "Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assessment expert for AI compliance strategies. Evaluate the strategy document against these criteria: (1) Comprehensiveness - Does it address EU AI Act, light-touch regimes, and data-localization requirements? (2) Actionability - Are recommendations specific and implementable? (3) Brand coherence - Does the strategy maintain consistent brand identity across jurisdictions? (4) Cross-border operations - Does it address customers operating in multiple regions? (5) Clarity - Is the strategy well-structured and easy to follow? (6) Completeness - Are product, documentation, marketing, and communication all covered? Provide your FULL assessment with detailed reasoning covering strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a document polishing specialist. Take the approved strategy and prepare it for final delivery. Ensure professional formatting, consistent structure, clear section headings, and polished language. Verify that all recommendations are clearly articulated and the document flows logically. Remove any redundancies and ensure the final output is ready for executive presentation."
+    }
+  ],
+  "explanation": "This pipeline follows a build-refine-validate-polish pattern optimized for complex strategy development. The Strategy Builder creates the initial comprehensive compliance and communication strategy addressing all regulatory scenarios. The Strategy Refiner then improves the draft based on quality feedback. The Quality Assessor acts as a decision gate, evaluating the strategy against six critical criteria (comprehensiveness, actionability, brand coherence, cross-border operations, clarity, and completeness). If the strategy needs revision, the pipeline loops back to the Strategy Refiner for improvement. Once the quality gate passes the strategy, the Final Polisher formats it for executive delivery. This design ensures the strategy is both comprehensive and actionable while maintaining quality through iterative refinement. The pipeline is efficient at 4 steps with a single quality gate that can trigger up to 3 refinement cycles if needed."
+}

@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Your objective is to produce a comprehensive product strategy document for localizing an adaptive-learning platform across Vietnam, Saudi Arabia, France, and Kenya in 2026. The final document must clearly define the balance between a shared technology core and local adaptations, addressing mandated curricula, language-of-instruction rules, attitudes toward foreign content, parental beliefs on screen time and standardized testing, and mixed procurement channels (government vs. direct-to-consumer).",
+      "description": "Drafts the initial comprehensive product strategy for the four target countries."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Your objective is to produce an improved, highly detailed product strategy document that resolves all identified gaps in the previous draft. The final output must seamlessly integrate the shared technology core with precise local adaptations for each of the four countries, ensuring procurement strategies are realistic and cultural nuances regarding education are fully respected.",
+      "description": "Refines and improves the strategy based on quality feedback from the gate."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Your objective is to produce a rigorous quality assessment of the product strategy. The final output must be a detailed evaluation of the strategy's strengths, weaknesses, and specific issues regarding the four target markets, curriculum mandates, and procurement channels. On the very last line, output exactly one routing keyword: pass or revise.",
+      "description": "Evaluates the refined strategy and determines if it passes quality standards or needs revision."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "Your objective is to produce a final, executive-ready product strategy document. The final output must be professionally formatted with clear headings, concise bullet points for each country's specific strategies, and a compelling executive summary that highlights the balance between the global tech core and local market fit.",
+      "description": "Formats the final approved strategy into a polished, professional executive document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Your objective is to produce a comprehensive product strategy document for localizing an adaptive-learning platform across Vietnam, Saudi Arabia, France, and Kenya in 2026. The final document must clearly define the balance between a shared technology core and local adaptations, addressing mandated curricula, language-of-instruction rules, attitudes toward foreign content, parental beliefs on screen time and standardized testing, and mixed procurement channels (government vs. direct-to-consumer)."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Your objective is to produce an improved, highly detailed product strategy document that resolves all identified gaps in the previous draft. The final output must seamlessly integrate the shared technology core with precise local adaptations for each of the four countries, ensuring procurement strategies are realistic and cultural nuances regarding education are fully respected."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Your objective is to produce a rigorous quality assessment of the product strategy. The final output must be a detailed evaluation of the strategy's strengths, weaknesses, and specific issues regarding the four target markets, curriculum mandates, and procurement channels. On the very last line, output exactly one routing keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Your objective is to produce a final, executive-ready product strategy document. The final output must be professionally formatted with clear headings, concise bullet points for each country's specific strategies, and a compelling executive summary that highlights the balance between the global tech core and local market fit."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategy Builder, which drafts the initial localization strategy covering curricula, cultural attitudes, and procurement for the four target countries. The Strategy Refiner then improves this draft based on feedback. The Strategic Quality Gate assesses the refined strategy; if it requires changes, it routes back to the Strategy Refiner to iterate until the quality standards are met. Once the strategy passes the quality gate, the Executive Polisher formats the final document for executive presentation. This structure ensures deep localization and strategic balance while maintaining a fully automated, high-quality output."
+}

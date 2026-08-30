@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Integration Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert banking integration strategist. Your task is to design a comprehensive integration and market-consolidation strategy for a pan-African banking group that has acquired banks in Nigeria, Kenya, and Morocco in 2026. The strategy must address: 1) Technology migration (unifying different core-banking systems while ensuring local continuity), 2) Brand decisions (balancing unified digital products with local responsiveness), 3) Management alignment (integrating entrenched local cultures), and 4) Regulatory compliance (navigating distinct supervisors in each country). Provide a detailed, sequenced strategic plan.",
+      "description": "Drafts the initial multi-country banking integration strategy covering technology, brand, management, and regulatory aspects."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. If no specific feedback is provided, enhance the strategy by ensuring deep, actionable insights for the specific regulatory and cultural contexts of Nigeria, Kenya, and Morocco. Fix all issues, strengthen the sequencing of technology and brand migration, and produce a polished, improved version.",
+      "description": "Refines and improves the initial strategy draft based on quality feedback or by proactively addressing regional nuances."
+    },
+    {
+      "name": "Strategic Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate assessing a multi-country banking integration strategy. Review the refined output carefully. Evaluate it on: 1) Comprehensiveness (does it cover tech, brand, management, and regulators for Nigeria, Kenya, and Morocco?), 2) Feasibility and sequencing (is the migration plan realistic?), 3) Local responsiveness vs. global unification balance. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for quality, feasibility, and completeness, routing back for revision if necessary."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive report polisher. Take the approved banking integration strategy and format it for a C-suite audience. Ensure professional tone, clear headings, logical flow, and impeccable grammar. Highlight key strategic milestones and risk mitigations. Do not change the core substance, only elevate the presentation and readability.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Integration Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert banking integration strategist. Your task is to design a comprehensive integration and market-consolidation strategy for a pan-African banking group that has acquired banks in Nigeria, Kenya, and Morocco in 2026. The strategy must address: 1) Technology migration (unifying different core-banking systems while ensuring local continuity), 2) Brand decisions (balancing unified digital products with local responsiveness), 3) Management alignment (integrating entrenched local cultures), and 4) Regulatory compliance (navigating distinct supervisors in each country). Provide a detailed, sequenced strategic plan."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. If no specific feedback is provided, enhance the strategy by ensuring deep, actionable insights for the specific regulatory and cultural contexts of Nigeria, Kenya, and Morocco. Fix all issues, strengthen the sequencing of technology and brand migration, and produce a polished, improved version."
+    },
+    {
+      "name": "Strategic Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate assessing a multi-country banking integration strategy. Review the refined output carefully. Evaluate it on: 1) Comprehensiveness (does it cover tech, brand, management, and regulators for Nigeria, Kenya, and Morocco?), 2) Feasibility and sequencing (is the migration plan realistic?), 3) Local responsiveness vs. global unification balance. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive report polisher. Take the approved banking integration strategy and format it for a C-suite audience. Ensure professional tone, clear headings, logical flow, and impeccable grammar. Highlight key strategic milestones and risk mitigations. Do not change the core substance, only elevate the presentation and readability."
+    }
+  ],
+  "explanation": "The pipeline begins with the Integration Strategist (Builder) to draft the comprehensive multi-country banking strategy. The Strategy Refiner then enhances the draft, ensuring deep contextual alignment for Nigeria, Kenya, and Morocco. The Strategic Quality Assessor (Quality Gate) evaluates the refined strategy for comprehensiveness, feasibility, and regulatory balance. If the strategy requires improvement, it routes back to the Strategy Refiner for revision. Once the quality gate passes the output, the Executive Polisher formats the final strategy for C-suite presentation. Execution flow: Builder → Refiner → Quality Gate (if revise, loops back to Refiner; if pass, continues) → Polisher."
+}

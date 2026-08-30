@@ -1,0 +1,56 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert product strategist. Draft a comprehensive product strategy for adapting a precision-agriculture platform (currently serving large farms in North America and Europe) to smallholder markets in India, Kenya, and Vietnam. Your strategy must explicitly cover: 1) Hardware simplification (addressing affordability, connectivity, and durability), 2) Delivery partnerships (leveraging cooperatives and input dealers for reach and trust), and 3) Analytics features to prioritize or drop (considering low literacy demands, mobile-first interfaces, and the specific data values smallholders care about, like weather alerts and market prices vs. complex soil analytics). Provide a detailed, structured initial draft.",
+      "description": "Creates the initial comprehensive product strategy draft for smallholder markets."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on the quality feedback provided. Fix all identified issues, ensure deep contextual relevance to the specific challenges of smallholder farmers in India, Kenya, and Vietnam, and produce a highly actionable, improved version of the product strategy. Ensure all three core areas (hardware, partnerships, analytics) are thoroughly addressed.",
+      "description": "Refines and improves the product strategy based on expert feedback."
+    },
+    {
+      "name": "Iterative Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are an expert agri-tech quality gate. Review the refined product strategy carefully. Assess its feasibility, contextual accuracy for smallholder markets (India, Kenya, Vietnam), and completeness regarding hardware simplification, delivery partnerships, and analytics prioritization. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass. The keyword determines pipeline routing.",
+      "description": "Evaluates the strategy for quality and contextual accuracy, routing back for refinement if needed."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional document polisher. Take the approved product strategy and format it beautifully for an executive audience. Ensure clear headings, logical flow, bullet points for readability, professional tone, and flawless grammar. Make it ready for final presentation without altering the core strategic content.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert product strategist. Draft a comprehensive product strategy for adapting a precision-agriculture platform (currently serving large farms in North America and Europe) to smallholder markets in India, Kenya, and Vietnam. Your strategy must explicitly cover: 1) Hardware simplification (addressing affordability, connectivity, and durability), 2) Delivery partnerships (leveraging cooperatives and input dealers for reach and trust), and 3) Analytics features to prioritize or drop (considering low literacy demands, mobile-first interfaces, and the specific data values smallholders care about, like weather alerts and market prices vs. complex soil analytics). Provide a detailed, structured initial draft."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on the quality feedback provided. Fix all identified issues, ensure deep contextual relevance to the specific challenges of smallholder farmers in India, Kenya, and Vietnam, and produce a highly actionable, improved version of the product strategy. Ensure all three core areas (hardware, partnerships, analytics) are thoroughly addressed."
+    },
+    {
+      "name": "Iterative Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are an expert agri-tech quality gate. Review the refined product strategy carefully. Assess its feasibility, contextual accuracy for smallholder markets (India, Kenya, Vietnam), and completeness regarding hardware simplification, delivery partnerships, and analytics prioritization. Provide your FULL assessment — strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: retry, pass. The keyword determines pipeline routing.",
+      "targetStep": 2
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document polisher. Take the approved product strategy and format it beautifully for an executive audience. Ensure clear headings, logical flow, bullet points for readability, professional tone, and flawless grammar. Make it ready for final presentation without altering the core strategic content."
+    }
+  ],
+  "explanation": "This pipeline uses a Builder to create the initial product strategy draft, followed by a Refiner to structure and enhance it. An Iterative Quality Gate (while loop) then evaluates the strategy for contextual accuracy and completeness. If the strategy needs improvement, the gate outputs 'retry' and routes it back to the Refiner for iterative correction (up to 3 iterations). Once the strategy passes the quality check with a 'pass', it is sent to the Final Polisher to ensure professional formatting and executive readiness. This ensures a highly contextualized, thoroughly vetted, and polished final output."
+}

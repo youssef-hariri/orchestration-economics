@@ -1,0 +1,71 @@
+{
+  "agents": [
+    {
+      "name": "Localization Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a senior localization and marketing strategist. Design a comprehensive localization and marketing strategy for a streaming platform's Korean-content slate expanding in 2026 across Southeast Asia, the Middle East, Latin America, and Europe. Your strategy must allocate a limited localization budget effectively, addressing regional differences in subtitle vs. dubbing preferences, tolerance for adaptation edits, sensitivity to historical/cultural references, dubbing-studio quality and costs, and transnational fandom dynamics. Provide specific tactical recommendations, budget allocation percentages, and risk mitigation strategies.",
+      "description": "Drafts the initial localization and marketing strategy based on the complex regional requirements and budget constraints."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous localization strategy output based on any quality feedback provided. If no specific feedback is provided on the first pass, self-evaluate the strategy for completeness, budget realism, and regional accuracy, and refine it to ensure all constraints are optimally addressed. Produce a polished, improved version.",
+      "description": "Refines the strategy based on quality feedback or self-evaluation to ensure all regional and budget constraints are met."
+    },
+    {
+      "name": "Localization Quality Assessor",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate for a global localization strategy. Review the refined strategy carefully. Assess whether it adequately addresses the specific dubbing expectations, cultural sensitivities, and fandom dynamics of Southeast Asia, the Middle East, Latin America, and Europe. Verify that the budget allocation is realistic and constrained. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy against regional and budget constraints, routing to revision or final polish.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive editor and formatter. Take the approved localization and marketing strategy and format it into a highly professional, executive-ready document. Use clear headings, bullet points for key tactical recommendations, and ensure the tone is authoritative and strategic. Fix any minor grammatical or formatting issues. Do not alter the core strategic recommendations, only enhance the presentation and readability.",
+      "description": "Formats and polishes the final approved strategy into a professional, executive-ready document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Localization Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a senior localization and marketing strategist. Design a comprehensive localization and marketing strategy for a streaming platform's Korean-content slate expanding in 2026 across Southeast Asia, the Middle East, Latin America, and Europe. Your strategy must allocate a limited localization budget effectively, addressing regional differences in subtitle vs. dubbing preferences, tolerance for adaptation edits, sensitivity to historical/cultural references, dubbing-studio quality and costs, and transnational fandom dynamics. Provide specific tactical recommendations, budget allocation percentages, and risk mitigation strategies."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous localization strategy output based on any quality feedback provided. If no specific feedback is provided on the first pass, self-evaluate the strategy for completeness, budget realism, and regional accuracy, and refine it to ensure all constraints are optimally addressed. Produce a polished, improved version."
+    },
+    {
+      "name": "Localization Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate for a global localization strategy. Review the refined strategy carefully. Assess whether it adequately addresses the specific dubbing expectations, cultural sensitivities, and fandom dynamics of Southeast Asia, the Middle East, Latin America, and Europe. Verify that the budget allocation is realistic and constrained. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive editor and formatter. Take the approved localization and marketing strategy and format it into a highly professional, executive-ready document. Use clear headings, bullet points for key tactical recommendations, and ensure the tone is authoritative and strategic. Fix any minor grammatical or formatting issues. Do not alter the core strategic recommendations, only enhance the presentation and readability."
+    }
+  ],
+  "explanation": "This pipeline begins with a Builder agent to draft the initial localization and marketing strategy, addressing the complex regional variables (dubbing preferences, cultural sensitivities, fandom dynamics, and budget constraints). The draft is immediately passed to a Refiner agent to self-evaluate and improve the strategy's completeness and realism. A Quality Assessor (IF gate) then critically reviews the refined strategy. If the strategy fails to adequately address the regional nuances or budget limits, the gate outputs 'revise' and loops back to the Refiner for further improvement. Once the strategy passes the quality assessment, it is routed to the Executive Strategy Polisher, which formats the final output into a professional, executive-ready document. Execution flow: Builder → Refiner → Quality Assessor (if 'revise', loops back to Refiner; if 'pass', continues) → Polisher."
+}

@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Onboarding Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert supply chain strategist. Draft a comprehensive supplier onboarding and integration strategy for a consumer-electronics manufacturer shifting its supply base to Mexico, Morocco, and Vietnam. The strategy must address unfamiliar business customs, different quality-management traditions, distinct communication styles, and early audit misunderstandings regarding specifications and delivery commitments. Ensure the approach builds quality, trust, and reliable communication across these three culturally distinct regions.",
+      "description": "Drafts the initial comprehensive supplier onboarding and integration strategy."
+    },
+    {
+      "name": "Global Supply Chain Expert",
+      "role": "expert",
+      "systemPrompt": "You are a domain expert in cross-cultural supply chain management and international business. Review the drafted onboarding strategy. Provide detailed, actionable feedback on how well it addresses the specific cultural nuances of Mexico, Morocco, and Vietnam. Identify any gaps in quality management integration, trust-building, or communication protocols. Suggest specific improvements to make the strategy more robust and culturally sensitive.",
+      "description": "Provides domain-specific expert feedback on the cultural and operational aspects of the drafted strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on the expert feedback provided. Fix all identified issues, integrate the suggested cultural and operational improvements, and produce a polished, comprehensive, and highly actionable version of the supplier onboarding strategy.",
+      "description": "Refines the strategy by incorporating expert feedback and fixing identified issues."
+    },
+    {
+      "name": "Integration Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate evaluator. Review the refined supplier onboarding strategy. Assess whether it fully and effectively addresses the cultural differences, quality-management traditions, and communication styles of Mexico, Morocco, and Vietnam. Check for clarity, actionability, and completeness in resolving the early audit misunderstandings. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy and routes the pipeline based on quality assessment.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved supplier onboarding strategy and format it for final presentation. Ensure professional tone, clear headings, logical flow, and impeccable grammar. The final output should be ready for executive review and immediate implementation by the supply chain management team.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Onboarding Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert supply chain strategist. Draft a comprehensive supplier onboarding and integration strategy for a consumer-electronics manufacturer shifting its supply base to Mexico, Morocco, and Vietnam. The strategy must address unfamiliar business customs, different quality-management traditions, distinct communication styles, and early audit misunderstandings regarding specifications and delivery commitments. Ensure the approach builds quality, trust, and reliable communication across these three culturally distinct regions."
+    },
+    {
+      "name": "Global Supply Chain Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a domain expert in cross-cultural supply chain management and international business. Review the drafted onboarding strategy. Provide detailed, actionable feedback on how well it addresses the specific cultural nuances of Mexico, Morocco, and Vietnam. Identify any gaps in quality management integration, trust-building, or communication protocols. Suggest specific improvements to make the strategy more robust and culturally sensitive."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on the expert feedback provided. Fix all identified issues, integrate the suggested cultural and operational improvements, and produce a polished, comprehensive, and highly actionable version of the supplier onboarding strategy."
+    },
+    {
+      "name": "Integration Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate evaluator. Review the refined supplier onboarding strategy. Assess whether it fully and effectively addresses the cultural differences, quality-management traditions, and communication styles of Mexico, Morocco, and Vietnam. Check for clarity, actionability, and completeness in resolving the early audit misunderstandings. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved supplier onboarding strategy and format it for final presentation. Ensure professional tone, clear headings, logical flow, and impeccable grammar. The final output should be ready for executive review and immediate implementation by the supply chain management team."
+    }
+  ],
+  "explanation": "The pipeline begins with the 'Onboarding Strategy Builder' to draft the initial comprehensive supplier integration plan for Mexico, Morocco, and Vietnam. Next, the 'Global Supply Chain Expert' reviews the draft to provide domain-specific feedback on cultural nuances and quality management. The 'Strategy Refiner' then incorporates this expert feedback to improve the strategy. The 'Integration Quality Gate' acts as an 'if' step to evaluate the refined strategy; if it passes, it moves to the 'Executive Polisher' for final formatting, but if it requires revision, it loops back to the 'Strategy Refiner' to fix the issues. Finally, the 'Executive Polisher' formats the approved strategy for user-facing delivery."
+}

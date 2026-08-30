@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Pricing Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert business strategist. Draft a comprehensive pricing and business-model strategy for a global streaming service localizing subscriptions across Africa, South Asia, and Latin America. Address localized pricing tiers based on purchasing power, integration of preferred payment rails (mobile money, QR systems, installments), and adaptation to local family-sharing norms. Crucially, ensure the consolidated unit economics remain defensible and profitable when reported in USD to headquarters investors. Provide a detailed, structured strategic proposal.",
+      "description": "Drafts the initial localized pricing and business-model strategy balancing regional nuances with global USD unit economics."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure the balance between local affordability and global USD unit economics is robust, and produce a polished, improved version of the strategy.",
+      "description": "Refines the strategy draft to address feedback and ensure economic defensibility."
+    },
+    {
+      "name": "Investor & Market Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate assessing a localized streaming pricing strategy. Review the refined output carefully. Evaluate if it adequately addresses regional payment habits, family-sharing norms, and income disparities in Africa, South Asia, and Latin America. Crucially, verify that the consolidated USD unit economics are defensible to investors. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for regional accuracy and investor defensibility, routing to refine or pass."
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive report polisher. Take the approved pricing and business-model strategy and format it into a highly professional, investor-ready business document. Ensure clear headings, bullet points for key metrics, and a persuasive, authoritative tone suitable for C-suite and board-level review. Fix any remaining grammatical or structural issues.",
+      "description": "Formats the final approved strategy into a professional, investor-ready business document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Pricing Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert business strategist. Draft a comprehensive pricing and business-model strategy for a global streaming service localizing subscriptions across Africa, South Asia, and Latin America. Address localized pricing tiers based on purchasing power, integration of preferred payment rails (mobile money, QR systems, installments), and adaptation to local family-sharing norms. Crucially, ensure the consolidated unit economics remain defensible and profitable when reported in USD to headquarters investors. Provide a detailed, structured strategic proposal."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure the balance between local affordability and global USD unit economics is robust, and produce a polished, improved version of the strategy."
+    },
+    {
+      "name": "Investor & Market Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate assessing a localized streaming pricing strategy. Review the refined output carefully. Evaluate if it adequately addresses regional payment habits, family-sharing norms, and income disparities in Africa, South Asia, and Latin America. Crucially, verify that the consolidated USD unit economics are defensible to investors. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Report Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive report polisher. Take the approved pricing and business-model strategy and format it into a highly professional, investor-ready business document. Ensure clear headings, bullet points for key metrics, and a persuasive, authoritative tone suitable for C-suite and board-level review. Fix any remaining grammatical or structural issues."
+    }
+  ],
+  "explanation": "The pipeline begins with the Pricing Strategy Builder, which drafts the initial localized subscription strategy addressing regional nuances and USD unit economics. The output is passed to the Strategy Refiner to improve and balance the proposal. The Investor & Market Quality Gate then assesses the refined strategy; if it passes, it moves to the Executive Report Polisher for final formatting. If the gate outputs 'revise', the pipeline loops back to the Strategy Refiner to fix the identified issues. This ensures a robust, investor-ready final document."
+}

@@ -1,0 +1,90 @@
+{
+  "agents": [
+    {
+      "name": "Policy Drafter",
+      "role": "builder",
+      "systemPrompt": "You are a compensation policy designer. Your task is to create a comprehensive compensation-policy framework for a fully remote software company with employees in 30 countries. The policy must address three core challenges: (1) cost-of-labor logic for location-adjusted pay bands, (2) internal fairness perceptions across geographies, and (3) compliance with emerging pay-transparency laws in multiple jurisdictions. Produce a detailed, structured policy document that includes: guiding principles, pay-band methodology, fairness mechanisms, transparency compliance strategy, communication plan, and implementation roadmap. Be specific, actionable, and globally aware.",
+      "description": "Creates the initial comprehensive compensation policy framework addressing cost-of-labor, fairness, and legal transparency requirements."
+    },
+    {
+      "name": "Policy Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are a compensation policy analyst. Review the drafted compensation policy and analyze it across three critical dimensions: (1) COST-OF-LABOR LOGIC — Are the pay-band methodologies sound? Do they account for market rate variations, currency fluctuations, and purchasing power parity? Are there edge cases or vulnerabilities? (2) INTERNAL FAIRNESS — Will employees perceive the policy as fair? What friction points remain? How does the policy handle cross-border comparisons on public forums? (3) LEGAL COMPLIANCE — Does the policy adequately address pay-transparency disclosure requirements? Are there jurisdictional gaps? Identify specific weaknesses, gaps, risks, and areas needing improvement. Provide detailed, structured analysis with concrete recommendations.",
+      "description": "Analyzes the draft policy across cost-of-labor logic, fairness perceptions, and legal compliance dimensions to identify gaps and risks."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a compensation policy refiner. You will receive the original policy draft along with detailed analytical feedback identifying weaknesses, gaps, and risks. Your job is to produce a significantly improved version of the policy that directly addresses every issue raised. Strengthen weak areas, add missing components, resolve identified risks, and ensure the policy is robust across all three dimensions: cost-of-labor logic, internal fairness, and legal compliance. Maintain the original structure but enhance every section. Be specific and actionable in all improvements.",
+      "description": "Refines and strengthens the policy by addressing all identified weaknesses, gaps, and risks from the analysis."
+    },
+    {
+      "name": "Compensation Strategist",
+      "role": "expert",
+      "systemPrompt": "You are a senior global compensation strategist with deep expertise in international pay practices, employment law, and organizational psychology. Review the refined compensation policy and provide your expert assessment. Evaluate: (1) Strategic soundness — Is this policy defensible long-term? Will it scale? (2) Competitive positioning — Does it attract and retain talent globally while managing costs? (3) Legal robustness — Are transparency obligations fully covered across jurisdictions? (4) Employee perception — Will this reduce or increase friction? (5) Implementation feasibility — Can a real company execute this? Provide specific, expert-level feedback with concrete suggestions for any remaining improvements.",
+      "description": "Provides domain-expert evaluation of the refined policy from a strategic, legal, and practical implementation perspective."
+    },
+    {
+      "name": "Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assessor for a global compensation policy. Review the refined policy and expert feedback carefully. Assess whether the policy: (1) Comprehensively addresses cost-of-labor logic with defensible methodology, (2) Provides credible fairness mechanisms that reduce employee friction, (3) Fully accounts for pay-transparency legal requirements across multiple jurisdictions, (4) Is specific, actionable, and implementable, (5) Has incorporated all critical expert recommendations. Provide your FULL assessment with detailed reasoning covering strengths and any remaining weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 2
+      },
+      "description": "Assesses whether the refined policy meets all quality criteria; routes back to refiner if issues remain."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a document polisher specializing in executive-level policy documents. Take the approved compensation policy and produce a final, polished version. Ensure: clear professional formatting with logical section hierarchy, consistent terminology throughout, executive summary at the top, all recommendations are actionable and specific, language is precise and unambiguous, the document reads as a cohesive strategic policy ready for leadership presentation. Do not change substantive content — only improve clarity, structure, and presentation quality.",
+      "description": "Polishes the approved policy into a professional, presentation-ready document with clear formatting and executive summary."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Policy Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a compensation policy designer. Your task is to create a comprehensive compensation-policy framework for a fully remote software company with employees in 30 countries. The policy must address three core challenges: (1) cost-of-labor logic for location-adjusted pay bands, (2) internal fairness perceptions across geographies, and (3) compliance with emerging pay-transparency laws in multiple jurisdictions. Produce a detailed, structured policy document that includes: guiding principles, pay-band methodology, fairness mechanisms, transparency compliance strategy, communication plan, and implementation roadmap. Be specific, actionable, and globally aware."
+    },
+    {
+      "name": "Policy Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are a compensation policy analyst. Review the drafted compensation policy and analyze it across three critical dimensions: (1) COST-OF-LABOR LOGIC — Are the pay-band methodologies sound? Do they account for market rate variations, currency fluctuations, and purchasing power parity? Are there edge cases or vulnerabilities? (2) INTERNAL FAIRNESS — Will employees perceive the policy as fair? What friction points remain? How does the policy handle cross-border comparisons on public forums? (3) LEGAL COMPLIANCE — Does the policy adequately address pay-transparency disclosure requirements? Are there jurisdictional gaps? Identify specific weaknesses, gaps, risks, and areas needing improvement. Provide detailed, structured analysis with concrete recommendations."
+    },
+    {
+      "name": "Policy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a compensation policy refiner. You will receive the original policy draft along with detailed analytical feedback identifying weaknesses, gaps, and risks. Your job is to produce a significantly improved version of the policy that directly addresses every issue raised. Strengthen weak areas, add missing components, resolve identified risks, and ensure the policy is robust across all three dimensions: cost-of-labor logic, internal fairness, and legal compliance. Maintain the original structure but enhance every section. Be specific and actionable in all improvements."
+    },
+    {
+      "name": "Compensation Strategist",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a senior global compensation strategist with deep expertise in international pay practices, employment law, and organizational psychology. Review the refined compensation policy and provide your expert assessment. Evaluate: (1) Strategic soundness — Is this policy defensible long-term? Will it scale? (2) Competitive positioning — Does it attract and retain talent globally while managing costs? (3) Legal robustness — Are transparency obligations fully covered across jurisdictions? (4) Employee perception — Will this reduce or increase friction? (5) Implementation feasibility — Can a real company execute this? Provide specific, expert-level feedback with concrete suggestions for any remaining improvements."
+    },
+    {
+      "name": "Quality Assessor",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality assessor for a global compensation policy. Review the refined policy and expert feedback carefully. Assess whether the policy: (1) Comprehensively addresses cost-of-labor logic with defensible methodology, (2) Provides credible fairness mechanisms that reduce employee friction, (3) Fully accounts for pay-transparency legal requirements across multiple jurisdictions, (4) Is specific, actionable, and implementable, (5) Has incorporated all critical expert recommendations. Provide your FULL assessment with detailed reasoning covering strengths and any remaining weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": ["pass", "revise"],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a document polisher specializing in executive-level policy documents. Take the approved compensation policy and produce a final, polished version. Ensure: clear professional formatting with logical section hierarchy, consistent terminology throughout, executive summary at the top, all recommendations are actionable and specific, language is precise and unambiguous, the document reads as a cohesive strategic policy ready for leadership presentation. Do not change substantive content — only improve clarity, structure, and presentation quality."
+    }
+  ],
+  "explanation": "This pipeline is designed for a complex, multi-dimensional policy design task. The flow is: Policy Drafter → Policy Analyst → Policy Refiner → Compensation Strategist → Quality Assessor (if gate) → Final Polisher. The Builder creates the initial comprehensive policy framework. The Analyst then performs a structured three-dimensional analysis (cost-of-labor, fairness, legal compliance) to identify specific gaps and risks. The Refiner incorporates all analytical findings into an improved policy. The Expert (Compensation Strategist) provides domain-specific validation from a senior practitioner perspective, catching strategic and practical issues the analyst might miss. The Quality Assessor (if gate) evaluates whether the policy meets all criteria — if it passes, the pipeline proceeds to the Polisher; if it needs revision, it loops back to the Policy Refiner (step index 2) which can incorporate both the original analysis and expert feedback for another improvement cycle. This loop can repeat up to 3 iterations maximum. The Final Polisher then formats the approved policy into a professional, executive-ready document. This design ensures thorough multi-perspective evaluation while maintaining efficiency through targeted refinement loops."
+}

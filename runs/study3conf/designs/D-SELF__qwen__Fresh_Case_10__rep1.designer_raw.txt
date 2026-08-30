@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Change Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert change management strategist. Draft a comprehensive global AI-tool rollout strategy for a 2026 mandate. The strategy must address culturally distinct adoption patterns, covert use, and resistance (professional pride, data privacy, headcount fears) without damaging trust or performance. Provide a detailed, structured plan.",
+      "description": "Drafts the initial change management strategy addressing global AI rollout challenges."
+    },
+    {
+      "name": "Global Change Expert",
+      "role": "expert",
+      "systemPrompt": "You are a global organizational change and cultural dynamics expert. Review the drafted strategy. Identify any gaps in addressing covert use, cultural resistance, or trust preservation. Provide detailed, actionable feedback on how to improve the strategy to ensure it is culturally nuanced and practically effective.",
+      "description": "Reviews the strategy for cultural accuracy, feasibility, and alignment with change management best practices."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous strategy based on the expert feedback provided. Fix all identified issues, ensuring cultural nuances, covert use, and resistance are thoroughly addressed without damaging trust or performance.",
+      "description": "Refines and improves the strategy based on expert feedback."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate. Review the refined strategy carefully against the original requirements: addressing culturally distinct adoption, covert use, and resistance without damaging trust or performance. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Assesses the refined strategy and determines if it meets all quality criteria or needs revision."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the refined change management strategy and format it professionally. Ensure clear headings, bullet points, and an authoritative, empathetic tone suitable for a global insurance group's leadership. Do not change the core content, only enhance readability and professional presentation.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Change Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert change management strategist. Draft a comprehensive global AI-tool rollout strategy for a 2026 mandate. The strategy must address culturally distinct adoption patterns, covert use, and resistance (professional pride, data privacy, headcount fears) without damaging trust or performance. Provide a detailed, structured plan."
+    },
+    {
+      "name": "Global Change Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a global organizational change and cultural dynamics expert. Review the drafted strategy. Identify any gaps in addressing covert use, cultural resistance, or trust preservation. Provide detailed, actionable feedback on how to improve the strategy to ensure it is culturally nuanced and practically effective."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous strategy based on the expert feedback provided. Fix all identified issues, ensuring cultural nuances, covert use, and resistance are thoroughly addressed without damaging trust or performance."
+    },
+    {
+      "name": "Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate. Review the refined strategy carefully against the original requirements: addressing culturally distinct adoption, covert use, and resistance without damaging trust or performance. Provide your FULL assessment — strengths, weaknesses, specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the refined change management strategy and format it professionally. Ensure clear headings, bullet points, and an authoritative, empathetic tone suitable for a global insurance group's leadership. Do not change the core content, only enhance readability and professional presentation."
+    }
+  ],
+  "explanation": "This pipeline begins with a Builder agent to draft the initial change-management strategy. An Expert agent then reviews the draft for cultural nuances and practical feasibility. The Refiner agent incorporates this feedback. A Quality Gate (if step) assesses the refined output; if it passes, it moves to the Polisher, otherwise it loops back to the Refiner for further revision. Finally, the Polisher formats the strategy for executive delivery. This structure ensures domain expertise is applied before final quality checks, guaranteeing a culturally sensitive and professionally formatted outcome."
+}

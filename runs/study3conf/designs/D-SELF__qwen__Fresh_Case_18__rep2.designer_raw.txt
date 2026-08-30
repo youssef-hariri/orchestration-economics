@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Strategic Architect",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product and regulatory-rollout strategy for a wearables company launching sleep-apnea screening and five additional health features in 2026. Address the divergent regulatory classifications (medical device in EU/Japan, wellness in emerging markets, pending in US). Sequence the market launches, detail the validation investments required for each region, and outline a credibility-building plan with clinicians and consumers. Deliver a structured, actionable strategic plan.",
+      "description": "Drafts the initial product and regulatory rollout strategy."
+    },
+    {
+      "name": "Regulatory and Market Analyst",
+      "role": "analyst",
+      "systemPrompt": "Evaluate the proposed product and regulatory-rollout strategy. Identify any gaps in addressing the specific regulatory classifications across the EU, Japan, emerging markets, and the US. Assess the logic of the launch sequencing, the adequacy of the clinical-validation investments, and the effectiveness of the credibility-building tactics for both physicians and consumers. Provide a detailed critique highlighting strengths, weaknesses, and specific areas for improvement.",
+      "description": "Analyzes the draft strategy for regulatory and market gaps."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the proposed product and regulatory-rollout strategy based on the provided critique. Address all identified gaps in regional regulatory compliance, refine the launch sequencing, optimize the validation investment allocations, and strengthen the credibility-building initiatives. Ensure the final strategy is cohesive, realistic, and comprehensively addresses the divergent market classifications.",
+      "description": "Refines the strategy based on analytical feedback."
+    },
+    {
+      "name": "Expert Evaluator",
+      "role": "critic",
+      "systemPrompt": "Review the refined product and regulatory-rollout strategy. Assess its completeness, regulatory accuracy across the specified regions (EU, Japan, emerging markets, US), logical launch sequencing, and robustness of the clinical validation and credibility-building plans. Provide a FULL assessment detailing strengths, weaknesses, and any remaining critical issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Quality gate that evaluates the refined strategy and routes the pipeline."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format and polish the final product and regulatory-rollout strategy for an executive audience. Ensure professional tone, clear headings, logical flow, and high readability. Highlight key strategic decisions, regional nuances, and actionable next steps without altering the core strategic content.",
+      "description": "Polishes the final output for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategic Architect",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product and regulatory-rollout strategy for a wearables company launching sleep-apnea screening and five additional health features in 2026. Address the divergent regulatory classifications (medical device in EU/Japan, wellness in emerging markets, pending in US). Sequence the market launches, detail the validation investments required for each region, and outline a credibility-building plan with clinicians and consumers. Deliver a structured, actionable strategic plan."
+    },
+    {
+      "name": "Regulatory and Market Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Evaluate the proposed product and regulatory-rollout strategy. Identify any gaps in addressing the specific regulatory classifications across the EU, Japan, emerging markets, and the US. Assess the logic of the launch sequencing, the adequacy of the clinical-validation investments, and the effectiveness of the credibility-building tactics for both physicians and consumers. Provide a detailed critique highlighting strengths, weaknesses, and specific areas for improvement."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the proposed product and regulatory-rollout strategy based on the provided critique. Address all identified gaps in regional regulatory compliance, refine the launch sequencing, optimize the validation investment allocations, and strengthen the credibility-building initiatives. Ensure the final strategy is cohesive, realistic, and comprehensively addresses the divergent market classifications."
+    },
+    {
+      "name": "Expert Evaluator",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Review the refined product and regulatory-rollout strategy. Assess its completeness, regulatory accuracy across the specified regions (EU, Japan, emerging markets, US), logical launch sequencing, and robustness of the clinical validation and credibility-building plans. Provide a FULL assessment detailing strengths, weaknesses, and any remaining critical issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format and polish the final product and regulatory-rollout strategy for an executive audience. Ensure professional tone, clear headings, logical flow, and high readability. Highlight key strategic decisions, regional nuances, and actionable next steps without altering the core strategic content."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategic Architect (Builder) drafting the initial rollout strategy. The Regulatory and Market Analyst then evaluates the draft for regional and clinical gaps. The Strategy Refiner incorporates this feedback to improve the plan. The Expert Evaluator acts as a quality gate (IF step); if the strategy is comprehensive and accurate, it passes to the Executive Polisher. If it requires further work, it routes back to the Strategy Refiner for revision. Finally, the Executive Polisher formats the approved strategy for the end user. This ensures a robust, well-vetted strategic plan while maintaining a fully automated flow under 8 steps."
+}

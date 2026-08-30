@@ -1,0 +1,71 @@
+```json
+{
+  "agents": [
+    {
+      "name": "Global Labor Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a senior labor relations and gig-economy strategist. Draft a comprehensive global labor-relations strategy for a delivery platform operating in 2026. The strategy must address: divergent gig-worker representation regimes including EU worker councils, Latin American reclassification pressures, and Southeast Asian self-regulatory codes; existing informal rider collectives in multiple cities; and the shift from single-home-market engagement norms. Define engagement structures for each regime, establish bargaining boundaries, and propose a consistency framework across regions. Output a detailed, actionable strategy document with clear sections.",
+      "description": "Creates the initial draft of the global labor-relations strategy covering all required regional regimes and engagement frameworks."
+    },
+    {
+      "name": "Multi-Jurisdiction Labor Expert",
+      "role": "expert",
+      "systemPrompt": "You are an international labor law and industrial relations expert specializing in the gig economy. Review the drafted labor-relations strategy for legal accuracy, regulatory feasibility, and strategic soundness across three domains: (1) EU worker council requirements and consultation obligations, (2) Latin American labor reclassification risks and collective bargaining implications, (3) Southeast Asian self-regulatory codes and multi-stakeholder engagement. Identify specific legal gaps, regulatory misalignments, unrealistic assumptions, or missing nuance. Provide concrete, actionable feedback for improvement. Be thorough and precise.",
+      "description": "Provides domain-specific expert review of the draft strategy's legal and regulatory accuracy across EU, LatAm, and Southeast Asia."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a senior strategy refiner. You have received expert feedback on a draft global labor-relations strategy. Produce a comprehensive revised strategy document that fully incorporates the expert's feedback, corrects all identified gaps or inaccuracies, and strengthens engagement structures, bargaining boundaries, and cross-regional consistency mechanisms. Maintain a professional, authoritative tone. Output the complete revised strategy.",
+      "description": "Revises the draft strategy based on expert feedback to improve accuracy, coherence, and feasibility."
+    },
+    {
+      "name": "Strategic Quality Validator",
+      "role": "critic",
+      "systemPrompt": "You are a senior labor strategy and operations reviewer. Review the refined labor-relations strategy comprehensively. Evaluate: (1) whether engagement structures are clearly defined for EU worker councils, LatAm reclassification contexts, and SE Asia self-regulatory codes; (2) whether bargaining boundaries are explicit and legally defensible; (3) whether a viable consistency mechanism bridges divergent regimes; (4) whether informal rider collectives are adequately addressed; (5) overall coherence, feasibility, and actionability. Provide a detailed assessment with specific strengths and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Performs iterative quality validation on the refined strategy, looping back for improvements if standards are not met."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a senior communications and strategy polisher. Perform a final quality review of the labor-relations strategy. Ensure impeccable formatting, logical flow, clear headings, professional tone, and actionable language. Verify that all regional regimes (EU, LatAm, Southeast Asia) are treated with equivalent depth and that consistency mechanisms are clearly articulated. Output the final, polished strategy ready for executive presentation.",
+      "description": "Conducts final formatting, tone alignment, and quality checks to produce the user-facing strategy document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Labor Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a senior labor relations and gig-economy strategist. Draft a comprehensive global labor-relations strategy for a delivery platform operating in 2026. The strategy must address: divergent gig-worker representation regimes including EU worker councils, Latin American reclassification pressures, and Southeast Asian self-regulatory codes; existing informal rider collectives in multiple cities; and the shift from single-home-market engagement norms. Define engagement structures for each regime, establish bargaining boundaries, and propose a consistency framework across regions. Output a detailed, actionable strategy document with clear sections."
+    },
+    {
+      "name": "Multi-Jurisdiction Labor Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are an international labor law and industrial relations expert specializing in the gig economy. Review the drafted labor-relations strategy for legal accuracy, regulatory feasibility, and strategic soundness across three domains: (1) EU worker council requirements and consultation obligations, (2) Latin American labor reclassification risks and collective bargaining implications, (3) Southeast Asian self-regulatory codes and multi-stakeholder engagement. Identify specific legal gaps, regulatory misalignments, unrealistic assumptions, or missing nuance. Provide concrete, actionable feedback for improvement. Be thorough and precise."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a senior strategy refiner. You have received expert feedback on a draft global labor-relations strategy. Produce a comprehensive revised strategy document that fully incorporates the expert's feedback, corrects all identified gaps or inaccuracies, and strengthens engagement structures, bargaining boundaries, and cross-regional consistency mechanisms. Maintain a professional, authoritative tone. Output the complete revised strategy."
+    },
+    {
+      "name": "Strategic Quality Validator",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a senior labor strategy and operations reviewer. Review the refined labor-relations strategy comprehensively. Evaluate: (1) whether engagement structures are clearly defined for EU worker councils, LatAm reclassification contexts, and SE Asia self-regulatory codes; (2) whether bargaining boundaries are explicit and legally defensible; (3) whether a viable consistency mechanism bridges divergent regimes; (4) whether informal rider collectives are adequately addressed; (5) overall coherence, feasibility, and actionability. Provide a detailed assessment with specific strengths and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "targetStep": 2,
+      "maxIterations": 3
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a senior communications and strategy polisher. Perform a final quality review of the labor-relations strategy. Ensure impeccable formatting, logical flow, clear headings, professional tone, and actionable language. Verify that all regional regimes (EU, LatAm, Southeast Asia) are treated with equivalent depth and that consistency mechanisms are clearly articulated. Output the final, polished strategy ready for executive presentation."
+    }
+  ],
+  "explanation": "The pipeline begins with the Global Labor Strategy Builder drafting the initial cross-regional labor-relations strategy. The Multi-Jurisdiction Labor Expert then reviews this draft for legal and regulatory accuracy across EU, Latin American, and Southeast Asian contexts, identifying gaps and misalignments. The Strategy Refiner incorporates this expert feedback into a comprehensive revised document. Next, the Strategic Quality Validator runs a while-loop assessment checking for coherent engagement structures, clear bargaining boundaries, workable consistency mechanisms, and adequate treatment of informal collectives; if the strategy falls short, the validator outputs 'retry' and the pipeline loops back to the Strategy Refiner for up to three iterations. Once the validator outputs 'pass', the Executive Polisher performs final formatting, tone alignment, and structural refinement to deliver an executive-ready strategy document."
+}
+```

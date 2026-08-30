@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to draft a comprehensive partnership strategy for a European industrial buyer to support steel and aluminum suppliers in India, Turkey, and North Africa in complying with the EU Carbon Border Adjustment Mechanism (CBAM). The strategy must address technical readiness, emissions reporting, carbon pricing, and the perception of CBAM as disguised protectionism. Propose actionable steps to preserve long-standing commercial relationships and ensure shared competitiveness despite differing views on fairness. Provide a structured, detailed strategic plan.",
+      "description": "Drafts the initial partnership strategy for CBAM compliance."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Review the initial strategy draft provided by the builder. Enhance the strategy by ensuring it comprehensively addresses technical readiness, financial support mechanisms, and the delicate diplomatic balance required when suppliers view CBAM as protectionism. Fix any structural or logical gaps and output the improved strategy.",
+      "description": "Refines and improves the initial strategy draft."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a critical quality gate evaluating a partnership strategy for EU CBAM compliance. Assess the provided strategy for completeness, feasibility, and sensitivity to the geopolitical and commercial nuances (e.g., suppliers viewing CBAM as protectionism). Evaluate if it adequately addresses technical readiness, financial support, and relationship preservation. Provide a FULL assessment detailing strengths, weaknesses, and specific areas for improvement. Then, on the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the strategy and decides if it passes or needs revision."
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a professional document polisher. Take the refined partnership strategy and format it for executive presentation. Ensure clear headings, bullet points, professional business language, and logical flow. Fix any grammatical errors and ensure the final output is highly readable, persuasive, and ready for a European industrial buyer's leadership team.",
+      "description": "Formats and polishes the final strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Initial Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert supply chain strategist. Your task is to draft a comprehensive partnership strategy for a European industrial buyer to support steel and aluminum suppliers in India, Turkey, and North Africa in complying with the EU Carbon Border Adjustment Mechanism (CBAM). The strategy must address technical readiness, emissions reporting, carbon pricing, and the perception of CBAM as disguised protectionism. Propose actionable steps to preserve long-standing commercial relationships and ensure shared competitiveness despite differing views on fairness. Provide a structured, detailed strategic plan."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Review the initial strategy draft provided by the builder. Enhance the strategy by ensuring it comprehensively addresses technical readiness, financial support mechanisms, and the delicate diplomatic balance required when suppliers view CBAM as protectionism. Fix any structural or logical gaps and output the improved strategy."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a critical quality gate evaluating a partnership strategy for EU CBAM compliance. Assess the provided strategy for completeness, feasibility, and sensitivity to the geopolitical and commercial nuances (e.g., suppliers viewing CBAM as protectionism). Evaluate if it adequately addresses technical readiness, financial support, and relationship preservation. Provide a FULL assessment detailing strengths, weaknesses, and specific areas for improvement. Then, on the VERY LAST LINE, output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Final Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a professional document polisher. Take the refined partnership strategy and format it for executive presentation. Ensure clear headings, bullet points, professional business language, and logical flow. Fix any grammatical errors and ensure the final output is highly readable, persuasive, and ready for a European industrial buyer's leadership team."
+    }
+  ],
+  "explanation": "This pipeline begins with an Initial Strategy Builder to draft the comprehensive CBAM partnership strategy. The draft is immediately passed to a Strategy Refiner to enhance and structure the content. The refined output is then evaluated by a Strategic Quality Gate (an 'if' step) which assesses the strategy's feasibility, completeness, and sensitivity to supplier perceptions. If the strategy requires improvement ('revise'), it loops back to the Strategy Refiner to address the specific feedback. Once the strategy passes the quality check ('pass'), it is sent to the Final Polisher to format the document for executive presentation. This ensures a robust, highly polished, and diplomatically sound strategy."
+}

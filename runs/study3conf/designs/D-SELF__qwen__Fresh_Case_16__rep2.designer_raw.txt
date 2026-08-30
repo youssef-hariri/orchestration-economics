@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are an expert product strategist. Draft a comprehensive product-adaptation strategy for a smart-home voice assistant entering Japan, Korea, Thailand, and the Gulf in 2026. Your strategy must explicitly cover: 1) Interaction style (adapting to honorific systems and varying comfort levels with vocal commands), 2) Household roles (navigating multigenerational home dynamics), 3) Privacy signaling (addressing local expectations versus Western always-listening assumptions), and 4) Feature prioritization. Provide a detailed, structured, and culturally nuanced proposal.",
+      "description": "Drafts the initial product-adaptation strategy covering interaction, household roles, privacy, and features for the target markets."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure deep cultural accuracy regarding honorifics, multigenerational dynamics, and privacy expectations in Japan, Korea, Thailand, and the Gulf. Produce a polished, improved, and highly actionable version of the strategy.",
+      "description": "Refines the strategy based on critical feedback to ensure cultural and strategic accuracy."
+    },
+    {
+      "name": "Cultural & Privacy Critic",
+      "role": "critic",
+      "systemPrompt": "You are a quality gate and cultural expert. Review the refined product-adaptation strategy carefully. Assess its depth, cultural accuracy (especially regarding honorifics in Japan, Korea, and Thailand, and social norms in the Gulf), handling of multigenerational households, privacy signaling, and feature prioritization. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy for cultural accuracy and completeness, routing back for revision if standards are not met.",
+      "type": "if",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive editor and polisher. Take the approved product-adaptation strategy and format it for a C-suite audience. Ensure the tone is professional, persuasive, and clear. Use appropriate headings, bullet points, and an executive summary. Fix any minor grammatical or stylistic issues without altering the core strategic content.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert product strategist. Draft a comprehensive product-adaptation strategy for a smart-home voice assistant entering Japan, Korea, Thailand, and the Gulf in 2026. Your strategy must explicitly cover: 1) Interaction style (adapting to honorific systems and varying comfort levels with vocal commands), 2) Household roles (navigating multigenerational home dynamics), 3) Privacy signaling (addressing local expectations versus Western always-listening assumptions), and 4) Feature prioritization. Provide a detailed, structured, and culturally nuanced proposal."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure deep cultural accuracy regarding honorifics, multigenerational dynamics, and privacy expectations in Japan, Korea, Thailand, and the Gulf. Produce a polished, improved, and highly actionable version of the strategy."
+    },
+    {
+      "name": "Cultural & Privacy Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a quality gate and cultural expert. Review the refined product-adaptation strategy carefully. Assess its depth, cultural accuracy (especially regarding honorifics in Japan, Korea, and Thailand, and social norms in the Gulf), handling of multigenerational households, privacy signaling, and feature prioritization. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive editor and polisher. Take the approved product-adaptation strategy and format it for a C-suite audience. Ensure the tone is professional, persuasive, and clear. Use appropriate headings, bullet points, and an executive summary. Fix any minor grammatical or stylistic issues without altering the core strategic content."
+    }
+  ],
+  "explanation": "This pipeline uses a Strategy Builder to draft the initial product-adaptation strategy, followed by a Strategy Refiner to improve it. A Cultural & Privacy Critic acts as an IF quality gate to evaluate the refined strategy against specific regional constraints (honorifics, multigenerational homes, privacy). If the strategy fails to meet the high cultural and strategic standards, the Critic routes it back to the Refiner for revision. Once the Critic passes the strategy, the Executive Polisher formats the final output for a professional presentation. This ensures a highly accurate, culturally nuanced, and polished final strategy."
+}

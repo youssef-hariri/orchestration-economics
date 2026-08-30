@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Drafter",
+      "role": "builder",
+      "systemPrompt": "You are an expert corporate finance and ESG strategist. Draft a comprehensive green bond financing strategy for an industrial group operating in Europe, North Africa, and Southeast Asia in 2026. The strategy must address: 1) Structuring issuance across divergent taxonomies (EU, Gulf, Asian) and disclosure standards. 2) Managing internal emissions measurement-quality risk. 3) Navigating conflicting guidance from rating agencies and regional banks. 4) Protecting the group's credibility with investors. Provide a detailed, structured strategic plan.",
+      "description": "Drafts the initial comprehensive green bond financing strategy addressing multi-jurisdictional taxonomies, data quality risks, and conflicting guidance."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure all constraints (divergent taxonomies, measurement quality, conflicting guidance, investor credibility) are thoroughly addressed, and produce a polished, improved version.",
+      "description": "Refines the drafted strategy to address any gaps or weaknesses identified during the quality assessment."
+    },
+    {
+      "name": "Taxonomy & Risk Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate evaluating a green bond financing strategy. Assess the strategy against the following criteria: 1) Does it adequately structure issuance across EU, Gulf, and Asian taxonomies? 2) Does it propose concrete mechanisms to manage inconsistent internal emissions measurement quality? 3) Does it resolve or navigate conflicting guidance from rating agencies/banks? 4) Does it protect investor credibility? Provide your FULL assessment with detailed reasoning, strengths, and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy against complex ESG, taxonomy, and data quality constraints to ensure it meets the required standard.",
+      "type": "if",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved green bond financing strategy and format it for a C-suite audience. Ensure professional tone, clear headings, logical flow, and flawless grammar. Do not alter the core strategic content, only enhance readability and presentation.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Drafter",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert corporate finance and ESG strategist. Draft a comprehensive green bond financing strategy for an industrial group operating in Europe, North Africa, and Southeast Asia in 2026. The strategy must address: 1) Structuring issuance across divergent taxonomies (EU, Gulf, Asian) and disclosure standards. 2) Managing internal emissions measurement-quality risk. 3) Navigating conflicting guidance from rating agencies and regional banks. 4) Protecting the group's credibility with investors. Provide a detailed, structured strategic plan."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure all constraints (divergent taxonomies, measurement quality, conflicting guidance, investor credibility) are thoroughly addressed, and produce a polished, improved version."
+    },
+    {
+      "name": "Taxonomy & Risk Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate evaluating a green bond financing strategy. Assess the strategy against the following criteria: 1) Does it adequately structure issuance across EU, Gulf, and Asian taxonomies? 2) Does it propose concrete mechanisms to manage inconsistent internal emissions measurement quality? 3) Does it resolve or navigate conflicting guidance from rating agencies/banks? 4) Does it protect investor credibility? Provide your FULL assessment with detailed reasoning, strengths, and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 1
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved green bond financing strategy and format it for a C-suite audience. Ensure professional tone, clear headings, logical flow, and flawless grammar. Do not alter the core strategic content, only enhance readability and presentation."
+    }
+  ],
+  "explanation": "The pipeline begins with a Strategy Drafter (builder) to create the initial comprehensive green bond financing strategy. This draft is passed to the Strategy Refiner to improve and address any immediate gaps. The Taxonomy & Risk Quality Gate (critic/if) then evaluates the refined strategy against the complex constraints of divergent regional taxonomies, emissions measurement risks, and conflicting guidance. If the strategy fails to meet the criteria, the gate outputs 'revise' and loops back to the Strategy Refiner for correction. Once the gate outputs 'pass', the pipeline proceeds to the Executive Polisher to format the final document for a C-suite audience. This ensures a robust, highly vetted, and professionally presented strategic plan."
+}

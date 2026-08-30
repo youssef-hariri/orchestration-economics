@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Core Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive product strategy for localizing an adaptive-learning platform across Vietnam, Saudi Arabia, France, and Kenya in 2026. The strategy must balance a shared technology core with deep local fit. Address mandated curricula, language-of-instruction rules, attitudes toward foreign content, parental and teacher beliefs on screen time and standardized testing, and mixed procurement channels (government versus direct-to-consumer). Produce a structured strategic document outlining the core platform features, country-specific localization modules, go-to-market strategies for each procurement channel, and cultural adaptation guidelines.",
+      "description": "Drafts the initial comprehensive product strategy for the 4-country expansion."
+    },
+    {
+      "name": "Localization & Market Analyst",
+      "role": "analyst",
+      "systemPrompt": "Analyze the provided product strategy for the adaptive-learning platform expansion into Vietnam, Saudi Arabia, France, and Kenya. Evaluate how well the strategy addresses the specific constraints of each market: mandated curricula, language rules, foreign content attitudes, screen time and testing beliefs, and government versus direct-to-consumer procurement. Identify any gaps, superficial localizations, or misalignments between the shared core and local needs. Provide a detailed critique highlighting specific areas that need deeper strategic refinement to ensure successful market entry and adoption.",
+      "description": "Analyzes the initial draft to identify gaps in local market fit and regulatory compliance."
+    },
+    {
+      "name": "Strategic Refiner",
+      "role": "refiner",
+      "systemPrompt": "Refine the product strategy based on the detailed market and localization analysis. Strengthen the country-specific adaptations for Vietnam, Saudi Arabia, France, and Kenya. Ensure the balance between the shared technology core and local fit is optimal. Deepen the strategies for navigating government procurement versus direct-to-consumer channels, and address the cultural nuances regarding screen time, testing, and foreign content. Produce an updated, comprehensive strategy document that resolves all identified gaps.",
+      "description": "Refines the strategy to address identified gaps and improve local market fit."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "Evaluate the refined product strategy for the adaptive-learning platform's international expansion. Assess whether it successfully balances a shared technology core with the specific local requirements of Vietnam, Saudi Arabia, France, and Kenya. Verify that it thoroughly addresses mandated curricula, language rules, cultural attitudes toward screen time and testing, and the distinct government versus direct-to-consumer procurement channels. Provide a full assessment of its strengths and any remaining weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: 'pass' if the strategy is comprehensive and actionable, or 'revise' if it still lacks depth or misses critical constraints.",
+      "description": "Evaluates the refined strategy for completeness and quality, routing back for revision if necessary."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format and polish the final product strategy document for executive presentation. Ensure professional formatting, clear headings, logical flow, and persuasive business language. The final output should be a pristine, ready-to-present strategic plan for the 2026 international expansion of the adaptive-learning platform.",
+      "description": "Polishes and formats the final strategy document for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Core Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive product strategy for localizing an adaptive-learning platform across Vietnam, Saudi Arabia, France, and Kenya in 2026. The strategy must balance a shared technology core with deep local fit. Address mandated curricula, language-of-instruction rules, attitudes toward foreign content, parental and teacher beliefs on screen time and standardized testing, and mixed procurement channels (government versus direct-to-consumer). Produce a structured strategic document outlining the core platform features, country-specific localization modules, go-to-market strategies for each procurement channel, and cultural adaptation guidelines."
+    },
+    {
+      "name": "Localization & Market Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "Analyze the provided product strategy for the adaptive-learning platform expansion into Vietnam, Saudi Arabia, France, and Kenya. Evaluate how well the strategy addresses the specific constraints of each market: mandated curricula, language rules, foreign content attitudes, screen time and testing beliefs, and government versus direct-to-consumer procurement. Identify any gaps, superficial localizations, or misalignments between the shared core and local needs. Provide a detailed critique highlighting specific areas that need deeper strategic refinement to ensure successful market entry and adoption."
+    },
+    {
+      "name": "Strategic Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Refine the product strategy based on the detailed market and localization analysis. Strengthen the country-specific adaptations for Vietnam, Saudi Arabia, France, and Kenya. Ensure the balance between the shared technology core and local fit is optimal. Deepen the strategies for navigating government procurement versus direct-to-consumer channels, and address the cultural nuances regarding screen time, testing, and foreign content. Produce an updated, comprehensive strategy document that resolves all identified gaps."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the refined product strategy for the adaptive-learning platform's international expansion. Assess whether it successfully balances a shared technology core with the specific local requirements of Vietnam, Saudi Arabia, France, and Kenya. Verify that it thoroughly addresses mandated curricula, language rules, cultural attitudes toward screen time and testing, and the distinct government versus direct-to-consumer procurement channels. Provide a full assessment of its strengths and any remaining weaknesses. On the VERY LAST LINE, output EXACTLY ONE keyword: 'pass' if the strategy is comprehensive and actionable, or 'revise' if it still lacks depth or misses critical constraints.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 5,
+        "revise": 3
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format and polish the final product strategy document for executive presentation. Ensure professional formatting, clear headings, logical flow, and persuasive business language. The final output should be a pristine, ready-to-present strategic plan for the 2026 international expansion of the adaptive-learning platform."
+    }
+  ],
+  "explanation": "The pipeline begins with the Core Strategy Builder to draft the initial localization strategy. The Localization & Market Analyst then reviews the draft to identify gaps in addressing the specific cultural, regulatory, and procurement constraints of the four target countries. The Strategic Refiner updates the document based on this analysis. The Strategy Quality Gate acts as an 'if' condition to evaluate the refined output; if the strategy is still insufficient, it routes back to the Strategic Refiner for further improvement. Once the quality gate passes the strategy, the Executive Polisher formats the final document for presentation. This ensures a highly tailored, robust strategy that balances a shared core with deep local fit."
+}

@@ -1,0 +1,72 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a supply chain strategist. Your task is to draft a comprehensive supply-chain resilience strategy for a semiconductor manufacturer in 2026. The strategy must address dual-sourcing critical materials (specialty gases and photoresists) currently sourced from a small number of countries facing export-control volatility. The strategy must balance 12-24 month qualification lead times, unforgiving quality standards, and the economic challenge of securing long-term offtake agreements that finance teams resist. Provide a structured, actionable plan that outlines the strategic approach, risk mitigation, and financial structuring.",
+      "description": "Creates the initial draft of the semiconductor supply-chain resilience strategy."
+    },
+    {
+      "name": "Domain Expert Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a semiconductor supply chain expert and content refiner. Review the drafted strategy and refine it. Ensure it deeply addresses the specific bottlenecks: how to accelerate or parallelize the 12-24 month qualification, how to mitigate quality risks during transition, and how to structure financial instruments or risk-sharing models to make long-term offtake agreements palatable to finance teams. Improve clarity, depth, and practical applicability based on any quality feedback provided.",
+      "description": "Enhances the draft with deep semiconductor domain expertise and addresses specific operational and financial constraints."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a rigorous quality gate evaluating a semiconductor supply chain resilience strategy. Assess the provided strategy against these critical criteria: 1) Does it realistically address the 12-24 month qualification lead times for specialty gases and photoresists? 2) Does it provide concrete mechanisms to maintain unforgiving quality standards during dual-sourcing? 3) Does it offer viable financial or contractual structures to overcome finance team resistance to long-term offtake agreements? 4) Does it mitigate export-control volatility? Provide a FULL assessment detailing strengths, weaknesses, and specific gaps. Then, on the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "description": "Evaluates the refined strategy against all critical business and operational constraints.",
+      "type": "if",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved supply chain resilience strategy and format it for a C-suite audience. Ensure a professional tone, clear headings, bullet points for readability, and a strong executive summary. Fix any grammatical issues and ensure the final output is pristine, highly readable, and ready for executive presentation.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a supply chain strategist. Your task is to draft a comprehensive supply-chain resilience strategy for a semiconductor manufacturer in 2026. The strategy must address dual-sourcing critical materials (specialty gases and photoresists) currently sourced from a small number of countries facing export-control volatility. The strategy must balance 12-24 month qualification lead times, unforgiving quality standards, and the economic challenge of securing long-term offtake agreements that finance teams resist. Provide a structured, actionable plan that outlines the strategic approach, risk mitigation, and financial structuring."
+    },
+    {
+      "name": "Domain Expert Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a semiconductor supply chain expert and content refiner. Review the drafted strategy and refine it. Ensure it deeply addresses the specific bottlenecks: how to accelerate or parallelize the 12-24 month qualification, how to mitigate quality risks during transition, and how to structure financial instruments or risk-sharing models to make long-term offtake agreements palatable to finance teams. Improve clarity, depth, and practical applicability based on any quality feedback provided."
+    },
+    {
+      "name": "Strategic Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a rigorous quality gate evaluating a semiconductor supply chain resilience strategy. Assess the provided strategy against these critical criteria: 1) Does it realistically address the 12-24 month qualification lead times for specialty gases and photoresists? 2) Does it provide concrete mechanisms to maintain unforgiving quality standards during dual-sourcing? 3) Does it offer viable financial or contractual structures to overcome finance team resistance to long-term offtake agreements? 4) Does it mitigate export-control volatility? Provide a FULL assessment detailing strengths, weaknesses, and specific gaps. Then, on the VERY LAST LINE, output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved supply chain resilience strategy and format it for a C-suite audience. Ensure a professional tone, clear headings, bullet points for readability, and a strong executive summary. Fix any grammatical issues and ensure the final output is pristine, highly readable, and ready for executive presentation."
+    }
+  ],
+  "explanation": "The pipeline begins with the Strategy Builder to generate an initial dual-sourcing plan. The Domain Expert Refiner then enhances the draft, ensuring deep alignment with semiconductor-specific constraints like qualification lead times and financial structuring. The Strategic Quality Gate acts as an 'if' condition to rigorously evaluate the refined strategy against all critical business, operational, and financial criteria. If the strategy fails to meet the standards (outputting 'revise'), it loops back to the Domain Expert Refiner for correction. Once the strategy passes the quality gate (outputting 'pass'), it moves to the Executive Polisher, which formats the final output for a C-suite audience. This 4-step flow ensures high-quality, domain-accurate strategic output while remaining well under the 8-step limit."
+}

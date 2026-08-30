@@ -1,0 +1,75 @@
+{
+  "agents": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "You are a pharmaceutical logistics strategist. Your task is to draft a comprehensive cold-chain distribution strategy for temperature-sensitive vaccines across West and East Africa in 2026. The outcome must be a detailed strategic document covering: 1) Equipment choices (passive vs. powered cooling units) justified by specific corridor infrastructure (road quality, electricity reliability). 2) Corridor sequencing based on seasonal weather windows and customs dwell times. 3) Contingency planning for spoilage risk, including last-mile arrangements with ministries of health. Provide a structured, professional draft.",
+      "description": "Drafts the initial cold-chain distribution strategy covering equipment, sequencing, and contingencies."
+    },
+    {
+      "name": "Initial Reviewer",
+      "role": "reviewer",
+      "systemPrompt": "You are an expert in African supply chain logistics and pharmaceutical cold chains. Review the drafted strategy. Identify gaps in infrastructure analysis, unrealistic equipment assumptions, missing contingency plans, or poor corridor sequencing. Provide detailed, actionable feedback to improve the strategy's realism and comprehensiveness.",
+      "description": "Provides initial domain-specific feedback on the drafted logistics strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a logistics strategy refiner. Your task is to rewrite and improve the cold-chain distribution strategy based on the reviewer's feedback. Ensure all identified gaps are filled, equipment choices are perfectly aligned with corridor constraints, and contingency plans are robust. Output the fully revised strategy.",
+      "description": "Refines the strategy draft based on expert feedback to address gaps and improve realism."
+    },
+    {
+      "name": "Quality Evaluator",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate for a pharmaceutical logistics strategy. Evaluate the refined strategy against the original requirements: equipment choices (passive vs powered), corridor sequencing, and spoilage contingency planning across West and East Africa. Assess if the strategy is actionable, realistic for 2026, and comprehensively addresses infrastructure and institutional constraints. Provide a FULL quality assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "description": "Assesses the refined strategy in a while loop, routing back for further refinement if quality standards are not met."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved cold-chain distribution strategy and format it for a C-suite presentation. Use clear headings, bullet points for key decisions (equipment, sequencing, contingencies), and professional business language. Ensure the final output is pristine, highly readable, and ready for stakeholder review.",
+      "description": "Formats the final approved strategy into a polished, executive-ready document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a pharmaceutical logistics strategist. Your task is to draft a comprehensive cold-chain distribution strategy for temperature-sensitive vaccines across West and East Africa in 2026. The outcome must be a detailed strategic document covering: 1) Equipment choices (passive vs. powered cooling units) justified by specific corridor infrastructure (road quality, electricity reliability). 2) Corridor sequencing based on seasonal weather windows and customs dwell times. 3) Contingency planning for spoilage risk, including last-mile arrangements with ministries of health. Provide a structured, professional draft."
+    },
+    {
+      "name": "Initial Reviewer",
+      "role": "reviewer",
+      "type": "agent",
+      "systemPrompt": "You are an expert in African supply chain logistics and pharmaceutical cold chains. Review the drafted strategy. Identify gaps in infrastructure analysis, unrealistic equipment assumptions, missing contingency plans, or poor corridor sequencing. Provide detailed, actionable feedback to improve the strategy's realism and comprehensiveness."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a logistics strategy refiner. Your task is to rewrite and improve the cold-chain distribution strategy based on the reviewer's feedback. Ensure all identified gaps are filled, equipment choices are perfectly aligned with corridor constraints, and contingency plans are robust. Output the fully revised strategy."
+    },
+    {
+      "name": "Quality Evaluator",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a strict quality gate for a pharmaceutical logistics strategy. Evaluate the refined strategy against the original requirements: equipment choices (passive vs powered), corridor sequencing, and spoilage contingency planning across West and East Africa. Assess if the strategy is actionable, realistic for 2026, and comprehensively addresses infrastructure and institutional constraints. Provide a FULL quality assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, retry.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 4,
+        "retry": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved cold-chain distribution strategy and format it for a C-suite presentation. Use clear headings, bullet points for key decisions (equipment, sequencing, contingencies), and professional business language. Ensure the final output is pristine, highly readable, and ready for stakeholder review."
+    }
+  ],
+  "explanation": "The pipeline begins with a Strategy Builder to draft the initial cold-chain distribution plan. An Initial Reviewer then provides domain-specific feedback on logistics and infrastructure constraints. The Strategy Refiner incorporates this feedback to improve the draft. A Quality Evaluator (while loop) then assesses the refined strategy, looping back to the Refiner up to 3 times if the strategy lacks depth or realism, ensuring all constraints (equipment, sequencing, contingencies) are fully addressed. Finally, an Executive Polisher formats the approved strategy into a pristine, C-suite-ready document. This flow guarantees a highly accurate, iteratively refined, and professionally formatted final outcome."
+}

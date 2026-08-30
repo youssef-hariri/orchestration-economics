@@ -1,0 +1,63 @@
+{
+  "agents": [
+    {
+      "name": "Global Strategy Builder",
+      "role": "builder",
+      "systemPrompt": "Develop a comprehensive global compliance and communication strategy for an AI-powered hiring platform sold across 15 countries with conflicting AI regulations (e.g., EU AI Act high-risk obligations vs. light-touch or strict data-localization regimes). The strategy must address product adaptation, documentation, marketing localization, and maintaining a coherent global brand without confusing cross-border customers. Provide a detailed, structured strategic plan.",
+      "description": "Drafts the initial global compliance and communication strategy addressing multi-jurisdictional AI regulations and brand coherence."
+    },
+    {
+      "name": "Compliance & Brand Critic",
+      "role": "critic",
+      "systemPrompt": "Evaluate the proposed global AI compliance and communication strategy. Assess its regulatory accuracy (especially regarding the EU AI Act and divergent global rules), practical product adaptation, clarity of customer communication, and global brand coherence. Provide a FULL assessment detailing strengths, weaknesses, and specific regulatory or strategic gaps. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Assesses the drafted strategy for regulatory accuracy, practicality, and brand consistency, routing to refinement if necessary."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "Improve the global AI compliance and communication strategy based on the critical feedback provided. Address all identified weaknesses, regulatory gaps, and brand inconsistencies. Produce a comprehensive, actionable, and legally sound strategy that perfectly balances local compliance with global brand coherence.",
+      "description": "Rewrites and improves the strategy to resolve regulatory gaps and brand inconsistencies identified by the critic."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "Format and polish the refined global AI compliance and communication strategy for final presentation to C-suite executives. Ensure a professional tone, flawless grammar, clear headings, logical flow, and high readability. Do not alter the core strategic advice, only enhance the presentation and clarity.",
+      "description": "Formats the final strategy for executive presentation, ensuring professional tone and flawless readability."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Global Strategy Builder",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "Develop a comprehensive global compliance and communication strategy for an AI-powered hiring platform sold across 15 countries with conflicting AI regulations (e.g., EU AI Act high-risk obligations vs. light-touch or strict data-localization regimes). The strategy must address product adaptation, documentation, marketing localization, and maintaining a coherent global brand without confusing cross-border customers. Provide a detailed, structured strategic plan."
+    },
+    {
+      "name": "Compliance & Brand Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "Evaluate the proposed global AI compliance and communication strategy. Assess its regulatory accuracy (especially regarding the EU AI Act and divergent global rules), practical product adaptation, clarity of customer communication, and global brand coherence. Provide a FULL assessment detailing strengths, weaknesses, and specific regulatory or strategic gaps. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 3,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "Improve the global AI compliance and communication strategy based on the critical feedback provided. Address all identified weaknesses, regulatory gaps, and brand inconsistencies. Produce a comprehensive, actionable, and legally sound strategy that perfectly balances local compliance with global brand coherence."
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "Format and polish the refined global AI compliance and communication strategy for final presentation to C-suite executives. Ensure a professional tone, flawless grammar, clear headings, logical flow, and high readability. Do not alter the core strategic advice, only enhance the presentation and clarity."
+    }
+  ],
+  "explanation": "This pipeline uses a 4-step automated flow to generate a high-quality global AI compliance strategy. The Builder drafts the initial strategy addressing the complex multi-jurisdictional requirements. The Critic acts as a quality gate, evaluating the draft for regulatory accuracy and brand coherence; if it fails, it routes to the Refiner to fix the issues. Once the Critic passes the strategy, it moves to the Polisher for final executive formatting. This ensures a robust, legally sound, and professionally presented outcome without human intervention."
+}

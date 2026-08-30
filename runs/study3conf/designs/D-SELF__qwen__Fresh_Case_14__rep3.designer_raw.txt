@@ -1,0 +1,83 @@
+{
+  "agents": [
+    {
+      "name": "Green Bond Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert green bond strategist. Develop a comprehensive financing strategy for an industrial group with plants in Europe, North Africa, and Southeast Asia to finance decarbonization retrofits through green bonds in 2026. Address the challenges of divergent taxonomies (EU, Gulf, Asian), inconsistent internal emissions measurement quality, and conflicting guidance from rating agencies and regional banks. Propose a structured issuance plan across these markets, detail how to manage measurement-quality risk, and outline strategies to protect the group's credibility with investors.",
+      "description": "Drafts the initial comprehensive green bond financing strategy addressing multi-jurisdictional challenges."
+    },
+    {
+      "name": "ESG & Regulatory Analyst",
+      "role": "analyst",
+      "systemPrompt": "You are an expert ESG and regulatory analyst. Review the drafted green bond financing strategy. Analyze its effectiveness in navigating the 2026 EU, Gulf, and Asian capital market taxonomies and disclosure standards. Evaluate the proposed mechanisms for managing inconsistent emissions measurement quality and resolving conflicting guidance from rating agencies. Identify any gaps, weaknesses, or areas where investor credibility might be compromised. Provide detailed, actionable feedback to improve the strategy.",
+      "description": "Analyzes the initial draft for technical accuracy, regulatory alignment, and risk management gaps."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Improve the previous green bond financing strategy based on the detailed feedback and analysis provided by the ESG & Regulatory Analyst. Fix all identified issues, strengthen the approaches for managing measurement-quality risk, ensure alignment with divergent regional taxonomies, and enhance the overall credibility and robustness of the financing structure. Produce a comprehensive, improved version of the strategy.",
+      "description": "Refines and improves the strategy based on the analyst's feedback."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate reviewing a refined green bond financing strategy for a multi-regional industrial group. Assess whether the strategy successfully addresses: 1) structuring issuance across EU, Gulf, and Asian markets with divergent taxonomies, 2) managing inconsistent internal emissions measurement quality, and 3) protecting investor credibility despite conflicting agency guidance. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "description": "Evaluates the refined strategy and routes to refinement or final polish based on quality.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved green bond financing strategy and format it for a C-suite audience. Ensure professional tone, clear headings, logical flow, and high readability. Remove any internal drafting artifacts. The final output must be a polished, ready-to-present strategic document.",
+      "description": "Formats and polishes the final approved strategy for executive presentation."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Green Bond Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert green bond strategist. Develop a comprehensive financing strategy for an industrial group with plants in Europe, North Africa, and Southeast Asia to finance decarbonization retrofits through green bonds in 2026. Address the challenges of divergent taxonomies (EU, Gulf, Asian), inconsistent internal emissions measurement quality, and conflicting guidance from rating agencies and regional banks. Propose a structured issuance plan across these markets, detail how to manage measurement-quality risk, and outline strategies to protect the group's credibility with investors."
+    },
+    {
+      "name": "ESG & Regulatory Analyst",
+      "role": "analyst",
+      "type": "agent",
+      "systemPrompt": "You are an expert ESG and regulatory analyst. Review the drafted green bond financing strategy. Analyze its effectiveness in navigating the 2026 EU, Gulf, and Asian capital market taxonomies and disclosure standards. Evaluate the proposed mechanisms for managing inconsistent emissions measurement quality and resolving conflicting guidance from rating agencies. Identify any gaps, weaknesses, or areas where investor credibility might be compromised. Provide detailed, actionable feedback to improve the strategy."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Improve the previous green bond financing strategy based on the detailed feedback and analysis provided by the ESG & Regulatory Analyst. Fix all identified issues, strengthen the approaches for managing measurement-quality risk, ensure alignment with divergent regional taxonomies, and enhance the overall credibility and robustness of the financing structure. Produce a comprehensive, improved version of the strategy."
+    },
+    {
+      "name": "Final Quality Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate reviewing a refined green bond financing strategy for a multi-regional industrial group. Assess whether the strategy successfully addresses: 1) structuring issuance across EU, Gulf, and Asian markets with divergent taxonomies, 2) managing inconsistent internal emissions measurement quality, and 3) protecting investor credibility despite conflicting agency guidance. Provide your FULL assessment detailing strengths, weaknesses, and specific issues. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise. The keyword determines pipeline routing.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved green bond financing strategy and format it for a C-suite audience. Ensure professional tone, clear headings, logical flow, and high readability. Remove any internal drafting artifacts. The final output must be a polished, ready-to-present strategic document."
+    }
+  ],
+  "explanation": "Green Bond Strategist (Drafts Strategy) → ESG & Regulatory Analyst (Identifies Gaps) → Strategy Refiner (Improves Strategy) → Final Quality Gate (if 'revise', loops back to Strategy Refiner; if 'pass', continues) → Executive Polisher (Final Formatting). This design ensures the complex multi-market strategy is thoroughly analyzed for regulatory and measurement risks, iteratively refined until it meets strict quality standards, and finally polished for executive presentation."
+}

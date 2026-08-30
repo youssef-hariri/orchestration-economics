@@ -1,0 +1,71 @@
+{
+  "agents": [
+    {
+      "name": "D2C Market Strategist",
+      "role": "builder",
+      "systemPrompt": "You are an expert global market entry strategist. Design a comprehensive launch and communications strategy for an Asian beauty brand entering Mexico, Colombia, and Brazil in 2026 via a Direct-to-Consumer (D2C) model. Address differing beauty norms, shade-range expectations, influencer ecosystems, marketplace vs. owned channels, social-commerce habits, and strategies to counter legacy multilevel-marketing (MLM) beauty firms. Provide a detailed, country-by-country breakdown and an overarching D2C operational plan.",
+      "description": "Drafts the initial comprehensive market entry and communications strategy for the three LATAM countries."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure deep cultural nuance for Mexico, Colombia, and Brazil, and strengthen the D2C and anti-MLM strategies. Produce a polished, improved version.",
+      "description": "Refines the strategy based on feedback from the quality gate, fixing cultural, strategic, or structural issues."
+    },
+    {
+      "name": "LATAM Market Critic",
+      "role": "critic",
+      "systemPrompt": "You are a strict quality gate and LATAM beauty market expert. Review the refined strategy carefully. Assess if it adequately addresses: 1) distinct beauty norms and shade ranges for MX, CO, BR; 2) specific influencer and social-commerce ecosystems; 3) D2C vs marketplace channel strategy; 4) actionable counter-strategies against legacy MLM dominance. Provide your FULL assessment with detailed reasoning, strengths, and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "description": "Evaluates the refined strategy against critical LATAM market success factors and routes the pipeline based on quality.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are an executive document polisher. Take the approved strategy and format it into a highly professional, readable, and compelling business document. Use clear headings, bullet points, and executive summaries. Ensure the tone is authoritative, strategic, and tailored for C-level stakeholders.",
+      "description": "Formats the final approved strategy into a polished, executive-ready business document."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "D2C Market Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are an expert global market entry strategist. Design a comprehensive launch and communications strategy for an Asian beauty brand entering Mexico, Colombia, and Brazil in 2026 via a Direct-to-Consumer (D2C) model. Address differing beauty norms, shade-range expectations, influencer ecosystems, marketplace vs. owned channels, social-commerce habits, and strategies to counter legacy multilevel-marketing (MLM) beauty firms. Provide a detailed, country-by-country breakdown and an overarching D2C operational plan."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a content refiner. Improve the previous output based on any quality feedback provided. Fix all issues, ensure deep cultural nuance for Mexico, Colombia, and Brazil, and strengthen the D2C and anti-MLM strategies. Produce a polished, improved version."
+    },
+    {
+      "name": "LATAM Market Critic",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a strict quality gate and LATAM beauty market expert. Review the refined strategy carefully. Assess if it adequately addresses: 1) distinct beauty norms and shade ranges for MX, CO, BR; 2) specific influencer and social-commerce ecosystems; 3) D2C vs marketplace channel strategy; 4) actionable counter-strategies against legacy MLM dominance. Provide your FULL assessment with detailed reasoning, strengths, and weaknesses. Then on the VERY LAST LINE output EXACTLY ONE of these keywords: pass, revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 4,
+        "revise": 2
+      }
+    },
+    {
+      "name": "Executive Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are an executive document polisher. Take the approved strategy and format it into a highly professional, readable, and compelling business document. Use clear headings, bullet points, and executive summaries. Ensure the tone is authoritative, strategic, and tailored for C-level stakeholders."
+    }
+  ],
+  "explanation": "The pipeline begins with the D2C Market Strategist (Builder) to draft the initial market entry and communications strategy for Mexico, Colombia, and Brazil. The output is passed to the Strategy Refiner to incorporate initial structural improvements. The LATAM Market Critic (Quality Gate) then evaluates the refined strategy against critical success factors like cultural nuances, D2C channel strategy, and MLM counter-tactics. If the strategy requires improvement, the gate outputs 'revise' and loops back to the Strategy Refiner. Once the strategy meets all criteria, the gate outputs 'pass' and routes to the Executive Polisher, which formats the final document for C-level presentation."
+}
