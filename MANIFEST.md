@@ -1022,3 +1022,16 @@ Author-requested comparison (pre-registered F-S-N comparator). Designed cheap-ex
 ## Entry 75 — 2026-08-30 — Full Study 3 vs F-S-N battery: both arms, all 5 dimensions, Holm (50 tests)
 
 `analysis/results/study3_vs_fsn_full.csv`. Key pattern: D-FRONT (frontier-designed, cheap-executed) does NOT rescue the families where cheap pipelines lose to frontier solo — claude D-FRONT still sig. below opus-solo on Novelty (d=−2.84) and Flexibility (−0.78); gemini D-FRONT sig. below flash-pro-solo on Usefulness (−1.41), Elaboration (−1.57), Flexibility (−0.68). kimi D-FRONT beats k3-solo on Novelty (+0.74, p_holm=.013) as does D-SELF (+0.85, p_holm=.006); qwen D-FRONT Novelty +0.61 (p_holm=.049). Conclusion: design authorship cannot compensate for executor capability where the frontier solo ceiling is high; orchestration gains are family-specific and concentrated where the solo frontier is weakest.
+
+## Entry 76 — 2026-08-30 — Study 3 economics table (cost per solution vs quality delta); token-field bug found & corrected
+
+Author-requested decision table: cost/solution (USD, frozen price vector v2026-08-23-wave) and ΔNovelty vs F-S-N per family for F-S-N / D-SELF / D-FRONT. **Correction (D54 audit trail):** first pass under-costed D-SELF/D-FRONT for OpenAI-format providers — the ledger stores provider-native usage fields (`prompt_tokens`/`completion_tokens`), which the inline script misread as Anthropic-style (`input_tokens`/`output_tokens`); Together-hosted k3 is logged as `moonshotai/Kimi-K3`, now aliased to the frozen `kimi-k3` price entry. Fixed and persisted as a versioned script `code/study3_economics.py`; outputs `results/study3_economics.json` + `analysis/results/study3_economics.csv`. F-S-N cost uses the 15/85 input/output split approximation (main ledger stores totals only) and is labeled as such.
+
+Corrected table (cost per completed solution; d = Novelty vs F-S-N):
+- **gemini:** F-S-N $0.043 · D-SELF $0.010 (0.24×, d=+0.46) · D-FRONT $0.025 (0.59×, d=+0.51) — cheaper AND better
+- **qwen:** F-S-N $0.020 · D-SELF $0.040 (1.99×, d=+0.55) · D-FRONT $0.046 (2.30×, d=+0.61) — better at 2× cost
+- **kimi:** F-S-N $0.107 · D-SELF $0.377 (3.53×, d=+0.85) · D-FRONT $0.274 (2.56×, d=+0.74) — better at ~3× cost
+- **gpt:** F-S-N $0.180 · D-SELF $0.729 (4.04×, d=−0.07) · D-FRONT $0.512 (2.84×, d=+0.13) — parity at higher cost
+- **claude:** F-S-N $0.266 · D-SELF $0.438 (1.65×, d=−3.15) · D-FRONT $0.668 (2.51×, d=−2.84) — more expensive AND much worse → sell solo
+
+Decision rule: T-EGR winner is family-specific — orchestrate gemini (strictly dominant), qwen/kimi (pay ~2–3× for +0.5–0.9 SD novelty), never claude (solo); gpt indifferent → solo on cost.
