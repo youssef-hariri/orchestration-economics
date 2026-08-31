@@ -1,0 +1,108 @@
+{
+  "agents": [
+    {
+      "name": "Market Entry Strategist",
+      "role": "builder",
+      "systemPrompt": "You are a fintech market entry strategist specializing in Islamic finance markets. Create a comprehensive market-entry and product-adaptation strategy for an AI-driven savings and micro-investment app expanding into Gulf states, Malaysia, and Indonesia in 2026. Include: market prioritization and sequencing; product features aligned with Islamic finance principles (Shariah-compliant savings, avoidance of riba, gharar, and haram industries); localization for distinct savings cultures; UX adaptations for family-based financial decision-making; trust-building frameworks for automated advice; and regulatory certification roadmaps for each market. Deliver a detailed, actionable initial draft.",
+      "description": "Creates the initial comprehensive market-entry strategy draft covering all target markets, Islamic finance compliance, cultural adaptation, and regulatory pathways."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are a strategy refiner. Improve the previous output based on any quality feedback provided. Fix all issues and produce a polished, improved version. Sharpen analysis for Gulf states, Malaysia, and Indonesia. Ensure Islamic finance principles are deeply integrated, family-centric financial decision-making is operationalized in UX and features, trust-building frameworks are market-specific, and regulatory certification pathways are clear and accurate.",
+      "description": "Refines the initial draft into a coherent strategy with deep cultural, religious, and regulatory integration."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "systemPrompt": "You are a senior critic evaluating market-entry strategies for values-sensitive financial markets. Review the strategy comprehensively. Assess: (1) Islamic finance alignment depth including AAOIFI standards and Shariah board requirements; (2) accuracy of local savings culture reflections for each market; (3) operationalization of family-based decision-making in product design; (4) market-specific trust-building mechanisms for AI advice; (5) correctness of regulatory certification pathways for each jurisdiction. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or retry.",
+      "description": "Evaluates refined strategy for depth and accuracy; loops back if insufficient."
+    },
+    {
+      "name": "Islamic Finance & Regional Expert",
+      "role": "expert",
+      "systemPrompt": "You are a domain expert in Islamic finance, Gulf and Southeast Asian banking regulations, and local financial cultures. Review the strategy and provide actionable recommendations. Identify Shariah non-compliance risks. Advise on Gulf regulators (UAE DFSA, Saudi CMA, Bahrain CBB), Malaysian regulations (BNM, Shariah Advisory Council), and Indonesian OJK certification for shariah fintech. Comment on cultural nuances like hajj savings, gold accumulation, communal circles, and family financial governance differences. Provide concrete product adaptations per region.",
+      "description": "Provides domain-specific expert opinion on Islamic finance compliance, local regulations, and cultural financial behaviors."
+    },
+    {
+      "name": "Integration Refiner",
+      "role": "refiner",
+      "systemPrompt": "You are an integration refiner. Improve the previous output by incorporating all expert feedback. Fix Shariah compliance risks, update regulatory roadmaps, deepen cultural adaptations, and ensure family-based decision-making features are fully specified. Produce a comprehensive, expert-validated strategy document.",
+      "description": "Integrates expert feedback into the strategy to resolve compliance risks and deepen regional specificity."
+    },
+    {
+      "name": "Final Validation Gate",
+      "role": "critic",
+      "systemPrompt": "You are a final validation critic. Review the integrated strategy for readiness. Assess whether all expert feedback has been properly incorporated, whether the strategy is actionable and coherent, whether Islamic finance compliance is fully addressed, and whether regulatory roadmaps are accurate. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "description": "Final quality check before polishing; routes back to integration refiner if issues remain."
+    },
+    {
+      "name": "Strategy Polisher",
+      "role": "polisher",
+      "systemPrompt": "You are a strategy polisher. Perform a final quality check and format the market-entry strategy for executive presentation. Ensure logical flow, consistent formatting, clear headings, actionable recommendations, and professional tone. Remove redundancy while preserving all substantive content. Output the final strategy document.",
+      "description": "Final quality check, formatting, and polishing for user-facing executive output."
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "Market Entry Strategist",
+      "role": "builder",
+      "type": "agent",
+      "systemPrompt": "You are a fintech market entry strategist specializing in Islamic finance markets. Create a comprehensive market-entry and product-adaptation strategy for an AI-driven savings and micro-investment app expanding into Gulf states, Malaysia, and Indonesia in 2026. Include: market prioritization and sequencing; product features aligned with Islamic finance principles (Shariah-compliant savings, avoidance of riba, gharar, and haram industries); localization for distinct savings cultures; UX adaptations for family-based financial decision-making; trust-building frameworks for automated advice; and regulatory certification roadmaps for each market. Deliver a detailed, actionable initial draft."
+    },
+    {
+      "name": "Strategy Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are a strategy refiner. Improve the previous output based on any quality feedback provided. Fix all issues and produce a polished, improved version. Sharpen analysis for Gulf states, Malaysia, and Indonesia. Ensure Islamic finance principles are deeply integrated, family-centric financial decision-making is operationalized in UX and features, trust-building frameworks are market-specific, and regulatory certification pathways are clear and accurate."
+    },
+    {
+      "name": "Strategy Quality Gate",
+      "role": "critic",
+      "type": "while",
+      "systemPrompt": "You are a senior critic evaluating market-entry strategies for values-sensitive financial markets. Review the strategy comprehensively. Assess: (1) Islamic finance alignment depth including AAOIFI standards and Shariah board requirements; (2) accuracy of local savings culture reflections for each market; (3) operationalization of family-based decision-making in product design; (4) market-specific trust-building mechanisms for AI advice; (5) correctness of regulatory certification pathways for each jurisdiction. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or retry.",
+      "whileOptions": [
+        "pass",
+        "retry"
+      ],
+      "whileMappings": {
+        "pass": 3,
+        "retry": 1
+      },
+      "maxIterations": 3
+    },
+    {
+      "name": "Islamic Finance & Regional Expert",
+      "role": "expert",
+      "type": "agent",
+      "systemPrompt": "You are a domain expert in Islamic finance, Gulf and Southeast Asian banking regulations, and local financial cultures. Review the strategy and provide actionable recommendations. Identify Shariah non-compliance risks. Advise on Gulf regulators (UAE DFSA, Saudi CMA, Bahrain CBB), Malaysian regulations (BNM, Shariah Advisory Council), and Indonesian OJK certification for shariah fintech. Comment on cultural nuances like hajj savings, gold accumulation, communal circles, and family financial governance differences. Provide concrete product adaptations per region."
+    },
+    {
+      "name": "Integration Refiner",
+      "role": "refiner",
+      "type": "agent",
+      "systemPrompt": "You are an integration refiner. Improve the previous output by incorporating all expert feedback. Fix Shariah compliance risks, update regulatory roadmaps, deepen cultural adaptations, and ensure family-based decision-making features are fully specified. Produce a comprehensive, expert-validated strategy document."
+    },
+    {
+      "name": "Final Validation Gate",
+      "role": "critic",
+      "type": "if",
+      "systemPrompt": "You are a final validation critic. Review the integrated strategy for readiness. Assess whether all expert feedback has been properly incorporated, whether the strategy is actionable and coherent, whether Islamic finance compliance is fully addressed, and whether regulatory roadmaps are accurate. Provide your FULL assessment with detailed reasoning. Then on the VERY LAST LINE output EXACTLY ONE keyword: pass or revise.",
+      "ifOptions": [
+        "pass",
+        "revise"
+      ],
+      "ifMappings": {
+        "pass": 6,
+        "revise": 4
+      }
+    },
+    {
+      "name": "Strategy Polisher",
+      "role": "polisher",
+      "type": "agent",
+      "systemPrompt": "You are a strategy polisher. Perform a final quality check and format the market-entry strategy for executive presentation. Ensure logical flow, consistent formatting, clear headings, actionable recommendations, and professional tone. Remove redundancy while preserving all substantive content. Output the final strategy document."
+    }
+  ],
+  "explanation": "The pipeline begins with a Builder that drafts the full market-entry strategy. A Refiner tightens the draft before a While quality gate iteratively validates depth on Islamic finance, cultural specificity, and regulatory accuracy, looping back up to three times. Next, an Expert agent injects specialized knowledge on Shariah compliance and regional regulations. An Integration Refiner synthesizes this feedback, followed by an If quality gate that approves or sends back for further revision. Finally, a Polisher formats the strategy for executive consumption. This sequence ensures culturally grounded, compliant, and actionable output without human approval steps."
+}
