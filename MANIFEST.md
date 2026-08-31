@@ -1079,3 +1079,7 @@ Judging final: 3,963/3,969 valid (zhipu 1,323/1,323; meta 1,320; deepseek 1,320)
 | R5 | claude | d<−1.0 (−3.15) | **−1.90** | ✅ PASS |
 
 **Headline "family moderation replicates" (R1∧R2∧R3∧R5): FALSE — 2/5 gates pass.** The two extreme Study-3 families replicate strongly (kimi benefit, claude harm, both beyond predicted thresholds); the three middle families do not — qwen/gemini/gpt all score BELOW frozen frontier-solo on the new problems. Interpretation (post-hoc, flagged as such): family moderation is real at the extremes but the sign/magnitude for mid-tier families is problem-set-dependent; a single fixed D-SELF benefit cannot be assumed per family. Reported as-is per wave discipline — no gate relabeling.
+
+## Entry 84 — 2026-08-31 — Paper v13: Study-3 confirmatory-replication subsection added
+
+New `\cref{sec:study3conf}` subsection (Protocol 16, OSF zkm8v): design, frozen-comparator logic, hash-locked script, R1–R5 gate table, 2/5 verdict, interpretation (family moderation real at extremes, non-transporting for mid-tier → benchmark-as-routing method, not a lookup table), and the pre-emptive "why we did not extend to new families" justification (author-approved). Study-3 decision-rule paragraph now carries a forward-pointer caveat; Summary of Key Findings gains a "partially replicated" row. Compiles 36pp, 0 undefined refs. v12 preserved untouched.
