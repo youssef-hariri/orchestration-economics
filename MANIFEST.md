@@ -1065,3 +1065,17 @@ Pilot (seeded draw Fresh_Case_10/16/22/12, 4 domains × 4 families): 16/16 compl
 ## Entry 82 — 2026-08-31 — Protocol 16 GENERATION COMPLETE: 441/450 + 9 disclosed attrition
 
 Final: gemini 90/90, claude 89/90 (1 design_failed), qwen 89/90 (1 failed), gpt 88/90 (2 failed), kimi 85/90 (3 failed + 2 design_failed). G1 passes for every family (≥93% completion; D57 rule). Moonshot balance flapped 3× (author top-ups each time; kimi projected ~$27 total for 90 pipelines — small recharges kept running dry mid-lane). Judging started: pass 1 (zhipu+meta only, DeepSeek held for its off-peak window per the OSF scheduling note) reached 796/2,640 before Together.ai balance hit zero (402 Payment Required) — resumed on top-up; judge_v2 resume-by-(runId,judge,variant) makes the two remaining passes (zhipu+meta remainder; deepseek in window + catch-up of the last kimi solution) exact. judge_v2.py on disk untouched (in-memory judge-list filter; frozen instrument preserved).
+
+## Entry 83 — 2026-08-31 — Protocol 16 judging COMPLETE; frozen gates R1–R5 executed; headline NOT replicated
+
+Judging final: 3,963/3,969 valid (zhipu 1,323/1,323; meta 1,320; deepseek 1,320). 6 persistent INCOMPLETE (judge returned unparseable content on 3 claude solutions × var2/var3, retried 3×; disclosed attrition, 0.15%). Frozen script hash verified pre-run (`478b3a6b…` matches Entry 81). Results (`results/study3conf_results.json`, `analysis/results/study3conf_gates.csv`):
+
+| Gate | Family | Predicted | Observed d | Verdict |
+|---|---|---|---|---|
+| R1 | kimi | d>0 (+0.85) | **+1.25** (p(+)≈1.0) | ✅ PASS |
+| R2 | qwen | d>0 (+0.55) | −0.23 | ❌ fail |
+| R3 | gemini | d>0 (+0.46) | −0.83 (p(−)<.001) | ❌ fail (reversed) |
+| R4 | gpt | TOST \|d\|<0.30 | −0.88, 90%CI [−1.32,−0.43] | ❌ fail (significantly NEGATIVE, not equivalent) |
+| R5 | claude | d<−1.0 (−3.15) | **−1.90** | ✅ PASS |
+
+**Headline "family moderation replicates" (R1∧R2∧R3∧R5): FALSE — 2/5 gates pass.** The two extreme Study-3 families replicate strongly (kimi benefit, claude harm, both beyond predicted thresholds); the three middle families do not — qwen/gemini/gpt all score BELOW frozen frontier-solo on the new problems. Interpretation (post-hoc, flagged as such): family moderation is real at the extremes but the sign/magnitude for mid-tier families is problem-set-dependent; a single fixed D-SELF benefit cannot be assumed per family. Reported as-is per wave discipline — no gate relabeling.
