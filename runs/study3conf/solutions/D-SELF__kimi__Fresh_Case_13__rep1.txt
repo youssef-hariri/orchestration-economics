@@ -1,0 +1,305 @@
+**CLIMATE-LINKED MICROINSURANCE: DISTRIBUTION & BUSINESS MODEL ARCHITECTURE**
+*2026 Pilot Blueprint | East Africa, South Asia & Central America*
+
+---
+
+## EXECUTIVE SYNTHESIS
+
+This blueprint defines the execution-ready pilot for climate-linked microinsurance across three distinct trust regimes and data environments. It is designed to be actuarially defensible, operationally coherent, and culturally legitimate. Five non-negotiable design rules govern all decisions:
+
+1. **Actuarial Honesty.** Pricing uses rolling 10-year climatologies, CMIP6 trend loading, and published credibility schedules. Proxy data is restricted to underwriting triage until validated to R² > 0.5. Discretionary “goodwill” reserves are eliminated; basis risk is managed through explicit, pre-priced secondary triggers.
+2. **Contract Clarity.** Parametric channels rely on enrollment-fraud controls only. Community channels use secret-ballot SMS attestation with anti-capture quotas. The two architectures are never conflated.
+3. **Sub-National Precision.** East Africa is disaggregated into Kenya/Uganda (mobile-cooperative), Ethiopia (state-cooperative), and Tanzania (VSLA/religious). South Asia mandates social-network mapping of FPOs to exclude elite-captured institutions. Central America explicitly includes indigenous territorial councils alongside Christian parishes.
+4. **Economic Viability.** **Fully-loaded customer acquisition cost (CAC) cannot exceed 40% of Year 1 plus Year 2 premium.** Where individual CAC is unviable, the pilot pivots to meso-level balance-sheet covers.
+5. **Capital Realism.** No cat bonds. No standalone primary underwriting at sub-scale. The minimum viable unit is **25,000 individual policies per region or meso-only cooperative/parish balance-sheet structures** (fewer, independent risks). Reinsurance is anchored in quota-share treaties with regional reinsurers and development-finance first-loss guarantees.
+
+---
+
+## 1. CROSS-CUTTING ACTUARIAL & DATA ARCHITECTURE
+
+### 1.1 Climate Non-Stationarity & Trend Loading
+Static historical climatology is rejected as the sole pricing anchor. All pricing employs:
+- **Rolling 10-year windows** updated annually.
+- **CMIP6 ensemble loading:** Downscaled CORDEX projections adjust mean loss cost and tail volatility in transitioning agro-ecological zones (e.g., ASAL expansion, monsoon shift, orographic rainfall change).
+- **Posterior predictive pricing:** Capital is held against the **90th percentile** of a distribution combining parameter uncertainty and trend uncertainty, not the mean.
+
+### 1.2 Credibility-Weighted Pricing Schedule
+Local pilot data earns full credibility only after 36 months or 5,000 exposure-years, whichever comes first.
+
+| Region | Data Tier | Y1 Credibility (Regional : Local) | Parameter Uncertainty Load | Climate Trend Load |
+|:---|:---|:---|:---|:---|
+| **East Africa** | Tier 2 (Sparse) | 90% : 10% | 10% | +5% |
+| **South Asia** | Tier 3 (Moderate) | 85% : 15% | 5% | +4% |
+| **Central America** | Tier 1 (Very Poor) | 95% : 5% | 15% | +8% |
+
+### 1.3 Proxy Data Governance
+SACCO delinquency rates, SHG savings volatility, and remittance cadence are **prohibited from pure premium calculation** until validated to R² > 0.5 against ground-truthed loss. Until then, they are used only for:
+- **Dynamic underwriting triage:** Farmers in the bottom quartile of liquidity stability pay a higher planting deposit (40% vs. 25%) or accept a 14-day waiting period.
+- **Customer targeting:** Identifying cohorts for financial-literacy intervention.
+
+### 1.4 Trigger Architecture: The “Dual-Lock” System
+Discretionary “goodwill” payouts are eliminated. Basis risk is managed through transparent, pre-priced layers.
+
+| Layer | Mechanism | Funding |
+|:---|:---|:---|
+| **Primary** | Satellite/weather parametric (automated) | Base premium |
+| **Secondary** | Fixed nominal top-up or percentage of primary limit. Activates if an independent audit (drone, peer-group, or cooperative ledger) confirms >50% area loss in a micro-catchment where the primary index did not trigger. | Explicit surcharge (10% in Tier 1; 6% in Tier 2; 4% in Tier 3) |
+| **Tertiary (Pilot Only)** | Development-finance first-loss guarantee for aggregate annual loss beyond 1.5× the modeled single-event maximum. | IFAD / GAFSP / MIGA collateral |
+
+*In Central America (Tier 1), the secondary layer is a fixed nominal indemnity ($50–$75 per farmer) or 25% of the primary limit. No yield-response modeling is attempted until 36 months of ground data exist.*
+
+### 1.5 Premium Default as Correlated Risk
+Where premiums are harvest-deducted, default is modeled as a **correlated peril** (20–30% leakage in payout years). Mitigation is mandatory:
+- **Non-refundable planting deposit:** 25–40% of premium at enrollment.
+- **Meso-premium option:** The cooperative pays the insurer regardless of member harvest.
+- **Rate loading:** If harvest deduction is mandatory, the pure premium is grossed up by the conditional default probability.
+
+### 1.6 Satellite Model Risk & Sensor Discipline
+| Region | Risk | Mitigation |
+|:---|:---|:---|
+| **South Asia** | NDVI saturation in dense Kharif canopy; monsoon cloud cover | Dual-sensor trigger: optical NDVI + SAR (Sentinel-1) backscatter |
+| **Central America** | 30–40% orographic deviation in satellite rainfall | Mandatory 24-month ground-gauge build-out (1 gauge per 50 km² pilot zone); Bayesian blending of satellite + gauge data |
+| **East Africa** | Heterogeneous highland smallholdings | 250m NDVI fused with 5 km rainfall grids; annual recalibration via cooperative yield ledgers |
+
+### 1.7 Global Portfolio Risk: ENSO & Compound Perils
+- **ENSO Correlation.** The global three-region portfolio is modeled with a t-copula using the NOAA Oceanic Niño Index (ONI) as a common latent factor. If empirical correlation in El Niño years exceeds 0.25, group-level required capital increases by **15%**.
+- **Compound Perils.** A multivariate compound Poisson framework models cascading risks (e.g., drought → locust in East Africa; hurricane → landslide in Central America). **Aggregate annual exposure is capped at 1.5× the largest single-event modeled loss.**
+
+---
+
+## 2. CROSS-CUTTING ENROLLMENT INTEGRITY & CLAIM CREDIBILITY
+
+### 2.1 Hard Enrollment Gates (Universal)
+| Control | Implementation |
+|:---|:---|
+| **Plot-Photo Geotag** | Farmer photographed at plot corner with visible landmark; timestamped GPS polygon captured. |
+| **Cadastral Cross-Check** | API verification against Bhulekh/Dharani (South Asia), cooperative registry (East Africa), or national cadastre (Central America). |
+| **Active Season Geolocation** | Farmers dial a monthly USSD code or enable a lightweight app ping from <2 km of the enrolled plot during the growing season. Replaces static tower-proximity rules that penalize pastoralists and tenants. |
+| **Biometric / ID Hash** | Prevents duplicate identity fraud; does not replace plot verification. |
+
+### 2.2 Separation of Duties & Incentive Design
+- **Enrollment & Education:** Cooperative agronomists, SHG leaders, parish mobilizers, and mobile agents may recruit.
+- **Verification:** A rotating panel of externally compensated agronomy students or independent surveyors (paid by the insurer, not the cooperative) conducts plot validation.
+- **Mystery-Shopper Audit:** 2% of all enrollments are covertly re-verified by an independent inspector.
+- **Commission Structure:** 50% of all agent commissions are withheld until 12-month retention is proven. This shifts incentives from volume to quality.
+
+### 2.3 Peer-Group Verification: Anti-Capture Protocol
+For community channels requiring indemnity-style top-ups:
+- **Secret-ballot SMS attestation:** Randomly selected neighboring farmers vote anonymously on area loss.
+- **Panel composition quota:** Every peer panel must include ≥40% women and ≥1 tenant farmer (if applicable).
+- **Compensation:** Panelists receive mobile airtime, not cash, to reduce coercion.
+- **Cost cap:** Verification expense cannot exceed **5% of premium**.
+
+### 2.4 Human Touchpoint Discipline
+- **Decouple the trust ambassador from the explainer.** Clergy and respected elders are used for enrollment and ceremonial payout confirmation. A separate, insurer-employed **community liaison** (local, salaried, non-clergy) explains non-triggers and partial triggers.
+- This preserves the moral authority of religious leaders while protecting them from becoming claims-lobbying captives.
+
+### 2.5 Parametric vs. Indemnity Clarity by Channel Type
+| Channel Type | Contract Architecture | Fraud Control Focus |
+|:---|:---|:---|
+| **Mobile / Fintech** | Pure parametric | Enrollment fraud only (ghost farming, urban SIMs). Audit the trigger data source, not the farmer. |
+| **Cooperative (Meso)** | Parametric primary + secondary fixed top-up | Enrollment fraud + meso-payout diversion (bypass cooperative treasury where possible). |
+| **Religious / SHG** | Parametric primary + peer-verified secondary | Enrollment fraud + elite capture in peer attestation. |
+
+---
+
+## 3. CROSS-CUTTING CHANNEL ECONOMICS & VIABILITY
+
+### 3.1 Fully-Loaded CAC Definition
+CAC includes: variable commissions, training amortization, tech build (USSD/API), mystery-shopper costs, mobilization support, and a 50% Year-2 lapse adjustment.
+
+### 3.2 Hard Viability Rule
+**No channel is approved where fully-loaded CAC exceeds 40% of the sum of Year 1 and Year 2 premiums.** At a $15–$20 annual premium, this implies a CAC ceiling of **$6–$8** over two years.
+
+### 3.3 Channel Viability Verdicts
+| Channel | East Africa | South Asia | Central America |
+|:---|:---|:---|:---|
+| **Cooperatives** | Approved | Approved | Approved (meso-first) |
+| **Mobile Agents** | Approved (Kenya/Uganda only) | Approved | **Eliminated standalone** |
+| **Religious / SHG / VSLA** | Approved (Tanzania / ASAL) | Approved | Approved (including indigenous councils) |
+| **Fintech Apps** | Approved (embedded / backend) | Approved (app + field agent hybrid) | **Backend only** (solar / remittance embed) |
+
+---
+
+## 4. REGIONAL PLAYBOOKS
+
+### REGION A: EAST AFRICA
+*Disaggregated Trust Regimes: Kenya/Uganda (Digital-Familiar), Ethiopia (State-Cooperative), Tanzania (VSLA/Religious)*
+
+#### A1. Agricultural Cooperatives
+*Applies to: Kenya, Uganda, Ethiopia, Tanzania*
+
+- **Acquisition & CAC.** Integrate insurance as an opt-out in input-finance packages. Premiums collected via non-refundable planting deposit (30%) or cooperative settlement.  
+  *Fully-Loaded CAC:* **$4–$8**.  
+  *Sub-market nuance:* In Ethiopia, restrict mobile disbursement; use cooperative treasury and bank branches due to limited mobile-money interoperability.
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** Satellite NDVI + weather station hybrid.  
+  - **Payout Rail:** Insurer-funded mobile-wallet float pre-positioned in cooperative-escrowed accounts. API releases individual payments to M-Pesa upon trigger, **bypassing cooperative monthly reconciliation**.  
+  - **Speed Promise:** Marketed at **10–14 days** (conservative); operational target is **<72 hours** via API float.  
+  - **Verification:** Cooperative agronomists enroll; external student panel audits 2% randomly + mystery shoppers.
+
+- **Portfolio Risk.**  
+  - **Basis-risk backstop:** Insurer offers explicit secondary layer priced via surcharge; the cooperative does not bear unpriced gap risk.  
+  - **Zonal cap:** No single cooperative > **12%** of regional portfolio.  
+  - **Reinsurance:** Retain 1-in-5 year risk; cede tail via **quota-share with Zep-Re or Kenya Re** for 2026. ARC Replica is a 2028 aspiration requiring 18-month government negotiation.  
+  - **Default mitigation:** Planting deposit mandatory; meso-premium option for drought-prone SACCOs.
+
+#### A2. Mobile-Network Agents
+*Applies to: Kenya, Uganda (viable); Ethiopia, Tanzania (eliminated for standalone micro)*
+
+- **Acquisition & CAC.** USSD push embedded in M-Pesa “Fuliza” or cash-in flows; not cold SMS. Assume 0.3% conversion.  
+  *Fully-Loaded CAC:* **$5–$8** (self-serve lower; agent-assisted higher).
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** Pure parametric (NDVI/rainfall). Zero paperwork.  
+  - **Fraud Control:** Geotagged plot photo + active season geolocation + biometric enrollment. Independent calibration audit of trigger data.  
+  - **Payout:** Instant M-Pesa credit from pre-funded float.  
+  - **Speed Promise:** **<48 hours**. Delays >72 hours are interpreted as fraud.
+
+- **Portfolio Risk.**  
+  - **Adverse selection:** SIM geo-fencing + active geolocation; exclude urban SIMs.  
+  - **Data sparsity:** Conservative Bayesian priors; annual recalibration.
+
+#### A3. Religious Community Groups / VSLAs
+*Applies to: Tanzania (VSLA/religious primary); Kenya/Uganda (ASAL pastoralist zones); Ethiopia (supplemental)*
+
+- **Acquisition & CAC.** Enrollment during services; mobilization by elders/imams.  
+  *Fully-Loaded CAC:* **$3–$6** (includes explicit $2–$3/policy mobilization support and quarterly “parish development fund” tied to retention).
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** Satellite index for drought; peer-group SMS attestation for localized perils (hail, livestock).  
+  - **Credibility:** Theological feasibility study conducted per denomination pre-launch. Inter-faith committee ratifies payout lists.  
+  - **Payout:** Mobile money or ceremonial parish disbursement. Community liaison (not clergy) explains non-triggers.  
+  - **Speed Promise:** **14–21 days**.
+
+- **Portfolio Risk.**  
+  - **Moral hazard:** Community co-payment deductible (first 20%). Random external audit (10%).  
+  - **Correlation:** Map members against elevation; cap single congregation at **10%** of regional portfolio.
+
+#### A4. Fintech / AgTech Platforms
+*Applies to: Kenya, Uganda (embedded); Ethiopia/Tanzania (backend only)*
+
+- **Acquisition & CAC.** Embedded in Apollo Agriculture-style input-finance platforms; USSD fallback.  
+  *Fully-Loaded CAC:* **$1–$4** (marginal atop host platform).
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** API-driven satellite index.  
+  - **Payout:** Automatic mobile-money push. In-app satellite dashboard for transparency.  
+  - **Speed Promise:** **24–48 hours**.
+
+- **Portfolio Risk.**  
+  - **Selection bias:** Host platform must enroll **all** borrowers in a geographic cohort (mandatory pooled cover).  
+  - **ML proxies:** Satellite + cadastral data used for trigger calibration only; not premium pricing until 3-year ground data exist.
+
+---
+
+### REGION B: SOUTH ASIA
+*Trust Regime: Bureaucratic-Acceptance / Delay-Distrust*
+
+#### B1. FPOs / Agricultural Cooperatives
+
+- **Acquisition & CAC.** Bulk enrollment via FPOs during KVK demonstrations. Bhulekh/Dharani API automates eligibility. Social-network mapping of FPO board composition; reject FPOs where >60% of board belongs to a single landholding family.  
+  *Fully-Loaded CAC:* **$5–$10**.
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** IMD/CHIRPS gridded rainfall (minimum 5 km × 5 km); SAR-optical fusion for cloud penetration. Area-yield index secondary for flood basins.  
+  - **Payout Rail:** Aadhaar-enabled DBT to FPO escrow, then to members.  
+  - **Speed Promise:** **10–14 days** (must beat PMFBY 21-day ceiling).  
+  - **Verification:** FPO board manages relations; external panel validates stratified random GPS-tagged sample.
+
+- **Portfolio Risk.**  
+  - **Meso-first + basis-risk backstop:** Insure FPO balance sheet with explicit reinsurance treaty so the FPO cannot be bankrupted by index mismatch.  
+  - **Adverse selection:** 30% female enrollment quota via women-agent networks; plot-photo geotagging prevents landlord enrollment of tenant land.  
+  - **Diversification:** Cap any single river basin at **12%** of portfolio.
+
+#### B2. Mobile / Business Correspondent Agents
+
+- **Acquisition & CAC.** BC networks during cash-in/cash-out; missed-call campaigns; IVR in local dialects.  
+  *Fully-Loaded CAC:* **$4–$9**.
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** Gridded weather index only. No single-station triggers.  
+  - **Fraud Control:** Aadhaar/eKYC + plot-photo + cadastral API + active geolocation. Agent commission clawback for failed KYC audit.  
+  - **Payout:** UPI/DBT.  
+  - **Speed Promise:** **7–14 days**.
+
+- **Portfolio Risk.**  
+  - **Skew mitigation:** Mandatory 30% female enrollment quota.  
+  - **Basis risk:** 5 km × 5 km grid minimum.
+
+#### B3. Religious / SHG Networks
+
+- **Acquisition & CAC.** Women-only SHGs spanning multiple hamlets (lower elite capture than mixed-caste groups). Group policies with joint liability.  
+  *Fully-Loaded CAC:* **$4–$7**.
+
+- **Claim Credibility & Speed.**  
+  - **NO TAKAFUL IN PHASE 1.** Genuine Takaful requires a licensed operator and Shariah governance ($3+ per policy), which is unviable at pilot scale. Offer conventional group cover through SHGs. Defer Takaful to Phase 2 with proper capital partners.  
+  - **Trigger:** Area-yield index at panchayat level; peer-group SMS attestation for secondary layer.  
+  - **Payout:** Group bank account → SHG distribution.  
+  - **Speed Promise:** **14–21 days**.
+
+- **Portfolio Risk.**  
+  - **Homogeneity:** SHGs must span multiple hamlets; no single-hamlet SHG may exceed 5% of regional portfolio.  
+  - **Data gaps:** SHG savings/loan data used for underwriting triage (deposit tiers) only.
+
+#### B4. Fintech / AgTech Platforms
+
+- **Acquisition & CAC.** Integrated into DeHaat-style platforms. Voice-bot onboarding in local languages. Blended model: app for enrollment, community agent for verification.  
+  *Fully-Loaded CAC:* **$2–$6**.
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** AI-modeled crop-stage vulnerability + remote sensing.  
+  - **Payout:** UPI/wallet transfer. In-app “Why did I get this?” weather-map explanation. Human call center for non-trigger events.  
+  - **Speed Promise:** **3–7 days**.
+
+- **Portfolio Risk.**  
+  - **Digital exclusion:** Women and tenant farmers often lack smartphones. Mandatory field-agent verification prevents demographic skew.  
+  - **Monsoon correlation:** Dynamic portfolio caps by district; no more than 10% in any single high-risk district.
+
+---
+
+### REGION C: CENTRAL AMERICA
+*Trust Regime: Extractive-Alienation / Institutionally Naïve*
+
+**Phase 1 Mandatory Pivot:** Due to very low trust (TI 3.0/10) and unviable individual CAC ($8–$14 exceeds the 40% viability rule at subsistence premium levels), Central America launches as a **meso-first pilot** in 2026. The insurer underwrites cooperative and parish balance sheets (20–30 meso contracts covering ~10,000 farmers), not 8,000 standalone micro-policies. Individual micro is Phase 2 only upon reaching 25,000 multi-country scale.
+
+#### C1. Agricultural Cooperatives (Meso-Micro)
+
+- **Acquisition & CAC.** Target coffee/cocoa cooperatives in Fair Trade/organic belts. Premiums deducted from cherry payments or locked in USD via diaspora remittance escrow. Governance audit prerequisite (external accounts, board elections).  
+  *Fully-Loaded CAC:* **$8–$14 per farmer** (absorbed via meso enrollment of 50–200 farmers per contract).
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** Parametric wind speed (hurricane) + excess rainfall. **24-month ground-truth calibration** mandatory before pure index reliance. Until then, cat-in-a-box parametric for liquidity; peer-group verification for top-up.  
+  - **Payout Rail:** Insurer releases directly to member accounts **bypassing cooperative treasury** where governance audits are incomplete; otherwise, escrowed release upon external audit.  
+  - **Transparency:** Payout lists on notice boards; weekly SMS updates; objective storm-track data shared.  
+  - **Speed Promise:** **21–35 days**; transparency matters more than speed.
+
+- **Portfolio Risk.**  
+  - **Multi-country pooling:** Guatemala, Honduras, Nicaragua, Costa Rica mandatory in one portfolio.  
+  - **Currency hedge:** USD-denominated premiums and payouts.  
+  - **Hurricane tail:** **Do not retain locally.** Quota-share with regional reinsurer; development-finance first-loss guarantee (50% of AAL up to $500k). CCRIF is a 2028 aspiration, not 2026.  
+  - **Basis-risk backstop:** Explicit cooperative-purchased reinsurance for gaps between storm parametric and verified loss.
+
+#### C2. Mobile-Network Agents
+**VERDICT: ELIMINATED** for standalone insurance distribution in 2026.  
+Intermediary legitimacy (3.0/10) and fully-loaded CAC make individual acquisition actuarially unviable. Mobile money is permitted **only as a remittance-rail** (diaspora pays premium to insurer escrow). No agent-led enrollment. No portfolio risk is assumed for a non-existent channel.
+
+#### C3. Religious & Indigenous Community Networks
+
+- **Acquisition & CAC.** **Christian Base Communities (CEBs), evangelical parishes, and Indigenous Territorial Councils** (e.g., Alcaldes Indígenas, CABIs in Guatemala) are all legitimate Phase 1 intermediaries. Product narrative co-designed using indigenous *reciprocity* concepts, not “insurance” branding.  
+  Diaspora premiums structured as **remittance round-ups** or 3-year family bundles (15–20% discount) to lock commitment.  
+  *Fully-Loaded CAC:* **$6–$12** (includes quarterly parish development fund and indigenous council stipend).
+
+- **Claim Credibility & Speed.**  
+  - **Trigger:** Parametric rainfall for drought; parish/territorial council peer-group verification for landslide/hurricane top-up.  
+  - **Credibility:** Priest/council leader delivers first-loss payouts as **trust ambassador**, but **community liaison** explains non-triggers.  
+  - **Transparency:** Secret-ballot SMS attestation with gender quotas; published noticeboard lists; weekly communication.  
+  - **Speed Promise:** **21–35 days**.
+
+- **Portfolio Risk.**  
+  - **Theological/cultural feasibility:** Denomination-specific and territory-specific studies pre-launch. Budget for inter-faith discord mitigation (separate branding if necessary).  
+  - **Geographic clustering:** Cap parish/council exposure; require multi-parish/multi-territory coalitions for viable pools.  
+  - **Remittance volatility:** Lock USD premiums annually.
+
+#### C4. Fintech /
