@@ -819,6 +819,19 @@ The disjointness rule~(D33) ensures that no judge shares architecture with any
 generator, mitigating the self-enhancement bias documented by
 \citet{ZhengEtAl2023}.
 
+\textbf{Platform use and conflict-of-interest disclosure.} All pipeline
+generation and execution in Studies 1--3 ran on \textbf{DeeWaanAI}
+(\url{https://deewaanai.com}), a commercial orchestration platform; the
+auto-designer evaluated in Study~3 and Protocol~16 is DeeWaanAI's production
+feature, used unmodified (fixed internal design prompt, free-form roles,
+up to seven steps with critic-gated loops). The author is affiliated with
+DeeWaanAI, and the findings directly inform the platform's routing and
+persona features (\cref{sec:conclusion}). This relationship is disclosed so
+readers can weight the translational claims accordingly; all protocols,
+gate outcomes (including failed ones), and attrition events are
+pre-registered and reported as-is, and the full data and code are publicly
+available.
+
 % ==================================================================
 % 4  RESULTS
 % ==================================================================
@@ -1329,8 +1342,8 @@ builder $\to$ critic $\to$ refiner structure was our fixed research instrument
 Study~3 (Protocol~13; pre-registered OSF~\href{https://osf.io/9ukjz}{9ukjz},
 with instrument amendment \href{https://osf.io/bwc93}{bwc93} and attrition
 clarification \href{https://osf.io/639eq}{639eq}, both filed before the
-corresponding computation) executes A7 as a stand-alone study. Using a
-production auto-designer, the model receives only the problem text and authors
+corresponding computation) executes A7 as a stand-alone study. Using
+DeeWaanAI's production auto-designer, the model receives only the problem text and authors
 a bespoke multi-step pipeline --- free choice of roles, step count, and
 critic-gated if/while feedback loops --- which is then executed verbatim by
 the cheap tier. Two arms per family: \textbf{D-SELF} (the cheap sibling
@@ -1869,6 +1882,20 @@ paragraph). If the task rewards concise strategic principles, the frontier is
 worth the premium. If the task rewards completeness, the lower-tier
 configuration is the better bet.
 \end{mdframed}
+
+\textbf{From findings to product.} This research was conducted on, and now
+feeds back into, the DeeWaanAI orchestration platform. Three findings have
+already changed the product: (1)~the persona penalty ($d = -0.691$) removed
+personas as a default quality lever; (2)~Study~3 established that pipeline
+\emph{design authorship} is a negligible factor, so the platform's
+auto-designer lets the cheap model design for itself rather than billing a
+frontier design pass; and (3)~Protocol~16's partial replication converted the
+static per-family routing table into \emph{benchmarking-as-routing} --- a
+cheap per-deployment probe (test the user's model on the user's problem type,
+then route), because mid-tier effects do not transport across problem sets.
+The loop is deliberate: the platform supplies the research instrument, the
+pre-registered findings supply the product's routing logic, and the
+disclosure in \cref{sec:ai-disclosure} keeps the relationship transparent.
 
 % ==================================================================
 % REFERENCES

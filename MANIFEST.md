@@ -1083,3 +1083,7 @@ Judging final: 3,963/3,969 valid (zhipu 1,323/1,323; meta 1,320; deepseek 1,320)
 ## Entry 84 — 2026-08-31 — Paper v13: Study-3 confirmatory-replication subsection added
 
 New `\cref{sec:study3conf}` subsection (Protocol 16, OSF zkm8v): design, frozen-comparator logic, hash-locked script, R1–R5 gate table, 2/5 verdict, interpretation (family moderation real at extremes, non-transporting for mid-tier → benchmark-as-routing method, not a lookup table), and the pre-emptive "why we did not extend to new families" justification (author-approved). Study-3 decision-rule paragraph now carries a forward-pointer caveat; Summary of Key Findings gains a "partially replicated" row. Compiles 36pp, 0 undefined refs. v12 preserved untouched.
+
+## Entry 85 — 2026-08-31 — Paper v13: platform disclosure + impact statement; research→product feature map drafted
+
+v13 edits (author directive): (1) platform-use + conflict-of-interest disclosure paragraph in AI-disclosure section (DeeWaanAI named as instrument for Studies 1–3; auto-designer = production feature; affiliation disclosed); (2) Study 3 design text names DeeWaanAI's auto-designer; (3) "From findings to product" impact paragraph at end of Conclusion (persona default removal, self-design default, benchmark-as-routing). Recompiled 38pp, 0 undefined refs. Author ruling: full feature map stays OUT of the paper (marketing-in-paper credibility risk); drafted standalone at product/research-to-product-feature-map.md (5 domains: routing, auto-design, refinement, personas, quality communication + 5 messaging rules).
