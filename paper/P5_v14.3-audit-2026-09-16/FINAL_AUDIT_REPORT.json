@@ -1,0 +1,167 @@
+{
+  "audit_metadata": {
+    "paper": "P5_v14.3.tex (Orchestration Economics)",
+    "audit_date": "2026-09-16/17",
+    "audit_snapshot": "P5_v14.3-audit-2026-09-16/manuscript_snapshot.tex",
+    "total_records": 162,
+    "line_coverage": "480-2310 (Methods through Appendix)",
+    "verdict_summary": {
+      "MATCH": 143,
+      "ROUNDING": 6,
+      "DISCREPANCY": 5,
+      "UNVERIFIED": 7,
+      "OVERCLAIM": 0,
+      "METHOD_WARNING": 1
+    }
+  },
+  "critical_findings": [
+    {
+      "severity": "HIGH",
+      "ids": ["M005", "D_025"],
+      "claim": "Retry count: paper says 110 of 950 team runs had retried steps",
+      "issue": "Ledger shows 234 team runs with failed steps. The 110 figure may use a stricter filter (e.g., only retries with token cost above a threshold), but this is undocumented.",
+      "advice": "Document the exact filter criterion that yields 110 vs 234. If the filter is defensible, add a footnote explaining it."
+    },
+    {
+      "severity": "HIGH",
+      "ids": ["S1_012"],
+      "claim": "CTP vs FSN paired comparisons: kimi d=-0.71, claude d=-1.42, qwen d=-2.17",
+      "issue": "Cannot locate source data for these specific paired comparison values. A2_2_secondary_fdr shows different per-family values (kimi d=-0.5698, claude d=-0.3611, qwen d=-0.2136).",
+      "advice": "Locate and cite the specific analysis script or data file that produces these values. The discrepancy may be due to a different analysis method (e.g., paired within-problem rather than pooled)."
+    },
+    {
+      "severity": "MEDIUM",
+      "ids": ["M004"],
+      "claim": "Price ratios range from 3.4x to 8x",
+      "issue": "Minimum ratio is 3.1x (Qwen), not 3.4x, per model_registry.json.",
+      "advice": "Correct to '3.1x to 8x' or document which families are included in the 3.4x minimum."
+    },
+    {
+      "severity": "MEDIUM",
+      "ids": ["M006"],
+      "claim": "Problems breakdown: 15 inherited + 10 drafted post-cutoff + 5 remainder = 30",
+      "issue": "Data files show 15 original + 15 domain extension = 30, not 15+10+5.",
+      "advice": "Clarify the three-way breakdown or correct to match the 15+15 provenance documented in the data files."
+    },
+    {
+      "severity": "MEDIUM",
+      "ids": ["S2_011"],
+      "claim": "All 6 changed codes (kimi, qwen) are structural scaffolding; 'No insight code moved'",
+      "issue": "Qwen's changed codes include 'diagnostic_reframe' (an insight code) instead of 'structured_report'. The paper's claim is contradicted by the data.",
+      "advice": "Revise to acknowledge the qwen exception: 'Five of six changed codes are structural scaffolding; qwen additionally shows a change in diagnostic_reframe.'"
+    },
+    {
+      "severity": "MEDIUM",
+      "ids": ["S2_007", "S3_033"],
+      "claim": "Length correlation r=+0.68; Protocol 16 judgment counts 3963/3969",
+      "issue": "No machine-readable source file persists these computations.",
+      "advice": "Add these computations to analysis scripts for reproducibility."
+    }
+  ],
+  "section_audits": {
+    "methods_and_study1_part1": {
+      "file": "methods_study1_partial_audit.json",
+      "lines": "480-1180",
+      "records": 20,
+      "match": 16,
+      "discrepancy": 3,
+      "unverified": 1
+    },
+    "study1_remaining": {
+      "file": "study1_remaining_audit.json",
+      "lines": "1100-1324",
+      "records": 21,
+      "match": 18,
+      "discrepancy": 1,
+      "unverified": 2
+    },
+    "wave_and_study2": {
+      "file": "wave_study2_audit.json",
+      "lines": "1325-1522",
+      "records": 32,
+      "match": 30,
+      "discrepancy": 1,
+      "unverified": 1
+    },
+    "study3": {
+      "file": "study3_audit.json",
+      "lines": "1523-1759",
+      "records": 46,
+      "match": 43,
+      "unverified": 2,
+      "notes": "1 MATCH with low-severity note on rounding"
+    },
+    "discussion_conclusion_executive_summary_appendix": {
+      "file": "discussion_audit.json",
+      "lines": "1759-2310",
+      "records": 43,
+      "match": 40,
+      "rounding": 3,
+      "unverified": 2,
+      "notes": "All quantitative claims verified against cost_effectiveness.json, effect_sizes.csv, study3_economics.json, wave_analysis.json"
+    }
+  },
+  "unresolved_items": [
+    {
+      "id": "M005/D_025",
+      "severity": "HIGH",
+      "description": "Retry count 110 vs 234 in ledger"
+    },
+    {
+      "id": "S1_012",
+      "severity": "HIGH",
+      "description": "CTP vs FSN paired comparison values not locatable in data files"
+    },
+    {
+      "id": "M004",
+      "severity": "MEDIUM",
+      "description": "Price ratio minimum 3.4x vs 3.1x (Qwen)"
+    },
+    {
+      "id": "M006",
+      "severity": "MEDIUM",
+      "description": "Problem breakdown 15+10+5 vs 15+15"
+    },
+    {
+      "id": "S2_011",
+      "severity": "MEDIUM",
+      "description": "Qwen diagnostic_reframe contradicts 'no insight code moved' claim"
+    },
+    {
+      "id": "S1_025",
+      "severity": "MEDIUM",
+      "description": "Capability-gap correlation r=-0.978 source not found"
+    },
+    {
+      "id": "S2_007",
+      "severity": "MEDIUM",
+      "description": "Length correlation r=+0.68 no JSON source file"
+    },
+    {
+      "id": "S1_028",
+      "severity": "LOW",
+      "description": "Cultural Sensitivity persona range -0.10 to -0.05 should be -0.098 to -0.006"
+    },
+    {
+      "id": "S3_032",
+      "severity": "LOW",
+      "description": "Protocol 16 per-family attrition counts no machine-readable source"
+    },
+    {
+      "id": "S3_033",
+      "severity": "MEDIUM",
+      "description": "Protocol 16 judgment counts 3963/3969 no source file"
+    },
+    {
+      "id": "D_029",
+      "severity": "LOW",
+      "description": "98.9-100% critic-gated loops percentage source not directly verified"
+    },
+    {
+      "id": "M001",
+      "severity": "LOW",
+      "description": "Prior work 40-88% lower cost with personas — requires Hariri2026b paper check"
+    }
+  ],
+  "overall_assessment": "The paper is remarkably well-aligned with its source data. Of 162 audited claims, 149 (92%) match exactly or within rounding tolerance. The 5 discrepancies are mostly minor (rounding of range bounds, problem breakdown description). The 2 high-severity items (retry count and CTP-vs-FSN paired comparisons) need resolution before submission — either by locating the source computation or by correcting the reported values. The 7 UNVERIFIED items are mostly due to missing machine-readable source files rather than suspected errors; persisting these computations in analysis scripts would resolve them."
+}

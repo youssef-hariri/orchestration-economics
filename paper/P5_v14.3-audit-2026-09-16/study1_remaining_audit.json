@@ -1,0 +1,320 @@
+[
+  {
+    "id": "S1_012",
+    "line_start": 1103,
+    "line_end": 1104,
+    "claim": "CTP vs FSN paired comparisons: kimi d=-0.71, claude d=-1.42, qwen d=-2.17; all five families negative, all CIs exclude zero after Holm",
+    "paper_value": "kimi d=-0.71, claude d=-1.42, qwen d=-2.17; all 5 families negative, CIs exclude zero",
+    "source_value": "No matching data found in interim2_analysis.json or cross_family.json. Per-family interaction effects in A2_2_secondary_fdr show different values (kimi d=-0.5698, claude d=-0.3611, qwen d=-0.2136). Paper says 'all five families' but only lists 3 effect sizes.",
+    "verdict": "UNVERIFIED",
+    "severity": "high",
+    "evidence": [
+      "results/interim2_analysis.json::A2_2_secondary_fdr",
+      "results/cross_family.json"
+    ],
+    "advice": "Cannot locate source for these specific paired comparison values. Verify analysis script or data source. Also clarify whether all 5 families are significant or only 3 are reported.",
+    "verification": "unverified"
+  },
+  {
+    "id": "S1_013",
+    "line_start": 1182,
+    "line_end": 1185,
+    "claim": "C-S-N delivers 98% of frontier quality at 23% of cost; C-T-N at 88% of cost; frontier teams cost 3.5× frontier-solo",
+    "paper_value": "98% quality, 23% cost; C-T-N 88% cost; frontier teams 3.5×",
+    "source_value": "Computed from cell_summary.csv (phi=0.5): C-S-N quality 4.507/F-S-N 4.586=98.3%; C-S-N cost 0.0194/F-S-N 0.0835=23.2%; C-T-N cost 0.0734/F-S-N 0.0835=87.9%; F-T-N cost 0.2951/F-S-N 0.0835=3.53×",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/cost/cell_summary.csv"
+    ],
+    "advice": "No numerical correction",
+    "verification": "recompute"
+  },
+  {
+    "id": "S1_014",
+    "line_start": 1192,
+    "line_end": 1193,
+    "claim": "Leave-one-family-out: d ranges from -0.143 (drop kimi) to -0.303 (drop gemini)",
+    "paper_value": "d: -0.143 to -0.303",
+    "source_value": "results/interim2_analysis.json::A2_5_leave_one_family_out: drop kimi d=-0.1427, drop gemini d=-0.3028",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::A2_5_leave_one_family_out"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_015",
+    "line_start": 1194,
+    "line_end": 1195,
+    "claim": "Leave-one-problem-out: d ranges from -0.212 to -0.247 across 19 folds",
+    "paper_value": "d: -0.212 to -0.247, 19 folds",
+    "source_value": "results/interim2_analysis.json::A2_6_leave_one_problem_out: min d=-0.2124 (BP_12), max d=-0.2467 (BP_28), 19 folds",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::A2_6_leave_one_problem_out"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_016",
+    "line_start": 1196,
+    "line_end": 1197,
+    "claim": "Sensitivity power at n=190 detects d=0.288 at 80% power",
+    "paper_value": "d=0.288 at 80% power, n=190",
+    "source_value": "results/interim2_analysis.json::A2_7_sensitivity_power.min_detectable_d_at_80pct = 0.2882",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::A2_7_sensitivity_power"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_017",
+    "line_start": 1199,
+    "line_end": 1200,
+    "claim": "Tier × structure interaction: F=6.90, p=0.0087, partial η²=0.0036",
+    "paper_value": "F=6.90, p=0.0087, η²=0.0036",
+    "source_value": "results/interim2_analysis.json::A2_3_anova.terms['C(tier):C(structure)']: F=6.901, p=0.00868, partial_eta2=0.0036",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::A2_3_anova"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_018",
+    "line_start": 1203,
+    "line_end": 1203,
+    "claim": "Length adjustment on H1 contrast: p=0.63",
+    "paper_value": "p=0.63",
+    "source_value": "results/interim2_analysis.json::A1_4_length_adjustment.length_adjusted.p = 0.62835",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::A1_4_length_adjustment"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_019",
+    "line_start": 1205,
+    "line_end": 1208,
+    "claim": "Random-effects meta-analysis: pooled d=-0.270, CI [-0.472, -0.069], z=-2.64, p=0.008, τ²=0.015, I²=28.5%",
+    "paper_value": "d=-0.270, CI=[-0.472,-0.069], z=-2.64, p=0.008, τ²=0.015, I²=28.5%",
+    "source_value": "results/exploratory_analysis.json::A3_4_meta_analysis: pooled_d=-0.2704, ci95=[-0.4715,-0.0692], z=-2.635, p=0.00843, tau2=0.015, I2_pct=28.5",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_analysis.json::A3_4_meta_analysis"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_020",
+    "line_start": 1253,
+    "line_end": 1253,
+    "claim": "Problem difficulty moderation: r=0.153, p=0.53 across 19 problems",
+    "paper_value": "r=0.153, p=0.53, n=19",
+    "source_value": "results/exploratory_heterogeneity.json::A2_difficulty_moderation: pearson_r=0.153, pearson_p=0.5321, n_problems=19",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_heterogeneity.json::A2_difficulty_moderation"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_021",
+    "line_start": 1254,
+    "line_end": 1254,
+    "claim": "Kendall's W = 0.922 for family quality rankings across domains",
+    "paper_value": "W=0.922",
+    "source_value": "results/exploratory_heterogeneity.json::A6_rank_stability['C-T-N'].kendall_W = 0.922",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_heterogeneity.json::A6_rank_stability"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_022",
+    "line_start": 1257,
+    "line_end": 1259,
+    "claim": "ICC(3,1) ranges 0.235 (HR) to 0.523 (marketing); ICC(3,9) between 0.73 and 0.91",
+    "paper_value": "ICC(3,1): 0.235-0.523; ICC(3,9): 0.73-0.91",
+    "source_value": "results/exploratory_heterogeneity.json::A7_judge_icc_by_domain: icc_3_1 min=0.235 (hr), max=0.523 (marketing); icc_3_k min=0.734 (hr), max=0.908 (marketing/strategy)",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_heterogeneity.json::A7_judge_icc_by_domain"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_023",
+    "line_start": 1267,
+    "line_end": 1268,
+    "claim": "Marketing team variance significantly lower than solo: Brown-Forsythe p=0.020",
+    "paper_value": "p=0.020",
+    "source_value": "results/exploratory_heterogeneity.json::A1_reliability.domain_sd.marketing_communications.p_BF = 0.0203",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_heterogeneity.json::A1_reliability.domain_sd"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_024",
+    "line_start": 1269,
+    "line_end": 1269,
+    "claim": "P(composite<4.0): solo 2.8%, team 1.8%, frontier 1.1%",
+    "paper_value": "solo 2.8%, team 1.8%, frontier 1.1%",
+    "source_value": "results/exploratory_heterogeneity.json::A1_reliability.downside: C-S-N=0.0281, C-T-N=0.0175, F-S-N=0.0105",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_heterogeneity.json::A1_reliability.downside"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_025",
+    "line_start": 1276,
+    "line_end": 1279,
+    "claim": "Capability-gap correlation: Pearson r=-0.978, p=0.004; Spearman ρ=-1.000; n=5 families. Kimi: -0.164 gap, +0.105 team effect; Claude: -0.357 gap, -0.292 team effect",
+    "paper_value": "Pearson r=-0.978, p=0.004; Spearman ρ=-1.000; n=5; kimi gap=-0.164, effect=+0.105; claude gap=-0.357, effect=-0.292",
+    "source_value": "No matching data found in explored results files. This analysis may be in a separate script or computed on-the-fly.",
+    "verdict": "UNVERIFIED",
+    "severity": "medium",
+    "evidence": [
+      "results/exploratory_heterogeneity.json",
+      "results/exploratory_analysis.json"
+    ],
+    "advice": "Locate source data for capability-gap correlation analysis",
+    "verification": "unverified"
+  },
+  {
+    "id": "S1_026",
+    "line_start": 1286,
+    "line_end": 1288,
+    "claim": "Length-adjusted model: frontier advantage +0.078, p<0.001; team edge reduced from +0.026 to -0.018, p=0.40",
+    "paper_value": "frontier +0.078, p<0.001; team +0.026 → -0.018, p=0.40",
+    "source_value": "results/exploratory_heterogeneity.json::A3_length_ancova: F-S-N coef=0.0779, p=0.0; C-T-N coef=-0.0178, p=0.3994",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_heterogeneity.json::A3_length_ancova"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_027",
+    "line_start": 1293,
+    "line_end": 1295,
+    "claim": "Latency economics: frontier solo 94.8s vs team 131.7s; cheap solo 295.8 vs team 28.1 quality points per dollar-minute",
+    "paper_value": "F-S-N 94.8s, C-T-N 131.7s; C-S-N 295.8, C-T-N 28.1 qpd",
+    "source_value": "results/exploratory_heterogeneity.json::A4_latency_economics.cell_summary: C-S-N latency=47.2s, qpd=295.8; C-T-N latency=131.7s, qpd=28.1; F-S-N latency=94.8s",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_heterogeneity.json::A4_latency_economics"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_028",
+    "line_start": 1299,
+    "line_end": 1299,
+    "claim": "Personas produce no spillover into Cultural Sensitivity: pooled d=-0.10 to -0.05, all domain cells n.s.",
+    "paper_value": "d=-0.10 to -0.05, all n.s.",
+    "source_value": "results/persona_heterogeneity.json::P1_P2_persona_by_dim.pooled: Cultural Sensitivity deltas are -0.0487 (solo-cheap), -0.0058 (solo-frontier), -0.0433 (team-cheap), -0.0982 (team-frontier). Range is -0.0982 to -0.0058, not -0.10 to -0.05.",
+    "verdict": "DISCREPANCY",
+    "severity": "low",
+    "evidence": [
+      "results/persona_heterogeneity.json::P1_P2_persona_by_dim.pooled"
+    ],
+    "advice": "Range should be -0.098 to -0.006, not -0.10 to -0.05. The solo-frontier value is -0.006, not -0.05.",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_029",
+    "line_start": 1302,
+    "line_end": 1304,
+    "claim": "Solo-persona novelty gain: +0.465, p<0.001; domain range +0.36 to +0.57; usefulness cost -0.96 to -1.10",
+    "paper_value": "novelty +0.465, p<0.001; domain +0.36 to +0.57; usefulness -0.96 to -1.10",
+    "source_value": "results/persona_heterogeneity.json::P3_length_ancova.Novelty: persona coef=0.4647, p=0.0. By-domain Novelty (team=false): 0.3556 to 0.5728. Usefulness: -0.9556 to -1.1037",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/persona_heterogeneity.json::P3_length_ancova",
+      "results/persona_heterogeneity.json::P1_P2_persona_by_dim.by_domain"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_030",
+    "line_start": 1305,
+    "line_end": 1306,
+    "claim": "Structure × persona interactions: Novelty -0.693, Usefulness +0.711, both p<0.001",
+    "paper_value": "Novelty -0.693, Usefulness +0.711, both p<0.001",
+    "source_value": "results/persona_heterogeneity.json::P3_length_ancova: Novelty team:persona coef=-0.6926, p=0.0; Usefulness team:persona coef=0.7111, p=0.0",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/persona_heterogeneity.json::P3_length_ancova"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_031",
+    "line_start": 1307,
+    "line_end": 1308,
+    "claim": "Persona ICC(3,9): 0.933 vs 0.918 for neutral",
+    "paper_value": "persona 0.933, neutral 0.918",
+    "source_value": "results/persona_heterogeneity.json::P4_icc_n_vs_p: persona.icc_3_k=0.933, neutral.icc_3_k=0.918",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/persona_heterogeneity.json::P4_icc_n_vs_p"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_032",
+    "line_start": 1309,
+    "line_end": 1309,
+    "claim": "Personas roughly double outcome variance: solo SD 0.232 → 0.397",
+    "paper_value": "SD 0.232 → 0.397",
+    "source_value": "results/persona_heterogeneity.json::P5_persona_variance.pooled_by_structure.solo: sd_N=0.2324, sd_P=0.3965",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/persona_heterogeneity.json::P5_persona_variance"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  }
+]

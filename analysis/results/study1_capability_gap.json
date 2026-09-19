@@ -1,0 +1,54 @@
+{
+ "claim": "Family-level team effect correlates with the family's capability gap to the frontier (Study 1, exploratory D44/D45)",
+ "definition": {
+  "capability_gap": "mean composite F-S-N minus C-S-N per family (positive = cheap below frontier)",
+  "team_effect": "mean composite C-T-N minus F-S-N per family (team output vs frontier solo)",
+  "team_lift": "mean composite C-T-N minus C-S-N per family (structure effect within cheap tier)"
+ },
+ "inputs_cell_means": {
+  "claude": {
+   "C-S-N": 4.3753,
+   "C-T-N": 4.4475,
+   "F-S-N": 4.7392
+  },
+  "gemini": {
+   "C-S-N": 4.3688,
+   "C-T-N": 4.4144,
+   "F-S-N": 4.483
+  },
+  "gpt": {
+   "C-S-N": 4.5365,
+   "C-T-N": 4.5439,
+   "F-S-N": 4.5918
+  },
+  "kimi": {
+   "C-S-N": 4.7251,
+   "C-T-N": 4.6659,
+   "F-S-N": 4.5608
+  },
+  "qwen": {
+   "C-S-N": 4.5205,
+   "C-T-N": 4.5832,
+   "F-S-N": 4.5573
+  }
+ },
+ "source": "results/exploratory_heterogeneity.json A1_reliability.cell_sd_cv (760-run exploratory subset, 19 problems, frozen 2026-08-22)",
+ "n_families": 5,
+ "pearson_r_gap_vs_teameffect": -0.979,
+ "spearman_rho_gap_vs_teameffect": -1.0,
+ "t_approx": -8.31,
+ "df": 3,
+ "p_two_sided_approx": 0.004,
+ "pearson_r_gap_vs_teamlift_partial_compensation": 0.8239,
+ "paper_reported": {
+  "pearson_r": -0.978,
+  "spearman_rho": -1.0,
+  "p": 0.004
+ },
+ "mechanical_note": "team_effect = team_lift - gap by construction, so the gap-vs-team-effect correlation is partly mechanical; the non-mechanical content is that lifts only partially compensate the gap (r=+0.82).",
+ "discrepancies_fixed_in_v15": [
+  "paper quoted claude gap as -0.357; under the gap definition that generates r=-0.978 it is +0.364 (claude cheap farthest BELOW frontier). -0.357 was the opposite-sign convention from full-data means.",
+  "paper prose said teams help most where cheap is 'farthest' from frontier (kimi) and hurt where gap is 'small' (claude); reversed. kimi gap -0.164 = cheap ABOVE frontier; claude gap +0.364 = farthest below."
+ ],
+ "recomputed_utc": "2026-09-17"
+}

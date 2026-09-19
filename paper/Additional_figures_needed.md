@@ -91,26 +91,34 @@ Generate these only if the author or reviewer requests them. See FIGURE-SELECTIO
 
 ## 5. Figure Numbering Crosswalk
 
-The current draft uses this numbering (after v2 insertions):
+The v14 draft embeds 15 main-text PNG figures, auto-numbered 1--15 in compiled
+document order. (`pdflatex` consumes the PNGs directly; no PDF versions are
+required to compile, and none are present in the v14 directory.)
 
-| Draft Label | Guide # | File | Section | Status |
-|-------------|---------|------|---------|--------|
-| Figure 1 | 1 | `fig1_design_schematic.png` | §3.1 | ✅ |
-| Figure 2 | 2 | `fig2_forest_plot.png` | §4.1 | ✅ |
-| Figure 3 | 3 | `fig3_cost_scatter.png` | §4.6 | ✅ Embedded |
-| Figure 4 | 4 | `fig4_gap_recovery.png` | §4.4 | ✅ |
-| Figure 5 | 5 | `fig5_code_heatmap.png` | §4.5 | ✅ |
-| Figure 6 | 6 | `fig6_tegr_bars.png` | §4.6 | ✅ |
-| Figure 7 | 7 | `fig7_cross_family_matrix.png` | §4.4 | ✅ |
-| Figure 8 | 8 | `fig8_robustness_loo.png` | §4.7 | ✅ |
-| Figure 9 | 9 | `fig9_meta_analysis_forest.png` | §4.7 | ✅ |
-| Figure 10 | 10 | `fig10_persona_dimensions.png` | §4.2 | ✅ |
-| Figure 11 | 19 (new) | `fig19_phi_sensitivity.png` | §4.6 | ✅ Generated & Embedded |
-| Figure 12 | 20 (new) | `fig20_contingency_rules.png` | §5.1 | ✅ Generated & Embedded |
-| Figure 13 | 21 (new) | `fig21_sequential_boundary.png` | §4.1 | ✅ Generated & Embedded |
-| Figure 14 | 22 (new) | `fig22_persona_radar.png` | §4.2 | ✅ Generated & Embedded |
+| v14 Fig # | File | v14 Section | Status |
+|-----------|------|-------------|--------|
+| 1  | `fig1_design_schematic.png`        | §3 (Methodology)            | ✅ Embedded |
+| 2  | `fig21_sequential_boundary.png`    | §4.1.1 (interaction)        | ✅ Embedded |
+| 3  | `fig2_forest_plot.png`             | §4.1.1 (interaction)        | ✅ Embedded |
+| 4  | `fig22_persona_radar.png`          | §4.1.2 (persona penalty)    | ✅ Embedded |
+| 5  | `fig10_persona_dimensions.png`     | §4.1.2 (persona penalty)    | ✅ Embedded |
+| 6  | `fig3_cost_scatter.png`            | §4.1.4 (Pareto)             | ✅ Embedded |
+| 7  | `fig6_tegr_bars.png`               | §4.1.4 (Pareto)             | ✅ Embedded |
+| 8  | `fig19_phi_sensitivity.png`        | §4.1.4 (Pareto)             | ✅ Embedded |
+| 9  | `fig8_robustness_loo.png`          | §4.1.5 (robustness)         | ✅ Embedded |
+| 10 | `fig9_meta_analysis_forest.png`    | §4.1.5 (robustness)         | ✅ Embedded |
+| 11 | `fig4_gap_recovery.png`            | §4.2.1 (refinement)         | ✅ Embedded |
+| 12 | `fig7_cross_family_matrix.png`     | §4.2.1 (refinement)         | ✅ Embedded |
+| 13 | `fig5_code_heatmap.png`            | §4.2.2 (mechanism)          | ✅ Embedded |
+| 14 | `fig23_study3_family_domain.png`   | §4.3 (Study 3 family econ.) | ✅ Embedded (new in v14) |
+| 15 | `fig20_contingency_rules.png`      | §5.1 (decision framework)   | ✅ Embedded |
 
-**Note:** Figures 11–18 from the guide (supplementary) are already generated and remain supplementary.
+**Note:** The supplementary figures referenced in FIGURE-SELECTION-GUIDE.md
+(guide numbers 11--18) exist only in `generate_supplementary_figures.py`; they
+are **not** present in the v14 paper directory and are not embedded in the main
+text. They remain available in the replication package on request. `fig23` was
+an orphan in v13 (present in the directory but neither in the guide nor
+embedded); v14 embeds it in the Study~3 family-economics discussion.
 
 ---
 
@@ -141,7 +149,10 @@ python research/orchestration-economics/paper/generate_new_figures.py
 | **Nice-to-have** | Persona radar overlay | Fig 22 | ✅ Complete |
 | **On-demand** | Variations of existing (see §4) | Various | ⏸️ Pending request |
 
-**Total figures now in `paper/figures/`:** 44 files (22 PNG + 22 PDF). All 22 figures from the numbering scheme exist and are embedded where specified.
+**Total main-text figures in the v14 paper directory:** 15 PNG files (no PDFs).
+All 15 are embedded in `FULL-PAPER-DRAFT-BUSINESS-v14.tex`. Supplementary
+figures (guide numbers 11--18) are not in the paper directory; they live only in
+the generation scripts and the replication package.
 
 ---
 

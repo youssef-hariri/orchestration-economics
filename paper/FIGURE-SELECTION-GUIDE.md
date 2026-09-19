@@ -40,7 +40,7 @@
 | 20 | Contingency flowchart | **Must-have** | §5.1 | Practitioner decision rules |
 | 21 | Sequential boundary | **Reviewer choice** | §4.1 | O'Brien–Fleming stopping |
 | 22 | Persona radar overlay | **Reviewer choice** | §4.2 | Style-over-substance signature |
-| 7 | Cross-family matrix | **Reviewer choice** | §4.4 or Supplementary | Cross-family generalizability |
+| 23 | Study 3 family × domain landscape | **Must-have** | §4.3 | Family-specific orchestration economics |
 | 8 | Robustness LOO | **Reviewer choice** | §4.7 or Supplementary | A2 battery: sensitivity |
 | 9 | Meta-analysis forest | **Reviewer choice** | §4.7 or Supplementary | Generalization across families |
 | 10 | Persona dimensions | **Reviewer choice** | §4.2 or Supplementary | Persona penalty mechanism |
@@ -395,6 +395,23 @@
 
 ---
 
+### Figure 23. Study 3 Family × Domain Landscape (Orchestration vs. Frontier Solo)
+
+- **File:** `fig23_study3_family_domain.png` (in the v14 paper directory)
+- **Data source:** Study 3 (Protocol 13) family-specific economics; the `tab:study3-econ` effect grid (Novelty ΔQ vs. F-S-N by family and domain)
+- **Placement:** §4.3 (Study 3, family-specific economics), immediately after the Study 3 economics table
+- **Size recommendation:** Full text width (~15 cm)
+- **Aspect ratio:** 16:9
+- **Color scheme:** Positive ΔQ (orchestration beats frontier solo) = green (#27AE60); negative ΔQ = red (#E74C3C); family rows ordered by how high the solo frontier ceiling sits
+- **Claim supported:** "Orchestration economics are family-specific, not general: cheap auto-designed pipelines beat frontier solo where the solo ceiling is low (Gemini, Qwen, Kimi) and lose where it is high (Claude); the binding moderator is the family, not the task domain."
+- **Caption template:**
+  > Figure 23. Study 3 family × domain landscape: the Novelty effect of cheap auto-designed pipelines versus frontier solo (F-S-N) across the five families and six business domains. The binding moderator is the family — how high its solo frontier ceiling sits — not the task domain: the domain pattern does not survive within-family conditioning.
+- **In-text reference:** "The family-specific economics are shown in Figure 23."
+- **LaTeX label:** `\label{fig:study3-family-domain}`
+- **Inclusion rationale:** The natural visual for Study 3's family-moderation finding. It was an orphan in v13 (generated but neither listed in this guide nor embedded); v14 embeds it in §4.3. **Must-have — now embedded in v14.**
+
+---
+
 ## Supplementary Figures (Not for Main Text)
 
 ---
@@ -668,8 +685,9 @@ The current draft uses this numbering:
 | Figure 12 | 20 | `fig20_contingency_rules.png` | §5.1 | Must-have |
 | Figure 13 | 21 | `fig21_sequential_boundary.png` | §4.1 | Reviewer choice |
 | Figure 14 | 22 | `fig22_persona_radar.png` | §4.2 | Reviewer choice |
+| (v14 Fig 14) | 23 | `fig23_study3_family_domain.png` | §4.3 | Must-have — embedded in v14 |
 
-**Note:** Figures 11–18 from the guide (supplementary) are already generated and remain supplementary — they do not need re-numbering unless promoted.
+**Note:** Figures 11–18 from the guide (supplementary) are already generated and remain supplementary — they do not need re-numbering unless promoted. The authoritative v14 compiled figure order (15 main-text figures, including fig23) is in `Additional_figures_needed.md` §5.
 
 ---
 

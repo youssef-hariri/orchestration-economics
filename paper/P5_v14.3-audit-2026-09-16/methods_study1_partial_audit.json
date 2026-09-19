@@ -1,0 +1,303 @@
+[
+  {
+    "id": "M001",
+    "line_start": 486,
+    "line_end": 486,
+    "claim": "Prior work showed 40-88% lower cost with personas",
+    "paper_value": "40-88% lower cost",
+    "source_value": "Not verified in current audit scope (requires Hariri2026b paper check)",
+    "verdict": "UNVERIFIED",
+    "severity": "low",
+    "evidence": [
+      "paper/P5_v14.3.tex:486"
+    ],
+    "advice": "Verify against Hariri2026b source",
+    "verification": "unverified"
+  },
+  {
+    "id": "M002",
+    "line_start": 583,
+    "line_end": 583,
+    "claim": "Five model families: Kimi, Qwen, GPT-5.6, Claude, Gemini",
+    "paper_value": "Kimi, Qwen, GPT-5.6, Claude, Gemini",
+    "source_value": "config/model_registry.json confirms 5 families with these names",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "config/model_registry.json::generators"
+    ],
+    "advice": "No numerical correction",
+    "verification": "source-doc"
+  },
+  {
+    "id": "M003",
+    "line_start": 584,
+    "line_end": 584,
+    "claim": "Thirty business problems used",
+    "paper_value": "30 problems",
+    "source_value": "config/experiment_config.json shows 15 original + 15 domain extension = 30 main problems",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "config/experiment_config.json::problems"
+    ],
+    "advice": "No numerical correction",
+    "verification": "source-doc"
+  },
+  {
+    "id": "M004",
+    "line_start": 698,
+    "line_end": 698,
+    "claim": "Price ratios range from 3.4x to 8x",
+    "paper_value": "3.4x to 8x",
+    "source_value": "config/model_registry.json: kimi=3.6x, qwen=3.1x, gpt=5.0x, claude=5.0x, gemini=8.0x",
+    "verdict": "DISCREPANCY",
+    "severity": "medium",
+    "evidence": [
+      "config/model_registry.json::generators"
+    ],
+    "advice": "Minimum ratio is 3.1x (qwen), not 3.4x. Correct to '3.1x to 8x'",
+    "verification": "source-doc"
+  },
+  {
+    "id": "M005",
+    "line_start": 730,
+    "line_end": 730,
+    "claim": "110 of 950 completed team runs had retried steps",
+    "paper_value": "110 of 950",
+    "source_value": "runs/logs/main_run_ledger.json shows 234 team runs with failed steps",
+    "verdict": "DISCREPANCY",
+    "severity": "high",
+    "evidence": [
+      "runs/logs/main_run_ledger.json"
+    ],
+    "advice": "Ledger shows 234 team runs with at least one failed step, not 110. Verify counting method or correct the number",
+    "verification": "artifact"
+  },
+  {
+    "id": "M006",
+    "line_start": 739,
+    "line_end": 742,
+    "claim": "15 inherited + 10 drafted post-cutoff + 5 remainder = 30 problems",
+    "paper_value": "15 + 10 + 5 = 30",
+    "source_value": "data/problems shows 15 original + 15 domain extension = 30; all 15 domain problems have same provenance",
+    "verdict": "DISCREPANCY",
+    "severity": "medium",
+    "evidence": [
+      "data/problems/business_problems_15.json",
+      "data/problems/business_problems_domain_15.json"
+    ],
+    "advice": "Data shows 15+15 split, not 15+10+5. Clarify the breakdown or correct the description",
+    "verification": "artifact"
+  },
+  {
+    "id": "M007",
+    "line_start": 778,
+    "line_end": 779,
+    "claim": "Judge correlations: 0.87 (deepseek-zhipu), 0.61 (deepseek-meta), 0.49 (meta-zhipu)",
+    "paper_value": "0.87, 0.61, 0.49",
+    "source_value": "results/interim2_analysis.json::inter_judge_r: deepseek~zhipu=0.871, deepseek~meta=0.613, meta~zhipu=0.494",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::inter_judge_r"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "M008",
+    "line_start": 859,
+    "line_end": 859,
+    "claim": "Meta-analysis pooled d = -0.270, I^2 = 28.5%",
+    "paper_value": "d = -0.270, I^2 = 28.5%",
+    "source_value": "results/exploratory_analysis.json::A3_4_meta_analysis: pooled_d=-0.2704, I2_pct=28.5",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_analysis.json::A3_4_meta_analysis"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "M009",
+    "line_start": 938,
+    "line_end": 938,
+    "claim": "Qualitative coding kappa = 0.824",
+    "paper_value": "kappa = 0.824",
+    "source_value": "results/qual2_kappa.json::pooled_kappa = 0.824",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/qual2_kappa.json::pooled_kappa"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_001",
+    "line_start": 1001,
+    "line_end": 1002,
+    "claim": "H1 interaction: d = -0.227, CI [-0.410, -0.040], t = -2.45, p = 0.0145",
+    "paper_value": "d=-0.227, CI=[-0.410,-0.040], t=-2.45, p=0.0145",
+    "source_value": "results/interim2_analysis.json::primary.H1: d=-0.2271, CI=[-0.4101,-0.0396], t=-2.447, p=0.0145",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::primary.H1_tier_x_structure_interaction"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_002",
+    "line_start": 1007,
+    "line_end": 1007,
+    "claim": "H1 BF10 = 1.002",
+    "paper_value": "BF10 = 1.002",
+    "source_value": "results/interim2_analysis.json::primary.H1.BF10_JZS = 1.002",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::primary.H1_tier_x_structure_interaction.BF10_JZS"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_003",
+    "line_start": 1010,
+    "line_end": 1010,
+    "claim": "H2 tier main effect: d = +0.294, CI [+0.201, +0.382], BF10 = 1.7e7",
+    "paper_value": "d=+0.294, CI=[+0.201,+0.382], BF10=1.7e7",
+    "source_value": "results/interim2_analysis.json::primary.tier_F_minus_C: d=0.294, CI=[0.2007,0.3823], BF10=17288980.458",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::primary.tier_F_minus_C"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_004",
+    "line_start": 1013,
+    "line_end": 1013,
+    "claim": "H3 structure main effect: d = +0.117, CI [+0.030, +0.205]",
+    "paper_value": "d=+0.117, CI=[+0.030,+0.205]",
+    "source_value": "results/interim2_analysis.json::primary.structure_T_minus_S: d=0.1174, CI=[0.0303,0.2051]",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::primary.structure_T_minus_S"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_005",
+    "line_start": 1016,
+    "line_end": 1017,
+    "claim": "H4 persona main effect: d = -0.691, CI [-0.761, -0.620], BF10 = 1.0e50",
+    "paper_value": "d=-0.691, CI=[-0.761,-0.620], BF10=1.0e50",
+    "source_value": "results/interim2_analysis.json::primary.persona_P_minus_N: d=-0.691, CI=[-0.7609,-0.62], BF10=1.019e50",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::primary.persona_P_minus_N"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_006",
+    "line_start": 1023,
+    "line_end": 1024,
+    "claim": "Persona dimensions: Novelty d=+0.154, p_FDR=0.001; Usefulness d=-1.024; Elaboration d=-0.966",
+    "paper_value": "Novelty: d=+0.154, p_FDR=0.001; Usefulness: d=-1.024; Elaboration: d=-0.966",
+    "source_value": "results/exploratory_analysis.json::A3_5: Novelty d=0.1535, p_fdr=0.00105; Usefulness d=-1.0238; Elaboration d=-0.9664",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/exploratory_analysis.json::A3_5_persona_dimensions"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_007",
+    "line_start": 1025,
+    "line_end": 1026,
+    "claim": "H5 structure x persona interaction: F = 1.23, p = 0.27",
+    "paper_value": "F=1.23, p=0.27",
+    "source_value": "results/interim2_analysis.json::A2_3_anova: F=1.226, p=0.26842",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/interim2_analysis.json::A2_3_anova.terms.C(structure):C(persona)"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_008",
+    "line_start": 1128,
+    "line_end": 1135,
+    "claim": "Table 2: Cell summary statistics (all 8 cells)",
+    "paper_value": "See Table 2 in paper",
+    "source_value": "results/cost/cell_summary.csv (phi=0.5): all n, cost, quality values match with rounding",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/cost/cell_summary.csv"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_009",
+    "line_start": 1154,
+    "line_end": 1158,
+    "claim": "Pareto frontier identical across all three phiBlend: {C-S-P, C-S-N, C-T-N, F-S-N, F-T-N}",
+    "paper_value": "{C-S-P, C-S-N, C-T-N, F-S-N, F-T-N}",
+    "source_value": "results/cost/cost_effectiveness.json::pareto_by_phi: all three phi values show identical set",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/cost/cost_effectiveness.json::pareto_by_phi"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_010",
+    "line_start": 1172,
+    "line_end": 1173,
+    "claim": "ICER: C-S-N at +$0.016/point; F-T-P at +$1.81/point",
+    "paper_value": "C-S-N: $0.016; F-T-P: $1.81",
+    "source_value": "results/cost/cost_effectiveness.json::icer_vs_cheapest: C-S-N=0.0163, F-T-P=1.8081",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/cost/cost_effectiveness.json::icer_vs_cheapest"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  },
+  {
+    "id": "S1_011",
+    "line_start": 1174,
+    "line_end": 1175,
+    "claim": "Refined kimi CTP: $0.0654 / quality 4.585, at 78% of F-S-N cost",
+    "paper_value": "$0.0654, quality=4.585, 78% of F-S-N cost",
+    "source_value": "results/cost/cost_effectiveness.json::refined_ctp_points: kimi cost=0.0654, quality=4.585; F-S-N cost=0.0835, 78%=0.0651",
+    "verdict": "MATCH",
+    "severity": "none",
+    "evidence": [
+      "results/cost/cost_effectiveness.json::refined_ctp_points"
+    ],
+    "advice": "No numerical correction",
+    "verification": "artifact"
+  }
+]

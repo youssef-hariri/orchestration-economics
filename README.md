@@ -88,3 +88,35 @@ All code that produced any artifact in this repo is committed in `code/` and `an
 3. `python code/make_ledger.py` regenerates the identical run list (seed 42); `python code/run_experiment.py` executes it (idempotent, resumable).
 4. `python code/judge_solutions.py` then `python code/aggregate_scores.py` reproduce `evaluation/`.
 5. `python analysis/stats.py` reproduces all tables/figures from `evaluation/scores_aggregated.csv`.
+
+---
+
+## Replication bundle (2026-09-19 update — Studies 1, 2/2b, 3, wave, Protocol 16)
+
+The repository now covers the full research program reported in paper v15.6:
+
+| Artifact | Path | Notes |
+|---|---|---|
+| **All frozen prompts** | `config/prompts/` | 13 files extracted verbatim from code (`code/extract_frozen_prompts.py`, provenance in `MANIFEST.json`): Study-1 role templates + neutral solo, Study-2 add-only refiner, Study-3 platform-verbatim designer + repair, 3 judge variants, 3 personas |
+| Problem banks | `data/problems/` | 30 main problems (15 validated + 15 domain-stratified), 30 fresh post-cutoff wave cases, 10 contamination-control cases |
+| **Study-3 designed pipelines** | `runs/study3/designs/*.designer_raw.txt` | auto-designed pipelines as JSON (agents with name/role/systemPrompt/description), one file per design attempt |
+| Responses (final answers) | `runs/fulltext/*.json`, `runs/study3/solutions/`, `runs/granular/` | main (1,900 runs), wave (2,418), Study 3 (544), Protocol 16 (441). **Team intermediate outputs were never persisted — only final answers** (disclosed design choice, paper §3) |
+| Judgments + rationales | `runs/logs/*_judgments.jsonl` | blind, order-shuffled, 3 judges × 3 variants |
+| Token/cost ledgers | `runs/logs/*_ledger*.json` | tokens stored; dollars re-priced via `config/price_vector.json` |
+| Analysis code + frozen outputs | `code/`, `results/`, `analysis/results/` | every statistic regenerates from the ledger (seed 42) |
+| **Claim-to-evidence map** | `paper/claim_map/` | machine-readable verification layer: `datapoints.json` (32,992 raw-anchored datapoints), `paper-claims.json` (161 paper mentions, verbatim quotes → DP links), `verify_two_way.py` re-verifies every value against the raw files (exit 0 = all green) |
+| Decision log | `DESIGN-DECISIONS.md` | D1–D61, every design/statistical decision with rationale |
+| Pre-registration chain | `preregistration/osf_submission/`, `protocols/` | Protocols 01–16; OSF GUIDs mapped in the paper's registration table |
+
+### Verify the paper against the data (2 commands)
+
+```
+python paper/claim_map/build_datapoints_map.py && python paper/claim_map/apply_manual_links.py
+python paper/claim_map/verify_two_way.py   # exit 0 = every datapoint verbatim-verified
+```
+
+### Prompts
+
+Every agent prompt used in any run is in `config/prompts/` (extracted programmatically
+from the exact code that used it — see `config/prompts/MANIFEST.json` for provenance).
+Study-3 pipeline designs are per-run JSON under `runs/study3/designs/`.

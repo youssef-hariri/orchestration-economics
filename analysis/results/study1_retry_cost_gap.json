@@ -1,0 +1,29 @@
+{
+ "claim": "Study 1 team-cost retry gap (M005/D_025)",
+ "verified_facts": {
+  "completed_team_runs": 950,
+  "runs_with_failed_step_entries": 234,
+  "runs_with_understated_run_total": 110,
+  "failed_attempts_zero_tokens_zero_latency": true,
+  "median_true_over_recorded_on_affected": 1.687,
+  "mean_true_over_recorded_on_affected": 1.814,
+  "aggregate_understatement_tokens_pct": 4.4,
+  "aggregate_understatement_cost_pct_by_phi": {
+   "0.0": 6.1,
+   "0.25": 6.0,
+   "0.5": 6.0,
+   "0.75": 5.8,
+   "1.0": 5.5
+  },
+  "affected_by_cell": {
+   "C-T-N": 35,
+   "C-T-P": 33,
+   "F-T-N": 18,
+   "F-T-P": 24
+  }
+ },
+ "mechanism": "failed step attempts are instant transport rejections (0 tokens, 0 latency, nothing billable); on 110 runs the ledger run-total omits tokens of COMPLETED earlier steps, so recorded cost understates true cost",
+ "auditor_note": "auditor's 234 = runs with any failed-step entry; paper's 110 = runs whose total is actually understated. Both traceable; 110 is the cost-relevant count.",
+ "source": "runs/logs/main_run_ledger.json + config/model_registry.json",
+ "recomputed_utc": "2026-09-17"
+}
