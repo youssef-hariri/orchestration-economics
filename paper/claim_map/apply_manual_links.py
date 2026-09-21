@@ -181,3 +181,42 @@ for nm in NEW_MENTIONS:
 pm["count"] = len(pm["mentions"])
 json.dump(pm, open(HERE / "paper-claims.json", "w"), indent=1, ensure_ascii=False)
 print(f"added {added} new mentions (total {pm['count']})")
+
+# --- D63 additions: corrected Study-3 sentences (token split, gemini cost, domain means)
+NEW2 = [
+ {"mention_id": "PM-S3_901",
+  "claim_text": "D-SELF vs D-FRONT tokens 34.8M vs 24.3M total; execution-driven (34.0M vs 23.6M); design 0.6M vs 0.7M (2-3%)",
+  "paper_value": "34.8M/24.3M; 34.0M/23.6M; 0.6M/0.7M; 2-3%",
+  "paper_file": "paper/P5_v15.6.tex",
+  "verbatim_quote": "the gap is execution-driven ($34.0$M vs.\\ $23.6$M): design-stage usage is comparable across arms ($0.6$M vs.\\ $0.7$M, 2--3\\% of totals)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "files": ["results/study3_token_split.json", "results/study3_results.json"],
+    "note": "totals = study3_results cost_and_structure (DP-registered); split = study3_token_split rows (design+repair+execution), D63"},
+  "link_status": "curated-derived"},
+ {"mention_id": "PM-S3_902",
+  "claim_text": "Gemini cheap pipelines roughly 1.7-4x cheaper than frontier solo (0.59x/0.24x)",
+  "paper_value": "1.7-4x; 0.59x/0.24x",
+  "paper_file": "paper/P5_v15.6.tex",
+  "verbatim_quote": "roughly $1.7$--$4\\times$ cheaper than frontier solo ($0.59\\times$/$0.24\\times$ the cost per solution)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "files": ["results/study3_economics.json"],
+    "note": "reciprocals of gemini cost_ratio_front_vs_fsn 0.59 and cost_ratio_self_vs_fsn 0.24"},
+  "link_status": "curated-derived"},
+ {"mention_id": "PM-S3_903",
+  "claim_text": "Pooled D-FRONT vs FSN domain means: strategy 4.08/4.00, marketing 4.08/4.01, HR 4.11/4.10, product 4.24/4.25, finance 3.81/3.99, operations 3.83/3.95",
+  "paper_value": "six domain mean pairs",
+  "paper_file": "paper/P5_v15.6.tex",
+  "verbatim_quote": "tie in HR ($4.11$ vs.\\ $4.10$) and product ($4.24$ vs.\\ $4.25$), and lose in finance ($3.81$ vs.\\ $3.99$)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "files": ["results/study3_by_family_domain.json"],
+    "note": "unweighted pooled means across families per domain from frozen family x domain rows (descriptive file, underpowered by design)"},
+  "link_status": "curated-derived"},
+]
+_ex2 = {m["mention_id"] for m in pm["mentions"]}
+add2 = 0
+for nm in NEW2:
+    if nm["mention_id"] not in _ex2:
+        pm["mentions"].append(nm); add2 += 1
+pm["count"] = len(pm["mentions"])
+json.dump(pm, open(HERE / "paper-claims.json", "w"), indent=1, ensure_ascii=False)
+print(f"added {add2} D63 mentions (total {pm['count']})")
