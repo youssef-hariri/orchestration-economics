@@ -135,3 +135,49 @@ json.dump(pm, open(HERE / "paper-claims.json", "w"), indent=1, ensure_ascii=Fals
 print(f"curated {changed} mentions")
 missing = [f for cur in CURATION.values() for f in cur.get("files", []) if not (ROOT / f).exists()]
 print("missing files:", missing or "none")
+
+# --- D62-era additions: 3 new cost-range mentions introduced in v15.6 --------
+# (Strategic-implication rewordings of the "$0.002 refinement pass" claims;
+# values trace to cost_effectiveness.json refined_ctp_points mean_refine_cost)
+REFINE_DPS = ["DP-0084", "DP-0089", "DP-0094"]  # kimi/claude/qwen mean_refine_cost
+NEW_MENTIONS = [
+ {"mention_id": "PM-S2_901",
+  "claim_text": "Refinement pass costs a fraction of a cent per output ($0.001-0.003, family-dependent)",
+  "paper_value": "$0.001-0.003",
+  "paper_file": "paper/P5_v15.6.tex", "paper_line": 97,
+  "verbatim_quote": "costing a fraction of a cent per output (\\$0.001--0.003, family-dependent)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "dp_ids": REFINE_DPS,
+    "files": ["results/cost/cost_effectiveness.json"],
+    "note": "range = min/max of per-family mean_refine_cost (qwen 0.00112, claude 0.00324), rounded to 3 decimals"},
+  "link_status": "curated-derived"},
+ {"mention_id": "PM-S2_902",
+  "claim_text": "Refinement pass costs $0.001-0.003 per output (family-dependent; pooled mean approx $0.002)",
+  "paper_value": "$0.001-0.003; mean ~$0.002",
+  "paper_file": "paper/P5_v15.6.tex", "paper_line": 1615,
+  "verbatim_quote": "A refinement pass costing \\$0.001--0.003 per output (family-dependent; pooled mean $\\approx$ \\$0.002)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "dp_ids": REFINE_DPS,
+    "files": ["results/cost/cost_effectiveness.json"],
+    "note": "range from per-family mean_refine_cost; pooled mean of (0.00156, 0.00324, 0.00112) = 0.00197 ~= $0.002"},
+  "link_status": "curated-derived"},
+ {"mention_id": "PM-S2_903",
+  "claim_text": "Fraction-of-a-cent refinement pass ($0.001-0.003, family-dependent)",
+  "paper_value": "$0.001-0.003",
+  "paper_file": "paper/P5_v15.6.tex", "paper_line": 2398,
+  "verbatim_quote": "fraction-of-a-cent refinement pass (\\$0.001--0.003, family-dependent)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "dp_ids": REFINE_DPS,
+    "files": ["results/cost/cost_effectiveness.json"],
+    "note": "same range derivation as PM-S2_901"},
+  "link_status": "curated-derived"},
+]
+_existing = {m["mention_id"] for m in pm["mentions"]}
+added = 0
+for nm in NEW_MENTIONS:
+    if nm["mention_id"] not in _existing:
+        pm["mentions"].append(nm)
+        added += 1
+pm["count"] = len(pm["mentions"])
+json.dump(pm, open(HERE / "paper-claims.json", "w"), indent=1, ensure_ascii=False)
+print(f"added {added} new mentions (total {pm['count']})")
