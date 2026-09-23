@@ -105,7 +105,7 @@ The repository now covers the full research program reported in paper v15.6:
 | Token/cost ledgers | `runs/logs/*_ledger*.json` | tokens stored; dollars re-priced via `config/price_vector.json` |
 | Analysis code + frozen outputs | `code/`, `results/`, `analysis/results/` | every statistic regenerates from the ledger (seed 42) |
 | **Claim-to-evidence map** | `paper/claim_map/` | machine-readable verification layer: `datapoints.json` (32,992 raw-anchored datapoints), `paper-claims.json` (161 paper mentions, verbatim quotes → DP links), `verify_two_way.py` re-verifies every value against the raw files (exit 0 = all green) |
-| Decision log | `DESIGN-DECISIONS.md` | D1–D61, every design/statistical decision with rationale |
+| Decision log | `DESIGN-DECISIONS.md` | D1–D60, every design/statistical decision with rationale |
 | Pre-registration chain | `preregistration/osf_submission/`, `protocols/` | Protocols 01–16; OSF GUIDs mapped in the paper's registration table |
 
 ### Verify the paper against the data (2 commands)

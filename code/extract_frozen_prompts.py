@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Extract every frozen prompt used in the experiments from code into
 config/prompts/*.md (reader-facing, no code digging). Provenance: each file
-records the exact code location it was extracted from. D61-era artifact."""
+records the exact code location it was extracted from. Artifact of the 2026-09-19 data audit."""
 import json, re
 from pathlib import Path
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Frozen: Study-3 token split, design stage vs execution stage (D63).
+"""Frozen: Study-3 token split, design stage vs execution stage.
 Motivation: paper draft attributed the D-SELF vs D-FRONT token gap
 (34.8M vs 24.3M, study3_results.json cost_and_structure) to design-stage
 iteration; the ledger shows design usage is near-identical and the gap is
@@ -41,7 +41,7 @@ for arm in ("D-SELF", "D-FRONT"):
 out = {
     "study": "study3_token_split",
     "date_utc": "2026-09-21",
-    "role": "frozen correction artifact (D63): splits study3_results.json cost_and_structure total_tokens into design vs execution",
+    "role": "frozen correction artifact: splits study3_results.json cost_and_structure total_tokens into design vs execution",
     "source_ledger": "runs/logs/study3_ledger_v2.jsonl",
     "conventions": "identical to code/study3_analysis.py (completed runs only; total_tokens per usage record)",
     "rows": rows,

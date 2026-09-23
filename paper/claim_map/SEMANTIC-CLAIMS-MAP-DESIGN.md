@@ -7,7 +7,7 @@
 The v1 claim map (datapoints.json + paper-claims.json, two-way verifier) enforces
 **value fidelity**: every number printed in the paper must equal a frozen value at a
 known key path in raw data. It passed 33,022/33,022 datapoints with 0 failures —
-yet three substantive defects survived it (D63, 2026-09-21):
+yet three substantive defects survived it (2026-09-21 audit, 2026-09-21):
 
 1. **Attribution error** — "cheap designers iterate more at the design stage
    (34.8M vs 24.3M tokens)". Both numbers matched frozen data exactly; the
@@ -22,8 +22,8 @@ yet three substantive defects survived it (D63, 2026-09-21):
    underpowered family×domain breakdown). No numbers → nothing for the map to
    bite on; and the map cannot detect a *missing* analysis.
 
-Earlier episode of the same class: D61 (paper-only d values) was a value-fidelity
-failure and the map caught it. D63 is the complementary failure class the map is
+Earlier episode of the same class: 2026-09-19 audit (paper-only d values) was a value-fidelity
+failure and the map caught it. 2026-09-21 audit is the complementary failure class the map is
 blind to: **right numbers, wrong story.**
 
 ## Proposal: Advanced Semantic Claims Map (v2 layer on top of v1)
@@ -72,7 +72,7 @@ Every comparative/interpretive sentence in the paper gets a semantic claim entry
   not an absence of checking.
 - Two-way: every semantic claim resolves; every flagged sentence has an entry.
 - Same pipeline: build → apply manual links → verify (exit 0 gate).
-- Episodes D61 (value fidelity) and D63 (semantic fidelity) are the paired
+- Episodes 2026-09-19 audit (value fidelity) and 2026-09-21 audit (semantic fidelity) are the paired
   teaching cases for the methodology paper.
 
 ### Open design questions (for the ideation session)
@@ -89,5 +89,5 @@ Every comparative/interpretive sentence in the paper gets a semantic claim entry
 ## Why it matters for the methodology paper
 v1 proves number-to-data traceability; v2 (semantic) proves story-to-data
 alignment. Together they answer the reviewer's hardest question: "your numbers
-are real, but is your prose true?" The paired D61/D63 episodes are the evidence
+are real, but is your prose true?" The paired 2026-09-19 audit/2026-09-21 audit episodes are the evidence
 that both layers are needed and that neither alone is sufficient.

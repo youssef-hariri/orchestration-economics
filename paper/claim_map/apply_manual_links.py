@@ -136,7 +136,7 @@ print(f"curated {changed} mentions")
 missing = [f for cur in CURATION.values() for f in cur.get("files", []) if not (ROOT / f).exists()]
 print("missing files:", missing or "none")
 
-# --- D62-era additions: 3 new cost-range mentions introduced in v15.6 --------
+# --- 2026-09-21 audit-era additions: 3 new cost-range mentions introduced in v15.6 --------
 # (Strategic-implication rewordings of the "$0.002 refinement pass" claims;
 # values trace to cost_effectiveness.json refined_ctp_points mean_refine_cost)
 REFINE_DPS = ["DP-0084", "DP-0089", "DP-0094"]  # kimi/claude/qwen mean_refine_cost
@@ -182,7 +182,7 @@ pm["count"] = len(pm["mentions"])
 json.dump(pm, open(HERE / "paper-claims.json", "w"), indent=1, ensure_ascii=False)
 print(f"added {added} new mentions (total {pm['count']})")
 
-# --- D63 additions: corrected Study-3 sentences (token split, gemini cost, domain means)
+# --- 2026-09-21 audit additions: corrected Study-3 sentences (token split, gemini cost, domain means)
 NEW2 = [
  {"mention_id": "PM-S3_901",
   "claim_text": "D-SELF vs D-FRONT tokens 34.8M vs 24.3M total; execution-driven (34.0M vs 23.6M); design 0.6M vs 0.7M (2-3%)",
@@ -191,7 +191,7 @@ NEW2 = [
   "verbatim_quote": "the gap is execution-driven ($34.0$M vs.\\ $23.6$M): design-stage usage is comparable across arms ($0.6$M vs.\\ $0.7$M, 2--3\\% of totals)",
   "dp_id": None, "curation": None,
   "manual_link": {"kind": "derived", "files": ["results/study3_token_split.json", "results/study3_results.json"],
-    "note": "totals = study3_results cost_and_structure (DP-registered); split = study3_token_split rows (design+repair+execution), D63"},
+    "note": "totals = study3_results cost_and_structure (DP-registered); split = study3_token_split rows (design+repair+execution), 2026-09-21 audit"},
   "link_status": "curated-derived"},
  {"mention_id": "PM-S3_902",
   "claim_text": "Gemini cheap pipelines roughly 1.7-4x cheaper than frontier solo (0.59x/0.24x)",
@@ -219,4 +219,43 @@ for nm in NEW2:
         pm["mentions"].append(nm); add2 += 1
 pm["count"] = len(pm["mentions"])
 json.dump(pm, open(HERE / "paper-claims.json", "w"), indent=1, ensure_ascii=False)
-print(f"added {add2} D63 mentions (total {pm['count']})")
+print(f"added {add2} 2026-09-21 audit mentions (total {pm['count']})")
+
+# --- Conclusion rewrite (2026-09-23): new mentions
+NEW3 = [
+ {"mention_id": "PM-C_901",
+  "claim_text": "Conclusion scope: 5,303 runs, 10 families, 49 problems",
+  "paper_value": "5,303 runs; 10 families; 49 problems",
+  "paper_file": "paper/P5_v15.6.tex",
+  "verbatim_quote": "Across three pre-registered studies and two out-of-sample replications (5{,}303 runs, 10 model families, 49 business problems)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "files": ["results/interim2_analysis.json", "results/wave_analysis.json", "results/study3_results.json", "results/study3conf_results.json"],
+    "note": "5,303 = 1,900 Study-1 + 2,418 wave + 544 Study-3 + 441 Protocol-16; 49 problems = 19 confirmatory + 30 wave"},
+  "link_status": "curated-derived"},
+ {"mention_id": "PM-C_902",
+  "claim_text": "Auto-designed cheap pipelines beat frontier solo for kimi/qwen/gemini at 0.24x-3.5x cost; claude loses (83%), gpt ties at 4x cost",
+  "paper_value": "0.24x-3.5x; 83%; 4x",
+  "paper_file": "paper/P5_v15.6.tex",
+  "verbatim_quote": "at costs ranging from $0.24\\times$ to $3.5\\times$ the frontier-solo price; the remaining two favor frontier solo --- claude on quality (the pipeline reaches 83\\%), gpt-5.6 on cost (quality ties at $4\\times$ the price)",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "files": ["results/study3_economics.json", "results/study3_vs_frontier_solo.json"],
+    "note": "range = gemini 0.24x to kimi 3.53x (D-SELF cost ratios); claude quality 82.6% rounds to 83%; gpt ratio 4.04x rounds to 4x; quality% from vs_frontier_solo means"},
+  "link_status": "curated-derived"},
+ {"mention_id": "PM-C_903",
+  "claim_text": "Tier price gap 3.1-8x; cheap solo 98% quality at 23% cost = monetization of the gap; token usage comparable (7,670 vs 7,412)",
+  "paper_value": "3.1-8x; 98%/23%",
+  "paper_file": "paper/P5_v15.6.tex",
+  "verbatim_quote": "Because token usage is comparable across tiers, the cheaper solo's advantage --- 98\\% of frontier quality at 23\\% of its cost",
+  "dp_id": None, "curation": None,
+  "manual_link": {"kind": "derived", "files": ["config/price_vector.json", "results/cost/cost_effectiveness.json"],
+    "note": "price ratios 3.1-8x from frozen vector tier pairs; 98%/23% from cell_summary_primary (C-S-N 4.5066/4.5864 qual, 0.0194/0.0835 cost); tokens 7,670 vs 7,412"},
+  "link_status": "curated-derived"},
+]
+_ex3 = {m["mention_id"] for m in pm["mentions"]}
+add3 = 0
+for nm in NEW3:
+    if nm["mention_id"] not in _ex3:
+        pm["mentions"].append(nm); add3 += 1
+pm["count"] = len(pm["mentions"])
+json.dump(pm, open(HERE / "paper-claims.json", "w"), indent=1, ensure_ascii=False)
+print(f"added {add3} conclusion mentions (total {pm['count']})")
