@@ -110,6 +110,11 @@ def main():
                                   "sd_diff": round(float(diff.std(ddof=1)), 4),
                                   "d": round(d, 4), "t": round(tv, 3), "p": round(pv, 6),
                                   "boot95CI_mean_diff": [round(lo, 4), round(hi, 4)]}
+        ctp_all = t[(t.family == fam) & (t.cell == "C-T-P")]["composite"]
+        fsn_all = t[(t.family == fam) & (t.cell == "F-S-N")]["composite"]
+        ctn_all = t[(t.family == fam) & (t.cell == "C-T-N")]["composite"]
+        out["per_family"][fam]["ctp_quality_pct_of_fsn"] = round(float(ctp_all.mean() / fsn_all.mean() * 100), 1)
+        out["per_family"][fam]["ctn_quality_pct_of_fsn"] = round(float(ctn_all.mean() / fsn_all.mean() * 100), 1)
         pvals.append(pv)
         fams.append(fam)
     adj = holm(pvals)
@@ -119,6 +124,9 @@ def main():
             out["per_family"][fam]["boot95CI_mean_diff"][0] > 0 or
             out["per_family"][fam]["boot95CI_mean_diff"][1] < 0)
     out["all_five_negative"] = all(f["mean_diff"] < 0 for f in out["per_family"].values())
+    ctp_p = t[t.cell == "C-T-P"]["composite"].mean()
+    fsn_p = t[t.cell == "F-S-N"]["composite"].mean()
+    out["pooled_ctp_quality_pct_of_fsn"] = round(float(ctp_p / fsn_p * 100), 1)
     path = ROOT / "results" / "ctp_vs_fsn_by_family.json"
     path.write_text(json.dumps(out, indent=1))
     print(json.dumps({f: {"d": v["d"], "p_holm": v["p_holm"]} for f, v in out["per_family"].items()}, indent=1))
