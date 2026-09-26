@@ -4,14 +4,14 @@
 datapoints.json   : canonical registry, DP-id -> value + source file + JSON key
                     path (or CSV row) + VERBATIM excerpt + analysis script.
 paper-claims.json : every audited paper statement -> verbatim sentence pulled
-                    from P5_v15.7.tex + DP-id link (by value match).
+                    from P5_v15.8.tex + DP-id link (by value match).
 Decisions/citations carry over from claim-map.json (already primary-sourced).
 """
 import csv, json, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-TEX = ROOT / "paper" / "P5_v15.7.tex"
+TEX = ROOT / "paper" / "P5_v15.8.tex"
 AUDIT = ROOT / "paper" / "P5_v14.3-audit-2026-09-16"
 HERE = Path(__file__).parent
 
@@ -193,7 +193,7 @@ for fn in audit_files:
             cur = None
         mentions.append({"mention_id": f"PM-{r['id']}", "claim_text": r.get("claim"),
                          "paper_value": r.get("paper_value"),
-                         "paper_file": "paper/P5_v15.7.tex",
+                         "paper_file": "paper/P5_v15.8.tex",
                          "paper_line": line_no, "verbatim_quote": quote,
                          "dp_id": dp_id, "curation": cur,
                          "link_status": "linked" if dp_id else ("quote-found-unlinked" if quote else "quote-not-found")})
