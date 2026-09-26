@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).parent
 dps = {d["dp_id"]: d for d in json.load(open(HERE / "datapoints.json"))["datapoints"]}
 pm = json.load(open(HERE / "paper-claims.json"))
-tex = (ROOT / "paper" / "P5_v15.6.tex").read_text(encoding="utf-8")
+tex = (ROOT / "paper" / "P5_v15.7.tex").read_text(encoding="utf-8")
 
 fail = []
 INDEX = {}

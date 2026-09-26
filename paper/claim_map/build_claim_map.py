@@ -73,7 +73,7 @@ for fn in audit_files:
         claims.append({
             "claim_id": cid,
             "type": "statistic" if cid != "M001" else "citation-claim",
-            "paper_location": {"file": "paper/P5_v15.5.tex",
+            "paper_location": {"file": "paper/P5_v15.7.tex",
                                "audit_snapshot_lines": [r.get("line_start"), r.get("line_end")],
                                "section": section_for(cid)},
             "claim_text": r.get("claim"),
@@ -94,7 +94,7 @@ for m in re.finditer(r"^## (D\d+)\.\s+(.+)$", dd, re.M):
     claims.append({
         "claim_id": did,
         "type": "decision",
-        "paper_location": {"file": "paper/P5_v15.5.tex", "section": "methods/ai-disclosure"},
+        "paper_location": {"file": "paper/P5_v15.7.tex", "section": "methods/ai-disclosure"},
         "claim_text": f"Design decision {did}: {title}",
         "sources": [{"file": "DESIGN-DECISIONS.md",
                      "locator": f"## {did}.",
@@ -102,7 +102,7 @@ for m in re.finditer(r"^## (D\d+)\.\s+(.+)$", dd, re.M):
         "verification": {"status": "verified", "audited": "2026-09-19"}})
 
 # ---- 3. bibliographic entries (inline thebibliography) --------------------
-tex = (ROOT / "paper" / "P5_v15.5.tex").read_text(encoding="utf-8")
+tex = (ROOT / "paper" / "P5_v15.7.tex").read_text(encoding="utf-8")
 for m in re.finditer(r"\\bibitem\[([^\]]*)\]\{([^}]+)\}\s*(.+?)(?=\n\\bibitem|\n\\end\{thebibliography\})", tex, re.S):
     auth, key, body = m.group(1), m.group(2), m.group(3).strip()
     quote = re.sub(r"\s+", " ", body)[:300]
@@ -110,9 +110,9 @@ for m in re.finditer(r"\\bibitem\[([^\]]*)\]\{([^}]+)\}\s*(.+?)(?=\n\\bibitem|\n
     claims.append({
         "claim_id": f"BIB-{key}",
         "type": "citation",
-        "paper_location": {"file": "paper/P5_v15.5.tex", "section": "bibliography"},
+        "paper_location": {"file": "paper/P5_v15.7.tex", "section": "bibliography"},
         "claim_text": f"Bibliographic record for citekey {key} ({auth})",
-        "sources": [{"file": "paper/P5_v15.5.tex", "locator": f"\\bibitem{{{key}}}",
+        "sources": [{"file": "paper/P5_v15.7.tex", "locator": f"\\bibitem{{{key}}}",
                      "quote": quote}],
         "verification": {"status": "bibliographic-record-verified",
                          "year": y.group(1) if y else None,
@@ -121,7 +121,7 @@ for m in re.finditer(r"\\bibitem\[([^\]]*)\]\{([^}]+)\}\s*(.+?)(?=\n\\bibitem|\n
 
 out = {
     "schema": "claim-map-v1",
-    "paper": "paper/P5_v15.5.tex",
+    "paper": "paper/P5_v15.7.tex",
     "generated": "2026-09-19",
     "generator": "paper/claim_map/build_claim_map.py",
     "counts": {"total": len(claims),
