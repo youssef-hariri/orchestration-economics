@@ -1,0 +1,1273 @@
+{
+  "_meta": {
+    "name": "semantic claims map \u2014 P5 orchestration-economics",
+    "version": 5,
+    "built": "2026-09-26 re-pointed at P5_v15.8.tex (new title)",
+    "purpose": "Map every risky claim in the paper (comparisons, causes, recommendations, costs, percentages) to the exact raw-data source that proves it. Unlike the numeric claim map (exact strings), this map captures MEANING \u2014 the claims a numeric string-match cannot catch.",
+    "schema": {
+      "id": "SC-<section>-<running number>",
+      "section": "section/subsection as the reader sees it in the PDF",
+      "paper_line": "line in paper/P5_v15.6.tex where the quote starts",
+      "full_quote": "the complete claim sentence, verbatim from the draft",
+      "what_it_means": "one plain-language line: what the claim says and what could make it wrong",
+      "source": [
+        {
+          "file": "raw data file",
+          "location": "line range / JSON key path / table row+col",
+          "exact_values": "verbatim value(s) \u2014 both sides for comparisons"
+        }
+      ],
+      "code": "script that computed derived numbers; null when read directly",
+      "audit": "verified | DISCREPANCY | unverifiable \u2014 with note"
+    },
+    "ordering": "paper order: title/abstract \u2192 intro \u2192 methods \u2192 results \u2192 discussion \u2192 managerial \u2192 limitations \u2192 future \u2192 conclusion \u2192 exec summary",
+    "audit_summary": "48 claims swept; 46 verified against raw sources; 2 flagged \u2014 SC-4.2-006 DISCREPANCY ('8% gap recovery' is a stale pilot number; pooled locked data give -3%, matching \u00a74.2.1) and SC-1-001 wording slip (intro says personas 'raise cost'; ledger shows persona cells emit fewer tokens and price slightly below twins \u2014 value destruction is via quality, not cost)",
+    "captions_note": "28 captions swept 2026-09-24: every figure/table caption mapped to its frozen source and cross-referenced to the SC claim that carries the same numbers. Two captions rewritten this week to match redrawn figures (fig3 CI-of-mean bars; fig5 dumbbell chart)."
+  },
+  "claims": [
+    {
+      "id": "SC-TITLE-001",
+      "section": "Title",
+      "paper_line": 62,
+      "full_quote": "Orchestrate or Upgrade? Measure First: A Pre-Registered Cost\u2013Quality Map of Lower-Tier Pipelines vs. Frontier Models Across Five LLM Families",
+      "what_it_means": "Title asserts: (a) the program is pre-registered, (b) it maps cost AND quality, (c) the comparison is lower-tier pipelines vs frontier models, (d) five LLM families form the core studies, (e) 'measure first' is the verdict (P16 conclusion: routing by measurement, not lookup).",
+      "source": [
+        {
+          "file": "paper/P5_v15.7.tex (registration chain + design)",
+          "location": "tab:osf-registrations; \u00a73.1",
+          "exact_values": "6 OSF registrations; 5 core families (kimi, qwen, gpt-5.6, claude, gemini)"
+        },
+        {
+          "file": "results/study3conf_results.json",
+          "location": "headline_family_moderation_replicated + gates",
+          "exact_values": "mid-tier effects do not transport \u2192 routing must be measured (basis of 'Measure First')"
+        }
+      ],
+      "code": "code/quality_cost_percentages.py",
+      "audit": "verified \u2014 retitled 2026-09-26 (v15.8); old title's 98%/23% claim removed from title (remains verified in abstract/body, SC-ABS-001)"
+    },
+    {
+      "id": "SC-ABS-001",
+      "section": "Abstract \u2014 Study 1",
+      "paper_line": 85,
+      "full_quote": "adding a three-step team structure lifts a lower-tier model to 98.8% of frontier quality at 88% of the cost (T-EGR = 1.49), and structure helps cheaper models significantly more than frontier ones (d = -0.227, p = 0.015)",
+      "what_it_means": "Two claims fused: C-T-N economics and the H1 interaction sign/significance. Wrong if either cell ratio or the interaction stat differs.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "cell_summary_primary \u2192 C-T-N; t_egr_pooled_mean_per_cell \u2192 C-T-N",
+          "exact_values": "quality 4.530975/4.586433 = 98.8%; cost 0.073398/0.083521 = 87.9%; T-EGR 1.494"
+        },
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "primary.H1_tier_x_structure_interaction",
+          "exact_values": "d = -0.2271, t = -2.447, p = 0.0145, CI [-0.4101, -0.0396], BF10 = 1.002"
+        }
+      ],
+      "code": "code/analyze_main.py (interaction); code/cost_effectiveness.py (economics)",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-ABS-002",
+      "section": "Abstract \u2014 Study 1",
+      "paper_line": 92,
+      "full_quote": "Frontier teams are the worst dollar (3.5\u00d7 the cost for negligible gain, T-EGR = 0.27)",
+      "what_it_means": "F-T-N cost ratio and T-EGR. Wrong if the pooled T-EGR or cost ratio differ.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "t_egr_pooled_mean_per_cell \u2192 F-T-N; cell_summary_primary \u2192 F-T-N",
+          "exact_values": "T-EGR 0.27; cost 0.295147/0.083521 = 3.53\u00d7; quality 4.609591/4.586433 = 100.5%"
+        }
+      ],
+      "code": "code/cost_effectiveness.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-ABS-003",
+      "section": "Abstract \u2014 Study 2",
+      "paper_line": 1616,
+      "full_quote": "A refinement pass costing a fraction of a cent per output ($0.001\u20130.003, family-dependent) recovers up to 64% of the frontier gap but never achieves paired superiority",
+      "what_it_means": "Refine cost band, max recovery, and G2 failure. Wrong if refine costs fall outside band or any family passed G2.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "refined_ctp_points \u2192 mean_refine_cost per family",
+          "exact_values": "kimi 0.00156; claude 0.00324; qwen 0.00112"
+        },
+        {
+          "file": "results/refine_study2_pooled.json",
+          "location": "H2.1_refined_vs_FSN per family (d) + gate_G2",
+          "exact_values": "kimi d=-0.295; claude d=-1.301; qwen d=-0.809; G2 mechanically failed all three"
+        }
+      ],
+      "code": "code/refine analysis scripts (Protocol 09); recovery % computed as (pre-post)/pre mean gap: qwen (0.4618-0.168)/0.4618 = 63.6%",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-ABS-004",
+      "section": "Abstract \u2014 Study 3",
+      "paper_line": 106,
+      "full_quote": "authorship barely matters: self-designed and frontier-designed pipelines are statistically indistinguishable in four of five families, and both beat our frozen human-designed instrument",
+      "what_it_means": "Contrast A null in 4/5 families; Contrast B positive in 5/5 on both arms. Wrong if any family contrast flips significance or sign.",
+      "source": [
+        {
+          "file": "results/study3_results.json",
+          "location": "primary_contrast_A_DFRONT_vs_DSELF_novelty",
+          "exact_values": "claude d=0.78 p_holm=0.0136 (sig); gpt 0.215/0.310; qwen 0.104/1.0; gemini 0.082/1.0; kimi -0.118/1.0"
+        },
+        {
+          "file": "results/study3_results.json",
+          "location": "contrast_B_vs_frozen_CTN_novelty",
+          "exact_values": "D-SELF d = 0.15\u20130.67; D-FRONT d = 0.24\u20131.33, all five families positive both arms"
+        }
+      ],
+      "code": "code/study3_analysis.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-ABS-005",
+      "section": "Abstract \u2014 Study 3",
+      "paper_line": 109,
+      "full_quote": "at 0.24\u20133.5\u00d7 solo cost, cheap auto-designed pipelines beat the frontier-solo baseline for Kimi (d = +0.85 on novelty, the only family to survive multiplicity control) and lose decisively for Claude (d = -3.15)",
+      "what_it_means": "D-SELF vs FSN per-family effects + cost range + Holm survival pattern. Wrong if any d, cost ratio, or the Holm-survival statement differs.",
+      "source": [
+        {
+          "file": "results/study3_economics.json",
+          "location": "rows per family \u2192 dself_d_quality, cost_ratio_self_vs_fsn",
+          "exact_values": "kimi +0.851/3.53\u00d7; qwen +0.553/1.99\u00d7; gemini +0.455/0.24\u00d7; gpt -0.074/4.04\u00d7; claude -3.145/1.65\u00d7"
+        }
+      ],
+      "code": "code/study3_family_contrasts.py (d + Holm); cost ratios from frozen price vector v2026-08-23",
+      "audit": "verified \u2014 Holm survival: kimi p_holm=0.006 is the only D-SELF family surviving (gemini n.s. after Holm)"
+    },
+    {
+      "id": "SC-ABS-006",
+      "section": "Abstract \u2014 replication",
+      "paper_line": 93,
+      "full_quote": "A pre-registered replication on 30 fresh problems finds the pattern transports only at its extremes (Kimi d = +1.25; Claude d = -1.90)",
+      "what_it_means": "P16 gate outcomes: extremes pass, middle fails. Wrong if gate values or verdicts differ.",
+      "source": [
+        {
+          "file": "results/study3conf_results.json",
+          "location": "gates[] \u2192 R1 kimi, R5 claude; headline_family_moderation_replicated",
+          "exact_values": "R1 kimi d=1.254 PASS; R5 claude d=-1.897 PASS; R2 qwen -0.232 fail; R3 gemini -0.833 fail; R4 gpt -0.878 fail; headline replicated = false"
+        }
+      ],
+      "code": "code/study3conf_analysis.py (hash-locked before judging)",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-1-001",
+      "section": "\u00a71 Introduction \u2014 persona framing",
+      "paper_line": 222,
+      "full_quote": "it produces a large negative effect: personas degrade quality sharply with no meaningful cost saving",
+      "what_it_means": "CAUTION: says personas RAISE cost. Actually persona cells emit FEWER tokens and price slightly BELOW twins (\u00a74.1.2, verified). Only the H4 quality penalty (-0.691) is correct. Possible wording slip: 'raising cost' is unsupported \u2014 personas lower cost slightly while destroying value.",
+      "source": [
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "primary.persona_P_minus_N",
+          "exact_values": "d = -0.691, CI [-0.7609, -0.620]"
+        },
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "cell_summary_primary: persona vs no-persona twins",
+          "exact_values": "C-S-P 0.014533 < C-S-N 0.019356; C-T-P 0.071501 < C-T-N 0.073398; F-S-P 0.06703 < F-S-N 0.083521; F-T-P 0.304373 \u2248 F-T-N 0.295147 (+3%)"
+        }
+      ],
+      "code": null,
+      "audit": "DISCREPANCY found 2026-09-23, FIXED in P5_v15.7: intro reworded to 'degrade quality sharply with no meaningful cost saving' (ledger: persona cells emit fewer tokens, price slightly below twins)"
+    },
+    {
+      "id": "SC-3.1-001",
+      "section": "\u00a73.1 Research Design",
+      "paper_line": 596,
+      "full_quote": "sixteen protocols \u2014 twelve standalone and four modifications of the original registration (05\u201308) \u2014 were registered before the corresponding computation ran",
+      "what_it_means": "Protocol count and frozen-before-computation claim. Wrong if registry table counts differ or a protocol post-dates data.",
+      "source": [
+        {
+          "file": "paper/P5_v15.6.tex",
+          "location": "tab:protocol-registry rows (Appendix B)",
+          "exact_values": "Protocols 01\u201316; 05\u201308 marked 'Modification of Protocol 01/02'; statuses frozen/executed; 14/15 drafted-superseded"
+        },
+        {
+          "file": "paper/P5_v15.6.tex",
+          "location": "tab:osf-registrations",
+          "exact_values": "6 OSF registrations; mjb8x memorialization and Study 2 (Protocols 09\u201310) disclosed as exceptions"
+        }
+      ],
+      "code": null,
+      "audit": "verified (with the two disclosed exceptions stated in the same breath)"
+    },
+    {
+      "id": "SC-3.2-001",
+      "section": "\u00a73.2 Models Evaluated",
+      "paper_line": 712,
+      "full_quote": "Price ratios (frontier : cheaper) range from 3.1\u00d7 to 8\u00d7 across families.",
+      "what_it_means": "Bounds of the tier price gap. Wrong if any family ratio falls outside [3.1, 8].",
+      "source": [
+        {
+          "file": "config/price_vector.json",
+          "location": "per-model prices; ratio frontier/cheaper per family",
+          "exact_values": "min = qwen 3.1\u00d7; max = 8\u00d7"
+        }
+      ],
+      "code": "code/price_ratio_check.py",
+      "audit": "verified (corrected from 3.4\u00d7 in audit M004)"
+    },
+    {
+      "id": "SC-3.3-001",
+      "section": "\u00a73.3 Orchestration Structures and Personas",
+      "paper_line": 746,
+      "full_quote": "on 110 of the 950 completed team runs the ledger's run total then omitted tokens from completed earlier steps, so recorded cost understates true cost on those runs",
+      "what_it_means": "Retry accounting gap size and direction. Wrong if counts differ.",
+      "source": [
+        {
+          "file": "analysis/results/study1_retry_cost_gap.json",
+          "location": "verified_facts",
+          "exact_values": "completed_team_runs 950; runs_with_failed_step_entries 234; runs_with_understated_run_total 110; median ratio 1.687; aggregate understatement 4.4%"
+        }
+      ],
+      "code": "code/ audit script producing study1_retry_cost_gap.json",
+      "audit": "verified (matches \u00a73.8 disclosure: 234/110/1.69/4.4%)"
+    },
+    {
+      "id": "SC-3.4-001",
+      "section": "\u00a73.4 Stimuli",
+      "paper_line": 756,
+      "full_quote": "Fifteen are inherited verbatim from a prior validated set; the remaining fifteen were drafted for this study so that the full grid covers six domains with five problems apiece",
+      "what_it_means": "Problem bank composition 15+15. Wrong if the bank file says otherwise.",
+      "source": [
+        {
+          "file": "config/problems*.json / problem bank files",
+          "location": "provenance fields per problem",
+          "exact_values": "15 inherited (Hariri2025a) + 15 drafted; 6 domains \u00d7 5"
+        }
+      ],
+      "code": null,
+      "audit": "verified (audit M006 fix: 15+15 split, wave's 30 are the post-cutoff contamination-control set)"
+    },
+    {
+      "id": "SC-3.5-001",
+      "section": "\u00a73.5 Evaluation Framework \u2014 judges",
+      "paper_line": 775,
+      "full_quote": "Three judges from families disjoint from every generator: deepseek-chat (resolved to deepseek-v4-flash), zai-org/GLM-5.2, and meta-llama/Llama-3.3-70B-Instruct-Turbo",
+      "what_it_means": "Judge identities and disjointness. Wrong if any judge shares family with a generator actually run.",
+      "source": [
+        {
+          "file": "config/price_vector.json + run ledgers",
+          "location": "judge entries; generator model list \u00a73.2",
+          "exact_values": "judges deepseek/GLM/Llama; generators kimi/qwen/gpt/claude/gemini (+wave: mistral/minimax/gemma/gpt-oss/inkling); deepseek fallback generator never invoked"
+        }
+      ],
+      "code": null,
+      "audit": "verified (GLM-5.2 substitution disclosed D33; price-vector name mismatch fixed 2026-09-21)"
+    },
+    {
+      "id": "SC-3.5-002",
+      "section": "\u00a73.5 Inter-Rater Reliability",
+      "paper_line": 800,
+      "full_quote": "Pairwise judge correlations on per-run composite scores are 0.87 (deepseek\u2013zhipu), 0.61 (deepseek\u2013meta), and 0.49 (meta\u2013zhipu)",
+      "what_it_means": "Panel correlations. Wrong if the frozen file's values differ.",
+      "source": [
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "inter_judge_r",
+          "exact_values": "deepseek~zhipu 0.871; deepseek~meta 0.613; meta~zhipu 0.494"
+        }
+      ],
+      "code": "code/analyze_main.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-001",
+      "section": "\u00a74.1.1 The interaction effect",
+      "paper_line": 818,
+      "full_quote": "The pre-registered interaction contrast is d = -0.227 (bootstrap 95% CI [-0.410, -0.040], Welch t = -2.45, p = 0.0145), with the sequential-analysis boundary crossed at the scheduled final look. ... within no-persona cells the interaction is essentially zero (d = -0.006, n.s.), while within persona cells it is large (d = -0.390, p_FDR = 0.007; tier \u00d7 structure \u00d7 persona three-way -0.151, p < 0.001)",
+      "what_it_means": "H1 primary result + persona-conditional decomposition + three-way term. Wrong if any of the three d values or the FDR p differ.",
+      "source": [
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "primary.H1_tier_x_structure_interaction",
+          "exact_values": "d=-0.2271, CI[-0.4101,-0.0396], t=-2.447, p=0.0145, boundary crossed=True"
+        },
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "A2_2_secondary_fdr (persona-split interaction)",
+          "exact_values": "no-persona d \u2248 -0.006 n.s.; persona d = -0.390, p_FDR = 0.007"
+        },
+        {
+          "file": "results/exploratory_analysis.json",
+          "location": "A3_1_lmm fixed effects (three-way)",
+          "exact_values": "tier\u00d7structure\u00d7persona = -0.151, p < 0.001; two-way at no-persona reference -0.0012, p = 0.967"
+        }
+      ],
+      "code": "code/analyze_main.py; code/exploratory_heterogeneity.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-002",
+      "section": "\u00a74.1.1 secondary effects",
+      "paper_line": 1108,
+      "full_quote": "tier main effect (H2: d = +0.294, CI [+0.201, +0.382], BF10 = 1.7\u00d710^7) ... structure main effect (H3: d = +0.117, CI [+0.030, +0.205]) ... persona main effect (H4) ... d = -0.691 (CI [-0.761, -0.620], BF10 = 1.0\u00d710^50) ... Novelty is the sole dimension where personas help (+0.154, p_FDR = 0.001) while Usefulness (-1.024) and Elaboration (-0.966) drive the reversal. The structure \u00d7 persona interaction (H5) is not significant (F = 1.23, p = 0.27)",
+      "what_it_means": "All four secondary H-stats + persona dimension decomposition + H5 null. Wrong if any value differs.",
+      "source": [
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "primary.tier_F_minus_C / structure_T_minus_S / persona_P_minus_N",
+          "exact_values": "tier d=0.294 CI[0.2007,0.3823] BF 1.73e7; structure d=0.1174 CI[0.0303,0.2051]; persona d=-0.691 CI[-0.7609,-0.620] BF 1.02e50"
+        },
+        {
+          "file": "results/exploratory_analysis.json",
+          "location": "A3_5_persona_dimensions",
+          "exact_values": "Novelty +0.1535 (p_fdr 0.00105, sole positive); Usefulness -1.0238; Elaboration -0.9664; Cultural Sensitivity -0.0871 n.s."
+        },
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "A2_3_anova.terms \u2192 C(structure):C(persona)",
+          "exact_values": "F = 1.226, p = 0.26842"
+        }
+      ],
+      "code": "code/analyze_main.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-003",
+      "section": "\u00a74.1.2 The persona penalty",
+      "paper_line": 1162,
+      "full_quote": "The lone survivor, C-S-P, remains on the frontier only because it is the cheapest configuration tested; its quality is the lowest of all eight cells. Its headline efficiency ratio (T-EGR 8.60, the highest in the study) is purely a small-denominator artifact of that minimal cost --- it marks the budget floor, not a recommended configuration, since the same tier without a persona (C-S-N) buys 0.30 points of quality for an additional $0.005",
+      "what_it_means": "C-S-P is cheapest, lowest quality, highest T-EGR (artifact). Wrong if any ordering or the 0.30/$0.005 deltas differ.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "cell_summary_primary + t_egr_pooled_mean_per_cell",
+          "exact_values": "C-S-P cost 0.014533 (min of 8), quality 4.210107 (min of 8), T-EGR 8.603 (max); C-S-N \u2212 C-S-P quality = 0.2965, cost delta = 0.0048"
+        }
+      ],
+      "code": "code/cost_effectiveness.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-004",
+      "section": "\u00a74.1.3 The frontier gap",
+      "paper_line": 1204,
+      "full_quote": "Paired comparisons ... are negative and large in three families (qwen d = -2.14, gemini d = -2.07, claude d = -1.32; all p_Holm < .001), small and borderline in kimi (d = -0.21, p_Holm = .053), and null in gpt (d = +0.03, p_Holm = .71)",
+      "what_it_means": "CTP vs FSN per-family directions/magnitudes \u2014 the 'structure does not substitute' evidence. Wrong if any sign/value differs.",
+      "source": [
+        {
+          "file": "results/ctp_vs_fsn_by_family.json",
+          "location": "per_family.<family> \u2192 d, p_holm",
+          "exact_values": "qwen -2.139/5e-05; gemini -2.0656/5e-05; claude -1.3184/5e-05; kimi -0.2082/0.052679; gpt +0.0337/0.712503"
+        }
+      ],
+      "code": "code/compute_ctp_vs_fsn.py",
+      "audit": "verified (recomputed values, closes audit S1_012)"
+    },
+    {
+      "id": "SC-4.1-005",
+      "section": "\u00a74.1.3 The frontier gap \u2014 business terms",
+      "paper_line": 1214,
+      "full_quote": "the cheaper team with persona delivers 100.1% of its frontier solo sibling's quality for gpt, 98.1% for kimi, 95.8% for claude, 89.9% for qwen, and 87.6% for gemini (pooled: 94.3%) --- and the persona-free cheaper team (C-T-N) actually exceeds its frontier sibling in two families (kimi 102.3%, qwen 100.6%)",
+      "what_it_means": "Per-family quality percentages for CTP and the two C-T-N exceedances. Wrong if any percentage differs.",
+      "source": [
+        {
+          "file": "results/ctp_vs_fsn_by_family.json",
+          "location": "per_family.<family> \u2192 ctp_quality_pct_of_fsn, ctn_quality_pct_of_fsn; pooled_ctp_quality_pct_of_fsn",
+          "exact_values": "CTP: gpt 100.1, kimi 98.1, claude 95.8, qwen 89.9, gemini 87.6, pooled 94.3; CTN: kimi 102.3, qwen 100.6"
+        }
+      ],
+      "code": "code/compute_ctp_vs_fsn.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-006",
+      "section": "\u00a74.1.4 Pareto frontier \u2014 cell table",
+      "paper_line": 1243,
+      "full_quote": "tab:cell-summary \u2014 C-S-P 285/$0.0145/4.210/91.8%/8.60; C-S-N 285/$0.0194/4.507/98.3%/6.15; C-T-P 285/$0.0715/4.327/94.3%/1.58; C-T-N 285/$0.0734/4.531/98.8%/1.49; F-S-P 190/$0.0670/4.406/96.1%/1.36; F-S-N 190/$0.0835/4.586/100%/1.00; F-T-N 190/$0.2951/4.610/100.5%/0.27; F-T-P 190/$0.3044/4.370/95.3%/0.27",
+      "what_it_means": "The central economics table \u2014 every downstream recommendation reads from here. Wrong if any cell differs.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "cell_summary_primary (n, mean_cost, mean_quality) + t_egr_pooled_mean_per_cell",
+          "exact_values": "all 8 rows match to rounding (e.g. F-T-P 0.304373/4.370409/0.274; C-S-P 0.014533/4.210107/8.603)"
+        }
+      ],
+      "code": "code/cost_effectiveness.py",
+      "audit": "verified row-by-row"
+    },
+    {
+      "id": "SC-4.1-007",
+      "section": "\u00a74.1.4 Pareto stability + ICER + refined point",
+      "paper_line": 1269,
+      "full_quote": "The Pareto frontier is identical across all three phi: {C-S-P, C-S-N, C-T-N, F-S-N, F-T-N}. ... ICER (vs. the lowest-cost cell, C-S-P): C-S-N is the best buy at +$0.016 per point of composite quality; F-T-P is the worst at +$1.81 per point. The refined kimi C-T-P point (not in the table) sits at $0.0654 / quality 4.585 --- 99.97% of pooled F-S-N quality (4.586) at 78% of its cost",
+      "what_it_means": "Frontier stability claim, best/worst ICER, refined-kimi milestone. Wrong if phi-panel sets differ, ICER extrema swap, or the refined point moves.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "pareto_by_phi + pareto_stable + icer_vs_cheapest + refined_ctp_points",
+          "exact_values": "identical set at phi 0.25/0.50/0.75 \u2713; ICER C-S-N 0.0163, F-T-P 1.8081; refined kimi cost 0.06542, quality 4.5848, refine add-on 0.00156"
+        }
+      ],
+      "code": "code/cost_effectiveness.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-008",
+      "section": "\u00a74.1.5 Robustness battery",
+      "paper_line": 1310,
+      "full_quote": "Leave-one-family-out (item 6.5): d ranges from -0.143 (drop kimi) to -0.303 (drop gemini) ... Leave-one-problem-out (item 6.6): d ranges from -0.212 to -0.247 ... Sensitivity power at the smallest cell (n = 190) detects d = 0.288 at 80% power ... tier \u00d7 structure interaction F = 6.90, p = 0.0087, partial eta2 = 0.0036 ... Length adjustment on the H1 contrast yields p = 0.63 ... meta-analysis ... pooled d = -0.270 (CI [-0.472, -0.069], z = -2.64, p = 0.008) ... I2 = 28.5% ... TOST equivalence ... (d = -0.008; TOST p = 0.063 against \u00b10.2 bounds) ... partial pooling ... range -0.20 to -0.36",
+      "what_it_means": "Entire robustness battery values. Wrong if any range, statistic, or test result differs.",
+      "source": [
+        {
+          "file": "results/interim2_analysis.json",
+          "location": "A2_5_leave_one_family_out; A2_6_leave_one_problem_out; A2_7_sensitivity_power; A2_3_anova; A1_4_length_adjustment",
+          "exact_values": "LOFO: kimi -0.1427 \u2026 gemini -0.3028, sign_stable true; LOPO range -0.212 to -0.247; min detectable d 0.2882 at n=190; ANOVA F=6.901 p=0.00868 eta2=0.0036"
+        },
+        {
+          "file": "results/exploratory_analysis.json",
+          "location": "A3_4_meta_analysis; A3_2_tost_no_persona; A3_3_empirical_bayes",
+          "exact_values": "pooled -0.2704, CI[-0.472,-0.069], z=-2.635, p=0.00843, tau2=0.015, I2=28.5%; TOST d=-0.0076 p=0.0629 bounds \u00b10.2; EB shrunk range -0.1976 to -0.3648"
+        }
+      ],
+      "code": "code/analyze_main.py; code/exploratory_heterogeneity.py",
+      "audit": "verified (EB range in paper '-0.20 to -0.36' matches -0.1976 to -0.3648)"
+    },
+    {
+      "id": "SC-4.1-009",
+      "section": "\u00a74.1.6 Exploratory heterogeneity",
+      "paper_line": 1407,
+      "full_quote": "Problem difficulty does not moderate the team effect (r = 0.153, p = 0.53) ... Kendall's W = 0.922 ... ICC(3,1) ranges from 0.235 (HR) to 0.523 (marketing), with panel reliability ICC(3,9) between 0.73 and 0.91",
+      "what_it_means": "Screening statistics. Wrong if values differ.",
+      "source": [
+        {
+          "file": "results/exploratory_heterogeneity.json",
+          "location": "A2_difficulty_moderation; A6_rank_stability.C-T-N; A7_judge_icc_by_domain",
+          "exact_values": "r=0.153 p=0.5321; W=0.922; ICC(3,1) hr 0.235 \u2026 marketing 0.523; ICC(3,k) 0.734\u20130.908"
+        }
+      ],
+      "code": "code/exploratory_heterogeneity.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-010",
+      "section": "\u00a74.1.6 domain contingency + capability gap",
+      "paper_line": 1416,
+      "full_quote": "the team-minus-solo quality effect varies from +0.004 (marketing) ... to finance (-0.106). In marketing ... team output variance is significantly lower (Brown-Forsythe p = 0.020) ... The family-level team effect ... correlates almost perfectly with the family's capability gap (Pearson r = -0.978, p = 0.004; Spearman rho = -1.000; n = 5)",
+      "what_it_means": "The three exploratory upgrade candidates' Study-1 values. Wrong if any differs \u2014 and all three later FAIL the wave (correctly reported as failures).",
+      "source": [
+        {
+          "file": "results/exploratory_heterogeneity.json",
+          "location": "A5_dimension_domains / variance tests / capability-gap block",
+          "exact_values": "marketing +0.004 \u2026 finance -0.106; BF p=0.020; r=-0.978 p=0.004, rho=-1.000, n=5"
+        }
+      ],
+      "code": "code/exploratory_heterogeneity.py",
+      "audit": "verified as Study-1 record; wave verdicts FAIL reported in \u00a74.1.7 (SC-4.1-011)"
+    },
+    {
+      "id": "SC-4.1-011",
+      "section": "\u00a74.1.6 length asymmetry",
+      "paper_line": 1444,
+      "full_quote": "A length-adjusted mixed model ... leaves the frontier advantage intact (+0.078, p < 0.001) but reduces the team's small raw edge (+0.026) to -0.018 (p = 0.40) ... frontier solo is faster than cheap teams (94.8s vs. 131.7s) and cheap solo dominates efficiency (295.8 vs. 28.1 quality points per dollar-minute)",
+      "what_it_means": "Length-control coefficients and latency economics. Wrong if coefficients or latencies differ.",
+      "source": [
+        {
+          "file": "results/exploratory_heterogeneity.json",
+          "location": "A3_length_ancova.fixed_effects; A4_latency_economics.cell_summary",
+          "exact_values": "F-S-N coef 0.0779 p\u22480; C-T-N raw +0.026 \u2192 adjusted -0.0178 p=0.3994; latency F-S-N 94.8s, C-T-N 131.7s; qpdm C-S-N 295.8, C-T-N 28.1"
+        }
+      ],
+      "code": "code/exploratory_heterogeneity.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.1-012",
+      "section": "\u00a74.1.6 persona decomposition",
+      "paper_line": 1458,
+      "full_quote": "personas produce no spillover into the judged Cultural Sensitivity dimension (pooled d = -0.10 to -0.01) ... the solo-persona novelty gain ... survives length control (+0.465, p < 0.001) and is uniform across all six domains (+0.36 to +0.57) against a uniform usefulness cost (-0.96 to -1.10); teams destroy that gain (structure \u00d7 persona interactions: Novelty -0.693, Usefulness +0.711, both p < 0.001) ... persona answers are judged more consistently (panel ICC(3,9) 0.933 vs. 0.918) ... personas roughly double outcome variance (solo SD 0.232 \u2192 0.397)",
+      "what_it_means": "Five-part persona decomposition. Wrong if any element differs.",
+      "source": [
+        {
+          "file": "results/persona_heterogeneity.json",
+          "location": "P1_P2_persona_by_dim (CS row: solo-cheap -0.0487 n.s., others small n.s.); P3_length_ancova; P4_icc_n_vs_p; P5_persona_variance",
+          "exact_values": "CS pooled range -0.098 to -0.006; novelty length-controlled +0.465; domains +0.36\u2013+0.57; usefulness -0.96\u2013-1.10; S\u00d7P Novelty -0.693, Usefulness +0.711; ICC 0.933/0.918; SD 0.232\u21920.397"
+        }
+      ],
+      "code": "code/persona_heterogeneity.py (D45 battery)",
+      "audit": "verified (CS range uses corrected -0.006 endpoint per audit S1_028)"
+    },
+    {
+      "id": "SC-4.1-013",
+      "section": "\u00a74.1.7 The replication wave \u2014 gates",
+      "paper_line": 1519,
+      "full_quote": "W1 team effect +0.0168, p = 0.002 PASS; W2 upgrade threshold +0.0745, p < 0.0001 PASS; W3 domain contingency LRT p = 1.0, marketing flips negative FAIL; W4 capability-gap r = -0.214, p = 0.55 (n = 10) FAIL; W5 marketing variance BF p = 0.795, direction reversed FAIL; W6 economics F-S-N 40.6 > C-T-N 21.2 quality/$-min, Pareto = {C-S-N, F-S-N}, T-EGR 4.04/0.96 PASS; W7 ICC(3,1) 0.471\u20130.622",
+      "what_it_means": "All seven wave gate outcomes on 2,418 runs. Wrong if any gate value or verdict differs.",
+      "source": [
+        {
+          "file": "results/wave_analysis.json",
+          "location": "W1_team_effect \u2026 W7_judge_icc_by_domain; n_runs",
+          "exact_values": "W1 0.0168/p=0.00217 PASS; W2 0.0745/p\u22480 PASS; W3 LRT p=1.0 FAIL, marketing delta negative; W4 r=-0.214 p=0.55 FAIL; W5 BF p=0.795, sd_team 0.272>0.263 FAIL; W6 40.6>21.2, Pareto {C-S-N,F-S-N}, T-EGR 4.04/0.96 PASS; W7 ICC range 0.471\u20130.622; n_runs 2418"
+        }
+      ],
+      "code": "code/analyze_wave.py (hash-locked)",
+      "audit": "verified (MiniMax sensitivity: T-EGR 4.11/0.98 \u2014 wave_analysis_minimax_promo.json)"
+    },
+    {
+      "id": "SC-4.2-001",
+      "section": "\u00a74.2.1 The refinement ceiling",
+      "paper_line": 1582,
+      "full_quote": "The pre-registered superiority gate (G2: d \u2265 0.2 with CI excluding 0 in all three families, in the direction refined > FSN) is mechanically failed in all three families: kimi d = -0.295, claude d = -1.301, qwen d = -0.809 (all CIs strictly negative after Holm)",
+      "what_it_means": "G2 failure \u2014 the Study-2 headline. Wrong if any d or CI differs.",
+      "source": [
+        {
+          "file": "results/refine_study2_pooled.json",
+          "location": "H2.1_refined_vs_FSN + gate_G2; n_pairs",
+          "exact_values": "kimi d=-0.295 CI[-0.1365,-0.0081]; claude d=-1.301 CI[-0.2481,-0.1643]; qwen d=-0.809 CI[-0.223,-0.1127]; n_pairs=171; G1 completion 1.0"
+        }
+      ],
+      "code": "Protocol 09 analysis scripts",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.2-002",
+      "section": "\u00a74.2.1 gap recovery",
+      "paper_line": 1591,
+      "full_quote": "the pass recovers 64% of the gap for qwen --- the family with a large pre-refinement gap. For kimi the pre-refinement gap is already near zero (mean difference -0.086), so recovery is small on the mean (14%) ... For claude the mean recovery is -3% (no movement)",
+      "what_it_means": "Per-family recovery percentages. Wrong if recomputed recovery differs: qwen (0.4618-0.168)/0.4618=63.6%; kimi (0.086-0.0737)/0.086=14.3%; claude (0.1987-0.204)/0.1987=-2.7%.",
+      "source": [
+        {
+          "file": "results/ctp_vs_fsn_by_family.json",
+          "location": "per_family.<f>.mean_diff (pre-refinement gap)",
+          "exact_values": "qwen -0.4618; kimi -0.086; claude -0.1987"
+        },
+        {
+          "file": "results/refine_study2_pooled.json",
+          "location": "H2.1_refined_vs_FSN.<f>.mean_diff (post)",
+          "exact_values": "qwen -0.168; kimi -0.0737; claude -0.204"
+        }
+      ],
+      "code": "recovery % = (pre \u2212 post)/pre, computed inline",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.2-003",
+      "section": "\u00a74.2.1 novelty protection + repair",
+      "paper_line": 1597,
+      "full_quote": "The Novelty protection criterion (H2.2: no family loses more than -0.10 Novelty) is passed by all three; Novelty actually increases for qwen (d = 1.10, p_FDR < 0.001). Usefulness and Elaboration show large gains in kimi and qwen (d = 0.57 to 1.35, all p_FDR < 0.001) and are unchanged in claude",
+      "what_it_means": "H2.2/H2.3 criteria outcomes. Wrong if any family breaches the margin or the qwen novelty d differs.",
+      "source": [
+        {
+          "file": "results/refine_study2_pooled.json",
+          "location": "H2.2_novelty_protection + H2.3_repair",
+          "exact_values": "pass: kimi/claude/qwen all true; qwen novelty d=1.101 p_FDR\u22480; U/E gains kimi & qwen d 0.57\u20131.35; claude unchanged"
+        }
+      ],
+      "code": "Protocol 09 analysis scripts",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.2-004",
+      "section": "\u00a74.2.1 length analysis",
+      "paper_line": 1605,
+      "full_quote": "the pooled Pearson correlation between word-count ratio (refined/original) and composite-score change is r = +0.67, Spearman rho = +0.70 (p < 0.001). Longer refined answers score higher, not lower",
+      "what_it_means": "Dilution-hypothesis falsification. Wrong if correlations differ.",
+      "source": [
+        {
+          "file": "results/QUALITATIVE-STUDY2.md",
+          "location": "length-correlation table (pooled row)",
+          "exact_values": "Pearson +0.675 (p<0.001); Spearman +0.707"
+        }
+      ],
+      "code": "qualitative analysis script (Protocol 10)",
+      "audit": "verified (persisted in MD artifact; audit S2_007 noted no JSON \u2014 recommend materializing to CSV)"
+    },
+    {
+      "id": "SC-4.2-005",
+      "section": "\u00a74.2.2 kappa + changed codes",
+      "paper_line": 1640,
+      "full_quote": "Pooled Cohen's kappa = 0.824 (93.1% agreement) ... Six of the thirteen codes fall below 0.70 ... Of the six codes whose prevalence changed between original and refined ... For kimi, all six changed codes are structural scaffolding ... For qwen, five of the six are structural scaffolding ... and one --- diagnostic_reframe --- is an insight code",
+      "what_it_means": "IRR and the per-family changed-code composition \u2014 basis of the coverage claim. Wrong if kappa, the below-threshold list, or the changed-code sets differ.",
+      "source": [
+        {
+          "file": "results/qual2_kappa.json",
+          "location": "pooled_kappa, pooled_pct_agree, per_item",
+          "exact_values": "kappa 0.824, agree 93.1%; below-threshold: diagnostic_reframe 0.535, named_concepts 0.489, assumption_test 0.557, structured_report 0.587, external_authority 0.56, redundancy_bloat 0.65"
+        },
+        {
+          "file": "results/qual2_analysis.json",
+          "location": "saturation_rq3",
+          "exact_values": "kimi 6 changed (all structural); qwen 6 changed (5 structural + diagnostic_reframe); claude 0 changed"
+        }
+      ],
+      "code": "qualitative coding pipeline (Protocol 10)",
+      "audit": "verified (audit S2_011 fix held)"
+    },
+    {
+      "id": "SC-4.2-006",
+      "section": "\u00a74.2.2 convergence + frontier edge + saturation",
+      "paper_line": 1672,
+      "full_quote": "Refinement does not consistently move lower-tier outputs toward the frontier (kimi: toward 4 / away 6 ... qwen: 5/4; claude: 0/2 with 11 codes flat) ... The only kappa-reliable frontier-vs-refined difference \u2265 0.30 is concise_maxims: qwen frontier 1.00 vs. refined 0.55 (gap 0.45). The medium-reliability redundancy_bloat code is 0.00 in every frontier sample and 0.65\u20130.95 in every refined sample. Claude's original answers are already at the codebook ceiling (\u2265 0.90 on 11 of 13 codes) ... a saturation mechanism that explains the absent gap recovery (-3%) in \u00a74.2.1",
+      "what_it_means": "Convergence counts, frontier-edge gap, bloat pattern, saturation. MOSTLY verified \u2014 but 'the 8% gap recovery' contradicts \u00a74.2.1's '-3%': pooled locked data give -2.7% (pre -0.1987 \u2192 post -0.204). 8% is the stale pilot figure (REFINE-STUDY2-PILOT.md). INTERNAL INCONSISTENCY.",
+      "source": [
+        {
+          "file": "results/qual2_analysis.json",
+          "location": "convergence_rq2; frontier_edge_rq1; saturation_rq3",
+          "exact_values": "kimi toward4/away6; qwen 5/4; claude 0/2 + 11 flat; concise_maxims qwen 1.00 vs 0.55 (kappa-reliable, gap 0.45); redundancy_bloat frontier 0.00 vs refined 0.65\u20130.95; claude ceiling \u22650.90 on 11/13"
+        },
+        {
+          "file": "results/ctp_vs_fsn_by_family.json + results/refine_study2_pooled.json",
+          "location": "claude mean_diff pre/post",
+          "exact_values": "recovery = (0.1987-0.204)/0.1987 = -2.7% \u2014 NOT 8%"
+        }
+      ],
+      "code": "recovery % computed inline",
+      "audit": "DISCREPANCY found 2026-09-23, FIXED in P5_v15.7: 'the 8% gap recovery' replaced with 'the absent gap recovery (-3%)' \u2014 now matches \u00a74.2.1 and the frozen data"
+    },
+    {
+      "id": "SC-4.3-001",
+      "section": "\u00a74.3 Study 3 \u2014 design & flow",
+      "paper_line": 1722,
+      "full_quote": "570 planned runs; 544 completed, with 26 disclosed attrition events concentrated in the Kimi lane (21 designer-stage failures ... plus 4 execution failures and 1 Claude designer failure) ... G1 ... passed for four families and failed strictly for Kimi (89/114 = 78%)",
+      "what_it_means": "Participant flow counts. Wrong if ledger counts differ.",
+      "source": [
+        {
+          "file": "results/study3_results.json",
+          "location": "participant_flow; solutions_judged; judgments",
+          "exact_values": "qwen 114, gemini 114, gpt 114, claude 113 (+1 design fail), kimi 89 (+21 design fail +4 exec fail); total 544; judgments 4896"
+        }
+      ],
+      "code": "code/study3_analysis.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.3-002",
+      "section": "\u00a74.3 Contrast A",
+      "paper_line": 107,
+      "full_quote": "Frontier-designed pipelines are statistically indistinguishable from self-designed ones in four of five families; the lone significant effect favors frontier authorship for Claude (d = 0.78, p_Holm = 0.014). Pooled across families, the authorship gap on Novelty is 4.03 vs. 3.99 ... composite d = 0.35, p_Holm = 0.021; every other family is null on both",
+      "what_it_means": "Primary authorship result + pooled means + composite robustness. Wrong if table values, pooled means, or composite robustness differ.",
+      "source": [
+        {
+          "file": "results/study3_results.json",
+          "location": "primary_contrast_A_DFRONT_vs_DSELF_novelty; pooled_arm_means",
+          "exact_values": "claude +0.1362/t2.997/d0.78/p_raw0.0027/p_holm0.0136; gpt +0.0487/1.765/0.215/0.0776/0.3103; qwen +0.0214/0.734/0.104/0.4629/1.0; gemini +0.0214/0.55/0.082/0.5823/1.0; kimi -0.038/-0.64/-0.118/0.5222/1.0; pooled D-FRONT 4.03 vs D-SELF 3.992"
+        },
+        {
+          "file": "results/study3_composite_robustness.json",
+          "location": "composite contrast",
+          "exact_values": "claude composite d=0.35 p_holm=0.021; others null on both DVs"
+        }
+      ],
+      "code": "code/study3_analysis.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.3-003",
+      "section": "\u00a74.3 Contrast B + structure discovery",
+      "paper_line": 562,
+      "full_quote": "model-authored pipelines win in all five families on both arms (D-SELF d = 0.15\u20130.67; D-FRONT d = 0.24\u20131.33 on Novelty). The auto-designer also discovers structure we did not hand it: 98.9% (D-SELF) and 100% (D-FRONT) of designs include at least one critic-gated if/while feedback loop, averaging 5.3\u20135.4 designed steps and 5.8\u20136.2 executed steps after gate loops",
+      "what_it_means": "H-D2 result + emergent structure stats. Wrong if any d range, loop %, or step mean differs.",
+      "source": [
+        {
+          "file": "results/study3_results.json",
+          "location": "contrast_B_vs_frozen_CTN_novelty; cost_and_structure",
+          "exact_values": "D-SELF d 0.15\u20130.67, D-FRONT 0.24\u20131.33 (5/5 both arms); D-SELF pct_with_gates 98.9, mean_steps 5.38, executed 6.19; D-FRONT 100.0, 5.3, 5.8"
+        }
+      ],
+      "code": "code/study3_analysis.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.3-004",
+      "section": "\u00a74.3 token attribution",
+      "paper_line": 1784,
+      "full_quote": "Cheap-designed pipelines consume more tokens overall (34.8M vs. 24.3M across the study), but the gap is execution-driven (34.0M vs. 23.6M): design-stage usage is comparable across arms (0.6M vs. 0.7M, 2\u20133% of totals)",
+      "what_it_means": "CAUSAL attribution: cost gap lives in execution, not design. Wrong if the split file shows otherwise.",
+      "source": [
+        {
+          "file": "results/study3_token_split.json",
+          "location": "rows per arm \u2192 design_tokens, execution_tokens, total_tokens, pct_design_of_total",
+          "exact_values": "D-SELF: design 604,690 (+repair 218,263), exec 33,993,225, total 34,816,178, design 2.36%; D-FRONT: design ~0.7M, exec 23.6M, total 24,299,976"
+        }
+      ],
+      "code": "code/compute_study3_token_split.py (frozen correction artifact 2026-09-21)",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.3-005",
+      "section": "\u00a74.3 Contrast vs frontier solo + econ table",
+      "paper_line": 1791,
+      "full_quote": "Pooled, the arms are at parity with frontier solo (D-SELF d = -0.22; D-FRONT d = -0.05 on Novelty) ... beat ... for Kimi (d = +0.85/+0.74, p_Holm = 0.006/0.013), Qwen (d = +0.55/+0.61), and Gemini (d = +0.46/+0.51, n.s. after Holm); they tie GPT-5.6-solo; and they lose catastrophically to Claude-opus solo (d = -3.15/-2.84) [+ tab:study3-econ rows]",
+      "what_it_means": "Family-specific win/tie/lose + per-family costs \u2014 the routing-table basis. Wrong if any d, p, or cost ratio differs.",
+      "source": [
+        {
+          "file": "results/study3_vs_frontier_solo.json",
+          "location": "per-family D-SELF/D-FRONT vs FSN contrasts",
+          "exact_values": "kimi +0.85/+0.74 (p_holm 0.006/0.013); qwen +0.55/+0.61; gemini +0.46/+0.51 n.s.; gpt -0.07/+0.13 (tie); claude -3.15/-2.84; pooled D-SELF -0.22, D-FRONT -0.05"
+        },
+        {
+          "file": "results/study3_economics.json",
+          "location": "rows per family",
+          "exact_values": "gemini $0.043 FSN, D-SELF $0.010 (0.24\u00d7), D-FRONT $0.025 (0.59\u00d7); qwen $0.020/$0.040 (2.0\u00d7)/$0.046 (2.3\u00d7); kimi $0.107/$0.377 (3.5\u00d7)/$0.274 (2.6\u00d7); gpt $0.180/$0.729 (4.0\u00d7)/$0.512 (2.8\u00d7); claude $0.266/$0.438 (1.7\u00d7)/$0.668 (2.5\u00d7)"
+        }
+      ],
+      "code": "code/study3_family_contrasts.py; cost from frozen price vector v2026-08-23",
+      "audit": "verified row-by-row"
+    },
+    {
+      "id": "SC-4.3-006",
+      "section": "\u00a74.3 domain pattern",
+      "paper_line": 1798,
+      "full_quote": "By domain, pooled D-FRONT means beat frontier solo in strategy (4.08 vs. 4.00) and marketing (4.08 vs. 4.01), tie in HR (4.11 vs. 4.10) and product (4.24 vs. 4.25), and lose in finance (3.81 vs. 3.99) and operations (3.83 vs. 3.95) --- but a descriptive family \u00d7 domain breakdown ... shows the domain pattern reversing sign within families",
+      "what_it_means": "Domain-level pooled means + the descriptive-reversal caution. Wrong if pooled means differ.",
+      "source": [
+        {
+          "file": "results/study3_by_family_domain.json",
+          "location": "rows[] grouped by domain, problem-count-weighted means",
+          "exact_values": "strategy 4.08/4.00; marketing 4.08/4.01; hr 4.11/4.10; product 4.24/4.25; finance 3.81/3.99; operations 3.83/3.95 (recomputed by pooling, matches to rounding)"
+        }
+      ],
+      "code": "pooling = \u03a3(mean\u00d7n_problems)/\u03a3n per domain",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.3-007",
+      "section": "\u00a74.3 Decision rule \u2014 Kimi designer fragility",
+      "paper_line": 1866,
+      "full_quote": "21 of 57 Kimi self-design attempts --- 37% --- failed at the design stage, making frontier- or human-authored templates the safer default for that family",
+      "what_it_means": "Designer-fragility rate feeding the fallback recommendation. Wrong if the attrition count differs.",
+      "source": [
+        {
+          "file": "results/study3_results.json",
+          "location": "participant_flow.kimi",
+          "exact_values": "design_failed 21 of 57 planned D-SELF designs (114 planned across both arms; 57 per arm) = 36.8%"
+        }
+      ],
+      "code": null,
+      "audit": "verified"
+    },
+    {
+      "id": "SC-4.3-008",
+      "section": "\u00a74.3.1 Protocol 16 \u2014 flow & gates",
+      "paper_line": 1874,
+      "full_quote": "450 planned runs; 441 completed with 9 disclosed attrition events (Gemini 90/90, Claude 89/90, Qwen 89/90, GPT-5.6 88/90, Kimi 85/90 ...) ... 3,963/3,969 valid unique judgments ... R1 Kimi +1.25 PASS; R2 Qwen -0.23 fail; R3 Gemini -0.83 fail (reversed); R4 GPT-5.6 -0.88 fail (negative); R5 Claude -1.90 PASS --- 2/5 gates, headline conjunction not replicated",
+      "what_it_means": "P16 flow, judgment attrition, and all five gate verdicts. Wrong if any count or gate differs.",
+      "source": [
+        {
+          "file": "results/study3conf_results.json",
+          "location": "gates[]",
+          "exact_values": "R1 kimi 1.254 [0.788,1.72] PASS; R2 qwen -0.232 [-0.658,0.194] fail; R3 gemini -0.833 [-1.276,-0.389] fail; R4 gpt -0.878 [-1.323,-0.432] fail; R5 claude -1.897 [-2.411,-1.383] PASS; headline replicated false"
+        },
+        {
+          "file": "analysis/results/study3conf_judgments_summary.json",
+          "location": "expected/valid/missing",
+          "exact_values": "3969 expected, 3963 valid, 6 persistent missing (3 Claude solutions \u00d7 2 judges' variants)"
+        }
+      ],
+      "code": "code/study3conf_analysis.py (SHA-256 hash-locked pre-judging)",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-5.1-001",
+      "section": "\u00a75.2 Decision Framework",
+      "paper_line": 1297,
+      "full_quote": "a single call from a cheaper model (C-S-N) achieves 98% of frontier quality at 23% of the cost (T-EGR 6.15) --- the highest-return configuration in the study, replicated out-of-sample across 10 families",
+      "what_it_means": "Rung-1 recommendation + replication support. Wrong if the Study-1 ratios or wave W6 differ.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "cell_summary_primary.C-S-N; t_egr_pooled_mean_per_cell.C-S-N",
+          "exact_values": "98.3% quality / 23.2% cost / T-EGR 6.154"
+        },
+        {
+          "file": "results/wave_analysis.json",
+          "location": "W6_economics",
+          "exact_values": "wave Pareto = {C-S-N, F-S-N}; C-S-N T-EGR 4.04 (10 families)"
+        }
+      ],
+      "code": "code/cost_effectiveness.py; code/analyze_wave.py",
+      "audit": "verified \u2014 note wave T-EGR is 4.04, not 6.15; the claim says 'replicated' not 'same value', which is accurate (C-S-N stays on the frontier)"
+    },
+    {
+      "id": "SC-5.1-002",
+      "section": "\u00a75.2 refinement rung",
+      "paper_line": 2049,
+      "full_quote": "the refined kimi point reaches the pooled F-S-N mean (4.585 vs. 4.586) and exceeds the weakest frontier family (qwen, 4.557) at 78% of F-S-N's cost, the lowest-cost route to that milestone among the configurations tested --- noting that the paired within-family comparison remains negative",
+      "what_it_means": "Refined-kimi milestone with parity caveat. Wrong if the means, the qwen FSN mean, or the 78% cost ratio differ.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "refined_ctp_points[0] (kimi); cell_summary_primary.F-S-N",
+          "exact_values": "refined kimi quality 4.5848 vs F-S-N 4.5864; cost 0.06542/0.08352 = 78.3%"
+        },
+        {
+          "file": "results/exploratory_heterogeneity.json",
+          "location": "A1_reliability.cell_sd_cv.qwen \u2192 F-S-N mean",
+          "exact_values": "qwen F-S-N composite mean 4.5573 (weakest frontier family)"
+        }
+      ],
+      "code": "code/cost_effectiveness.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-5.1-003",
+      "section": "\u00a75.2 frontier-team avoidance",
+      "paper_line": 2057,
+      "full_quote": "frontier team cells spend 3.5\u00d7 the frontier-solo cost for +0.024 points of quality (T-EGR 0.27), making them the worst dollar in the experiment",
+      "what_it_means": "F-T-N avoidance rule. Wrong if the deltas differ.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "cell_summary_primary F-T-N vs F-S-N; t_egr_pooled",
+          "exact_values": "cost 0.295147/0.083521 = 3.53\u00d7; quality delta 4.609591-4.586433 = +0.0232; T-EGR 0.27"
+        }
+      ],
+      "code": "code/cost_effectiveness.py",
+      "audit": "verified (+0.024 vs computed +0.0232 \u2014 rounds to 0.02; borderline rounding, flag for .3f consistency)"
+    },
+    {
+      "id": "SC-6-001",
+      "section": "\u00a76.3 Risk register \u2014 replication risk",
+      "paper_line": 2410,
+      "full_quote": "The core economics replicated out-of-sample across 10 model families (Protocol 12). For Study 3's family rules, the extremes transported to new problems (Kimi pipelines again beat frontier solo; Claude's again lost badly), but the mid-tier effects did not (Protocol 16 passed 2 of 5 pre-registered gates)",
+      "what_it_means": "Replication-risk summary for managers. Wrong if wave/P16 verdicts differ.",
+      "source": [
+        {
+          "file": "results/wave_analysis.json",
+          "location": "gates W1/W2/W6",
+          "exact_values": "W1/W2/W6 PASS, n=2418, 10 families"
+        },
+        {
+          "file": "results/study3conf_results.json",
+          "location": "gates[] + headline_family_moderation_replicated",
+          "exact_values": "2/5 PASS (R1 kimi, R5 claude); headline false"
+        }
+      ],
+      "code": "code/analyze_wave.py; code/study3conf_analysis.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-6-002",
+      "section": "\u00a76.4 Build-versus-Buy \u2014 design fee",
+      "paper_line": 2259,
+      "full_quote": "auto-design largely dissolves [the upfront investment]: Study 3 shows models author better pipelines than our hand-designed instrument, at a design fee that is a small fraction of the first execution (2\u20133% of total tokens)",
+      "what_it_means": "Design-fee share claim. Wrong if the token split differs.",
+      "source": [
+        {
+          "file": "results/study3_token_split.json",
+          "location": "pct_design_of_total per arm",
+          "exact_values": "D-SELF 2.36%; D-FRONT ~2.9% (design \u22480.7M of 24.3M)"
+        }
+      ],
+      "code": "code/compute_study3_token_split.py",
+      "audit": "verified"
+    },
+    {
+      "id": "SC-9-001",
+      "section": "\u00a79 Conclusion \u2014 headline answer",
+      "paper_line": 2363,
+      "full_quote": "Across three pre-registered studies and two out-of-sample replications (5,303 runs, 10 model families, 49 business problems) ... Pooled, the cheaper team reaches 98.8% of frontier-solo quality at 88% of its cost ... auto-designed cheaper pipelines beat frontier solo outright for three of the five families (kimi, qwen, gemini), at costs ranging from 0.24\u00d7 to 3.5\u00d7 the frontier-solo price; the remaining two favor frontier solo --- claude on quality (the pipeline reaches 83%), gpt-5.6 on cost (quality ties at 4\u00d7 the price)",
+      "what_it_means": "The paper's compressed answer. Wrong if the run/problem counts, the pooled ratios, or any family-level outcome differs.",
+      "source": [
+        {
+          "file": "run ledgers + study3_results.json + study3conf_results.json + wave_analysis.json",
+          "location": "run counts",
+          "exact_values": "1900 main + 2418 wave + 544 study3 + 441 P16 = 5303; 19 + 30 = 49 problems; 10 families in wave"
+        },
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "C-T-N vs F-S-N",
+          "exact_values": "98.8% quality / 87.9% cost"
+        },
+        {
+          "file": "results/study3_economics.json",
+          "location": "rows",
+          "exact_values": "kimi/qwen/gemini positive d at 0.24\u20133.53\u00d7; claude D-SELF quality \u224883% of FSN at 1.65\u00d7; gpt d=-0.07 (tie) at 4.04\u00d7"
+        }
+      ],
+      "code": "code/quality_cost_percentages.py",
+      "audit": "verified (claude 83% quality figure from Novelty means; gpt 'ties at 4\u00d7' matches 4.04\u00d7 and d=-0.074)"
+    },
+    {
+      "id": "SC-A-001",
+      "section": "Appendix A Executive Summary",
+      "paper_line": 2443,
+      "full_quote": "Across 1,900 runs, five model families, and 19 business problems: a single call from a lower-tier model delivers 98% of frontier quality at 23% of the cost (T-EGR 6.15). Orchestrating that model into a three-step builder\u2013critic\u2013refiner pipeline adds coverage for about 3.8\u00d7 that cost (T-EGR 1.49). Orchestrating a frontier model costs 3.5\u00d7 more for negligible gain",
+      "what_it_means": "Executive-summary compression of the Study-1 economics. Wrong if any ratio differs.",
+      "source": [
+        {
+          "file": "results/cost/cost_effectiveness.json",
+          "location": "cell_summary_primary + t_egr_pooled_mean_per_cell",
+          "exact_values": "C-S-N 98.3%/23.2%/6.154; C-T-N cost 0.0734 vs C-S-N 0.0194 = 3.79\u00d7; T-EGR 1.494; F-T-N 3.53\u00d7"
+        }
+      ],
+      "code": "code/cost_effectiveness.py",
+      "audit": "verified"
+    }
+  ],
+  "captions": [
+    {
+      "id": "CAP-tab-osf",
+      "object": "Table: OSF registration chain",
+      "line": 637,
+      "claim": "6 OSF registrations with roles/dates; mjb8x memorialization + bwc93 supersedes withdrawn v1 (9ukjz)",
+      "source": {
+        "file": "OSF live registrations + decision log",
+        "location": "tab:osf-registrations rows",
+        "exact_values": "mjb8x 2026-08-06; 83c9u 2026-08-22; jg49x 2026-08-23; bwc93/639eq 2026-08-29; zkm8v 2026-08-30"
+      },
+      "covered_by": "SC-3.1-001",
+      "audit": "verified (handoff-verified facts; 9ukjz never cited)"
+    },
+    {
+      "id": "CAP-fig1",
+      "object": "Figure 1: design schematic",
+      "line": 687,
+      "claim": "2x2x2 factorial + apparatus depiction",
+      "source": {
+        "file": "paper/P5_v15.7.tex \u00a73.1",
+        "location": "Research Design text",
+        "exact_values": "8 cells; 5 families; 1900 runs"
+      },
+      "covered_by": "SC-3.1-001",
+      "audit": "verified (diagram, no numeric claims beyond design)"
+    },
+    {
+      "id": "CAP-fig21",
+      "object": "Figure: sequential boundary",
+      "line": 1140,
+      "claim": "z = -2.447 crosses interim-2 OBF boundary |z| >= 1.977; stop and report H1 supported",
+      "source": {
+        "file": "results/interim1_sequential_analysis.json + results/interim2_analysis.json",
+        "location": "stopping_rules / primary.H1",
+        "exact_values": "t = -2.447 at final look; boundary crossed = True"
+      },
+      "covered_by": "SC-4.1-001",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig2",
+      "object": "Figure: forest plot cell quality",
+      "line": 1150,
+      "claim": "cell quality means with 95% CIs",
+      "source": {
+        "file": "results/cost/cost_effectiveness.json",
+        "location": "cell_summary_primary mean_quality/sd_quality/n",
+        "exact_values": "8 cells, e.g. F-S-N 4.5864, C-S-P 4.2101"
+      },
+      "covered_by": "SC-4.1-006",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig22",
+      "object": "Figure: persona radar",
+      "line": 1186,
+      "claim": "persona polygon smaller on Usefulness/Elaboration, larger on Novelty",
+      "source": {
+        "file": "results/exploratory_analysis.json",
+        "location": "A3_5_persona_dimensions",
+        "exact_values": "Novelty +0.1535; Usefulness -1.0238; Elaboration -0.9664"
+      },
+      "covered_by": "SC-4.1-002",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig10",
+      "object": "Figure: persona dimensions (FDR)",
+      "line": 1196,
+      "claim": "per-dimension persona effects, FDR-corrected",
+      "source": {
+        "file": "results/exploratory_analysis.json",
+        "location": "A3_5_persona_dimensions p_fdr",
+        "exact_values": "4 dims sig FDR; CS n.s."
+      },
+      "covered_by": "SC-4.1-002",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-tab-cells",
+      "object": "Table: cell summary",
+      "line": 1237,
+      "claim": "8-cell n/cost/quality/%/T-EGR at phi=0.50",
+      "source": {
+        "file": "results/cost/cost_effectiveness.json",
+        "location": "cell_summary_primary + t_egr_pooled_mean_per_cell",
+        "exact_values": "all rows verified"
+      },
+      "covered_by": "SC-4.1-006",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig3",
+      "object": "Figure: cost-effectiveness frontier",
+      "line": 1258,
+      "claim": "8 cells + refined CTP points; Pareto path; error bars now 95% CI of mean (caption should say so)",
+      "source": {
+        "file": "results/cost/cost_effectiveness.json",
+        "location": "cell_summary_primary + refined_ctp_points + pareto_by_phi",
+        "exact_values": "refined kimi 0.06542/4.5848; pareto set {C-S-P,C-S-N,C-T-N,F-S-N,F-T-N}"
+      },
+      "covered_by": "SC-4.1-007",
+      "audit": "verified \u2014 NOTE: figure redrawn 2026-09-24 with CI-of-mean bars; caption text updated"
+    },
+    {
+      "id": "CAP-fig6",
+      "object": "Figure: T-EGR bars",
+      "line": 1265,
+      "claim": "T-EGR per cell ranking",
+      "source": {
+        "file": "results/cost/cost_effectiveness.json",
+        "location": "t_egr_pooled_mean_per_cell",
+        "exact_values": "C-S-P 8.603 > C-S-N 6.154 > C-T-P 1.577 > C-T-N 1.494 > F-S-P 1.364 > F-S-N 1.0 > F-T-P 0.274 \u2248 F-T-N 0.27"
+      },
+      "covered_by": "SC-4.1-006",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig19",
+      "object": "Figure: phi sensitivity",
+      "line": 1278,
+      "claim": "identical Pareto set at phi 0.25/0.50/0.75",
+      "source": {
+        "file": "results/cost/cost_effectiveness.json",
+        "location": "pareto_by_phi",
+        "exact_values": "same 5-cell set in all three panels"
+      },
+      "covered_by": "SC-4.1-007",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-tab-rob",
+      "object": "Table: robustness battery in business terms",
+      "line": 1345,
+      "claim": "d -> quality points / % of frontier: -0.227 = 0.077 pts = 1.7%; LOFO 1.1-2.2%; LOPO 1.6-1.8%; meta 2.0%",
+      "source": {
+        "file": "results/interim2_analysis.json + results/exploratory_analysis.json",
+        "location": "pooled SD 0.339, F-S-N mean 4.586; conversions d*0.339 and /4.586",
+        "exact_values": "-0.227*0.339=0.077 (1.7%); LOFO -0.143..-0.303 -> 0.048..0.103 (1.1..2.2%); LOPO -> 1.6..1.8%; meta -0.270 -> 0.091 (2.0%)"
+      },
+      "covered_by": "SC-4.1-008",
+      "audit": "verified (conversion arithmetic checks)"
+    },
+    {
+      "id": "CAP-fig8",
+      "object": "Figure: LOO sensitivity",
+      "line": 1379,
+      "claim": "leave-one-out d stability",
+      "source": {
+        "file": "results/interim2_analysis.json",
+        "location": "A2_5/A2_6 folds",
+        "exact_values": "family folds -0.1427..-0.3028 sign-stable; problem folds -0.212..-0.247"
+      },
+      "covered_by": "SC-4.1-008",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig9",
+      "object": "Figure: meta-analysis forest",
+      "line": 1386,
+      "claim": "interaction by family, pooled RE estimate",
+      "source": {
+        "file": "results/exploratory_analysis.json",
+        "location": "A3_4_meta_analysis",
+        "exact_values": "k=5, pooled -0.2704, I2 28.5%, tau2 0.015"
+      },
+      "covered_by": "SC-4.1-008",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-tab-wave",
+      "object": "Table: wave gates",
+      "line": 1512,
+      "claim": "W1-W7 outcomes on 2418 runs",
+      "source": {
+        "file": "results/wave_analysis.json",
+        "location": "W1..W7 + n_runs",
+        "exact_values": "W1/W2/W6 PASS; W3/W4/W5 FAIL; W7 audit range 0.471-0.622"
+      },
+      "covered_by": "SC-4.1-013",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig4",
+      "object": "Figure: refinement probe",
+      "line": 1626,
+      "claim": "Study-2 refinement results (G2 fail, recovery)",
+      "source": {
+        "file": "results/refine_study2_pooled.json",
+        "location": "H2.1 + gate_G2",
+        "exact_values": "kimi -0.295, claude -1.301, qwen -0.809"
+      },
+      "covered_by": "SC-4.2-001/002",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig7",
+      "object": "Figure: cross-family matrix",
+      "line": 1633,
+      "claim": "no cross-family CTP pairing flips to superiority after refinement",
+      "source": {
+        "file": "results/cross_family.json",
+        "location": "A_original_ctp_vs_cross_family_fsn + B_refined_vs_cross_family_fsn",
+        "exact_values": "all pairings negative (e.g. kimi->claude d=-1.457)"
+      },
+      "covered_by": "SC-4.2-001 (context)",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig5",
+      "object": "Figure: code prevalence (redrawn dumbbell)",
+      "line": 1701,
+      "claim": "structure codes move after refinement, insight codes do not; frontier apart on concise maxims/zero bloat",
+      "source": {
+        "file": "results/qual2_analysis.json",
+        "location": "prevalence.<family>.orig/refined/fsn",
+        "exact_values": "e.g. kimi structured_report 0.65->0.90 (fsn 0.50); concise_maxims qwen fsn 1.00 vs refined 0.55; bloat fsn 0.00 vs refined 0.65-0.95"
+      },
+      "covered_by": "SC-4.2-005/006",
+      "audit": "verified (figure redrawn 2026-09-24; caption rewritten to match)"
+    },
+    {
+      "id": "CAP-tab-s3a",
+      "object": "Table: Study 3 authorship contrast",
+      "line": 1758,
+      "claim": "D-FRONT vs D-SELF per family, Holm",
+      "source": {
+        "file": "results/study3_results.json",
+        "location": "primary_contrast_A_DFRONT_vs_DSELF_novelty",
+        "exact_values": "all 5 rows verified"
+      },
+      "covered_by": "SC-4.3-002",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-tab-s3econ",
+      "object": "Table: Study 3 economics",
+      "line": 1810,
+      "claim": "cost per solution + d vs FSN per family/arm",
+      "source": {
+        "file": "results/study3_economics.json",
+        "location": "rows[]",
+        "exact_values": "all 5 rows verified"
+      },
+      "covered_by": "SC-4.3-005",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig-s3dom",
+      "object": "Figure: Study 3 family x domain",
+      "line": 1834,
+      "claim": "family moderates, not domain (descriptive)",
+      "source": {
+        "file": "results/study3_by_family_domain.json",
+        "location": "rows[] d_vs_FSN_D-SELF",
+        "exact_values": "claude all-negative; kimi/gemini mostly positive"
+      },
+      "covered_by": "SC-4.3-006",
+      "audit": "verified (figure built 2026-09-23)"
+    },
+    {
+      "id": "CAP-fig-s3econ",
+      "object": "Figure: Study 3 econ scatter",
+      "line": 1846,
+      "claim": "dominance quadrant contains Gemini both arms; Kimi/Qwen buy quality at 2-3.5x; GPT ties; Claude loses",
+      "source": {
+        "file": "results/study3_economics.json",
+        "location": "rows[] cost ratios + d",
+        "exact_values": "gemini 0.24x/0.59x at +0.46/+0.51; kimi 3.53x at +0.85; claude 1.65x at -3.15"
+      },
+      "covered_by": "SC-4.3-005",
+      "audit": "verified (figure built 2026-09-23)"
+    },
+    {
+      "id": "CAP-tab-p16",
+      "object": "Table: P16 gates",
+      "line": 1921,
+      "claim": "R1-R5 predicted/observed/CI/verdict",
+      "source": {
+        "file": "results/study3conf_results.json",
+        "location": "gates[]",
+        "exact_values": "2/5 PASS; values verified"
+      },
+      "covered_by": "SC-4.3-008",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-fig-p16",
+      "object": "Figure: P16 predicted vs observed",
+      "line": 1943,
+      "claim": "extremes pass, mid-tier fail",
+      "source": {
+        "file": "results/study3conf_results.json",
+        "location": "gates[] d + d_ci90",
+        "exact_values": "matches table"
+      },
+      "covered_by": "SC-4.3-008",
+      "audit": "verified (figure built 2026-09-23)"
+    },
+    {
+      "id": "CAP-tab-summary",
+      "object": "Table: summary of key findings",
+      "line": 2005,
+      "claim": "aggregated finding list with evidence column",
+      "source": {
+        "file": "all of the above frozen files",
+        "location": "each row traces to its section's SC entry",
+        "exact_values": "rows mirror verified claims"
+      },
+      "covered_by": "all SC entries",
+      "audit": "verified by cross-reference"
+    },
+    {
+      "id": "CAP-fig20",
+      "object": "Figure: contingency rules flowchart",
+      "line": 2090,
+      "claim": "decision flow mapping budget/task to cell with expected T-EGR",
+      "source": {
+        "file": "results/cost/cost_effectiveness.json + results/wave_analysis.json + results/study3_economics.json",
+        "location": "T-EGR values + wave verdicts + S3 economics",
+        "exact_values": "T-EGR 6.15/1.49/0.27; wave W6 bimodal; S3 family rules"
+      },
+      "covered_by": "SC-5.1-001..003",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-tab-managerial",
+      "object": "Table: managerial quick-reference",
+      "line": 2099,
+      "claim": "recommended cell per task profile with quality/cost/T-EGR (98%/23%/6.15; 100.5%/353%/0.27 etc.)",
+      "source": {
+        "file": "results/cost/cost_effectiveness.json",
+        "location": "cell_summary_primary ratios + t_egr",
+        "exact_values": "C-S-N 98%/23%/6.15; C-S-P 92%/17%/8.60; F-T-N 100.5%/353%/0.27; F-T-P 95.3%/365%/0.27; refined CTP ~100%/78%"
+      },
+      "covered_by": "SC-4.1-006/007, SC-5.1-002",
+      "audit": "verified (C-S-P 17% = 0.014533/0.083521 = 17.4%)"
+    },
+    {
+      "id": "CAP-tab-protocols",
+      "object": "Table: protocol registry",
+      "line": 2510,
+      "claim": "16 protocols with roles/statuses",
+      "source": {
+        "file": "DESIGN-DECISIONS.md + OSF chain",
+        "location": "registry rows",
+        "exact_values": "01-16; 14/15 superseded (D59)"
+      },
+      "covered_by": "SC-3.1-001",
+      "audit": "verified"
+    },
+    {
+      "id": "CAP-tab-arms",
+      "object": "Table: arm registry",
+      "line": 2541,
+      "claim": "8 factorial cells + A5-A8 + D-SELF/D-FRONT definitions and statuses",
+      "source": {
+        "file": "DESIGN-DECISIONS.md + protocol files",
+        "location": "registry rows",
+        "exact_values": "A5/A6/A8 never executed; A7 executed as Study 3"
+      },
+      "covered_by": "SC-3.1-001",
+      "audit": "verified"
+    }
+  ]
+}

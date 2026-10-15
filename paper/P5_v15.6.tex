@@ -93,8 +93,9 @@ so the team's added structure buys only a marginal quality gain for about
 for negligible gain, $\TEGR = 0.27$). A pre-registered replication on 30 fresh problems and 10 families confirms the core economics out-of-sample; three secondary hypotheses --- a marketing-domain exception, a capability-gap correlation, and team-driven variance reduction --- failed their pre-registered gates and are not recommended.
 
 \smallskip
-\noindent\textbf{Study 2 --- Why substitution stops short.} A \$0.002
-refinement pass recovers up to 64\% of the frontier gap but never achieves
+\noindent\textbf{Study 2 --- Why substitution stops short.} A refinement pass
+costing a fraction of a cent per output (\$0.001--0.003, family-dependent)
+recovers up to 64\% of the frontier gap but never achieves
 paired superiority. Qualitative coding ($\kappa = 0.824$) locates the ceiling:
 orchestration buys \emph{coverage} (more structure, more length) while the
 frontier wins on \emph{density} (compressed insight, zero boilerplate) --- a gap
@@ -114,14 +115,14 @@ so routing must be \emph{measured per deployment, not looked up}.
 
 \smallskip
 \noindent\textbf{For business decision-makers:} use a \emph{single} lower-tier
-call by default --- the highest return. Add a \emph{team} (structure) only when
-the binding gap is \emph{coverage} (breadth, length, completeness) and its
-roughly four-fold cost is justified. Reserve the \emph{frontier} for
+call by default --- the highest return. Add a \emph{pipeline} only where
+measurement on your own models and problems supports it: effects are
+family- and problem-specific, and model-authored (auto-designed) pipelines
+outperform hand-designed ones. Reserve the \emph{frontier} for
 \emph{density}-critical work --- compressed insight with zero boilerplate --- the
 one thing orchestration cannot manufacture. Never combine frontier and team (the
-worst dollar in the study). And because these economics are family-specific,
-\emph{measure} efficiency ($\TEGR$) on your own models and problems rather than
-trusting any lookup table.
+worst dollar in the study). Above all, \emph{measure} efficiency ($\TEGR$)
+on your own stack rather than trusting any lookup table.
 
 \medskip
 \noindent\textbf{Keywords:} Large Language Models, Multi-Agent Systems, LLM Orchestration,
@@ -618,7 +619,12 @@ orchestrated and frontier outputs actually contain (Protocol~10). A
 pre-registered \textbf{Study~2 extension} (Protocol~11) repeats the refinement
 test with two further families (GPT, Gemini) and adds a refiner-identity
 contrast: each family refined by its own model versus a \emph{cross-family}
-refiner editing another family's output. \textbf{Study~3}
+refiner editing another family's output. The Study-1$\to$Study-2 sequence
+follows an explanatory-sequential loop (D39): Study~2's \emph{structure}
+(universal add-only refiner prompt, paired design, power rule) was frozen on
+2026-07-30 --- before Study~1's main run --- while its \emph{repair targets}
+(the dimensions refinement must repair or protect) were set from Study-1
+results and locked before any refinement run. \textbf{Study~3}
 manipulates pipeline design authorship with model-authored pipelines
 (Protocol~13, \cref{sec:study3}). The two replications stress-test the core
 claims out-of-sample: a confirmatory wave on 30 fresh problems across ten
@@ -768,7 +774,11 @@ in effect during the execution period).
 
 Three judges from families disjoint from every generator: \texttt{deepseek-chat}
 (resolved to \texttt{deepseek-v4-flash}), \texttt{zai-org/GLM-5.2}, and
-\texttt{meta-llama/Llama-3.3-70B-Instruct-Turbo}. The disjointness rule~(D33)
+\texttt{meta-llama/Llama-3.3-70B-Instruct-Turbo}. GLM-5.2 is a within-family
+substitution for the preregistered GLM-4.7 (non-serverless on Together at
+pilot day, D33); judge prices are recorded in the frozen price vector for
+completeness only --- judge cost is excluded from all cell economics. The
+disjointness rule~(D33)
 guards against self-enhancement bias \citep{ZhengEtAl2023}: even when deepseek
 is the registered fallback generator, the fallback was never invoked, so
 disjointness holds in the executed data.
@@ -922,10 +932,29 @@ records whether this happened, and the affected runs are audited separately
 rather than silently excluded.
 
 \subsection{Code and Data Availability}
-All analysis code, the frozen token ledger, judge rationales, the decision log
-(D1--D60), and Protocols~09--10 and~13--16 are committed to the
-\texttt{orchestration-economics} repository. The pre-registration trail is the
-OSF registration chain mapped in \cref{tab:osf-registrations}: each OSF
+The complete replication bundle is public at
+\url{https://github.com/youssef-hariri/orchestration-economics}:
+all analysis code; the frozen token ledgers; judge prompts and rationales;
+the decision log (D1--D60); Protocols~01--16; the problem banks; and the
+run-level responses for every study (main run, 1{,}900 runs; replication
+wave, 2{,}418; Study~3, 544; Protocol~16, 441). Every prompt used in any run
+is extracted verbatim into \texttt{config/prompts/} (13 files, with
+machine-checked provenance): the Study-1 role templates and neutral solo
+prompt, the Study-2 add-only refiner prompt, the Study-3 platform-verbatim
+designer and repair prompts, the three judge variants, and the three
+personas. Study-3 auto-designed pipelines are published as per-run JSON
+(\texttt{runs/study3/designs/}), each listing every agent's name, role, and
+full system prompt. Team intermediate outputs (builder/critic drafts) were
+not persisted --- only final answers were stored and judged; this disclosed
+design choice bounds what re-analysis can recover (\cref{sec:limitations}).
+
+The repository additionally ships a machine-readable \textbf{claim-to-evidence
+map} (\texttt{paper/claim\_map/}): 32{,}992 datapoints extracted from the
+frozen results files, each with source file, key path, and verbatim excerpt,
+plus 161 paper mentions with verbatim quotes linked to their datapoints.
+Running \texttt{verify\_two\_way.py} re-checks every datapoint against the
+raw files (exit code~0 at submission). The pre-registration trail is the OSF
+registration chain mapped in \cref{tab:osf-registrations}: each OSF
 registration archives its protocol file, and the table discloses the two
 exceptions --- the Study~1 memorialization (mjb8x) and Study~2
 (Protocols~09--10), which are committed to the repository and frozen in the
@@ -1038,7 +1067,11 @@ This section reports three studies that escalate a single business question ---
 \emph{orchestrate cheaper models, or pay for the frontier?} \textbf{Study~1}
 (\cref{sec:study1}) tests whether pipeline structure substitutes for model tier
 and prices the answer in dollars. \textbf{Study~2} (\cref{sec:study2}) explains
-\emph{why} that substitution stops short of the frontier. \textbf{Study~3}
+\emph{why} that substitution stops short of the frontier --- its refinement
+stage was frozen before Study~1's main run (Protocol~09, D39), while its
+repair targets were set from Study-1 results and locked before any refinement
+run, an explanatory-sequential loop disclosed in \cref{sec:method} (D39).
+\textbf{Study~3}
 (\cref{sec:study3}) asks whether it matters \emph{who designs} the pipeline.
 Each study's headline claims are then stress-tested out-of-sample in a
 pre-registered replication, so the rules we recommend are the ones that survived
@@ -1177,6 +1210,16 @@ thus family-dependent --- consistent with the family-specificity findings
 throughout --- and it is the empirical target that
 Study~2 (\cref{sec:study2}) asks a cheap refinement pass to close.
 
+In business terms, the gap is small even where it is real. Judged on the
+1--5 composite scale, the cheaper team with persona delivers
+100.1\% of its frontier solo sibling's quality for gpt, 98.1\% for kimi,
+95.8\% for claude, 89.9\% for qwen, and 87.6\% for gemini (pooled: 94.3\%)
+--- and the persona-free cheaper team (C-T-N) actually \emph{exceeds} its
+frontier sibling in two families (kimi 102.3\%, qwen 100.6\%). A budget owner
+should read the paired deficits above as statistical reliability, not as
+commercially visible differences: no family falls below 87\% of frontier
+quality, at 86\% of the frontier price.
+
 \begin{quote}
 \textbf{Strategic Implication:} As executed, lower-tier teams do not beat a single
 frontier call on matched problems. The substitution thesis is bounded: structure
@@ -1193,18 +1236,18 @@ $\phiBlend = 0.50$, the cell means are:
   \centering
   \caption{Cell summary statistics (primary analysis, $\phiBlend = 0.50$).}
   \label{tab:cell-summary}
-  \begin{tabular}{@{}lrrrr@{}}
+  \begin{tabular}{@{}lrrrrr@{}}
     \toprule
-    \textbf{Cell} & \textbf{$n$} & \textbf{Cost (USD)} & \textbf{Quality} & \textbf{T-EGR} \\
+    \textbf{Cell} & \textbf{$n$} & \textbf{Cost (USD)} & \textbf{Quality} & \textbf{Quality (\% of F-S-N)} & \textbf{T-EGR} \\
     \midrule
-    C-S-P & 285 & 0.0145 & 4.210 & 8.60 \\
-    C-S-N & 285 & 0.0194 & 4.507 & 6.15 \\
-    C-T-P & 285 & 0.0715 & 4.327 & 1.58 \\
-    C-T-N & 285 & 0.0734 & 4.531 & 1.49 \\
-    F-S-P & 190 & 0.0670 & 4.406 & 1.36 \\
-    F-S-N & 190 & 0.0835 & 4.586 & 1.00 (base) \\
-    F-T-N & 190 & 0.2951 & 4.610 & 0.27 \\
-    F-T-P & 190 & 0.3044 & 4.370 & 0.27 \\
+    C-S-P & 285 & 0.0145 & 4.210 & 91.8\% & 8.60 \\
+    C-S-N & 285 & 0.0194 & 4.507 & 98.3\% & 6.15 \\
+    C-T-P & 285 & 0.0715 & 4.327 & 94.3\% & 1.58 \\
+    C-T-N & 285 & 0.0734 & 4.531 & 98.8\% & 1.49 \\
+    F-S-P & 190 & 0.0670 & 4.406 & 96.1\% & 1.36 \\
+    F-S-N & 190 & 0.0835 & 4.586 & 100\% (base) & 1.00 (base) \\
+    F-T-N & 190 & 0.2951 & 4.610 & 100.5\% & 0.27 \\
+    F-T-P & 190 & 0.3044 & 4.370 & 95.3\% & 0.27 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1244,17 +1287,19 @@ the sensitivity panel, satisfying the pre-registered claim rule.
 ICER (vs.\ the lowest-cost cell, C-S-P): C-S-N is the best buy at +\$0.016 per
 point of composite quality; F-T-P is the worst at +\$1.81 per point. The
 refined kimi C-T-P point (not in the table) sits at \$0.0654 / quality~4.585 ---
-absolute parity with pooled F-S-N (4.586) at 78\% of its cost, with the caveat
+99.97\% of pooled F-S-N quality (4.586) at 78\% of its cost, with the caveat
 that the paired within-family comparison remains negative (disclosure
 per~\cref{sec:refinement}).
 
 \begin{quote}
 \textbf{Strategic Implication:} The economically optimal strategy is tier
 substitution at the lower-tier end: a single call from a cheaper model
-(C-S-N) delivers 98\% of frontier quality at 23\% of the cost, and the
-three-step team variant (C-T-N) buys coverage at 88\% of the cost. The worst
+(C-S-N) delivers 98.3\% of frontier quality at 23\% of the cost, and the
+three-step team variant (C-T-N) reaches 98.8\% of frontier quality while
+buying coverage at 88\% of the cost. The worst
 dollar in the experiment is spent on frontier teams --- they cost
-3.5$\times$ the frontier-solo price for negligible quality gain.
+3.5$\times$ the frontier-solo price for a 100.5\%-quality output, a gain of
+half a percentage point.
 \end{quote}
 
 \subsubsection{Robustness across model families and problems}\label{sec:robustness-families}
@@ -1289,16 +1334,43 @@ be certified as zero. Empirical-Bayes partial pooling of the per-family
 interaction estimates (item 7.3) shrinks all five toward the pooled value
 without sign flips (range $-0.20$ to $-0.36$).
 
+\cref{tab:robustness-pct} restates the battery in quality terms. With a pooled
+SD of 0.339 on the 1--5 composite and an F-S-N mean of 4.586, the observed
+interaction ($d = -0.227$) equals a 0.077-point structural gain for cheaper
+models --- 1.7\% of frontier quality --- and every perturbation keeps the
+effect inside a 1.1--2.2\% band.
+
+\begin{table}[ht]
+  \centering
+  \caption{Robustness battery in business terms: effect sizes converted to
+  quality points and percentage of frontier (F-S-N) quality.}
+  \label{tab:robustness-pct}
+  \small
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    \textbf{Perturbation} & \textbf{$d$} & \textbf{Quality points} & \textbf{\% of frontier quality} \\
+    \midrule
+    Primary interaction (all 1,900 runs) & $-0.227$ & 0.077 & 1.7\% \\
+    Leave-one-family-out range & $-0.143$ to $-0.303$ & 0.048--0.103 & 1.1--2.2\% \\
+    Leave-one-problem-out range & $-0.212$ to $-0.247$ & 0.072--0.084 & 1.6--1.8\% \\
+    Cross-family meta-analysis (pooled) & $-0.270$ & 0.091 & 2.0\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 Across all battery perturbations the interaction keeps its sign and the
 decision is unchanged. The leave-one-out sensitivity (\cref{fig:loo})
 and random-effects meta-analysis (\cref{fig:meta-analysis}) confirm that no
 single family, problem, or outlier drives the result.
 
 \begin{quote}
-\textbf{Strategic Implication:} The findings are robust to judge, model family,
-problem domain, and output-length variations. The interaction is small but
-reliable and generalizes across the five leading LLM families --- a stable
-result for firms making platform-agnostic investment decisions.
+\textbf{Strategic Implication:} The pattern is not a vendor or problem-set
+artifact: remove any single model family or any single problem and the
+conclusion is unchanged. In business terms, the structural lift for cheaper
+models is a reliable 1--2\% of frontier quality wherever you look ---
+modest in absolute terms, but stable enough that a firm can adopt the
+lower-tier strategy without betting on any particular vendor, and small
+enough that no vendor switch will overturn it.
 \end{quote}
 
 \begin{figure}[ht]
@@ -1399,14 +1471,15 @@ documented threat~(Zheng et~al., 2023; Dubois et~al., 2024), which is why each
 effect above was re-tested under length control before reporting.
 
 \begin{quote}
-\textbf{Strategic Implication (exploratory --- gate FAILED):} The contingency
-picture above did \emph{not} survive the replication wave
-(\cref{sec:wave}): on fresh problems the frontier advantage is uniform across
-domains, the capability-gap correlation vanishes ($r = -0.21$ vs.\
-$-0.978$), and the marketing variance advantage reverses. We retain it as a
-hypothesis generator only; the decision framework
-of~\cref{sec:decision-framework} rests on the replicated core claims, not on
-these.
+\textbf{Strategic Implication (exploratory --- did not survive replication):}
+Treat everything in this subsection as an untested lead, not a budgeting rule.
+In our first sample, marketing looked like the one domain where cheap teams
+matched solo output \emph{with lower variance} --- an attractive niche for
+volume automation. On fresh data that niche disappeared, and the
+``capability-gap'' shortcut for predicting where teams help also evaporated.
+Practical reading: do \emph{not} route work by domain and do \emph{not} expect
+team structures to stabilize quality; base budget decisions only on the
+replicated rules in the decision framework of~\cref{sec:decision-framework}.
 \end{quote}
 
 \subsubsection{Out-of-sample confirmation: the replication wave (Protocol 12)}\label{sec:wave}
@@ -1480,6 +1553,18 @@ replication-grade; the contingency nuances are not. Practitioner rules should
 be built on W1/W2/W6 only.
 \end{quote}
 
+\begin{quote}
+\textbf{Strategic Implication:} The rules you can take to the board are the
+three that survived contact with new data. (i)~Adding pipeline structure to a
+cheap model buys a small but real quality gain. (ii)~Frontier solo still wins
+on quality by a margin $\sim 4\times$ larger --- for revenue- or
+compliance-bearing tasks, pay for the frontier. (iii)~The efficient menu is
+two-point: cheap solo for volume work (best quality per dollar, T-EGR
+$4.04$), frontier solo for high-stakes work --- cheap teams sit in the
+dominated middle at current prices. Every other pattern in this paper is a
+lead for future research, not an operating rule.
+\end{quote}
+
 \subsection{Study 2: Why Substitution Stops Short of the Frontier}\label{sec:study2}
 
 Study~1 established that orchestrated lower-tier models approach but do not
@@ -1527,7 +1612,8 @@ refinement: no cross-family CTP pairing flips to superiority, confirming that
 the within-family result is not an artifact of family selection.
 
 \begin{quote}
-\textbf{Strategic Implication:} A \$0.002 refinement pass delivers bounded
+\textbf{Strategic Implication:} A refinement pass costing \$0.001--0.003 per
+output (family-dependent; pooled mean $\approx$ \$0.002) delivers bounded
 improvement --- it recovers most of the frontier gap on average but never
 achieves paired superiority. For firms, this means refinement is a viable
 risk-mitigation strategy (improve quality at lower cost) but not a replacement
@@ -1690,8 +1776,11 @@ on Novelty). The auto-designer also discovers structure we did not hand it:
 98.9\% (D-SELF) and 100\% (D-FRONT) of designs include at least one
 critic-gated if/while feedback loop, averaging $5.3$--$5.4$ designed steps and
 $5.8$--$6.2$ executed steps after gate loops --- richer than our fixed
-three-step instrument. Cheap designers iterate more at the design stage
-(D-SELF consumed $34.8$M tokens vs.\ $24.3$M for D-FRONT across the study).
+three-step instrument. Cheap-designed pipelines consume more tokens overall
+($34.8$M vs.\ $24.3$M across the study), but the gap is execution-driven
+($34.0$M vs.\ $23.6$M): design-stage usage is comparable across arms
+($0.6$M vs.\ $0.7$M, 2--3\% of totals) --- cheap executors burn tokens in
+longer, looped executions, not in more design iteration.
 
 \textbf{Contrast vs.\ frontier solo: orchestration is family-specific, not
 general.} Pooled, the arms are at parity with frontier solo (D-SELF
@@ -1701,11 +1790,15 @@ their own family's frontier flagship running solo for Kimi
 ($d = +0.85$/$+0.74$, $p_{\text{Holm}} = 0.006$/$0.013$), Qwen
 ($d = +0.55$/$+0.61$), and Gemini ($d = +0.46$/$+0.51$, n.s.\ after Holm);
 they tie GPT-5.6-solo; and they lose catastrophically to Claude-opus solo
-($d = -3.15$/$-2.84$). By domain, D-FRONT meets or beats frontier solo in
-strategy, marketing, HR, and product, and loses in finance and operations ---
-but this domain pattern does not survive within-family conditioning: the
-moderator is the \emph{family} (how high the solo frontier sits), not the
-task. Frontier authorship does not rescue the losing families: where the cheap
+($d = -3.15$/$-2.84$). By domain, pooled D-FRONT means beat frontier solo in strategy
+($4.08$ vs.\ $4.00$) and marketing ($4.08$ vs.\ $4.01$), tie in HR
+($4.11$ vs.\ $4.10$) and product ($4.24$ vs.\ $4.25$), and lose in finance
+($3.81$ vs.\ $3.99$) and operations ($3.83$ vs.\ $3.95$) ---
+but a descriptive family $\times$ domain breakdown (cells of 2--5 problems,
+underpowered for inference by design) shows the domain pattern reversing
+sign within families: Claude loses in all six domains while Kimi and Gemini
+win in most. The moderator is the \emph{family} (how high the solo frontier
+sits), not the task. Frontier authorship does not rescue the losing families: where the cheap
 executor is the bottleneck, a frontier-designed plan cannot compensate.
 
 \begin{table}[ht]
@@ -1731,27 +1824,30 @@ executor is the bottleneck, a frontier-designed plan cannot compensate.
   \end{tabular}
 \end{table}
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth]{}
-  \caption{Study~3 family $\times$ domain landscape: the Novelty effect of
-    cheap auto-designed pipelines versus frontier solo (F-S-N) across the five
-    families and six business domains. The binding moderator is the
-    \emph{family} --- how high its solo frontier ceiling sits --- not the task
-    domain: the domain pattern does not survive within-family conditioning
-    (\cref{sec:study3conf}).}
-  \label{fig:study3-family-domain}
-\end{figure}
+% TODO(figures): generate fig_study3_family_domain.png (family x domain Novelty
+% landscape from results/study3_by_family_domain.json) and restore this block.
+%\begin{figure}[ht]
+%  \centering
+%  \includegraphics[width=\textwidth]{fig_study3_family_domain.png}
+%  \caption{Study~3 family $\times$ domain landscape: the Novelty effect of
+%    cheap auto-designed pipelines versus frontier solo (F-S-N) across the five
+%    families and six business domains (descriptive; cells of 2--5 problems,
+%    underpowered for inference by design). The visible moderator is the
+%    \emph{family} --- how high its solo frontier ceiling sits --- not the task
+%    domain (\cref{sec:study3conf}).}
+%  \label{fig:study3-family-domain}
+%\end{figure}
 
 \textbf{Decision rule.} Study~3 converts orchestration from a blanket
 recommendation into a routing table. For Gemini, cheap auto-designed pipelines
-are strictly dominant --- better \emph{and} 2--4$\times$ cheaper than frontier
-solo. For Qwen and Kimi, orchestration buys the largest quality gains in the
+are strictly dominant --- better \emph{and} roughly $1.7$--$4\times$ cheaper
+than frontier solo ($0.59\times$/$0.24\times$ the cost per solution). For Qwen and Kimi, orchestration buys the largest quality gains in the
 study at 2--3.5$\times$ solo cost (which remains low in absolute terms).
 For Claude, no cheap-executed pipeline approaches the flagship: buy solo.
 For GPT-5.6, quality is a tie and solo is cheaper. And because authorship
 effects are negligible (Contrast A), when orchestration is indicated the cheap
-model can design for itself --- the frontier design fee buys nothing, except
+model can design for itself --- paying a frontier model to author the pipeline
+adds no measurable quality, except
 where the cheap designer itself is fragile (21 of 57 Kimi self-design attempts
 --- 37\% --- failed at the design stage, making frontier- or human-authored
 templates the safer default for that family). \cref{sec:study3conf} stress-tests this table on new problems:
@@ -1863,6 +1959,19 @@ must be measured per deployment, not looked up: benchmark-as-routing, not a
 routing table.
 \end{quote}
 
+\begin{quote}
+\textbf{Strategic Implication:} Do not copy this paper's routing table into
+your budget --- build your own. Only the extremes survived new data: if your
+stack sits at the low-ceiling end (Kimi-class), cheap auto-designed pipelines
+beat the flagship outright --- default to orchestration; if it sits at the
+high-ceiling end (Claude-class), pay for the flagship solo and skip pipelines
+entirely. For everything in between, the effect flips sign across problem
+sets, so route by measurement, not by lookup: run a cheap self-designed probe
+on your own tasks (\$0.01--\$0.73 per solution;
+\cref{tab:study3-econ}) and let the result decide. Routing is an ongoing
+measurement practice, not a one-time purchase decision.
+\end{quote}
+
 \subsection{Summary of Key Findings}
 
 \begin{table}[ht]
@@ -1900,19 +2009,44 @@ routing table.
 % ==================================================================
 \section{Discussion}\label{sec:discussion}
 
+\subsection{The Density Ceiling: Why Additive Pipelines Hit a Wall}
+
+The qualitative mechanism (\cref{sec:mechanism}) explains the pattern.
+Orchestration is compositional --- add a critic, add a refiner, add a section,
+add a table. Composition grows the answer but cannot compress it. The frontier's
+residual advantage sits exactly where additive composition fails:
+\texttt{concise\_maxims} (compressed, quotable strategic principles) and zero
+\texttt{redundancy\_bloat}. These are the outputs of a single model that has
+been selected or trained to produce dense prose. An add-only refiner, by design,
+cannot delete the boilerplate the team structure produced. The falsifiable
+prediction that follows is that a \emph{subtractive} refiner --- one permitted
+to cut as well as add --- would narrow the density gap. This is the central
+future-work experiment implied by our results.
+
 \subsection{A Decision Framework for AI Investment}\label{sec:decision-framework}
 
 The results support a contingency framework for AI investment rather than a
-universal rule. For budget-constrained firms, \textbf{invest in the lower tier
+universal rule, and the pre-registered replications discipline every rung of
+it: we recommend only what survived contact with new data. For
+budget-constrained firms, \textbf{invest in the lower tier
 first}: a single call from a cheaper model (C-S-N) achieves 98\% of frontier
 quality at 23\% of the cost ($\TEGR$~6.15) --- the highest-return
-configuration in the study. \textbf{Add the three-step pipeline only when
-coverage is the target} (timelines, matrices, quantified plans): the cheaper
-team (C-T-N) reaches 98.8\% of frontier quality at 88\% of the cost
-($\TEGR$~1.49). \textbf{Do not
-orchestrate at the frontier tier}: frontier team cells spend 3.5$\times$ the
-frontier-solo cost for +0.024 points of quality ($\TEGR$~0.27), making them the
-worst dollar in the experiment. \textbf{Use a low-cost refinement pass as a
+configuration in the study, replicated out-of-sample across 10 families
+(\cref{sec:wave}). \textbf{Reserve frontier solo for density-critical output}
+(executive briefs, compressed strategic principles): the frontier advantage is
+real, replicated (W2), and concentrated exactly where additive composition
+fails. \textbf{Treat pipelines as a measured, family-conditional option --- not
+a default}: the fixed three-step pipeline tested in Study~1 (C-T-N: 98.8\% of
+frontier quality at 88\% of the cost, $\TEGR$~1.49) did \emph{not} replicate as
+an efficient cell --- on fresh problems it is the dominated middle
+($\TEGR$~0.96, excluded from the Pareto set; \cref{sec:wave}) --- and
+auto-designed pipelines beat that fixed human design in all five families
+(\cref{sec:study3}). Where a cheap auto-designed pipeline beats its own
+family's frontier solo (the low-ceiling stacks Gemini, Qwen, Kimi), it becomes
+the quality-maximizing choice; where the ceiling is high (Claude), it is a
+dominated expense; and mid-tier effects do not transport across problem sets,
+so the rung is operated by measurement, not by table
+(\cref{sec:study3conf}). \textbf{Use a low-cost refinement pass as a
 risk-mitigation strategy} when absolute quality parity is the target: the
 refined kimi point reaches the pooled F-S-N mean (4.585 vs.\ 4.586) and exceeds
 the weakest frontier family (qwen, 4.557) at 78\% of F-S-N's cost, the lowest-cost
@@ -1920,6 +2054,10 @@ route to that milestone among the configurations tested --- noting that the
 paired within-family comparison remains negative
 (\cref{sec:refinement}). \textbf{Avoid personas}: they degrade quality sharply
 while reducing cost only marginally --- a value-destroying configuration.
+\textbf{Do not
+orchestrate at the frontier tier}: frontier team cells spend 3.5$\times$ the
+frontier-solo cost for +0.024 points of quality ($\TEGR$~0.27), making them the
+worst dollar in the experiment.
 
 \begin{figure}[ht]
   \centering
@@ -1945,6 +2083,9 @@ while reducing cost only marginally --- a value-destroying configuration.
     Density-critical (exec briefs, strategic principles)
       & F-S-N & 100\% & 100\% & 1.00
       & budget tight $\to$ C-S-N at 98\% \\
+    Pipeline option (auto-designed, family-conditional)
+      & D-SELF & beats solo at extremes & 0.24--3.5$\times$ & ---
+      & mid-tier stack $\to$ measure first (\cref{sec:study3conf}) \\
     Budget-minimum, quality-adequate
       & C-S-P & 92\% & 17\% & 8.60
       & novelty needed, substance traded \\
@@ -1961,7 +2102,7 @@ while reducing cost only marginally --- a value-destroying configuration.
   \end{tabularx}
 \end{table}
 
-Study~3 adds a family-conditional override to this framework
+The family-conditional detail behind the pipeline rule
 (\cref{sec:study3}, \cref{tab:study3-econ}): where the deployment stack is
 Gemini, the auto-designed cheap pipeline is strictly dominant over frontier
 solo (better novelty at $0.24\times$ the cost); for Qwen and Kimi the pipeline
@@ -1969,20 +2110,6 @@ is the quality-maximizing choice at 2--3.5$\times$ solo cost; for Claude the
 solo flagship remains untouchable and pipelines are a dominated expense; and in
 all cases the design fee is better spent on execution than on authorship ---
 self-designed pipelines match frontier-designed ones in four of five families.
-
-\subsection{The Density Ceiling: Why Additive Pipelines Hit a Wall}
-
-The qualitative mechanism (\cref{sec:mechanism}) explains the pattern.
-Orchestration is compositional --- add a critic, add a refiner, add a section,
-add a table. Composition grows the answer but cannot compress it. The frontier's
-residual advantage sits exactly where additive composition fails:
-\texttt{concise\_maxims} (compressed, quotable strategic principles) and zero
-\texttt{redundancy\_bloat}. These are the outputs of a single model that has
-been selected or trained to produce dense prose. An add-only refiner, by design,
-cannot delete the boilerplate the team structure produced. The falsifiable
-prediction that follows is that a \emph{subtractive} refiner --- one permitted
-to cut as well as add --- would narrow the density gap. This is the central
-future-work experiment implied by our results.
 
 \subsection{Contribution to the Business of AI Literature}
 
@@ -2040,12 +2167,18 @@ rung where the next dollar buys less quality than it costs:
         of frontier quality for 23\% of the price ($\TEGR$~6.15) --- the
         highest-return dollar in the study and the correct default for most
         open-ended knowledge work.
-  \item \textbf{Add the three-step team only when coverage is the deliverable
-        (C-T-N)} --- timelines, option matrices, quantified plans. It reaches
-        98.8\% of frontier quality at 88\% of the cost ($\TEGR$~1.49): still
-        positive-return, but the marginal dollar now buys \emph{coverage}, not
-        quality.
-  \item \textbf{Buy a refinement pass as cheap insurance (\$0.002).} It lifts a
+  \item \textbf{Add a pipeline only where measurement supports it
+        (family-conditional).} The fixed three-step team tested in Study~1
+        reached 98.8\% of frontier quality at 88\% of the cost
+        ($\TEGR$~1.49), but that cell did not replicate as efficient --- on
+        fresh problems it is the dominated middle ($\TEGR$~0.96;
+        \cref{sec:wave}) --- and auto-designed pipelines beat the fixed design
+        in all five families (\cref{sec:study3}). Where a cheap auto-designed
+        pipeline beats its own family's frontier solo (low-ceiling stacks), it
+        is the quality-maximizing rung; elsewhere skip it. The marginal dollar
+        now buys \emph{coverage}, not density.
+  \item \textbf{Buy a refinement pass as cheap insurance (\$0.001--0.003,
+        family-dependent).} It lifts a
         refined lower-tier answer to the weakest frontier family's level (qwen,
         4.557) at 78\% of frontier-solo cost --- but it never achieves
         superiority. Treat it as a
@@ -2083,7 +2216,13 @@ ones in four of five families, so a firm does not need to pay a frontier model t
 author its workflows. Second, \textbf{treat routing as a recurring procurement
 KPI}, re-measured whenever a model version or an API price changes --- because the
 dollar figures that drive the ladder move with the market, even when the quality
-ordering does not.
+ordering does not. Third, \textbf{do not hand-design pipelines}: model-authored
+pipelines beat our human-designed three-step instrument in all five families,
+and the auto-designer supplies richer structure than a fixed template
+(critic-gated feedback loops in 98.9--100\% of designs, five to six steps on
+average). The one caution is design-stage fragility: 37\% of Kimi self-design
+attempts failed schema validation, so for fragile designers keep validated
+frontier- or human-authored fallback templates.
 
 \subsection{Risk Register: What Can Go Wrong and How to Bound It}
 
@@ -2100,10 +2239,12 @@ ordering does not.
         expect a cheap additive pipeline to substitute for compressed, quotable
         insight; buy the frontier for that class of output.
   \item \textbf{Replication risk --- honestly bounded.} The core economics
-        replicated out-of-sample across 10 model families (Protocol~12), but the
-        exploratory family-extremes did not transport cleanly (Protocol~16 passed
-        2 of 5 pre-registered gates). \emph{Control:} treat the headline rules as
-        bankable and the family-specific extremes as hypotheses to re-measure
+        replicated out-of-sample across 10 model families (Protocol~12). For
+        Study~3's family rules, the \emph{extremes} transported to new problems
+        (Kimi pipelines again beat frontier solo; Claude's again lost badly),
+        but the \emph{mid-tier} effects did not (Protocol~16 passed 2 of 5
+        pre-registered gates). \emph{Control:} treat the headline rules as
+        bankable and the family-specific rules as hypotheses to re-measure
         locally, not as guarantees. This is the payoff of pre-registration --- we
         can tell the manager which findings survived a fresh bet and which did not.
 \end{itemize}
@@ -2115,7 +2256,11 @@ level. Orchestration pipelines are \emph{built}: an upfront architectural
 investment that lowers the marginal cost per call. The build path pays off when
 (a)~the task is coverage-sensitive, (b)~the quality bar is ``good enough'' rather
 than ``best available,'' and (c)~the firm can absorb the engineering cost of
-maintaining a multi-step pipeline. When density is the binding constraint, the buy
+maintaining a multi-step pipeline --- a condition that auto-design largely
+dissolves: Study~3 shows models author better pipelines than our hand-designed
+instrument, at a design fee that is a small fraction of the first execution
+(2--3\% of total tokens), so the upfront architectural investment collapses to
+a single design call. When density is the binding constraint, the buy
 path (frontier solo) remains optimal.
 
 The decision statistic is $\TEGR$: \textbf{build when the measured $\TEGR$ on your
@@ -2130,163 +2275,129 @@ to shift as model prices and capabilities move.
 % ==================================================================
 \section{Limitations}\label{sec:limitations}
 
-Nine acknowledged limitations bound the claims. (1)~Evaluation is LLM-only; no
+Four limitations bound the claims; study-specific disclosures (the blended-$\phiBlend$
+price assumption with its sensitivity panel, list-price costing and unpriced
+latency, wave execution events, Study-3 attrition and retry cost accounting, and
+the unreplicated persona-carried $H_1$ interaction) are stated where they arise
+in Methodology and Results.
+
+\textbf{(1) LLM-only evaluation.} No
 human panel was recruited. Our bias controls (blinding, order shuffle, disjoint
 judge families, three prompt variants) follow the best current practice
 \citep{ZhengEtAl2023, VergaEtAl2024} but do not substitute for human agreement
-on a subset. (2)~The blended-$\phiBlend$ price assumption is a disclosed
-limitation; we mitigate it with a pre-registered sensitivity panel and require
-cross-$\phiBlend$ stability for any frontier-membership claim. (3)~The task
-domain is English business strategy; generalization to code, scientific writing,
-or non-English domains is an empirical question. (4)~Cross-family comparisons
-(e.g.\ kimi vs.\ claude refinement rates) are descriptive and confounded with
-family quality; only within-family comparisons support causal language. Two
-further disclosures --- the small truncation audit and the team-cost retry gap
---- are stated but not corrected. On the latter: team intermediate outputs are
-excluded from judged answers by design (only the final answer is scored) but
-\emph{are} included in cost; the sole cost understatement comes from retry
-runs whose ledger totals omit completed earlier steps (110 of 950 completed
-team runs affected, of the 234 carrying a failed-step record; in the other 124
-the failed attempt logged zero tokens; median true-to-recorded cost ratio of
-1.69 on affected runs ---
-4.4\% of team-cell cost in aggregate). The gap mildly \emph{flatters} the
-team cells, but it is immaterial against the cost differences that drive the
-conclusions (teams cost $\sim$3.8$\times$ the solo call): no ordering can
-flip.
+on a subset.
 
-A fifth limitation is practical: our costs are API-list prices, not
-enterprise-negotiated rates. Firms with volume commitments or reserved-capacity
-agreements may face different absolute prices, though the \emph{relative}
-rankings (lower tier $\approx$ 23\% of frontier) are preserved as long as the
-price ratio between tiers remains in the 3.1--8$\times$ range observed across the
-five families at the time of the experiment. Similarly, pipeline latency --- the
-wall-clock time of three sequential API calls versus one --- is not priced here;
-latency-sensitive applications may prefer frontier solo even when the dollar
-cost favors the lower-tier pipeline.
+\textbf{(2) One task domain.} All stimuli are English business-strategy
+problems; generalization to code, scientific writing,
+or non-English domains is an empirical question.
 
-A sixth limitation concerns stimulus sampling breadth. The confirmatory
-analysis rests on 19 business problems --- below the 30--40 stimulus range
-recommended for maximal generalizability power \citep{WestfallKennyJudd2014}.
-Although leave-one-problem-out cross-validation (19 folds)
-confirmed sign stability of every reported effect (max $|\Delta d| = 0.02$),
-and the within-problem replication is dense (100 runs/problem, 5
-families), the 19 problems do not exhaust the universe of possible
-business tasks. External validity --- the claim that orchestration
-economics generalizes beyond these specific problems --- is therefore
-bounded. Future work should replicate with larger, more diverse problem
-corpora spanning additional domains, languages, and task complexities.
+\textbf{(3) Study~2 rests on a single sample.} Unlike Studies~1 and~3, whose
+headline claims were stress-tested on fresh problems in pre-registered
+replications (\cref{sec:wave}, \cref{sec:study3conf}), the refinement ceiling
+and the coverage-versus-density mechanism were estimated on the original locked
+sample only (\emph{cf.}\ the replication-scope note in \cref{sec:mechanism}).
+A confirmatory refinement wave is future work.
 
-A seventh limitation concerns the replication wave's execution environment
-(\cref{sec:wave}). Two provider-side events required disclosed handling: the
-Gemini lane ran after a billing upgrade resolved a free-tier daily request
-cap, and the Kimi frontier lane was completed via a Together.ai routing
-deviation after Moonshot credit exhaustion (D53) --- the pinned model version
-was unchanged, but within-family routing homogeneity for Kimi was broken
-(cheap cells Moonshot-direct, frontier via Together; per-run route membership
-is auditable in the ledger). Separately, the pre-registered dual
-variance-component mixed model was numerically singular on the wave design
-matrix; a pre-declared fallback rule (hard-requiring bit-identical fixed
-effects) substituted a parsimonious random-effects structure (D52), so the
-W3a likelihood-ratio statistic carries a REML-comparability caveat.
-
-An eighth limitation is specific to Study~3 (\cref{sec:study3}). Attrition was concentrated in one family: 37\% of Kimi self-design
-attempts (21 of 57) failed at the \emph{designer} stage (empty or
-truncated structured output on the production auto-design prompt), and
-total Kimi-lane attrition reached 22\% (25 of 114, including a provider
-moderation block on one problem), so the Kimi cells rest on fewer
-observations ($n = 89$ of 114) and the designer-fragility finding is
-itself confounded with provider routing (Moonshot vs.\ Together; D58). Study~3
-also instantiates design authorship through a \emph{single} production
-auto-designer at its default decoding settings; other designers, temperatures,
-or step caps might shift the authorship contrast, and our instrument
-deliberately disallows human-in-the-loop approval steps, so the results speak
-to fully automated pipelines only.
-
-A ninth limitation concerns the primary interaction itself. The $H_1$
-contrast is the pre-registered pooled test and stands as registered, but its
-effect is carried by the persona-loaded cells (\cref{sec:interaction}), and
-the replication wave could not re-test it: the wave design excluded persona
-and frontier-team cells, so no out-of-sample verdict on the interaction
-exists. The neutral-cell interaction remains an open confirmatory target.
+\textbf{(4) Study-3 domain breakdowns are descriptive.} The family $\times$
+domain patterns reported in \cref{sec:study3} rest on 2--5 problems per cell,
+underpowered for inference by design; they are indicative patterns, not tested
+findings. Powering domain-level claims was not the purpose of Study~3.
 
 % ==================================================================
 % 8  FUTURE DIRECTIONS
 % ==================================================================
 \section{Future Directions}\label{sec:future}
 
-The first priority named in earlier drafts --- an out-of-sample confirmatory
-replication wave --- is now complete (\cref{sec:wave}); it promoted the core
+Two priorities named in earlier drafts are now complete: the out-of-sample
+confirmatory replication wave (\cref{sec:wave}) --- which promoted the core
 claims (team effect W1, upgrade threshold W2, economics W6) and rejected the
-exploratory upgrades; the $H_1$ interaction is not among the promoted claims,
-since the wave carried no frontier-team or persona cells. The second --- pipeline design
-authorship --- is likewise now complete (Study~3, \cref{sec:study3}): it
-executed the registered A7 arm and found authorship effects to be negligible,
-with orchestration economics family-specific. Two candidates from the original roadmap are now closed by the results
-themselves: \textbf{loop control} (Protocol~14) is superseded because
-Study~3 found critic-gated loops in 98.9--100\% of auto-designed
-pipelines yet outcomes remained family-determined, and \textbf{static
-routing} (Protocol~15) is superseded because Protocol~16 showed mid-tier
-effects do not transport across problem sets --- routing is a measured
-per-deployment discipline (\cref{sec:study3conf}), not a learnable
-lookup. Five experiments follow directly. First, a \textbf{frontier-team
-add-on to the replication wave} --- one missing cell (F-T-N) on the same 30
-fresh problems, designed and costed but not yet run: the neutral-cell tier
-$\times$ structure interaction, indistinguishable from zero in Study~1
-(\cref{sec:interaction}), is the one headline statistic still without an
-out-of-sample verdict (\cref{sec:limitations}). Second, a \textbf{bounded
-generalization probe} on new model families, positioned as a validation
-of the benchmarking-as-routing method rather than a confirmatory
-experiment (\cref{sec:study3conf}). Third, a \textbf{subtractive
-refiner} study that is permitted to cut as well as add: this isolates
-the density mechanism identified in~\cref{sec:mechanism}. Fourth, a
-\textbf{human-panel replication} on a subset of runs to bound LLM-judge
-bias in our specific design. Fifth, a \textbf{second task domain} (code
-generation, scientific writing) to test whether the
-coverage-vs-density mechanism generalizes beyond business strategy.
+exploratory upgrades --- and pipeline design authorship (Study~3,
+\cref{sec:study3}), which executed the registered A7 arm and found authorship
+effects negligible and orchestration economics family-specific. Two candidates
+from the original roadmap are closed by the results themselves: \textbf{loop
+control} (Protocol~14) is superseded because Study~3 found critic-gated loops
+in 98.9--100\% of auto-designed pipelines yet outcomes remained
+family-determined, and \textbf{static routing} (Protocol~15) is superseded
+because Protocol~16 showed mid-tier effects do not transport across problem
+sets. Four larger research programs follow.
+
+\textbf{(1) The editing-operations program.} The density ceiling
+(\cref{sec:mechanism}) says the binding constraint is \emph{what operations} a
+pipeline may perform, not how many steps it has: our add-only refiner could
+grow answers but never compress them. The open program is to study editing
+operations directly --- a refiner permitted to cut, compress, merge, and
+reorder --- and to test whether models can learn to allocate compute between
+generation and deletion. This is the direct falsifiable test of the density
+mechanism and the natural successor to Study~2.
+
+\textbf{(2) Frontier-team outputs as an object of study.} The worst dollar in
+the experiment (frontier teams: 3.5$\times$ the cost for negligible gain) is
+unexplained. We hold the frozen frontier-team outputs from Study~1; nobody has
+characterized \emph{what} they actually produce --- whether teaming dilutes the
+frontier's density the way it dilutes persona novelty, or whether the outputs
+are genuinely richer but not better. A descriptive and qualitative analysis of
+these existing outputs would explain the anomaly and inform whether frontier
+orchestration deserves further study at all.
+
+\textbf{(3) Benchmarking-as-routing: validating the measurement method.}
+Protocol~16 killed static routing tables; the open project is the
+\emph{method} itself: does a cheap self-designed probe on a user's own tasks
+reliably predict the correct routing decision? This is positioned as a
+product-method validation (the research-to-product bridge for the DeeWaanAI
+platform), not a confirmatory experiment.
+
+\textbf{(4) Semantic claim-to-evidence verification.} Building this paper's
+machine-readable claim map taught us a methodological lesson: value fidelity
+(every number traces to frozen data) is necessary but not sufficient ---
+numbers can match their sources while the prose misstates what they mean
+(two such episodes were caught and corrected in this project). Extending
+claim-to-evidence mapping from values to semantics --- direction, attribution,
+and existence-of-analysis checks on interpretive prose --- is a reusable
+methodology for AI-assisted research and a study of its own.
 
 % ==================================================================
 % 9  CONCLUSION
 % ==================================================================
 \section{Conclusion}\label{sec:conclusion}
 
-For organizations deploying LLMs for knowledge work, three investment rules
-emerge from four pre-registered empirical bases: Study~1 (1{,}900 runs), its
-Protocol~12 replication wave (2{,}418 analyzed runs), Study~3 (544 completed
-runs), and the Protocol~16 replication (441 completed runs) --- together
-spanning 10 model families and 30 fresh problems. \textbf{First}, at the lower-tier end,
-model-tier substitution works: a single call from a lower-tier model
-delivers 98\% of frontier quality at 23\% of the cost ($\TEGR$~6.15) --- the
-highest-return configuration tested; the three-step team variant adds coverage
-at 88\% of the cost ($\TEGR$~1.49). \textbf{Second}, at the frontier end, team
-orchestration destroys value: it costs 3.5$\times$ the frontier-solo price for
-negligible quality gain ($\TEGR$~0.27). \textbf{Third}, a low-cost refinement pass
-(\$0.002) recovers most of the frontier gap where a real gap exists (64\% for
-qwen) but never beats it --- and cannot close gaps that are already near zero
-(kimi) --- a bounded-improvement result that makes it a viable risk-mitigation
-strategy where a gap exists, not a replacement strategy. The residual frontier
-advantage is density (compressed insight, zero waste), not coverage --- a
-capability gap that add-only pipelines cannot bridge. Personas are value-destroying: they degrade quality sharply
-($d = -0.691$) while reducing cost only marginally. The governing principle is contingency, not universality: match the
-right pipeline architecture to the right model tier for the right task, and
-invest in refinement before investing in a frontier team.
+Can a team of cheaper models beat a frontier model working alone? Across three
+pre-registered studies and two out-of-sample replications (5{,}303 runs, 10
+model families, 49 business problems), the answer is \textbf{contingent --- on
+the family's tier price gap (3.1--8$\times$) and on the model family itself.}
+Pooled, the cheaper team reaches 98.8\% of frontier-solo quality at 88\% of its
+cost --- short of parity, with the residual gap concentrated in density, which
+additive pipelines cannot manufacture. Yet auto-designed cheaper pipelines beat
+frontier solo outright for three of the five families (kimi, qwen, gemini), at
+costs ranging from $0.24\times$ to $3.5\times$ the frontier-solo price; the
+remaining two favor frontier solo --- claude on quality (the pipeline reaches
+83\%), gpt-5.6 on cost (quality ties at $4\times$ the price). Because token
+usage is comparable across tiers, the cheaper solo's advantage --- 98\% of
+frontier quality at 23\% of its cost --- is the direct monetization of the tier
+price gap and the highest-return default in the study. And since pipeline
+effects are family- and problem-dependent, and model-authored designs
+outperform our human-designed instrument, configuration choices should rest on
+measurement against the firm's own tasks.
 
-The broader implication is a build-versus-buy framework for AI capability.
-Frontier models are \emph{bought} --- a fixed per-call cost for a given quality
-level. Orchestration pipelines are \emph{built} --- an upfront architectural
-investment that lowers marginal cost per call. Our results show that the build
-path pays off when (a)~the task is coverage-sensitive, (b)~the quality bar is
-``good enough'' rather than ``best available,'' and (c)~the firm can absorb the
-engineering cost of maintaining a multi-step pipeline. When density is the
-binding constraint --- when the output must compress insight into minimal prose
---- the buy path (frontier solo) remains optimal. The contingency is not a
-limitation of the study; it is the finding.
+The paper makes three contributions. \emph{Empirically}, it provides the first
+dollarized, pre-registered, cost-matched test of the substitution claim on
+open-ended knowledge work, and its replication gates publicly separated what
+survives new data from what does not --- the core economics replicated; the
+contingency nuances did not. \emph{Methodologically}, it contributes reusable
+rigor infrastructure: token-invariant costing through a frozen price vector
+(every dollar figure re-derivable under alternative prices) and a
+machine-readable claim-to-evidence map tracing every printed statistic to
+frozen raw data. \emph{Practically}, it converts orchestration from an
+engineering project into a measurement practice: in all five families, models
+author better pipelines than our hand-designed instrument, and paying a
+frontier model to do the designing adds no measurable quality --- what matters
+is measuring the pipeline effect on the firm's own model stack and tasks.
 
-For the field, the contribution is a dollarized, pre-registered, cost-matched
-empirical test of the substitution claim that sits at the heart of the
-multi-agent AI industry. The claim is partially true: structure does substitute
-for tier, but only up to a ceiling set by density. We offer this ceiling, and
-the contingency rules that surround it, as one empirical data point toward a
-more rigorous economics of AI orchestration.
+These findings are bounded by three limitations: the task domain is English
+business strategy; evaluation rests on an LLM judge panel without a human
+reference; and pipeline effects vary by model family and problem set. Future
+research should test editing operations beyond addition, characterize
+frontier-team outputs, and validate benchmarking-as-routing as a method on
+firms' own tasks.
 
 % ==================================================================
 % APPENDIX A — EXECUTIVE SUMMARY (moved from front matter in v9)
@@ -2308,17 +2419,20 @@ business problems: a single call from a lower-tier model delivers
 \textbf{98\% of frontier quality at 23\% of the cost} ($\TEGR$~6.15).
 Orchestrating that model into a three-step builder--critic--refiner pipeline
 adds coverage for about 3.8$\times$ that cost ($\TEGR$~1.49). Orchestrating a
-frontier model costs \textbf{3.5$\times$ more for negligible gain}. A \$0.002
-refinement pass recovers most of the remaining gap where a real gap exists
+frontier model costs \textbf{3.5$\times$ more for negligible gain}. A
+fraction-of-a-cent refinement pass (\$0.001--0.003, family-dependent)
+recovers most of the remaining gap where a real gap exists
 (qwen, 64\%) but never beats the frontier.
 
 \medskip
 \noindent\textbf{Three rules for AI budget allocation:}
 \begin{enumerate}[leftmargin=*,nosep]
   \item \textbf{cheaper tier, single call} $\to$ highest ROI
-    ($\TEGR$~6.15). Add the three-step pipeline only when coverage is the
-    target --- timelines, matrices, quantified plans --- at $\sim$3.8$\times$
-    the solo cost ($\TEGR$~1.49).
+    ($\TEGR$~6.15). Pipelines are a measured, family-conditional option, not a
+    default: auto-designed cheap pipelines beat the frontier flagship on
+    low-ceiling stacks (Gemini, Qwen, Kimi) and lose where the ceiling is high
+    (Claude) --- the fixed three-step pipeline tested here did not replicate
+    as an efficient cell, so measure on your own tasks before committing.
   \item \textbf{Frontier tier (solo)} $\to$ best absolute quality per dollar
     when density matters (compressed insight, zero boilerplate).
   \item \textbf{Never add personas as a quality lever} --- they degrade judged
